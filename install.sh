@@ -1,50 +1,54 @@
-#! /bin/bash
+#!/bin/bash
+# Thanks to Martin - https://github.com/martin-svk/dot-files/blob/master/install.sh
 
-# Install script for dotfiles
-# ---
-# This script creates symlinks in the home directory
-# that points to their respective file inside this
-# (dotfiles) directory
+# Varialbles
 
-DATE=`date +%Y%m%d%H%M`
-dotfiles_dir=~/dotfiles
-backup_dir=~/dotfiles-backup-${DATE}
-npm_global_dir=~/.npm-global-test
+overwrite=false
+current_path=$(pwd)
 
-echo "Creating backup directory: ${backup_dir}"
-echo ""
-# create backup directory and parents if not yet exist
-mkdir -p "$backup_dir" 
+# Overwrite files dialog
 
-# create a .npm-global directory in the ~ folder if it doest
-# not yet exist
-if [ ! -d $npm_global_dir ];then
-  echo "Creating NPM global directory: ${npm_global_dir}"
-  echo ""
-  mkdir -p "$npm_global_dir"
-else
-  echo "NPM global directory already exists: ${npm_global_dir}"
-  echo ""
+echo "Do you want to overwrite old .dotfiles and folders? [Y/n]"
+
+read answer
+
+if [ $answer = "Y" ]; then
+  echo "Files and folders will be overwitten"
+  overwrite=true
 fi
 
-for file in "$dotfiles_dir"/.[^.]*; do
-  # save dotfile extention/name, the text after the "."
-  filename=.${file##*.}
+# Functions
 
-  # full path to the old dotfile
-  old_file=${HOME}/${filename}
+command_exists() {
+  type "$1" &>/dev/null
+}
 
-  # if an old version of the current dotfile exists
-  # move it to the backup directory
-  if [ -f $old_file ]; then
-    # save old dotfile extention/name
-    old_filename=.${old_file##*.}
-    echo "Found old version of ${old_filename} moving it to backup directory"
-    # move the old file into backup directory
-    mv $old_file $backup_dir
-  fi
+# ZSH config
 
-  echo "Creating symbolic link in ${HOME} to ${file}"
-  ln -s $file $HOME/$filename 
-  echo ""
-done
+if [ ! -f ~/.zshrc ]; then
+  echo "Creating .zshrc!"
+elif $overwrite; then
+  echo "Removing old .zshrc!"
+else 
+  echo "Keeping the old .zshrc"
+fi
+
+# Neovim config
+
+if [ ! -d ~/.config/nvim ]; then
+  echo "Creating nvim folder!"
+elif $overwrite; then
+  echo "Removing old nvim folder"
+else 
+  echo "Keeping the old nvim folder then"
+fi
+
+# Vim config
+
+if [ ! -f ~/.vimrc ]; then
+  echo "Creating symbolic link for .vimrc!"
+elif $overwrite; then
+  echo "Removing old .vimrc!"
+else 
+  echo "Keeping the old .vimrc!"
+fi
