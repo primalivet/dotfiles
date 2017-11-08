@@ -5,13 +5,16 @@ set nocompatible		      " disable vi compatibility
 
 " color
 
+colorscheme pablo      " set colorscheme
 syntax enable				      " enable syntax highlighting
 
 " spaces and tabs
 
 set softtabstop=2 	      " a TAB is 2 spaces also when editing
 set tabstop=2				      " a TAB is 2 spaces when viewing
+set shiftwidth=2          " keep consistent spacing
 set expandtab				      " a TAB is acually spaces
+set autoindent            " keep the same indentation as the previous line
 
 " ui
 
@@ -25,7 +28,10 @@ set showmatch             " highlight matching [{()}]
 set splitright            " default split to the right 
 set splitbelow            " default split nested down
 set laststatus=2          " always show statusline
-set scrolloff=10
+set scrolloff=10          " set limit in number of rows when the editor should start scrolling
+set updatetime=250        " interval for when vim writes swap file to disk
+set timeoutlen=1000       " timeout for mappings
+set ttimeoutlen=0         " timeout for key codes
 
 " search
 
