@@ -25,45 +25,45 @@ command_exists() {
 
 link_bash() {
   echo -n "Creating symbolc link for .bashrc..."
-  #ln -sf $curren_path/bash/.bashrc ~/.bashrc
+  ln -sf $current_path/bash/.bashrc ~/.bashrc
   echo "done!"
 }
 
 link_zsh() {
   echo -n "Creating symbolc link for .zshrc..."
-  #ln -sf $curren_path/zsh/.zshrc ~/.zshrc
+  ln -sf $current_path/zsh/.zshrc ~/.zshrc
   echo "done!"
 }
 
 link_git() {
   echo -n "Creating symbolc link for .gitconfig..."
-  #ln -sf $curren_path/git/.gitconfig ~/.gitconfig
+  ln -sf $current_path/git/.gitconfig ~/.gitconfig
   echo "done!"
 }
 
 link_vim() {
   echo -n "Creating symbolic link for .vimrc..."
-  #ln -sf $current_path/nvim/init.vim ~/.vimrc
+  ln -sf $current_path/nvim/init.vim ~/.vimrc
   echo "done!"
 }
 
 link_nvim() {
   echo -n "Creating folders for neovim..."
-  #mkdir -p ~/.config/nvim
+  mkdir -p ~/.config/nvim
   echo "done!"
 
   echo -n "Creating symbolic link for init.vim..."
-  #ln -sf $current_path/nvim/init.vim ~/.config/nvim/nvim.init
+  ln -sf $current_path/nvim/init.vim ~/.config/nvim/nvim.init
   echo "done!"
 }
 
 link_npm() {
   echo -n "Creating folders for npm..."
-  #mkdir -p ~/.npm-global
+  mkdir -p ~/.npm-global
   echo "done!"
 
   echo -n "Creating symbolic link for .npmrc..."
-  #ln -sf $current_path/npm/.npmrc ~/.npmrc
+  ln -sf $current_path/npm/.npmrc ~/.npmrc
   echo "done!"
 }
 
@@ -73,8 +73,10 @@ if [ ! -f ~/.bashrc ]; then
   link_bash
 elif $replace; then
   echo -n "Removing old zshrc..."
-  #rm ~/.bashrc
+  rm ~/.bashrc
   echo "done!"
+
+  link_bash
 else 
   echo "Keeping the old .bashrc"
 fi
@@ -85,8 +87,10 @@ if [ ! -f ~/.zshrc ]; then
   link_zsh
 elif $replace; then
   echo -n "Removing old .zshrc..."
-  #rm ~/.zshrc
+  rm ~/.zshrc
   echo "done!"
+
+  link_zsh
 else 
   echo "Keeping the old .zshrc"
 fi
@@ -97,8 +101,10 @@ if [ ! -f ~/.gitconfig ]; then
   link_git
 elif $replace; then
   echo -n "Removing old .gitconfig..."
-  #rm ~/.gitconfig
+  rm ~/.gitconfig
   echo "done!"
+
+  link_git
 else 
   echo "Keeping the old .gitconfig"
 fi
@@ -109,7 +115,7 @@ if [ ! -f ~/.vimrc ]; then
   link_vim
 elif $replace; then
   echo -n "Removing old .vimrc..."
-  #rm ~/.vimrc
+  rm ~/.vimrc
   echo "done!"
 
   link_vim
@@ -123,7 +129,7 @@ if [ ! -d ~/.config/nvim ]; then
   link_nvim
 elif $replace; then
   echo -n "Removing old nvim folder..."
-  #rm -rf ~/.config/nvim
+  rm -rf ~/.config/nvim
   echo "done!"
 
   link_nvim
@@ -137,7 +143,7 @@ if [ ! -d ~/.npm-global ]; then
   link_npm
 elif $replace; then
   echo -n "Removing old npm folder..."
-  #rm -rf ~/.npm-global
+  rm -rf ~/.npm-global
   echo "done!"
 
   link_npm
