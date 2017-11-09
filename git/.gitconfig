@@ -1,6 +1,6 @@
 [user]
-  name = Primalivet
-  email = gustafholm1@gmail.com
+  name=Primalivet
+  email=gustafholm1@gmail.com
 
 [push]
-  default = simple
+  default=simple
