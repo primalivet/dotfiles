@@ -1,6 +1,11 @@
 # Include ~/.bin in PATH
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.npm-global:$PATH
+export PATH=$HOME/.rbenv/bin:$PATH
+
+# Load rbenv automatically by appending
+# the following to ~/.zshrc: 
+eval "$(rbenv init -)"
 
 # Path to your oh-my-zsh installation.
 export ZSH=/home/gustaf/.oh-my-zsh
@@ -14,4 +19,5 @@ ZSH_THEME="primalivet"
 plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
+
 
