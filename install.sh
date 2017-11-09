@@ -3,18 +3,18 @@
 
 # Varialbles
 
-overwrite=false
+replace=false
 current_path=$(pwd)
 
 # Overwrite files dialog
 
-echo "Do you want to overwrite old .dotfiles and folders? [Y/n]"
+echo "Do you want to overwrite old files and folders? [Y/n]"
 
 read answer
 
 if [ $answer = "Y" ]; then
-  echo "Files and folders will be overwitten"
-  overwrite=true
+  echo "Okay, overwriting old files and folders with the new dotfiles."
+  replace=true
 fi
 
 # Functions
@@ -27,7 +27,7 @@ command_exists() {
 
 if [ ! -f ~/.zshrc ]; then
   echo "Creating .zshrc!"
-elif $overwrite; then
+elif $replace; then
   echo "Removing old .zshrc!"
 else 
   echo "Keeping the old .zshrc"
@@ -37,8 +37,12 @@ fi
 
 if [ ! -d ~/.config/nvim ]; then
   echo "Creating nvim folder!"
-elif $overwrite; then
+elif $replace; then
   echo "Removing old nvim folder"
+  rm -rf ~/.config/nvim
+  echo "Creating new nvim folder"
+  mkdir -p ~/.config/nvim
+  ln -sf $current_path/nvim/init.vim ~/.config/nvim/nvim.init
 else 
   echo "Keeping the old nvim folder then"
 fi
@@ -47,7 +51,7 @@ fi
 
 if [ ! -f ~/.vimrc ]; then
   echo "Creating symbolic link for .vimrc!"
-elif $overwrite; then
+elif $replace; then
   echo "Removing old .vimrc!"
 else 
   echo "Keeping the old .vimrc!"
