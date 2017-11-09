@@ -5,7 +5,7 @@ set nocompatible		      " disable vi compatibility
 
 " color
 
-colorscheme pablo      " set colorscheme
+colorscheme pablo         " set colorscheme
 syntax enable				      " enable syntax highlighting
 
 " spaces and tabs
@@ -45,10 +45,3 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
-
-" plugins - requires vim version >= 8
-
-let g:ale_linters={'javascript':['eslint']}
-
-packloadall               " load all plugins now
-silent! helptags ALL      " load all helptags now, all messages and error will be ignored
