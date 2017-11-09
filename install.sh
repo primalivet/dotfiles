@@ -13,7 +13,7 @@ echo "Do you want to overwrite old files and folders? [Y/n]"
 read answer
 
 if [ $answer = "Y" ]; then
-  echo "Okay, overwriting old files and folders with the new dotfiles."
+  echo "Roger!"
   replace=true
 fi
 
@@ -23,36 +23,124 @@ command_exists() {
   type "$1" &>/dev/null
 }
 
+link_bash() {
+  echo -n "Creating symbolc link for .bashrc..."
+  #ln -sf $curren_path/bash/.bashrc ~/.bashrc
+  echo "done!"
+}
+
+link_zsh() {
+  echo -n "Creating symbolc link for .zshrc..."
+  #ln -sf $curren_path/zsh/.zshrc ~/.zshrc
+  echo "done!"
+}
+
+link_git() {
+  echo -n "Creating symbolc link for .gitconfig..."
+  #ln -sf $curren_path/git/.gitconfig ~/.gitconfig
+  echo "done!"
+}
+
+link_vim() {
+  echo -n "Creating symbolic link for .vimrc..."
+  #ln -sf $current_path/nvim/init.vim ~/.vimrc
+  echo "done!"
+}
+
+link_nvim() {
+  echo -n "Creating folders for neovim..."
+  #mkdir -p ~/.config/nvim
+  echo "done!"
+
+  echo -n "Creating symbolic link for init.vim..."
+  #ln -sf $current_path/nvim/init.vim ~/.config/nvim/nvim.init
+  echo "done!"
+}
+
+link_npm() {
+  echo -n "Creating folders for npm..."
+  #mkdir -p ~/.npm-global
+  echo "done!"
+
+  echo -n "Creating symbolic link for .npmrc..."
+  #ln -sf $current_path/npm/.npmrc ~/.npmrc
+  echo "done!"
+}
+
+# Bash config
+
+if [ ! -f ~/.bashrc ]; then
+  link_bash
+elif $replace; then
+  echo -n "Removing old zshrc..."
+  #rm ~/.bashrc
+  echo "done!"
+else 
+  echo "Keeping the old .bashrc"
+fi
+
 # ZSH config
 
 if [ ! -f ~/.zshrc ]; then
-  echo "Creating .zshrc!"
+  link_zsh
 elif $replace; then
-  echo "Removing old .zshrc!"
+  echo -n "Removing old .zshrc..."
+  #rm ~/.zshrc
+  echo "done!"
 else 
   echo "Keeping the old .zshrc"
 fi
 
-# Neovim config
+# Git config
 
-if [ ! -d ~/.config/nvim ]; then
-  echo "Creating nvim folder!"
+if [ ! -f ~/.gitconfig ]; then
+  link_git
 elif $replace; then
-  echo "Removing old nvim folder"
-  rm -rf ~/.config/nvim
-  echo "Creating new nvim folder"
-  mkdir -p ~/.config/nvim
-  ln -sf $current_path/nvim/init.vim ~/.config/nvim/nvim.init
+  echo -n "Removing old .gitconfig..."
+  #rm ~/.gitconfig
+  echo "done!"
 else 
-  echo "Keeping the old nvim folder then"
+  echo "Keeping the old .gitconfig"
 fi
 
 # Vim config
 
 if [ ! -f ~/.vimrc ]; then
-  echo "Creating symbolic link for .vimrc!"
+  link_vim
 elif $replace; then
-  echo "Removing old .vimrc!"
+  echo -n "Removing old .vimrc..."
+  #rm ~/.vimrc
+  echo "done!"
+
+  link_vim
 else 
   echo "Keeping the old .vimrc!"
+fi
+
+# Neovim config
+
+if [ ! -d ~/.config/nvim ]; then
+  link_nvim
+elif $replace; then
+  echo -n "Removing old nvim folder..."
+  #rm -rf ~/.config/nvim
+  echo "done!"
+
+  link_nvim
+else 
+  echo "Keeping the old nvim"
+fi
+
+# NPM config
+
+if [ ! -d ~/.npm-global ]; then
+  link_npm
+elif $replace; then
+  echo -n "Removing old npm folder..."
+  #rm -rf ~/.npm-global
+  echo "done!"
+
+  link_npm
+else 
+  echo "Keeping the old npm"
 fi
