@@ -41,6 +41,12 @@ link_git() {
   echo "done!"
 }
 
+link_tmux() {
+  echo -n "Creating symbold link for tmux.conf..."
+  ln -sf $current_path/tmux/tmux.conf ~/.tmux.conf
+  echo "done!"
+}
+
 link_vim() {
   echo -n "Creating symbolic link for .vimrc..."
   ln -sf $current_path/nvim/init.vim ~/.vimrc
@@ -107,6 +113,20 @@ elif $replace; then
   link_git
 else 
   echo "Keeping the old .gitconfig"
+fi
+
+# Tmux config
+
+if [ ! -f ~/tmux.conf ]; then
+  link_tmux
+elif $replace; then
+  echo -n "Removing old tmux.conf..."
+  rm ~/tmux.conf
+  echo "done!"
+
+  link_tmux
+else 
+  echo "Keeping the old tmux.conf..."
 fi
 
 # Vim config
