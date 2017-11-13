@@ -1,3 +1,5 @@
+source ~/.config/nvim/plugins " load plugins
+
 "  Thank you Doug Black for a good start
 " https://dougblack.io/words/a-good-vimrc.html
 
@@ -5,6 +7,7 @@ set nocompatible		      " disable vi compatibility
 
 " color
 
+set t_Co=256
 colorscheme pablo         " set colorscheme
 syntax enable				      " enable syntax highlighting
 

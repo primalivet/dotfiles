@@ -16,8 +16,15 @@ shopt -s checkwinsize
 # history
 export HISTCONTROL=ignoreboth:erasedups
 
+export TERM=xterm-256color
+
+# update path with home/bin
 export PATH=$HOME/bin:$PATH 
+
+# add ~./.npm-global to path
 export PATH=$HOME/.npm-global:$PATH 
+
+# add .rbenv to path
 export PATH=$HOME/.rbenv/bin:$PATH
 
 # Load rbenv automatically by appending the following to ~/.bashrc: 

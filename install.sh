@@ -60,7 +60,12 @@ link_nvim() {
 
   echo -n "Creating symbolic link for init.vim..."
   ln -sf $current_path/nvim/init.vim ~/.config/nvim/init.vim
+  echo "done!"  
+  
+  echo -n "Creating symbolic link for plugins.vim..."
+  ln -sf $current_path/nvim/plugins.vim ~/.config/nvim/plugins.vim
   echo "done!"
+
 }
 
 link_npm() {
