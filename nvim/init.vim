@@ -7,7 +7,7 @@ set nocompatible		      " disable vi compatibility
 
 " color
 
-colorscheme pablo         " set colorscheme
+colorscheme default
 syntax enable				      " enable syntax highlighting
 
 " spaces and tabs
@@ -17,6 +17,7 @@ set tabstop=2				      " a TAB is 2 spaces when viewing
 set shiftwidth=2          " keep consistent spacing
 set expandtab				      " a TAB is acually spaces
 set autoindent            " keep the same indentation as the previous line
+set smartindent 
 
 " ui
 
@@ -26,6 +27,7 @@ set showcmd					      " show commands in the bottom bar
 set cursorline			      " enable current line highlighting
 set lazyredraw			      " only redraw when needed
 set wildmenu
+set wildmode=list:longest " complete like a shell
 set showmatch             " highlight matching [{()}]
 set splitright            " default split to the right 
 set splitbelow            " default split nested down
