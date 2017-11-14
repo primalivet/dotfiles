@@ -1,12 +1,3 @@
-# Setup for running ZSH at start in WSL
-# if running in terminal
-#if [ -t 1 ]; then
-#	# if zsh is installed
-#	if which zsh > /dev/null; then
-#		exec zsh
-#	fi
-#fi
-
 # append to the history file
 shopt -s histappend
 
