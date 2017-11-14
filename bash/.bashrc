@@ -84,6 +84,6 @@ function nonzero_return() {
   [ $RETVAL -ne 0 ] && echo "error: $RETVAL " 
 }
                                                                                                   
-export PS1="\W\`parse_git_branch\`\\$ "
+export PS1="\W\`parse_git_branch\` \\$ "
 
 source=~/.bashrc
