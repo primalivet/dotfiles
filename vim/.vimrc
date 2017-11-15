@@ -13,6 +13,14 @@ if !filereadable('~/.vim/autoload/plug.vim')
   endif
 endif
 
+" plugins
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'vim-airline/vim-airline'
+
+call plug#end()
+
 " Thank you Doug Black for a good start
 " https://dougblack.io/words/a-good-vimrc.html
 
