@@ -4,6 +4,9 @@ shopt -s histappend
 # check the window size after each command ($LINES, $COLUMNS)
 shopt -s checkwinsize
 
+# bash autocomplete
+[ -f /etc/bash_completion ] && . /etc/bash_completion
+
 # history
 export HISTCONTROL=ignoreboth:erasedups
 
