@@ -25,7 +25,12 @@ export PATH=$HOME/.rbenv/bin:$PATH
 eval "$(rbenv init -)"
 
 # aliases
-alias l='ls -Al'
+alias l='ls -Al --color'
+
+# edit sl colors, remove dir backgrounds
+LS_COLORS='tw=30:ow=34'
+
+export LS_COLORS
 
 # get current branch in git repo
 function parse_git_branch() {
@@ -37,7 +42,7 @@ function parse_git_branch() {
     echo ""
   fi
 }
-                      
+
 # get current status of git repo
 function parse_git_dirty {
   status=`git status 2>&1 | tee`
@@ -80,4 +85,4 @@ function nonzero_return() {
                                                                                                   
 export PS1="\W\`parse_git_branch\` \\$ "
 
-source=~/.bashrc
+source ~/.bashrc
