@@ -23,6 +23,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
 
 call plug#end()
 
@@ -42,7 +43,7 @@ set ttimeoutlen=0               " timeout for key codes
 
 " colors
 
-colorscheme pablo             " set colorscheme
+colorscheme default             " set colorscheme
 syntax on                       " turn syntax highlighting on
 set cursorline			            " enable current line highlighting
 
