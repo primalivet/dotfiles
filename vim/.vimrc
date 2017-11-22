@@ -18,6 +18,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'flazz/vim-colorschemes'
 
 call plug#end()
 
@@ -39,7 +40,9 @@ set fileformat=unix             " use this format
 
 " colors
 
-colorscheme default             " set colorscheme
+colorscheme duotone-dark        " set colorscheme
+set background=dark
+set t_Co=256
 syntax on                       " turn syntax highlighting on
 set cursorline			            " enable current line highlighting
 
