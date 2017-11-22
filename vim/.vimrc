@@ -1,8 +1,3 @@
-" THANKS!
-" Doug Black - https://dougblack.io/words/a-good-vimrc.html
-"            - https://github.com/dougblack/dotfiles
-" Nick Nisi  - https://github.com/nicknisi/dotfiles
-
 " check if vim-plug is installed
 
 if !filereadable('~/.vim/autoload/plug.vim')
@@ -39,6 +34,8 @@ set lazyredraw			            " only redraw when needed
 set updatetime=250              " interval for when vim writes swap file to disk
 set timeoutlen=1000             " timeout for mappings
 set ttimeoutlen=0               " timeout for key codes
+set fileformats=unix,dos,mac    " recognize theses formats
+set fileformat=unix             " use this format
 
 " colors
 
@@ -70,9 +67,27 @@ let g:netrw_banner=0            " hide the netrw banner
 set number					            " enable line numbers
 set relativenumber	            " enable relative numbers
 set laststatus=2                " always show statusline
+set showmode                    " make sure the mode is visible
 set showcmd					            " show commands in the bottom bar
 set showmatch                   " highlight matching [{()}]
+set matchtime=1                 " ...for a tenth of a second
 set scrolloff=10                " when does window start to scroll, in rows
+set splitbelow                  " put new splits beneth the current one
+set splitright                  " put new splits right of the current one
+set fillchars=vert:\            " remove vertical split "|"
 set wildmenu                    " enable completion
 set wildmode=list:longest       " complete like a shell
 set wildignore+=*/node_modules/*
+set wildignore+=*/.git/*
+
+" statusline
+
+set statusline=%=               " switch to right side
+set statusline+=Line\ %l        " Line NR
+set statusline+=\ of\ %L        " of NR
+set statusline+=\ in\ %f\       " in relative file
+
+" Thanks for the inperation!
+" Doug Black        / https://github.com/dougblack
+" Nick Nisi         / https://github.com/nicknisi
+" Ellen Gummesson   / https://github.com/gummesson
