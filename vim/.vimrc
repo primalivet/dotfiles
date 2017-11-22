@@ -23,7 +23,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdtree'
 
 call plug#end()
 
@@ -66,6 +65,8 @@ set hlsearch                    " highlight search matches
 
 " user interface
 
+let g:netrw_liststyle=3         " set netrw filebrowser to list style 3
+let g:netrw_banner=0            " hide the netrw banner
 set number					            " enable line numbers
 set relativenumber	            " enable relative numbers
 set laststatus=2                " always show statusline
