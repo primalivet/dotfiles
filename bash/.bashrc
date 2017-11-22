@@ -73,7 +73,7 @@ function parse_git_dirty {
     bits="!${bits}"
   fi
   if [ ! "${bits}" == "" ]; then
-    echo "${bits} "
+    echo "${bits}"
   else
     echo ""
   fi
@@ -85,4 +85,4 @@ function nonzero_return() {
 }
                                                                                                   
 #export PS1="\W\`parse_git_branch\` \\$ "
-export PS1="\W\`parse_git_branch\`\[\e[31m\]\`parse_git_dirty\`\[\e[m\]\\$ "
+export PS1="\W\`parse_git_branch\`\[\e[31m\]\`parse_git_dirty\`\[\e[m\] \\$ "
