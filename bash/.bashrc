@@ -37,7 +37,8 @@ function parse_git_branch() {
   BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
   if [ ! "${BRANCH}" == "" ]; then
     STAT=`parse_git_dirty`
-    echo "[${BRANCH}${STAT}]" 
+    #echo "[${BRANCH}${STAT}]"
+    echo " on ${BRANCH}"
   else
     echo ""
   fi
@@ -72,7 +73,7 @@ function parse_git_dirty {
     bits="!${bits}"
   fi
   if [ ! "${bits}" == "" ]; then
-    echo " ${bits}"
+    echo "${bits} "
   else
     echo ""
   fi
@@ -83,6 +84,5 @@ function nonzero_return() {
   [ $RETVAL -ne 0 ] && echo "error: $RETVAL " 
 }
                                                                                                   
-export PS1="\W\`parse_git_branch\` \\$ "
-
-source ~/.bashrc
+#export PS1="\W\`parse_git_branch\` \\$ "
+export PS1="\W\`parse_git_branch\`\[\e[31m\]\`parse_git_dirty\`\[\e[m\]\\$ "
