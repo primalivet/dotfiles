@@ -90,8 +90,9 @@ set showmode                    " make sure the mode is visible
 " Windows Subsystem Linux specific settings
 
 if isWSL                        
-  set background=dark
-  colorscheme dracula
+  set background=light
+  colorscheme PaperColor
+  let g:airline_theme='papercolor'
 endif
 
 " Thanks for the inperation!
