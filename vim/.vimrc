@@ -40,9 +40,9 @@ set fileformat=unix             " use this format
 
 " colors
 
-colorscheme duotone-dark        " set colorscheme
-set background=dark
 set t_Co=256
+set background=light
+colorscheme PaperColor          " set colorscheme
 syntax on                       " turn syntax highlighting on
 set cursorline			            " enable current line highlighting
 
