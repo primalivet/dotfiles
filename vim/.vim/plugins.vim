@@ -11,3 +11,11 @@ if !filereadable('~/.vim/autoload/plug.vim')
     exit
   endif
 endif
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'airblade/vim-gitgutter'
+
+call plug#end()
