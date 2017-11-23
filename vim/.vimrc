@@ -1,5 +1,4 @@
 source ~/.vim/plugins.vim       " include check and eventual install for vim-plug
-source ~/.vim/wsl.vim           " include helper to check for WSL
 
 " general settings
 
@@ -47,6 +46,8 @@ set cursorline                  " enable current line highlighting
 set background=light            " use light background
 colorscheme PaperColor          " set colorscheme
 
+set t_ut=                       "  disable bce https://sunaku.github.io/vim-256color-bce.html
+
 " tabs and indentation
 
 filetype indent on              " enable filetype specific indentation
@@ -79,21 +80,14 @@ set statusline+=Line\ %l        " Line NR
 set statusline+=\ of\ %L        " of NR
 set statusline+=\ in\ %f\       " in relative file
 
-set laststatus=2                " always show statusline
-
+set laststatus=2                " always show statusline 
+let g:airline_theme='papercolor'
 
 " commandline (below statusline)
 
 set showcmd                     " show commands in the bottom bar
 set showmode                    " make sure the mode is visible
 
-" Windows Subsystem Linux specific settings
-
-if isWSL                        
-  set background=light
-  colorscheme PaperColor
-  let g:airline_theme='papercolor'
-endif
 
 " Thanks for the inperation!
 " Doug Black        / https://github.com/dougblack
