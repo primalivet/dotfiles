@@ -1,17 +1,5 @@
-" check if vim-plug is installed
-
-if !filereadable('~/.vim/autoload/plug.vim')
-  if executable('curl')
-    call system('curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
-    if v:shell_error
-      echom "Error installing vim-plug to ~/.vim/autoload, Please try installing it manually.\n"
-      exit
-    endif
-  else
-    echom "vim-plug not installed. Please install it manually or install curl.\n"
-    exit
-  endif
-endif
+source ~/.vim/check-vim-plug.vim  " include check and eventual install for vim-plug
+source ~/.vim/check-wsl.vim       " include helper to check for WSL
 
 " register plugins
 
@@ -40,11 +28,16 @@ set fileformat=unix             " use this format
 
 " colors
 
-set t_Co=256
-set background=light
-colorscheme PaperColor          " set colorscheme
-syntax on                       " turn syntax highlighting on
+if isWSL
+  set background=dark
+  colorscheme default
+else
+  set background=light
+  colorscheme PaperColor          " set colorscheme
+endif
+
 set cursorline			            " enable current line highlighting
+syntax on                       " turn syntax highlighting on
 
 " spaces and tabs
 
