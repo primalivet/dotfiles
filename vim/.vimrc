@@ -16,10 +16,10 @@ let g:ctrlp_show_hidden=1
 
 " general config stuff
 
-set nocompatible		            " disable vi compatibility
+set nocompatible                " disable vi compatibility
 set encoding=utf-8
 set autoread                    " update files if they're changed outside vim
-set lazyredraw			            " only redraw when needed
+set lazyredraw                  " only redraw when needed
 set updatetime=250              " interval for when vim writes swap file to disk
 set timeoutlen=1000             " timeout for mappings
 set ttimeoutlen=0               " timeout for key codes
@@ -33,10 +33,10 @@ if isWSL
   colorscheme default
 else
   set background=light
-  colorscheme PaperColor          " set colorscheme
+  colorscheme PaperColor        " set colorscheme
 endif
 
-set cursorline			            " enable current line highlighting
+set cursorline                  " enable current line highlighting
 syntax on                       " turn syntax highlighting on
 
 " spaces and tabs
@@ -45,9 +45,9 @@ filetype plugin indent on       " enable filetype detection and specific indenta
 set backspace=indent,eol,start  " make backspace behave like normal
 set autoindent                  " keep the same indentation as the previous line
 set smartindent 
-set expandtab				            " a TAB is acually spaces
-set tabstop=2				            " a TAB is 2 spaces when viewing
-set softtabstop=2 	            " a TAB is 2 spaces also when editing
+set expandtab                   " a TAB is acually spaces
+set tabstop=2                   " a TAB is 2 spaces when viewing
+set softtabstop=2               " a TAB is 2 spaces also when editing
 set shiftwidth=2                " keep consistent spacing
 set shiftround                  " round indent to nearest multiple by 2
 
@@ -60,11 +60,11 @@ set hlsearch                    " highlight search matches
 
 let g:netrw_liststyle=3         " set netrw filebrowser to list style 3
 let g:netrw_banner=0            " hide the netrw banner
-set number					            " enable line numbers
-set relativenumber	            " enable relative numbers
+set number                      " enable line numbers
+set relativenumber              " enable relative numbers
 set laststatus=2                " always show statusline
 set showmode                    " make sure the mode is visible
-set showcmd					            " show commands in the bottom bar
+set showcmd                     " show commands in the bottom bar
 set showmatch                   " highlight matching [{()}]
 set matchtime=1                 " ...for a tenth of a second
 set scrolloff=10                " when does window start to scroll, in rows
