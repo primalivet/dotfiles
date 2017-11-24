@@ -1,3 +1,8 @@
+# helper function to check if command exists
+command_exists() {
+  type "$1" &> /dev/null
+}
+
 # append to the history file
 shopt -s histappend
 
@@ -18,11 +23,14 @@ export PATH=$HOME/bin:$PATH
 # add ~./.npm-global to path
 export PATH=$HOME/.npm-global:$PATH 
 
-# add .rbenv to path
-export PATH=$HOME/.rbenv/bin:$PATH
-
-# Load rbenv automatically by appending the following to ~/.bashrc: 
-eval "$(rbenv init -)"
+if command_exists rbenv; then
+  # add .rbenv to path
+  export PATH=$HOME/.rbenv/bin:$PATH
+  # Load rbenv automatically by appending the following to ~/.bashrc: 
+  eval "$(rbenv init -)"
+else
+  echo "Ruby version manager 'rbenv' isn't installed. So it wasn't initialized nor added to PATH."
+fi
 
 # aliases
 alias l='ls -Al --color'
