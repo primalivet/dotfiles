@@ -73,15 +73,7 @@ set wildmode=list:longest       " complete like a shell
 set hlsearch                    " highlight search matches
 set incsearch                   " search as characheters are entered
 
-" statusline
-
-set statusline=%=               " switch to right side
-set statusline+=Line\ %l        " Line NR
-set statusline+=\ of\ %L        " of NR
-set statusline+=\ in\ %f\       " in relative file
-
 set laststatus=2                " always show statusline 
-let g:airline_theme='papercolor'
 
 " commandline (below statusline)
 
