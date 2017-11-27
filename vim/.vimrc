@@ -80,6 +80,18 @@ set laststatus=2                " always show statusline
 set showcmd                     " show commands in the bottom bar
 set showmode                    " make sure the mode is visible
 
+" mappings
+
+let mapleader=","               " change leader key
+
+nnoremap <F12> :call ToggleRelativeNumbers()<CR>
+function! ToggleRelativeNumbers()
+  if &relativenumber
+    set number norelativenumber
+  else
+    set number relativenumber
+  endif
+endfunction
 
 " Thanks for the inperation!
 " Doug Black        / https://github.com/dougblack
