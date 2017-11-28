@@ -17,6 +17,8 @@ export HISTCONTROL=ignoreboth:erasedups
 
 export TERM=xterm-256color
 
+export EDITOR=vim
+
 # update path with home/bin
 export PATH=$HOME/bin:$PATH 
 
@@ -33,7 +35,8 @@ else
 fi
 
 # aliases
-alias l='ls -Al --color'
+alias ls='ls --color'
+alias l='ls -Al'
 
 # edit sl colors, remove dir backgrounds
 LS_COLORS='tw=30:ow=34'
