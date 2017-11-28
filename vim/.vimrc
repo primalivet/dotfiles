@@ -29,6 +29,12 @@ set splitbelow                  " put new splits beneth the current one
 set splitright                  " put new splits right of the current one
 set fillchars=vert:\            " remove vertical split
 
+" invisibles
+
+set listchars=tab:▸\            " define invisible tabs
+set listchars+=trail:·          " define invisible trailing spaces
+set list                        " enable invisible chars
+
 " linenumbers
 
 set number                      " enable line numbers
