@@ -18,6 +18,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
+Plug 'pangloss/vim-javascript'
 Plug 'flazz/vim-colorschemes'
 
 call plug#end()
