@@ -16,6 +16,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-surround'
 Plug 'flazz/vim-colorschemes'
 
 call plug#end()
