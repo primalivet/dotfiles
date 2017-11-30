@@ -20,5 +20,6 @@ Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
 Plug 'pangloss/vim-javascript'
 Plug 'flazz/vim-colorschemes'
+Plug 'itchyny/lightline.vim'
 
 call plug#end()

@@ -1,4 +1,4 @@
-set nocompatible                " motherfuckers act like they forgot about VI
+
 
 " imports
 " ===========================================================================
@@ -10,6 +10,9 @@ source ~/.vim/plugins.vim       " check for vim-plug and install plugins
 " =============================================================================
 
 let g:ctrlp_show_hidden=1       " show hidden files in ctrlp
+let g:lightline={
+  \ 'colorscheme':'PaperColor',
+  \ }
 
 " misc
 "==============================================================================
