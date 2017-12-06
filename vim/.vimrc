@@ -76,6 +76,13 @@ set wildignore+=*/node_modules/*
 set wildmenu                    " enable completion
 set wildmode=list:longest       " complete like a shell
 
+" statusline
+"===============================================================================
+
+set laststatus=2                " always show statusline
+set noshowmode                  " hide mode on line below statusline
+set showcmd                     " show commands as they are typed
+
 " key mappings
 " ==============================================================================
 
