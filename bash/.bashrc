@@ -22,6 +22,9 @@ export EDITOR=vim
 # update path with home/bin
 export PATH=$HOME/bin:$PATH 
 
+# add go lang to path
+export PATH=/usr/local/go/bin:$PATH
+
 # add ~./.npm-global to path
 export PATH=$HOME/.npm-global:$PATH 
 
