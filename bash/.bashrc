@@ -33,8 +33,6 @@ if command_exists rbenv; then
   export PATH=$HOME/.rbenv/bin:$PATH
   # Load rbenv automatically by appending the following to ~/.bashrc: 
   eval "$(rbenv init -)"
-else
-  echo "Ruby version manager 'rbenv' isn't installed. So it wasn't initialized nor added to PATH."
 fi
 
 # aliases
