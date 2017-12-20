@@ -14,12 +14,13 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'w0rp/ale'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dracula/vim'
+Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-surround'
-Plug 'pangloss/vim-javascript'
-Plug 'flazz/vim-colorschemes'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'w0rp/ale'
 
 call plug#end()

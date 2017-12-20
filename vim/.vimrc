@@ -1,18 +1,14 @@
-
-
 " imports
 " ===========================================================================
 
 source ~/.vim/functions.vim     " include custom functions
-source ~/.vim/plugins.vim       " check for vim-plug and install plugins 
+source ~/.vim/plugins.vim       " check for vim-plug and install plugins
 
 " plugin settings
 " =============================================================================
 
 let g:ctrlp_show_hidden=1       " show hidden files in ctrlp
-let g:lightline={
-  \ 'colorscheme':'PaperColor',
-  \ }
+let g:airline_theme='codedark'
 
 " misc
 "==============================================================================
@@ -30,8 +26,7 @@ set updatetime=250              " interval for when vim writes swap file to disk
 " ==============================================================================
 
 syntax on                       " turn syntax highlighting on
-colorscheme PaperColor          " set colorscheme
-set background=light            " use light background
+colorscheme codedark            " set colorscheme
 set cursorline                  " enable current line highlighting
 set showmatch matchtime=1       " highlight matching [{()}] ...for a tenth of a second
 
@@ -54,7 +49,7 @@ set lazyredraw                  " only redraw when needed
 
 filetype indent on              " enable filetype specific indentation
 set autoindent                  " keep the same indentation as the previous line
-set smartindent 
+set smartindent
 set expandtab                   " a TAB is acually spaces
 set shiftround                  " round indent to nearest multiple by 2
 set shiftwidth=2                " keep consistent spacing
