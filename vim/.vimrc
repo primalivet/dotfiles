@@ -8,7 +8,11 @@ source ~/.vim/plugins.vim       " check for vim-plug and install plugins
 " =============================================================================
 
 let g:ctrlp_show_hidden=1       " show hidden files in ctrlp
-let g:airline_theme='codedark'
+
+let g:lightline={ 'colorscheme': 'Dracula' }
+
+let g:ale_sign_column_always = 1
+let g:ale_echo_msg_format='[%linter%] %s [%severity%]'
 
 " misc
 "==============================================================================
@@ -26,7 +30,8 @@ set updatetime=250              " interval for when vim writes swap file to disk
 " ==============================================================================
 
 syntax on                       " turn syntax highlighting on
-colorscheme codedark            " set colorscheme
+colorscheme dracula             " set colorscheme
+set background=dark
 set cursorline                  " enable current line highlighting
 set showmatch matchtime=1       " highlight matching [{()}] ...for a tenth of a second
 
@@ -75,7 +80,7 @@ set wildmode=list:longest       " complete like a shell
 "===============================================================================
 
 set laststatus=2                " always show statusline
-set noshowmode                  " hide mode on line below statusline
+set noshowmode                  " hide default 'mode' in statusline
 set showcmd                     " show commands as they are typed
 
 " key mappings

@@ -17,10 +17,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dracula/vim'
-Plug 'tomasiser/vim-code-dark'
+Plug 'itchyny/lightline.vim'
+Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 
 call plug#end()
