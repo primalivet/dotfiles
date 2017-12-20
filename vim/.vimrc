@@ -31,10 +31,9 @@ set updatetime=250              " interval for when vim writes swap file to disk
 
 syntax on                       " turn syntax highlighting on
 colorscheme dracula             " set colorscheme
-set background=dark
-set cursorline                  " enable current line highlighting
-set showmatch matchtime=1       " highlight matching [{()}] ...for a tenth of a second
+set cursorline                  " highlight current line
 
+set showmatch matchtime=1       " highlight matching [{()}] ...for a tenth of a second
 set number relativenumber       " enable hybrid line numbers
 set scrolloff=5                 " when does window start to scroll, in rows
 
