@@ -47,7 +47,7 @@ filetype indent on              " enable filetype specific indentation
 set autoindent                  " keep the same indentation as the previous line
 set expandtab                   " a TAB is acually spaces
 set list                        " enable invisible chars
-set listchars=trail:·,tab:▸     " define invisible trailing spaces
+set listchars=trail:·,tab:▸\ 
 set shiftround                  " round indent to nearest multiple by 2
 set shiftwidth=2                " keep consistent spacing
 set smartindent
