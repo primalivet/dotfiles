@@ -76,7 +76,6 @@ set wildmode=list:longest       " complete like a shell
 "===============================================================================
 
 set laststatus=2                " always show statusline
-set noshowmode                  " hide default 'mode' in statusline
 set showcmd                     " show commands as they are typed
 
 " key mappings
@@ -87,6 +86,9 @@ let mapleader=","
 
 " :W also writes the document, just as :w
 command! W w
+
+" :Evimrc to edit ~/.vimrc
+command! Evimrc split ~/.vimrc 
 
 " F12 toggles between normal and hybrid line numbers
 nnoremap <F12> :call ToggleRelativeNumbers()<CR>
