@@ -8,9 +8,6 @@ source ~/.vim/plugins.vim       " check for vim-plug and install plugins
 " =============================================================================
 
 let g:ctrlp_show_hidden=1       " show hidden files in ctrlp
-
-let g:lightline={ 'colorscheme': 'Dracula' }
-
 let g:ale_sign_column_always = 1
 let g:ale_echo_msg_format='[%linter%] %s [%severity%]'
 
