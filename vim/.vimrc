@@ -9,7 +9,7 @@ source ~/.vim/plugins.vim       " check for vim-plug and install plugins
 
 let g:ctrlp_show_hidden=1       " show hidden files in ctrlp
 let g:ale_sign_column_always = 1
-let g:ale_echo_msg_format='[%linter%] %s [%severity%]'
+"let g:ale_echo_msg_format='[%linter% - %severity%] %s'
 
 " misc
 "==============================================================================
@@ -89,6 +89,12 @@ command! W w
 
 " :Evimrc to edit ~/.vimrc
 command! Evimrc split ~/.vimrc 
+
+" Split controls
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " F12 toggles between normal and hybrid line numbers
 nnoremap <F12> :call ToggleRelativeNumbers()<CR>
