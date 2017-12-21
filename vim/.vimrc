@@ -7,9 +7,9 @@ source ~/.vim/plugins.vim       " check for vim-plug and install plugins
 " plugin settings
 " =============================================================================
 
-let g:ctrlp_show_hidden=1       " show hidden files in ctrlp
-let g:ale_sign_column_always = 1
 "let g:ale_echo_msg_format='[%linter% - %severity%] %s'
+let g:ale_sign_column_always = 1
+let g:ctrlp_show_hidden=1       " show hidden files in ctrlp
 
 " misc
 "==============================================================================
@@ -26,47 +26,39 @@ set updatetime=250              " interval for when vim writes swap file to disk
 " ui, color and highlighting
 " ==============================================================================
 
-syntax on                       " turn syntax highlighting on
 colorscheme dracula             " set colorscheme
-set cursorline                  " highlight current line
-
-set showmatch matchtime=1       " highlight matching [{()}] ...for a tenth of a second
-set number relativenumber       " enable hybrid line numbers
-set scrolloff=5                 " when does window start to scroll, in rows
-
-set t_ut=                       "  disable bce https://sunaku.github.io/vim-256color-bce.html
-
-set splitbelow                  " put new splits beneth the current one
-set splitright                  " put new splits right of the current one
-set fillchars=vert:\            " remove vertical split
-
 let g:netrw_banner=0            " hide the netrw banner
 let g:netrw_liststyle=3         " set netrw filebrowser to list style 3
-
+set cursorline                  " highlight current line
+set fillchars=vert:\            " remove vertical split
 set lazyredraw                  " only redraw when needed
+set number relativenumber       " enable hybrid line numbers
+set scrolloff=5                 " when does window start to scroll, in rows
+set showmatch matchtime=1       " highlight matching [{()}] ...for a tenth of a second
+set splitbelow                  " put new splits beneth the current one
+set splitright                  " put new splits right of the current one
+set t_ut=                       "  disable bce https://sunaku.github.io/vim-256color-bce.html
+syntax on                       " turn syntax highlighting on
 
 " indentation and whitespace
 " ==============================================================================
 
 filetype indent on              " enable filetype specific indentation
 set autoindent                  " keep the same indentation as the previous line
-set smartindent
 set expandtab                   " a TAB is acually spaces
+set list                        " enable invisible chars
+set listchars=trail:·,tab:▸     " define invisible trailing spaces
 set shiftround                  " round indent to nearest multiple by 2
 set shiftwidth=2                " keep consistent spacing
-set tabstop=2                   " a TAB is 2 spaces when viewing
+set smartindent
 set softtabstop=2               " a TAB is 2 spaces also when editing
-
-set list                        " enable invisible chars
-set listchars+=trail:·          " define invisible trailing spaces
-set listchars=tab:▸\            " define invisible tabs
+set tabstop=2                   " a TAB is 2 spaces when viewing
 
 " search and wild
 " ==============================================================================
 
 set hlsearch                    " highlight search matches
 set incsearch                   " search as characheters are entered
-
 set wildignore+=*/.git/*
 set wildignore+=*/node_modules/*
 set wildmenu                    " enable completion
@@ -89,6 +81,9 @@ command! W w
 
 " :Evimrc to edit ~/.vimrc
 command! Evimrc split ~/.vimrc 
+
+" sort inner paragraph
+nnoremap <leader>sp :call SortParagraph()<CR>
 
 " Split controls
 nnoremap <C-h> <C-w>h

@@ -5,3 +5,8 @@ function! ToggleRelativeNumbers()
     set number relativenumber
   endif
 endfunction
+
+function! SortParagraph()
+  :normal {jma}kmb  
+  :'a,'bsort
+endfunction
