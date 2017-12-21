@@ -95,6 +95,6 @@ function nonzero_return() {
   RETVAL=$?
   [ $RETVAL -ne 0 ] && echo "error: $RETVAL " 
 }
-                                                                                                  
+
 #export PS1="\W\`parse_git_branch\` \\$ "
 export PS1="\W\`parse_git_branch\`\[\e[31m\]\`parse_git_dirty\`\[\e[m\] \\$ "

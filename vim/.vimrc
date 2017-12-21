@@ -47,12 +47,13 @@ filetype indent on              " enable filetype specific indentation
 set autoindent                  " keep the same indentation as the previous line
 set expandtab                   " a TAB is acually spaces
 set list                        " enable invisible chars
-set listchars=trail:·,tab:▸\ 
 set shiftround                  " round indent to nearest multiple by 2
 set shiftwidth=2                " keep consistent spacing
 set smartindent
 set softtabstop=2               " a TAB is 2 spaces also when editing
 set tabstop=2                   " a TAB is 2 spaces when viewing
+
+set listchars=trail:·,tab:▸\ 
 
 " search and wild
 " ==============================================================================
@@ -70,6 +71,11 @@ set wildmode=list:longest       " complete like a shell
 set laststatus=2                " always show statusline
 set showcmd                     " show commands as they are typed
 
+set statusline=%t\ 
+set statusline+=%y\ 
+set statusline+=%{LinterStatus()}
+set statusline+=%=
+set statusline+=%l/%L
 " key mappings
 " ==============================================================================
 

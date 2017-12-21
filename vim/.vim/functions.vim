@@ -10,3 +10,11 @@ function! SortParagraph()
   :normal {jma}kmb  
   :'a,'bsort
 endfunction
+
+function! LinterStatus() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:errors = l:counts.error + l:counts.style_error
+  let l:non_errors = l:counts.total - l:errors
+
+  return l:counts.total == 0 ? 'OK' : printf('%dE/%dW', errors, non_errors)
+endfunction
