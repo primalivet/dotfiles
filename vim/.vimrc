@@ -26,7 +26,7 @@ set updatetime=250              " interval for when vim writes swap file to disk
 " ui, color and highlighting
 " ==============================================================================
 
-colorscheme dracula             " set colorscheme
+"colorscheme dracula             " set colorscheme
 let g:netrw_banner=0            " hide the netrw banner
 let g:netrw_liststyle=3         " set netrw filebrowser to list style 3
 set cursorline                  " highlight current line
