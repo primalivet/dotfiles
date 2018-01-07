@@ -37,7 +37,8 @@ fi
 
 # aliases
 alias ls='ls --color'
-alias l='ls -Al'
+alias l='ls -A'
+alias ll='ls -Al'
 
 # edit sl colors, remove dir backgrounds
 LS_COLORS='tw=30:ow=34'

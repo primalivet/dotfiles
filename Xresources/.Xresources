@@ -1,2 +1,5 @@
-URxvt*font: xft:LiberationMono:size=12
+*background: #000000
+*foreground: #ffffff
+
+*font: xft:monospace:size=12
 URxvt*scrollBar: false
