@@ -14,6 +14,7 @@ let g:ctrlp_show_hidden=1       " show hidden files in ctrlp
 " misc
 "==============================================================================
 
+set clipboard=unnamed           " use system clipboard
 set autoread                    " update files if they're changed outside vim
 set backspace=indent,eol,start  " make backspace behave like normal
 set encoding=utf-8              " use utf8 encoding
@@ -26,6 +27,7 @@ set updatetime=250              " interval for when vim writes swap file to disk
 " ui, color and highlighting
 " ==============================================================================
 
+colorscheme realrealplain
 let g:netrw_banner=0            " hide the netrw banner
 let g:netrw_liststyle=3         " set netrw filebrowser to list style 3
 set cursorline                  " highlight current line
@@ -36,7 +38,7 @@ set scrolloff=5                 " when does window start to scroll, in rows
 set showmatch matchtime=1       " highlight matching [{()}] ...for a tenth of a second
 set splitbelow                  " put new splits beneth the current one
 set splitright                  " put new splits right of the current one
-set t_ut=                       "  disable bce https://sunaku.github.io/vim-256color-bce.html
+set t_ut=                       " disable bce https://sunaku.github.io/vim-256color-bce.html
 syntax on                       " turn syntax highlighting on
 
 " indentation and whitespace
@@ -62,7 +64,7 @@ set incsearch                   " search as characheters are entered
 set wildignore+=*/.git/*
 set wildignore+=*/node_modules/*
 set wildmenu                    " enable completion
-set wildmode=list:longest       " complete like a shell
+"set wildmode=list:longest       " complete like a shell
 
 " statusline
 "===============================================================================

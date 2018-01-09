@@ -1,5 +1,40 @@
-*background: #000000
-*foreground: #ffffff
+!Black
+*color0: #000000
+!Maroon
+*color1: #800000
+!Green
+*color2: #008000
+!Olive
+*color3: #808000
+!Navy
+*color4: #000080
+!Purple
+*color5: #800080
+!Teal
+*color6: #008080
+!Silver
+*color7: #c0c0c0
+!Grey
+*color8: #808080
+!Red
+*color9: #ff0000
+!Lime
+*color10: #00ff00
+!Yellow
+*color11: #ffff00
+!Blue
+*color12: #0000ff
+!Fuchsia
+*color13: #ff00ff
+!Aqua
+*color14: #00ffff
+!White
+*color15: #ffffff
 
-*font: xft:monospace:size=12
+*foreground: #ffffff
+*background: #000000
+
+*cursorColor: #808080
+
+*font: xft:Hack:size=12
 URxvt*scrollBar: false

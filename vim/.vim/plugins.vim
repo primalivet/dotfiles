@@ -16,11 +16,13 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dracula/vim'
-Plug 'nanotech/jellybeans.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
+Plug 'nanotech/jellybeans.vim'
+Plug 'gerw/vim-HiLinkTrace'
+Plug 'rakr/vim-one'
+Plug 'primalivet/vim-realrealplain'
 
 call plug#end()
