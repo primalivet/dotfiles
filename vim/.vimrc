@@ -7,16 +7,15 @@ source ~/.vim/plugins.vim       " check for vim-plug and install plugins
 " plugin settings
 " =============================================================================
 
-"let g:ale_echo_msg_format='[%linter% - %severity%] %s'
 let g:ale_sign_column_always = 1
 let g:ctrlp_show_hidden=1       " show hidden files in ctrlp
 
 " misc
 "==============================================================================
 
-set clipboard=unnamed           " use system clipboard
 set autoread                    " update files if they're changed outside vim
 set backspace=indent,eol,start  " make backspace behave like normal
+set clipboard=unnamed           " use system clipboard
 set encoding=utf-8              " use utf8 encoding
 set fileformat=unix             " use this format
 set fileformats=unix,dos,mac    " recognize theses formats
