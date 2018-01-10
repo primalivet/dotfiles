@@ -7,22 +7,22 @@ if !filereadable('~/.vim/autoload/plug.vim')
       exit
     endif
   else
-    echom "vim-plug not installed. Please install it manually or install curl.\n"
-    exit
+      echom "vim-plug not installed. Please install it manually or install curl.\n"
+      exit
   endif
 endif
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'w0rp/ale'
-Plug 'nanotech/jellybeans.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'pangloss/vim-javascript'
+"Plug 'tpope/vim-commentary'
+"Plug 'tpope/vim-surround'
+"Plug 'w0rp/ale'
+"Plug 'nanotech/jellybeans.vim'
 Plug 'gerw/vim-HiLinkTrace'
-Plug 'rakr/vim-one'
+"Plug 'rakr/vim-one'
 Plug 'primalivet/vim-realrealplain'
 
 call plug#end()
