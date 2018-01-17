@@ -1,7 +1,8 @@
 source ~/.vim/functions.vim
 source ~/.vim/plugins.vim
 
-colorscheme realrealplain
+let g:lightline = { 'colorscheme': 'friendly' }
+colorscheme friendly
 filetype plugin indent on
 let g:netrw_altv=1
 let g:netrw_banner=0
@@ -24,7 +25,7 @@ set number relativenumber
 set path+=**
 set scrolloff=4
 set shiftwidth=2 shiftround
-set showcmd laststatus=2
+set noshowmode showcmd laststatus=2
 set showmatch matchtime=1
 set splitbelow splitright
 set t_ut=
