@@ -41,6 +41,11 @@ command! Evimrc split ~/.vimrc
 nnoremap q: <Nop>
 nnoremap Q <Nop>
 
+" insert parens and braces automatically and place cursor inside.
+inoremap {<CR> {<CR>}<C-o>O<Tab>
+inoremap (<CR> (<CR>)<C-o>O<Tab>
+inoremap [<CR> [<CR>]<C-o>O<Tab>
+
 " sort inner paragraph
 nnoremap <leader>sp :call SortParagraph()<CR>
 
