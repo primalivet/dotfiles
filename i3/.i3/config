@@ -13,7 +13,7 @@ set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Sans 10
+font pango:Hack 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -158,24 +158,24 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
   status_command i3status
-  colors {
-    background #1e282f
-    statusline #cedfe9
-    separator #889ca8
+#   colors {
+#     background #1e282f
+#     statusline #cedfe9
+#     separator #889ca8
 
-    # class            border  backgr. text
-    focused_workspace  #475b6b #475b6b #cedfe9
-    inactive_workspace #1e282f #1e282f #cedfe9
-    urgent_workspace   #f94d96 #f94d96 #cedfe9
-  }
+#     # class            border  backgr. text
+#     focused_workspace  #475b6b #475b6b #cedfe9
+#     inactive_workspace #1e282f #1e282f #cedfe9
+#     urgent_workspace   #f94d96 #f94d96 #cedfe9
+#   }
 }
 
 # Colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #475b6b #475b6b #cedfe9 #475b6b   #475b6b
-client.focused_inactive #29343d #29343d #cedfe9 #29343d   #29343d
-client.unfocused        #29343d #29343d #889ca8 #29343d   #29343d
-client.urgent           #f94d96 #f94d96 #29343d #f94d96   #f94d96
-client.placeholder      #29343d #29343d #cedfe9 #29343d   #29343d
+# client.focused          #475b6b #475b6b #cedfe9 #475b6b   #475b6b
+# client.focused_inactive #29343d #29343d #cedfe9 #29343d   #29343d
+# client.unfocused        #29343d #29343d #889ca8 #29343d   #29343d
+# client.urgent           #f94d96 #f94d96 #29343d #f94d96   #f94d96
+# client.placeholder      #29343d #29343d #cedfe9 #29343d   #29343d
 
-client.background       #1e282f
+# client.background       #1e282f

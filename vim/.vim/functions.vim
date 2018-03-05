@@ -1,3 +1,9 @@
+function! CreateBackupDir()
+  if !isdirectory('~/.vim/backup/undo')
+    call system('mkdir -p ~/.vim/backup/undo')
+  endif
+endfunction
+
 function! ToggleRelativeNumbers()
   if &relativenumber
     set number norelativenumber

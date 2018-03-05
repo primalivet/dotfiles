@@ -1,9 +1,14 @@
 source ~/.vim/functions.vim
 source ~/.vim/plugins.vim
 
-colorscheme friendly
+call CreateBackupDir()
+
+colorscheme realrealplain
 filetype plugin indent on
-let g:lightline = { 'colorscheme': 'friendly' }
+let g:ale_linters = { 'javascript': ['eslint'] }
+let g:ale_fixers = { 'javascript': ['prettier'] }
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_fix_on_save = 1
 let g:netrw_altv=1
 let g:netrw_banner=0
 let g:netrw_browse_splits=4
@@ -17,7 +22,7 @@ set clipboard=unnamed
 set encoding=utf-8
 set expandtab tabstop=2 softtabstop=2
 set fileformat=unix fileformats=unix,dos,mac
-set fillchars=vert:\
+set fillchars=vert:\|
 set history=200
 set hlsearch incsearch
 set lazyredraw
@@ -44,6 +49,8 @@ command! Evimrc split ~/.vimrc
 
 nnoremap q: <Nop>
 nnoremap Q <Nop>
+nnoremap j gj
+nnoremap k gk
 
 " insert parens and braces automatically and place cursor inside.
 inoremap {<CR> {<CR>}<C-o>O<Tab>
