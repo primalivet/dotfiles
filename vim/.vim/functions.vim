@@ -22,5 +22,14 @@ function! LinterStatus() abort
   let l:errors = l:counts.error + l:counts.style_error
   let l:non_errors = l:counts.total - l:errors
 
-  return l:counts.total == 0 ? 'OK' : printf('%dE/%dW', errors, non_errors)
+  return l:counts.total == 0 ? 'OK ' : printf('%dE/%dW ', errors, non_errors)
+endfunction
+
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?''.l:branchname.' ':''
 endfunction

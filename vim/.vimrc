@@ -43,6 +43,16 @@ set updatetime=250
 set wildmenu wildignore=*/.git/*,*/node_modules/*
 syntax on
 
+set statusline=
+set statusline+=%{StatuslineGit()}
+set statusline+=%f
+set statusline+=\ %m
+set statusline+=%=
+set statusline+=%{LinterStatus()}
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
+
+
 command! W w
 command! Q q
 command! Evimrc split ~/.vimrc
