@@ -4,6 +4,7 @@ source ~/.vim/plugins.vim
 call CreateBackupDir()
 
 colorscheme realrealplain
+set background=light
 filetype plugin indent on
 let g:ale_linters = { 'javascript': ['eslint'] }
 let g:ale_fixers = { 'javascript': ['prettier'] }
@@ -28,7 +29,8 @@ set hlsearch incsearch
 set lazyredraw
 set list listchars=trail:·,tab:▸\ 
 set nocompatible
-set noshowmode showcmd laststatus=2
+" set noshowmode showcmd laststatus=2
+set showcmd
 set noswapfile
 set number relativenumber
 set path+=**
@@ -42,16 +44,6 @@ set undofile undodir=~/.vim/backup/undo/
 set updatetime=250
 set wildmenu wildignore=*/.git/*,*/node_modules/*
 syntax on
-
-set statusline=
-set statusline+=%{StatuslineGit()}
-set statusline+=%f
-set statusline+=\ %m
-set statusline+=%=
-set statusline+=%{LinterStatus()}
-set statusline+=\ %p%%
-set statusline+=\ %l:%c
-
 
 command! W w
 command! Q q
@@ -75,6 +67,9 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" F5 toggles between light and dark background
+nnoremap <F11> :call ToggleBG()<CR>
 
 " F12 toggles between normal and hybrid line numbers
 nnoremap <F12> :call ToggleRelativeNumbers()<CR>

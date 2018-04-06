@@ -17,6 +17,7 @@ function! SortParagraph()
   :'a,'bsort
 endfunction
 
+
 function! LinterStatus() abort
   let l:counts = ale#statusline#Count(bufnr(''))
   let l:errors = l:counts.error + l:counts.style_error
@@ -32,4 +33,14 @@ endfunction
 function! StatuslineGit()
   let l:branchname = GitBranch()
   return strlen(l:branchname) > 0?''.l:branchname.' ':''
+endfunction
+
+" Credit to Ethan Schoonover for this toggle background  function
+" Original function can be found in Ethan's git repo:
+" https://github.com/altercation/solarized/blob/master/vim-colors-solarized/autoload/togglebg.vim
+function! ToggleBG()
+let &background = ( &background == "dark"? "light" : "dark" )
+  if exists("g:colors_name")
+    exe "colorscheme " . g:colors_name
+  endif
 endfunction
