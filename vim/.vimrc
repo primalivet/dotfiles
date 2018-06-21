@@ -1,66 +1,59 @@
-source ~/.vim/functions.vim
-source ~/.vim/plugins.vim
+function! ToggleRelativeNumbers()
+  if &relativenumber 
+    set number norelativenumber
+  else 
+    set number relativenumber endif
+endfunction
 
-call CreateBackupDir()
+function! SortParagraph()
+  :normal {jma}kmb  
+  :'a,'bsort
+endfunction
 
-colorscheme realrealplain
-set background=light
-filetype plugin indent on
-let g:ale_linters = { 'javascript': ['eslint'] }
-let g:ale_fixers = { 'javascript': ['prettier'] }
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_fix_on_save = 1
+syntax on
+set background=dark
+
+set expandtab tabstop=2 softtabstop=2
+set shiftwidth=2 shiftround
+set autoindent
+set hlsearch incsearch
+set ignorecase smartcase
+set showmatch matchtime=1
+set backspace=2
+set scrolloff=5
+set showcmd
+set number relativenumber
+set list listchars=trail:·,tab:▸\ 
+set wildmenu wildignore=*/.git/*,*/node_modules/*
+set path+=**
+
 let g:netrw_altv=1
 let g:netrw_banner=0
 let g:netrw_browse_splits=4
 let g:netrw_liststyle=3
-let mapleader=","
-set autoindent smartindent
-set autoread
-set backspace=indent,eol,start
-set backup backupdir=~/.vim/backup/
-set clipboard=unnamed
-set encoding=utf-8
-set expandtab tabstop=2 softtabstop=2
-set fileformat=unix fileformats=unix,dos,mac
-set fillchars=vert:\|
-set history=200
-set hlsearch incsearch
-set lazyredraw
-set list listchars=trail:·,tab:▸\ 
-set nocompatible
-" set noshowmode showcmd laststatus=2
-set showcmd
-set noswapfile
-set number relativenumber
-set path+=**
-set scrolloff=4
-set shiftwidth=2 shiftround
-set showmatch matchtime=1
-set splitbelow splitright
-set t_ut=
-set timeoutlen=1000 ttimeoutlen=0
-set undofile undodir=~/.vim/backup/undo/
-set updatetime=250
-set wildmenu wildignore=*/.git/*,*/node_modules/*
-syntax on
 
 command! W w
 command! Q q
-command! Evimrc split ~/.vimrc
 
+let mapleader=","
+
+" disable annoying mode
 nnoremap q: <Nop>
 nnoremap Q <Nop>
+
+" tab and keep visual selection
+vmap <S-TAB> <gv
+vmap <TAB> >gv
+
+" make j and k work on wrapped lines
 nnoremap j gj
 nnoremap k gk
 
 " insert parens and braces automatically and place cursor inside.
-inoremap {<CR> {<CR>}<C-o>O<Tab>
-inoremap (<CR> (<CR>)<C-o>O<Tab>
-inoremap [<CR> [<CR>]<C-o>O<Tab>
-
-" sort inner paragraph
-nnoremap <leader>sp :call SortParagraph()<CR>
+inoremap ({<CR> ({<CR>})<C-o>O
+inoremap {<CR> {<CR>}<C-o>O
+inoremap (<CR> (<CR>)<C-o>O
+inoremap [<CR> [<CR>]<C-o>O
 
 " split controls
 nnoremap <C-h> <C-w>h
@@ -68,8 +61,15 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" F5 toggles between light and dark background
-nnoremap <F11> :call ToggleBG()<CR>
+" sort inner paragraph
+nnoremap <leader>sp :call SortParagraph()<CR>
 
-" F12 toggles between normal and hybrid line numbers
-nnoremap <F12> :call ToggleRelativeNumbers()<CR>
+" toggles between normal and hybrid line numbers
+nnoremap <leader>ln :call ToggleRelativeNumbers()<CR>
+
+" old ale plugin settings for javscript
+" let g:ale_linters = { 'javascript': ['eslint'] }
+" let g:ale_fixers = { 'javascript': ['prettier'] }
+" let g:ale_javascript_prettier_use_local_config = 1
+" let g:ale_fix_on_save = 1
+

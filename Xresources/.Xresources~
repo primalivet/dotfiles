@@ -1,40 +1,41 @@
-!Black
-*color0: #29343d
-!Maroon
-*color1: #fb7eb3
-!Green
-*color2: #9bf5a2
-!Olive
-*color3: #feeeab
-!Navy
-*color4: #70c1fb
-!Purple
-*color5: #cbabfb
-!Teal
-*color6: #fb7ef6
-!Silver
-*color7: #cedfe9
-!Grey
-*color8: #889ca8
-!Red
-*color9: #f94d96
-!Lime
-*color10: #6df077
-!Yellow
-*color11: #fee375
-!Blue
-*color12: #3eabfa
-!Fuchsia
-*color13: #ad7af9
-!Aqua
-*color14: #f94df3
-!White
-*color15: #ffffff
+#define darkBlack #101010
+#define lightBlack #424242
+#define darkRed #b71c1c
+#define lightRed #f44336
+#define darkGreen #1b5e20
+#define lightGreen #4caf50
+#define darkYellow #f57f17
+#define lightYellow #ffeb3b
+#define darkBlue #1a237e
+#define lightBlue #3f51b5
+#define darkMagentan #880e4f
+#define lightMagentan #e91e63
+#define darkCyan #004d40
+#define lightCyan #009688
+#define darkWhite #9e9e9e
+#define lightWhite #e0e0e0
 
-*foreground: #cedfe9
-*background: #1e282f
+/* *color0: darkBlack */
+/* *color1: darkRed */
+/* *color2: darkGreen */
+/* *color3: darkYellow */
+/* *color4: darkBlue */
+/* *color5: darkMagentan */
+/* *color6: darkCyan */
+/* *color7: darkWhite */
+/* *color8: lightBlack */
+/* *color9: lightRed */
+/* *color10: lightGreen */
+/* *color11: lightYellow */
+/* *color12: lightBlue */
+/* *color13: lightMagentan */
+/* *color14: lightCyan */
+/* *color15: lightWhite */
 
-*cursorColor: #fee375
+/* *foreground: lightWhite */
+/* *background: darkBlack */
+/* *cursorColor: lightYellow */
 
-*font: xft:Hack:size=12
-URxvt*scrollBar: false
+/* *font: xft:Hack:size=11 */
+/* *font: xft:Terminus:pixelsize=16 */
+/* URxvt*scrollBar: false */
