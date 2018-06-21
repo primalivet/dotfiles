@@ -2,7 +2,8 @@ function! ToggleRelativeNumbers()
   if &relativenumber 
     set number norelativenumber
   else 
-    set number relativenumber endif
+    set number relativenumber 
+  endif
 endfunction
 
 function! SortParagraph()
