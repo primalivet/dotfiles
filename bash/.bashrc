@@ -26,14 +26,7 @@ export PATH=$HOME/bin:$PATH
 export PATH=/usr/local/go/bin:$PATH
 
 # add ~./.npm-global to path
-export PATH=$HOME/.npm-global:$PATH 
-
-if command_exists rbenv; then
-  # add .rbenv to path
-  export PATH=$HOME/.rbenv/bin:$PATH
-  # Load rbenv automatically by appending the following to ~/.bashrc: 
-  eval "$(rbenv init -)"
-fi
+export PATH=$HOME/.npm-global-packages:$PATH 
 
 # aliases
 alias ls='ls --color'
