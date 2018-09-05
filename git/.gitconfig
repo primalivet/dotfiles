@@ -4,3 +4,6 @@
 
 [push]
   default=simple
+
+[core]
+  filemode=false
