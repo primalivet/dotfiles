@@ -23,7 +23,7 @@ set showmatch matchtime=1
 set backspace=2
 set scrolloff=5
 set showcmd
-set number relativenumber
+set number
 set list listchars=trail:·,tab:▸\ 
 set wildmenu wildignore=*/.git/*,*/node_modules/*
 set path+=**
@@ -42,9 +42,13 @@ let mapleader=","
 nnoremap q: <Nop>
 nnoremap Q <Nop>
 
-" tab and keep visual selection
+" tab/shift tab and keep visual selection
 vmap <S-TAB> <gv
 vmap <TAB> >gv
+
+" also keep visual selection on >  and < keys
+vmap < <gv
+vmap > >gv
 
 " make j and k work on wrapped lines
 nnoremap j gj
