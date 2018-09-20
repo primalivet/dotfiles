@@ -29,7 +29,7 @@ export PATH=/usr/local/go/bin:$PATH
 export PATH=$HOME/.npm-global-packages:$PATH 
 
 # aliases
-alias ls='ls --color'
+#alias ls='ls --color'
 alias l='ls -A'
 alias ll='ls -Al'
 
