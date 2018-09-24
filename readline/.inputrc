@@ -1,0 +1,5 @@
+# use vi mode everywhere with GNU readline
+set editing-mode vi
+
+# show "normal"/"insert" mode in prompt
+set show-mode-in-prompt on
