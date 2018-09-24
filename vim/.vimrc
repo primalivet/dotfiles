@@ -66,6 +66,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" unhighlight seach results
+nnoremap <leader><Space> :nohlsearch<CR>
+
 " sort inner paragraph
 nnoremap <leader>sp :call SortParagraph()<CR>
 
