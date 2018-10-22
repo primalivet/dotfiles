@@ -1,4 +1,5 @@
-#dotfiles
+# dotfiles
+
 I try to keep this as simple as possible. Use `git clone` to get it on your computer. What directory you clone it to doesn't matter.
 
 ```
