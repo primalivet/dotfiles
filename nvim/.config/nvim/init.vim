@@ -4,11 +4,14 @@
 set nocompatible
 filetype plugin indent on           " autoload filetype plugins and indent files
 
+" plugins {{{
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'gerw/vim-HiLinkTrace'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'primalivet/vim-realrealplain'
 call plug#end()
+" }}}
 
 let g:lightline={'colorscheme': 'realrealplain'}
 
