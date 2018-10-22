@@ -20,7 +20,7 @@ export TERM=xterm-256color
 export EDITOR=vim
 
 # update path with home/bin
-export PATH=$HOME/bin:$PATH 
+export PATH=$HOME/.local/bin:$PATH 
 
 # add go lang to path
 export PATH=/usr/local/go/bin:$PATH
