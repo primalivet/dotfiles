@@ -1,5 +1,43 @@
+# basic settings
+
+# no bells
+set bell-style none
+
+# dont make me confirm completion
+# when many items
+set completion-query-items -1
+
+# switch ~ for full path
+set expand-tilde on
+
+# match hidden files
+set match-hidden-files on
+
+# show the common prefix before 
+# going through the completion list items
+set menu-complete-display-prefix on
+
+# show me all completions
+set show-all-if-ambiguous on
+
+# vi mode settings
+
 # use vi mode everywhere with GNU readline
 set editing-mode vi
 
 # show "normal"/"insert" mode in prompt
 set show-mode-in-prompt on
+
+# set prompt text for command/insert mode
+set vi-cmd-mode-string (cmd)
+set vi-ins-mode-string (ins)
+
+# mappings for command mode
+set keymap vi-command
+
+# mappings for insert mode
+set keymap vi-insert
+
+# TAB 
+TAB: menu-complete
+"\e[Z": menu-complete-backwards
