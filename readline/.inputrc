@@ -3,6 +3,14 @@
 # no bells
 set bell-style none
 
+# display possible completions in color
+# uses LS_COLORS
+set colored-stats on
+
+# use color to show the common
+# completion prefix, uses LS_COLORS
+# set colored-completion-prefix on
+
 # dont make me confirm completion
 # when many items
 set completion-query-items -1
@@ -29,8 +37,12 @@ set editing-mode vi
 set show-mode-in-prompt on
 
 # set prompt text for command/insert mode
-set vi-cmd-mode-string (cmd)
-set vi-ins-mode-string (ins)
+# uses \1 and \2 insead of \[ and \] to start and
+# end escape sequens
+# set vi-cmd-mode-string "\1\e[32m\2COMMAND\1\e[0m\2 "
+# set vi-ins-mode-string "\1\e[34m\2INSERT \1\e[0m\2 "
+set vi-cmd-mode-string "(cmd) "
+set vi-ins-mode-string "(ins) "
 
 # mappings for command mode
 set keymap vi-command
