@@ -16,6 +16,8 @@ set completion-map-case on
 # dont make me confirm completion when many items
 set completion-query-items -1
 
+# dont print control charaters like ^C
+set echo-control-characters off
 # switch ~ for full path
 set expand-tilde on
 
@@ -32,33 +34,10 @@ set match-hidden-files off
 # show the common prefix before going through the completion list items
 set menu-complete-display-prefix on
 
-#
-set print-completions-horizontally on
-
 # show me multiple completions on first tab
 set show-all-if-ambiguous on
 
-# vi mode settings
-# -----------------------------------------------------------------------------
-# use vi mode everywhere with GNU readline
-set editing-mode vi
-
-# show "normal"/"insert" mode in prompt
-set show-mode-in-prompt on
-
-# set prompt text for command/insert mode uses \1 and \2 insead of \[ and \] 
-# to start and end escape sequens
-#
-# set vi-cmd-mode-string "\1\e[32m\2COMMAND\1\e[0m\2 "
-# set vi-ins-mode-string "\1\e[34m\2INSERT \1\e[0m\2 "
-set vi-cmd-mode-string "(cmd) "
-set vi-ins-mode-string "(ins) "
-
-# mappings for command mode
-set keymap vi-command
-
-# mappings for insert mode
-set keymap vi-insert
-
-# tab cycles possible completions
-TAB: menu-complete
+$if Bash
+	# cycle through completion with tab
+	Tab: menu-complete
+$endif
