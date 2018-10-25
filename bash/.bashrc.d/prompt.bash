@@ -1,15 +1,19 @@
-# get current branch in git repo
+# takes 2 optional arguments
+# $1 is the git branch string prefix
+# $2 is the git branch string suffix
 function parse_git_branch() {
     BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
     if [ ! "${BRANCH}" == "" ]; then
         STAT=`parse_git_dirty`
-        echo " ${BRANCH}"
+        echo "${1:-}${BRANCH}${2:-}"
     else
         echo ""
     fi
 }
 
 # get current status of git repo
+# $1 is the git status string prefix
+# $2 is the git status string suffix
 function parse_git_dirty {
     status=`git status 2>&1 | tee`
     dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
@@ -38,18 +42,22 @@ function parse_git_dirty {
         bits="!${bits}"
     fi
     if [ ! "${bits}" == "" ]; then
-        echo "${bits}"
+        echo "${1:-}${bits}${2:-}"
     else
         echo ""
     fi
 }
 
-export PS1="\[\e[01m\]" # bold
-export PS1="$PS1\W" # current working dir
-export PS1="$PS1\[\e[m\]" # turn off color
-export PS1="$PS1\[\e[32m\]" # green
-export PS1="$PS1\`parse_git_branch\`" # current git branch
-export PS1="$PS1\[\e[35m\]" # red
-export PS1="$PS1\`parse_git_dirty\`" # current git branch
-export PS1="$PS1\[\e[m\]" # turn off color
-export PS1="$PS1 \\$ "
+prompt() {
+    PS1_SUFFIX='$ '
+    case $1 in
+        git)
+            PS1="\u@\h:\[\033[01m\]\W\[\033[35m\]\`parse_git_branch ':'\`\[\033[31m\]\`parse_git_dirty\`\[\033[00m\]$PS1_SUFFIX"
+            ;;
+        '')
+            source /etc/skel/.bashrc
+            ;;
+    esac
+}
+
+prompt "${MODE:-git}"

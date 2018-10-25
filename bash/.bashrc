@@ -9,31 +9,30 @@ command_exists() {
     type "$1" &> /dev/null
 }
 
-HISTCONTROL=ignoredups # ignore duplicate input
+# ignore duplicate input
+HISTCONTROL=ignoredups 
 
-shopt -s histappend # append to the history file
-shopt -s checkwinsize # check the window size after each command and update if changed
+# correct small errors when using cd
+shopt -s cdspell
+# check the window size after each command and update if changed
+shopt -s checkwinsize 
+# correct small errors when completing
+shopt -s dirspell
+# append to the history file
+shopt -s histappend 
+# dont complete tab press on empty line with every single option
+shopt -s no_empty_cmd_completion
 
 # update path with home/bin
 export PATH=$HOME/.local/bin:$PATH 
-
-# add go lang to path
-export PATH=/usr/local/go/bin:$PATH 
-
-# add ~./.npm-global to path
-export PATH=$HOME/.npm-global-packages:$PATH 
-
+# xdg path config directory
+export XDG_CONFIG_HOME=$HOME/.config
 # set TERM to use 256 colors
 export TERM=xterm-256color 
-
-# check for installed editors
-if command_exists nvim; then
-    export EDITOR=nvim
-elif command_exists vim; then
-    export EDITOR=vim
-else
-    export EDITOR=vi
-fi
+# set node version manager directory
+export NVM_DIR="$HOME/.nvm"
+# set EDITOR to nvim if it exists
+if command_exists nvim; then export EDITOR=nvim; fi
 
 # check for dircolors support and load .dircolors if it exists
 if [ -x /usr/bin/dircolors ]; then
@@ -46,3 +45,8 @@ for script in "$HOME"/.bashrc.d/*.bash ; do
     source $script
 done
 unset -v script
+
+# This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# This loads nvm bash_completion
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
