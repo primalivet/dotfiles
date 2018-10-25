@@ -6,7 +6,7 @@ fi
 
 # view all files exept (. and ..) in list format with human readable sizes and
 # group directories first
-alias ll='ls -Alh --group-directories-first'
+alias ld='ls -Alh --group-directories-first'
 
 # use neovim in place of vi and vim if available
 if command_exists nvim; then
