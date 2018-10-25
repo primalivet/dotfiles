@@ -17,13 +17,21 @@ let g:netrw_banner=0                " hide annoying banner
 let g:netrw_browse_splits=4         " open files in same window, :Sex and :Vex for splits
 let g:netrw_liststyle=3             " tree style listing
 
-let g:ale_linters = { 'javascript': ['eslint'] }
-let g:ale_fixers = { 'javascript': ['prettier'] }
+let g:ale_linters = { 
+    \ 'javascript': ['eslint'],
+    \ 'php': ['phpcs'] 
+    \ }
+let g:ale_fixers = { 
+    \ 'javascript': ['prettier'],
+    \ 'php': ['php_cs_fixer'] 
+    \ }
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_fix_on_save = 2
 " }}}
 
 " base settings (see :h nvim-defaults) {{{
+" use comma ',' as leader key
+let mapleader="," 		    
 " linenumbers
 set number                          
 " start to scroll when cursor is < 5 rows from end of buffer
@@ -50,8 +58,8 @@ set nowritebackup
 set noswapfile                      
 " dont wrap lines
 set nowrap                          
-" use comma ',' as leader key
-let mapleader="," 		    
+" ignore node_modules
+set wildignore+=**/node_modules/**
 
 colorscheme realrealplain
 set background=dark
