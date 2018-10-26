@@ -30,39 +30,42 @@ let g:ale_fix_on_save = 2
 " }}}
 
 " base settings (see :h nvim-defaults) {{{
+" set colorscheme
+colorscheme realrealplain
 " use comma ',' as leader key
 let mapleader="," 		    
-" linenumbers
-set number                          
-" start to scroll when cursor is < 5 rows from end of buffer
-set scrolloff=5                     
-" highlight matching brackets
-set showmatch                       
+" prefer dark background
+set background=dark
+set formatoptions+=ro
 " hightlight matching brackets for 1/10 of a second
 set matchtime=1                     
-" round indent to multiples of shiftwidth
-set shiftround                      
-" open new vertical splits to the right
-set splitright                      
-" open new horizontal splits to the botton
-set splitbelow                      
-" make the path smart when using :find etc. etc.
-set path+=**                        
-" show the current mode
-set noshowmode                      
 " don't backup before overwriting a file
 set nobackup                        
-" if the :write wasn't successfull, everything is fucked
-set nowritebackup                   
+" show the current mode
+set noshowmode                      
 " dont use a swap file
 set noswapfile                      
 " dont wrap lines
 set nowrap                          
+" if the :write wasn't successfull, everything is fucked
+set nowritebackup                   
+" linenumbers
+set number                          
+" make the path smart when using :find etc. etc.
+set path+=**                        
+" start to scroll when cursor is < 5 rows from end of buffer
+set scrolloff=5                     
+" round indent to multiples of shiftwidth
+set shiftround                      
+" highlight matching brackets
+set showmatch                       
+" open new horizontal splits to the botton
+set splitbelow                      
+" open new vertical splits to the right
+set splitright                      
 " ignore node_modules
 set wildignore+=**/node_modules/**
 
-colorscheme realrealplain
-set background=dark
 " }}}
 
 " commands {{{
@@ -70,6 +73,15 @@ set background=dark
 command! W w 			    
 " capital q quits
 command! Q q
+" }}}
+
+" cross mode mappings {{{
+" increase the default width/height of window resize. this is still the
+" default window resizing keymaps, se :h window-resize
+noremap <C-w>+ :resize +5<CR>
+noremap <C-w>- :resize -5<CR>
+noremap <C-w>< :vertical:resize -5<CR>
+noremap <C-w>> :vertical:resize +5<CR>
 " }}}
 
 " normal mode mappings {{{
@@ -111,4 +123,9 @@ inoremap [<CR> [<CR>]<C-o>O
 " also keep visual selection on >  and < keys
 vnoremap < <gv
 vnoremap > >gv
+" }}}
+
+" auto commands {{{
+" treat json as javascript
+autocmd BufNewFile,BufRead *.json set ft=javascript
 " }}}
