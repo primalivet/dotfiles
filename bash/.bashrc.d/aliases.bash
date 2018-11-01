@@ -2,7 +2,7 @@
 # command, somthing that's impossible with aliases. You can read more about
 # this in Tom Ryders post https://sanctum.geek.nz/arabesque/custom-commands/
 
-# ls on steriods
+# ll - more detailed listing
 # -A : all files, including .dotfiles. but don't include . and ..
 # -l : list/long format
 # -h : sizes in human readable format
@@ -15,8 +15,20 @@ ll() {
     fi
 }
 
-# use neovim in place of vi and vim if available
-if command_exists nvim; then
-    alias vi='nvim'
-    alias vim='nvim'
-fi
+# lld - more detailed and directory grouped listing build on top of the
+# "ll" command
+# --group-directories-first does what it sounds like
+lld() {
+    ll "--group-directories-first" "$@"
+}
+
+# prioritize nvim over vim and vim over vi
+vi() {
+    if command_exists nvim; then
+        command nvim "$@"
+    elif command_exists vim; then
+        command vim "$@"
+    else
+        command vi "$@"
+    fi
+}
