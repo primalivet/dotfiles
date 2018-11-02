@@ -3,11 +3,10 @@
 # no bells
 set bell-style none
 
-# display possible completions in color uses LS_COLORS
+# display possible completions in color and highlight the current completion
+# prefix. uses LS_COLORS
 set colored-stats on
-
-# use color to show the common completion prefix, uses LS_COLORS
-# set colored-completion-prefix on
+set colored-completion-prefix on
 
 # when completing, don't be case sensative and treat underscors as hyphens
 set completion-ignore-case on
@@ -18,6 +17,7 @@ set completion-query-items -1
 
 # dont print control charaters like ^C
 set echo-control-characters off
+
 # switch ~ for full path
 set expand-tilde on
 
