@@ -3,30 +3,31 @@
 " plugins {{{
 call plug#begin('~/.local/share/nvim/plugged')
 Plug '/mnt/c/code/vim-realrealplain' " use local version
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'gerw/vim-HiLinkTrace'
-Plug 'itchyny/lightline.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'w0rp/ale'
+Plug 'mattn/emmet-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-haml'
 call plug#end()
 " }}}
 
 " plugin settings {{{
-let g:lightline={'colorscheme': 'realrealplain'}
 
-let g:netrw_banner=0                " hide annoying banner
-let g:netrw_browse_splits=4         " open files in same window, :Sex and :Vex for splits
-let g:netrw_liststyle=3             " tree style listing
+" hide annoying banner
+let g:netrw_banner = 0              
+" open files in same window, :Sex and :Vex for splits
+let g:netrw_browse_splits = 4       
+" tree style listing
+let g:netrw_liststyle = 3           
+" hide same files as are ignored by git
+let g:netrw_list_hide= netrw_gitignore#Hide()
 
-let g:ale_linters = { 
-    \ 'javascript': ['eslint'],
-    \ 'php': ['phpcs'] 
-    \ }
-let g:ale_fixers = { 
-    \ 'javascript': ['prettier'],
-    \ 'php': ['php_cs_fixer'] 
-    \ }
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_fix_on_save = 2
+
+let g:user_emmet_mode='i'
+
+let g:ale_linters_explicit = 1
+let g:ale_fix_on_save = 1
 " }}}
 
 " base settings (see :h nvim-defaults) {{{
@@ -36,13 +37,14 @@ colorscheme realrealplain
 let mapleader="," 		    
 " prefer dark background
 set background=dark
+" insert comment char on <CR>, 'O' and 'o'
 set formatoptions+=ro
+" show statusline when nessasary
+set laststatus=1
 " hightlight matching brackets for 1/10 of a second
 set matchtime=1                     
 " don't backup before overwriting a file
 set nobackup                        
-" show the current mode
-set noshowmode                      
 " dont use a swap file
 set noswapfile                      
 " dont wrap lines
@@ -63,8 +65,10 @@ set showmatch
 set splitbelow                      
 " open new vertical splits to the right
 set splitright                      
-" ignore node_modules
+" ignore node_modules directory
 set wildignore+=**/node_modules/**
+" ignore vendor directory
+set wildignore+=**/vendor/**
 
 " }}}
 
@@ -126,6 +130,17 @@ vnoremap > >gv
 " }}}
 
 " auto commands {{{
-" treat json as javascript
-autocmd BufNewFile,BufRead *.json set ft=javascript
+" augroup filetypes
+    " autocmd!
+    " autocmd BufNewFile,BufRead *.scss,*.less,*.styl set filetype=css
+" augroup END
 " }}}
+
+" if autochdir is 0 (false) and there is a .vimrc.local in the pwd
+if (has('autochdir') == 0) && (filereadable(globpath('.', '.local.vimrc')))
+    " if yes, load it up!
+    let s:lvimrc_unresolved = fnamemodify('.local.vimrc', ':p')
+    let s:lvimrc_resolved = resolve(s:lvimrc_unresolved)
+    execute "source" . s:lvimrc_resolved
+endif
+
