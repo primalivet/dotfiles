@@ -8,7 +8,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'w0rp/ale'
 Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
-Plug 'tpope/vim-haml'
+Plug 'StanAngeloff/php.vim'
+Plug 'tpope/vim-haml' " includes json support
 call plug#end()
 " }}}
 
