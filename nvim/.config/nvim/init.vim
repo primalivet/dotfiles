@@ -6,10 +6,7 @@ Plug '/mnt/c/code/vim-realrealplain' " use local version
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'w0rp/ale'
-Plug 'mattn/emmet-vim'
-Plug 'pangloss/vim-javascript'
-Plug 'StanAngeloff/php.vim'
-Plug 'tpope/vim-haml' " includes json support
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 " }}}
 
@@ -24,11 +21,10 @@ let g:netrw_liststyle = 3
 " hide same files as are ignored by git
 let g:netrw_list_hide= netrw_gitignore#Hide()
 
-
-let g:user_emmet_mode='i'
-
 let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
+
+let g:ctrlp_show_hidden = 1
 " }}}
 
 " base settings (see :h nvim-defaults) {{{
@@ -66,6 +62,8 @@ set showmatch
 set splitbelow                      
 " open new vertical splits to the right
 set splitright                      
+" ignore .git directory
+set wildignore+=**/.git/**
 " ignore node_modules directory
 set wildignore+=**/node_modules/**
 " ignore vendor directory
@@ -144,4 +142,3 @@ if (has('autochdir') == 0) && (filereadable(globpath('.', '.local.vimrc')))
     let s:lvimrc_resolved = resolve(s:lvimrc_unresolved)
     execute "source" . s:lvimrc_resolved
 endif
-
