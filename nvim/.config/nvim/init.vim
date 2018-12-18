@@ -7,6 +7,7 @@ Plug 'gerw/vim-HiLinkTrace'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 call plug#end()
 " }}}
 
@@ -25,6 +26,8 @@ let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
 
 let g:ctrlp_show_hidden = 1
+
+let g:deoplete#enable_at_startup = 1
 " }}}
 
 " base settings (see :h nvim-defaults) {{{
@@ -128,13 +131,6 @@ vnoremap < <gv
 vnoremap > >gv
 " }}}
 
-" auto commands {{{
-" augroup filetypes
-    " autocmd!
-    " autocmd BufNewFile,BufRead *.scss,*.less,*.styl set filetype=css
-" augroup END
-" }}}
-
 " if autochdir is 0 (false) and there is a .vimrc.local in the pwd
 if (has('autochdir') == 0) && (filereadable(globpath('.', '.local.vimrc')))
     " if yes, load it up!
@@ -142,3 +138,4 @@ if (has('autochdir') == 0) && (filereadable(globpath('.', '.local.vimrc')))
     let s:lvimrc_resolved = resolve(s:lvimrc_unresolved)
     execute "source" . s:lvimrc_resolved
 endif
+
