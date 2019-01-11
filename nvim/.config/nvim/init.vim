@@ -37,8 +37,11 @@ colorscheme realrealplain
 let mapleader="," 		    
 " prefer dark background
 set background=dark
-" insert comment char on <CR>, 'O' and 'o'
-set formatoptions+=ro
+" set colorcolumn to 1 charater more than textwidth, so all lines should be
+" wrapped before the colorcolumn.
+set colorcolumn=+1
+" set formatoptions, se :h fo-table for help on each option
+set formatoptions=tcroj
 " show statusline when nessasary
 set laststatus=1
 " hightlight matching brackets for 1/10 of a second
@@ -65,14 +68,14 @@ set showmatch
 set splitbelow                      
 " open new vertical splits to the right
 set splitright                      
+" limit text width to 80 characters
+set textwidth=80
 " ignore .git directory
 set wildignore+=**/.git/**
 " ignore node_modules directory
 set wildignore+=**/node_modules/**
 " ignore vendor directory
 set wildignore+=**/vendor/**
-
-" }}}
 
 " commands {{{
 " capital w writes
@@ -138,4 +141,3 @@ if (has('autochdir') == 0) && (filereadable(globpath('.', '.local.vimrc')))
     let s:lvimrc_resolved = resolve(s:lvimrc_unresolved)
     execute "source" . s:lvimrc_resolved
 endif
-
