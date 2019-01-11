@@ -32,3 +32,7 @@ vi() {
         command vi "$@"
     fi
 }
+
+vim() {
+    vi "$@"
+}
