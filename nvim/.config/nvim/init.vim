@@ -76,6 +76,7 @@ set wildignore+=**/.git/**
 set wildignore+=**/node_modules/**
 " ignore vendor directory
 set wildignore+=**/vendor/**
+" }}}
 
 " commands {{{
 " capital w writes
