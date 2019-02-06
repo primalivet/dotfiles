@@ -47,7 +47,7 @@ set cursorline
 " set formatoptions, se :h fo-table for help on each option
 set formatoptions=tcroj
 " show statusline when nessasary
-set laststatus=1
+set laststatus=2
 " hightlight matching brackets for 1/10 of a second
 set matchtime=1                     
 " don't backup before overwriting a file
@@ -64,6 +64,8 @@ set number
 set path+=**                        
 " start to scroll when cursor is < 5 rows from end of buffer
 set scrolloff=5                     
+" start to scroll when cursor is < 16 columns from end of line
+set sidescrolloff=15
 " round indent to multiples of shiftwidth
 set shiftround                      
 " highlight matching brackets
