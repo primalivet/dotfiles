@@ -4,6 +4,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 Plug '/mnt/c/code/vim-realrealplain' " use local version
 Plug 'gerw/vim-HiLinkTrace'
+Plug 'cocopon/colorswatch.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot'
@@ -41,6 +42,8 @@ set background=dark
 " set colorcolumn to 1 charater more than textwidth, so all lines should be
 " wrapped before the colorcolumn.
 set colorcolumn=+1
+" highlight current cursor line
+set cursorline
 " set formatoptions, se :h fo-table for help on each option
 set formatoptions=tcroj
 " show statusline when nessasary
