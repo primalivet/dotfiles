@@ -39,9 +39,6 @@ colorscheme realrealplain
 let mapleader="," 		    
 " prefer dark background
 set background=dark
-" set colorcolumn to 1 charater more than textwidth, so all lines should be
-" wrapped before the colorcolumn, if wrap is set
-set colorcolumn=+1
 " highlight current cursor line
 set cursorline
 " set formatoptions, se :h fo-table for help on each option
