@@ -76,6 +76,8 @@ set splitbelow
 set splitright                      
 " limit text width to 80 characters
 set textwidth=80
+" 
+set timeoutlen=0
 " ignore .git directory
 set wildignore+=**/.git/**
 " ignore node_modules directory
@@ -128,11 +130,13 @@ nnoremap <leader><Space> :nohlsearch<CR>
 "}}}
 
 " insert mode mappings {{{
-" insert parens and braces automatically and place cursor inside.
-inoremap ({<CR> ({<CR>})<C-o>O
-inoremap {<CR> {<CR>}<C-o>O
-inoremap (<CR> (<CR>)<C-o>O
-inoremap [<CR> [<CR>]<C-o>O
+" insert parens, braces and quotes automatically and place cursor inside.
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+inoremap { {}<Esc>i
+inoremap " ""<Esc>i
+inoremap ' ''<Esc>i
+inoremap ` ``<Esc>i
 " }}}
 
 " visual mode mappings {{{
@@ -141,6 +145,7 @@ vnoremap < <gv
 vnoremap > >gv
 " }}}
 
+" local vimrc {{{
 " if autochdir is 0 (false) and there is a .vimrc.local in the pwd
 if (has('autochdir') == 0) && (filereadable(globpath('.', '.local.vimrc')))
     " if yes, load it up!
@@ -148,3 +153,4 @@ if (has('autochdir') == 0) && (filereadable(globpath('.', '.local.vimrc')))
     let s:lvimrc_resolved = resolve(s:lvimrc_unresolved)
     execute "source" . s:lvimrc_resolved
 endif
+" }}}
