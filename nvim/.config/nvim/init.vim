@@ -4,12 +4,12 @@
 call plug#begin('~/.local/share/nvim/plugged')
 Plug '/mnt/c/code/vim-realrealplain' " use local version
 Plug 'gerw/vim-HiLinkTrace'
-Plug 'cocopon/colorswatch.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'w0rp/ale'
-Plug 'sheerun/vim-polyglot'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'sheerun/vim-polyglot' " highlighting for many languages
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 call plug#end()
 " }}}
 
@@ -73,8 +73,8 @@ set splitbelow
 set splitright                      
 " limit text width to 80 characters
 set textwidth=80
-" 
-set timeoutlen=0
+"do not delay on terminal input
+set ttimeoutlen=0
 " ignore .git directory
 set wildignore+=**/.git/**
 " ignore node_modules directory
@@ -125,16 +125,6 @@ nnoremap <leader>e :Explore<CR>
 " unhighlight seach results
 nnoremap <leader><Space> :nohlsearch<CR>
 "}}}
-
-" insert mode mappings {{{
-" insert parens, braces and quotes automatically and place cursor inside.
-inoremap ( ()<Esc>i
-inoremap [ []<Esc>i
-inoremap { {}<Esc>i
-inoremap " ""<Esc>i
-inoremap ' ''<Esc>i
-inoremap ` ``<Esc>i
-" }}}
 
 " visual mode mappings {{{
 " also keep visual selection on >  and < keys
