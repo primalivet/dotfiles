@@ -5,8 +5,8 @@ set bell-style none
 
 # display possible completions in color and highlight the current completion
 # prefix. uses LS_COLORS
-set colored-stats on
-set colored-completion-prefix on
+set colored-stats off
+set colored-completion-prefix off
 
 # when completing, don't be case sensative and treat underscors as hyphens
 set completion-ignore-case on
