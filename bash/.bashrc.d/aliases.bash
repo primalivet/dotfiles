@@ -9,7 +9,7 @@
 # --colors=auto : colors from LS_COLORS enviroment variable
 ll() {
     if [ -x /usr/bin/dircolors ]; then
-        command ls -Alh --color=auto "$@"
+        command ls -Alh "$@"
     else
         command ls -Alh "$@"
     fi

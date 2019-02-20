@@ -52,7 +52,7 @@ prompt() {
     PS1_SUFFIX='$ '
     case $1 in
         git)
-            PS1="\u@\h:\[\033[01m\]\W\[\033[35m\]\`parse_git_branch ':'\`\[\033[31m\]\`parse_git_dirty\`\[\033[00m\]$PS1_SUFFIX"
+            PS1="\u@\h:\W\`parse_git_branch ':'\`\[\033[01;91m\]\`parse_git_dirty\`\[\033[00m\]$PS1_SUFFIX"
             ;;
         '')
             source /etc/skel/.bashrc
