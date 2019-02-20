@@ -2,13 +2,11 @@
 
 " plugins {{{
 call plug#begin('~/.local/share/nvim/plugged')
-Plug '/mnt/c/code/vim-realrealplain' " use local version
+Plug '/mnt/c/code/vim-terminal16'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot' " highlighting for many languages
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 call plug#end()
 " }}}
@@ -34,7 +32,7 @@ let g:deoplete#enable_at_startup = 1
 
 " base settings (see :h nvim-defaults) {{{
 " set colorscheme
-colorscheme realrealplain
+colorscheme terminal16
 " use comma ',' as leader key
 let mapleader="," 		    
 " prefer dark background
