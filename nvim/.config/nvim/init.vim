@@ -26,8 +26,6 @@ let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
 
 let g:ctrlp_show_hidden = 1
-
-let g:deoplete#enable_at_startup = 1
 " }}}
 
 " base settings (see :h nvim-defaults) {{{
@@ -39,6 +37,8 @@ let mapleader=","
 set background=dark
 " highlight current cursor line
 set cursorline
+" dont fold on start
+set foldlevelstart=99
 " set formatoptions, se :h fo-table for help on each option
 set formatoptions=tcroj
 " show statusline when nessasary
