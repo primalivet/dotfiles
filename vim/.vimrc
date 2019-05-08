@@ -1,19 +1,22 @@
-" vim: fdm=marker
+" automatic installation of vim-plug
+" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 " plugins {{{
 call plug#begin('~/.local/share/nvim/plugged')
-Plug '/mnt/c/code/vim-terminal16'
-Plug 'gerw/vim-HiLinkTrace'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot' " highlighting for many languages
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 call plug#end()
 " }}}
 
-" plugin settings {{{
 
-" hide annoying banner
+"hide annoying banner
 let g:netrw_banner = 0              
 " open files in same window, :Sex and :Vex for splits
 let g:netrw_browse_splits = 4       
@@ -29,8 +32,10 @@ let g:ctrlp_show_hidden = 1
 " }}}
 
 " base settings (see :h nvim-defaults) {{{
+" load filetype plugins
+filetype plugin on
 " set colorscheme
-colorscheme terminal16
+colorscheme default
 " use comma ',' as leader key
 let mapleader="," 		    
 " prefer dark background
@@ -79,6 +84,8 @@ set wildignore+=**/.git/**
 set wildignore+=**/node_modules/**
 " ignore vendor directory
 set wildignore+=**/vendor/**
+" enable wildmenu
+set wildmenu
 " }}}
 
 " commands {{{
@@ -139,3 +146,4 @@ if (has('autochdir') == 0) && (filereadable(globpath('.', '.local.vimrc')))
     execute "source" . s:lvimrc_resolved
 endif
 " }}}
+

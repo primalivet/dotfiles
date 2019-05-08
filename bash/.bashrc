@@ -1,63 +1,83 @@
-# if not interactive, don't do anything
+# if not running interactively, don't do anything
 case $- in
-    *i*) ;;
-    *) return;;
+	*i*) ;;
+	*) return;;
 esac
 
-# helper function to check if command exists
-command_exists() {
-    type "$1" &> /dev/null
+# check if terminal emulator supports color
+case "$TERM" in
+    xterm-color|*-256color) support_color=yes;;
+esac
+
+# add datetime for each command in the history eg. Dec 16 13:33:37
+export HISTTIMEFORMAT="%h %d %H:%M:%S"
+
+# increase history size
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+
+# dont save lines which begin with a <space> character and lines equal to previous line
+export HISTCONTROL=ignorespace:ignoredups
+
+# append to history, don't overwrite
+shopt -s histappend
+
+# set node version manager enviroment variable
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# some aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# check if inside git controlled dir, if yes parse branch name
+# 2 optional arguments: $1 is the git branch string prefix and $2 suffix
+function parse_git_branch() {
+	local branch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+    if [ ! "$branch" == "" ]; then
+        echo "${1:-}$branch${2:-}"
+    else
+        echo ""
+    fi
 }
 
-# ignore duplicate input
-HISTCONTROL=ignoredups 
+# get current status of git repo
+# 2 optional arguments: $1 is the git branch string prefix and $2 suffix
+function parse_git_dirty {
+	status=`git status 2>&1 | tee`
+	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
+	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
+	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
+	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
+	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
+	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
+	local bits=''
+	if [ "${renamed}" == "0" ]; then
+		bits=">${bits}"
+	fi
+	if [ "${ahead}" == "0" ]; then
+		bits="*${bits}"
+	fi
+	if [ "${newfile}" == "0" ]; then
+		bits="+${bits}"
+	fi
+	if [ "${untracked}" == "0" ]; then
+		bits="?${bits}"
+	fi
+	if [ "${deleted}" == "0" ]; then
+		bits="x${bits}"
+	fi
+	if [ "${dirty}" == "0" ]; then
+		bits="!${bits}"
+	fi
+    if [ ! "${bits}" == "" ]; then
+        echo "${1:-}$bits${2:-}"
+    else
+        echo "${2:-}"
+    fi
+}
 
-# correct small errors when using cd
-shopt -s cdspell
-# check the window size after each command and update if changed
-shopt -s checkwinsize 
-# correct small errors when completing
-shopt -s dirspell
-# append to the history file
-shopt -s histappend 
-# dont complete tab press on empty line with every single option
-shopt -s no_empty_cmd_completion
+PS1="\u@\h:\w\`parse_git_branch ':' \`\`parse_git_dirty ':'\`\$ "
 
-# update path with home/bin
-export PATH=$HOME/.local/bin:$PATH 
-# xdg path config directory
-export XDG_CONFIG_HOME=$HOME/.config
-# set TERM to use 256 colors
-export TERM=xterm-256color 
-# set node version manager directory
-export NVM_DIR="$HOME/.nvm"
-# set EDITOR to nvim if it exists
-if command_exists nvim; then export EDITOR=nvim; fi
-
-# check for dircolors support and load .dircolors if it exists
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-fi
-
-# load bash startup scripts
-for script in "$HOME"/.bashrc.d/*.bash ; do
-    [[ -e $script ]] || continue
-    source $script
-done
-unset -v script
-
-# enable programmable completion features 
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
-
-# This loads nvm
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# This loads nvm bash_completion
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
