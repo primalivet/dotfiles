@@ -37,7 +37,7 @@ alias l='ls -CF'
 function parse_git_branch() {
 	local branch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
     if [ ! "$branch" == "" ]; then
-        echo "${1:-}$branch${2:-}"
+        echo "${1:-}${branch}${2:-}"
     else
         echo ""
     fi
