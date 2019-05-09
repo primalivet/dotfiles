@@ -6,11 +6,21 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" this is highly personal, it sets up the path to my theme, terminal16.
+" if the theme exists on my drive, use the local version.
+if empty(glob('/mnt/c/Code/vim-terminal16/colors/terminal16.vim'))
+    let b:terminal16_path = "/mnt/c/Code/vim-terminal16"
+else
+    let b:terminal16_path = "primalivet/vim-terminal16"
+endif
+
 " plugins {{{
 call plug#begin('~/.local/share/nvim/plugged')
+Plug b:terminal16_path
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot' " highlighting for many languages
+Plug 'gerw/vim-HiLinkTrace'
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 call plug#end()
 " }}}
@@ -35,7 +45,7 @@ let g:ctrlp_show_hidden = 1
 " load filetype plugins
 filetype plugin on
 " set colorscheme
-colorscheme default
+colorscheme terminal16
 " use comma ',' as leader key
 let mapleader="," 		    
 " prefer dark background
