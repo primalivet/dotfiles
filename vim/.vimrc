@@ -15,7 +15,7 @@ Plug 'sheerun/vim-polyglot' " highlighting for many languages
 call plug#end()
 " }}}
 
-
+" plugin settings {{{
 "hide annoying banner
 let g:netrw_banner = 0              
 " open files in same window, :Sex and :Vex for splits

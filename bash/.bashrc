@@ -19,6 +19,9 @@ export HISTFILESIZE=10000
 # dont save lines which begin with a <space> character and lines equal to previous line
 export HISTCONTROL=ignorespace:ignoredups
 
+# trim pwd in prompt
+PROMPT_DIRTRIM=2
+
 # append to history, don't overwrite
 shopt -s histappend
 
