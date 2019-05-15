@@ -18,6 +18,7 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 Plug b:terminal16_path
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot' " highlighting for many languages
 Plug 'gerw/vim-HiLinkTrace'

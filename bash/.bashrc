@@ -35,6 +35,10 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+if [ -f ~/.bash_private ]; then
+    . ~/.bash_private
+fi
+
 # check if inside git controlled dir, if yes parse branch name
 # 2 optional arguments: $1 is the git branch string prefix and $2 suffix
 function parse_git_branch() {
