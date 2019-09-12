@@ -36,17 +36,17 @@ let g:ale_linters = {
 " FZF
 let g:fzf_layout = { 'down': '~50%'}
 let g:fzf_colors = {
-    \ 'fg': ['fg', 'NonText'],
+    \ 'fg': ['fg', 'Normal'],
     \ 'bg': ['bg', 'Normal'],
     \ 'hl': ['fg', 'Normal'],
-    \ 'fg+': ['fg', 'Normal'],
+    \ 'fg+': ['fg', 'Search'],
     \ 'bg+': ['bg', 'StatusLineNC'],
     \ 'hl+': ['fg', 'PreProc'],
     \ 'info': ['fg', 'Normal'],
     \ 'border': ['fg', 'Normal'],
-    \ 'prompt': ['fg', 'NonText'],
-    \ 'pointer': ['fg', 'PreProc'],
-    \ 'marker': ['fg', 'Constant'],
+    \ 'prompt': ['fg', 'Normal'],
+    \ 'pointer': ['fg', 'Search'],
+    \ 'marker': ['fg', 'Normal'],
     \ 'spinner': ['fg', 'Normal'],
     \ 'header': ['fg', 'Normal']
     \ }
