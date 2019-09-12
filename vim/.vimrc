@@ -10,7 +10,7 @@ endif
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot' 
 Plug 'airblade/vim-gitgutter'
@@ -25,8 +25,12 @@ let g:netrw_liststyle = 3 " tree style listing
 let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
 
 " ALE PLUGIN SETTINGS
+let g:ale_use_global_executables = 0 "only use local executables
 let g:ale_linters_explicit = 1 " only run explicitlly set linters 
-let g:ale_fix_on_save = 1 " run available fixer when file is saved
+" explicitlly set linters
+let g:ale_linters = { 
+    \ 'javascript': ['eslint'], 
+    \ }
 
 " CTRLP PLUGIN SETTINGS
 let g:ctrlp_show_hidden = 1
@@ -75,6 +79,7 @@ set ttimeout
 set ttimeoutlen=0 "do not delay on terminal input
 set wildignore+=**/.git/**
 set wildignore+=**/node_modules/**
+set wildignore+=**/.next/**
 set wildignore+=**/vendor/**
 set wildmenu
 
@@ -144,6 +149,20 @@ nnoremap <leader>e :Explore<CR>
 
 " unhighlight seach results
 nnoremap <leader><Space> :nohlsearch<CR>
+
+" toggle between paste and nopaste
+function! TogglePasteMode()
+    if (&paste == 0)
+        execute 'set paste'
+        echo ':set paste'
+    else 
+        execute 'set nopaste'
+        echo ':set nopaste'
+    endif
+endfunction
+
+" toggle paste
+nnoremap <leader>p :call TogglePasteMode()<CR>
 
 " also keep visual selection on >  and < keys
 vnoremap < <gv
