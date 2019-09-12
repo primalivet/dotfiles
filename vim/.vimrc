@@ -10,7 +10,8 @@ endif
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
-" Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot' 
 Plug 'airblade/vim-gitgutter'
@@ -32,8 +33,23 @@ let g:ale_linters = {
     \ 'javascript': ['eslint'], 
     \ }
 
-" CTRLP PLUGIN SETTINGS
-let g:ctrlp_show_hidden = 1
+" FZF
+let g:fzf_layout = { 'down': '~50%'}
+let g:fzf_colors = {
+    \ 'fg': ['fg', 'NonText'],
+    \ 'bg': ['bg', 'Normal'],
+    \ 'hl': ['fg', 'Normal'],
+    \ 'fg+': ['fg', 'Normal'],
+    \ 'bg+': ['bg', 'StatusLineNC'],
+    \ 'hl+': ['fg', 'PreProc'],
+    \ 'info': ['fg', 'Normal'],
+    \ 'border': ['fg', 'Normal'],
+    \ 'prompt': ['fg', 'NonText'],
+    \ 'pointer': ['fg', 'PreProc'],
+    \ 'marker': ['fg', 'Constant'],
+    \ 'spinner': ['fg', 'Normal'],
+    \ 'header': ['fg', 'Normal']
+    \ }
 
 " enable true color, https://github.com/tmux/tmux/issues/1246
 if exists('+termguicolors')
@@ -143,6 +159,9 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" open fuzzy finder
+nnoremap <C-p> :Files<CR>
 
 " open netrw
 nnoremap <leader>e :Explore<CR>
