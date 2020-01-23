@@ -1,4 +1,6 @@
-set nocompatible
+set nocompatible " see help for this, basically required
+
+filetype plugin on " read filetype specific plugins
 
 " VIM PLUG AUTO INSTALL
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
@@ -16,7 +18,8 @@ Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot' 
 Plug 'airblade/vim-gitgutter'
 Plug 'gerw/vim-HiLinkTrace'
-Plug 'chriskempson/base16-vim'
+Plug '/mnt/c/Code/vim-terminal16'
+Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
 " NETRW PLUGIN SETTINGS
@@ -28,42 +31,32 @@ let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
 " ALE PLUGIN SETTINGS
 let g:ale_use_global_executables = 0 "only use local executables
 let g:ale_linters_explicit = 1 " only run explicitlly set linters 
-" explicitlly set linters
-let g:ale_linters = { 
-    \ 'javascript': ['eslint'], 
-    \ }
+let g:ale_linters = { 'javascript': ['eslint'], 'php': ['phpcs'] } " explicitlly set linters
+let g:ale_fixers = { 'javascript': ['eslint'], 'php': ['phpcbf'] } " explicitlly set fixers
+let g:ale_echo_msg_format = '(%linter%) %severity%: %s'
 
 " FZF
 let g:fzf_layout = { 'down': '~50%'}
 let g:fzf_colors = {
-    \ 'fg': ['fg', 'Normal'],
-    \ 'bg': ['bg', 'Normal'],
-    \ 'hl': ['fg', 'Normal'],
-    \ 'fg+': ['fg', 'Search'],
-    \ 'bg+': ['bg', 'StatusLineNC'],
-    \ 'hl+': ['fg', 'PreProc'],
-    \ 'info': ['fg', 'Normal'],
-    \ 'border': ['fg', 'Normal'],
-    \ 'prompt': ['fg', 'Normal'],
-    \ 'pointer': ['fg', 'Search'],
-    \ 'marker': ['fg', 'Normal'],
-    \ 'spinner': ['fg', 'Normal'],
-    \ 'header': ['fg', 'Normal']
-    \ }
+   \ 'fg': ['fg', 'Normal'],
+   \ 'bg': ['bg', 'Normal'],
+   \ 'hl': ['fg', 'Normal'],
+   \ 'fg+': ['fg', 'Normal'],
+   \ 'bg+': ['bg', 'StatusLineNC'],
+   \ 'hl+': ['fg', 'PreProc'],
+   \ 'info': ['fg', 'Comment'],
+   \ 'border': ['fg', 'Normal'],
+   \ 'prompt': ['fg', 'Normal'],
+   \ 'pointer': ['fg', 'Search'],
+   \ 'marker': ['fg', 'Normal'],
+   \ 'spinner': ['fg', 'Normal'],
+   \ 'header': ['fg', 'Normal']
+   \ }
 
-" enable true color, https://github.com/tmux/tmux/issues/1246
-if exists('+termguicolors')
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-    set termguicolors
-endif
+set background=light
+colorscheme terminal16
 
 " VIM SETTINGS
-filetype plugin on " read filetype specific plugins
-let mapleader=","
-"set termguicolors
-set background=dark
-colorscheme base16-oceanicnext 
 set cursorline
 set nofoldenable
 set formatoptions=tcroj " set formatoptions, se :h fo-table
@@ -82,6 +75,7 @@ set scrolloff=5
 set sidescrolloff=15
 set hlsearch
 set incsearch
+set relativenumber
 set shiftround " round indent to multiples of shiftwidth
 set showmatch
 set showmode
@@ -99,13 +93,7 @@ set wildignore+=**/.next/**
 set wildignore+=**/vendor/**
 set wildmenu
 
-" Remove background color from SignColumn and GitGutter
-hi SignColumn guibg=NONE
-hi LineNr guibg=NONE
-hi GitGutterAdd guibg=NONE
-hi GitGutterChange guibg=NONE
-hi GitGutterDelete guibg=NONE
-hi GitGutterChangeDelete guibg=NONE
+let mapleader=","
 
 " Save/Quit on capitalized command
 command! W w
@@ -142,7 +130,12 @@ noremap <C-w>- :resize -5<CR>
 noremap <C-w>< :vertical:resize -5<CR>
 noremap <C-w>> :vertical:resize +5<CR>
 
+" Nothing on capital Q
 nnoremap Q <Nop>
+
+" auto esc on move
+imap jj <Esc>
+imap kk <Esc>
 
 " make j and k work on wrapped lines
 nnoremap j gj
@@ -163,25 +156,30 @@ nnoremap <C-l> <C-w>l
 " open fuzzy finder
 nnoremap <C-p> :Files<CR>
 
+" run ALE fix
+nnoremap <leader>f :ALEFix<CR>
+
+" edit vimrc
+nnoremap <leader>ev :edit $MYVIMRC<CR>
+
 " open netrw
 nnoremap <leader>e :Explore<CR>
 
 " unhighlight seach results
 nnoremap <leader><Space> :nohlsearch<CR>
 
-" toggle between paste and nopaste
-function! TogglePasteMode()
-    if (&paste == 0)
-        execute 'set paste'
-        echo ':set paste'
-    else 
-        execute 'set nopaste'
-        echo ':set nopaste'
-    endif
-endfunction
+" toggle paste mode
+nnoremap <leader>p :set paste!<CR>
 
-" toggle paste
-nnoremap <leader>p :call TogglePasteMode()<CR>
+" toggle list (hidden chars)
+nnoremap <leader>l :set list!<CR>
+
+" toggle relativenumbers
+nnoremap <leader>r :set relativenumber!<CR>
+
+" move lines https://vim.fandom.com/wiki/Moving_lines_up_or_down
+vnoremap <C-j> :move '>+1<CR>gv=gv
+vnoremap <C-k> :move '<-2<CR>gv=gv
 
 " also keep visual selection on >  and < keys
 vnoremap < <gv
