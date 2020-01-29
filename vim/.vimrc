@@ -10,6 +10,11 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+"augroup UpdateLightLine
+"    autocmd!
+"    autocmd OptionSet background execute "source" . $MYVIMRC
+"augroup END
+
 " PLUGINS
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -20,6 +25,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'gerw/vim-HiLinkTrace'
 Plug '/mnt/c/Code/vim-terminal16'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'itchyny/lightline.vim'
 call plug#end()
 
 " NETRW PLUGIN SETTINGS
@@ -53,6 +59,11 @@ let g:fzf_colors = {
    \ 'header': ['fg', 'Normal']
    \ }
 
+" lightline
+let g:lightline = { 
+\'colorscheme': 'terminal16',
+\ }
+
 set background=light
 colorscheme terminal16
 
@@ -60,7 +71,7 @@ colorscheme terminal16
 set cursorline
 set nofoldenable
 set formatoptions=tcroj " set formatoptions, se :h fo-table
-set laststatus=1
+set laststatus=2
 set listchars=eol:$,tab:>--,space:·,trail:·
 set matchtime=1 " hightlight matching brackets for 1/10 of a second
 set noautochdir " dont set vim current dir to file dir
@@ -78,7 +89,7 @@ set incsearch
 set relativenumber
 set shiftround " round indent to multiples of shiftwidth
 set showmatch
-set showmode
+set noshowmode
 set signcolumn=yes " always show error column
 set splitbelow
 set splitright
