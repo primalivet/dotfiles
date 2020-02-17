@@ -25,7 +25,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'gerw/vim-HiLinkTrace'
 Plug '/mnt/c/Code/vim-terminal16'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'itchyny/lightline.vim'
 call plug#end()
 
 " NETRW PLUGIN SETTINGS
@@ -59,11 +58,6 @@ let g:fzf_colors = {
    \ 'header': ['fg', 'Normal']
    \ }
 
-" lightline
-let g:lightline = { 
-\'colorscheme': 'terminal16',
-\ }
-
 set background=light
 colorscheme terminal16
 
@@ -71,8 +65,8 @@ colorscheme terminal16
 set cursorline
 set nofoldenable
 set formatoptions=tcroj " set formatoptions, se :h fo-table
-set laststatus=2
-set listchars=eol:$,tab:>--,space:·,trail:·
+set laststatus=1
+set listchars=tab:>--,space:·,trail:·
 set matchtime=1 " hightlight matching brackets for 1/10 of a second
 set noautochdir " dont set vim current dir to file dir
 set nobackup
@@ -89,7 +83,7 @@ set incsearch
 set relativenumber
 set shiftround " round indent to multiples of shiftwidth
 set showmatch
-set noshowmode
+set showmode
 set signcolumn=yes " always show error column
 set splitbelow
 set splitright
@@ -110,29 +104,29 @@ let mapleader=","
 command! W w
 command! Q q
 
-" auto insert quotes
-inoremap " ""<ESC>i
-inoremap ' ''<ESC>i
-inoremap ` ``<ESC>i
-
-" auto insert bracket pairs
-inoremap ( ()<ESC>i
-inoremap [ []<ESC>i
-inoremap { {}<ESC>i
-inoremap { {}<ESC>i
-
-" auto insert expected if fast typer
-inoremap () ()
-inoremap [] []
-inoremap {} {}
-
-" auto insert douple pairs
-inoremap ({ ({})<ESC>F}i
-inoremap ([ ([])<ESC>F]i
-
-" auto insert block
-inoremap [<CR> [<CR>]<ESC>O
-inoremap {<CR> {<CR>}<ESC>O
+"" auto insert quotes
+"inoremap " ""<ESC>i
+"inoremap ' ''<ESC>i
+"inoremap ` ``<ESC>i
+"
+"" auto insert bracket pairs
+"inoremap ( ()<ESC>i
+"inoremap [ []<ESC>i
+"inoremap { {}<ESC>i
+"inoremap { {}<ESC>i
+"
+"" auto insert expected if fast typer
+"inoremap () ()
+"inoremap [] []
+"inoremap {} {}
+"
+"" auto insert douple pairs
+"inoremap ({ ({})<ESC>F}i
+"inoremap ([ ([])<ESC>F]i
+"
+"" auto insert block
+"inoremap [<CR> [<CR>]<ESC>O
+"inoremap {<CR> {<CR>}<ESC>O
 
 " increase the default width/height of window resize. this is still the
 " default window resizing keymaps, se :h window-resize
