@@ -188,7 +188,8 @@ nnoremap <C-p> :Files<CR>
 nnoremap <leader>e :Explore<CR>
 
 " edit vimrc
-nnoremap <leader>ev :edit $MYVIMRC<CR>
+nnoremap <leader>ev :vsp $MYVIMRC<CR>
+nnoremap <leader>sv :so $MYVIMRC<CR>
 
 " show documentation in preview window
 nnoremap <silent> <leader>D :call <SID>show_documentation()<CR>
