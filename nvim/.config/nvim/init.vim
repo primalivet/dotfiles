@@ -5,9 +5,9 @@
 "    |/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
 "  
 "  
-"===============================================================================
+"============================
 " PLUGINS
-"===============================================================================
+"============================
 
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -23,9 +23,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 call plug#end()
 
-"===============================================================================
+"============================
 " FUNCTIONS
-"===============================================================================
+"============================
 
 function! s:show_documentation()
   if &filetype == 'vim'
@@ -35,9 +35,9 @@ function! s:show_documentation()
   endif
 endfunction
 
-"===============================================================================
+"============================
 " PLUGINS / STATUS AND THEME
-"===============================================================================
+"============================
 
 let g:gruvbox_contrast_dark = 'hard'
 
@@ -45,9 +45,9 @@ let g:airline_powerline_fonts = 1
 
 let g:tmuxline_powerline_separators = 1
 
-"===============================================================================
+"============================
 " COC
-"===============================================================================
+"============================
 
 let g:coc_global_extensions = [ 
 	\ 'coc-tsserver', 
@@ -57,18 +57,18 @@ let g:coc_global_extensions = [
 	\ 'coc-html'
 	\ ]
 
-"===============================================================================
+"============================
 " NETRW
-"===============================================================================
+"============================
 
 let g:netrw_banner = 0 " hide annoying banner
 let g:netrw_browse_splits = 4 " open files in same window 
 let g:netrw_liststyle = 3 " tree style listing 
 let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
 
-"===============================================================================
+"============================
 " GENERIC
-"===============================================================================
+"============================
 
 colorscheme gruvbox
 
@@ -85,11 +85,9 @@ set signcolumn=yes " always show error column
 set splitbelow
 set splitright
 
-let mapleader=","
-
-"===============================================================================
+"============================
 " ABBREVIATIONS
-"===============================================================================
+"============================
 
 cnoreabbrev W w
 cnoreabbrev Q q
@@ -99,19 +97,21 @@ cnoreabbrev wQ wq
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
 
-"===============================================================================
+"============================
 " AUTOCOMMANDS
-"===============================================================================
+"============================
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-"===============================================================================
+"============================
 " MAPPINGS
-"===============================================================================
+"============================
+
+let mapleader=","
 
 " MAPPINGS / MOVEMENT
-"-------------------------------------------------------------------------------
+"----------------------------
 
 " auto esc on move
 imap jj <Esc>j
@@ -149,7 +149,7 @@ noremap <C-w>< :vertical:resize -5<CR>
 noremap <C-w>> :vertical:resize +5<CR>
 
 " MAPPINGS / SETTINGS
-"-------------------------------------------------------------------------------
+"----------------------------
 
 " unhighlight seach results
 nnoremap <leader><Space> :nohlsearch<CR>
@@ -164,7 +164,7 @@ nnoremap <leader>l :set list!<CR>
 nnoremap <leader>r :set relativenumber!<CR>
 
 " MAPPINGS / COC
-"-------------------------------------------------------------------------------
+"----------------------------
 
 " go to definition
 nmap <leader>gd <Plug>(coc-definition)
@@ -179,7 +179,7 @@ nmap <leader>rn <Plug>(coc-rename)
 nnoremap <leader>f :CocCommand eslint.executeAutofix<CR>
 
 " MAPPINGS / OTHER
-"-------------------------------------------------------------------------------
+"----------------------------
 
 " open fuzzy finder
 nnoremap <C-p> :Files<CR>
