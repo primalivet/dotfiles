@@ -155,7 +155,7 @@ noremap <C-w>> :vertical:resize +5<CR>
 nnoremap <leader><Space> :nohlsearch<CR>
 
 " toggle paste mode
-nnoremap <leader>p :set paste!<CR>
+nnoremap <leader>p :set invpaste<CR>
 
 " toggle list (hidden chars)
 nnoremap <leader>l :set list!<CR>
@@ -188,8 +188,8 @@ nnoremap <C-p> :Files<CR>
 nnoremap <leader>e :Explore<CR>
 
 " edit vimrc
-nnoremap <leader>ev :vsp $MYVIMRC<CR>
-nnoremap <leader>sv :so $MYVIMRC<CR>
+nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " show documentation in preview window
 nnoremap <silent> <leader>D :call <SID>show_documentation()<CR>
