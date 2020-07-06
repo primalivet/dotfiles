@@ -6,4 +6,5 @@
   default=simple
 
 [core]
+  editor=vim
   filemode=false

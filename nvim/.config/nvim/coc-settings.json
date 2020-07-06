@@ -1,7 +1,4 @@
 {
-  "javascript": {
-    "validate": {
-      "enable": false
-    }
-  }
+	"tsserver.npm": "/usr/bin/npm",
+	"javascript.suggestionActions.enabled": false
 }

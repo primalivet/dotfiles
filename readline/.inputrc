@@ -1,15 +1,10 @@
-# basic settings
-# -----------------------------------------------------------------------------
 # no bells
 set bell-style none
 
-# display possible completions in color and highlight the current completion
-# prefix. uses LS_COLORS
-set colored-stats off
-set colored-completion-prefix off
-
-# when completing, don't be case sensative and treat underscors as hyphens
+# when completing, don't be case sensative 
 set completion-ignore-case on
+
+# treat underscors as hyphens
 set completion-map-case on
 
 # dont make me confirm completion when many items
@@ -18,18 +13,12 @@ set completion-query-items -1
 # dont print control charaters like ^C
 set echo-control-characters off
 
-# switch ~ for full path
-set expand-tilde on
-
 # try to keep cursor column when jumping in history
 set history-preserve-point on
 
 # add trailing slash for dirs and symlinked dirs
 set mark-directories on
 set mark-symlinked-directories on
-
-# match hidden files
-set match-hidden-files off
 
 # show the common prefix before going through the completion list items
 set menu-complete-display-prefix on

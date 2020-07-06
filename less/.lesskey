@@ -1,5 +1,0 @@
-# less pages settings
-# -i : case insenstive
-# -R : read ansi esc code like color etc
-LESS = -iR
-LESSHISTFILE=-

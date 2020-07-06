@@ -1,109 +1,131 @@
-" vim: fdm=marker
+"  
+"     ____ ____ ____ ____ ____ ____ ____ ____ 
+"    ||d |||o |||t |||f |||i |||l |||e |||s ||
+"    ||__|||__|||__|||__|||__|||__|||__|||__||
+"    |/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
+"  
+"  
+"===============================================================================
+" PLUGINS
+"===============================================================================
 
-" plugins {{{
-call plug#begin('~/.local/share/nvim/plugged')
-Plug '/mnt/c/code/vim-terminal16'
-Plug 'gerw/vim-HiLinkTrace'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'w0rp/ale'
-Plug 'sheerun/vim-polyglot' " highlighting for many languages
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+call plug#begin(stdpath('data') . '/plugged')
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'sheerun/vim-polyglot' 
+Plug 'airblade/vim-gitgutter'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'edkolev/tmuxline.vim'
 call plug#end()
-" }}}
 
-" plugin settings {{{
+"===============================================================================
+" FUNCTIONS
+"===============================================================================
 
-" hide annoying banner
-let g:netrw_banner = 0              
-" open files in same window, :Sex and :Vex for splits
-let g:netrw_browse_splits = 4       
-" tree style listing
-let g:netrw_liststyle = 3           
-" hide same files as are ignored by git
-let g:netrw_list_hide= netrw_gitignore#Hide()
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
-let g:ale_linters_explicit = 1
-let g:ale_fix_on_save = 1
+"===============================================================================
+" PLUGINS / STATUS AND THEME
+"===============================================================================
 
-let g:ctrlp_show_hidden = 1
-" }}}
+let g:gruvbox_contrast_dark = 'hard'
 
-" base settings (see :h nvim-defaults) {{{
-" set colorscheme
-colorscheme terminal16
-" use comma ',' as leader key
-let mapleader="," 		    
-" prefer dark background
-set background=dark
-" highlight current cursor line
-set cursorline
-" dont fold on start
-set foldlevelstart=99
-" set formatoptions, se :h fo-table for help on each option
-set formatoptions=tcroj
-" show statusline when nessasary
-set laststatus=2
-" hightlight matching brackets for 1/10 of a second
-set matchtime=1                     
-" don't backup before overwriting a file
-set nobackup                        
-" dont use a swap file
-set noswapfile                      
-" dont wrap lines
-set nowrap                          
-" if the :write wasn't successfull, everything is fucked
-set nowritebackup                   
-" linenumbers
-set number                          
-" make the path smart when using :find etc. etc.
-set path+=**                        
-" start to scroll when cursor is < 5 rows from end of buffer
-set scrolloff=5                     
-" start to scroll when cursor is < 16 columns from end of line
-set sidescrolloff=15
-" round indent to multiples of shiftwidth
-set shiftround                      
-" highlight matching brackets
-set showmatch                       
-" open new horizontal splits to the botton
-set splitbelow                      
-" open new vertical splits to the right
-set splitright                      
-" limit text width to 80 characters
-set textwidth=80
-"do not delay on terminal input
-set ttimeoutlen=0
-" ignore .git directory
-set wildignore+=**/.git/**
-" ignore node_modules directory
-set wildignore+=**/node_modules/**
-" ignore vendor directory
-set wildignore+=**/vendor/**
-" }}}
+let g:airline_powerline_fonts = 1
 
-" commands {{{
-" capital w writes
-command! W w 			    
-" capital q quits
-command! Q q
-" }}}
+let g:tmuxline_powerline_separators = 1
 
-" cross mode mappings {{{
-" increase the default width/height of window resize. this is still the
-" default window resizing keymaps, se :h window-resize
-noremap <C-w>+ :resize +5<CR>
-noremap <C-w>- :resize -5<CR>
-noremap <C-w>< :vertical:resize -5<CR>
-noremap <C-w>> :vertical:resize +5<CR>
-" }}}
+"===============================================================================
+" COC
+"===============================================================================
 
-" normal mode mappings {{{
-" disable ex mode
-nnoremap Q <Nop>
+let g:coc_global_extensions = [ 
+	\ 'coc-tsserver', 
+	\ 'coc-json', 
+	\ 'coc-eslint',
+	\ 'coc-css',
+	\ 'coc-html'
+	\ ]
+
+"===============================================================================
+" NETRW
+"===============================================================================
+
+let g:netrw_banner = 0 " hide annoying banner
+let g:netrw_browse_splits = 4 " open files in same window 
+let g:netrw_liststyle = 3 " tree style listing 
+let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
+
+"===============================================================================
+" GENERIC
+"===============================================================================
+
+colorscheme gruvbox
+
+set hidden
+set laststatus=2 " hide status if no splits
+set listchars=tab:>--,space:·,trail:·
+set nolist
+set number " show line numbers
+set noshowmode
+set updatetime=300 " updatetime for CursorHold & CursorHoldI
+set scrolloff=5
+set sidescrolloff=5
+set signcolumn=yes " always show error column
+set splitbelow
+set splitright
+
+let mapleader=","
+
+"===============================================================================
+" ABBREVIATIONS
+"===============================================================================
+
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev WQ wq
+cnoreabbrev Wq wq
+cnoreabbrev wQ wq
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+
+"===============================================================================
+" AUTOCOMMANDS
+"===============================================================================
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+"===============================================================================
+" MAPPINGS
+"===============================================================================
+
+" MAPPINGS / MOVEMENT
+"-------------------------------------------------------------------------------
+
+" auto esc on move
+imap jj <Esc>j
+imap kk <Esc>k
 
 " make j and k work on wrapped lines
 nnoremap j gj
 nnoremap k gk
+
+" remap split controls to not use prefix
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " center stuff when focused
 nnoremap n nzz
@@ -111,31 +133,63 @@ nnoremap N Nzz
 nnoremap { {zz
 nnoremap } }zz
 
-" split controls
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" move lines https://vim.fandom.com/wiki/Moving_lines_up_or_down
+vnoremap <C-j> :move '>+1<CR>gv=gv
+vnoremap <C-k> :move '<-2<CR>gv=gv
 
-" open netrw quickly!
-nnoremap <leader>e :Explore<CR>
-
-" unhighlight seach results
-nnoremap <leader><Space> :nohlsearch<CR>
-"}}}
-
-" visual mode mappings {{{
 " also keep visual selection on >  and < keys
 vnoremap < <gv
 vnoremap > >gv
-" }}}
 
-" local vimrc {{{
-" if autochdir is 0 (false) and there is a .vimrc.local in the pwd
-if (has('autochdir') == 0) && (filereadable(globpath('.', '.local.vimrc')))
-    " if yes, load it up!
-    let s:lvimrc_unresolved = fnamemodify('.local.vimrc', ':p')
-    let s:lvimrc_resolved = resolve(s:lvimrc_unresolved)
-    execute "source" . s:lvimrc_resolved
-endif
-" }}}
+" increase the default width/height of window resize. this is still the
+" default window resizing keymaps, se :h window-resize
+noremap <C-w>+ :resize +5<CR>
+noremap <C-w>- :resize -5<CR>
+noremap <C-w>< :vertical:resize -5<CR>
+noremap <C-w>> :vertical:resize +5<CR>
+
+" MAPPINGS / SETTINGS
+"-------------------------------------------------------------------------------
+
+" unhighlight seach results
+nnoremap <leader><Space> :nohlsearch<CR>
+
+" toggle paste mode
+nnoremap <leader>p :set paste!<CR>
+
+" toggle list (hidden chars)
+nnoremap <leader>l :set list!<CR>
+
+" toggle relativenumbers
+nnoremap <leader>r :set relativenumber!<CR>
+
+" MAPPINGS / COC
+"-------------------------------------------------------------------------------
+
+" go to definition
+nmap <leader>gd <Plug>(coc-definition)
+
+" go to references
+nmap <leader>gr <Plug>(coc-references)
+
+" rename symbol under cursor
+nmap <leader>rn <Plug>(coc-rename)
+
+" run eslint autofix
+nnoremap <leader>f :CocCommand eslint.executeAutofix<CR>
+
+" MAPPINGS / OTHER
+"-------------------------------------------------------------------------------
+
+" open fuzzy finder
+nnoremap <C-p> :Files<CR>
+
+" open netrw
+nnoremap <leader>e :Explore<CR>
+
+" edit vimrc
+nnoremap <leader>ev :edit $MYVIMRC<CR>
+
+" show documentation in preview window
+nnoremap <silent> <leader>D :call <SID>show_documentation()<CR>
+
