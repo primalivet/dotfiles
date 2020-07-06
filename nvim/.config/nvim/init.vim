@@ -193,3 +193,5 @@ nnoremap <leader>ev :edit $MYVIMRC<CR>
 " show documentation in preview window
 nnoremap <silent> <leader>D :call <SID>show_documentation()<CR>
 
+" Sort selected lines
+vmap <leader>ss :'<,'>sort<CR>
