@@ -13,6 +13,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
+Plug 'jesseleite/vim-agriculture'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
@@ -73,7 +74,6 @@ let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
 colorscheme gruvbox
 
 set hidden
-set laststatus=2 " hide status if no splits
 set listchars=tab:>--,space:·,trail:·
 set nolist
 set number " show line numbers
@@ -155,34 +155,35 @@ noremap <C-w>> :vertical:resize +5<CR>
 nnoremap <leader><Space> :nohlsearch<CR>
 
 " toggle paste mode
-nnoremap <leader>p :set invpaste<CR>
+nnoremap <leader>tp :set invpaste<CR>
 
 " toggle list (hidden chars)
-nnoremap <leader>l :set list!<CR>
-
-" toggle relativenumbers
-nnoremap <leader>r :set relativenumber!<CR>
+nnoremap <leader>tl :set list!<CR>
 
 " MAPPINGS / COC
 "----------------------------
 
 " go to definition
-nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gd <Plug>(coc-definition)<CR>
 
 " go to references
-nmap <leader>gr <Plug>(coc-references)
+nmap <leader>gr <Plug>(coc-references)<CR>
 
 " rename symbol under cursor
 nmap <leader>rn <Plug>(coc-rename)
 
 " run eslint autofix
-nnoremap <leader>f :CocCommand eslint.executeAutofix<CR>
+nnoremap <leader>lf :CocCommand eslint.executeAutofix<CR>
 
 " MAPPINGS / OTHER
 "----------------------------
 
 " open fuzzy finder
-nnoremap <C-p> :Files<CR>
+nnoremap <leader>f :Files<CR>
+
+" project search
+nmap <leader>s <Plug>AgRawSearch
+vmap <leader>s <Plug>AgRawVisualSelection
 
 " open netrw
 nnoremap <leader>e :Explore<CR>
@@ -192,7 +193,7 @@ nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " show documentation in preview window
-nnoremap <silent> <leader>D :call <SID>show_documentation()<CR>
+nnoremap <silent> <leader>d :call <SID>show_documentation()<CR>
 
 " Sort selected lines
 vmap <leader>ss :'<,'>sort<CR>
