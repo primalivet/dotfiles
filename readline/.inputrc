@@ -1,7 +1,7 @@
 # no bells
 set bell-style none
 
-# when completing, don't be case sensative 
+# when completing, don't be case sensative
 set completion-ignore-case on
 
 # treat underscors as hyphens
@@ -27,6 +27,6 @@ set menu-complete-display-prefix on
 set show-all-if-ambiguous on
 
 $if Bash
-	# cycle through completion with tab
-	Tab: menu-complete
+		# cycle through completion with tab
+		Tab: menu-complete
 $endif

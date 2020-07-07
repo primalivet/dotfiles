@@ -1,10 +1,10 @@
 [user]
-  name=Primalivet
-  email=gustafholm1@gmail.com
+		name=Primalivet
+		email=gustafholm1@gmail.com
 
 [push]
-  default=simple
+		default=simple
 
 [core]
-  editor=nvim
-  filemode=false
+		editor=nvim
+		filemode=false

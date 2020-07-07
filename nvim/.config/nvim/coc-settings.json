@@ -1,4 +1,4 @@
 {
-	"tsserver.npm": "/usr/bin/npm",
-	"javascript.suggestionActions.enabled": false
+  "tsserver.npm": "/usr/bin/npm",
+  "javascript.suggestionActions.enabled": false
 }

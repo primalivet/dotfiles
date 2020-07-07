@@ -1,10 +1,9 @@
-"  
-"     ____ ____ ____ ____ ____ ____ ____ ____ 
-"    ||d |||o |||t |||f |||i |||l |||e |||s ||
-"    ||__|||__|||__|||__|||__|||__|||__|||__||
-"    |/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
-"  
-"  
+"  ____ ____ ____ ____ ____ ____ ____ ____
+" ||d |||o |||t |||f |||i |||l |||e |||s ||
+" ||__|||__|||__|||__|||__|||__|||__|||__||
+" |/__\|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
+"
+"
 "============================
 " PLUGINS
 "============================
@@ -18,7 +17,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'sheerun/vim-polyglot' 
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -29,11 +28,11 @@ call plug#end()
 "============================
 
 function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
+		if &filetype == 'vim'
+				execute 'h '.expand('<cword>')
+		else
+				call CocAction('doHover')
+		endif
 endfunction
 
 "============================
@@ -50,21 +49,21 @@ let g:tmuxline_powerline_separators = 1
 " COC
 "============================
 
-let g:coc_global_extensions = [ 
-	\ 'coc-tsserver', 
-	\ 'coc-json', 
-	\ 'coc-eslint',
-	\ 'coc-css',
-	\ 'coc-html'
-	\ ]
+let g:coc_global_extensions = [
+						\ 'coc-tsserver',
+						\ 'coc-json',
+						\ 'coc-eslint',
+						\ 'coc-css',
+						\ 'coc-html'
+						\ ]
 
 "============================
 " NETRW
 "============================
 
 let g:netrw_banner = 0 " hide annoying banner
-let g:netrw_browse_splits = 4 " open files in same window 
-let g:netrw_liststyle = 3 " tree style listing 
+let g:netrw_browse_splits = 4 " open files in same window
+let g:netrw_liststyle = 3 " tree style listing
 let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
 
 "============================
@@ -191,7 +190,7 @@ nnoremap <leader>F :Files<CR>
 " fzf/ag project search
 nmap <leader>/ <Plug>AgRawSearch
 vmap <leader>/ <Plug>AgRawVisualSelection
-vmap <leader>* <Plug>AgRawWordUnderCursor
+nmap <leader>* <Plug>AgRawWordUnderCursor
 
 " open netrw file explorer
 nnoremap <leader>e :Explore<CR>
