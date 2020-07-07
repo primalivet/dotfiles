@@ -133,13 +133,28 @@ nnoremap N Nzz
 nnoremap { {zz
 nnoremap } }zz
 
+" MAPPINGS / EDIT
+"----------------------------
+
 " move lines https://vim.fandom.com/wiki/Moving_lines_up_or_down
 vnoremap <C-j> :move '>+1<CR>gv=gv
 vnoremap <C-k> :move '<-2<CR>gv=gv
 
-" also keep visual selection on >  and < keys
+" keep visual selection on >  and < keys
 vnoremap < <gv
 vnoremap > >gv
+
+" rename symbol under cursor
+nmap <leader>rn <Plug>(coc-rename)
+
+" run eslint autofix
+nnoremap <leader>af :CocCommand eslint.executeAutofix<CR>
+
+" Sort selected lines
+vmap <leader>ss :'<,'>sort<CR>
+
+" MAPPINGS / UI AND SETTINGS
+"----------------------------
 
 " increase the default width/height of window resize. this is still the
 " default window resizing keymaps, se :h window-resize
@@ -147,9 +162,6 @@ noremap <C-w>+ :resize +5<CR>
 noremap <C-w>- :resize -5<CR>
 noremap <C-w>< :vertical:resize -5<CR>
 noremap <C-w>> :vertical:resize +5<CR>
-
-" MAPPINGS / SETTINGS
-"----------------------------
 
 " unhighlight seach results
 nnoremap <leader><Space> :nohlsearch<CR>
@@ -160,40 +172,34 @@ nnoremap <leader>tp :set invpaste<CR>
 " toggle list (hidden chars)
 nnoremap <leader>tl :set list!<CR>
 
-" MAPPINGS / COC
-"----------------------------
-
 " go to definition
 nmap <leader>gd <Plug>(coc-definition)<CR>
 
 " go to references
 nmap <leader>gr <Plug>(coc-references)<CR>
 
-" rename symbol under cursor
-nmap <leader>rn <Plug>(coc-rename)
+" MAPPINGS / SEARCH & EXPLORE
+"----------------------------
 
-" run eslint autofix
-nnoremap <leader>lf :CocCommand eslint.executeAutofix<CR>
+" fzf search files
+nnoremap <leader>f :GFiles<CR>
+nnoremap <leader>F :Files<CR>
+
+" fzf/ag project search
+nmap <leader>/ <Plug>AgRawSearch
+vmap <leader>/ <Plug>AgRawVisualSelection
+vmap <leader>* <Plug>AgRawWordUnderCursor
+
+" open netrw file explorer
+nnoremap <leader>e :Explore<CR>
+
+" show documentation in preview window
+nnoremap <silent> <leader>h :call <SID>show_documentation()<CR>
 
 " MAPPINGS / OTHER
 "----------------------------
-
-" open fuzzy finder
-nnoremap <leader>f :Files<CR>
-
-" project search
-nmap <leader>s <Plug>AgRawSearch
-vmap <leader>s <Plug>AgRawVisualSelection
-
-" open netrw
-nnoremap <leader>e :Explore<CR>
 
 " edit vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-" show documentation in preview window
-nnoremap <silent> <leader>d :call <SID>show_documentation()<CR>
-
-" Sort selected lines
-vmap <leader>ss :'<,'>sort<CR>
