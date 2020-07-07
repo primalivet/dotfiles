@@ -163,6 +163,9 @@ noremap <C-w>- :resize -5<CR>
 noremap <C-w>< :vertical:resize -5<CR>
 noremap <C-w>> :vertical:resize +5<CR>
 
+" :only
+nnoremap <leader>o :only<CR>
+
 " unhighlight seach results
 nnoremap <leader><Space> :nohlsearch<CR>
 
