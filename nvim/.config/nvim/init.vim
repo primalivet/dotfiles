@@ -19,6 +19,7 @@ Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 call plug#end()
@@ -202,6 +203,6 @@ nnoremap <silent> <leader>h :call <SID>show_documentation()<CR>
 "----------------------------
 
 " edit vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <leader>ev :split $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
