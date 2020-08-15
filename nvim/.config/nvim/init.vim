@@ -15,7 +15,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'jesseleite/vim-agriculture'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -29,11 +29,20 @@ call plug#end()
 "============================
 
 function! s:show_documentation()
-		if &filetype == 'vim'
-				execute 'h '.expand('<cword>')
-		else
-				call CocAction('doHover')
-		endif
+	if &filetype == 'vim'
+		execute 'h '.expand('<cword>')
+	else
+		call CocAction('doHover')
+	endif
+endfunction
+
+" find better solution for php as it's now synchronous
+function! s:fix_current_buffer()
+	if &filetype == 'php'
+		execute 'silent !vendor/bin/phpcbf ' . expand('%:p')
+	elseif &filetype == 'js'
+		call CocCommand eslint.executeAutofix<CR>
+	endif
 endfunction
 
 "============================
@@ -53,9 +62,10 @@ let g:tmuxline_powerline_separators = 1
 let g:coc_global_extensions = [
 						\ 'coc-tsserver',
 						\ 'coc-json',
-						\ 'coc-eslint',
 						\ 'coc-css',
-						\ 'coc-html'
+						\ 'coc-html',
+						\ 'coc-eslint',
+						\ 'coc-diagnostic'
 						\ ]
 
 "============================
@@ -149,6 +159,7 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " run eslint autofix
 nnoremap <leader>af :CocCommand eslint.executeAutofix<CR>
+"knnoremap <leader>af :call <SID>fix_current_buffer()<CR>
 
 " Sort selected lines
 vmap <leader>ss :'<,'>sort<CR>
@@ -174,6 +185,9 @@ nnoremap <leader>tp :set invpaste<CR>
 
 " toggle list (hidden chars)
 nnoremap <leader>tl :set list!<CR>
+
+" open coc diagnostics
+nnoremap <leader>d :CocDiagnostics<CR>
 
 " go to definition
 nmap <leader>gd <Plug>(coc-definition)<CR>
