@@ -14,27 +14,15 @@ Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'jesseleite/vim-agriculture'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot' 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 call plug#end()
-
-"============================
-" FUNCTIONS
-"============================
-
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
 
 "============================
 " PLUGINS / STATUS AND THEME
@@ -47,16 +35,14 @@ let g:airline_powerline_fonts = 1
 let g:tmuxline_powerline_separators = 1
 
 "============================
-" COC
+" LSP NEOVIM
 "============================
 
-let g:coc_global_extensions = [ 
-	\ 'coc-tsserver', 
-	\ 'coc-json', 
-	\ 'coc-eslint',
-	\ 'coc-css',
-	\ 'coc-html'
-	\ ]
+let g:LanguageClient_serverCommands = {
+			\ 'javascript': ['node', '/data/data/com.termux/files/usr/bin/javascript-typescript-stdio'],
+			\}
+
+let g:LanguageClient_selectionUI = 'fzf'
 
 "============================
 " NETRW
@@ -102,7 +88,7 @@ cnoreabbrev Q! q!
 "============================
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 "============================
 " MAPPINGS
@@ -136,6 +122,8 @@ nnoremap } }zz
 " MAPPINGS / EDIT
 "----------------------------
 
+nmap <leader>m <Plug>(lcn-menu)<CR>
+
 " move lines https://vim.fandom.com/wiki/Moving_lines_up_or_down
 vnoremap <C-j> :move '>+1<CR>gv=gv
 vnoremap <C-k> :move '<-2<CR>gv=gv
@@ -145,10 +133,10 @@ vnoremap < <gv
 vnoremap > >gv
 
 " rename symbol under cursor
-nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>rn <Plug>(lcn-rename)<CR>
 
 " run eslint autofix
-nnoremap <leader>af :CocCommand eslint.executeAutofix<CR>
+" nnoremap <leader>af :CocCommand eslint.executeAutofix<CR>
 
 " Sort selected lines
 vmap <leader>ss :'<,'>sort<CR>
@@ -173,10 +161,10 @@ nnoremap <leader>tp :set invpaste<CR>
 nnoremap <leader>tl :set list!<CR>
 
 " go to definition
-nmap <leader>gd <Plug>(coc-definition)<CR>
+nmap <leader>gd <Plug>(lcn-definition)<CR>
 
 " go to references
-nmap <leader>gr <Plug>(coc-references)<CR>
+" nmap <leader>gr <Plug>(coc-references)<CR>
 
 " MAPPINGS / SEARCH & EXPLORE
 "----------------------------
@@ -194,12 +182,12 @@ vmap <leader>* <Plug>AgRawWordUnderCursor
 nnoremap <leader>e :Explore<CR>
 
 " show documentation in preview window
-nnoremap <silent> <leader>h :call <SID>show_documentation()<CR>
+" nnoremap <silent> <leader>h :call <SID>show_documentation()<CR>
 
 " MAPPINGS / OTHER
 "----------------------------
 
 " edit vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <leader>ev :edit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
