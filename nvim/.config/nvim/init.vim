@@ -5,20 +5,29 @@
 "
 "
 "============================
+" PLUGINS / PRE LOADING
+"============================
+
+let g:ale_completion_enable = 1
+
+"============================
 " PLUGINS
 "============================
 
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'airblade/vim-gitgutter'
+Plug 'arcticicestudio/nord-vim'
+Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
+Plug 'gruvbox-community/gruvbox'
 Plug 'jesseleite/vim-agriculture'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'gruvbox-community/gruvbox'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'lifepillar/vim-mucomplete'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -29,20 +38,11 @@ call plug#end()
 "============================
 
 function! s:show_documentation()
-	if &filetype == 'vim'
-		execute 'h '.expand('<cword>')
-	else
-		call CocAction('doHover')
-	endif
-endfunction
-
-" find better solution for php as it's now synchronous
-function! s:fix_current_buffer()
-	if &filetype == 'php'
-		execute 'silent !vendor/bin/phpcbf ' . expand('%:p')
-	elseif &filetype == 'js'
-		call CocCommand eslint.executeAutofix<CR>
-	endif
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    :ALEHover<CR>
+  endif
 endfunction
 
 "============================
@@ -56,17 +56,36 @@ let g:airline_powerline_fonts = 1
 let g:tmuxline_powerline_separators = 1
 
 "============================
-" COC
+" FZF
 "============================
 
-let g:coc_global_extensions = [
-						\ 'coc-tsserver',
-						\ 'coc-json',
-						\ 'coc-css',
-						\ 'coc-html',
-						\ 'coc-eslint',
-						\ 'coc-diagnostic'
-						\ ]
+let g:fzf_layout = { 'down': '50%' }
+
+"============================
+" ALE
+"============================
+
+let g:ale_sign_column_always = 1
+
+let g:ale_linters_explicit = 1
+
+let g:ale_list_window_size = 5
+
+let g:ale_linters = {
+\ 'javascript': ['eslint', 'tsserver'],
+\ 'php': ['phpcs'],
+\}
+
+let g:ale_fixers = {
+\ 'javascript': ['eslint'],
+\ 'php': ['phpcbf'],
+\}
+
+"============================
+" MUCOMPLETE
+"============================
+
+let g:mucomplete#enable_auto_at_startup = 1
 
 "============================
 " NETRW
@@ -94,6 +113,8 @@ set sidescrolloff=5
 set signcolumn=yes " always show error column
 set splitbelow
 set splitright
+set omnifunc=ale#completion#OmniFunc
+set completeopt+=menuone,noinsert
 
 "============================
 " ABBREVIATIONS
@@ -111,15 +132,13 @@ cnoreabbrev Q! q!
 " AUTOCOMMANDS
 "============================
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
 "============================
 " MAPPINGS
 "============================
 
 let mapleader=","
 
+"----------------------------
 " MAPPINGS / MOVEMENT
 "----------------------------
 
@@ -143,6 +162,7 @@ nnoremap N Nzz
 nnoremap { {zz
 nnoremap } }zz
 
+"----------------------------
 " MAPPINGS / EDIT
 "----------------------------
 
@@ -155,15 +175,15 @@ vnoremap < <gv
 vnoremap > >gv
 
 " rename symbol under cursor
-nmap <leader>rn <Plug>(coc-rename)
+nnoremap <leader>rn :ALERename<CR>
 
 " run eslint autofix
-nnoremap <leader>af :CocCommand eslint.executeAutofix<CR>
-"knnoremap <leader>af :call <SID>fix_current_buffer()<CR>
+nnoremap <leader>af :ALEFix<CR>
 
 " Sort selected lines
 vmap <leader>ss :'<,'>sort<CR>
 
+"----------------------------
 " MAPPINGS / UI AND SETTINGS
 "----------------------------
 
@@ -184,19 +204,24 @@ nnoremap <leader><Space> :nohlsearch<CR>
 nnoremap <leader>tp :set invpaste<CR>
 
 " toggle list (hidden chars)
-nnoremap <leader>tl :set list!<CR>
+nnoremap <leader>thc :set list!<CR>
 
 " open coc diagnostics
 nnoremap <leader>d :CocDiagnostics<CR>
 
 " go to definition
-nmap <leader>gd <Plug>(coc-definition)<CR>
+nnoremap <leader>gd :ALEGoToDefinition<CR>
 
-" go to references
-nmap <leader>gr <Plug>(coc-references)<CR>
-
-" MAPPINGS / SEARCH & EXPLORE
 "----------------------------
+" MAPPINGS / SEARCH & VIEW
+"----------------------------
+
+" only this buffer
+nnoremap <leader>o :only<CR>
+
+" open/close location list
+nnoremap <leader>ol :lopen<CR>
+nnoremap <leader>cl :lclose<CR>
 
 " fzf search files
 nnoremap <leader>f :GFiles<CR>
@@ -204,19 +229,19 @@ nnoremap <leader>F :Files<CR>
 
 " fzf/ag project search
 nmap <leader>/ <Plug>AgRawSearch
-vmap <leader>/ <Plug>AgRawVisualSelection
-nmap <leader>* <Plug>AgRawWordUnderCursor
+vmap <leader>/ <Plug>AgRawVisualSelection<CR>
+vmap <leader>* <Plug>AgRawWordUnderCursor<CR>
 
 " open netrw file explorer
 nnoremap <leader>e :Explore<CR>
 
 " show documentation in preview window
-nnoremap <silent> <leader>h :call <SID>show_documentation()<CR>
+ nnoremap <silent> <leader>h :call <SID>show_documentation()<CR>
 
+"----------------------------
 " MAPPINGS / OTHER
 "----------------------------
 
 " edit vimrc
-nnoremap <leader>ev :split $MYVIMRC<CR>
+nnoremap <leader>ev :edit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
-
