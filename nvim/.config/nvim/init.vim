@@ -22,13 +22,15 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'jesseleite/vim-agriculture'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot' 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'lifepillar/vim-mucomplete'
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 "============================
@@ -54,18 +56,26 @@ let g:airline_powerline_fonts = 1
 let g:tmuxline_powerline_separators = 1
 
 "============================
+" FZF
+"============================
+
+let g:fzf_layout = { 'down': '50%' }
+"============================
 " ALE
 "============================
 
 let g:ale_sign_column_always = 1
 let g:ale_linters_explicit = 1
+let g:ale_list_window_size = 5
 
 let g:ale_linters = {
 \ 'javascript': ['eslint', 'tsserver'],
+\ 'php': ['phpcs'],
 \}
 
 let g:ale_fixers = {
 \ 'javascript': ['eslint'],
+\ 'php': ['phpcbf'],
 \}
 
 "============================
@@ -101,7 +111,7 @@ set signcolumn=yes " always show error column
 set splitbelow
 set splitright
 set omnifunc=ale#completion#OmniFunc
-set completeopt+=menuone,noinsert,preview
+set completeopt+=menuone,noinsert
 
 "============================
 " ABBREVIATIONS
@@ -193,8 +203,11 @@ nnoremap <leader>thc :set list!<CR>
 " go to definition
 nnoremap <leader>gd :ALEGoToDefinition<CR>
 
-" MAPPINGS / SEARCH & EXPLORE
+" MAPPINGS / SEARCH & VIEW
 "----------------------------
+
+" only this buffer
+nnoremap <leader>o :only<CR>
 
 " open/close location list
 nnoremap <leader>ol :lopen<CR>
@@ -206,8 +219,8 @@ nnoremap <leader>F :Files<CR>
 
 " fzf/ag project search
 nmap <leader>/ <Plug>AgRawSearch
-vmap <leader>/ <Plug>AgRawVisualSelection
-vmap <leader>* <Plug>AgRawWordUnderCursor
+vmap <leader>/ <Plug>AgRawVisualSelection<CR>
+vmap <leader>* <Plug>AgRawWordUnderCursor<CR>
 
 " open netrw file explorer
 nnoremap <leader>e :Explore<CR>
