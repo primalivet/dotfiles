@@ -15,12 +15,11 @@ let g:ale_completion_enable = 1
 "============================
 
 call plug#begin(stdpath('data') . '/plugged')
+Plug '/mnt/c/Code/vim-terminal16'
 Plug 'airblade/vim-gitgutter'
-Plug 'arcticicestudio/nord-vim'
 Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'edkolev/tmuxline.vim'
-Plug 'gruvbox-community/gruvbox'
+Plug 'gerw/vim-HiLinkTrace'
 Plug 'jesseleite/vim-agriculture'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -28,9 +27,7 @@ Plug 'lifepillar/vim-mucomplete'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
 call plug#end()
 
 "============================
@@ -72,11 +69,13 @@ let g:ale_linters_explicit = 1
 let g:ale_list_window_size = 5
 
 let g:ale_linters = {
+\ 'css': ['stylelint'],
 \ 'javascript': ['eslint', 'tsserver'],
 \ 'php': ['phpcs'],
 \}
 
 let g:ale_fixers = {
+\ 'css': ['stylelint'],
 \ 'javascript': ['eslint'],
 \ 'php': ['phpcbf'],
 \}
@@ -100,21 +99,23 @@ let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
 " GENERIC
 "============================
 
-colorscheme gruvbox
+colorscheme terminal16
 
+
+set background=dark
+set completeopt=menu,menuone,noinsert
 set hidden
 set listchars=tab:>--,space:·,trail:·
 set nolist
-set number " show line numbers
 set noshowmode
-set updatetime=300 " updatetime for CursorHold & CursorHoldI
+set number " show line numbers
+set omnifunc=ale#completion#OmniFunc
 set scrolloff=5
 set sidescrolloff=5
 set signcolumn=yes " always show error column
 set splitbelow
 set splitright
-set omnifunc=ale#completion#OmniFunc
-set completeopt+=menuone,noinsert
+set updatetime=300 " updatetime for CursorHold & CursorHoldI
 
 "============================
 " ABBREVIATIONS
@@ -131,6 +132,9 @@ cnoreabbrev Q! q!
 "============================
 " AUTOCOMMANDS
 "============================
+
+" hide statusbar in FZF window
+autocmd  FileType fzf set laststatus=0 | autocmd WinLeave <buffer> set laststatus=2
 
 "============================
 " MAPPINGS
