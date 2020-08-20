@@ -104,18 +104,45 @@ colorscheme terminal16
 
 set background=dark
 set completeopt=menu,menuone,noinsert
+set cursorline
 set hidden
 set listchars=tab:>--,space:·,trail:·
 set nolist
-set noshowmode
 set number " show line numbers
 set omnifunc=ale#completion#OmniFunc
 set scrolloff=5
+set showmode
 set sidescrolloff=5
 set signcolumn=yes " always show error column
 set splitbelow
 set splitright
 set updatetime=300 " updatetime for CursorHold & CursorHoldI
+
+"----------------------------
+" GENERIC / STATUSLINE
+"----------------------------
+
+set statusline= 
+" short filename, truncate left  
+set statusline+=%<%f
+" space
+set statusline+=\ 
+" show if helpfile
+set statusline+=%h
+" show if file modified
+set statusline+=%m
+" show if file read only
+set statusline+=%r
+" fugitive statusline for git
+set statusline+=%{FugitiveStatusline()}
+" switch to right side of statusline
+set statusline+=%=
+" align left, bigger max width, %l line, %c column, %V virtual column
+set statusline+=%-14.(%l,%c%V%)
+" space
+set statusline+=\ 
+" percentage of file
+set statusline+=%P
 
 "============================
 " ABBREVIATIONS
@@ -134,7 +161,7 @@ cnoreabbrev Q! q!
 "============================
 
 " hide statusbar in FZF window
-autocmd  FileType fzf set laststatus=0 | autocmd WinLeave <buffer> set laststatus=2
+autocmd!  FileType fzf set laststatus=0 noshowmode noruler | autocmd WinLeave <buffer> set laststatus=2 showmode ruler
 
 "============================
 " MAPPINGS
