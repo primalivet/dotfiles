@@ -34,11 +34,17 @@ call plug#end()
 " FUNCTIONS
 "============================
 
+function! RootDir()
+	let l:cwd_string = fnamemodify(getcwd(), ':t')
+	return cwd_string
+endfunction
+
+
 function! s:show_documentation()
   if &filetype == 'vim'
     execute 'h '.expand('<cword>')
   else
-    :ALEHover<CR>
+    :ALEHover
   endif
 endfunction
 
@@ -68,14 +74,21 @@ let g:ale_linters_explicit = 1
 
 let g:ale_list_window_size = 5
 
+let g:ale_set_quickfix = 1
+
+let g:ale_open_list = 1
+
 let g:ale_linters = {
 \ 'css': ['stylelint'],
+\ 'scss': ['stylelint'],
 \ 'javascript': ['eslint', 'tsserver'],
 \ 'php': ['phpcs'],
+\ 'vim': ['vimls'],
 \}
 
 let g:ale_fixers = {
 \ 'css': ['stylelint'],
+\ 'scss': ['stylelint'],
 \ 'javascript': ['eslint'],
 \ 'php': ['phpcbf'],
 \}
@@ -122,7 +135,11 @@ set updatetime=300 " updatetime for CursorHold & CursorHoldI
 " GENERIC / STATUSLINE
 "----------------------------
 
-set statusline= 
+set statusline=
+" root dir
+set statusline=%{RootDir()}
+" space
+set statusline+=\ 
 " short filename, truncate left  
 set statusline+=%<%f
 " space
@@ -237,11 +254,15 @@ nnoremap <leader>tp :set invpaste<CR>
 " toggle list (hidden chars)
 nnoremap <leader>thc :set list!<CR>
 
-" open coc diagnostics
-nnoremap <leader>d :CocDiagnostics<CR>
+" open/close qucikfix list
+nnoremap <leader>cw :cw<CR>
+nnoremap <leader>cc :cc<CR>
 
 " go to definition
 nnoremap <leader>gd :ALEGoToDefinition<CR>
+
+" find references
+nnoremap <leader>gr :ALEFindReferences<CR>
 
 "----------------------------
 " MAPPINGS / SEARCH & VIEW
@@ -249,10 +270,6 @@ nnoremap <leader>gd :ALEGoToDefinition<CR>
 
 " only this buffer
 nnoremap <leader>o :only<CR>
-
-" open/close location list
-nnoremap <leader>ol :lopen<CR>
-nnoremap <leader>cl :lclose<CR>
 
 " fzf search files
 nnoremap <leader>f :GFiles<CR>
