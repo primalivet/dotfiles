@@ -15,7 +15,11 @@ let g:ale_completion_enable = 1
 "============================
 
 call plug#begin(stdpath('data') . '/plugged')
-Plug '/mnt/c/Code/vim-terminal16'
+if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
+		Plug '/mnt/c/Code/vim-terminal16'
+else
+		Plug 'primalivet/vim-terminal16'
+endif
 Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
@@ -139,11 +143,11 @@ set statusline=
 " root dir
 set statusline=%{RootDir()}
 " space
-set statusline+=\ 
-" short filename, truncate left  
+set statusline+=\
+" short filename, truncate left
 set statusline+=%<%f
 " space
-set statusline+=\ 
+set statusline+=\
 " show if helpfile
 set statusline+=%h
 " show if file modified
@@ -157,7 +161,7 @@ set statusline+=%=
 " align left, bigger max width, %l line, %c column, %V virtual column
 set statusline+=%-14.(%l,%c%V%)
 " space
-set statusline+=\ 
+set statusline+=\
 " percentage of file
 set statusline+=%P
 
