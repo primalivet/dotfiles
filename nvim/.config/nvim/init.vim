@@ -88,6 +88,7 @@ let g:ale_linters = {
 \ 'javascript': ['eslint', 'tsserver'],
 \ 'php': ['phpcs'],
 \ 'vim': ['vimls'],
+\ 'c': ['clangd'],
 \}
 
 let g:ale_fixers = {
@@ -95,6 +96,7 @@ let g:ale_fixers = {
 \ 'scss': ['stylelint'],
 \ 'javascript': ['eslint'],
 \ 'php': ['phpcbf'],
+\ 'c': ['clang-format'],
 \}
 
 "============================
