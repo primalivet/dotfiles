@@ -27,6 +27,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'gerw/vim-HiLinkTrace'
+Plug 'liuchengxu/vim-which-key'
 "Plug 'itchyny/lightline.vim'
 "Plug 'vim-airline/vim-airline'
 
@@ -146,6 +147,7 @@ set splitbelow
 set splitright
 set updatetime=300 " updatetime for CursorHold & CursorHoldI
 set nowrap
+set timeoutlen=500
 "set termguicolors " enable 24 bit colors
 
 "----------------------------
@@ -191,7 +193,7 @@ cnoreabbrev Q! q!
 "============================
 
 " hide statusbar in FZF window
-autocmd!  FileType fzf set laststatus=0 noshowmode noruler | autocmd WinLeave <buffer> set laststatus=2 showmode ruler
+autocmd!  FileType fzf,which_key set laststatus=0 noshowmode noruler | autocmd WinLeave <buffer> set laststatus=2 showmode ruler
 
 " hide numbers in txt files
 autocmd! FileType txt set nonumber
@@ -201,6 +203,13 @@ autocmd! FileType txt set nonumber
 "============================
 
 let mapleader=","
+nnoremap <silent> <leader> :WhichKey ','<CR>
+vnoremap <silent> <leader> :WhichKeyVisual ','<CR>
+
+
+let g:which_key_use_floating_win = 0
+let g:which_key_map = {}
+call which_key#register(',', "g:which_key_map")
 
 "----------------------------
 " MAPPINGS / MOVEMENT
@@ -260,6 +269,7 @@ noremap <C-w>> :vertical:resize +5<CR>
 
 " :only
 nnoremap <leader>o :only<CR>
+let g:which_key_map.o = 'only-buffer'
 
 " unhighlight seach results
 nnoremap <leader><Space> :nohlsearch<CR>
