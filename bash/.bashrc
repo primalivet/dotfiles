@@ -103,6 +103,7 @@ export PS1="\u@\h:\w\`parse_git_branch ':' \`\`parse_git_dirty ':'\`\$ "
 
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export EDITOR=nvim
 
 export YVM_DIR=/home/primalivet/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh

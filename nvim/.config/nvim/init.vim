@@ -28,8 +28,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'liuchengxu/vim-which-key'
-"Plug 'itchyny/lightline.vim'
-"Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 
 " source terminal16 from locally from my machine if it exists
 if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
@@ -66,9 +65,9 @@ endfunction
 " PLUGINS / STATUS AND THEME
 "============================
 
-let g:airline_powerline_fonts = 1
-
-let g:tmuxline_powerline_separators = 1
+let g:lightline = {
+      \ 'colorscheme': 'terminal16',
+      \ }
 
 "============================
 " FZF
@@ -136,18 +135,18 @@ set hidden
 set ignorecase
 set listchars=tab:>--,space:·,trail:·
 set nolist
+set noshowmode
+set nowrap
 set number " show line numbers
 set omnifunc=ale#completion#OmniFunc
 set scrolloff=5
-set noshowmode
 set sidescrolloff=5
 set signcolumn=yes " always show error column
 set smartcase
 set splitbelow
 set splitright
-set updatetime=300 " updatetime for CursorHold & CursorHoldI
-set nowrap
 set timeoutlen=500
+set updatetime=300 " updatetime for CursorHold & CursorHoldI
 "set termguicolors " enable 24 bit colors
 
 "----------------------------
@@ -203,16 +202,22 @@ autocmd! FileType txt set nonumber
 "============================
 
 let mapleader=","
+
+call which_key#register(',', "g:which_key_map")
+
 nnoremap <silent> <leader> :WhichKey ','<CR>
 vnoremap <silent> <leader> :WhichKeyVisual ','<CR>
 
-
 let g:which_key_use_floating_win = 0
 let g:which_key_map = {}
-call which_key#register(',', "g:which_key_map")
+let g:which_key_hspace = 15
+
+" o only-buffer
+" q quickfix
+" l loclist
 
 "----------------------------
-" MAPPINGS / MOVEMENT
+" MAPPINGS / NO LEADER
 "----------------------------
 
 " auto esc on move
@@ -235,9 +240,12 @@ nnoremap N Nzz
 nnoremap { {zz
 nnoremap } }zz
 
-"----------------------------
-" MAPPINGS / EDIT
-"----------------------------
+" increase the default width/height of window resize. this is still the
+" default window resizing keymaps, se :h window-resize
+noremap <C-w>+ :resize +5<CR>
+noremap <C-w>- :resize -5<CR>
+noremap <C-w>< :vertical:resize -5<CR>
+noremap <C-w>> :vertical:resize +5<CR>
 
 " move lines https://vim.fandom.com/wiki/Moving_lines_up_or_down
 vnoremap <C-j> :move '>+1<CR>gv=gv
@@ -247,42 +255,49 @@ vnoremap <C-k> :move '<-2<CR>gv=gv
 vnoremap < <gv
 vnoremap > >gv
 
-" rename symbol under cursor
-nnoremap <leader>rn :ALERename<CR>
-
-" run eslint autofix
-nnoremap <leader>af :ALEFix<CR>
-
-" Sort selected lines
-vmap <leader>ss :'<,'>sort<CR>
-
 "----------------------------
-" MAPPINGS / UI AND SETTINGS
+" MAPPINGS / OTHER
 "----------------------------
-
-" increase the default width/height of window resize. this is still the
-" default window resizing keymaps, se :h window-resize
-noremap <C-w>+ :resize +5<CR>
-noremap <C-w>- :resize -5<CR>
-noremap <C-w>< :vertical:resize -5<CR>
-noremap <C-w>> :vertical:resize +5<CR>
 
 " :only
 nnoremap <leader>o :only<CR>
 let g:which_key_map.o = 'only-buffer'
 
-" unhighlight seach results
-nnoremap <leader><Space> :nohlsearch<CR>
+" open/close qucikfix list
+nnoremap <leader>cw :cw<CR>
+nnoremap <leader>cc :cc<CR>
+
+" open netrw file explorer
+"nnoremap <leader>e :Explore<CR>
+
+"nnoremap <leader>gcc :call GccCompileRunDestroy()<CR>
+
+"----------------------------
+" MAPPINGS / TOGGLE
+"----------------------------
+
+let g:which_key_map.t = { 'name' : '+toggle' }
+let g:which_key_map.t.l = 'toggle-list-chars'
+let g:which_key_map.t.s = 'toggle-search-highlight'
+let g:which_key_map.t.p = 'toggle-paste-mode'
 
 " toggle paste mode
 nnoremap <leader>tp :set invpaste<CR>
 
 " toggle list (hidden chars)
-nnoremap <leader>thc :set list!<CR>
+nnoremap <leader>tl :set list!<CR>
 
-" open/close qucikfix list
-nnoremap <leader>cw :cw<CR>
-nnoremap <leader>cc :cc<CR>
+" toggle search highlight
+nnoremap <leader>ts :set hlsearch!<CR>
+
+"----------------------------
+" MAPPINGS / GOTO
+"----------------------------
+
+let g:which_key_map.g = { 'name' : '+goto' }
+let g:which_key_map.g.d = 'goto-definition'
+let g:which_key_map.g.r = 'goto-references'
+let g:which_key_map.g.h = 'goto-documentation'
 
 " go to definition
 nnoremap <leader>gd :ALEGoToDefinition<CR>
@@ -290,34 +305,64 @@ nnoremap <leader>gd :ALEGoToDefinition<CR>
 " find references
 nnoremap <leader>gr :ALEFindReferences<CR>
 
-"----------------------------
-" MAPPINGS / SEARCH & VIEW
-"----------------------------
-
-" only this buffer
-nnoremap <leader>o :only<CR>
-
-" fzf search files
-nnoremap <leader>f :GFiles<CR>
-nnoremap <leader>F :Files<CR>
-
-" fzf/ag project search
-nmap <leader>/ <Plug>AgRawSearch
-vmap <leader>/ <Plug>AgRawVisualSelection<CR>
-vmap <leader>* <Plug>AgRawWordUnderCursor<CR>
-
-" open netrw file explorer
-nnoremap <leader>e :Explore<CR>
-
 " show documentation in preview window
-nnoremap <silent> <leader>h :call <SID>show_documentation()<CR>
+nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
 
 "----------------------------
-" MAPPINGS / OTHER
+" MAPPINGS / VIMRC
 "----------------------------
 
-nnoremap <leader>gcc :call GccCompileRunDestroy()<CR>
+let g:which_key_map.v = { 'name' : '+vimrc' }
+let g:which_key_map.v.e = 'vimrc-edit'
+let g:which_key_map.v.s = 'vimrc-source'
 
 " edit vimrc
-nnoremap <leader>ev :edit $MYVIMRC<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>ve :edit $MYVIMRC<CR>
+
+" source vimrc
+nnoremap <leader>vs :source $MYVIMRC<CR>
+
+"----------------------------
+" MAPPINGS / EDIT
+"----------------------------
+
+let g:which_key_map.e = { 'name' : '+edit' }
+let g:which_key_map.e.f = 'edit-fix-buffer'
+let g:which_key_map.e.r = 'edit-rename'
+let g:which_key_map.e.s = 'edit-sort-selected'
+
+" VISUAL
+"
+" e s edit-sort-visual
+
+" run eslint autofix
+nnoremap <leader>ef :ALEFix<CR>
+
+" rename symbol under cursor
+nnoremap <leader>er :ALERename<CR>
+
+" Sort selected lines
+vnoremap <leader>es :'<,'>sort<CR>
+
+"----------------------------
+" MAPPINGS / SEARCH
+"----------------------------
+
+let g:which_key_map.s = { 'name' : '+search' }
+let g:which_key_map.s.f = 'search-files'
+let g:which_key_map.s.g = 'search-git-files'
+let g:which_key_map.s['/'] = 'ag-raw-search' " uses range in visual
+let g:which_key_map.s['*'] = 'ag-raw-under-cursor'
+
+" fzf search files
+nnoremap <leader>sf :Files<CR>
+
+" fzf search git files
+nnoremap <leader>sg :GFiles<CR>
+
+" fzf/ag project search
+nmap <leader>s/ <Plug>AgRawSearch
+vmap <leader>s/ <Plug>AgRawVisualSelection<CR>
+
+"fzf/ag
+nmap <leader>s* <Plug>AgRawWordUnderCursor<CR>
