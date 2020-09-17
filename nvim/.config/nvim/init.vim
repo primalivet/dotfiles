@@ -26,9 +26,12 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'gerw/vim-HiLinkTrace'
 Plug 'liuchengxu/vim-which-key'
-Plug 'itchyny/lightline.vim'
+
+" only load HiLinkTrace when working in dotfiles or colorscheme dir
+if (fnamemodify(getcwd(), ':t') ==? 'dotfiles') || (fnamemodify(getcwd(), ':t') ==? 'vim-terminal16')
+	Plug 'gerw/vim-HiLinkTrace'
+endif
 
 " source terminal16 from locally from my machine if it exists
 if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
@@ -60,14 +63,19 @@ function! s:show_documentation()
 		:ALEHover
 	endif
 endfunction
+"============================
+" GIT GUTTER
+"============================
+
+" remove mapping to preview hunk (gitgutter)
+" Hunks are remapped below
+let g:gitgutter_map_keys = 0
 
 "============================
-" PLUGINS / STATUS AND THEME
+" FZF
 "============================
 
-let g:lightline = {
-      \ 'colorscheme': 'terminal16',
-      \ }
+let g:terminal16_256_colors = 1
 
 "============================
 " FZF
@@ -93,7 +101,7 @@ let g:ale_linters = {
 			\ 'css': ['stylelint'],
 			\ 'scss': ['stylelint'],
 			\ 'javascript': ['eslint', 'tsserver'],
-			\ 'php': ['phpcs'],
+			\ 'php': ['phpcs', 'langserver', ],
 			\ 'vim': ['vimls'],
 			\ 'c': [ 'gcc', 'clangd']
 			\}
@@ -201,20 +209,16 @@ autocmd! FileType txt set nonumber
 " MAPPINGS
 "============================
 
-let mapleader=","
+let mapleader="\<Space>"
 
-call which_key#register(',', "g:which_key_map")
+call which_key#register('<Space>', "g:which_key_map")
 
-nnoremap <silent> <leader> :WhichKey ','<CR>
-vnoremap <silent> <leader> :WhichKeyVisual ','<CR>
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :WhichKeyVisual '<Space>'<CR>
 
 let g:which_key_use_floating_win = 0
 let g:which_key_map = {}
 let g:which_key_hspace = 15
-
-" o only-buffer
-" q quickfix
-" l loclist
 
 "----------------------------
 " MAPPINGS / NO LEADER
@@ -259,18 +263,39 @@ vnoremap > >gv
 " MAPPINGS / OTHER
 "----------------------------
 
-" :only
-nnoremap <leader>o :only<CR>
-let g:which_key_map.o = 'only-buffer'
-
 " open/close qucikfix list
 nnoremap <leader>cw :cw<CR>
 nnoremap <leader>cc :cc<CR>
 
-" open netrw file explorer
-"nnoremap <leader>e :Explore<CR>
-
 "nnoremap <leader>gcc :call GccCompileRunDestroy()<CR>
+
+"----------------------------
+" MAPPINGS / NEXT & PREVIOUS
+"----------------------------
+
+let g:which_key_map['['] = { 'name' : '+previous' }
+let g:which_key_map[']'] = { 'name' : '+next' }
+
+let g:which_key_map['['].q = 'previous-qucikfix'
+
+let g:which_key_map[']'].q = 'next-quickfix'
+
+nnoremap <leader>[q :cnext<CR>
+nnoremap <leader>]q :cprevious<CR>
+
+"----------------------------
+" MAPPINGS / TOGGLE
+"----------------------------
+
+let g:which_key_map.w = { 'name' : '+window' }
+let g:which_key_map.w.o = 'only-current'
+let g:which_key_map.w.e = 'explore'
+
+" :only
+nnoremap <leader>wo :only<CR>
+
+" open netrw file explorer
+nnoremap <leader>we :Explore<CR>
 
 "----------------------------
 " MAPPINGS / TOGGLE
@@ -330,6 +355,9 @@ let g:which_key_map.e = { 'name' : '+edit' }
 let g:which_key_map.e.f = 'edit-fix-buffer'
 let g:which_key_map.e.r = 'edit-rename'
 let g:which_key_map.e.s = 'edit-sort-selected'
+let g:which_key_map.e.hp = 'edit-hunk-preview'
+let g:which_key_map.e.hs = 'edit-hunk-stage'
+let g:which_key_map.e.hu = 'edit-hunk-undo'
 
 " VISUAL
 "
@@ -343,6 +371,11 @@ nnoremap <leader>er :ALERename<CR>
 
 " Sort selected lines
 vnoremap <leader>es :'<,'>sort<CR>
+
+" edit git hunk
+nmap <leader>ehp <Plug>(GitGutterPreviewHunk)
+nmap <leader>ehs <Plug>(GitGutterStageHunk)
+nmap <leader>ehu <Plug>(GitGutterUndoHunk)
 
 "----------------------------
 " MAPPINGS / SEARCH

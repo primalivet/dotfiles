@@ -25,8 +25,6 @@ PROMPT_DIRTRIM=2
 # append to history, don't overwrite
 shopt -s histappend
 
-# add go dir to path
-export PATH=$PATH:/usr/local/go/bin
 
 # set node version manager enviroment variable
 export NVM_DIR="$HOME/.nvm"
@@ -101,8 +99,12 @@ function parse_git_dirty {
 
 export PS1="\u@\h:\w\`parse_git_branch ':' \`\`parse_git_dirty ':'\`\$ "
 
-export PATH="$HOME/.bin:$PATH"
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH=$HOME/.bin:$PATH
+export PATH=$HOME/.yarn/bin:$PATH
+export PATH=$HOME/.config/yarn/global/node_modules/.bin:$PATH
+export PATH=$HOME/.config/composer/vendor/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
+
 export EDITOR=nvim
 
 export YVM_DIR=/home/primalivet/.yvm
