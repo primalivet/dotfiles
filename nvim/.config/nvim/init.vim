@@ -3,44 +3,6 @@
 " ||__|||__|||__||
 " |/__\|/__\|/__\|
 "
-"
-"============================
-" PLUGINS / PRE LOADING
-"============================
-
-let g:ale_completion_enable = 1
-
-"============================
-" PLUGINS
-"============================
-
-call plug#begin(stdpath('data') . '/plugged')
-Plug 'airblade/vim-gitgutter'
-Plug 'dense-analysis/ale'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'jesseleite/vim-agriculture'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'lifepillar/vim-mucomplete'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'liuchengxu/vim-which-key'
-
-" only load HiLinkTrace when working in dotfiles or colorscheme dir
-if (fnamemodify(getcwd(), ':t') ==? 'dotfiles') || (fnamemodify(getcwd(), ':t') ==? 'vim-terminal16')
-	Plug 'gerw/vim-HiLinkTrace'
-endif
-
-" source terminal16 from locally from my machine if it exists
-if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
-	Plug '/mnt/c/Code/vim-terminal16'
-else
-	Plug 'primalivet/vim-terminal16'
-endif
-call plug#end()
-
 "============================
 " FUNCTIONS
 "============================
@@ -55,79 +17,75 @@ function! RootDir()
 	return cwd_string
 endfunction
 
-
 function! s:show_documentation()
-	if &filetype == 'vim'
-		execute 'h '.expand('<cword>')
-	else
-		:ALEHover
-	endif
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocActionAsync('doHover')
+  endif
 endfunction
-"============================
-" GIT GUTTER
-"============================
-
-" remove mapping to preview hunk (gitgutter)
-" Hunks are remapped below
-let g:gitgutter_map_keys = 0
 
 "============================
-" FZF
+" PLUGINS
 "============================
 
-let g:terminal16_256_colors = 1
+call plug#begin(stdpath('data') . '/plugged')
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'airblade/vim-gitgutter'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'jesseleite/vim-agriculture'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'liuchengxu/vim-which-key'
+
+" only load HiLinkTrace when working in dotfiles or colorscheme dir
+if (fnamemodify(getcwd(), ':t') ==? 'dotfiles') || (fnamemodify(getcwd(), ':t') ==? 'vim-terminal16')
+	Plug 'gerw/vim-HiLinkTrace'
+endif
+
+if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
+	" source terminal16 from locally from my machine if it exists
+	Plug '/mnt/c/Code/vim-terminal16'
+else
+	Plug 'primalivet/vim-terminal16'
+endif
+
+call plug#end()
 
 "============================
-" FZF
-"============================
-
-let g:fzf_layout = { 'down': '50%' }
-
-"============================
-" ALE
-"============================
-
-let g:ale_sign_column_always = 1
-
-let g:ale_linters_explicit = 1
-
-let g:ale_list_window_size = 5
-
-let g:ale_set_quickfix = 1
-
-let g:ale_open_list = 1
-
-let g:ale_linters = {
-			\ 'css': ['stylelint'],
-			\ 'scss': ['stylelint'],
-			\ 'javascript': ['eslint', 'tsserver'],
-			\ 'php': ['phpcs', 'langserver', ],
-			\ 'vim': ['vimls'],
-			\ 'c': [ 'gcc', 'clangd']
-			\}
-
-let g:ale_fixers = {
-			\ 'css': ['stylelint'],
-			\ 'scss': ['stylelint'],
-			\ 'javascript': ['eslint'],
-			\ 'php': ['phpcbf'],
-			\ 'c': ['clang-format']
-			\}
-
-"============================
-" MUCOMPLETE
-"============================
-
-let g:mucomplete#enable_auto_at_startup = 1
-
-"============================
-" NETRW
+" PLUGINS / POST LOADED
 "============================
 
 let g:netrw_banner = 0 " hide annoying banner
 let g:netrw_browse_splits = 4 " open files in same window
 let g:netrw_liststyle = 3 " tree style listing
 let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
+
+let g:coc_global_extensions = [
+ \ 'coc-json',
+ \ 'coc-tsserver',
+ \ 'coc-eslint',
+ \ 'coc-highlight',
+ \ 'coc-vimlsp',
+ \ 'coc-pairs',
+ \ 'coc-phpls',
+ \ 'coc-diagnostic',
+ \ 'coc-css',
+ \ 'coc-stylelint'
+ \ ]
+
+let g:fzf_layout = { 'down': '50%' }
+
+" remove mapping to preview hunk (gitgutter)
+" Hunks are remapped below
+let g:gitgutter_map_keys = 0
+
+let g:terminal16_256_colors = 1
 
 "============================
 " GENERIC
@@ -137,17 +95,20 @@ colorscheme terminal16
 
 set background=dark
 set backupcopy=yes
+set cmdheight=1
 set completeopt=menu,menuone,noinsert
 set cursorline
+set encoding=utf-8
 set hidden
 set ignorecase
 set listchars=tab:>--,space:·,trail:·
+set nobackup
 set nolist
-set noshowmode
 set nowrap
+set nowritebackup
 set number " show line numbers
-set omnifunc=ale#completion#OmniFunc
 set scrolloff=5
+set shortmess+=c " dont pass messages to in-completion-menu
 set sidescrolloff=5
 set signcolumn=yes " always show error column
 set smartcase
@@ -155,7 +116,6 @@ set splitbelow
 set splitright
 set timeoutlen=500
 set updatetime=300 " updatetime for CursorHold & CursorHoldI
-"set termguicolors " enable 24 bit colors
 
 "----------------------------
 " GENERIC / STATUSLINE
@@ -196,10 +156,20 @@ cnoreabbrev W! w!
 cnoreabbrev Q! q!
 
 "============================
+" COMMANDS
+"============================
+
+"============================
 " AUTOCOMMANDS
 "============================
 
-" hide statusbar in FZF window
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" support for comments in jsonc format
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" hide statusbar in FZF, Which Key and Quickfix
 autocmd!  FileType fzf,which_key set laststatus=0 noshowmode noruler | autocmd WinLeave <buffer> set laststatus=2 showmode ruler
 
 " hide numbers in txt files
@@ -260,31 +230,21 @@ vnoremap < <gv
 vnoremap > >gv
 
 "----------------------------
-" MAPPINGS / OTHER
-"----------------------------
-
-" open/close qucikfix list
-nnoremap <leader>cw :cw<CR>
-nnoremap <leader>cc :cc<CR>
-
-"nnoremap <leader>gcc :call GccCompileRunDestroy()<CR>
-
-"----------------------------
 " MAPPINGS / NEXT & PREVIOUS
 "----------------------------
 
 let g:which_key_map['['] = { 'name' : '+previous' }
 let g:which_key_map[']'] = { 'name' : '+next' }
 
-let g:which_key_map['['].q = 'previous-qucikfix'
+let g:which_key_map['['].q = 'previous-diagnostic'
 
-let g:which_key_map[']'].q = 'next-quickfix'
+let g:which_key_map[']'].q = 'next-diagnostic'
 
-nnoremap <leader>[q :cnext<CR>
-nnoremap <leader>]q :cprevious<CR>
+nmap <leader>[q <Plug>(coc-diagnostic-next)
+nmap <leader>]q <Plug(coc-diagnostic-prev)
 
 "----------------------------
-" MAPPINGS / TOGGLE
+" MAPPINGS / WINDOW
 "----------------------------
 
 let g:which_key_map.w = { 'name' : '+window' }
@@ -325,10 +285,10 @@ let g:which_key_map.g.r = 'goto-references'
 let g:which_key_map.g.h = 'goto-documentation'
 
 " go to definition
-nnoremap <leader>gd :ALEGoToDefinition<CR>
+nmap <leader>gd <Plug>(coc-definition)
 
 " find references
-nnoremap <leader>gr :ALEFindReferences<CR>
+nmap <leader>gr <Plug>(coc-references)
 
 " show documentation in preview window
 nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
@@ -353,21 +313,21 @@ nnoremap <leader>vs :source $MYVIMRC<CR>
 
 let g:which_key_map.e = { 'name' : '+edit' }
 let g:which_key_map.e.f = 'edit-fix-buffer'
+let g:which_key_map.e.a = 'edit-codeaction'
 let g:which_key_map.e.r = 'edit-rename'
 let g:which_key_map.e.s = 'edit-sort-selected'
 let g:which_key_map.e.hp = 'edit-hunk-preview'
 let g:which_key_map.e.hs = 'edit-hunk-stage'
 let g:which_key_map.e.hu = 'edit-hunk-undo'
 
-" VISUAL
-"
-" e s edit-sort-visual
+" run autofix
+nmap <leader>ea <Plug>(coc-codeaction)
 
-" run eslint autofix
-nnoremap <leader>ef :ALEFix<CR>
+" run autofix
+nmap <leader>ef <Plug>(coc-fix-current)
 
 " rename symbol under cursor
-nnoremap <leader>er :ALERename<CR>
+nmap <leader>er <Plug>(coc-rename)
 
 " Sort selected lines
 vnoremap <leader>es :'<,'>sort<CR>
@@ -384,6 +344,7 @@ nmap <leader>ehu <Plug>(GitGutterUndoHunk)
 let g:which_key_map.s = { 'name' : '+search' }
 let g:which_key_map.s.f = 'search-files'
 let g:which_key_map.s.g = 'search-git-files'
+let g:which_key_map.s.b = 'search-buffers'
 let g:which_key_map.s['/'] = 'ag-raw-search' " uses range in visual
 let g:which_key_map.s['*'] = 'ag-raw-under-cursor'
 
@@ -392,6 +353,9 @@ nnoremap <leader>sf :Files<CR>
 
 " fzf search git files
 nnoremap <leader>sg :GFiles<CR>
+
+" fzf search git files
+nnoremap <leader>sb :Buffers<CR>
 
 " fzf/ag project search
 nmap <leader>s/ <Plug>AgRawSearch
