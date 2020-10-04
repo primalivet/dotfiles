@@ -27,6 +27,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'liuchengxu/vim-which-key'
+Plug 'jiangmiao/auto-pairs'
 
 " only load HiLinkTrace when working in dotfiles or colorscheme dir
 if (fnamemodify(getcwd(), ':t') ==? 'dotfiles') || (fnamemodify(getcwd(), ':t') ==? 'vim-terminal16')
@@ -87,6 +88,14 @@ let g:fzf_layout = { 'down': '50%' }
 " ALE
 "============================
 
+call ale#linter#Define('php', {
+\   'name': 'intelephense',
+\   'lsp': 'stdio',
+\   'executable': 'intelephense',
+\   'command': '%e --stdio',
+\   'project_root': function('ale_linters#php#langserver#GetProjectRoot')
+\ })
+
 let g:ale_sign_column_always = 1
 
 let g:ale_linters_explicit = 1
@@ -97,11 +106,15 @@ let g:ale_set_quickfix = 1
 
 let g:ale_open_list = 1
 
+let g:ale_completion_enabled = 1
+let g:ale_completion_delay = 100
+let g:ale_completion_autoimport = 1
+
 let g:ale_linters = {
 			\ 'css': ['stylelint'],
 			\ 'scss': ['stylelint'],
 			\ 'javascript': ['eslint', 'tsserver'],
-			\ 'php': ['phpcs', 'langserver', ],
+			\ 'php': ['intelephense', 'phpcs' ],
 			\ 'vim': ['vimls'],
 			\ 'c': [ 'gcc', 'clangd']
 			\}
@@ -325,10 +338,10 @@ let g:which_key_map.g.r = 'goto-references'
 let g:which_key_map.g.h = 'goto-documentation'
 
 " go to definition
-nnoremap <leader>gd :ALEGoToDefinition<CR>
+nmap <leader>gd <Plug>(ale_go_to_definition)
 
 " find references
-nnoremap <leader>gr :ALEFindReferences<CR>
+nmap <leader>gr <Plug>(ale_find_references)
 
 " show documentation in preview window
 nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
@@ -364,10 +377,10 @@ let g:which_key_map.e.hu = 'edit-hunk-undo'
 " e s edit-sort-visual
 
 " run eslint autofix
-nnoremap <leader>ef :ALEFix<CR>
+nmap <leader>ef <Plug>(ale_fix)
 
 " rename symbol under cursor
-nnoremap <leader>er :ALERename<CR>
+nmap <leader>er <Plug>(ale_rename)
 
 " Sort selected lines
 vnoremap <leader>es :'<,'>sort<CR>
