@@ -3,7 +3,6 @@
 " ||__|||__|||__||
 " |/__\|/__\|/__\|
 "
-"
 "============================
 " PLUGINS / PRE LOADING
 "============================
@@ -28,11 +27,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'liuchengxu/vim-which-key'
 Plug 'jiangmiao/auto-pairs'
-
-" only load HiLinkTrace when working in dotfiles or colorscheme dir
-if (fnamemodify(getcwd(), ':t') ==? 'dotfiles') || (fnamemodify(getcwd(), ':t') ==? 'vim-terminal16')
-	Plug 'gerw/vim-HiLinkTrace'
-endif
+Plug 'gerw/vim-HiLinkTrace'
+Plug 'gruvbox-community/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'edkolev/tmuxline.vim'
 
 " source terminal16 from locally from my machine if it exists
 if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
@@ -46,16 +44,10 @@ call plug#end()
 " FUNCTIONS
 "============================
 
-function! GccCompileRunDestroy()
-	let l:filename_no_extention = expand('%:r')
-	execute '!gcc % -o ' . filename_no_extention . '.out && ./' . filename_no_extention . '.out && rm ' . filename_no_extention . '.out'
-endfunction
-
 function! RootDir()
 	let l:cwd_string = fnamemodify(getcwd(), ':t')
 	return cwd_string
 endfunction
-
 
 function! s:show_documentation()
 	if &filetype == 'vim'
@@ -64,6 +56,15 @@ function! s:show_documentation()
 		:ALEHover
 	endif
 endfunction
+
+function! s:toggle_background()
+	if &background == 'dark'
+		set background=light
+	else
+		set background=dark
+	endif
+endfunction
+
 "============================
 " GIT GUTTER
 "============================
@@ -73,10 +74,30 @@ endfunction
 let g:gitgutter_map_keys = 0
 
 "============================
-" FZF
+" AIRLINE
 "============================
 
-let g:terminal16_256_colors = 1
+let g:airline_extensions = [
+			\ 'branch',
+			\ ]
+
+"============================
+" GRUVBOX
+"============================
+
+let g:tmuxline_powerline_separators = 0
+
+"============================
+" GRUVBOX
+"============================
+
+let g:gruvbox_sign_column = 'bg0'
+
+"============================
+" TERMINAL16
+"============================
+
+" let g:terminal16_256_colors = 1
 
 "============================
 " FZF
@@ -89,31 +110,25 @@ let g:fzf_layout = { 'down': '50%' }
 "============================
 
 call ale#linter#Define('php', {
-\   'name': 'intelephense',
-\   'lsp': 'stdio',
-\   'executable': 'intelephense',
-\   'command': '%e --stdio',
-\   'project_root': function('ale_linters#php#langserver#GetProjectRoot')
-\ })
+			\   'name': 'intelephense',
+			\   'lsp': 'stdio',
+			\   'executable': 'intelephense',
+			\   'command': '%e --stdio',
+			\   'project_root': function('ale_linters#php#langserver#GetProjectRoot')
+			\ })
 
 let g:ale_sign_column_always = 1
-
 let g:ale_linters_explicit = 1
-
 let g:ale_list_window_size = 5
-
 let g:ale_set_quickfix = 1
-
 let g:ale_open_list = 1
-
-let g:ale_completion_enabled = 1
 let g:ale_completion_delay = 100
 let g:ale_completion_autoimport = 1
-
 let g:ale_linters = {
 			\ 'css': ['stylelint'],
 			\ 'scss': ['stylelint'],
 			\ 'javascript': ['eslint', 'tsserver'],
+			\ 'typescript': ['tsserver'],
 			\ 'php': ['intelephense', 'phpcs' ],
 			\ 'vim': ['vimls'],
 			\ 'c': [ 'gcc', 'clangd']
@@ -146,7 +161,7 @@ let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
 " GENERIC
 "============================
 
-colorscheme terminal16
+colorscheme gruvbox
 
 set background=dark
 set backupcopy=yes
@@ -168,7 +183,8 @@ set splitbelow
 set splitright
 set timeoutlen=500
 set updatetime=300 " updatetime for CursorHold & CursorHoldI
-"set termguicolors " enable 24 bit colors
+set termguicolors " enable 24 bit colors
+set textwidth=80
 
 "----------------------------
 " GENERIC / STATUSLINE
@@ -212,11 +228,13 @@ cnoreabbrev Q! q!
 " AUTOCOMMANDS
 "============================
 
-" hide statusbar in FZF window
+autocmd! WinLeave * set colorcolumn=0
+autocmd! WinEnter * set colorcolumn=+1 " draws a colorcolumn 1 in +1 column textwidth
+" hide statusbar in FZF, whichkey
 autocmd!  FileType fzf,which_key set laststatus=0 noshowmode noruler | autocmd WinLeave <buffer> set laststatus=2 showmode ruler
 
-" hide numbers in txt files
-autocmd! FileType txt set nonumber
+" hide numbers in txt, markdown
+autocmd! FileType txt,md set nonumber
 
 "============================
 " MAPPINGS
@@ -308,7 +326,7 @@ let g:which_key_map.w.e = 'explore'
 nnoremap <leader>wo :only<CR>
 
 " open netrw file explorer
-nnoremap <leader>we :Explore<CR>
+nnoremap <leader>we :Sexplore<CR>
 
 "----------------------------
 " MAPPINGS / TOGGLE
@@ -318,6 +336,7 @@ let g:which_key_map.t = { 'name' : '+toggle' }
 let g:which_key_map.t.l = 'toggle-list-chars'
 let g:which_key_map.t.s = 'toggle-search-highlight'
 let g:which_key_map.t.p = 'toggle-paste-mode'
+let g:which_key_map.t.b = 'toggle-background'
 
 " toggle paste mode
 nnoremap <leader>tp :set invpaste<CR>
@@ -327,6 +346,9 @@ nnoremap <leader>tl :set list!<CR>
 
 " toggle search highlight
 nnoremap <leader>ts :set hlsearch!<CR>
+
+" toggle background light/dark
+nnoremap <leader>tb :call <SID>toggle_background()<CR>
 
 "----------------------------
 " MAPPINGS / GOTO

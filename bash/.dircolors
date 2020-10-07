@@ -42,8 +42,8 @@ TERM screen-256color
 # Background color codes:
 # 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
 
-NORMAL 00;37 # no color code at all
-RESET 00;37 # reset to "normal" color
+# NORMAL 00;37 # no color code at all
+# RESET 00;37 # reset to "normal" color
 FILE 00;37 # regular file: use no color at all
 DIR 00;32 # directory
 LINK 00;33 # symbolic link. (If you set this to 'target' instead of a numerical value, the color is as for the file pointed to.)
