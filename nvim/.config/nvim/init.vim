@@ -190,27 +190,28 @@ set textwidth=80
 " GENERIC / STATUSLINE
 "----------------------------
 
-set statusline=
-" root dir
-set statusline+=%{RootDir()}
-" space, short filename, truncate left
-set statusline+=\ %<%f
-" space, show if helpfile
-set statusline+=\ %h
-" show if file modified
-set statusline+=%m
-" show if file read only
-set statusline+=%r
-" fugitive statusline for git
-set statusline+=%{FugitiveHead()}
-" switch to right side of statusline
-set statusline+=%=
-" align left, bigger max width, %l line, %c column, %V virtual column
-set statusline+=%-14.(%l,%c%V%)
-" space
-set statusline+=\
-" percentage of file
-set statusline+=%P
+" handled by airline as of now
+" set statusline=
+" " root dir
+" set statusline+=%{RootDir()}
+" " space, short filename, truncate left
+" set statusline+=\ %<%f
+" " space, show if helpfile
+" set statusline+=\ %h
+" " show if file modified
+" set statusline+=%m
+" " show if file read only
+" set statusline+=%r
+" " fugitive statusline for git
+" set statusline+=%{FugitiveHead()}
+" " switch to right side of statusline
+" set statusline+=%=
+" " align left, bigger max width, %l line, %c column, %V virtual column
+" set statusline+=%-14.(%l,%c%V%)
+" " space
+" set statusline+=\
+" " percentage of file
+" set statusline+=%P
 
 "============================
 " ABBREVIATIONS
@@ -231,7 +232,7 @@ cnoreabbrev Q! q!
 autocmd! WinLeave * set colorcolumn=0
 autocmd! WinEnter * set colorcolumn=+1 " draws a colorcolumn 1 in +1 column textwidth
 " hide statusbar in FZF, whichkey
-autocmd!  FileType fzf,which_key set laststatus=0 noshowmode noruler | autocmd WinLeave <buffer> set laststatus=2 showmode ruler
+autocmd!  FileType fzf,which_key set laststatus=0 | autocmd WinLeave <buffer> set laststatus=2
 
 " hide numbers in txt, markdown
 autocmd! FileType txt,md set nonumber
