@@ -3,262 +3,17 @@
 " ||__|||__|||__||
 " |/__\|/__\|/__\|
 "
-"============================
-" PLUGINS / PRE LOADING
-"============================
-
-let g:ale_completion_enable = 1
-
-"============================
-" PLUGINS
-"============================
-
-call plug#begin(stdpath('data') . '/plugged')
-Plug 'airblade/vim-gitgutter'
-Plug 'dense-analysis/ale'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'jesseleite/vim-agriculture'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'lifepillar/vim-mucomplete'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'liuchengxu/vim-which-key'
-Plug 'jiangmiao/auto-pairs'
-Plug 'gerw/vim-HiLinkTrace'
-Plug 'gruvbox-community/gruvbox'
-Plug 'vim-airline/vim-airline'
-Plug 'edkolev/tmuxline.vim'
-
-" source terminal16 from locally from my machine if it exists
-if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
-	Plug '/mnt/c/Code/vim-terminal16'
-else
-	Plug 'primalivet/vim-terminal16'
-endif
-call plug#end()
-
-"============================
-" FUNCTIONS
-"============================
-
-function! RootDir()
-	let l:cwd_string = fnamemodify(getcwd(), ':t')
-	return cwd_string
-endfunction
-
-function! s:show_documentation()
-	if &filetype == 'vim'
-		execute 'h '.expand('<cword>')
-	else
-		:ALEHover
-	endif
-endfunction
-
-function! s:toggle_background()
-	if &background == 'dark'
-		set background=light
-	else
-		set background=dark
-	endif
-endfunction
-
-"============================
-" GIT GUTTER
-"============================
-
-" remove mapping to preview hunk (gitgutter)
-" Hunks are remapped below
-let g:gitgutter_map_keys = 0
-
-"============================
-" AIRLINE
-"============================
-
-let g:airline_extensions = [
-			\ 'branch',
-			\ ]
-
-"============================
-" GRUVBOX
-"============================
-
-let g:tmuxline_powerline_separators = 0
-
-"============================
-" GRUVBOX
-"============================
-
-let g:gruvbox_sign_column = 'bg0'
-
-"============================
-" TERMINAL16
-"============================
-
-" let g:terminal16_256_colors = 1
-
-"============================
-" FZF
-"============================
-
-let g:fzf_layout = { 'down': '50%' }
-
-"============================
-" ALE
-"============================
-
-call ale#linter#Define('php', {
-			\   'name': 'intelephense',
-			\   'lsp': 'stdio',
-			\   'executable': 'intelephense',
-			\   'command': '%e --stdio',
-			\   'project_root': function('ale_linters#php#langserver#GetProjectRoot')
-			\ })
-
-let g:ale_sign_column_always = 1
-let g:ale_linters_explicit = 1
-let g:ale_list_window_size = 5
-let g:ale_set_quickfix = 1
-let g:ale_open_list = 1
-let g:ale_completion_delay = 100
-let g:ale_completion_autoimport = 1
-let g:ale_linters = {
-			\ 'css': ['stylelint'],
-			\ 'scss': ['stylelint'],
-			\ 'javascript': ['eslint', 'tsserver'],
-			\ 'typescript': ['tsserver'],
-			\ 'php': ['intelephense', 'phpcs' ],
-			\ 'vim': ['vimls'],
-			\ 'c': [ 'gcc', 'clangd']
-			\}
-
-let g:ale_fixers = {
-			\ 'css': ['stylelint'],
-			\ 'scss': ['stylelint'],
-			\ 'javascript': ['eslint'],
-			\ 'php': ['phpcbf'],
-			\ 'c': ['clang-format']
-			\}
-
-"============================
-" MUCOMPLETE
-"============================
-
-let g:mucomplete#enable_auto_at_startup = 1
-
-"============================
-" NETRW
-"============================
-
-let g:netrw_banner = 0 " hide annoying banner
-let g:netrw_browse_splits = 4 " open files in same window
-let g:netrw_liststyle = 3 " tree style listing
-let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
-
-"============================
-" GENERIC
-"============================
-
-colorscheme gruvbox
-
-set background=dark
-set backupcopy=yes
-set completeopt=menu,menuone,noinsert
-set cursorline
-set hidden
-set ignorecase
-set listchars=tab:>--,space:·,trail:·
-set nolist
-set noshowmode
-set nowrap
-set number " show line numbers
-set omnifunc=ale#completion#OmniFunc
-set scrolloff=5
-set sidescrolloff=5
-set signcolumn=yes " always show error column
-set smartcase
-set splitbelow
-set splitright
-set timeoutlen=500
-set updatetime=300 " updatetime for CursorHold & CursorHoldI
-set termguicolors " enable 24 bit colors
-set textwidth=80
-
-"----------------------------
-" GENERIC / STATUSLINE
-"----------------------------
-
-" handled by airline as of now
-" set statusline=
-" " root dir
-" set statusline+=%{RootDir()}
-" " space, short filename, truncate left
-" set statusline+=\ %<%f
-" " space, show if helpfile
-" set statusline+=\ %h
-" " show if file modified
-" set statusline+=%m
-" " show if file read only
-" set statusline+=%r
-" " fugitive statusline for git
-" set statusline+=%{FugitiveHead()}
-" " switch to right side of statusline
-" set statusline+=%=
-" " align left, bigger max width, %l line, %c column, %V virtual column
-" set statusline+=%-14.(%l,%c%V%)
-" " space
-" set statusline+=\
-" " percentage of file
-" set statusline+=%P
-
-"============================
-" ABBREVIATIONS
-"============================
-
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev WQ wq
-cnoreabbrev Wq wq
-cnoreabbrev wQ wq
-cnoreabbrev W! w!
-cnoreabbrev Q! q!
-
-"============================
-" AUTOCOMMANDS
-"============================
-
-autocmd! WinLeave * set colorcolumn=0
-autocmd! WinEnter * set colorcolumn=+1 " draws a colorcolumn 1 in +1 column textwidth
-" hide statusbar in FZF, whichkey
-autocmd!  FileType fzf,which_key set laststatus=0 | autocmd WinLeave <buffer> set laststatus=2
-
-" hide numbers in txt, markdown
-autocmd! FileType txt,md set nonumber
-
-"============================
-" MAPPINGS
-"============================
-
+" use space as leader
 let mapleader="\<Space>"
 
-call which_key#register('<Space>', "g:which_key_map")
-
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-vnoremap <silent> <leader> :WhichKeyVisual '<Space>'<CR>
-
-let g:which_key_use_floating_win = 0
-let g:which_key_map = {}
-let g:which_key_hspace = 15
-
-"----------------------------
+"-------------------------------------------------------------------------------
 " MAPPINGS / NO LEADER
-"----------------------------
+"-------------------------------------------------------------------------------
 
 " auto esc on move
 imap jj <Esc>j
 imap kk <Esc>k
+
 
 " make j and k work on wrapped lines
 nnoremap j gj
@@ -280,8 +35,8 @@ nnoremap } }zz
 " default window resizing keymaps, se :h window-resize
 noremap <C-w>+ :resize +5<CR>
 noremap <C-w>- :resize -5<CR>
-noremap <C-w>< :vertical:resize -5<CR>
-noremap <C-w>> :vertical:resize +5<CR>
+noremap <C-w>< :vertical:resize +5<CR>
+noremap <C-w>> :vertical:resize -5<CR>
 
 " move lines https://vim.fandom.com/wiki/Moving_lines_up_or_down
 vnoremap <C-j> :move '>+1<CR>gv=gv
@@ -291,101 +46,107 @@ vnoremap <C-k> :move '<-2<CR>gv=gv
 vnoremap < <gv
 vnoremap > >gv
 
-"----------------------------
-" MAPPINGS / OTHER
-"----------------------------
 
-" open/close qucikfix list
-nnoremap <leader>cw :cw<CR>
-nnoremap <leader>cc :cc<CR>
+augroup MyWinSettings
+	" draws a colorcolumn 1 in +1 column textwidth
+	au! WinLeave * set cc=0 | autocmd! WinEnter * set cc=+1
 
-"nnoremap <leader>gcc :call GccCompileRunDestroy()<CR>
+	" hide statusbar in FZF, whichkey
+	au!  FileType fzf,which_key set ls=0 | autocmd WinLeave <buffer> set ls=2
+augroup END
 
-"----------------------------
-" MAPPINGS / NEXT & PREVIOUS
-"----------------------------
+augroup MyFileSettings
+	" hide numbers in txt, markdown
+	au! FileType txt,md set nonu
+augroup END
 
-let g:which_key_map['['] = { 'name' : '+previous' }
-let g:which_key_map[']'] = { 'name' : '+next' }
+set backupcopy=yes
+set completeopt=menu,menuone,noinsert
+set cursorline
+set hidden
+set ignorecase
+set listchars=tab:>--,space:·,trail:·
+set nolist
+set showmode
+set nowrap
+set number " show line numbers
+set relativenumber " show relative line numbers
+set omnifunc=ale#completion#OmniFunc
+set path+=** " make path act in a recursive fashion on :find etc.
+set scrolloff=5
+set sidescrolloff=5
+set signcolumn=yes " always show error column
+set smartcase
+set splitbelow
+set splitright
+set textwidth=80
+set timeoutlen=500
+set updatetime=300 " updatetime for CursorHold & CursorHoldI
 
-let g:which_key_map['['].q = 'previous-qucikfix'
+"-------------------------------------------------------------------------------
+" NETEW
+"-------------------------------------------------------------------------------
 
-let g:which_key_map[']'].q = 'next-quickfix'
+let g:netrw_banner = 0 " hide annoying banner
+let g:netrw_browse_splits = 4 " open files in same window
+let g:netrw_liststyle = 3 " tree style listing
+let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
 
-nnoremap <leader>[q :cnext<CR>
-nnoremap <leader>]q :cprevious<CR>
+"-------------------------------------------------------------------------------
+" VIM PLUG / PRE START
+"-------------------------------------------------------------------------------
 
-"----------------------------
-" MAPPINGS / TOGGLE
-"----------------------------
+" need to happen before ale loads
+let g:ale_completion_enable = 1
 
-let g:which_key_map.w = { 'name' : '+window' }
-let g:which_key_map.w.o = 'only-current'
-let g:which_key_map.w.e = 'explore'
+"-------------------------------------------------------------------------------
+" VIM PLUG / START
+"-------------------------------------------------------------------------------
 
-" :only
-nnoremap <leader>wo :only<CR>
+call plug#begin(stdpath('data') . '/plugged')
 
-" open netrw file explorer
-nnoremap <leader>we :Sexplore<CR>
+Plug 'liuchengxu/vim-which-key'
+Plug 'dense-analysis/ale'
+Plug 'lifepillar/vim-mucomplete'
+Plug 'airblade/vim-gitgutter'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'jesseleite/vim-agriculture'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
+Plug 'gerw/vim-HiLinkTrace'
+Plug 'Yggdroot/indentLine'
+Plug 'gruvbox-community/gruvbox'
+" load terminal16 locally from my machine if it exists
+if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
+	Plug '/mnt/c/Code/vim-terminal16'
+else
+	Plug 'primalivet/vim-terminal16'
+endif
 
-"----------------------------
-" MAPPINGS / TOGGLE
-"----------------------------
+"-------------------------------------------------------------------------------
+" VIM PLUG / END
+"-------------------------------------------------------------------------------
 
-let g:which_key_map.t = { 'name' : '+toggle' }
-let g:which_key_map.t.l = 'toggle-list-chars'
-let g:which_key_map.t.s = 'toggle-search-highlight'
-let g:which_key_map.t.p = 'toggle-paste-mode'
-let g:which_key_map.t.b = 'toggle-background'
+call plug#end()
 
-" toggle paste mode
-nnoremap <leader>tp :set invpaste<CR>
+"-------------------------------------------------------------------------------
+" WHICH KEY
+"-------------------------------------------------------------------------------
 
-" toggle list (hidden chars)
-nnoremap <leader>tl :set list!<CR>
+call which_key#register('<Space>', "g:which_key_map")
 
-" toggle search highlight
-nnoremap <leader>ts :set hlsearch!<CR>
+let g:which_key_use_floating_win = 0
+let g:which_key_hspace = 15
 
-" toggle background light/dark
-nnoremap <leader>tb :call <SID>toggle_background()<CR>
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :WhichKeyVisual '<Space>'<CR>
 
-"----------------------------
-" MAPPINGS / GOTO
-"----------------------------
-
-let g:which_key_map.g = { 'name' : '+goto' }
-let g:which_key_map.g.d = 'goto-definition'
-let g:which_key_map.g.r = 'goto-references'
-let g:which_key_map.g.h = 'goto-documentation'
-
-" go to definition
-nmap <leader>gd <Plug>(ale_go_to_definition)
-
-" find references
-nmap <leader>gr <Plug>(ale_find_references)
-
-" show documentation in preview window
-nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
-
-"----------------------------
-" MAPPINGS / VIMRC
-"----------------------------
-
-let g:which_key_map.v = { 'name' : '+vimrc' }
-let g:which_key_map.v.e = 'vimrc-edit'
-let g:which_key_map.v.s = 'vimrc-source'
-
-" edit vimrc
-nnoremap <leader>ve :edit $MYVIMRC<CR>
-
-" source vimrc
-nnoremap <leader>vs :source $MYVIMRC<CR>
-
-"----------------------------
-" MAPPINGS / EDIT
-"----------------------------
+let g:which_key_map = {} " reset keymap
 
 let g:which_key_map.e = { 'name' : '+edit' }
 let g:which_key_map.e.f = 'edit-fix-buffer'
@@ -395,43 +156,213 @@ let g:which_key_map.e.hp = 'edit-hunk-preview'
 let g:which_key_map.e.hs = 'edit-hunk-stage'
 let g:which_key_map.e.hu = 'edit-hunk-undo'
 
-" VISUAL
-"
-" e s edit-sort-visual
-
-" run eslint autofix
 nmap <leader>ef <Plug>(ale_fix)
-
-" rename symbol under cursor
 nmap <leader>er <Plug>(ale_rename)
-
-" Sort selected lines
 vnoremap <leader>es :'<,'>sort<CR>
-
-" edit git hunk
 nmap <leader>ehp <Plug>(GitGutterPreviewHunk)
 nmap <leader>ehs <Plug>(GitGutterStageHunk)
 nmap <leader>ehu <Plug>(GitGutterUndoHunk)
 
-"----------------------------
-" MAPPINGS / SEARCH
-"----------------------------
+let g:which_key_map.g = { 'name' : '+goto' }
+let g:which_key_map.g.d = 'goto-definition'
+let g:which_key_map.g.r = 'goto-references'
+let g:which_key_map.g.h = 'goto-documentation'
+
+nmap <leader>gd <Plug>(ale_go_to_definition)
+nmap <leader>gr <Plug>(ale_find_references)
+nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
 
 let g:which_key_map.s = { 'name' : '+search' }
 let g:which_key_map.s.f = 'search-files'
 let g:which_key_map.s.g = 'search-git-files'
-let g:which_key_map.s['/'] = 'ag-raw-search' " uses range in visual
 let g:which_key_map.s['*'] = 'ag-raw-under-cursor'
+let g:which_key_map.s['/'] = 'ag-raw-search' " uses range in visual
 
-" fzf search files
 nnoremap <leader>sf :Files<CR>
-
-" fzf search git files
 nnoremap <leader>sg :GFiles<CR>
-
-" fzf/ag project search
+nmap <leader>s* <Plug>AgRawWordUnderCursor<CR>
 nmap <leader>s/ <Plug>AgRawSearch
 vmap <leader>s/ <Plug>AgRawVisualSelection<CR>
 
-"fzf/ag
-nmap <leader>s* <Plug>AgRawWordUnderCursor<CR>
+let g:which_key_map.t = { 'name' : '+toggle' }
+let g:which_key_map.t.l = 'toggle-list-chars'
+let g:which_key_map.t.p = 'toggle-paste-mode'
+let g:which_key_map.t.s = 'toggle-search-highlight'
+let g:which_key_map.t.b = 'toggle-background'
+
+nnoremap <leader>tl :set list!<CR>
+nnoremap <leader>tp :set invpaste<CR>
+nnoremap <leader>ts :set hlsearch!<CR>
+nnoremap <leader>tb :call <SID>toggle_background()<CR>
+
+
+let g:which_key_map.v = { 'name' : '+vimrc' }
+let g:which_key_map.v.e = 'vimrc-edit'
+let g:which_key_map.v.s = 'vimrc-source'
+
+nnoremap <leader>ve :edit $MYVIMRC<CR>
+nnoremap <leader>vs :source $MYVIMRC<CR>
+
+let g:which_key_map.w = { 'name' : '+window' }
+let g:which_key_map.w.e = 'explore'
+let g:which_key_map.w.o = 'only-current'
+
+nnoremap <leader>wo :only<CR>
+nnoremap <leader>we :Explore<CR>
+
+let g:which_key_map['['] = { 'name' : '+previous' }
+let g:which_key_map['['].q = 'previous-qucikfix'
+
+nnoremap <leader>]q :cprevious<CR>
+
+let g:which_key_map[']'] = { 'name' : '+next' }
+let g:which_key_map[']'].q = 'next-quickfix'
+
+nnoremap <leader>[q :cnext<CR>
+
+"-------------------------------------------------------------------------------
+" ALE
+"-------------------------------------------------------------------------------
+
+call ale#linter#Define('php', {
+			\   'name': 'intelephense',
+			\   'lsp': 'stdio',
+			\   'executable': 'intelephense',
+			\   'command': '%e --stdio',
+			\   'project_root': function('ale_linters#php#langserver#GetProjectRoot')
+			\ })
+
+function! s:show_documentation()
+	if &filetype == 'vim'
+		execute 'h '.expand('<cword>')
+	else
+		:ALEHover
+	endif
+endfunction
+
+let g:ale_sign_column_always = 1
+let g:ale_linters_explicit = 1
+let g:ale_list_window_size = 5
+let g:ale_set_quickfix = 1
+let g:ale_open_list = 1
+" how long should ale wait until sending request to lsp server
+let g:ale_completion_delay = 100
+let g:ale_completion_autoimport = 1
+
+
+let g:ale_linters = {
+			\ 'css': ['stylelint'],
+			\ 'scss': ['stylelint'],
+			\ 'javascript': ['eslint', 'tsserver'],
+			\ 'typescript': ['tsserver'],
+			\ 'php': ['intelephense', 'phpcs' ],
+			\ 'vim': ['vimls'],
+			\ 'c': [ 'gcc', 'clangd']
+			\}
+
+let g:ale_fixers = {
+			\ 'css': ['stylelint'],
+			\ 'scss': ['stylelint'],
+			\ 'javascript': ['eslint'],
+			\ 'php': ['phpcbf'],
+			\ 'c': ['clang-format']
+			\}
+
+"-------------------------------------------------------------------------------
+" MUCOMPLETE
+"-------------------------------------------------------------------------------
+
+function! CompetionMethod()
+	return get(g:mucomplete#msg#short_methods,
+				\ get(g:, 'mucomplete_current_method', ''), '')
+endfunction
+
+let g:mucomplete#enable_auto_at_startup = 1
+
+"-------------------------------------------------------------------------------
+" GITGUTTER
+"-------------------------------------------------------------------------------
+
+" remove mapping to preview hunk, they're remapped below
+let g:gitgutter_map_keys = 0
+
+"-------------------------------------------------------------------------------
+" FZF
+"-------------------------------------------------------------------------------
+
+let g:fzf_layout = { 'down': '50%' }
+
+"-------------------------------------------------------------------------------
+" GRUVBOX
+"-------------------------------------------------------------------------------
+
+let g:gruvbox_sign_column = 'bg0'
+
+"-------------------------------------------------------------------------------
+" TERMINAL16
+"-------------------------------------------------------------------------------
+
+" let g:terminal16_256_colors = 1
+
+"-------------------------------------------------------------------------------
+" STATUSLINE
+"-------------------------------------------------------------------------------
+
+function! RootDir()
+	let l:cwd_string = fnamemodify(getcwd(), ':t')
+	return cwd_string
+endfunction
+
+" set colors / set statusline+=%#HighlightGroup#
+" start empty
+set statusline=
+" root dir
+set statusline+=%{RootDir()}
+" fugitive statusline for git
+set statusline+=\ %{FugitiveHead()}
+" space, short filename, truncate left
+set statusline+=\ %<%f
+" space, show if helpfile
+set statusline+=\ %h
+" show if file modified
+set statusline+=%m
+" show if file read only
+set statusline+=%r
+" switch to right side of statusline
+set statusline+=%=
+" filetype
+set statusline+=%y
+" align left, bigger max width, %l line, %c column, %V virtual column
+set statusline+=\ %-14.(%l,%c%V%)
+" percentage of file
+set statusline+=%P
+
+"-------------------------------------------------------------------------------
+" ABBREVIATIONS
+"-------------------------------------------------------------------------------
+
+" help went I type it sloppy
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev WQ wq
+cnoreabbrev Wq wq
+cnoreabbrev wQ wq
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+
+"-------------------------------------------------------------------------------
+" COLORS
+"-------------------------------------------------------------------------------
+
+function! s:toggle_background()
+	if &background == 'dark'
+		set background=light
+	else
+		set background=dark
+	endif
+endfunction
+
+colorscheme gruvbox
+
+set background=dark
+set termguicolors " enable 24 bit colors
