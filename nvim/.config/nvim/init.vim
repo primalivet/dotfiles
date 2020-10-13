@@ -121,6 +121,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'Yggdroot/indentLine'
 Plug 'gruvbox-community/gruvbox'
+
 " load terminal16 locally from my machine if it exists
 if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
 	Plug '/mnt/c/Code/vim-terminal16'
@@ -174,12 +175,14 @@ nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
 
 let g:which_key_map.s = { 'name' : '+search' }
 let g:which_key_map.s.f = 'search-files'
+let g:which_key_map.s.b = 'search-buffers'
 let g:which_key_map.s.g = 'search-git-files'
 let g:which_key_map.s['*'] = 'ag-raw-under-cursor'
 let g:which_key_map.s['/'] = 'ag-raw-search' " uses range in visual
 
 nnoremap <leader>sf :Files<CR>
 nnoremap <leader>sg :GFiles<CR>
+nnoremap <leader>sb :Buffers<CR>
 nmap <leader>s* <Plug>AgRawWordUnderCursor<CR>
 nmap <leader>s/ <Plug>AgRawSearch
 vmap <leader>s/ <Plug>AgRawVisualSelection<CR>
@@ -313,6 +316,14 @@ function! RootDir()
 	return cwd_string
 endfunction
 
+function! PasteMode()
+	if &paste
+		return "[PASTE]"
+	else
+		return ""
+	endif
+endfunction
+
 " set colors / set statusline+=%#HighlightGroup#
 " start empty
 set statusline=
@@ -328,6 +339,8 @@ set statusline+=\ %h
 set statusline+=%m
 " show if file read only
 set statusline+=%r
+" paste mode is on?
+set statusline+=%{PasteMode()}
 " switch to right side of statusline
 set statusline+=%=
 " filetype
