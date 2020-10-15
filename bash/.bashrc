@@ -100,6 +100,7 @@ function parse_git_dirty {
 export PS1="\u@\h:\w\`parse_git_branch ':' \`\`parse_git_dirty ':'\`\$ "
 
 export PATH=$HOME/.bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.yarn/bin:$PATH
 export PATH=$HOME/.config/yarn/global/node_modules/.bin:$PATH
 export PATH=$HOME/.config/composer/vendor/bin:$PATH

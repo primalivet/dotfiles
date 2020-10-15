@@ -168,10 +168,12 @@ let g:which_key_map.g = { 'name' : '+goto' }
 let g:which_key_map.g.d = 'goto-definition'
 let g:which_key_map.g.r = 'goto-references'
 let g:which_key_map.g.h = 'goto-documentation'
+let g:which_key_map.g.f = 'goto-file'
 
 nmap <leader>gd <Plug>(ale_go_to_definition)
 nmap <leader>gr <Plug>(ale_find_references)
 nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
+nnoremap <leader>gf gf
 
 let g:which_key_map.s = { 'name' : '+search' }
 let g:which_key_map.s.f = 'search-files'
@@ -216,12 +218,12 @@ nnoremap <leader>we :Explore<CR>
 let g:which_key_map['['] = { 'name' : '+previous' }
 let g:which_key_map['['].q = 'previous-qucikfix'
 
-nnoremap <leader>]q :cprevious<CR>
+nmap <leader>[q <Plug>(ale_previous_wrap)
 
 let g:which_key_map[']'] = { 'name' : '+next' }
 let g:which_key_map[']'].q = 'next-quickfix'
 
-nnoremap <leader>[q :cnext<CR>
+nmap <leader>]q <Plug>(ale_next_wrap)
 
 "-------------------------------------------------------------------------------
 " ALE
@@ -245,9 +247,10 @@ endfunction
 
 let g:ale_sign_column_always = 1
 let g:ale_linters_explicit = 1
-let g:ale_list_window_size = 5
+let g:ale_list_window_size = 10
 let g:ale_set_quickfix = 1
-let g:ale_open_list = 1
+" opens quickfix list automatically
+" let g:ale_open_list = 1
 " how long should ale wait until sending request to lsp server
 let g:ale_completion_delay = 100
 let g:ale_completion_autoimport = 1
@@ -260,7 +263,8 @@ let g:ale_linters = {
 			\ 'typescript': ['tsserver'],
 			\ 'php': ['intelephense', 'phpcs' ],
 			\ 'vim': ['vimls'],
-			\ 'c': [ 'gcc', 'clangd']
+			\ 'c': [ 'gcc', 'clangd'],
+			\ 'yaml': [ 'yamllint' ]
 			\}
 
 let g:ale_fixers = {
