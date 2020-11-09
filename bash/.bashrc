@@ -40,6 +40,8 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some aliases
+alias docker='echo "Running docker in Powershell"; powershell.exe docker'
+alias docker-compose='echo "Running docker-compose in Powershell"; powershell.exe docker-compose'
 alias ls='ls --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
