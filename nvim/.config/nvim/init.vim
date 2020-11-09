@@ -46,7 +46,6 @@ vnoremap <C-k> :move '<-2<CR>gv=gv
 vnoremap < <gv
 vnoremap > >gv
 
-
 augroup MyWinSettings
 	" draws a colorcolumn 1 in +1 column textwidth
 	au! WinLeave * set cc=0 | autocmd! WinEnter * set cc=+1
@@ -57,7 +56,12 @@ augroup END
 
 augroup MyFileSettings
 	" hide numbers in txt, markdown
-	au! FileType txt,md set nonu
+	au! FileType text,md set nonu nornu
+augroup END
+
+augroup MySearchSettings
+	" turn on hlsearch when entering cmd line
+	autocmd CmdlineEnter /,\? :set hlsearch
 augroup END
 
 set backupcopy=yes
@@ -118,6 +122,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
+Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx','typescript'], 'do': 'make install' }
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'Yggdroot/indentLine'
 Plug 'gruvbox-community/gruvbox'
@@ -156,6 +161,7 @@ let g:which_key_map.e.s = 'edit-sort-selected'
 let g:which_key_map.e.hp = 'edit-hunk-preview'
 let g:which_key_map.e.hs = 'edit-hunk-stage'
 let g:which_key_map.e.hu = 'edit-hunk-undo'
+let g:which_key_map.e.d = 'edit-insert-jsdoc'
 
 nmap <leader>ef <Plug>(ale_fix)
 nmap <leader>er <Plug>(ale_rename)
@@ -163,6 +169,7 @@ vnoremap <leader>es :'<,'>sort<CR>
 nmap <leader>ehp <Plug>(GitGutterPreviewHunk)
 nmap <leader>ehs <Plug>(GitGutterStageHunk)
 nmap <leader>ehu <Plug>(GitGutterUndoHunk)
+nmap <silent> <leader>ed <Plug>(jsdoc)
 
 let g:which_key_map.g = { 'name' : '+goto' }
 let g:which_key_map.g.d = 'goto-definition'
@@ -264,7 +271,7 @@ let g:ale_linters = {
 			\ 'php': ['intelephense', 'phpcs' ],
 			\ 'vim': ['vimls'],
 			\ 'c': [ 'gcc', 'clangd'],
-			\ 'yaml': [ 'yamllint' ]
+			\ 'haskell': ['ghc']
 			\}
 
 let g:ale_fixers = {
@@ -379,7 +386,7 @@ function! s:toggle_background()
 	endif
 endfunction
 
-colorscheme gruvbox
-
-set background=dark
-set termguicolors " enable 24 bit colors
+set background=light
+colorscheme terminal16
+let g:terminal16_256_colors = 1
+" set termguicolors " enable 24 bit colors
