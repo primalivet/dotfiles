@@ -51,12 +51,14 @@ augroup MyWinSettings
 	au! WinLeave * set cc=0 | autocmd! WinEnter * set cc=+1
 
 	" hide statusbar in FZF, whichkey
-	au!  FileType fzf,which_key set ls=0 | autocmd WinLeave <buffer> set ls=2
+	au!  FileType fzf,which_key set nonu scl=no ls=0 nosmd noru | autocmd WinLeave <buffer> set nu scl=yes ls=2 smd ru
+
 augroup END
 
 augroup MyFileSettings
 	" hide numbers in txt, markdown
 	au! FileType text,md set nonu nornu
+	" au! BufReadPost *.svelte set syntax=html
 augroup END
 
 augroup MySearchSettings
@@ -74,7 +76,7 @@ set nolist
 set showmode
 set nowrap
 set number " show line numbers
-set relativenumber " show relative line numbers
+"set relativenumber " show relative line numbers
 set omnifunc=ale#completion#OmniFunc
 set path+=** " make path act in a recursive fashion on :find etc.
 set scrolloff=5
@@ -122,7 +124,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
-Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx','typescript'], 'do': 'make install' }
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'Yggdroot/indentLine'
 Plug 'gruvbox-community/gruvbox'
@@ -226,11 +227,13 @@ let g:which_key_map['['] = { 'name' : '+previous' }
 let g:which_key_map['['].q = 'previous-qucikfix'
 
 nmap <leader>[q <Plug>(ale_previous_wrap)
+nmap <leader>[h <Plug>(GitGutterPrevHunk)
 
 let g:which_key_map[']'] = { 'name' : '+next' }
 let g:which_key_map[']'].q = 'next-quickfix'
 
 nmap <leader>]q <Plug>(ale_next_wrap)
+nmap <leader>]h <Plug>(GitGutterNextHunk)
 
 "-------------------------------------------------------------------------------
 " ALE
@@ -262,7 +265,6 @@ let g:ale_set_quickfix = 1
 let g:ale_completion_delay = 100
 let g:ale_completion_autoimport = 1
 
-
 let g:ale_linters = {
 			\ 'css': ['stylelint'],
 			\ 'scss': ['stylelint'],
@@ -279,7 +281,7 @@ let g:ale_fixers = {
 			\ 'scss': ['stylelint'],
 			\ 'javascript': ['eslint'],
 			\ 'php': ['phpcbf'],
-			\ 'c': ['clang-format']
+			\ 'c': ['clang-format'],
 			\}
 
 "-------------------------------------------------------------------------------
@@ -305,6 +307,12 @@ let g:gitgutter_map_keys = 0
 "-------------------------------------------------------------------------------
 
 let g:fzf_layout = { 'down': '50%' }
+
+"-------------------------------------------------------------------------------
+" IndentLines
+"-------------------------------------------------------------------------------
+
+let g:indentLine_fileTypeExclude = ['fzf']
 
 "-------------------------------------------------------------------------------
 " GRUVBOX
@@ -386,7 +394,7 @@ function! s:toggle_background()
 	endif
 endfunction
 
-set background=light
-colorscheme terminal16
+set background=dark
 let g:terminal16_256_colors = 1
+colorscheme terminal16
 " set termguicolors " enable 24 bit colors
