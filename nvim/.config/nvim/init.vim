@@ -73,15 +73,21 @@ set hidden
 set ignorecase
 set listchars=tab:>--,space:·,trail:·
 set nolist
+set shortmess+=c " Don't pass messages to ins-completion-menu.
 set showmode
 set nowrap
 set number " show line numbers
-"set relativenumber " show relative line numbers
-" set omnifunc=ale#completion#OmniFunc
 set path+=** " make path act in a recursive fashion on :find etc.
 set scrolloff=5
 set sidescrolloff=5
-set signcolumn=yes " always show error column
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 set smartcase
 set splitbelow
 set splitright
@@ -102,9 +108,6 @@ let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
 " VIM PLUG / PRE START
 "-------------------------------------------------------------------------------
 
-" need to happen before ale loads
-" let g:ale_completion_enable = 1
-
 "-------------------------------------------------------------------------------
 " VIM PLUG / START
 "-------------------------------------------------------------------------------
@@ -121,7 +124,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'jiangmiao/auto-pairs'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -154,7 +156,7 @@ vnoremap <silent> <leader> :WhichKeyVisual '<Space>'<CR>
 let g:which_key_map = {} " reset keymap
 
 let g:which_key_map.e = { 'name' : '+edit' }
-let g:which_key_map.e.f = 'edit-fix-buffer'
+let g:which_key_map.e.f = 'edit-fix-current'
 let g:which_key_map.e.r = 'edit-rename'
 let g:which_key_map.e.s = 'edit-sort-selected'
 let g:which_key_map.e.hp = 'edit-hunk-preview'
@@ -162,8 +164,8 @@ let g:which_key_map.e.hs = 'edit-hunk-stage'
 let g:which_key_map.e.hu = 'edit-hunk-undo'
 let g:which_key_map.e.d = 'edit-insert-jsdoc'
 
-" nmap <leader>ef <Plug>(ale_fix)
-" nmap <leader>er <Plug>(ale_rename)
+nmap <leader>ef <Plug>(coc-fix-current)
+nmap <leader>er <Plug>(coc-rename)
 vnoremap <leader>es :'<,'>sort<CR>
 nmap <leader>ehp <Plug>(GitGutterPreviewHunk)
 nmap <leader>ehs <Plug>(GitGutterStageHunk)
@@ -176,8 +178,8 @@ let g:which_key_map.g.r = 'goto-references'
 let g:which_key_map.g.h = 'goto-documentation'
 let g:which_key_map.g.f = 'goto-file'
 
-" nmap <leader>gd <Plug>(ale_go_to_definition)
-" nmap <leader>gr <Plug>(ale_find_references)
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gr <Plug>(coc-reference)
 nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
 nnoremap <leader>gf gf
 
@@ -224,76 +226,40 @@ nnoremap <leader>we :Explore<CR>
 let g:which_key_map['['] = { 'name' : '+previous' }
 let g:which_key_map['['].q = 'previous-qucikfix'
 
-" nmap <leader>[q <Plug>(ale_previous_wrap)
+nmap <leader>[q <Plug>(coc-diagnostic-prev)
 nmap <leader>[h <Plug>(GitGutterPrevHunk)
 
 let g:which_key_map[']'] = { 'name' : '+next' }
 let g:which_key_map[']'].q = 'next-quickfix'
 
-" nmap <leader>]q <Plug>(ale_next_wrap)
+nmap <leader>]q <Plug>(coc-diagnostic-next)
 nmap <leader>]h <Plug>(GitGutterNextHunk)
 
 "-------------------------------------------------------------------------------
-" ALE / COC
+" COC
 "-------------------------------------------------------------------------------
 
-let g:coc_global_extensions = ['coc-json',  'coc-eslint', 'coc-tsserver']
+let g:coc_global_extensions = [
+			\'coc-json',
+			\'coc-html',
+			\'coc-css',
+			\'coc-eslint',
+			\'coc-tsserver'
+			\]
 
-"call ale#linter#Define('php', {
-"			\   'name': 'intelephense',
-"			\   'lsp': 'stdio',
-"			\   'executable': 'intelephense',
-"			\   'command': '%e --stdio',
-"			\   'project_root': function('ale_linters#php#langserver#GetProjectRoot')
-"			\ })
+" show documentation in preview window
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
-"function! s:show_documentation()
-"	if &filetype == 'vim'
-"		execute 'h '.expand('<cword>')
-"	else
-"		:ALEHover
-"	endif
-"endfunction
-
-"let g:ale_sign_column_always = 1
-"let g:ale_linters_explicit = 1
-"let g:ale_list_window_size = 10
-"let g:ale_set_quickfix = 1
-"" opens quickfix list automatically
-"" let g:ale_open_list = 1
-"" how long should ale wait until sending request to lsp server
-"let g:ale_completion_delay = 100
-"let g:ale_completion_autoimport = 1
-
-"let g:ale_linters = {
-"			\ 'css': ['stylelint'],
-"			\ 'scss': ['stylelint'],
-"			\ 'javascript': ['eslint', 'tsserver'],
-"			\ 'typescript': ['tsserver'],
-"			\ 'php': ['intelephense', 'phpcs' ],
-"			\ 'vim': ['vimls'],
-"			\ 'c': [ 'gcc', 'clangd'],
-"			\ 'haskell': ['ghc']
-"			\}
-
-"let g:ale_fixers = {
-"			\ 'css': ['stylelint'],
-"			\ 'scss': ['stylelint'],
-"			\ 'javascript': ['eslint'],
-"			\ 'php': ['phpcbf'],
-"			\ 'c': ['clang-format'],
-"			\}
-
-""-------------------------------------------------------------------------------
-"" MUCOMPLETE
-""-------------------------------------------------------------------------------
-
-"function! CompetionMethod()
-"	return get(g:mucomplete#msg#short_methods,
-"				\ get(g:, 'mucomplete_current_method', ''), '')
-"endfunction
-
-"let g:mucomplete#enable_auto_at_startup = 1
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 "-------------------------------------------------------------------------------
 " GITGUTTER
