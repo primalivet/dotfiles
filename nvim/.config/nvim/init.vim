@@ -77,7 +77,7 @@ set showmode
 set nowrap
 set number " show line numbers
 "set relativenumber " show relative line numbers
-set omnifunc=ale#completion#OmniFunc
+" set omnifunc=ale#completion#OmniFunc
 set path+=** " make path act in a recursive fashion on :find etc.
 set scrolloff=5
 set sidescrolloff=5
@@ -103,7 +103,7 @@ let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
 "-------------------------------------------------------------------------------
 
 " need to happen before ale loads
-let g:ale_completion_enable = 1
+" let g:ale_completion_enable = 1
 
 "-------------------------------------------------------------------------------
 " VIM PLUG / START
@@ -112,8 +112,6 @@ let g:ale_completion_enable = 1
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'liuchengxu/vim-which-key'
-Plug 'dense-analysis/ale'
-Plug 'lifepillar/vim-mucomplete'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -126,7 +124,7 @@ Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'Yggdroot/indentLine'
-Plug 'gruvbox-community/gruvbox'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " load terminal16 locally from my machine if it exists
 if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
@@ -164,8 +162,8 @@ let g:which_key_map.e.hs = 'edit-hunk-stage'
 let g:which_key_map.e.hu = 'edit-hunk-undo'
 let g:which_key_map.e.d = 'edit-insert-jsdoc'
 
-nmap <leader>ef <Plug>(ale_fix)
-nmap <leader>er <Plug>(ale_rename)
+" nmap <leader>ef <Plug>(ale_fix)
+" nmap <leader>er <Plug>(ale_rename)
 vnoremap <leader>es :'<,'>sort<CR>
 nmap <leader>ehp <Plug>(GitGutterPreviewHunk)
 nmap <leader>ehs <Plug>(GitGutterStageHunk)
@@ -178,8 +176,8 @@ let g:which_key_map.g.r = 'goto-references'
 let g:which_key_map.g.h = 'goto-documentation'
 let g:which_key_map.g.f = 'goto-file'
 
-nmap <leader>gd <Plug>(ale_go_to_definition)
-nmap <leader>gr <Plug>(ale_find_references)
+" nmap <leader>gd <Plug>(ale_go_to_definition)
+" nmap <leader>gr <Plug>(ale_find_references)
 nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
 nnoremap <leader>gf gf
 
@@ -226,74 +224,76 @@ nnoremap <leader>we :Explore<CR>
 let g:which_key_map['['] = { 'name' : '+previous' }
 let g:which_key_map['['].q = 'previous-qucikfix'
 
-nmap <leader>[q <Plug>(ale_previous_wrap)
+" nmap <leader>[q <Plug>(ale_previous_wrap)
 nmap <leader>[h <Plug>(GitGutterPrevHunk)
 
 let g:which_key_map[']'] = { 'name' : '+next' }
 let g:which_key_map[']'].q = 'next-quickfix'
 
-nmap <leader>]q <Plug>(ale_next_wrap)
+" nmap <leader>]q <Plug>(ale_next_wrap)
 nmap <leader>]h <Plug>(GitGutterNextHunk)
 
 "-------------------------------------------------------------------------------
-" ALE
+" ALE / COC
 "-------------------------------------------------------------------------------
 
-call ale#linter#Define('php', {
-			\   'name': 'intelephense',
-			\   'lsp': 'stdio',
-			\   'executable': 'intelephense',
-			\   'command': '%e --stdio',
-			\   'project_root': function('ale_linters#php#langserver#GetProjectRoot')
-			\ })
+let g:coc_global_extensions = ['coc-json',  'coc-eslint', 'coc-tsserver']
 
-function! s:show_documentation()
-	if &filetype == 'vim'
-		execute 'h '.expand('<cword>')
-	else
-		:ALEHover
-	endif
-endfunction
+"call ale#linter#Define('php', {
+"			\   'name': 'intelephense',
+"			\   'lsp': 'stdio',
+"			\   'executable': 'intelephense',
+"			\   'command': '%e --stdio',
+"			\   'project_root': function('ale_linters#php#langserver#GetProjectRoot')
+"			\ })
 
-let g:ale_sign_column_always = 1
-let g:ale_linters_explicit = 1
-let g:ale_list_window_size = 10
-let g:ale_set_quickfix = 1
-" opens quickfix list automatically
-" let g:ale_open_list = 1
-" how long should ale wait until sending request to lsp server
-let g:ale_completion_delay = 100
-let g:ale_completion_autoimport = 1
+"function! s:show_documentation()
+"	if &filetype == 'vim'
+"		execute 'h '.expand('<cword>')
+"	else
+"		:ALEHover
+"	endif
+"endfunction
 
-let g:ale_linters = {
-			\ 'css': ['stylelint'],
-			\ 'scss': ['stylelint'],
-			\ 'javascript': ['eslint', 'tsserver'],
-			\ 'typescript': ['tsserver'],
-			\ 'php': ['intelephense', 'phpcs' ],
-			\ 'vim': ['vimls'],
-			\ 'c': [ 'gcc', 'clangd'],
-			\ 'haskell': ['ghc']
-			\}
+"let g:ale_sign_column_always = 1
+"let g:ale_linters_explicit = 1
+"let g:ale_list_window_size = 10
+"let g:ale_set_quickfix = 1
+"" opens quickfix list automatically
+"" let g:ale_open_list = 1
+"" how long should ale wait until sending request to lsp server
+"let g:ale_completion_delay = 100
+"let g:ale_completion_autoimport = 1
 
-let g:ale_fixers = {
-			\ 'css': ['stylelint'],
-			\ 'scss': ['stylelint'],
-			\ 'javascript': ['eslint'],
-			\ 'php': ['phpcbf'],
-			\ 'c': ['clang-format'],
-			\}
+"let g:ale_linters = {
+"			\ 'css': ['stylelint'],
+"			\ 'scss': ['stylelint'],
+"			\ 'javascript': ['eslint', 'tsserver'],
+"			\ 'typescript': ['tsserver'],
+"			\ 'php': ['intelephense', 'phpcs' ],
+"			\ 'vim': ['vimls'],
+"			\ 'c': [ 'gcc', 'clangd'],
+"			\ 'haskell': ['ghc']
+"			\}
 
-"-------------------------------------------------------------------------------
-" MUCOMPLETE
-"-------------------------------------------------------------------------------
+"let g:ale_fixers = {
+"			\ 'css': ['stylelint'],
+"			\ 'scss': ['stylelint'],
+"			\ 'javascript': ['eslint'],
+"			\ 'php': ['phpcbf'],
+"			\ 'c': ['clang-format'],
+"			\}
 
-function! CompetionMethod()
-	return get(g:mucomplete#msg#short_methods,
-				\ get(g:, 'mucomplete_current_method', ''), '')
-endfunction
+""-------------------------------------------------------------------------------
+"" MUCOMPLETE
+""-------------------------------------------------------------------------------
 
-let g:mucomplete#enable_auto_at_startup = 1
+"function! CompetionMethod()
+"	return get(g:mucomplete#msg#short_methods,
+"				\ get(g:, 'mucomplete_current_method', ''), '')
+"endfunction
+
+"let g:mucomplete#enable_auto_at_startup = 1
 
 "-------------------------------------------------------------------------------
 " GITGUTTER
@@ -313,12 +313,6 @@ let g:fzf_layout = { 'down': '50%' }
 "-------------------------------------------------------------------------------
 
 let g:indentLine_fileTypeExclude = ['fzf']
-
-"-------------------------------------------------------------------------------
-" GRUVBOX
-"-------------------------------------------------------------------------------
-
-let g:gruvbox_sign_column = 'bg0'
 
 "-------------------------------------------------------------------------------
 " TERMINAL16
