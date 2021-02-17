@@ -1,0 +1,74 @@
+{
+	"eslint.autoFixOnSave": true,
+	"diagnostic-languageserver.linters": {
+		// 
+		// PHPCS & PHPCBF linting and fixing through coc-diagnostic
+		// ---
+		// This works great as a linter, however the companion fixer tool phpcbf
+		// dont work at all thorugh coc-diagnostic it seems. At the best phpcbf
+		// would fix the current buffer but with the wrong phpcs.xml config.
+		// 
+		// There is a Github issue on this problem at:
+		// https://github.com/iamcco/coc-diagnostic/issues/38
+		// 
+		// As a result of that the phpcbf is ran thorugh the binding for fixing
+		// current file in vimrc/init.vim.
+		// 
+		"phpcs": {
+			"command": "./vendor/bin/phpcs",
+			"debounce": 3000,
+			"rootPatterns": [
+				"composer.json",
+				"composer.lock",
+				"vendor",
+				".git"
+			],
+			"args": [
+				"--report=emacs",
+				"-s",
+				"-"
+			],
+			"offsetLine": 0,
+			"offsetColumn": 0,
+			"sourceName": "phpcs",
+			"formatLines": 1,
+			"formatPattern": [
+				"^.*:(\\d+):(\\d+):\\s+(.*)\\s+-\\s+(.*)(\\r|\\n)*$",
+				{
+					"line": 1,
+					"column": 2,
+					"message": 4,
+					"security": 3
+				}
+			],
+			"securities": {
+				"error": "error",
+				"warning": "warning"
+			}
+		}
+	},
+	// "diagnostic-languageserver.formatters": {
+	// 	"phpcbf": {
+	// 		"command": "./vendor/bin/phpcbf",
+	// 		"args": [
+	// 			"-"
+	// 		],
+	// 		"rootPatterns": [
+	// 			"composer.json",
+	// 			"phpcs.xml",
+	// 			"phpcs.xml.dist",
+	// 			".git"
+	// 		],
+	// 		"isStderr": false,
+	// 		"isStdout": true
+	// 	}
+	// },
+	"diagnostic-languageserver.filetypes": {
+		"php": [
+			"phpcs"
+		]
+	}
+	// "diagnostic-languageserver.formatFiletypes": {
+	// 	"php": "phpcbf"
+	// }
+}

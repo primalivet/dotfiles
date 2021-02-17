@@ -46,6 +46,10 @@ vnoremap <C-k> :move '<-2<CR>gv=gv
 vnoremap < <gv
 vnoremap > >gv
 
+"-------------------------------------------------------------------------------
+" AUTOCOMMANDS 
+"-------------------------------------------------------------------------------
+
 augroup MyWinSettings
 	" draws a colorcolumn 1 in +1 column textwidth
 	au! WinLeave * set cc=0 | autocmd! WinEnter * set cc=+1
@@ -58,7 +62,8 @@ augroup END
 augroup MyFileSettings
 	" hide numbers in txt, markdown
 	au! FileType text,md set nonu nornu
-	" au! BufReadPost *.svelte set syntax=html
+	" read jsonc comments correctly
+	au! FileType json syntax match Comment +\/\/.\+$+
 augroup END
 
 augroup MySearchSettings
@@ -66,7 +71,12 @@ augroup MySearchSettings
 	autocmd CmdlineEnter /,\? :set hlsearch
 augroup END
 
-set backupcopy=yes
+"-------------------------------------------------------------------------------
+" OPTIONS 
+"-------------------------------------------------------------------------------
+
+set nobackup " No backups, seems to be a problem with some lsps
+set nowritebackup " No backups, seems to be a problem with some lsps
 set completeopt=menu,menuone,noinsert
 set cursorline
 set hidden
@@ -240,11 +250,14 @@ nmap <leader>]h <Plug>(GitGutterNextHunk)
 "-------------------------------------------------------------------------------
 
 let g:coc_global_extensions = [
+			\'coc-vimlsp',
 			\'coc-json',
 			\'coc-html',
 			\'coc-css',
 			\'coc-eslint',
-			\'coc-tsserver'
+			\'coc-tsserver',
+			\'coc-phpls',
+			\'coc-diagnostic'
 			\]
 
 " show documentation in preview window
@@ -279,12 +292,6 @@ let g:fzf_layout = { 'down': '50%' }
 "-------------------------------------------------------------------------------
 
 let g:indentLine_fileTypeExclude = ['fzf']
-
-"-------------------------------------------------------------------------------
-" TERMINAL16
-"-------------------------------------------------------------------------------
-
-" let g:terminal16_256_colors = 1
 
 "-------------------------------------------------------------------------------
 " STATUSLINE
@@ -346,15 +353,6 @@ cnoreabbrev Q! q!
 " COLORS
 "-------------------------------------------------------------------------------
 
-function! s:toggle_background()
-	if &background == 'dark'
-		set background=light
-	else
-		set background=dark
-	endif
-endfunction
-
 set background=dark
-let g:terminal16_256_colors = 1
 colorscheme terminal16
-" set termguicolors " enable 24 bit colors
+" set termguicolors " not with theme terminal16
