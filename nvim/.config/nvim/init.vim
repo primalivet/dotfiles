@@ -138,11 +138,17 @@ Plug 'gerw/vim-HiLinkTrace'
 Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" load terminal16 locally from my machine if it exists
-if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
-	Plug '/mnt/c/Code/vim-terminal16'
+" " load terminal16 locally from my machine if it exists
+" if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
+" 	Plug '/mnt/c/Code/vim-terminal16'
+" else
+" 	Plug 'primalivet/vim-terminal16'
+" endif
+" load terminal8 locally from my machine if it exists
+if filereadable('/mnt/c/Code/vim-terminal8/colors/terminal8.vim')
+	Plug '/mnt/c/Code/vim-terminal8'
 else
-	Plug 'primalivet/vim-terminal16'
+	Plug 'primalivet/vim-terminal8'
 endif
 
 "-------------------------------------------------------------------------------
@@ -212,11 +218,13 @@ let g:which_key_map.t.l = 'toggle-list-chars'
 let g:which_key_map.t.p = 'toggle-paste-mode'
 let g:which_key_map.t.s = 'toggle-search-highlight'
 let g:which_key_map.t.b = 'toggle-background'
+let g:which_key_map.t.i = 'toggle-indentlines'
 
 nnoremap <leader>tl :set list!<CR>
 nnoremap <leader>tp :set invpaste<CR>
 nnoremap <leader>ts :set hlsearch!<CR>
 nnoremap <leader>tb :call <SID>toggle_background()<CR>
+nnoremap <leader>ti :IndentLinesToggle<CR>
 
 
 let g:which_key_map.v = { 'name' : '+vimrc' }
@@ -292,6 +300,7 @@ let g:fzf_layout = { 'down': '50%' }
 "-------------------------------------------------------------------------------
 
 let g:indentLine_fileTypeExclude = ['fzf']
+let g:indentLine_enable = 0
 
 "-------------------------------------------------------------------------------
 " STATUSLINE
@@ -362,5 +371,5 @@ function! s:toggle_background()
 endfunction
 
 set background=light
-colorscheme terminal16
+colorscheme terminal8
 " set termguicolors " not with theme terminal16
