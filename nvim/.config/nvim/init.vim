@@ -300,7 +300,7 @@ let g:fzf_layout = { 'down': '50%' }
 "-------------------------------------------------------------------------------
 
 let g:indentLine_fileTypeExclude = ['fzf']
-let g:indentLine_enable = 0
+let g:indentLine_enabled = 0
 
 "-------------------------------------------------------------------------------
 " STATUSLINE
