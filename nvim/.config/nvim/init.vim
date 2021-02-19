@@ -47,7 +47,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 "-------------------------------------------------------------------------------
-" AUTOCOMMANDS 
+" AUTOCOMMANDS
 "-------------------------------------------------------------------------------
 
 augroup MyWinSettings
@@ -72,7 +72,7 @@ augroup MySearchSettings
 augroup END
 
 "-------------------------------------------------------------------------------
-" OPTIONS 
+" OPTIONS
 "-------------------------------------------------------------------------------
 
 set nobackup " No backups, seems to be a problem with some lsps
@@ -189,7 +189,7 @@ let g:which_key_map.g.h = 'goto-documentation'
 let g:which_key_map.g.f = 'goto-file'
 
 nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gr <Plug>(coc-reference)
+nmap <leader>gr <Plug>(coc-references)
 nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
 nnoremap <leader>gf gf
 
