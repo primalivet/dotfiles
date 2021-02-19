@@ -353,6 +353,14 @@ cnoreabbrev Q! q!
 " COLORS
 "-------------------------------------------------------------------------------
 
-set background=dark
+function! s:toggle_background()
+        if &background == 'dark'
+                set background=light
+        else
+                set background=dark
+        endif
+endfunction
+
+set background=light
 colorscheme terminal16
 " set termguicolors " not with theme terminal16
