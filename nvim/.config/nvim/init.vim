@@ -138,17 +138,13 @@ Plug 'gerw/vim-HiLinkTrace'
 Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" " load terminal16 locally from my machine if it exists
-" if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
-" 	Plug '/mnt/c/Code/vim-terminal16'
-" else
-" 	Plug 'primalivet/vim-terminal16'
-" endif
-" load terminal8 locally from my machine if it exists
-if filereadable('/mnt/c/Code/vim-terminal8/colors/terminal8.vim')
-	Plug '/mnt/c/Code/vim-terminal8'
+" load terminal16 locally from my machine if it exists
+if filereadable('/data/data/com.termux/files/home/Code/vim-terminal16/colors/terminal16.vim')
+	Plug '/data/data/com.termux/files/home/Code/vim-terminal16'
+elseif filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
+	Plug '/mnt/c/Code/vim-terminal16'
 else
-	Plug 'primalivet/vim-terminal8'
+	Plug 'primalivet/vim-terminal16'
 endif
 
 "-------------------------------------------------------------------------------
@@ -370,6 +366,6 @@ function! s:toggle_background()
         endif
 endfunction
 
-set background=light
-colorscheme terminal8
+set background=dark
+colorscheme terminal16
 " set termguicolors " not with theme terminal16
