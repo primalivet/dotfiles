@@ -259,6 +259,7 @@ nmap <leader>]h <Plug>(GitGutterNextHunk)
 
 let g:coc_global_extensions = [
 			\'coc-vimlsp',
+			\'coc-yaml',
 			\'coc-json',
 			\'coc-html',
 			\'coc-css',
