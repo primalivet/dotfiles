@@ -262,7 +262,8 @@ let g:coc_global_extensions = [
 			\'coc-eslint',
 			\'coc-tsserver',
 			\'coc-phpls',
-			\'coc-diagnostic'
+			\'coc-diagnostic',
+			\'coc-sh'
 			\]
 
 " show documentation in preview window
