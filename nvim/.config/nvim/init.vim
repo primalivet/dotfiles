@@ -47,6 +47,14 @@ vnoremap < <gv
 vnoremap > >gv
 
 "-------------------------------------------------------------------------------
+" COMMANDS
+"-------------------------------------------------------------------------------
+
+command! -nargs=0  Format      :call CocAction('format')
+
+command! -nargs=0  OrganizeImports :call CocAction('runCommand', 'editor.action.organizeImport')
+
+"-------------------------------------------------------------------------------
 " AUTOCOMMANDS
 "-------------------------------------------------------------------------------
 
@@ -56,14 +64,13 @@ augroup MyWinSettings
 
 	" hide statusbar in FZF, whichkey
 	au!  FileType fzf,which_key set nonu scl=no ls=0 nosmd noru | autocmd WinLeave <buffer> set nu scl=yes ls=2 smd ru
-
 augroup END
 
 augroup MyFileSettings
+	" wrap lines in markdown
+	au BufRead,BufNewFile *.md setlocal wrap
 	" hide numbers in txt, markdown
-	au! FileType text,md set nonu nornu
-	" read jsonc comments correctly
-	au! FileType json syntax match Comment +\/\/.\+$+
+	au! FileType text,md,markdown set nonu nornu
 augroup END
 
 augroup MySearchSettings
@@ -75,34 +82,49 @@ augroup END
 " OPTIONS
 "-------------------------------------------------------------------------------
 
-set nobackup " No backups, seems to be a problem with some lsps
-set nowritebackup " No backups, seems to be a problem with some lsps
-set completeopt=menu,menuone,noinsert
-set cursorline
+syntax on
+filetype plugin on
+filetype plugin indent on
+
+" Files and Buffers
 set hidden
-set ignorecase
-set listchars=tab:>--,space:·,trail:·
-set nolist
+set nobackup " No backups, seems to be a problem with some lsps
+set nowrap
+set nowritebackup " No backups, seems to be a problem with some lsps
+
+" UI
+set completeopt=menu,menuone,noinsert
+set number " show line numbers
+set scrolloff=5
 set shortmess+=c " Don't pass messages to ins-completion-menu.
 set showmode
-set nowrap
-set number " show line numbers
-set path+=** " make path act in a recursive fashion on :find etc.
-set scrolloff=5
 set sidescrolloff=5
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
-set smartcase
+set signcolumn=yes
 set splitbelow
 set splitright
+
+" Search and Find
+set ignorecase
+set path+=** " make path act in a recursive fashion on :find etc.
+set smartcase
+
+" Fromatting
+set listchars=tab:>--,space:·,trail:·
+set nolist
 set textwidth=80
-set timeoutlen=500
+
+" Indentation
+set autoindent
+set cindent
+set expandtab
+set shiftround
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set smarttab
+
+" Timings
+set timeoutlen=500 "timeout for mapped sequence
 set updatetime=300 " updatetime for CursorHold & CursorHoldI
 
 "-------------------------------------------------------------------------------
@@ -124,27 +146,28 @@ let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
 
 call plug#begin(stdpath('data') . '/plugged')
 
+Plug 'sheerun/vim-polyglot'
 Plug 'liuchengxu/vim-which-key'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'jesseleite/vim-agriculture'
-Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'gregsexton/MatchTag'
 
 " load terminal16 locally from my machine if it exists
 if filereadable('/data/data/com.termux/files/home/Code/vim-terminal16/colors/terminal16.vim')
-	Plug '/data/data/com.termux/files/home/Code/vim-terminal16'
+  Plug '/data/data/com.termux/files/home/Code/vim-terminal16'
 elseif filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
-	Plug '/mnt/c/Code/vim-terminal16'
+  Plug '/mnt/c/Code/vim-terminal16'
 else
-	Plug 'primalivet/vim-terminal16'
+  Plug 'primalivet/vim-terminal16'
 endif
 
 "-------------------------------------------------------------------------------
@@ -168,7 +191,9 @@ vnoremap <silent> <leader> :WhichKeyVisual '<Space>'<CR>
 let g:which_key_map = {} " reset keymap
 
 let g:which_key_map.e = { 'name' : '+edit' }
-let g:which_key_map.e.f = 'edit-fix-current'
+let g:which_key_map.e.q = 'edit-fix-current'
+let g:which_key_map.e.f = 'edit-format-buffer'
+let g:which_key_map.e.oi = 'edit-organize-imports'
 let g:which_key_map.e.r = 'edit-rename'
 let g:which_key_map.e.s = 'edit-sort-selected'
 let g:which_key_map.e.hp = 'edit-hunk-preview'
@@ -176,7 +201,9 @@ let g:which_key_map.e.hs = 'edit-hunk-stage'
 let g:which_key_map.e.hu = 'edit-hunk-undo'
 let g:which_key_map.e.d = 'edit-insert-jsdoc'
 
-nmap <leader>ef <Plug>(coc-fix-current)
+nmap <leader>eq <Plug>(coc-fix-current)
+nmap <leader>ef :Format<CR>
+nmap <leader>eoi :OrganizeImports<cr>
 nmap <leader>er <Plug>(coc-rename)
 vnoremap <leader>es :'<,'>sort<CR>
 nmap <leader>ehp <Plug>(GitGutterPreviewHunk)
@@ -299,6 +326,12 @@ let g:fzf_layout = { 'down': '50%' }
 
 let g:indentLine_fileTypeExclude = ['fzf']
 let g:indentLine_enabled = 0
+
+"-------------------------------------------------------------------------------
+" Syntax and Hightlight
+"-------------------------------------------------------------------------------
+
+let g:vim_markdown_frontmatter = 1
 
 "-------------------------------------------------------------------------------
 " STATUSLINE

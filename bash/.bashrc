@@ -17,14 +17,17 @@ export HISTSIZE=10000
 export HISTFILESIZE=10000
 
 # dont save lines which begin with a <space> character and lines equal to previous line
-export HISTCONTROL=ignorespace:ignoredups
+export HISTCONTROL=ignorespace:ignoredups:eracedups
 
 # trim pwd in prompt
-PROMPT_DIRTRIM=2
+PROMPT_DIRTRIM=1
 
 # append to history, don't overwrite
 shopt -s histappend
 
+# after each command, append to history and re-read history (this should make
+# history  presistant across terminals)
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 # set node version manager enviroment variable
 export NVM_DIR="$HOME/.nvm"
@@ -99,7 +102,8 @@ function parse_git_dirty {
 		fi
 }
 
-export PS1="\u@\h:\w\`parse_git_branch ':' \`\`parse_git_dirty ':'\`\$ "
+# WITH HOST export PS1="\u@\h:\w\`parse_git_branch ':' \`\`parse_git_dirty ':'\`\$ "
+export PS1="\u:\w\`parse_git_branch ':' \`\`parse_git_dirty ':'\`\$ "
 
 export PATH=$HOME/.bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
@@ -113,6 +117,14 @@ export EDITOR=nvim
 export YVM_DIR=/home/primalivet/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Setup fzf
+if [[ ! "$PATH" == *~/.fzf/bin* ]]; then
+  export PATH="${PATH:+${PATH}:}~/.fzf/bin"
+fi
+
+# Auto-completion
+[[ $- == *i* ]] && source "~/.fzf/shell/completion.bash" 2> /dev/null
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 source ~/.bash_completion

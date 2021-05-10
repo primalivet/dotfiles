@@ -1,20 +1,40 @@
 {
+
+  // COC
+
+  // "coc.preferences.formatOnSaveFiletypes": [
+  //   "purescript"
+  // ],
+
+	// LSPs
+
+  "languageserver": {
+    "purescript": {
+      "command": "purescript-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["purescript"],
+      "trace.server": "off",
+      "rootPatterns": ["bower.json", "psc-package.json", "spago.dhall"],
+      "settings": {
+        "purescript": {
+          "addSpagoSources": true
+          //"addNpmPath": true // Set to true if using a local purty install for formatting etc
+        }
+      }
+    }
+  },
+
+	// ESLint 
+
 	"eslint.autoFixOnSave": true,
+
+	// Typescript
+
 	"javascript.suggestionActions.enabled": false,
+
+	// Diagnostic Languageserver
+
 	"diagnostic-languageserver.linters": {
-		//
-		// PHPCS & PHPCBF linting and fixing through coc-diagnostic
-		// ---
-		// This works great as a linter, however the companion fixer tool phpcbf
-		// dont work at all thorugh coc-diagnostic it seems. At the best phpcbf
-		// would fix the current buffer but with the wrong phpcs.xml config.
-		//
-		// There is a Github issue on this problem at:
-		// https://github.com/iamcco/coc-diagnostic/issues/38
-		//
-		// As a result of that the phpcbf is ran thorugh the binding for fixing
-		// current file in vimrc/init.vim.
-		//
 		"phpcs": {
 			"command": "./vendor/bin/phpcs",
 			"debounce": 3000,
@@ -48,6 +68,24 @@
 			}
 		}
 	},
+	"diagnostic-languageserver.filetypes": {
+		"php": [
+			"phpcs"
+		]
+	}
+  //
+  // PHPCS & PHPCBF linting and fixing through coc-diagnostic
+  // ---
+  // PHPCS works great as a linter, however the companion fixer tool phpcbf
+  // dont work at all thorugh coc-diagnostic it seems. At the best phpcbf
+  // would fix the current buffer but with the wrong phpcs.xml config.
+  //
+  // There is a Github issue on this problem at:
+  // https://github.com/iamcco/coc-diagnostic/issues/38
+  //
+  // As a result of that the phpcbf is ran thorugh the binding for fixing
+  // current file in vimrc/init.vim.
+  //
 	// "diagnostic-languageserver.formatters": {
 	// 	"phpcbf": {
 	// 		"command": "./vendor/bin/phpcbf",
@@ -64,11 +102,6 @@
 	// 		"isStdout": true
 	// 	}
 	// },
-	"diagnostic-languageserver.filetypes": {
-		"php": [
-			"phpcs"
-		]
-	}
 	// "diagnostic-languageserver.formatFiletypes": {
 	// 	"php": "phpcbf"
 	// }
