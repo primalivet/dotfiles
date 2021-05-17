@@ -160,6 +160,7 @@ Plug 'gerw/vim-HiLinkTrace'
 Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'gregsexton/MatchTag'
+Plug 'fatih/vim-go'
 
 " load terminal16 locally from my machine if it exists
 if filereadable('/data/data/com.termux/files/home/Code/vim-terminal16/colors/terminal16.vim')
