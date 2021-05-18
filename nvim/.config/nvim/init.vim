@@ -261,9 +261,11 @@ nnoremap <leader>vs :source $MYVIMRC<CR>
 let g:which_key_map.w = { 'name' : '+window' }
 let g:which_key_map.w.e = 'explore'
 let g:which_key_map.w.o = 'only-current'
+let g:which_key_map.w['='] = 'equal-splits'
 
 nnoremap <leader>wo :only<CR>
 nnoremap <leader>we :Explore<CR>
+nnoremap <leader>w= <C-w>=
 
 let g:which_key_map['['] = { 'name' : '+previous' }
 let g:which_key_map['['].q = 'previous-qucikfix'
