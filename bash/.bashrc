@@ -36,6 +36,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # fzf
 export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ag/.ignore --hidden -g ""'
+export FZF_DEFAULT_OPTS='--height 100% --color=hl:13,hl+:13,fg+:11,marker:11,border:8,prompt:-1,pointer:11,spinner:-1,bg+:-1,bg:-1,spinner:-1,info:-1,fg:-1'
 
 # check for dircolors support and load .dircolors if it exists
 if [ -x /usr/bin/dircolors ]; then
@@ -125,6 +126,6 @@ fi
 
 # Auto-completion
 [[ $- == *i* ]] && source "~/.fzf/shell/completion.bash" 2> /dev/null
-# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 source ~/.bash_completion
