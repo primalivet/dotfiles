@@ -55,6 +55,11 @@ alias l='ls -CF'
 alias vi=nvim
 alias df='cd /mnt/c/Code/dotfiles/'
 alias code='cd /mnt/c/Code/'
+alias gs='git status'
+alias ga='git add'
+alias gaa='git add --all'
+alias gc='git commit'
+alias gd='git diff'
 
 if [ -f ~/.bash_private ]; then
 		. ~/.bash_private
