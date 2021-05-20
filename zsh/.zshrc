@@ -1,94 +1,89 @@
 # PATH
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$HOME/.bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/.yarn/bin:$PATH
-export PATH=$HOME/.config/yarn/global/node_modules/.bin:$PATH
-export PATH=$HOME/.config/composer/vendor/bin:$PATH
-export PATH=$PATH:/usr/local/go/bin
+#-------------------------------------------------------------------------------
 
-# Path to your oh-my-zsh installation.
-export ZSH="/home/primalivet/.oh-my-zsh"
+export PATH=/home/primalivet/.local/bin:$PATH
+export PATH=/usr/local/sbin:$PATH
+export PATH=/usr/local/bin:$PATH
+export PATH=/usr/sbin:/usr/bin:$PATH
+export PATH=/sbin:$PATH
+export PATH=/bin:$PATH
 
-ZSH_THEME="minimal"
+# COMPLETION
+#-------------------------------------------------------------------------------
+# Customizations should happend before completion is initialized.
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# Use case insensitive path completion. Monster cmd!
+# Found: https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# Partial completion. Eg: '/mn/c/C/do' will complete to '/mnt/c/Code/dotfiles/'
+# Found: https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
+zstyle ':completion:*' list-suffixes zstyle ':completion:*' expand prefix suffix
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
-# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-HIST_STAMPS="yyyy-mm-dd"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# User configuration
+# initialize completion
+autoload -Uz compinit && compinit
 
 # EDITOR
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
-fi
+#-------------------------------------------------------------------------------
 
-# DOCKER aliases (executes commands to Powershell)
-alias docker='echo "Running docker in Powershell"; powershell.exe docker'
-alias docker-compose='echo "Running docker-compose in Powershell"; powershell.exe docker-compose'
+EDITOR=nvim
 
-# VI aliases
-alias vi=nvim
+# HISTORY
+#-------------------------------------------------------------------------------
 
-# NVM
-# set node version manager enviroment variable
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# FZF
-export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ag/.ignore --hidden -g ""'
-export FZF_DEFAULT_OPTS='--height 100% --color=hl:13,hl+:13,fg+:11,marker:11,border:8,prompt:-1,pointer:11,spinner:-1,bg+:-1,bg:-1,spinner:-1,info:-1,fg:-1'
+# PROMPT
+#-------------------------------------------------------------------------------
+# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
+# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Visual-effects
+# http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Version-Control-Information
 
-# ZSH
-plugins=(git fzf)
-source $ZSH/oh-my-zsh.sh
+# Git Integation
+
+# Autoload zsh add-zsh-hook and vcs_info functions (-U autoload w/o substition, -z use zsh style)
+autoload -Uz add-zsh-hook vcs_info
+# Enable substitution in the prompt.
+setopt prompt_subst
+# Run vcs_info just before a prompt is displayed (precmd)
+add-zsh-hook precmd vcs_info
+# add ${vcs_info_msg_0} to the prompt
+
+# Enable checking for (un)staged changes, enabling use of %u and %c
+zstyle ':vcs_info:*' check-for-changes true
+# Set custom strings for an unstaged vcs repo changes (*) and staged changes (+)
+zstyle ':vcs_info:*' unstagedstr ' *'
+zstyle ':vcs_info:*' stagedstr ' +'
+# Set the format of the Git information for vcs_info
+zstyle ':vcs_info:git:*' formats       '(%b%u%c)'
+zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
+
+# %m = host
+# %# = prompt sign % in normal # in super (like sudo)
+# %/ = full path
+# %~ = shorter path
+# %2~ = max 2 dirs
+# %f = reset color
+# %F{0} = foreground color ANSI 0-255
+# %B = bold
+# %b = unbold
+
+# General Styling
+PROMPT='%1~ '\$vcs_info_msg_0_' %# '
+
+# ALIASES
+#-------------------------------------------------------------------------------
+
+alias reload='source ~/.zshrc'
+alias rebuild-completion='rm -f ~/.zcompdump; compinit'
+
+alias ll='ls -al'
+
+alias vi='nvim'
+
+alias gl='git log --oneline'
+alias gs='git status'
+alias ga='git add'
+alias gaa='git add --all'
+alias gc='git commit'
+alias gp='git push'
+
