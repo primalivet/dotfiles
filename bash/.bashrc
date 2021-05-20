@@ -1,3 +1,5 @@
+# TODO clean up and reorder this file
+
 # if not running interactively, don't do anything
 case $- in
 		*i*) ;;
@@ -51,6 +53,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias vi=nvim
+alias df='cd /mnt/c/Code/dotfiles/'
+alias code='cd /mnt/c/Code/'
 
 if [ -f ~/.bash_private ]; then
 		. ~/.bash_private
