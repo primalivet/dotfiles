@@ -1,8 +1,6 @@
 # PATH
 #-------------------------------------------------------------------------------
 
-echo "Setting up PATH $(date +%T)"
-
 export PATH=/sbin:$PATH
 export PATH=/bin:$PATH
 export PATH=/usr/sbin:/usr/bin:$PATH
@@ -11,24 +9,16 @@ export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/.bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
-echo "Done            $(date +%T)"
-
 # DIRCOLORS
 #-------------------------------------------------------------------------------
-
-echo "Setting up DIRCOLORS $(date +%T)"
 
 # check for dircolors support and load .dircolors if it exists
 if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-echo "Done                 $(date +%T)"
-
 # GENERAL SHELL OPTIONS
 #-------------------------------------------------------------------------------
-
-echo "Setting up SHELL OPTIONS $(date +%T)"
 
 # automatically cd into dirs
 setopt AUTO_CD
@@ -40,33 +30,21 @@ setopt NO_CASE_GLOB
 setopt CORRECT
 setopt CORRECT_ALL
 
-echo "Done                     $(date +%T)"
-
 # GENERAL ENV VARIABLES
 #-------------------------------------------------------------------------------
-
-echo "Setting up ENV VARIABLES $(date +%T)"
 
 export KEYTIMEOUT=1
 
 EDITOR=nvim
 
-echo "Done                     $(date +%T)"
-
 # KEYBINDINGS
 #-------------------------------------------------------------------------------
-
-echo "Setting up KEYBINDINGS $(date +%T)"
 
 # use vim keybindings
 bindkey -e
 
-echo "Done                   $(date +%T)"
-
 # COMPLETION
 #-------------------------------------------------------------------------------
-
-echo "Setting up COMPLETION $(date +%T)"
 
 # Customizations should happend before completion is initialized.
 
@@ -81,12 +59,8 @@ zstyle ':completion:*' list-suffixes zstyle ':completion:*' expand prefix suff
 # initialize completion
 autoload -Uz compinit && compinit
 
-echo "Done                  $(date +%T)"
-
 # HISTORY
 #-------------------------------------------------------------------------------
-
-echo "Setting up HISTORY $(date +%T)"
 
 # History in zdotdir if exsits, otherwise home dir
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
@@ -108,12 +82,8 @@ setopt HIST_IGNORE_DUPS
 # removes blank lines from history
 setopt HIST_REDUCE_BLANKS
 
-echo "Done               $(date +%T)"
-
 # PROMPT
 #-------------------------------------------------------------------------------
-
-echo "Setting up PROMPT $(date +%T)"
 
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Visual-effects
@@ -151,12 +121,8 @@ zstyle ':vcs_info:git:*' actionformats ' %b|%a%u%c'
 # General Styling
 PROMPT='%1~${vcs_info_msg_0_} %# '
 
-echo "Done              $(date +%T)"
-
 # ALIASES
 #-------------------------------------------------------------------------------
-
-echo "Setting up ALIASES $(date +%T)"
 
 alias reload='source ~/.zshrc'
 alias rebuild-completion='rm -f ~/.zcompdump; compinit'
@@ -170,17 +136,14 @@ alias vi='nvim'
 
 alias gl='git log --oneline'
 alias gs='git status'
+alias gd='git diff'
 alias ga='git add'
 alias gaa='git add --all'
 alias gc='git commit'
 alias gp='git push'
 
-echo "Done               $(date +%T)"
-
 # FZF
 #-------------------------------------------------------------------------------
-
-echo "Setting up FZF $(date +%T)"
 
 # Setup fzf
 if [[ ! "$PATH" == *~/.fzf/bin* ]]; then
@@ -192,37 +155,27 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-echo "Done           $(date +%T)"
+# NODE VERSION MANANGER (N)
+#-------------------------------------------------------------------------------
+
 
 # NODE VERSION MANAGER (NVM)
 #-------------------------------------------------------------------------------
 
-echo "Setting up NVM $(date +%T)"
-
 # set node version manager enviroment variable
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-echo "Done           $(date +%T)"
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # YARN VERSION MANAGER (YVM)
 #-------------------------------------------------------------------------------
 
-echo "Setting up YVM $(date +%T)"
-
 export YVM_DIR=/home/primalivet/.yvm
 [ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
-
-echo "Done           $(date +%T)"
 
 # PRIVATE
 #-------------------------------------------------------------------------------
 
-echo "Setting up PRIVATE $(date +%T)"
-
 if [ -f ~/.zsh_private ]; then
   . ~/.zsh_private
 fi
-
-echo "Done               $(date +%T)"
