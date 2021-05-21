@@ -56,6 +56,8 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 # Found: https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
 zstyle ':completion:*' list-suffixes zstyle ':completion:*' expand prefix suffix
 
+zstyle ':completion:*' menu select
+
 # initialize completion
 autoload -Uz compinit && compinit
 
@@ -150,6 +152,9 @@ alias ga='git add'
 alias gaa='git add --all'
 alias gc='git commit'
 alias gp='git push'
+
+alias tls='tmux ls'
+alias tat='tmux attatch-session -t'
 
 # FZF
 #-------------------------------------------------------------------------------
