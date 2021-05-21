@@ -1,15 +1,73 @@
 # PATH
 #-------------------------------------------------------------------------------
 
-export PATH=/home/primalivet/.local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
-export PATH=/usr/local/bin:$PATH
-export PATH=/usr/sbin:/usr/bin:$PATH
+echo "Setting up PATH $(date +%T)"
+
 export PATH=/sbin:$PATH
 export PATH=/bin:$PATH
+export PATH=/usr/sbin:/usr/bin:$PATH
+export PATH=/usr/local/sbin:$PATH
+export PATH=/usr/local/bin:$PATH
+export PATH=$HOME/.bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+
+echo "Done            $(date +%T)"
+
+# DIRCOLORS
+#-------------------------------------------------------------------------------
+
+echo "Setting up DIRCOLORS $(date +%T)"
+
+# check for dircolors support and load .dircolors if it exists
+if [ -x /usr/bin/dircolors ]; then
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+
+echo "Done                 $(date +%T)"
+
+# GENERAL SHELL OPTIONS
+#-------------------------------------------------------------------------------
+
+echo "Setting up SHELL OPTIONS $(date +%T)"
+
+# automatically cd into dirs
+setopt AUTO_CD
+
+# case insensitive glob matching
+setopt NO_CASE_GLOB
+
+# Suggestions when misspell
+setopt CORRECT
+setopt CORRECT_ALL
+
+echo "Done                     $(date +%T)"
+
+# GENERAL ENV VARIABLES
+#-------------------------------------------------------------------------------
+
+echo "Setting up ENV VARIABLES $(date +%T)"
+
+export KEYTIMEOUT=1
+
+EDITOR=nvim
+
+echo "Done                     $(date +%T)"
+
+# KEYBINDINGS
+#-------------------------------------------------------------------------------
+
+echo "Setting up KEYBINDINGS $(date +%T)"
+
+# use vim keybindings
+bindkey -e
+
+echo "Done                   $(date +%T)"
 
 # COMPLETION
 #-------------------------------------------------------------------------------
+
+echo "Setting up COMPLETION $(date +%T)"
+
 # Customizations should happend before completion is initialized.
 
 # Use case insensitive path completion. Monster cmd!
@@ -23,17 +81,40 @@ zstyle ':completion:*' list-suffixes zstyle ':completion:*' expand prefix suff
 # initialize completion
 autoload -Uz compinit && compinit
 
-# EDITOR
-#-------------------------------------------------------------------------------
-
-EDITOR=nvim
+echo "Done                  $(date +%T)"
 
 # HISTORY
 #-------------------------------------------------------------------------------
 
+echo "Setting up HISTORY $(date +%T)"
+
+# History in zdotdir if exsits, otherwise home dir
+HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+
+SAVEHIST=10000
+HISTSIZE=10000
+
+# share history across multiple zsh sessions
+setopt SHARE_HISTORY
+# append to history
+setopt APPEND_HISTORY
+
+# adds commands as they are typed, not at shell exit
+setopt INC_APPEND_HISTORY
+
+# do not store duplications
+setopt HIST_IGNORE_DUPS
+
+# removes blank lines from history
+setopt HIST_REDUCE_BLANKS
+
+echo "Done               $(date +%T)"
 
 # PROMPT
 #-------------------------------------------------------------------------------
+
+echo "Setting up PROMPT $(date +%T)"
+
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Visual-effects
 # http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Version-Control-Information
@@ -42,7 +123,7 @@ EDITOR=nvim
 # Autoload zsh add-zsh-hook and vcs_info functions (-U autoload w/o substition, -z use zsh style)
 autoload -Uz add-zsh-hook vcs_info
 # Enable substitution in the prompt.
-setopt prompt_subst
+setopt PROMPT_SUBST
 # Run vcs_info just before a prompt is displayed (precmd)
 add-zsh-hook precmd vcs_info
 # add ${vcs_info_msg_0} to the prompt
@@ -70,13 +151,20 @@ zstyle ':vcs_info:git:*' actionformats ' %b|%a%u%c'
 # General Styling
 PROMPT='%1~${vcs_info_msg_0_} %# '
 
+echo "Done              $(date +%T)"
+
 # ALIASES
 #-------------------------------------------------------------------------------
+
+echo "Setting up ALIASES $(date +%T)"
 
 alias reload='source ~/.zshrc'
 alias rebuild-completion='rm -f ~/.zcompdump; compinit'
 
-alias ll='ls -al'
+alias ls='ls --color'
+alias ll='ls -al --color'
+alias code='cd /mnt/c/Code/'
+alias dotfiles='cd /mnt/c/Code/dotfiles/'
 
 alias vi='nvim'
 
@@ -87,3 +175,54 @@ alias gaa='git add --all'
 alias gc='git commit'
 alias gp='git push'
 
+echo "Done               $(date +%T)"
+
+# FZF
+#-------------------------------------------------------------------------------
+
+echo "Setting up FZF $(date +%T)"
+
+# Setup fzf
+if [[ ! "$PATH" == *~/.fzf/bin* ]]; then
+  export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ag/.ignore --hidden -g ""'
+  export FZF_DEFAULT_OPTS='--height 100% --color=hl:13,hl+:13,fg+:11,marker:11,border:8,prompt:-1,pointer:11,spinner:-1,bg+:-1,bg:-1,spinner:-1,info:-1,fg:-1'
+
+  export PATH="${PATH:+${PATH}:}~/.fzf/bin"
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+echo "Done           $(date +%T)"
+
+# NODE VERSION MANAGER (NVM)
+#-------------------------------------------------------------------------------
+
+echo "Setting up NVM $(date +%T)"
+
+# set node version manager enviroment variable
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+echo "Done           $(date +%T)"
+
+# YARN VERSION MANAGER (YVM)
+#-------------------------------------------------------------------------------
+
+echo "Setting up YVM $(date +%T)"
+
+export YVM_DIR=/home/primalivet/.yvm
+[ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
+
+echo "Done           $(date +%T)"
+
+# PRIVATE
+#-------------------------------------------------------------------------------
+
+echo "Setting up PRIVATE $(date +%T)"
+
+if [ -f ~/.zsh_private ]; then
+  . ~/.zsh_private
+fi
+
+echo "Done               $(date +%T)"
