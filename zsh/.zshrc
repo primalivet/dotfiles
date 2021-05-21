@@ -1,4 +1,3 @@
-export TERM=xterm-256color
 # PATH
 #-------------------------------------------------------------------------------
 
@@ -33,6 +32,8 @@ setopt CORRECT_ALL
 
 # GENERAL ENV VARIABLES
 #-------------------------------------------------------------------------------
+
+export TERM=xterm-256color
 
 export KEYTIMEOUT=1
 
