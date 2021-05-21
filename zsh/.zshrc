@@ -38,8 +38,7 @@ EDITOR=nvim
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Visual-effects
 # http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Version-Control-Information
 
-# Git Integation
-
+# Git Integation - https://salferrarello.com/zsh-git-status-prompt/
 # Autoload zsh add-zsh-hook and vcs_info functions (-U autoload w/o substition, -z use zsh style)
 autoload -Uz add-zsh-hook vcs_info
 # Enable substitution in the prompt.
@@ -51,12 +50,13 @@ add-zsh-hook precmd vcs_info
 # Enable checking for (un)staged changes, enabling use of %u and %c
 zstyle ':vcs_info:*' check-for-changes true
 # Set custom strings for an unstaged vcs repo changes (*) and staged changes (+)
-zstyle ':vcs_info:*' unstagedstr ' *'
-zstyle ':vcs_info:*' stagedstr ' +'
+zstyle ':vcs_info:*' unstagedstr ' %F{red}*%f'
+zstyle ':vcs_info:*' stagedstr ' %F{yellow}+%f'
 # Set the format of the Git information for vcs_info
-zstyle ':vcs_info:git:*' formats       '(%b%u%c)'
-zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
+zstyle ':vcs_info:git:*' formats       ' (%b%u%c)'
+zstyle ':vcs_info:git:*' actionformats ' (%b|%a%u%c)'
 
+# General expantions in prompt
 # %m = host
 # %# = prompt sign % in normal # in super (like sudo)
 # %/ = full path
@@ -68,7 +68,7 @@ zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
 # %b = unbold
 
 # General Styling
-PROMPT='%1~ '\$vcs_info_msg_0_' %# '
+PROMPT='%1~${vcs_info_msg_0_} %# '
 
 # ALIASES
 #-------------------------------------------------------------------------------
