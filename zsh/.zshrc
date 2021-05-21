@@ -59,6 +59,15 @@ zstyle ':completion:*' list-suffixes zstyle ':completion:*' expand prefix suff
 # initialize completion
 autoload -Uz compinit && compinit
 
+# AUTOSUGGESTIONS
+#-------------------------------------------------------------------------------
+
+if [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+else
+	echo 'Warning: zsh-autosuggestions not found in ~/.zsh'
+fi
+
 # HISTORY
 #-------------------------------------------------------------------------------
 
@@ -171,11 +180,11 @@ fi
 #-------------------------------------------------------------------------------
 
 export YVM_DIR=/home/primalivet/.yvm
-[ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
+[ -r $YVM_DIR/yvm.sh ] && source $YVM_DIR/yvm.sh
 
 # PRIVATE
 #-------------------------------------------------------------------------------
 
 if [ -f ~/.zsh_private ]; then
-  . ~/.zsh_private
+  source ~/.zsh_private
 fi
