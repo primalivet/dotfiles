@@ -171,6 +171,18 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# ASDF VERSION MANAGER
+#-------------------------------------------------------------------------------
+# Can manage multiple languages, including node
+
+source $HOME/.asdf/asdf.sh
+
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit
+compinit
+
 # NODE VERSION MANANGER (N)
 #-------------------------------------------------------------------------------
 
