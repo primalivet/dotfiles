@@ -174,6 +174,8 @@ fi
 # NODE VERSION MANANGER (N)
 #-------------------------------------------------------------------------------
 
+# n-install (see http://git.io/n-install-repo).
+export N_PREFIX="$HOME/.n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
 
 # NODE VERSION MANAGER (NVM)
 #-------------------------------------------------------------------------------
@@ -195,3 +197,4 @@ export YVM_DIR=/home/primalivet/.yvm
 if [ -f ~/.zsh_private ]; then
   source ~/.zsh_private
 fi
+
