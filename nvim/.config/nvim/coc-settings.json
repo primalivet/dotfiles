@@ -5,6 +5,7 @@
   // "coc.preferences.formatOnSaveFiletypes": [
   //   "purescript"
   // ],
+	"coc.preferences.formatOnSaveFiletypes": ["js", "css", "typescript"],
 
 	// LSPs
 

@@ -156,6 +156,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'gregsexton/MatchTag'
 Plug 'fatih/vim-go'
+Plug 'itchyny/lightline.vim'
 
 " load terminal16 locally from my machine if it exists
 if filereadable('/data/data/com.termux/files/home/Code/vim-terminal16/colors/terminal16.vim')
@@ -288,7 +289,8 @@ let g:coc_global_extensions = [
 			\'coc-tsserver',
 			\'coc-phpls',
 			\'coc-diagnostic',
-			\'coc-sh'
+			\'coc-sh',
+			\'coc-prettier'
 			\]
 
 " show documentation in preview window
@@ -330,6 +332,46 @@ let g:indentLine_enabled = 0
 "-------------------------------------------------------------------------------
 
 let g:vim_markdown_frontmatter = 1
+
+"-------------------------------------------------------------------------------
+" LIGHTLINE
+"-------------------------------------------------------------------------------
+
+" hide vim native --INSERT-- message
+set noshowmode
+
+" lightline colorscheme
+let g:lightline = {
+	\ 'colorscheme': 'terminal16',
+	\ 'active': {
+	\		'left':	 [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'gitbranch', 'modified' ] ],
+	\		'right': [ [ 'lineinfo' ],
+	\				 [ 'percent' ],
+	\				 [ 'fileformat', 'fileencoding', 'filetype' ] ]
+	\ },
+	\ 'inactive': {
+	\		'left':	 [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'gitbranch', 'modified' ] ],
+	\		'right': [ [ 'lineinfo' ],
+	\				 [ 'percent' ],
+	\				 [ 'fileformat', 'fileencoding', 'filetype' ] ]
+	\ },
+	\ 'component_function': {
+	\   'fileformat': 'LightlineFileformat',
+	\   'filetype': 'LightlineFiletype',
+	\   'gitbranch': 'FugitiveHead',
+	\ },
+	\ 'component': {
+	\   'lineinfo': '%3l:%-2v%<'
+	\ }
+\ }
+
+function! LightlineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
 
 "-------------------------------------------------------------------------------
 " STATUSLINE
@@ -391,14 +433,7 @@ cnoreabbrev Q! q!
 " COLORS
 "-------------------------------------------------------------------------------
 
-function! s:toggle_background()
-        if &background == 'dark'
-                set background=light
-        else
-                set background=dark
-        endif
-endfunction
-
 set background=dark
-colorscheme terminal16
 " set termguicolors " not with theme terminal16
+colorscheme terminal16
+

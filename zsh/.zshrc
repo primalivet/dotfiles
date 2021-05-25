@@ -203,6 +203,12 @@ export N_PREFIX="$HOME/.n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_P
 export YVM_DIR=/home/primalivet/.yvm
 [ -r $YVM_DIR/yvm.sh ] && source $YVM_DIR/yvm.sh
 
+# NETLIFY
+#-------------------------------------------------------------------------------
+
+# Netlify Large Media Helper
+source ~/.config/netlify/helper/path.zsh.inc
+
 # PRIVATE
 #-------------------------------------------------------------------------------
 
@@ -210,3 +216,6 @@ if [ -f ~/.zsh_private ]; then
   source ~/.zsh_private
 fi
 
+
+# The next line updates PATH for Netlify's Git Credential Helper.
+test -f '/home/primalivet/.config/netlify/helper/path.zsh.inc' && source '/home/primalivet/.config/netlify/helper/path.zsh.inc'
