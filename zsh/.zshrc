@@ -120,7 +120,7 @@ zstyle ':vcs_info:*' unstagedstr ' 😬'
 zstyle ':vcs_info:*' stagedstr ' 😊'
 # Set the format of the Git information for vcs_info
 zstyle ':vcs_info:git:*' formats       ' %b%u%c'
-zstyle ':vcs_info:git:*' actionformats ' %b|%a%u%c'
+zstyle ':vcs_info:git:*' actionformats ' %b 💯|%a%u%c'
 
 # General expantions in prompt
 # %m = host
