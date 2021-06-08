@@ -119,6 +119,11 @@ set softtabstop=2
 set tabstop=2
 set smarttab
 
+" Folding
+set foldenable
+set foldmethod=indent
+set foldcolumn=2
+
 " Timings
 set timeoutlen=500 "timeout for mapped sequence
 set updatetime=300 " updatetime for CursorHold & CursorHoldI
