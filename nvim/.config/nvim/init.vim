@@ -89,6 +89,7 @@ set nowritebackup " No backups, seems to be a problem with some lsps
 
 " UI
 set completeopt=menu,menuone,noinsert
+set cursorline
 set number " show line numbers
 set scrolloff=5
 set shortmess+=c " Don't pass messages to ins-completion-menu.
