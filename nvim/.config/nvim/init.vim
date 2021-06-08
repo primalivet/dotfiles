@@ -94,7 +94,6 @@ set noshowmode
 set number " show line numbers
 set scrolloff=5
 set shortmess+=c " Don't pass messages to ins-completion-menu.
-set showmode
 set sidescrolloff=5
 set signcolumn=yes
 set splitbelow
