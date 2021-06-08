@@ -90,6 +90,7 @@ set nowritebackup " No backups, seems to be a problem with some lsps
 " UI
 set completeopt=menu,menuone,noinsert
 set cursorline
+set noshowmode
 set number " show line numbers
 set scrolloff=5
 set shortmess+=c " Don't pass messages to ins-completion-menu.
@@ -150,26 +151,23 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'jesseleite/vim-agriculture'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'gerw/vim-HiLinkTrace'
-Plug 'Yggdroot/indentLine'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'gregsexton/MatchTag'
-Plug 'fatih/vim-go'
-Plug 'itchyny/lightline.vim'
-Plug 'wojciechkepka/vim-github-dark'
-Plug 'cocopon/iceberg.vim'
 Plug 'gruvbox-community/gruvbox'
+Plug 'vim-airline/vim-airline'
+" TMUXLINE use it once to generate a .conf file to source in tmux
+" Plug 'edkolev/tmuxline.vim'
+"let g:tmuxline_powerline_symbols = 1
 
 " load terminal16 locally from my machine if it exists
-if filereadable('/data/data/com.termux/files/home/Code/vim-terminal16/colors/terminal16.vim')
-  Plug '/data/data/com.termux/files/home/Code/vim-terminal16'
-elseif filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
-  Plug '/mnt/c/Code/vim-terminal16'
-else
-  Plug 'primalivet/vim-terminal16'
-endif
+" if filereadable('/data/data/com.termux/files/home/Code/vim-terminal16/colors/terminal16.vim')
+"   Plug '/data/data/com.termux/files/home/Code/vim-terminal16'
+" elseif filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
+"   Plug '/mnt/c/Code/vim-terminal16'
+" else
+"   Plug 'primalivet/vim-terminal16'
+" endif
 
 "-------------------------------------------------------------------------------
 " VIM PLUG / END
@@ -332,8 +330,8 @@ let g:fzf_layout = { 'down': '50%' }
 " IndentLines
 "-------------------------------------------------------------------------------
 
-let g:indentLine_fileTypeExclude = ['fzf']
-let g:indentLine_enabled = 1
+" let g:indentLine_fileTypeExclude = ['fzf']
+" let g:indentLine_enabled = 1
 
 "-------------------------------------------------------------------------------
 " Syntax and Hightlight
@@ -342,43 +340,49 @@ let g:indentLine_enabled = 1
 let g:vim_markdown_frontmatter = 1
 
 "-------------------------------------------------------------------------------
-" LIGHTLINE
+" GRUVBOX
 "-------------------------------------------------------------------------------
 
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_sign_column = 'bg0'
 
 "-------------------------------------------------------------------------------
+" AIRLINE
+"-------------------------------------------------------------------------------
+
+let g:airline_powerline_fonts = 1
+
+"-------------------------------------------------------------------------------
 " LIGHTLINE
 "-------------------------------------------------------------------------------
 
 " hide vim native --INSERT-- message
-set noshowmode
+" set noshowmode
 
-" lightline colorscheme
-let g:lightline = {
-	\ 'colorscheme': 'gruvbox',
-	\ 'active': {
-	\		'left':	 [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'gitbranch', 'modified' ] ],
-	\		'right': [ [ 'lineinfo' ],
-	\				 [ 'percent' ],
-	\				 [ 'fileformat', 'fileencoding', 'filetype' ] ]
-	\ },
-	\ 'inactive': {
-	\		'left':	 [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'gitbranch', 'modified' ] ],
-	\		'right': [ [ 'lineinfo' ],
-	\				 [ 'percent' ],
-	\				 [ 'fileformat', 'fileencoding', 'filetype' ] ]
-	\ },
-	\ 'component_function': {
-	\   'fileformat': 'LightlineFileformat',
-	\   'filetype': 'LightlineFiletype',
-	\   'gitbranch': 'FugitiveHead',
-	\ },
-	\ 'component': {
-	\   'lineinfo': '%3l:%-2v%<'
-	\ }
-\ }
+" " lightline colorscheme
+" let g:lightline = {
+" 	\ 'colorscheme': 'gruvbox',
+" 	\ 'active': {
+" 	\		'left':	 [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'gitbranch', 'modified' ] ],
+" 	\		'right': [ [ 'lineinfo' ],
+" 	\				 [ 'percent' ],
+" 	\				 [ 'fileformat', 'fileencoding', 'filetype' ] ]
+" 	\ },
+" 	\ 'inactive': {
+" 	\		'left':	 [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'gitbranch', 'modified' ] ],
+" 	\		'right': [ [ 'lineinfo' ],
+" 	\				 [ 'percent' ],
+" 	\				 [ 'fileformat', 'fileencoding', 'filetype' ] ]
+" 	\ },
+" 	\ 'component_function': {
+" 	\   'fileformat': 'LightlineFileformat',
+" 	\   'filetype': 'LightlineFiletype',
+" 	\   'gitbranch': 'FugitiveHead',
+" 	\ },
+" 	\ 'component': {
+" 	\   'lineinfo': '%3l:%-2v%<'
+" 	\ }
+" \ }
 
 function! LightlineFileformat()
   return winwidth(0) > 70 ? &fileformat : ''
