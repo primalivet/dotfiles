@@ -65,7 +65,7 @@ augroup MyFileSettings
 	" wrap lines in markdown
 	au BufRead,BufNewFile *.md setlocal wrap
 	" hide numbers in txt, markdown
-	au! FileType text,md,markdown set nonu nornu
+	au! FileType text,md,markdown setlocal nonu nornu
 augroup END
 
 augroup MySearchSettings
@@ -157,6 +157,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'gregsexton/MatchTag'
 Plug 'fatih/vim-go'
 Plug 'itchyny/lightline.vim'
+Plug 'wojciechkepka/vim-github-dark'
+Plug 'cocopon/iceberg.vim'
+Plug 'gruvbox-community/gruvbox'
 
 " load terminal16 locally from my machine if it exists
 if filereadable('/data/data/com.termux/files/home/Code/vim-terminal16/colors/terminal16.vim')
@@ -255,13 +258,17 @@ nnoremap <leader>ve :edit $MYVIMRC<CR>
 nnoremap <leader>vs :source $MYVIMRC<CR>
 
 let g:which_key_map.w = { 'name' : '+window' }
-let g:which_key_map.w.e = 'explore'
-let g:which_key_map.w.o = 'only-current'
+let g:which_key_map.w.v = 'split-vertical'
+let g:which_key_map.w.x = 'split-horizontal'
 let g:which_key_map.w['='] = 'equal-splits'
+let g:which_key_map.w.o = 'only-current'
+let g:which_key_map.w.e = 'explore'
 
+nnoremap <leader>wv :vsp<CR>
+nnoremap <leader>wx :sp<CR>
+nnoremap <leader>w= <C-w>=
 nnoremap <leader>wo :only<CR>
 nnoremap <leader>we :Explore<CR>
-nnoremap <leader>w= <C-w>=
 
 let g:which_key_map['['] = { 'name' : '+previous' }
 let g:which_key_map['['].q = 'previous-qucikfix'
@@ -325,7 +332,7 @@ let g:fzf_layout = { 'down': '50%' }
 "-------------------------------------------------------------------------------
 
 let g:indentLine_fileTypeExclude = ['fzf']
-let g:indentLine_enabled = 0
+let g:indentLine_enabled = 1
 
 "-------------------------------------------------------------------------------
 " Syntax and Hightlight
@@ -337,12 +344,19 @@ let g:vim_markdown_frontmatter = 1
 " LIGHTLINE
 "-------------------------------------------------------------------------------
 
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_sign_column = 'bg0'
+
+"-------------------------------------------------------------------------------
+" LIGHTLINE
+"-------------------------------------------------------------------------------
+
 " hide vim native --INSERT-- message
 set noshowmode
 
 " lightline colorscheme
 let g:lightline = {
-	\ 'colorscheme': 'terminal16',
+	\ 'colorscheme': 'gruvbox',
 	\ 'active': {
 	\		'left':	 [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'gitbranch', 'modified' ] ],
 	\		'right': [ [ 'lineinfo' ],
@@ -434,6 +448,6 @@ cnoreabbrev Q! q!
 "-------------------------------------------------------------------------------
 
 set background=dark
-" set termguicolors " not with theme terminal16
-colorscheme terminal16
+set termguicolors " not with theme terminal16
+colorscheme gruvbox
 

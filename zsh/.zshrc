@@ -158,6 +158,9 @@ alias gp='git push'
 alias tls='tmux ls'
 alias tat='tmux attatch-session -t'
 
+# alias docker='echo "Running docker in Powershell"; powershell.exe docker'
+# alias docker-compose='echo "Running docker-compose in Powershell"; powershell.exe docker-compose'
+
 # FZF
 #-------------------------------------------------------------------------------
 
