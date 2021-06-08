@@ -114,8 +114,10 @@ add-zsh-hook precmd vcs_info
 # Enable checking for (un)staged changes, enabling use of %u and %c
 zstyle ':vcs_info:*' check-for-changes true
 # Set custom strings for an unstaged vcs repo changes (*) and staged changes (+)
-zstyle ':vcs_info:*' unstagedstr '%F{red}*%f'
-zstyle ':vcs_info:*' stagedstr '%F{yellow}+%f'
+# zstyle ':vcs_info:*' unstagedstr '%F{red}*%f'
+# zstyle ':vcs_info:*' stagedstr '%F{yellow}+%f'
+zstyle ':vcs_info:*' unstagedstr ' 😬'
+zstyle ':vcs_info:*' stagedstr ' 😊'
 # Set the format of the Git information for vcs_info
 zstyle ':vcs_info:git:*' formats       ' %b%u%c'
 zstyle ':vcs_info:git:*' actionformats ' %b|%a%u%c'
@@ -132,7 +134,7 @@ zstyle ':vcs_info:git:*' actionformats ' %b|%a%u%c'
 # %b = unbold
 
 # General Styling
-PROMPT='%1~${vcs_info_msg_0_} %# '
+PROMPT='%1~${vcs_info_msg_0_} 🍺 '
 
 # ALIASES
 #-------------------------------------------------------------------------------
