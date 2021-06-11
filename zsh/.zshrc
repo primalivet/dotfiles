@@ -143,6 +143,7 @@ alias rebuild-completion='rm -f ~/.zcompdump; compinit'
 alias ls='ls --color'
 alias ll='ls -al --color'
 alias code='cd /mnt/c/Code/'
+alias kod='cd ~/Kod/'
 alias dotfiles='cd /mnt/c/Code/dotfiles/'
 
 alias vi='nvim'

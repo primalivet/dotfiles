@@ -30,6 +30,9 @@
 	"eslint.autoFixOnSave": true,
 
 	// Typescript
+	"typescript.suggest.autoImports": true,
+
+	// Javascript
 
 	"javascript.suggestionActions.enabled": false,
 

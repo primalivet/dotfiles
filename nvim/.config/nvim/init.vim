@@ -120,6 +120,7 @@ set tabstop=2
 set smarttab
 
 " Folding
+set foldlevel=999 " never start folded
 set foldenable
 set foldmethod=indent
 set foldcolumn=2
@@ -156,6 +157,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'jesseleite/vim-agriculture'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'gregsexton/MatchTag'
 Plug 'gruvbox-community/gruvbox'
@@ -216,11 +218,13 @@ nmap <silent> <leader>ed <Plug>(jsdoc)
 
 let g:which_key_map.g = { 'name' : '+goto' }
 let g:which_key_map.g.d = 'goto-definition'
+let g:which_key_map.g.d = 'goto-type-definition'
 let g:which_key_map.g.r = 'goto-references'
 let g:which_key_map.g.h = 'goto-documentation'
 let g:which_key_map.g.f = 'goto-file'
 
 nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gt <Plug>(coc-type-definition)
 nmap <leader>gr <Plug>(coc-references)
 nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
 nnoremap <leader>gf gf
@@ -274,16 +278,32 @@ nnoremap <leader>wo :only<CR>
 nnoremap <leader>we :Explore<CR>
 
 let g:which_key_map['['] = { 'name' : '+previous' }
-let g:which_key_map['['].q = 'previous-qucikfix'
+let g:which_key_map['['].q = 'previous-diagnostic'
 
 nmap <leader>[q <Plug>(coc-diagnostic-prev)
 nmap <leader>[h <Plug>(GitGutterPrevHunk)
 
 let g:which_key_map[']'] = { 'name' : '+next' }
-let g:which_key_map[']'].q = 'next-quickfix'
+let g:which_key_map[']'].q = 'next-diagnostic'
 
 nmap <leader>]q <Plug>(coc-diagnostic-next)
 nmap <leader>]h <Plug>(GitGutterNextHunk)
+
+" I know this is useless, but it's a good help when I forget mappings
+let g:which_key_map.z = { 'name' : '+fold' }
+let g:which_key_map.z.a = 'toggle'
+let g:which_key_map.z.A = 'toggle-all'
+let g:which_key_map.z.o = 'open-cursor'
+let g:which_key_map.z.O = 'open-all-cursor'
+let g:which_key_map.z.c = 'close-cursor'
+let g:which_key_map.z.C = 'close-all-cursor'
+
+nnoremap <leader>za za
+nnoremap <leader>zA zA
+nnoremap <leader>zo zo
+nnoremap <leader>zo zO
+nnoremap <leader>zc zc
+nnoremap <leader>zc zC
 
 "-------------------------------------------------------------------------------
 " COC
@@ -460,3 +480,5 @@ set background=dark
 set termguicolors " not with theme terminal16
 colorscheme gruvbox
 
+" when using gruvbox, make Todo black on yellow
+highlight Todo guifg=#1d2021 guibg=#d79921
