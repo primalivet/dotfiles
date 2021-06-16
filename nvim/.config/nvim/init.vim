@@ -54,12 +54,14 @@ Plug 'tpope/vim-fugitive'
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
-" TODO Plug 'glepnir/lspsaga.nvim'
+
+" Format
+" Plug 'dense-analysis/ale' (to slow and dont send diagnostic to nvim_lsp)
+" Plug 'sbdchd/neoformat' (cant really understand relation between eslint-plugin-prettier and .prettierc)
 
 " Colors
 Plug 'gruvbox-community/gruvbox'
 if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
-  " load terminal16 locally from my machine if it exists
   Plug '/mnt/c/Code/vim-terminal16'
 else
   Plug 'primalivet/vim-terminal16'
@@ -68,7 +70,6 @@ endif
 
 call plug#end()
 
-" use space as leader
 let mapleader=" "
 
 " auto esc on move
@@ -115,6 +116,7 @@ vnoremap > >gv
 
 " Edit
 nnoremap <leader>er :lua vim.lsp.buf.rename()<CR>
+" nnoremap <leader>er	  :Lspsaga rename<CR>
 vnoremap <leader>es :'<,'>sort<CR>
 
 " GoTo
@@ -195,7 +197,7 @@ function! s:show_current_hunk() abort
   endif
 endfunction
 
-function! s:statusline_expression()
+function! s:status_expression()
   let paste = "%{&paste ? '[PASTE]' : ''}"
   let mod = "%{&modified ? '[+]' : !&modifiable ? '[x]' : ''}"
   let ro = "%{&readonly ? '[RO]' : ''}"
@@ -208,4 +210,4 @@ function! s:statusline_expression()
   return '[%n] %f %<'.mod.ro.paste.branch.sep.ft.pos.'%*'.pct
 endfunction
 
-let &statusline= s:statusline_expression()
+let &statusline= s:status_expression()

@@ -1,8 +1,7 @@
 set completeopt=menuone,noselect " has to be this value for nvim-compe
 
 lua << EOF
-require'lspconfig'.vimls.setup{}
-require'lspconfig'.tsserver.setup{}
+require('lsp')
 EOF
 
 let g:compe = {}
