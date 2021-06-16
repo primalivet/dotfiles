@@ -9,6 +9,20 @@ export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/.bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
+# KEYBINDINGS
+#-------------------------------------------------------------------------------
+
+bindkey -v # vi mode
+
+# search history like in emacs mode, fzf will integrate into this
+bindkey "^R" history-incremental-search-backward
+
+# Ctrl + N|P to forward / backward in history
+bindkey "^P" history-search-backward
+bindkey "^N" history-search-forward
+
+export KEYTIMEOUT=1 # quicker timeout between commands
+
 # DIRCOLORS
 #-------------------------------------------------------------------------------
 
@@ -38,12 +52,6 @@ export TERM=xterm-256color
 export KEYTIMEOUT=1
 
 EDITOR=nvim
-
-# KEYBINDINGS
-#-------------------------------------------------------------------------------
-
-# use vim keybindings
-bindkey -e
 
 # COMPLETION
 #-------------------------------------------------------------------------------
@@ -95,7 +103,45 @@ setopt HIST_IGNORE_DUPS
 # removes blank lines from history
 setopt HIST_REDUCE_BLANKS
 
-# PROMPT
+# PROMPT VI MODE SYMBOL
+#-------------------------------------------------------------------------------
+## Init
+setopt PROMPT_SUBST
+
+## Options
+VI_INS_MODE_SYMBOL=${VI_INS_MODE_SYMBOL:-'INSERT'}
+VI_CMD_MODE_SYMBOL=${VI_CMD_MODE_SYMBOL:-'NORMAL'}
+
+## Set symbol for the initial mode
+VI_MODE_SYMBOL="${VI_INS_MODE_SYMBOL}"
+
+# on keymap change, define the mode and redraw prompt
+zle-keymap-select() {
+  if [ "${KEYMAP}" = 'vicmd' ]; then
+    VI_MODE_SYMBOL="${VI_CMD_MODE_SYMBOL}"
+  else
+    VI_MODE_SYMBOL="${VI_INS_MODE_SYMBOL}"
+  fi
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+# reset to default mode at the end of line input reading
+zle-line-finish() {
+  VI_MODE_SYMBOL="${VI_INS_MODE_SYMBOL}"
+}
+zle -N zle-line-finish
+
+# Fix a bug when you C-c in CMD mode, you'd be prompted with CMD mode indicator
+# while in fact you would be in INS mode.
+# Fixed by catching SIGINT (C-c), set mode to INS and repropagate the SIGINT,
+# so if anything else depends on it, we will not break it.
+TRAPINT() {
+  VI_MODE_SYMBOL="${VI_INS_MODE_SYMBOL}"
+  return $(( 128 + $1 ))
+}
+
+# PROMPT GIT
 #-------------------------------------------------------------------------------
 
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
@@ -131,8 +177,11 @@ zstyle ':vcs_info:git:*' actionformats ' %b|%a%u%c'
 # %B = bold
 # %b = unbold
 
+# PROMPT
+#-------------------------------------------------------------------------------
+
 # General Styling
-PROMPT='%1~${vcs_info_msg_0_} %# '
+PROMPT='$VI_MODE_SYMBOL %1~${vcs_info_msg_0_} %# '
 
 # ALIASES
 #-------------------------------------------------------------------------------
@@ -159,8 +208,8 @@ alias gp='git push'
 alias tls='tmux ls'
 alias tat='tmux attatch-session -t'
 
-# alias docker='echo "Running docker in Powershell"; powershell.exe docker'
-# alias docker-compose='echo "Running docker-compose in Powershell"; powershell.exe docker-compose'
+alias docker='echo "Running docker in Powershell"; powershell.exe docker'
+alias docker-compose='echo "Running docker-compose in Powershell"; powershell.exe docker-compose'
 
 # FZF
 #-------------------------------------------------------------------------------

@@ -1,14 +1,79 @@
-" use space as leader
-let mapleader="\<Space>"
+filetype plugin on
+filetype plugin indent on
 
-"-------------------------------------------------------------------------------
-" MAPPINGS / NO LEADER
-"-------------------------------------------------------------------------------
+set autoindent
+set cindent
+set cursorline
+set expandtab
+set foldcolumn=2
+set foldenable
+set foldlevel=999 " never start folded
+set foldmethod=indent
+set hidden " Files and Buffers
+set ignorecase
+set listchars=tab:>--,space:·,trail:·
+set nobackup " No backups, seems to be a problem with some lsps
+set nolist
+set nowrap
+set nowritebackup " No backups, seems to be a problem with some lsps
+set number
+set path+=** " make path act in a recursive fashion on :find etc.
+set scrolloff=5
+set shiftround
+set shiftwidth=2
+set shortmess+=c " Don't pass messages to ins-completion-menu.
+set sidescrolloff=5
+set signcolumn=yes
+set smartcase " only be case sensitive when i type CAPS
+set smarttab
+set softtabstop=2
+set splitbelow
+set splitright
+set tabstop=2
+set textwidth=80
+set timeoutlen=500 "timeout for mapped sequence
+set updatetime=100 " updatetime for CursorHold & CursorHoldI
+
+call plug#begin(stdpath('data') . '/plugged')
+
+" Edit
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'gregsexton/MatchTag'
+
+" Search
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'jesseleite/vim-agriculture'
+
+" Git
+Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-fugitive'
+
+" LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
+" TODO Plug 'glepnir/lspsaga.nvim'
+
+" Colors
+Plug 'gruvbox-community/gruvbox'
+if filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
+  " load terminal16 locally from my machine if it exists
+  Plug '/mnt/c/Code/vim-terminal16'
+else
+  Plug 'primalivet/vim-terminal16'
+endif
+
+
+call plug#end()
+
+" use space as leader
+let mapleader=" "
 
 " auto esc on move
 imap jj <Esc>j
 imap kk <Esc>k
-
 
 " make j and k work on wrapped lines
 nnoremap j gj
@@ -41,429 +106,78 @@ vnoremap <C-k> :move '<-2<CR>gv=gv
 vnoremap < <gv
 vnoremap > >gv
 
-"-------------------------------------------------------------------------------
-" COMMANDS
-"-------------------------------------------------------------------------------
+" LSP
+" nnoremap <leader>gi :lua vim.lsp.buf.implementation()<CR>
+" nnoremap <leader>gsh :lua vim.lsp.buf.signature_help()<CR>
+" nnoremap <leader>gh :lua vim.lsp.buf.hover()<CR>
+" nnoremap <leader>gca :lua vim.lsp.buf.code_action()<CR>
+" nnoremap <leader>gsd :lua vim.lsp.diagnostic.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
 
-command! -nargs=0  Format      :call CocAction('format')
-
-command! -nargs=0  OrganizeImports :call CocAction('runCommand', 'editor.action.organizeImport')
-
-"-------------------------------------------------------------------------------
-" AUTOCOMMANDS
-"-------------------------------------------------------------------------------
-
-augroup MyWinSettings
-	" draws a colorcolumn 1 in +1 column textwidth
-	au! WinLeave * set cc=0 | autocmd! WinEnter * set cc=+1
-
-	" hide statusbar in FZF, whichkey
-	au!  FileType fzf,which_key set nonu scl=no ls=0 nosmd noru | autocmd WinLeave <buffer> set nu scl=yes ls=2 smd ru
-augroup END
-
-augroup MyFileSettings
-	" wrap lines in markdown
-	au BufRead,BufNewFile *.md setlocal wrap
-	" hide numbers in txt, markdown
-	au! FileType text,md,markdown setlocal nonu nornu
-augroup END
-
-augroup MySearchSettings
-	" turn on hlsearch when entering cmd line
-	autocmd CmdlineEnter /,\? :set hlsearch
-augroup END
-
-"-------------------------------------------------------------------------------
-" OPTIONS
-"-------------------------------------------------------------------------------
-
-syntax on
-filetype plugin on
-filetype plugin indent on
-
-" Files and Buffers
-set hidden
-set nobackup " No backups, seems to be a problem with some lsps
-set nowrap
-set nowritebackup " No backups, seems to be a problem with some lsps
-
-" UI
-set completeopt=menu,menuone,noinsert
-set cursorline
-set noshowmode
-set number " show line numbers
-set scrolloff=5
-set shortmess+=c " Don't pass messages to ins-completion-menu.
-set sidescrolloff=5
-set signcolumn=yes
-set splitbelow
-set splitright
-
-" Search and Find
-set ignorecase
-set path+=** " make path act in a recursive fashion on :find etc.
-set smartcase
-
-" Fromatting
-set listchars=tab:>--,space:·,trail:·
-set nolist
-set textwidth=80
-
-" Indentation
-set autoindent
-set cindent
-set expandtab
-set shiftround
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set smarttab
-
-" Folding
-set foldlevel=999 " never start folded
-set foldenable
-set foldmethod=indent
-set foldcolumn=2
-
-" Timings
-set timeoutlen=500 "timeout for mapped sequence
-set updatetime=300 " updatetime for CursorHold & CursorHoldI
-
-"-------------------------------------------------------------------------------
-" NETEW
-"-------------------------------------------------------------------------------
-
-let g:netrw_banner = 0 " hide annoying banner
-let g:netrw_browse_splits = 4 " open files in same window
-let g:netrw_liststyle = 3 " tree style listing
-let g:netrw_list_hide= netrw_gitignore#Hide() " hide same files as gitignore
-
-"-------------------------------------------------------------------------------
-" VIM PLUG / PRE START
-"-------------------------------------------------------------------------------
-
-"-------------------------------------------------------------------------------
-" VIM PLUG / START
-"-------------------------------------------------------------------------------
-
-call plug#begin(stdpath('data') . '/plugged')
-
-Plug 'sheerun/vim-polyglot'
-Plug 'liuchengxu/vim-which-key'
-Plug 'airblade/vim-gitgutter'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'jesseleite/vim-agriculture'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'gregsexton/MatchTag'
-Plug 'gruvbox-community/gruvbox'
-Plug 'vim-airline/vim-airline'
-" TMUXLINE use it once to generate a .conf file to source in tmux
-" Plug 'edkolev/tmuxline.vim'
-"let g:tmuxline_powerline_symbols = 1
-
-" load terminal16 locally from my machine if it exists
-" if filereadable('/data/data/com.termux/files/home/Code/vim-terminal16/colors/terminal16.vim')
-"   Plug '/data/data/com.termux/files/home/Code/vim-terminal16'
-" elseif filereadable('/mnt/c/Code/vim-terminal16/colors/terminal16.vim')
-"   Plug '/mnt/c/Code/vim-terminal16'
-" else
-"   Plug 'primalivet/vim-terminal16'
-" endif
-
-"-------------------------------------------------------------------------------
-" VIM PLUG / END
-"-------------------------------------------------------------------------------
-
-call plug#end()
-
-"-------------------------------------------------------------------------------
-" WHICH KEY
-"-------------------------------------------------------------------------------
-
-call which_key#register('<Space>', "g:which_key_map")
-
-let g:which_key_use_floating_win = 0
-let g:which_key_hspace = 15
-
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-vnoremap <silent> <leader> :WhichKeyVisual '<Space>'<CR>
-
-let g:which_key_map = {} " reset keymap
-
-let g:which_key_map.e = { 'name' : '+edit' }
-let g:which_key_map.e.q = 'edit-fix-current'
-let g:which_key_map.e.f = 'edit-format-buffer'
-let g:which_key_map.e.oi = 'edit-organize-imports'
-let g:which_key_map.e.r = 'edit-rename'
-let g:which_key_map.e.s = 'edit-sort-selected'
-let g:which_key_map.e.hp = 'edit-hunk-preview'
-let g:which_key_map.e.hs = 'edit-hunk-stage'
-let g:which_key_map.e.hu = 'edit-hunk-undo'
-let g:which_key_map.e.d = 'edit-insert-jsdoc'
-
-nmap <leader>eq <Plug>(coc-fix-current)
-nmap <leader>ef :Format<CR>
-nmap <leader>eoi :OrganizeImports<cr>
-nmap <leader>er <Plug>(coc-rename)
+" Edit
+nnoremap <leader>er :lua vim.lsp.buf.rename()<CR>
 vnoremap <leader>es :'<,'>sort<CR>
-nmap <leader>ehp <Plug>(GitGutterPreviewHunk)
-nmap <leader>ehs <Plug>(GitGutterStageHunk)
-nmap <leader>ehu <Plug>(GitGutterUndoHunk)
-nmap <silent> <leader>ed <Plug>(jsdoc)
 
-let g:which_key_map.g = { 'name' : '+goto' }
-let g:which_key_map.g.d = 'goto-definition'
-let g:which_key_map.g.d = 'goto-type-definition'
-let g:which_key_map.g.r = 'goto-references'
-let g:which_key_map.g.h = 'goto-documentation'
-let g:which_key_map.g.f = 'goto-file'
-
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gt <Plug>(coc-type-definition)
-nmap <leader>gr <Plug>(coc-references)
-nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
+" GoTo
+nnoremap <leader>gd :lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>gt :lua vim.lsp.buf.type_definition()<CR>
+nnoremap <leader>gr :lua vim.lsp.buf.references()<CR>
+nnoremap <leader>gs :lua vim.lsp.buf.signature_help()<CR>
+" nnoremap <silent> <leader>gh :call <SID>show_documentation()<CR>
 nnoremap <leader>gf gf
 
-let g:which_key_map.s = { 'name' : '+search' }
-let g:which_key_map.s.f = 'search-files'
-let g:which_key_map.s.b = 'search-buffers'
-let g:which_key_map.s.g = 'search-git-files'
-let g:which_key_map.s['*'] = 'ag-raw-under-cursor'
-let g:which_key_map.s['/'] = 'ag-raw-search' " uses range in visual
-
+" Search
 nnoremap <leader>sf :Files<CR>
 nnoremap <leader>sg :GFiles<CR>
 nnoremap <leader>sb :Buffers<CR>
-nmap <leader>s* <Plug>AgRawWordUnderCursor<CR>
+nmap <leader>s* <Plug>AgRawWordUnderCursor
 nmap <leader>s/ <Plug>AgRawSearch
-vmap <leader>s/ <Plug>AgRawVisualSelection<CR>
+vmap <leader>s/ <Plug>AgRawVisualSelection
 
-let g:which_key_map.t = { 'name' : '+toggle' }
-let g:which_key_map.t.l = 'toggle-list-chars'
-let g:which_key_map.t.p = 'toggle-paste-mode'
-let g:which_key_map.t.s = 'toggle-search-highlight'
-let g:which_key_map.t.b = 'toggle-background'
-let g:which_key_map.t.i = 'toggle-indentlines'
-
+" Toggle
 nnoremap <leader>tl :set list!<CR>
 nnoremap <leader>tp :set invpaste<CR>
 nnoremap <leader>ts :set hlsearch!<CR>
-nnoremap <leader>tb :call <SID>toggle_background()<CR>
-nnoremap <leader>ti :IndentLinesToggle<CR>
 
-
-let g:which_key_map.v = { 'name' : '+vimrc' }
-let g:which_key_map.v.e = 'vimrc-edit'
-let g:which_key_map.v.s = 'vimrc-source'
-
+" Vimrc
 nnoremap <leader>ve :edit $MYVIMRC<CR>
 nnoremap <leader>vs :source $MYVIMRC<CR>
 
-let g:which_key_map.w = { 'name' : '+window' }
-let g:which_key_map.w.v = 'split-vertical'
-let g:which_key_map.w.x = 'split-horizontal'
-let g:which_key_map.w['='] = 'equal-splits'
-let g:which_key_map.w.o = 'only-current'
-let g:which_key_map.w.e = 'explore'
-
+" Window
 nnoremap <leader>wv :vsp<CR>
 nnoremap <leader>wx :sp<CR>
 nnoremap <leader>w= <C-w>=
 nnoremap <leader>wo :only<CR>
 nnoremap <leader>we :Explore<CR>
 
-let g:which_key_map['['] = { 'name' : '+previous' }
-let g:which_key_map['['].q = 'previous-diagnostic'
+nnoremap [q :lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap ]q :lua vim.lsp.diagnostic.goto_next()<CR>
+" [C goes to first git hunk
+" [c goes to prev git hunk
+" ]c goes to next git hunk
+" ]C goes to last git hunk
 
-nmap <leader>[q <Plug>(coc-diagnostic-prev)
-nmap <leader>[h <Plug>(GitGutterPrevHunk)
+augroup PRIMALIVET
+	" Show remove colorcolumn for current window
+	" set cc=+1 means set it +1 column from 'textwidth' option
+	au! WinLeave * set cc=0 | autocmd! WinEnter * set cc=+1
 
-let g:which_key_map[']'] = { 'name' : '+next' }
-let g:which_key_map[']'].q = 'next-diagnostic'
+	" hide statusbar in FZF, whichkey
+	au!  FileType fzf,which_key set nonu scl=no ls=0 nosmd noru | autocmd WinLeave <buffer> set nu scl=yes ls=2 smd ru
 
-nmap <leader>]q <Plug>(coc-diagnostic-next)
-nmap <leader>]h <Plug>(GitGutterNextHunk)
+	" show hunk message
+	au! User SignifyHunk call s:show_current_hunk()
 
-" I know this is useless, but it's a good help when I forget mappings
-let g:which_key_map.z = { 'name' : '+fold' }
-let g:which_key_map.z.a = 'toggle'
-let g:which_key_map.z.A = 'toggle-all'
-let g:which_key_map.z.o = 'open-cursor'
-let g:which_key_map.z.O = 'open-all-cursor'
-let g:which_key_map.z.c = 'close-cursor'
-let g:which_key_map.z.C = 'close-all-cursor'
+	" turn on hlsearch when entering cmd line
+	autocmd CmdlineEnter /,\? :set hlsearch
 
-nnoremap <leader>za za
-nnoremap <leader>zA zA
-nnoremap <leader>zo zo
-nnoremap <leader>zo zO
-nnoremap <leader>zc zc
-nnoremap <leader>zc zC
+	" wrap lines in markdown
+	au BufRead,BufNewFile *.md setlocal wrap
 
-"-------------------------------------------------------------------------------
-" COC
-"-------------------------------------------------------------------------------
+	" hide numbers in txt, markdown
+	au! FileType text,md,markdown setlocal nonu nornu
+augroup END
 
-let g:coc_global_extensions = [
-			\'coc-vimlsp',
-			\'coc-yaml',
-			\'coc-json',
-			\'coc-html',
-			\'coc-css',
-			\'coc-eslint',
-			\'coc-tsserver',
-			\'coc-phpls',
-			\'coc-diagnostic',
-			\'coc-sh',
-			\'coc-prettier'
-			\]
-
-" show documentation in preview window
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-"-------------------------------------------------------------------------------
-" GITGUTTER
-"-------------------------------------------------------------------------------
-
-" remove mapping to preview hunk, they're remapped below
-let g:gitgutter_map_keys = 0
-
-"-------------------------------------------------------------------------------
-" FZF
-"-------------------------------------------------------------------------------
-
-let g:fzf_layout = { 'down': '50%' }
-
-"-------------------------------------------------------------------------------
-" IndentLines
-"-------------------------------------------------------------------------------
-
-" let g:indentLine_fileTypeExclude = ['fzf']
-" let g:indentLine_enabled = 1
-
-"-------------------------------------------------------------------------------
-" Syntax and Hightlight
-"-------------------------------------------------------------------------------
-
-let g:vim_markdown_frontmatter = 1
-
-"-------------------------------------------------------------------------------
-" GRUVBOX
-"-------------------------------------------------------------------------------
-
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_sign_column = 'bg0'
-
-"-------------------------------------------------------------------------------
-" AIRLINE
-"-------------------------------------------------------------------------------
-
-let g:airline_powerline_fonts = 1
-
-"-------------------------------------------------------------------------------
-" LIGHTLINE
-"-------------------------------------------------------------------------------
-
-" hide vim native --INSERT-- message
-" set noshowmode
-
-" " lightline colorscheme
-" let g:lightline = {
-" 	\ 'colorscheme': 'gruvbox',
-" 	\ 'active': {
-" 	\		'left':	 [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'gitbranch', 'modified' ] ],
-" 	\		'right': [ [ 'lineinfo' ],
-" 	\				 [ 'percent' ],
-" 	\				 [ 'fileformat', 'fileencoding', 'filetype' ] ]
-" 	\ },
-" 	\ 'inactive': {
-" 	\		'left':	 [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'gitbranch', 'modified' ] ],
-" 	\		'right': [ [ 'lineinfo' ],
-" 	\				 [ 'percent' ],
-" 	\				 [ 'fileformat', 'fileencoding', 'filetype' ] ]
-" 	\ },
-" 	\ 'component_function': {
-" 	\   'fileformat': 'LightlineFileformat',
-" 	\   'filetype': 'LightlineFiletype',
-" 	\   'gitbranch': 'FugitiveHead',
-" 	\ },
-" 	\ 'component': {
-" 	\   'lineinfo': '%3l:%-2v%<'
-" 	\ }
-" \ }
-
-function! LightlineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! LightlineFiletype()
-  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-endfunction
-
-"-------------------------------------------------------------------------------
-" STATUSLINE
-"-------------------------------------------------------------------------------
-
-function! RootDir()
-	let l:cwd_string = fnamemodify(getcwd(), ':t')
-	return cwd_string
-endfunction
-
-function! PasteMode()
-	if &paste
-		return "[PASTE]"
-	else
-		return ""
-	endif
-endfunction
-
-" set colors / set statusline+=%#HighlightGroup#
-" start empty
-set statusline=
-" root dir
-set statusline+=%{RootDir()}
-" fugitive statusline for git
-set statusline+=\ %{FugitiveHead()}
-" space, short filename, truncate left
-set statusline+=\ %<%f
-" space, show if helpfile
-set statusline+=\ %h
-" show if file modified
-set statusline+=%m
-" show if file read only
-set statusline+=%r
-" paste mode is on?
-set statusline+=%{PasteMode()}
-" switch to right side of statusline
-set statusline+=%=
-" filetype
-set statusline+=%y
-" align left, bigger max width, %l line, %c column, %V virtual column
-set statusline+=\ %-14.(%l,%c%V%)
-" percentage of file
-set statusline+=%P
-
-"-------------------------------------------------------------------------------
-" ABBREVIATIONS
-"-------------------------------------------------------------------------------
-
-" help went I type it sloppy
+" help me!
 cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev WQ wq
@@ -471,14 +185,27 @@ cnoreabbrev Wq wq
 cnoreabbrev wQ wq
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
+inoreabbrev parmas params
+inoreabbrev cosnt const
 
-"-------------------------------------------------------------------------------
-" COLORS
-"-------------------------------------------------------------------------------
+function! s:show_current_hunk() abort
+  let h = sy#util#get_hunk_stats()
+  if !empty(h)
+	echo printf('[Hunk %d/%d]', h.current_hunk, h.total_hunks)
+  endif
+endfunction
 
-set background=dark
-set termguicolors " not with theme terminal16
-colorscheme gruvbox
+function! s:statusline_expression()
+  let paste = "%{&paste ? '[PASTE]' : ''}"
+  let mod = "%{&modified ? '[+]' : !&modifiable ? '[x]' : ''}"
+  let ro = "%{&readonly ? '[RO]' : ''}"
+  let ft  = "%{len(&filetype) ? '['.&filetype.']' : ''}"
+  let branch = "%{exists('g:loaded_fugitive') && FugitiveHead() != '' ? '['.FugitiveHead().']' : ''}"
+  let sep = ' %= '
+  let pos = ' %-12(%l : %c%V%) '
+  let pct = ' %P'
 
-" when using gruvbox, make Todo black on yellow
-highlight Todo guifg=#1d2021 guibg=#d79921
+  return '[%n] %f %<'.mod.ro.paste.branch.sep.ft.pos.'%*'.pct
+endfunction
+
+let &statusline= s:statusline_expression()
