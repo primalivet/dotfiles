@@ -56,8 +56,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 
 " Format
-" Plug 'dense-analysis/ale' (to slow and dont send diagnostic to nvim_lsp)
-" Plug 'sbdchd/neoformat' (cant really understand relation between eslint-plugin-prettier and .prettierc)
+Plug 'dense-analysis/ale'
 
 " Colors
 Plug 'gruvbox-community/gruvbox'
@@ -109,14 +108,12 @@ vnoremap > >gv
 
 " LSP
 " nnoremap <leader>gi :lua vim.lsp.buf.implementation()<CR>
-" nnoremap <leader>gsh :lua vim.lsp.buf.signature_help()<CR>
 " nnoremap <leader>gh :lua vim.lsp.buf.hover()<CR>
 " nnoremap <leader>gca :lua vim.lsp.buf.code_action()<CR>
 " nnoremap <leader>gsd :lua vim.lsp.diagnostic.show_line_diagnostics(); vim.lsp.util.show_line_diagnostics()<CR>
 
 " Edit
 nnoremap <leader>er :lua vim.lsp.buf.rename()<CR>
-" nnoremap <leader>er	  :Lspsaga rename<CR>
 vnoremap <leader>es :'<,'>sort<CR>
 
 " GoTo

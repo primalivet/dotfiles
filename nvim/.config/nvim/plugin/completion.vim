@@ -1,9 +1,3 @@
-set completeopt=menuone,noselect " has to be this value for nvim-compe
-
-lua << EOF
-require('lsp')
-EOF
-
 let g:compe = {}
 let g:compe.enabled = v:true
 let g:compe.autocomplete = v:true
