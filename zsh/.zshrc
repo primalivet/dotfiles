@@ -8,6 +8,7 @@ export PATH=/usr/local/sbin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/.bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/go/bin:$PATH
 
 # KEYBINDINGS
 #-------------------------------------------------------------------------------
@@ -272,3 +273,5 @@ fi
 
 # The next line updates PATH for Netlify's Git Credential Helper.
 test -f '/home/primalivet/.config/netlify/helper/path.zsh.inc' && source '/home/primalivet/.config/netlify/helper/path.zsh.inc'
+
+alias luamake=/mnt/c/Code/lua-language-server/3rd/luamake/luamake

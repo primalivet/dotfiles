@@ -56,7 +56,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 
 " Format
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 
 " Colors
 Plug 'gruvbox-community/gruvbox'
