@@ -29,12 +29,21 @@ local formatters = {
   },
   eslint = {
 	command = "eslint_d",
-	args = { "--fix", "--stdin-filepath", "%filepath"}
+	args = { "--fix-to-stdout", "--stdin", "--stdin-filename", "%filename"}
   }
 }
 
 local formatFiletypes = {
-  javascript = "prettier"
+  -- TODO make optional as I should be alble to control the formatter from an
+  -- option depending on project
+  -- With the right configuration this seem to work with both prettier and
+  -- eslint as formatters as well as single prettier or eslint.
+  --
+  -- This is crutial to adopt to different projects. So options below could be
+  -- javascript = { "eslint", "prettier" }
+  -- javascript = "eslint"
+  -- javascript = "prettier"
+  javascript = {"eslint", "prettier"}
 }
 
 nvim_lsp.diagnosticls.setup{
@@ -47,7 +56,5 @@ nvim_lsp.diagnosticls.setup{
   },
   on_attach = function(client)
 	client.resolved_capabilities.formatting = true
-	-- client.resolved_capabilities.rename = false
-	-- client.resolved_capabilities.goto_definition = false
   end
 }
