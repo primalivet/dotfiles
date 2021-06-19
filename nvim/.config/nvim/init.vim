@@ -4,7 +4,7 @@ filetype plugin indent on
 
 " TODO: reset 'sets' from nvim defaults
 set autoindent
-set background=light
+set background=dark
 set cindent
 set cursorline
 set expandtab
@@ -159,7 +159,8 @@ cnoreabbrev Q! q!
 inoreabbrev parmas params
 inoreabbrev cosnt const
 
-lua require 'primalivet.lsp' " configuration for language servers
-lua require 'primalivet.compe' " configuration for completion
+" source lua files
+lua require 'primalivet.lsp'
+lua require 'primalivet.compe'
 
 colorscheme gruvbox
