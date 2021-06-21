@@ -78,4 +78,4 @@ nnoremap ]q :lua vim.lsp.diagnostic.goto_next()<CR>
 " source lua files
 lua require 'primalivet'.init()
 
-colorscheme xcodedarkhc
+colorscheme brickor

@@ -1,6 +1,5 @@
 local cmd = vim.api.nvim_command
 local fn = vim.fn
-local packer = nil
 
 function packer_autoinstall()
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -12,7 +11,7 @@ function packer_autoinstall()
 end
 
 function packer_register()
-  require'packer'.startup(function()
+  require'packer'.startup(function(use)
 
   use { 'wbthomason/packer.nvim' }
 
@@ -24,12 +23,10 @@ function packer_register()
   use { 'arzg/vim-colors-xcode' }
   use { 'lifepillar/vim-colortemplate' }
 
-  use { 'neovim/nvim-lspconfig' }
-
   use {
-    'hrsh7th/nvim-compe',
+    'neovim/nvim-lspconfig',
     config = function()
-      require'primalivet.plugins.compe'
+      require'primalivet.plugins.lsp'
     end
   }
 
@@ -37,6 +34,14 @@ function packer_register()
     'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
   }
+
+  use {
+    'hrsh7th/nvim-compe',
+    config = function()
+      require'primalivet.plugins.compe'.init()
+    end
+  }
+
 
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -51,7 +56,14 @@ function packer_register()
     end
   }
 
-  use { 'norcalli/nvim-colorizer.lua' }
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require'colorizer'.setup()
+    end
+  }
+
+  use { '/mnt/c/Code/vim-brickor' }
 
   end)
 
