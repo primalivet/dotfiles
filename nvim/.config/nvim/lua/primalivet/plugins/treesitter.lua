@@ -6,6 +6,8 @@ function M.init()
       'bash',
       'css',
       'dockerfile',
+      'go',
+      'gomod',
       'html',
       'javascript',
       'json',
