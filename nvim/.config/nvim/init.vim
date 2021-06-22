@@ -60,6 +60,7 @@ nnoremap <leader>sc :lua require('telescope.builtin').current_buffer_fuzzy_find(
 nnoremap <leader>sb :lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>s* :lua require('telescope.builtin').grep_string()<CR>
 nnoremap <leader>s/ :lua require('telescope.builtin').live_grep()<CR>
+nnoremap <leader>sd :lua require('primalivet.plugins.telescope').dotfiles()<CR>
 
 " Toggle
 nnoremap <leader>tl :set list!<CR>

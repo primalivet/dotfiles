@@ -1,4 +1,6 @@
-function init()
+local M = {}
+
+function M.init()
   vim.o.completeopt = "menuone,noselect"
 
   require'compe'.setup {
@@ -28,6 +30,4 @@ function init()
   }
 end
 
-return {
-  init = init
-}
+return M

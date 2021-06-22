@@ -1,4 +1,6 @@
-function init()
+local M = {}
+
+function M.init()
   require('nvim-treesitter.configs').setup({
     ensure_installed = {
       'bash',
@@ -21,6 +23,4 @@ function init()
   })
 end
 
-return {
-  init = init
-}
+return M

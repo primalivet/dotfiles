@@ -1,9 +1,7 @@
 local M = {}
 
 function M.init()
-  require 'primalivet.packer'.init()
+  require('gitsigns').setup()
 end
 
 return M
-
-

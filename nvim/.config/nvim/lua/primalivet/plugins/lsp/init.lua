@@ -1,4 +1,10 @@
-require("primalivet.plugins.lsp.sumneko")
-require("primalivet.plugins.lsp.vimls")
-require("primalivet.plugins.lsp.tsserver")
-require("primalivet.plugins.lsp.diagnosticls")
+local M = {}
+
+function M.init()
+  require("primalivet.plugins.lsp.sumneko").init()
+  require("primalivet.plugins.lsp.vimls").init()
+  require("primalivet.plugins.lsp.tsserver").init()
+  require("primalivet.plugins.lsp.diagnosticls").init()
+end
+
+return M
