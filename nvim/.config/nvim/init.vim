@@ -54,12 +54,12 @@ nnoremap <leader>gh :lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>gf gf
 
 " Search
-nnoremap <leader>sf :Telescope find_files<CR>
-nnoremap <leader>sg :Telescope git_files<CR>
-nnoremap <leader>sb :Telescope buffers<CR>
-" nmap <leader>s* <Plug>AgRawWordUnderCursor
-" nmap <leader>s/ <Plug>AgRawSearch
-" vmap <leader>s/ <Plug>AgRawVisualSelection
+nnoremap <leader>sf :lua require('telescope.builtin').find_files()<CR>
+nnoremap <leader>sg :lua require('telescope.builtin').git_files()<CR>
+nnoremap <leader>sc :lua require('telescope.builtin').current_buffer_fuzzy_find({ previewer = false, sorting_strategy="ascending" })<CR>
+nnoremap <leader>sb :lua require('telescope.builtin').buffers()<CR>
+nnoremap <leader>s* :lua require('telescope.builtin').grep_string()<CR>
+nnoremap <leader>s/ :lua require('telescope.builtin').live_grep()<CR>
 
 " Toggle
 nnoremap <leader>tl :set list!<CR>

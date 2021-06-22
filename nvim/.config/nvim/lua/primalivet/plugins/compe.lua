@@ -1,5 +1,4 @@
 function init()
-  print("setup compe")
   vim.o.completeopt = "menuone,noselect"
 
   require'compe'.setup {
