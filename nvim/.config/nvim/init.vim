@@ -74,7 +74,8 @@ nnoremap <leader>vs :source $MYVIMRC<CR>
 " Previous and Next of problems, git hunks etc
 nnoremap [q :lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap ]q :lua vim.lsp.diagnostic.goto_next()<CR>
-" [c, ]c, [C, ]C, goes to previous, next, first and last git hunk
+nnoremap ]c :lua require('gitsigns.actions').next_hunk()<CR>
+nnoremap [c :lua require('gitsigns.actions').prev_hunk()<CR>
 
 " source lua files
 lua require 'primalivet'.init()
