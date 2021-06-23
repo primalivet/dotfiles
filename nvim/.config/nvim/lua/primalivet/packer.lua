@@ -28,7 +28,13 @@ local function packer_register()
     use { 'gerw/vim-HiLinkTrace' }
     use { 'gruvbox-community/gruvbox' }
     use { 'arzg/vim-colors-xcode' }
-    use { '/mnt/c/Code/vim-brickor' }
+    use { '/mnt/c/Code/nvim-brickor',
+          -- TODO uncomment for development
+          -- config = function() require'nvim-brickor'.setup() end
+    }
+
+    use { 'iamcco/markdown-preview.nvim',
+          ft = { 'markdown' }, run = function() vim.fn['mkdp#util#install'](0) end }
 
     use { 'neovim/nvim-lspconfig',
           config = function() require'primalivet.plugins.lsp'.init() end }
