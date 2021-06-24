@@ -15,10 +15,6 @@ end
 local function packer_register()
   require'packer'.startup(function(use)
 
-    -- TODO try lspsaga https://github.com/glepnir/lspsaga.nvim
-    -- TODO try trouble https://github.com/folke/trouble.nvim
-    -- TODO try lightbulb https://github.com/kosayoda/nvim-lightbulb
-
     use { 'wbthomason/packer.nvim' }
     use { 'editorconfig/editorconfig-vim' }
     use { 'tpope/vim-commentary' }
@@ -28,10 +24,7 @@ local function packer_register()
     use { 'gerw/vim-HiLinkTrace' }
     use { 'gruvbox-community/gruvbox' }
     use { 'arzg/vim-colors-xcode' }
-    use { '/mnt/c/Code/nvim-brickor',
-          -- TODO uncomment for development
-          -- config = function() require'nvim-brickor'.setup() end
-    }
+    use { '/mnt/c/Code/nvim-brickor' }
 
     use { 'iamcco/markdown-preview.nvim',
           ft = { 'markdown' }, run = function() vim.fn['mkdp#util#install'](0) end }

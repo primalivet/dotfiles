@@ -199,6 +199,7 @@ alias kod='cd ~/Kod/'
 alias dotfiles='cd /mnt/c/Code/dotfiles/'
 
 alias vi='nvim'
+alias ta='tmux attach'
 
 alias gl='git log --oneline'
 alias gs='git status'
