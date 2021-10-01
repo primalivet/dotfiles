@@ -1,0 +1,23 @@
+import:
+  - ~/.config/alacritty/github_light_default.yml
+window:
+  dimensions:
+    columns: 160
+    lines: 50
+  padding:
+    x: 0
+    y: 0
+font:
+  normal:
+    family: SF Mono
+    style: Regular
+  bold:
+    style: Bold
+  italic:
+    style: Italic
+  bold_italic:
+    style: Bold Italic
+  size: 14.0
+  offset:
+    x: 1
+    y: 1
