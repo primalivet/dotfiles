@@ -30,6 +30,8 @@ M.init = function(mode)
     vim.cmd("hi! link StatusLineNC CursorLine")
     vim.cmd("hi! link QuickfixLine CursorLine")
     vim.cmd("hi! link EndOfBuffer Whitespace")
+    vim.cmd("hi! link TSNote String")
+    vim.cmd("hi! link Todo String")
 end
 
 return M

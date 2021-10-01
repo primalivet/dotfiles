@@ -1,7 +1,7 @@
 local M = {}
 
 function M.init()
-    local nvim_lsp = require("lspconfig")
+    local nvim_lsp = require "lspconfig"
 
     nvim_lsp.tsserver.setup {
         on_attach = function(client, bufnr)
@@ -23,11 +23,9 @@ function M.init()
                 bufnr
             )
 
-            ts_utils.setup(
-                {
-                    filter_out_diagnostics_by_severity = {"hint"}
-                }
-            )
+            ts_utils.setup {
+                filter_out_diagnostics_by_severity = {"hint"}
+            }
 
             ts_utils.setup_client(client)
         end

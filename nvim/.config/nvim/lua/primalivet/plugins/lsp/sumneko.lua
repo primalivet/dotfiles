@@ -2,7 +2,7 @@ local M = {}
 
 function M.init()
     -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
-    local nvim_lsp = require("lspconfig")
+    local nvim_lsp = require "lspconfig"
 
     USER = vim.fn.expand("$USER")
 

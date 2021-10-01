@@ -13,7 +13,6 @@ end
 
 local function git_status()
     local icon = ""
-    -- TODO: get 'head' from current directory
     local signs = vim.b.gitsigns_status_dict or {head = "", added = 0, changed = 0, removed = 0}
     local has_branch = signs.head ~= ""
 

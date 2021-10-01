@@ -52,7 +52,6 @@ function M.init()
     nvim_set_keymap("n", "<leader>sd", ':lua require"primalivet.plugins.telescope".dotfiles()<CR>', default_opt)
 
     -- Toggle
-    -- nvim_set_keymap("n", "<leader>tt", ":TroubleToggle<CR>", default_opt)
     nvim_set_keymap("n", "<leader>tt", ":lua require('primalivet.utils').toggle_quickfix()<CR>", default_opt)
     nvim_set_keymap("n", "<leader>tl", ":set list!<CR>", default_opt)
     nvim_set_keymap("n", "<leader>tp", ":set invpaste<CR>", default_opt)
@@ -63,11 +62,6 @@ function M.init()
         ':lua require"primalivet.plugins.github-theme".toggle_background()<CR>',
         default_opt
     )
-
-    -- Vimrc
-    nvim_set_keymap("n", "<leader>ve", ":edit $MYVIMRC<CR>", default_opt)
-    -- nvim_set_keymap('n', '<leader>vs', ':source $MYVIMRC<CR>', default_opt)
-    -- TODO: https://neovim.discourse.group/t/reload-init-lua-and-all-require-d-scripts/971/11
 
     -- Previous and Next of problems, git hunks etc
     nvim_set_keymap("n", "[q", ":lua vim.lsp.diagnostic.goto_prev()<CR>", default_opt)

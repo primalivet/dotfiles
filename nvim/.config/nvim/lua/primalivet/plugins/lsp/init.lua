@@ -1,4 +1,3 @@
-local hello = ""
 local M = {}
 
 function M.init()
@@ -9,16 +8,6 @@ function M.init()
     require("primalivet.plugins.lsp.null-ls").init()
     require("primalivet.plugins.lsp.jsonls").init()
 
-    local function diag_type(severity)
-        if severity == 1 then
-            return "E"
-        elseif severity == 2 then
-            return "W"
-        else
-            return ""
-        end
-    end
-
     -- Integrate quickfix list with the nvim lsp
     do
         local lsp_method = "textDocument/publishDiagnostics"
@@ -26,27 +15,9 @@ function M.init()
         vim.lsp.handlers[lsp_method] = function(err, method, result, client_id, bufnr, config)
             default_handler(err, method, result, client_id, bufnr, config)
             local diagnostics = vim.lsp.diagnostic.get_all()
-            local qflist = {}
-            for bnr, diag in pairs(diagnostics) do
-                for _, d in ipairs(diag) do
-                    -- TODO: check if relatedInformation[{ location = { uri }}]
-                    --       contain unwanted value such as "node_modules"
-                    --       if so, we don't want those in qf list
-                    -- local relInfo = ((d or {}).relatedInformation or nil)
-                    -- if relInfo ~= nil then
-                    --     for _, info in ipairs(relInfo) do
-                    --     end
-                    -- end
+            local items = vim.lsp.util.diagnostics_to_items(diagnostics)
 
-                    d.bufnr = bnr
-                    d.lnum = d.range.start.line + 1
-                    d.col = d.range.start.character + 1
-                    d.text = string.format("%s (%s)", d.message, d.source or "unknown")
-                    d.type = diag_type(d.severity)
-                    table.insert(qflist, d)
-                end
-            end
-            vim.lsp.util.set_qflist(qflist)
+            vim.lsp.util.set_loclist(items)
         end
     end
 end

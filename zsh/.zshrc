@@ -212,24 +212,6 @@ alias gp='git push'
 alias tls='tmux ls'
 alias tat='tmux attatch-session -t'
 
-# TODO: rework || use alacritty
-# alias darkmode='2>/dev/null defaults read -g AppleInterfaceStyle'
-
-# if [[ $(darkmode) == 'Dark' ]]; then
-#   export DARKMODE=1
-#   kitty @set-colors --all --configured ~/.config/kitty/github_dark_default.conf
-# else
-#   export DARKMODE=0
-#   kitty @set-colors --all --configured ~/.config/kitty/github_light_default.conf
-# fi
-# kitty @set-colors --all --configured github_dark_default.conf
-# if [[ ! ( $(darkmode) =~ 'Dark' ) ]]; then
-#   kitty @ --to unix:/tmp/kitty set-colors --all --configured ~/.config/kitty/github_dark_default.conf
-# else
-#   kitty @ --to unix:/tmp/kitty set-colors --all --configured ~/.config/kitty/github_light_default.conf
-#   # kitty @ --to unix:/tmp/kitty set-colors --reset
-# fi
-
 # FZF
 #-------------------------------------------------------------------------------
 
