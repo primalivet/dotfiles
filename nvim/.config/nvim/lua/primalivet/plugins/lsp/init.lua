@@ -29,6 +29,15 @@ function M.init()
             local qflist = {}
             for bnr, diag in pairs(diagnostics) do
                 for _, d in ipairs(diag) do
+                    -- TODO: check if relatedInformation[{ location = { uri }}]
+                    --       contain unwanted value such as "node_modules"
+                    --       if so, we don't want those in qf list
+                    -- local relInfo = ((d or {}).relatedInformation or nil)
+                    -- if relInfo ~= nil then
+                    --     for _, info in ipairs(relInfo) do
+                    --     end
+                    -- end
+
                     d.bufnr = bnr
                     d.lnum = d.range.start.line + 1
                     d.col = d.range.start.character + 1
