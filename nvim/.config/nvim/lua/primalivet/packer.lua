@@ -15,27 +15,111 @@ end
 local function packer_register()
     require "packer".startup(
         function(use)
+            -- The plugin manager
             use {"wbthomason/packer.nvim"}
 
-            -- Trouble: Temporary disabled as I'm trying out a Nvim LSP ->
-            -- Quickfix setup, see ./plugins/lsp/init.lua
-            -- use {
-            --     "folke/trouble.nvim",
-            --     requires = "kyazdani42/nvim-web-devicons",
-            --     config = function()
-            --         require("primalivet.plugins.trouble").init()
-            --     end
-            -- }
-
+            -- .editorconfig project files
             use {"editorconfig/editorconfig-vim"}
 
+            -- Generate JSDoc from a function signature
             use {"heavenshell/vim-jsdoc", run = "make install", ft = {"javascript", "javascript.jsx", "typescript"}}
 
+            -- Easy to align stuff around '=' for example, usefull for Markdown
+            use {"junegunn/vim-easy-align"}
+
+            -- Show function signature in a "floating window" when typeing
+            use {"ray-x/lsp_signature.nvim", requires = {"neovim/nvim-lspconfig"}}
+
+            -- Comment and uncomment
+            use {"tpope/vim-commentary"}
+
+            -- Easier to work with surrounding stuff like () {} and ""
+            use {"tpope/vim-surround"}
+
+            -- Enables to repeat, maily use it to repeat commands from commentary and surround above
+            use {"tpope/vim-repeat"}
+
+            -- Git integration (dont use that much, perfer git cli)
+            use {"tpope/vim-fugitive"}
+
+            -- Live preview of markdown while typeing
+            use {"iamcco/markdown-preview.nvim", run = "cd app && yarn install", ft = {"markdown"}}
+
+            -- Automatically insert tags for html and jsx etc.
+            use {"windwp/nvim-ts-autotag"}
+
+            -- Show import cost of npm packages
+            use {"yardnsm/vim-import-cost", run = "npm install"}
+
+            -- A theme i like (Good treesitter support)
+            use {
+                "projekt0n/github-nvim-theme",
+                config = function()
+                    require("primalivet.plugins.github-theme").init()
+                end
+            }
+
+            -- Automatically insert pairs like () {} "" etc.
+            use {
+                "windwp/nvim-autopairs",
+                requires = "nvim-treesitter/nvim-treesitter",
+                config = function()
+                    require "primalivet.plugins.autopairs".init()
+                end
+            }
+
+            -- Show git changes in the signcolumn, revert changes etc.
+            use {
+                "lewis6991/gitsigns.nvim",
+                requires = {"nvim-lua/plenary.nvim"},
+                config = function()
+                    require "gitsigns".setup {}
+                end
+            }
+
+            -- Show colors in color, like #ffffff whould be show in white background
+            use {
+                "norcalli/nvim-colorizer.lua",
+                config = function()
+                    require "colorizer".setup()
+                end
+            }
+
+            -- Search and find of a lot of things
+            use {
+                "nvim-telescope/telescope.nvim",
+                requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}, {"kyazdani42/nvim-web-devicons"}},
+                config = function()
+                    require "primalivet.plugins.telescope".init()
+                end
+            }
+
+            -- Better code syntax support
+            use {
+                "nvim-treesitter/nvim-treesitter",
+                run = ":TSUpdate",
+                config = function()
+                    require "primalivet.plugins.treesitter".init()
+                end
+            }
+
+            -- This is a tool to "view" what syntax group is used on a particular row/column
+            use {
+                "nvim-treesitter/playground",
+                requires = {{"nvim-treesitter/nvim-treesitter"}},
+                config = function()
+                    require "primalivet.plugins.treesitter-playground".init()
+                end
+            }
+
+            -- Formatting
+            use {"jose-elias-alvarez/null-ls.nvim", requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}}
+
+            -- Completion
             use {
                 "hrsh7th/nvim-cmp",
                 requires = {
-                    "onsails/lspkind-nvim",
-                    "hrsh7th/vim-vsnip",
+                    "hrsh7th/vim-snip",
                     "hrsh7th/cmp-buffer",
                     "hrsh7th/cmp-nvim-lua",
                     "hrsh7th/cmp-nvim-lsp",
@@ -47,29 +131,7 @@ local function packer_register()
                 end
             }
 
-            use {"iamcco/markdown-preview.nvim", run = "cd app && yarn install", ft = {"markdown"}}
-
-            use {"jose-elias-alvarez/null-ls.nvim", requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}}
-
-            use {
-                "jose-elias-alvarez/nvim-lsp-ts-utils",
-                requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", "jose-elias-alvarez/null-ls.nvim"}
-            }
-
-            use {"junegunn/vim-easy-align"}
-
-            use {
-                "lewis6991/gitsigns.nvim",
-                requires = {"nvim-lua/plenary.nvim"},
-                config = function()
-                    require "primalivet.plugins.gitsigns".init()
-                end
-            }
-
-            use {"lifepillar/vim-colortemplate"}
-
-            -- use { 'lukas-reineke/indent-blankline.nvim', config = function() require'primalivet.plugins.indent-blankline'.init() end }
-
+            -- Language Servers
             use {
                 "neovim/nvim-lspconfig",
                 config = function()
@@ -77,67 +139,10 @@ local function packer_register()
                 end
             }
 
+            -- Langauge server helpers, mainly for Typescript
             use {
-                "norcalli/nvim-colorizer.lua",
-                config = function()
-                    require "primalivet.plugins.colorizer".init()
-                end
-            }
-
-            use {
-                "nvim-telescope/telescope.nvim",
-                requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}, {"kyazdani42/nvim-web-devicons"}},
-                config = function()
-                    require "primalivet.plugins.telescope".init()
-                end
-            }
-
-            use {
-                "nvim-treesitter/nvim-treesitter",
-                run = ":TSUpdate",
-                config = function()
-                    require "primalivet.plugins.treesitter".init()
-                end
-            }
-
-            use {
-                "nvim-treesitter/playground",
-                requires = {{"nvim-treesitter/nvim-treesitter"}},
-                config = function()
-                    require "primalivet.plugins.treesitter-playground".init()
-                end
-            }
-
-            use {
-                "projekt0n/github-nvim-theme",
-                config = function()
-                    require("primalivet.plugins.github-theme").init()
-                end
-            }
-
-            use {"ray-x/lsp_signature.nvim", requires = {"neovim/nvim-lspconfig"}}
-
-            use {"tpope/vim-commentary"}
-
-            use {"tpope/vim-fugitive"}
-
-            use {"tpope/vim-repeat"}
-
-            use {"tpope/vim-surround"}
-
-            use {
-                "windwp/nvim-autopairs",
-                requires = "nvim-treesitter/nvim-treesitter",
-                config = function()
-                    require "primalivet.plugins.autopairs".init()
-                end
-            }
-
-            use {"windwp/nvim-ts-autotag"}
-
-            use {
-                "yardnsm/vim-import-cost",
-                run = "npm install"
+                "jose-elias-alvarez/nvim-lsp-ts-utils",
+                requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", "jose-elias-alvarez/null-ls.nvim"}
             }
         end
     )
