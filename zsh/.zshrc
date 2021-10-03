@@ -217,7 +217,8 @@ alias tat='tmux attatch-session -t'
 
 # Setup fzf
 if [[ ! "$PATH" == *~/.fzf/bin* ]]; then
-  export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ag/.ignore --hidden -g ""'
+  # export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ag/.ignore --hidden -g ""'
+  export FZF_DEFAULT_COMMAND='rg --files --hidden'
   export FZF_DEFAULT_OPTS='--height 100% --color=hl:13,hl+:13,fg+:11,marker:11,border:8,prompt:-1,pointer:11,spinner:-1,bg+:-1,bg:-1,spinner:-1,info:-1,fg:-1'
 
   export PATH="${PATH:+${PATH}:}~/.fzf/bin"

@@ -24,6 +24,13 @@ local function packer_register()
             -- Generate JSDoc from a function signature
             use {"heavenshell/vim-jsdoc", run = "make install", ft = {"javascript", "javascript.jsx", "typescript"}}
 
+            use {
+                "junegunn/fzf",
+                config = function()
+                    -- should run pre loading
+                    vim.api.nvim_set_var("fzf_layout", {down = "50%"})
+                end
+            }
             -- Easy to align stuff around '=' for example, usefull for Markdown
             use {"junegunn/vim-easy-align"}
 
@@ -51,13 +58,32 @@ local function packer_register()
             -- Show import cost of npm packages
             use {"yardnsm/vim-import-cost", run = "npm install"}
 
-            -- A theme i like (Good treesitter support)
+            -- Filebrower (only adapter to vifm cli program)
+            use {"vifm/vifm.vim"}
+
+            -- Color convertion
+            -- use {"NTBBloodbath/color-converter.nvim"}
+            use {"amadeus/vim-convert-color-to"}
+
+            -- Theme creation tool (for lua themes)
+            use {"rktjmp/lush.nvim"}
+
+            -- Colorscheme
             use {
-                "projekt0n/github-nvim-theme",
+                "gruvbox-community/gruvbox",
                 config = function()
-                    require("primalivet.plugins.github-theme").init()
+                    vim.api.nvim_set_var("gruvbox_contrast_dark", "hard")
                 end
             }
+
+            use {"~/Code/OSS/nvim-brickor"}
+
+            -- use {
+            --     "projekt0n/github-nvim-theme",
+            --     config = function()
+            --         require("primalivet.plugins.github-theme").init()
+            --     end
+            -- }
 
             -- Automatically insert pairs like () {} "" etc.
             use {
@@ -119,7 +145,7 @@ local function packer_register()
             use {
                 "hrsh7th/nvim-cmp",
                 requires = {
-                    "hrsh7th/vim-snip",
+                    "hrsh7th/vim-vsnip",
                     "hrsh7th/cmp-buffer",
                     "hrsh7th/cmp-nvim-lua",
                     "hrsh7th/cmp-nvim-lsp",

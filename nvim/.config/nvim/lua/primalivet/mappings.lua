@@ -63,9 +63,9 @@ function M.init()
         default_opt
     )
 
-    -- Previous and Next of problems, git hunks etc
-    nvim_set_keymap("n", "[q", ":lua vim.lsp.diagnostic.goto_prev()<CR>", default_opt)
-    nvim_set_keymap("n", "]q", ":lua vim.lsp.diagnostic.goto_next()<CR>", default_opt)
+    nvim_set_keymap("n", "[p", ":lua vim.lsp.diagnostic.goto_prev()<CR>", default_opt)
+    nvim_set_keymap("n", "]p", ":lua vim.lsp.diagnostic.goto_next()<CR>", default_opt)
+    -- These are here for transparency, as they are already defined by gitsign
     nvim_set_keymap("n", "]c", ':lua require("gitsigns.actions").next_hunk()<CR>', default_opt)
     nvim_set_keymap("n", "[c", ':lua require("gitsigns.actions").prev_hunk()<CR>', default_opt)
 end

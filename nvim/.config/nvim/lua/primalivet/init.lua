@@ -16,7 +16,6 @@ function M.init()
     vim.opt.grepprg = "rg --vimgrep --no-heading --hidden"
     vim.opt.hidden = true -- dont unload abandoned buffers, just hide em
     vim.opt.ignorecase = true --  dont be case sensitive
-    vim.opt.list = true -- show invisibles
     vim.opt.listchars = "tab:>--,space:·,trail:·" -- make em look like this
     vim.opt.number = true -- show numbers
     vim.opt.path = "**"
@@ -47,7 +46,7 @@ function M.init()
 
     vim.cmd "command! -nargs=+ Search execute 'silent grep! <args>' | copen" -- rg search and populate quickfix-list
     vim.cmd ":packadd cfilter" -- enable filter quickfix list
-    vim.cmd "colorscheme github_dark_default" -- set colorscheme
+    vim.cmd "colorscheme gruvbox" -- set colorscheme
 end
 
 return M
