@@ -1,17 +1,18 @@
 local M = {}
 
 function M.init()
-    local actions = require("telescope.actions")
+    local telescope = require "telescope"
+    local actions = require "telescope.actions"
     require("telescope").setup {
         defaults = {
             color_devicons = false,
             winblend = 0,
-            borderchars = {"─", "│", "─", "│", "┌", "┐", "┘", "└"},
+            borderchars = {"", "", "", "", "", "", "", ""}, -- remove borders
             layout_config = {
-                width = 0.8,
-                height = 0.8
+                prompt_position = "bottom",
+                height = 0.75
             },
-            previewer = false,
+            layout_strategy = "bottom_pane",
             mappings = {
                 i = {
                     ["<esc>"] = actions.close
@@ -19,6 +20,7 @@ function M.init()
             }
         }
     }
+    telescope.load_extension "fzf"
 end
 
 function M.dotfiles()

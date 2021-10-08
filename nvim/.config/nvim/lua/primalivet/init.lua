@@ -1,13 +1,15 @@
 local M = {}
 
 function M.init()
-    vim.cmd "syntax on"
+    -- vim.cmd "syntax on"
     vim.cmd "filetype plugin on"
     vim.cmd "filetype plugin indent on"
 
+    vim.opt.fillchars = "vert:|"
     vim.opt.backup = false -- No backups,
     vim.opt.clipboard = "unnamed"
     vim.opt.cursorline = true -- show what line i'm on
+    vim.opt.diffopt = "vertical"
     vim.opt.expandtab = true -- use space indentation
     vim.opt.foldenable = true --  use folds
     vim.opt.foldlevel = 999 -- dont fold at start
@@ -44,9 +46,17 @@ function M.init()
     require "primalivet.statusline".init()
     require "primalivet.mappings".init()
 
-    vim.cmd "command! -nargs=+ Search execute 'silent grep! <args>' | copen" -- rg search and populate quickfix-list
     vim.cmd ":packadd cfilter" -- enable filter quickfix list
-    vim.cmd "colorscheme gruvbox" -- set colorscheme
+    vim.cmd "command! -nargs=+ Grep exe 'silent grep! <args>' | copen" -- rg search and populate quickfix-list
+
+    vim.cmd "colorscheme pygments"
+
+    vim.cmd [[
+      augroup PRIMALIVET_STYLES
+        autocmd!
+        autocmd FileType help,qf,loc,packer,netrw setlocal winhighlight=Normal:NormalFloat
+      augroup END
+    ]]
 end
 
 return M

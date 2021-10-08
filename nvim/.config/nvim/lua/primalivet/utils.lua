@@ -1,5 +1,11 @@
 local M = {}
 
+M.reload_config = function()
+    require("plenary.reload").reload_module("primalivet")
+    require("primalivet").init()
+    print("Reloaded config")
+end
+
 M.toggle_quickfix = function()
     for _, win in pairs(vim.fn.getwininfo()) do
         if win.quickfix == 1 then
