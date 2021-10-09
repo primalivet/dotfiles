@@ -1,12 +1,10 @@
 [user]
 		name=Primalivet
-		email=gustafholm1@gmail.com
+		email=gustaf.holn@icloud.com
 
 [push]
 		default=simple
 
 [core]
-		editor=nvim
+		editor=vim
 		filemode=false
-[include]
-		path = ~/.config/netlify/helper/git-config

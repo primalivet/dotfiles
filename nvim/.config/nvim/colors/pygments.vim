@@ -42,127 +42,163 @@ function! s:HL(group, fg, ...)
   execute join(histring, ' ')
 endfunction
 
+let g:use_beige = 1
+
 let s:cs = {}
-let  s:cs.grey0          =  ['#f4f5f7',  0]
-let  s:cs.grey1          =  ['#e9ecef',  0]
-let  s:cs.grey2          =  ['#cccccc',  0]
-let  s:cs.grey3          =  ['#bbbbbb',  0]
-let  s:cs.grey4          =  ['#aaaaaa',  0]
 
-let  s:cs.black          =  ['#333333',  0]
-let  s:cs.green          =  ['#00A000',  0]
-let  s:cs.green_dark     =  ['#008000',  0]
-let  s:cs.wine_dark      =  ['#BB6688',  0]
-let  s:cs.wine           =  ['#B00040',  0]
-let  s:cs.blood_dark     =  ['#880000',  0]
-let  s:cs.blood          =  ['#A00000',  0]
-let  s:cs.lipstick_dark  =  ['#BA2121',  0]
-let  s:cs.lipstick       =  ['#D2413A',  0]
-let  s:cs.blue           =  ['#0000FF',  0]
-let  s:cs.blue_dark      =  ['#000080',  0]
-let  s:cs.purple         =  ['#AA22FF',  0]
-let  s:cs.purple_dark    =  ['#800080',  0]
-let  s:cs.teal           =  ['#408080',  0]
-let  s:cs.red            =  ['#FF0000',  0]
-let  s:cs.yellow         =  ['#FFFF00',  0]
-let  s:cs.yellow         =  ['#FFFF00',  0]
+let  s:cs.grey1   =  ['#e9ecef',  0] " Terminal bg
+let  s:cs.grey2   =  ['#dddddd',  0] " Terminal 7
+let  s:cs.grey3   =  ['#cccccc',  0] " Terminal 8
+let  s:cs.grey4   =  ['#bbbbbb',  0]
 
-let  s:cs.beige          =  ['#ebe4cc',  0]
-let  s:cs.beige_dark     =  ['#d1c5a1',  0]
+let  s:cs.beige1  =  ['#ebe4cc',  0] " Terminal bg
+let  s:cs.beige2  =  ['#D4CDB8',  0] " Terminal 7
+let  s:cs.beige3  =  ['#bcb6a3',  0] " Terminal 8
+let  s:cs.beige4  =  ['#a5a08f',  0]
+
+let  s:cs.black          =  ['#333333',  0] " Terminal 0
+let  s:cs.blood_dark     =  ['#880000',  0] " Terminal 1
+let  s:cs.green_dark     =  ['#008000',  0] " Terminal 2
+" TODO 1 more yellow
+let  s:cs.blue_dark      =  ['#000080',  0] " Terminal 4
+let  s:cs.purple_dark    =  ['#800080',  0] " Terminal 5
+let  s:cs.teal           =  ['#408080',  0] " Terminal 6
+
+let  s:cs.lipstick  =  ['#BA2121',  0]  "  Terminal  9
+let  s:cs.green     =  ['#00A000',  0]  "  Terminal  10
+let  s:cs.yellow    =  ['#FFFF00',  0]  "  Terminal  11
+let  s:cs.blue      =  ['#0000FF',  0]  "  Terminal  12
+let  s:cs.purple    =  ['#AA22FF',  0]  "  Terminal  13
+" TODO 1 more teal
+let  s:cs.white     =  ['#f4f5f7',  0] " Terminal 15
+
+" Extra
+let  s:cs.red =  ['#FF0000',  0] " Terminal 9
+
+let s:fg = s:cs.black
+
+let s:elevation1_bg = s:cs.grey1
+let s:elevation2_bg = s:cs.grey2
+let s:elevation3_bg = s:cs.grey3
+let s:elevation4_bg = s:cs.grey4
+
+if g:use_beige == 1
+  let s:elevation1_bg = s:cs.beige1
+  let s:elevation2_bg = s:cs.beige2
+  let s:elevation3_bg = s:cs.beige3
+  let s:elevation4_bg = s:cs.beige4
+endif
+
+"------------------------------------------------------------------------------
+" NORMAL
+"------------------------------------------------------------------------------
+
+call s:HL('Normal', s:fg, s:elevation1_bg)
 
 "------------------------------------------------------------------------------
 " SCHEME GROUPS
 "------------------------------------------------------------------------------
 
-call s:HL('FuglyTeal', s:cs.teal)
-call s:HL('FuglyTealItalic', s:cs.teal, s:none, s:italic)
-call s:HL('FuglyGreen', s:cs.green_dark)
-call s:HL('FuglyGreenBold', s:cs.green_dark, s:none, s:bold)
-call s:HL('FuglyBlue', s:cs.blue)
-call s:HL('FuglyBlueBold', s:cs.blue, s:none, s:bold)
-call s:HL('FuglyBlueDark', s:cs.blue_dark)
-call s:HL('FuglyBlueDarkBold', s:cs.blue_dark, s:none, s:bold)
-call s:HL('FuglyRed', s:cs.blue)
-call s:HL('FuglyLipstick', s:cs.lipstick)
-call s:HL('FuglyLipstickDark', s:cs.lipstick_dark)
-call s:HL('FuglyWine', s:cs.wine)
-call s:HL('FuglyWineDark', s:cs.wine_dark)
-call s:HL('FuglyBlood', s:cs.blood)
-call s:HL('FuglyBloodDark', s:cs.blood_dark)
-call s:HL('FuglyPurple', s:cs.purple)
-call s:HL('FuglyPurpleBold', s:cs.purple, s:none, s:bold)
-call s:HL('FuglyPurpleDark', s:cs.purple_dark)
+call  s:HL('FuglyTeal',           s:cs.teal)
+call  s:HL('FuglyTealItalic',     s:cs.teal,         s:none,  s:italic)
+
+call  s:HL('FuglyGreen',          s:cs.green)
+call  s:HL('FuglyGreenBold',      s:cs.green,        s:none,  s:bold)
+
+call  s:HL('FuglyGreenDark',      s:cs.green_dark)
+call  s:HL('FuglyGreenDarkBold',  s:cs.green_dark,   s:none,  s:bold)
+
+call  s:HL('FuglyBlue',           s:cs.blue)
+call  s:HL('FuglyBlueBold',       s:cs.blue,         s:none,  s:bold)
+
+call  s:HL('FuglyBlueDark',       s:cs.blue_dark)
+call  s:HL('FuglyBlueDarkBold',   s:cs.blue_dark,    s:none,  s:bold)
+
+call  s:HL('FuglyRed',            s:cs.red)
+call  s:HL('FuglyLipstick',       s:cs.lipstick)
+call  s:HL('FuglyBloodDark',      s:cs.blood_dark)
+
+call  s:HL('FuglyPurple',         s:cs.purple)
+call  s:HL('FuglyPurpleBold',     s:cs.purple,       s:none,  s:bold)
+
+call  s:HL('FuglyPurpleDark',     s:cs.purple_dark)
+
+call  s:HL('FuglyYellow',         s:cs.yellow)
 
 "------------------------------------------------------------------------------
 " SCHEME ABSTRACT GROUPS
 "------------------------------------------------------------------------------
 
-call s:HL('FuglyBaseLevel1', s:cs.black, s:cs.grey1)
-call s:HL('FuglyBaseLevel2', s:cs.black, s:cs.grey2)
-call s:HL('FuglyBaseLevel2Bg', s:none, s:cs.grey2)
-call s:HL('FuglyBaseLevel3', s:cs.black, s:cs.grey3)
-call s:HL('FuglyBaseLevel4', s:cs.black, s:cs.grey4)
 
-call s:HL('FuglyForeground', s:cs.black, s:none)
-call s:HL('FuglyForegroundBold', s:cs.black, s:none, s:bold)
-call s:HL('FuglyNegative', s:cs.grey0, s:cs.black)
-call s:HL('FuglyNegativeBold', s:cs.grey0, s:cs.black, s:bold)
+call  s:HL('Elevation1',    s:fg,    s:elevation1_bg)
+call  s:HL('Elevation1Bg',  s:none,  s:elevation1_bg)
+call  s:HL('Elevation2',    s:fg,    s:elevation2_bg)
+call  s:HL('Elevation2Bg',  s:none,  s:elevation2_bg)
+call  s:HL('Elevation3',    s:fg,    s:elevation3_bg)
+call  s:HL('Elevation3Bg',  s:none,  s:elevation3_bg)
+call  s:HL('Elevation4',    s:fg,    s:elevation4_bg)
+call  s:HL('Elevation4Bg',  s:none,  s:elevation4_bg)
+
+call s:HL('FuglyForeground', s:fg, s:none)
+call s:HL('FuglyForegroundBold', s:fg, s:none, s:bold)
+call s:HL('FuglyNegative', s:elevation1_bg, s:fg)
+call s:HL('FuglyNegativeBold', s:elevation1_bg, s:fg, s:bold)
 
 "------------------------------------------------------------------------------
 " BASE - UI
 "------------------------------------------------------------------------------
 
-call s:HL('Normal', s:cs.black, s:cs.beige)
-
 " Line related
-hi! link CursorLine FuglyBaseLevel2Bg
-hi! link Visual FuglyBaseLevel2Bg
-hi! link Folded FuglyBaseLevel2Bg
-hi! link StatusLine FuglyNegativeBold
-hi! link StatusLineNC FuglyBaseLevel3
+hi!  link  CursorLine    Elevation2Bg
+hi!  link  Visual        Elevation2Bg
+hi!  link  Folded        Elevation2Bg
+hi!  link  StatusLine    FuglyNegativeBold
+hi!  link  StatusLineNC  Elevation3
+hi!  link  QuickFixLine  Elevation3
 
 " Column related
-hi! link LineNr FuglyPurpleDark
-hi! link CursorLineNr FuglyPurpleBold
-call s:HL('SignColumn', s:cs.black, s:cs.beige_dark)
-call s:HL('FoldColumn', s:cs.grey0, s:cs.black)
+hi!  link  LineNr        FuglyForeground
+hi!  link  CursorLineNr  FuglyForegroundBold
+hi!  link  SignColumn    Elevation1
+hi!  link  FoldColumn    Elevation1
 
 " Search
-call s:HL('IncSearch', s:cs.black, s:cs.yellow)
-call s:HL('Search', s:cs.black, s:cs.yellow)
-call s:HL('Substitute', s:cs.black, s:cs.yellow)
+call s:HL('IncSearch', s:fg, s:cs.yellow)
+call s:HL('Search', s:fg, s:cs.yellow)
+call s:HL('Substitute', s:fg, s:cs.yellow)
 
 " Diffs
-call  s:HL('DiffAdd',     s:cs.green_dark,s:cs.beige_dark  )
-call  s:HL('DiffChange',  s:cs.yellow,s:cs.beige_dark  )
-call  s:HL('DiffDelete',  s:cs.blood,s:cs.beige_dark  )
-call  s:HL('DiffText',    s:cs.yellow,s:cs.beige_dark, s:bold  )  "  TODO:  differantiate  from  DiffChange
+hi!  link  DiffAdd     FuglyGreenDark
+hi!  link  DiffChange  FuglyYellow
+hi!  link  DiffDelete  FuglyRed
+hi!  link  DiffText    FuglyYellow  "  TODO:  differantiate  from  DiffChange
 
 " Messages
-call s:HL('MsgArea', s:cs.black, s:none)
-call s:HL('MsgSeparator', s:cs.black, s:none)
-call s:HL('ModeMsg', s:cs.black, s:none)
-call s:HL('MoreMsg', s:cs.black, s:none)
-call s:HL('ErrorMsg', s:cs.black, s:cs.red)
-call s:HL('WarningMsg', s:cs.black, s:cs.yellow)
-call s:HL('Question', s:cs.black, s:cs.green)
+hi!  link  MsgArea       FuglyForeground
+hi!  link  MsgSeparator  FuglyForeground
+hi!  link  ModeMsg       FuglyForeground
+hi!  link  MoreMsg       FuglyForeground
+hi!  link  Error         FuglyRed
+hi!  link  WarningMsg    FugleYellow
+hi!  link  Question      FuglyForeground
 
 " Popup and Floats
-call s:HL('NormalFloat', s:cs.black, s:cs.beige_dark)
-hi! link Pmenu FuglyBaseLevel3
-hi! link PmenuSbar FuglyBaseLevel3
-hi! link PmenuThumb FuglyBaseLevel4
-hi! link PmenuSel FuglyNegative
+hi!  link  NormalFloat  Elevation2
+hi!  link  Pmenu        Elevation3
+hi!  link  PmenuSbar    Elevation3
+hi!  link  PmenuThumb   Elevation4
+hi!  link  PmenuSel     FuglyNegative
 
 " Other
-hi! link Whitespace FuglyForeground
-hi! link VertSplit FuglyNegativeBold
-hi! link MatchParen FuglyNegativeBold
-hi! link Directory FuglyForegroundBold
-hi! link NonText FuglyForeground
-hi! link EndOfBuffer NonText
+hi!  link  Whitespace   FuglyForeground
+hi!  link  VertSplit    Elevation1
+hi!  link  MatchParen   FuglyNegativeBold
+hi!  link  Directory    FuglyForegroundBold
+hi!  link  NonText      FuglyForeground
+hi!  link  EndOfBuffer  NonText
 
 " TODO: More groups, maybe just let them be
+" TODO: check help highlight-group for more groups
 " call s:HL('Cursor', s:cs.grey6, s:cs.grey0)
 " call s:HL('CursorIM', s:cs.grey6, s:cs.grey0)
 " call s:HL('TermCursor')
@@ -180,22 +216,22 @@ hi! link Constant FuglyForeground
 hi! link String FuglyLipstick
 hi! link Character String
 hi! link Number FuglyForeground
-hi! link Boolean FuglyGreenBold
+hi! link Boolean FuglyGreenDarkBold
 hi! link Float FuglyForeground
 
 hi! link Identifier FuglyBlueDark " TS dont define generic identifier, overrides in TS
 hi! link Function FuglyBlueDark
 
 hi! link Statement FuglyForeground
-hi! link Conditional FuglyGreenBold
-hi! link Repeat FuglyGreenBold
+hi! link Conditional FuglyGreenDarkBold
+hi! link Repeat FuglyGreenDarkBold
 hi! link Label FuglyForeground " Includes to much stuff, define in TS
 hi! link Operator FuglyForegroundBold
-hi! link Keyword FuglyGreenBold
-hi! link Exception FuglyGreenBold
+hi! link Keyword FuglyGreenDarkBold
+hi! link Exception FuglyGreenDarkBold
 
 hi! link PreProc FuglyForeground
-hi! link Include FuglyPurpleDark
+hi! link Include FuglyForegroundBold
 hi! link Define FuglyForeground
 hi! link Macro FuglyForeground
 hi! link PreCondit FuglyForeground
@@ -284,13 +320,13 @@ hi! link TSDanger ErrorMsg " Text representation of a danger note.
 hi! link TSException Exception " Exception related keywords: try, except, finally in Python.
 hi! link TSFuncBuiltin Function " Built-in functions: print in Lua.
 hi! link TSKeywordFunction FuglyBlueBold " Keywords used to define a function: function in Lua, def and lambda in Python.
-hi! link TSKeywordOperator FuglyGreenBold " Unary and binary operators that are English words: and, or in Python; sizeof in C.
-hi! link TSKeywordReturn FuglyGreenBold " Keywords like return and yield.
+hi! link TSKeywordOperator FuglyGreenDarkBold " Unary and binary operators that are English words: and, or in Python; sizeof in C.
+hi! link TSKeywordReturn FuglyGreenDarkBold " Keywords like return and yield.
 hi! link TSNote Todo " Text representation of an informational note.
 hi! link TSType FuglyBloodDark " Type (and class) definitions and annotations.
 hi! link TSTypeBuiltin FuglyBloodDark " Built-in types: i32 in Rust.
 hi! link TSVariable FuglyBlueDark " Variable names that don't fit into other categories.
-hi! link TSVariableBuiltin FuglyGreenBold " Variable names defined by the language: this or self in Javascript.
+hi! link TSVariableBuiltin FuglyGreenDarkBold " Variable names defined by the language: this or self in Javascript.
 hi! link TSWarning WarningMsg" Text representation of a warning note.
 
 " TREESITTER  - UNDEFINED
@@ -305,10 +341,9 @@ hi! link TSWarning WarningMsg" Text representation of a warning note.
 "------------------------------------------------------------------------------
 
 hi! link TelescopeNormal NormalFloat
-hi! link TelescopeSelection CursorLine
-hi! link TelescopeSelectionCaret TelescopeSelection
-hi! link TelescopeMultiSelection Type
+hi! link TelescopeSelection Elevation3
+hi! link TelescopeMultiSelection FuglyForegroundBold
 hi! link TelescopePreviewNormal TelescopeNormal
 hi! link TelescopeBorder TelescopeNormal
 hi! link TelescopeMatching Search
-hi! link TelescopePromptPrefix Identifier
+hi! link TelescopePromptPrefix FuglyForeground

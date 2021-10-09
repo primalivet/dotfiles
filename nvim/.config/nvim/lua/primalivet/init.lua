@@ -49,7 +49,7 @@ function M.init()
     vim.cmd ":packadd cfilter" -- enable filter quickfix list
     vim.cmd "command! -nargs=+ Grep exe 'silent grep! <args>' | copen" -- rg search and populate quickfix-list
 
-    vim.cmd "colorscheme pygments"
+    -- vim.cmd "colorscheme pygments"
 
     vim.cmd [[
       augroup PRIMALIVET_STYLES
