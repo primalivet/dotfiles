@@ -1,56 +1,40 @@
+" ============================================================================
+" .vimrc
+" ----------------------------------------------------------------------------
+"  Theeeesee (david attenborough) vimfiles uses native packages. So you wont
+"  find a list of plugins here. If you're curiouse have a look in:
+"  ./vim/.vim/pack/plugins/[start|opt]/[name] to see what plugins are used. The
+"  ones in 'start' are loaded automatically and the ones in opt need to be
+"  loaded with the :packadd ex command.
+" ============================================================================
+
 set nocompatible 
-
-if executable('rg')
-  set grepformat=%f:%l:%c:%m,%f:%l:%m
-  set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
-endif
-
-
-if filereadable('.prettierrc') 
-  if filereadable('./node_modules/.bin/prettier') == 1
-    augroup MyFormatter
-      autocmd!
-      " Use Prettier as formatprg and Run Prettier before writing Buffer to
-      " disk
-      autocmd FileType javascript setlocal formatprg=node_modules/.bin/prettier\ --stdin-filepath\ %
-      autocmd BufWritePre *.js silent! normal! ggVGgq
-    augroup END
-  endif
-endif
-
-if filereadable('.eslintrc') 
-  let s:has_bin = filereadable('./node_modules/.bin/eslint')
-  " TODO: set formatprg?
-endif
 
 syntax enable 
 filetype plugin indent on
 packadd! cfilter
-packadd! vim-commentary
 
-set background=dark termguicolors
-set hidden noswapfile
-set number relativenumber
-set autoindent smartindent
-set textwidth=79 colorcolumn=+1 nowrap
-set formatoptions+=roj
+set backspace=eol,indent,start
 set clipboard=unnamed
-set expandtab tabstop=2 softtabstop=2 shiftwidth=2 shiftround
+set expandtab autoindent smartindent
 set foldenable foldmethod=indent foldlevel=3
-set path+=.,** wildmenu wildignore+=*/node_modules/*,*/dist/*,*/build/*
-set nobackup nowritebackup
-set splitbelow splitright
+set hidden noswapfile nobackup nowritebackup
 set hlsearch incsearch ignorecase smartcase
-set scrolloff=5 sidescrolloff=5
 set listchars=tab:>--,space:·,trail:·
+set number relativenumber
+set path+=.,** wildmenu wildignore+=*/node_modules/*,*/dist/*,*/build/*
+set scrolloff=5 sidescrolloff=5
+set termguicolors background=dark
+set textwidth=79 colorcolumn=+1 nowrap formatoptions+=roj
 set timeoutlen=500 updatetime=100
 
-command! -nargs=+ Search execute 'silent grep! <args>' | copen"
-
+" =============================================================================
 " No leader key mappings
+" -----------------------------------------------------------------------------
 " I try to keep this as 'non-destructive' as possible. 
 " As and example '<' is mapped below to keep selection after indent and  j is
 " mapped to 'go over' wrapped lines
+" =============================================================================
 
 " Use hjkl style navigation in command mode
 cnoremap <C-h> <Left>
@@ -71,22 +55,24 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Location list navigation
-nnoremap [l :cprevious
-nnoremap ]l :cnext
+nnoremap [l :cprevious<CR>
+nnoremap ]l :cnext<CR>
 
 " Quickfix list navigation
-nnoremap [q :cprevious
-nnoremap ]q :cnext
+nnoremap [c :cprevious<CR>
+nnoremap ]c :cnext<CR>
 
-" Sort visual selection
-
+" =============================================================================
 " Leader mappings
+" -----------------------------------------------------------------------------
 " Below are leadings (in all modes) but that are prefixed with <leader> key. In
 " my case set to <Space>. 
+" =============================================================================
 
 let g:mapleader=" "
 
 " TODO: <leader>er rename under cusor
+" Sort visual selection
 vnoremap <leader>es :'<,'>sort<CR>
 " TODO: <leader>ea display code action
 " TODO: <leader>ef format current buffer
@@ -106,3 +92,36 @@ nnoremap <leader>gf gf
 nnoremap <leader>tl :set list!<CR>
 nnoremap <leader>tp :set invpaste<CR>
 nnoremap <leader>ts :nohlsearch<CR>
+
+" RG {{{
+if executable('rg')
+        set grepformat=%f:%l:%c:%m,%f:%l:%m
+        set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
+endif
+" }}}
+
+" Run grep through the whole project, populate quickfix list with result and
+" then open quickfix list.
+command! -nargs=+ Grep execute 'silent grep! <args>' | copen"
+
+" ============================================================================
+" Formatting
+" ----------------------------------------------------------------------------
+" When we have a local executable and config for Prettier set the executable to
+" formatprogram and run it on save. Also register a command to format buffer
+" manually.
+" TODO: make it more general for other languages formatters (lua, go etc)
+" TODO: make it work with global prettier and prettiere_d with just a config
+" for other filetypes than js.
+" ============================================================================
+
+if filereadable('.prettierrc')  && filereadable('./node_modules/.bin/prettier') == 1
+        command! Format execute "silent normal! ggVGgq"
+        augroup MyFormatter
+                autocmd!
+                autocmd FileType javascript setlocal formatprg=node_modules/.bin/prettier\ --stdin-filepath\ %
+                autocmd BufWritePre *.js silent! normal! ggVGgq
+        augroup END
+endif
+
+" vim:foldmarker=marker:foldlevel=0:
