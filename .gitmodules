@@ -13,3 +13,6 @@
 [submodule "vim/.vim/pack/plugins/start/fzf"]
 	path = vim/.vim/pack/plugins/start/fzf
 	url = git@github.com:junegunn/fzf
+[submodule "vim/.vim/pack/plugins/start/vim-prettier"]
+	path = vim/.vim/pack/plugins/start/vim-prettier
+	url = git@github.com:prettier/vim-prettier.git
