@@ -1,10 +1,12 @@
 [user]
-		name=Primalivet
-		email=gustaf.holn@icloud.com
+        name=Primalivet
+        email=gustaf.holn@icloud.com
 
 [push]
-		default=simple
+        default=simple
 
 [core]
-		editor=vim
-		filemode=false
+        editor=vim
+        filemode=false
+[status]
+        submodulesummary=true
