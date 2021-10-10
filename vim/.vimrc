@@ -1,28 +1,24 @@
 " .vimrc
-" ============================================================================
+"
 "  Theeeesee (david attenborough) vimfiles uses native packages. So you wont
 "  find a list of plugins here. If you're curiouse have a look in:
 "  ./vim/.vim/pack/plugins/[start|opt]/[name] to see what plugins are used. The
 "  ones in 'start' are loaded automatically and the ones in opt need to be
 "  loaded with the :packadd ex command.
-" ============================================================================
 
-" call fzf install script if not already installed
-if executable('fzf') == 0
-        " TODO: maybe check if fzf submodule is loaded
-        execute '!~/.vim/pack/plugins/start/fzf/install' 
-endif
+" {{{ Options
 
 set nocompatible 
 
 syntax enable 
 filetype plugin indent on
-packadd! cfilter
+
+let $MYRUNTIME = split(&rtp, ',')[0]
 
 set backspace=eol,indent,start
 set clipboard=unnamed
 set expandtab autoindent smartindent
-set foldenable foldmethod=indent foldlevel=3
+set foldenable foldmethod=marker foldlevel=0
 set hidden noswapfile nobackup nowritebackup
 set hlsearch incsearch ignorecase smartcase
 set listchars=tab:>--,space:·,trail:·
@@ -32,23 +28,41 @@ set scrolloff=5 sidescrolloff=5
 set termguicolors background=dark
 set textwidth=79 colorcolumn=+1 nowrap formatoptions+=roj
 set timeoutlen=500 updatetime=100
-set modeline modelines=5
 
 if executable('rg')
         set grepformat=%f:%l:%c:%m,%f:%l:%m
         set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
 endif
 
-let g:fzf_layout = { 'down': '50%' }
+let g:mapleader="\<Space>"
 
-" Mappings (no leader key)
-" =============================================================================
+"}}}
+
+"{{{ Packages
+
+" Builtin plugin (to filter quickfix/loc list
+packadd! cfilter
+
+let g:fzf_layout = { 'down': '50%' }
+packadd fzf
+packadd fzf.vim
+
+packadd vim-commentary
+packadd vim-surround
+" packadd vim-repeat
+
+if has('nvim')
+endif
+
+"}}}
+
+" {{{ Mappings
+
 " I try to keep this as 'non-destructive' as possible. 
 " As and example '<' is mapped below to keep selection after indent and  j is
 " mapped to 'go over' wrapped lines
-" =============================================================================
 
-" Use hjkl style navigation in command mode
+" Use hjkl style navigation in ex-command mode
 cnoremap <C-h> <Left>
 cnoremap <C-j> <Down>
 cnoremap <C-k> <Up>
@@ -74,13 +88,8 @@ nnoremap ]l :cnext<CR>
 nnoremap [c :cprevious<CR>
 nnoremap ]c :cnext<CR>
 
-" Mappings (with leader key)
-" =============================================================================
 " Below are leadings (in all modes) but that are prefixed with <leader> key. In
 " my case set to <Space>. 
-" =============================================================================
-
-let g:mapleader="\<Space>"
 
 " TODO: <leader>er rename under cusor
 " Sort visual selection
@@ -111,12 +120,19 @@ nnoremap <leader>tl :set list!<CR>
 nnoremap <leader>tp :set invpaste<CR>
 nnoremap <leader>ts :nohlsearch<CR>
 
-if executable('rg')
-        set grepformat=%f:%l:%c:%m,%f:%l:%m
-        set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
-endif
+"}}}
+
+" {{{ Commands
 
 " Run grep through the whole project, populate quickfix list with result and
 " then open quickfix list.
 command! -nargs=+ Grep execute 'silent grep! <args>' | copen"
+
+" TODO: command to list packages
+
+"}}}
+
+" {{{ Autocommands
+
+" }}}
 
