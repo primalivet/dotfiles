@@ -1,18 +1,18 @@
 [submodule "vim/.vim/pack/plugins/start/vim-commentary"]
-	path = vim/.vim/pack/plugins/start/vim-commentary
+	path = vim/.vim/pack/plugins/opt/vim-commentary
 	url = git@github.com:tpope/vim-commentary.git
 [submodule "vim/.vim/pack/plugins/start/vim-surround"]
-	path = vim/.vim/pack/plugins/start/vim-surround
+	path = vim/.vim/pack/plugins/opt/vim-surround
 	url = git@github.com:tpope/vim-surround.git
 [submodule "vim/.vim/pack/plugins/start/vim-repeat"]
-	path = vim/.vim/pack/plugins/start/vim-repeat
+	path = vim/.vim/pack/plugins/opt/vim-repeat
 	url = git@github.com:tpope/vim-repeat.git
 [submodule "vim/.vim/pack/plugins/start/fzf.vim"]
-	path = vim/.vim/pack/plugins/start/fzf.vim
+	path = vim/.vim/pack/plugins/opt/fzf.vim
 	url = git@github.com:junegunn/fzf.vim
 [submodule "vim/.vim/pack/plugins/start/fzf"]
-	path = vim/.vim/pack/plugins/start/fzf
+	path = vim/.vim/pack/plugins/opt/fzf
 	url = git@github.com:junegunn/fzf
 [submodule "vim/.vim/pack/plugins/start/vim-prettier"]
-	path = vim/.vim/pack/plugins/start/vim-prettier
+	path = vim/.vim/pack/plugins/opt/vim-prettier
 	url = git@github.com:prettier/vim-prettier.git

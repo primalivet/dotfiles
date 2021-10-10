@@ -88,7 +88,7 @@ vnoremap <leader>es :'<,'>sort<CR>
 " TODO: <leader>ea display code action
 " TODO: <leader>ef format current buffer
 
-" Seach 
+" Seach (FZF)
 nnoremap <silent><leader>sc :Commands<CR>
 nnoremap <silent><leader>sh :Helptags<CR>
 nnoremap <silent><leader>sf :Files<CR>
