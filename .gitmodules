@@ -1,3 +1,6 @@
 [submodule "vim/.vim/pack/plugins/opt/fzf"]
 	path = vim/.vim/pack/plugins/opt/fzf
 	url = git@github.com:junegunn/fzf
+[submodule "vim/.vim/pack/plugins/opt/fzf.vim"]
+	path = vim/.vim/pack/plugins/opt/fzf.vim
+	url = git@github.com:junegunn/fzf.vim
