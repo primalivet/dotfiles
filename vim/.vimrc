@@ -98,14 +98,12 @@ nnoremap <leader>tl :set list!<CR>
 nnoremap <leader>tp :set invpaste<CR>
 nnoremap <leader>ts :nohlsearch<CR>
 
-" Commands
-" =============================================================================
+if executable('rg')
+        set grepformat=%f:%l:%c:%m,%f:%l:%m
+        set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
+endif
 
 " Run grep through the whole project, populate quickfix list with result and
 " then open quickfix list.
 command! -nargs=+ Grep execute 'silent grep! <args>' | copen"
 
-augroup MyFoldSettings
-        au!
-        au FileType vim setlocal foldmethod=marker foldlevel=0
-augroup END
