@@ -4,3 +4,6 @@
 [submodule "vim/.vim/pack/plugins/opt/fzf.vim"]
 	path = vim/.vim/pack/plugins/opt/fzf.vim
 	url = git@github.com:junegunn/fzf.vim
+[submodule "vim/.vim/pack/plugins/opt/vim-commentary"]
+	path = vim/.vim/pack/plugins/opt/vim-commentary
+	url = git@github.com:tpope/vim-commentary
