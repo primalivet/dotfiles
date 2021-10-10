@@ -7,6 +7,12 @@
 "  loaded with the :packadd ex command.
 " ============================================================================
 
+" call fzf install script if not already installed
+if executable('fzf') == 0
+        " TODO: maybe check if fzf submodule is loaded
+        execute '!~/.vim/pack/plugins/start/fzf/install' 
+endif
+
 set nocompatible 
 
 syntax enable 
@@ -81,6 +87,13 @@ let g:mapleader="\<Space>"
 vnoremap <leader>es :'<,'>sort<CR>
 " TODO: <leader>ea display code action
 " TODO: <leader>ef format current buffer
+
+" Seach 
+nnoremap <silent><leader>sc :Commands<CR>
+nnoremap <silent><leader>sh :Helptags<CR>
+nnoremap <silent><leader>sf :Files<CR>
+nnoremap <silent><leader>sg :GitFiles<CR>
+nnoremap <silent><leader>s/ :BLines<CR>
 
 " Go to [stuff], these are dependent on the LSP server for respective language.
 " Exept <leader>gf which is just an alias for gf (goto file) as I'm used to
