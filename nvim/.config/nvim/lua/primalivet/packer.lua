@@ -73,7 +73,6 @@ local function startup_cb(use)
         end
     }
 
-    use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
     use {
         "nvim-telescope/telescope.nvim",
         requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}},

@@ -20,7 +20,6 @@ function M.init()
             }
         }
     }
-    telescope.load_extension "fzf"
 end
 
 function M.dotfiles()
