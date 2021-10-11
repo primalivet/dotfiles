@@ -198,7 +198,6 @@ alias work='cd ~/Code/Work'
 alias oss='cd ~/Code/OSS'
 alias dotfiles='cd ~/Code/OSS/dotfiles/'
 
-alias vi='nvim'
 alias ta='tmux attach'
 
 alias gl='git log --oneline'
