@@ -1,19 +1,9 @@
-" .vimrc
-"
-"  Theeeesee (david attenborough) vimfiles uses native packages. So you wont
-"  find a list of plugins here. If you're curiouse have a look in:
-"  ./vim/.vim/pack/plugins/[start|opt]/[name] to see what plugins are used. The
-"  ones in 'start' are loaded automatically and the ones in opt need to be
-"  loaded with the :packadd ex command.
-
 " {{{ Options
 
-set nocompatible 
-
-syntax enable 
-filetype plugin indent on
-
+set nocompatible
 let $MYRUNTIME = split(&rtp, ',')[0]
+
+syntax enable
 
 set backspace=eol,indent,start
 set clipboard=unnamed
@@ -25,9 +15,15 @@ set listchars=tab:>--,space:·,trail:·
 set number relativenumber
 set path+=.,** wildmenu wildignore+=*/node_modules/*,*/dist/*,*/build/*
 set scrolloff=5 sidescrolloff=5
-set termguicolors background=dark
+set showcmd
+set background=dark
 set textwidth=79 colorcolumn=+1 nowrap formatoptions+=roj
 set timeoutlen=500 updatetime=100
+set laststatus=1
+
+if exists('&termguicolors')
+        set notermguicolors
+endif
 
 if executable('rg')
         set grepformat=%f:%l:%c:%m,%f:%l:%m
@@ -44,21 +40,26 @@ let g:mapleader="\<Space>"
 packadd! cfilter
 
 let g:fzf_layout = { 'down': '50%' }
+
 packadd fzf
 packadd fzf.vim
-
 packadd vim-commentary
 packadd vim-surround
-" packadd vim-repeat
+packadd vim-repeat
+packadd editorconfig-vim
 
 if has('nvim')
+        packadd nvim-lspconfig
+        packadd gitsigns.nvim
 endif
+
+filetype plugin indent on
 
 "}}}
 
 " {{{ Mappings
 
-" I try to keep this as 'non-destructive' as possible. 
+" I try to keep this as 'non-destructive' as possible.
 " As and example '<' is mapped below to keep selection after indent and  j is
 " mapped to 'go over' wrapped lines
 
@@ -89,7 +90,7 @@ nnoremap [c :cprevious<CR>
 nnoremap ]c :cnext<CR>
 
 " Below are leadings (in all modes) but that are prefixed with <leader> key. In
-" my case set to <Space>. 
+" my case set to <Space>.
 
 " TODO: <leader>er rename under cusor
 " Sort visual selection
@@ -103,6 +104,7 @@ nnoremap <silent><leader>sh :Helptags<CR>
 nnoremap <silent><leader>sf :Files<CR>
 nnoremap <silent><leader>sg :GitFiles<CR>
 nnoremap <silent><leader>s/ :BLines<CR>
+nnoremap <silent><leader>sd :Dotfiles<CR>
 
 " Go to [stuff], these are dependent on the LSP server for respective language.
 " Exept <leader>gf which is just an alias for gf (goto file) as I'm used to
@@ -128,11 +130,23 @@ nnoremap <leader>ts :nohlsearch<CR>
 " then open quickfix list.
 command! -nargs=+ Grep execute 'silent grep! <args>' | copen"
 
+
+" TODO: make it work whereever dotfiles is located
+command! Dotfiles execute 'Files ~/Code/OSS/dotfiles'
+
 " TODO: command to list packages
 
 "}}}
 
 " {{{ Autocommands
+
+" }}}
+
+" {{{ Lua
+
+if has('nvim')
+        lua require('gitsigns').setup()
+endif
 
 " }}}
 

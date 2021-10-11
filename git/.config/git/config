@@ -8,5 +8,11 @@
 [core]
         editor=vim
         filemode=false
+[diff]
+        tool=vimdiff
+[merge]
+        tool=vimdiff
 [status]
         submodulesummary=true
+[difftool]
+	prompt = false

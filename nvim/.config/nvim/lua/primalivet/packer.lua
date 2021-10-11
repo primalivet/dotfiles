@@ -5,18 +5,14 @@ local fn = vim.fn
 
 local function startup_cb(use)
     -- The plugin manager
-    use {"gerw/vim-HiLinkTrace"}
     use {"wbthomason/packer.nvim"}
     use {"nvim-lua/plenary.nvim"}
 
     -- .editorconfig project files
     use {"editorconfig/editorconfig-vim"}
 
-    -- Generate JSDoc from a function signature
-    use {"heavenshell/vim-jsdoc", run = "make install", ft = {"javascript", "javascript.jsx", "typescript"}}
-
-    -- Kitty config file syntax
-    use {"fladson/vim-kitty"}
+    -- -- Generate JSDoc from a function signature
+    -- use {"heavenshell/vim-jsdoc", run = "make install", ft = {"javascript", "javascript.jsx", "typescript"}}
 
     use {
         "junegunn/fzf",
@@ -29,30 +25,12 @@ local function startup_cb(use)
     }
     use {"junegunn/fzf.vim"}
 
-    -- Which Key
-    use {
-        "folke/which-key.nvim",
-        config = function()
-            require "which-key".setup {}
-        end
-    }
-
-    -- Easy to align stuff around '=' for example, usefull for Markdown
-    use {"junegunn/vim-easy-align"}
-
     -- Show function signature in a "floating window" when typeing
     use {"ray-x/lsp_signature.nvim", requires = {"neovim/nvim-lspconfig"}}
 
-    -- Comment and uncomment
     use {"tpope/vim-commentary"}
-
-    -- Easier to work with surrounding stuff like () {} and ""
     use {"tpope/vim-surround"}
-
-    -- Enables to repeat, maily use it to repeat commands from commentary and surround above
     use {"tpope/vim-repeat"}
-
-    -- Git integration (dont use that much, perfer git cli)
     use {"tpope/vim-fugitive"}
 
     use {
@@ -65,25 +43,11 @@ local function startup_cb(use)
     -- Live preview of markdown while typeing
     use {"iamcco/markdown-preview.nvim", run = "cd app && yarn install", ft = {"markdown"}}
 
-    -- Automatically insert tags for html and jsx etc.
-    use {"windwp/nvim-ts-autotag"}
-
-    -- Show import cost of npm packages
-    use {"yardnsm/vim-import-cost", run = "npm install"}
+    -- -- Automatically insert tags for html and jsx etc.
+    -- use {"windwp/nvim-ts-autotag"}
 
     -- Filebrower (only adapter to vifm cli program)
     use {"vifm/vifm.vim"}
-
-    -- Colorscheme
-    use {"gruvbox-community/gruvbox"}
-    use {"jnurmine/Zenburn"}
-
-    -- use {
-    --     "projekt0n/github-nvim-theme",
-    --     config = function()
-    --         require("primalivet.plugins.github-theme").init()
-    --     end
-    -- }
 
     -- Automatically insert pairs like () {} "" etc.
     use {
@@ -136,17 +100,6 @@ local function startup_cb(use)
             vim.cmd "command! GitsignsPreviewHunk exe 'Gitsigns preview_hunk'"
         end
     }
-
-    -- Show colors in color, like #ffffff whould be show in white background
-    use {
-        "norcalli/nvim-colorizer.lua",
-        config = function()
-            require "colorizer".setup()
-        end
-    }
-
-    -- Icons
-    use {"kyazdani42/nvim-web-devicons"}
 
     -- Search and find of a lot of things
     use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
