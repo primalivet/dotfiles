@@ -1,5 +1,7 @@
 set nocompatible
 
+let $MYRTP = split(&rtp, ',')[0]
+
 set autoindent smartindent
 set background=dark
 set backspace=eol,indent,start
