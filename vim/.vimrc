@@ -13,9 +13,10 @@ set hlsearch incsearch ignorecase smartcase
 set laststatus=1
 set listchars=tab:>--,space:·,trail:·
 set number relativenumber
-set path+=.,** 
+set path+=.,**
 set scrolloff=5 sidescrolloff=5
 set showcmd ruler
+set tags+=./tags
 set textwidth=79 colorcolumn=+1 nowrap formatoptions+=roj
 set timeoutlen=500 updatetime=100
 set wildmenu wildignore+=*/node_modules/*,*/dist/*,*/build/*
@@ -30,7 +31,7 @@ endif
 " Enable build in packages/plugins
 " cfilter enables :Cfilter quickfix/loc list
 " matchit improves the % operator
-packadd! cfilter 
+packadd! cfilter
 packadd! matchit
 
 filetype plugin indent on
@@ -56,11 +57,13 @@ vnoremap > >gv
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
+nnoremap <leader>tl :set list!<CR>
+nnoremap <leader>tp :set invpaste<CR>
 nnoremap <leader>ts :nohlsearch<CR>
 
 " Location list navigation
-nnoremap [l :cprevious<CR>
-nnoremap ]l :cnext<CR>
+nnoremap [l :lprevious<CR>
+nnoremap ]l :lnext<CR>
 
 " Quickfix list navigation
 nnoremap [c :cprevious<CR>
@@ -69,8 +72,9 @@ nnoremap ]c :cnext<CR>
 " Sort visual selection
 vnoremap <leader>es :'<,'>sort<CR>
 
+" Source vimrc
+nnoremap <leader>vs :source $MYVIMRC<CR>
+
 " Run grep through the whole project, populate quickfix list with result and
 " then open quickfix list.
 command! -nargs=+ Grep execute 'silent grep! <args>' | copen"
-
-
