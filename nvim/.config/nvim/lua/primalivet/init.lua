@@ -40,11 +40,10 @@ function M.init()
     vim.g.mapleader = " " -- Space is leader
 
     require "primalivet.packer".init()
-    require "primalivet.netrw".init()
-    require "primalivet.statusline".init()
     require "primalivet.mappings".init()
 
     vim.cmd ":packadd cfilter" -- enable filter quickfix list
+    vim.cmd "color pygments"
 end
 
 return M

@@ -1,6 +1,8 @@
+" {{{ Options
+
 set nocompatible
 
-let $MYRTP = split(&rtp, ',')[0]
+syntax enable
 
 set autoindent smartindent
 set background=dark
@@ -21,6 +23,9 @@ set textwidth=79 colorcolumn=+1 nowrap formatoptions+=roj
 set timeoutlen=500 updatetime=100
 set wildmenu wildignore+=*/node_modules/*,*/dist/*,*/build/*
 
+let $MYRTP = split(&rtp, ',')[0]
+let g:mapleader="\<Space>"
+
 " If rg is available on the system, use it for the :grep command instead of the
 " normal grep program
 if executable('rg')
@@ -28,16 +33,20 @@ if executable('rg')
         set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
 endif
 
-" Enable build in packages/plugins
-" cfilter enables :Cfilter quickfix/loc list
-" matchit improves the % operator
+" }}}
+
+" {{{ Packages (builtin)
+
+" cfilter enables :Cfilter quickfix/loc list 
 packadd! cfilter
+" matchit improves the % operator 
 packadd! matchit
-
+" filetype detection, filetype specific 'plugs' and indentation
 filetype plugin indent on
-syntax enable
 
-let g:mapleader="\<Space>"
+" }}}
+
+"{{{ Keymaps
 
 " Use hjkl style navigation in ex-command mode
 cnoremap <C-h> <Left>
@@ -75,6 +84,21 @@ vnoremap <leader>es :'<,'>sort<CR>
 " Source vimrc
 nnoremap <leader>vs :source $MYVIMRC<CR>
 
+"}}}
+
+" {{{ Commands
+
 " Run grep through the whole project, populate quickfix list with result and
 " then open quickfix list.
 command! -nargs=+ Grep execute 'silent grep! <args>' | copen"
+
+" }}}
+
+" {{{ Autocommands
+
+augroup FILE_TYPES
+   au!
+   au FileType sh,zsh,bash,vim setlocal fdm=marker fdl=0
+augroup END
+
+" }}}

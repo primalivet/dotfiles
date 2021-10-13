@@ -1,5 +1,4 @@
-# PATH
-#-------------------------------------------------------------------------------
+# {{{ Path and Environment variables
 
 export PATH=/sbin:$PATH
 export PATH=/bin:$PATH
@@ -11,8 +10,13 @@ export PATH=$HOME/.bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/go/bin:$PATH
 
-# KEYBINDINGS
-#-------------------------------------------------------------------------------
+export TERM=xterm-256color
+export KEYTIMEOUT=1
+export EDITOR=nvim
+
+# }}}
+
+# {{{ Keybindings
 
 bindkey -v # vi mode
 
@@ -25,16 +29,9 @@ bindkey "^N" history-search-forward
 
 export KEYTIMEOUT=1 # quicker timeout between commands
 
-# DIRCOLORS
-#-------------------------------------------------------------------------------
+# }}}
 
-# check for dircolors support and load .dircolors if it exists
-if [ -x /usr/bin/dircolors ]; then
-	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-fi
-
-# GENERAL SHELL OPTIONS
-#-------------------------------------------------------------------------------
+# {{{ Options
 
 # automatically cd into dirs
 setopt AUTO_CD
@@ -46,17 +43,9 @@ setopt NO_CASE_GLOB
 setopt CORRECT
 setopt CORRECT_ALL
 
-# GENERAL ENV VARIABLES
-#-------------------------------------------------------------------------------
+# }}}
 
-export TERM=xterm-256color
-
-export KEYTIMEOUT=1
-
-EDITOR=nvim
-
-# COMPLETION
-#-------------------------------------------------------------------------------
+# {{{ Completion
 
 # Customizations should happend before completion is initialized.
 
@@ -73,8 +62,9 @@ zstyle ':completion:*' menu select
 # initialize completion
 autoload -Uz compinit && compinit
 
-# AUTOSUGGESTIONS
-#-------------------------------------------------------------------------------
+# }}}
+
+# {{{ Autosuggestion
 
 if [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
   source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -82,8 +72,9 @@ else
 	echo 'Warning: zsh-autosuggestions not found in ~/.zsh'
 fi
 
-# HISTORY
-#-------------------------------------------------------------------------------
+# }}}
+
+# {{{ History
 
 # History in zdotdir if exsits, otherwise home dir
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
@@ -105,8 +96,10 @@ setopt HIST_IGNORE_DUPS
 # removes blank lines from history
 setopt HIST_REDUCE_BLANKS
 
-# PROMPT VI MODE SYMBOL
-#-------------------------------------------------------------------------------
+# }}}
+
+# {{{ Prompt VI mode 
+
 ## Init
 setopt PROMPT_SUBST
 
@@ -143,8 +136,9 @@ TRAPINT() {
   return $(( 128 + $1 ))
 }
 
-# PROMPT GIT
-#-------------------------------------------------------------------------------
+# }}}
+
+# {{{ Prompt GIT status
 
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Visual-effects
@@ -179,29 +173,34 @@ zstyle ':vcs_info:git:*' actionformats ' %b|%a%u%c'
 # %B = bold
 # %b = unbold
 
-# PROMPT
-#-------------------------------------------------------------------------------
+# }}}
+
+# {{{ Prompt general
 
 # General Styling
 PROMPT='$VI_MODE_SYMBOL %1~${vcs_info_msg_0_} %# '
 
-# ALIASES
-#-------------------------------------------------------------------------------
+# }}}
 
+# {{{ Aliases
+
+# Misc
+# Use when installing exuberant-ctags through homebrew
+#alias ctags="`brew --prefix`/bin/ctags"
 alias reload='source ~/.zshrc'
 alias rebuild-completion='rm -f ~/.zcompdump; compinit'
 
-alias ctags="`brew --prefix`/bin/ctags"
-
+# LS
 alias ls='ls -G'
 alias ll='ls -al -G'
+
+# Places
 alias code='cd ~/Code/'
 alias work='cd ~/Code/Work'
 alias oss='cd ~/Code/OSS'
 alias dotfiles='cd ~/Code/OSS/dotfiles/'
 
-alias ta='tmux attach'
-
+# Git
 alias gl='git log --oneline'
 alias gs='git status'
 alias gd='git diff'
@@ -211,56 +210,41 @@ alias gaa='git add --all'
 alias gc='git commit'
 alias gp='git push'
 
-alias tls='tmux ls'
-alias tat='tmux attatch-session -t'
+# }}}
 
-# FZF
-#-------------------------------------------------------------------------------
+# {{{ FZF
 
-# Setup fzf
-#if [[ ! "$PATH" == *~/.fzf/bin* ]]; then
-  export FZF_DEFAULT_COMMAND='rg --files --hidden'
-  export FZF_DEFAULT_OPTS='--height 100% --color=hl:13,hl+:13,fg+:11,marker:11,border:8,prompt:-1,pointer:11,spinner:-1,bg+:-1,bg:-1,spinner:-1,info:-1,fg:-1'
+# TODO: check if fzf exists in path before settings these variables
+export FZF_DEFAULT_COMMAND='rg --files --hidden'
+export FZF_DEFAULT_OPTS='--height 100% --color=hl:13,hl+:13,fg+:11,marker:11,border:8,prompt:-1,pointer:11,spinner:-1,bg+:-1,bg:-1,spinner:-1,info:-1,fg:-1'
 
-  #export PATH="${PATH:+${PATH}:}~/.fzf/bin"
-#fi
+# if [[ ! "$PATH" == *~/.fzf/bin* ]]; then
+#   export PATH="${PATH:+${PATH}:}~/.fzf/bin"
+# fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# NODE VERSION MANANGER (N)
-#-------------------------------------------------------------------------------
+# }}}
+
+# {{{ Node version manager (n)
 
 # n-install (see http://git.io/n-install-repo).
 export N_PREFIX="$HOME/.n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
 
-# NODE VERSION MANAGER (NVM)
-#-------------------------------------------------------------------------------
+# }}}
 
-# set node version manager enviroment variable
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# YARN VERSION MANAGER (YVM)
-#-------------------------------------------------------------------------------
-
-export YVM_DIR=/home/primalivet/.yvm
-[ -r $YVM_DIR/yvm.sh ] && source $YVM_DIR/yvm.sh
-
-# PRIVATE
-#-------------------------------------------------------------------------------
+# {{{ Private
 
 if [ -f ~/.zsh_private ]; then
   source ~/.zsh_private
 fi
 
-# AUTOADDED
-#-------------------------------------------------------------------------------
+# }}}
+
+# AUTOGENERATED
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/gustaf/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gustaf/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/gustaf/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gustaf/google-cloud-sdk/completion.zsh.inc'; fi
-
-alias luamake=/Users/gustaf/.config/nvim/lua-language-server/3rd/luamake/luamake

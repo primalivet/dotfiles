@@ -5,8 +5,9 @@ if version > 580
   endif
 endif
 
-
+set background=light
 let colors_name = "pygments"
+let g:use_beige = 1
 
 let s:none = ['NONE', 'NONE']
 let s:bold = 'bold,'
@@ -42,51 +43,97 @@ function! s:HL(group, fg, ...)
   execute join(histring, ' ')
 endfunction
 
-let g:use_beige = 1
-
 let s:cs = {}
 
-let  s:cs.grey1   =  ['#e9ecef',  0] " Terminal bg
-let  s:cs.grey2   =  ['#dddddd',  0] " Terminal 7
-let  s:cs.grey3   =  ['#cccccc',  0] " Terminal 8
-let  s:cs.grey4   =  ['#bbbbbb',  0]
+if &background == 'dark'
+  let  s:cs.grey1   =  ['#313131',  0] " Terminal bg
+  let  s:cs.grey2   =  ['#212121',  0] " Terminal 7
+  let  s:cs.grey3   =  ['#212121',  0] " Terminal 8
+  let  s:cs.grey4   =  ['#000000',  0]
 
-let  s:cs.beige1  =  ['#ebe4cc',  0] " Terminal bg
-let  s:cs.beige2  =  ['#D4CDB8',  0] " Terminal 7
-let  s:cs.beige3  =  ['#bcb6a3',  0] " Terminal 8
-let  s:cs.beige4  =  ['#a5a08f',  0]
+  " TODO
+  " let  s:cs.beige1  =  ['#ebe4cc',  0] " Terminal bg
+  " let  s:cs.beige2  =  ['#D4CDB8',  0] " Terminal 7
+  " let  s:cs.beige3  =  ['#bcb6a3',  0] " Terminal 8
+  " let  s:cs.beige4  =  ['#a5a08f',  0]
 
-let  s:cs.black          =  ['#333333',  0] " Terminal 0
-let  s:cs.blood_dark     =  ['#880000',  0] " Terminal 1
-let  s:cs.green_dark     =  ['#008000',  0] " Terminal 2
-" TODO 1 more yellow
-let  s:cs.blue_dark      =  ['#000080',  0] " Terminal 4
-let  s:cs.purple_dark    =  ['#800080',  0] " Terminal 5
-let  s:cs.teal           =  ['#408080',  0] " Terminal 6
+  let  s:cs.black          =  ['#333333',  0] " Terminal 0
+  let  s:cs.blood_dark     =  ['#880000',  0] " Terminal 1
+  let  s:cs.green_dark     =  ['#008000',  0] " Terminal 2
+  " TODO 1 more yellow
+  let  s:cs.blue_dark      =  ['#000080',  0] " Terminal 4
+  let  s:cs.purple_dark    =  ['#800080',  0] " Terminal 5
+  let  s:cs.teal           =  ['#408080',  0] " Terminal 6
 
-let  s:cs.lipstick  =  ['#BA2121',  0]  "  Terminal  9
-let  s:cs.green     =  ['#00A000',  0]  "  Terminal  10
-let  s:cs.yellow    =  ['#FFFF00',  0]  "  Terminal  11
-let  s:cs.blue      =  ['#0000FF',  0]  "  Terminal  12
-let  s:cs.purple    =  ['#AA22FF',  0]  "  Terminal  13
-" TODO 1 more teal
-let  s:cs.white     =  ['#f4f5f7',  0] " Terminal 15
+  let  s:cs.lipstick  =  ['#BA2121',  0]  "  Terminal  9
+  let  s:cs.green     =  ['#00A000',  0]  "  Terminal  10
+  let  s:cs.yellow    =  ['#FFFF00',  0]  "  Terminal  11
+  let  s:cs.blue      =  ['#0000FF',  0]  "  Terminal  12
+  let  s:cs.purple    =  ['#AA22FF',  0]  "  Terminal  13
+  " TODO 1 more teal
+  let  s:cs.white     =  ['#919191',  0] " Terminal 15
 
-" Extra
-let  s:cs.red =  ['#FF0000',  0] " Terminal 9
+  " Extra
+  let  s:cs.red =  ['#FF0000',  0] " Terminal 9
 
-let s:fg = s:cs.black
+  let s:fg = s:cs.white
 
-let s:elevation1_bg = s:cs.grey1
-let s:elevation2_bg = s:cs.grey2
-let s:elevation3_bg = s:cs.grey3
-let s:elevation4_bg = s:cs.grey4
+  let s:elevation1_bg = s:cs.grey1
+  let s:elevation2_bg = s:cs.grey2
+  let s:elevation3_bg = s:cs.grey3
+  let s:elevation4_bg = s:cs.grey4
 
-if g:use_beige == 1
-  let s:elevation1_bg = s:cs.beige1
-  let s:elevation2_bg = s:cs.beige2
-  let s:elevation3_bg = s:cs.beige3
-  let s:elevation4_bg = s:cs.beige4
+  if g:use_beige == 1
+    let s:elevation1_bg = s:cs.beige1
+    let s:elevation2_bg = s:cs.beige2
+    let s:elevation3_bg = s:cs.beige3
+    let s:elevation4_bg = s:cs.beige4
+  endif
+
+else
+
+  let  s:cs.grey1   =  ['#e9ecef',  0] " Terminal bg
+  let  s:cs.grey2   =  ['#dddddd',  0] " Terminal 7
+  let  s:cs.grey3   =  ['#cccccc',  0] " Terminal 8
+  let  s:cs.grey4   =  ['#bbbbbb',  0]
+
+  let  s:cs.beige1  =  ['#ebe4cc',  0] " Terminal bg
+  let  s:cs.beige2  =  ['#D4CDB8',  0] " Terminal 7
+  let  s:cs.beige3  =  ['#bcb6a3',  0] " Terminal 8
+  let  s:cs.beige4  =  ['#a5a08f',  0]
+
+  let  s:cs.black          =  ['#333333',  0] " Terminal 0
+  let  s:cs.blood_dark     =  ['#880000',  0] " Terminal 1
+  let  s:cs.green_dark     =  ['#008000',  0] " Terminal 2
+  " TODO 1 more yellow
+  let  s:cs.blue_dark      =  ['#000080',  0] " Terminal 4
+  let  s:cs.purple_dark    =  ['#800080',  0] " Terminal 5
+  let  s:cs.teal           =  ['#408080',  0] " Terminal 6
+
+  let  s:cs.lipstick  =  ['#BA2121',  0]  "  Terminal  9
+  let  s:cs.green     =  ['#00A000',  0]  "  Terminal  10
+  let  s:cs.yellow    =  ['#FFFF00',  0]  "  Terminal  11
+  let  s:cs.blue      =  ['#0000FF',  0]  "  Terminal  12
+  let  s:cs.purple    =  ['#AA22FF',  0]  "  Terminal  13
+  " TODO 1 more teal
+  let  s:cs.white     =  ['#f4f5f7',  0] " Terminal 15
+
+  " Extra
+  let  s:cs.red =  ['#FF0000',  0] " Terminal 9
+
+  let s:fg = s:cs.black
+
+  let s:elevation1_bg = s:cs.grey1
+  let s:elevation2_bg = s:cs.grey2
+  let s:elevation3_bg = s:cs.grey3
+  let s:elevation4_bg = s:cs.grey4
+
+  if g:use_beige == 1
+    let s:elevation1_bg = s:cs.beige1
+    let s:elevation2_bg = s:cs.beige2
+    let s:elevation3_bg = s:cs.beige3
+    let s:elevation4_bg = s:cs.beige4
+  endif
 endif
 
 "------------------------------------------------------------------------------
@@ -141,6 +188,7 @@ call  s:HL('Elevation4Bg',  s:none,  s:elevation4_bg)
 
 call s:HL('FuglyForeground', s:fg, s:none)
 call s:HL('FuglyForegroundBold', s:fg, s:none, s:bold)
+call s:HL('FuglyForegroundItalic', s:fg, s:none, s:italic)
 call s:HL('FuglyNegative', s:elevation1_bg, s:fg)
 call s:HL('FuglyNegativeBold', s:elevation1_bg, s:fg, s:bold)
 
@@ -154,7 +202,7 @@ hi!  link  Visual        Elevation2Bg
 hi!  link  Folded        Elevation2Bg
 hi!  link  StatusLine    FuglyNegativeBold
 hi!  link  StatusLineNC  Elevation3
-hi!  link  QuickFixLine  Elevation3
+hi!  link  QuickFixLine  Elevation4
 
 " Column related
 hi!  link  LineNr        FuglyForeground
@@ -183,10 +231,10 @@ hi!  link  WarningMsg    FugleYellow
 hi!  link  Question      FuglyForeground
 
 " Popup and Floats
-hi!  link  NormalFloat  Elevation2
+hi!  link  NormalFloat  Elevation3
 hi!  link  Pmenu        Elevation3
 hi!  link  PmenuSbar    Elevation3
-hi!  link  PmenuThumb   Elevation4
+hi!  link  PmenuThumb   FuglyNegative
 hi!  link  PmenuSel     FuglyNegative
 
 " Other
@@ -205,6 +253,10 @@ hi!  link  EndOfBuffer  NonText
 " call s:HL('TermCursorNC')
 " call s:HL('Conceal', s:cs.grey6, s:cs.grey0)
 
+augroup PYGMENTS_COLORS_COMMANDS
+  au!
+  au FileType qf setlocal winhighlight=Normal:Elevation2
+augroup END
 
 "------------------------------------------------------------------------------
 " BASE - SYNTAX
@@ -341,9 +393,20 @@ hi! link TSWarning WarningMsg" Text representation of a warning note.
 "------------------------------------------------------------------------------
 
 hi! link TelescopeNormal NormalFloat
-hi! link TelescopeSelection Elevation3
+hi! link TelescopeSelection FuglyNegative
 hi! link TelescopeMultiSelection FuglyForegroundBold
 hi! link TelescopePreviewNormal TelescopeNormal
 hi! link TelescopeBorder TelescopeNormal
 hi! link TelescopeMatching Search
 hi! link TelescopePromptPrefix FuglyForeground
+
+"------------------------------------------------------------------------------
+" CMP
+"------------------------------------------------------------------------------
+
+hi! link CmpItemAbbr NormalFloat
+hi! link CmpItemAbbrDeprecated NormalFloat
+hi! link CmpItemAbbrMatch Search
+hi! link CmpItemAbbrMatchFuzzy Search
+hi! link CmpItemKind NormalFloat
+hi! link CmpItemMenu NormalFloat
