@@ -7,7 +7,7 @@ function M.init()
     vim.opt.fillchars = "vert:|"
     vim.opt.backup = false -- No backups,
     vim.opt.clipboard = "unnamed"
-    vim.opt.cursorline = true -- show what line i'm on
+    vim.opt.cursorline = false -- show what line i'm on
     vim.opt.diffopt = "vertical"
     vim.opt.expandtab = true -- use space indentation
     vim.opt.foldenable = true --  use folds
@@ -30,7 +30,7 @@ function M.init()
     vim.opt.splitbelow = true -- and horizontal below
     vim.opt.splitright = true -- vert splits to the right
     vim.opt.tabstop = 2
-    vim.opt.termguicolors = true --use more colors than before :)
+    vim.opt.termguicolors = false --use more colors than before :)
     vim.opt.textwidth = 80 -- max text width 80,
     vim.opt.timeoutlen = 500 --timeout for mappings and
     vim.opt.updatetime = 100 --updatetime for events
@@ -43,7 +43,6 @@ function M.init()
     require "primalivet.mappings".init()
 
     vim.cmd ":packadd cfilter" -- enable filter quickfix list
-    vim.cmd "color pygments"
 end
 
 return M
