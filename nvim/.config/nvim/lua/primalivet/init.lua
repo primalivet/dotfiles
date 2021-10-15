@@ -43,10 +43,6 @@ function M.init()
     require "primalivet.mappings".init()
 
     vim.cmd ":packadd cfilter" -- enable filter quickfix list
-<<<<<<< HEAD
-=======
-    vim.cmd "colorscheme default_defined"
->>>>>>> d1ef870b278c30b7f5dfcd3e33475435516cd2fb
 end
 
 return M
