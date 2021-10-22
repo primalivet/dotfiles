@@ -14,6 +14,9 @@ export TERM=xterm-256color
 export KEYTIMEOUT=1
 export EDITOR=nvim
 
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+export PUPPETEER_EXECUTABLE_PATH=/Applications/Chromium.app/Contents/MacOS/Chromium
+
 # }}}
 
 # {{{ Keybindings
@@ -98,7 +101,7 @@ setopt HIST_REDUCE_BLANKS
 
 # }}}
 
-# {{{ Prompt VI mode 
+# {{{ Prompt VI mode
 
 ## Init
 setopt PROMPT_SUBST
