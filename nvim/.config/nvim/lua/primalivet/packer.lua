@@ -121,9 +121,9 @@ function M.init()
                           local lsp_signature = require("lsp_signature")
                           lsp_signature.on_attach()
 
-                          if client.name == 'tsserver' then
-                                  print('TSSERVER!!')
-                          end
+                          -- Handle specific lsps
+                          -- if client.name == 'tsserver' then
+                          -- end
                   end
 
                   local nvim_lsp = require'lspconfig'
