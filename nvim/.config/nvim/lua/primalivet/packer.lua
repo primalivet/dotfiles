@@ -1,12 +1,11 @@
 local M = {}
-local cmd = vim.api.nvim_command
 local fn = vim.fn
 
 function M.init()
 	-- Bootstrap
 	local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 	if fn.empty(fn.glob(install_path)) > 0 then
-		packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+		fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 	end
 
 	local packer = require'packer'
@@ -23,6 +22,12 @@ function M.init()
 	use 'tpope/vim-repeat'
 	use 'tpope/vim-fugitive'
 	use 'simrat39/symbols-outline.nvim'
+
+  use {
+          'nvim-lualine/lualine.nvim',
+          requires = {'kyazdani42/nvim-web-devicons', opt = true},
+          config = function() require('lualine').setup() end
+  }
 
 	use {
           'ray-x/lsp_signature.nvim',
@@ -120,7 +125,7 @@ function M.init()
                   --
                   -- Generic "On attach" function for all language servers
                   --
-                  local function on_attach(client, bufnr)
+                  local function on_attach(client)
                           -- Disable formatting for any language server
                           client.resolved_capabilities.document_formatting = false
                           client.resolved_capabilities.document_range_formatting = false

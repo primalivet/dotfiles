@@ -46,10 +46,10 @@ function M.init()
     nvim_set_keymap("n", "<leader>ts", ":nohlsearch<CR>", default_opt)
 
     -- Prev/Next Location list
-    nvim_set_keymap("n", "[l", ":lprevious", default_opt)
-    nvim_set_keymap("n", "]l", ":lnext", default_opt)
-    nvim_set_keymap("n", "[L", ":lfirst", default_opt)
-    nvim_set_keymap("n", "]L", ":llast", default_opt)
+    nvim_set_keymap("n", "[l", ":lprevious<CR>", default_opt)
+    nvim_set_keymap("n", "]l", ":lnext<CR>", default_opt)
+    nvim_set_keymap("n", "[L", ":lfirst<CR>", default_opt)
+    nvim_set_keymap("n", "]L", ":llast<CR>", default_opt)
 
     -- Prev/Next Quickfix list
     nvim_set_keymap("n", "[c", ":cprevious<CR>", default_opt)

@@ -251,3 +251,5 @@ if [ -f '/Users/gustaf/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gustaf/g
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/gustaf/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gustaf/google-cloud-sdk/completion.zsh.inc'; fi
+
+alias luamake=/Users/gustaf/.local/lua-language-server/3rd/luamake/luamake

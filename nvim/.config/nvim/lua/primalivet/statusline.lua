@@ -21,21 +21,29 @@ end
 local function diagnostics_status()
         local diagnostics = vim.lsp.diagnostic.get_all()
         local items = vim.lsp.util.diagnostics_to_items(diagnostics)
-        local errors = 0
-        local warnings = 0
-        local infos = 0
+        local es = 0
+        local ws = 0
+        local is = 0
+
+        vim.cmd'hi! link StatusLineError Error'
+        vim.cmd'hi! link StatusLineWarning Warning'
 
         for _, item in ipairs(items) do
                 if item.type == 'E' then
-                        errors = errors + 1
+                        es = es + 1
                 elseif item.type == 'W' then
-                        warnings = warnings + 1
+                        ws = ws + 1
                 elseif item.type == 'I' then
-                        infos = infos + 1
+                        is = is + 1
                 end
         end
 
-        return errors and warnings and infos and string.format("E: %s W: %s I: %s", errors, warnings, infos) or ""
+        if es == 0 and ws == 0 and is == 0 then
+                return ""
+        else
+                return "%#StatusLineError#E:" .. es .. "%#StatusLineWarning#W:" .. ws .. "%#StatusLine#I:" .. is
+                -- return string.format("%#StatusLineError#E:%s %#StatusLineWarning#W:%s I:%s", es, ws, is) or ""
+        end
 end
 
 local function lsp_status()
