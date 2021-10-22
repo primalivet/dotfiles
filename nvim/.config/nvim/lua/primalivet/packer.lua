@@ -240,11 +240,23 @@ function M.init()
           end
   }
 
+	use {
+          "nvim-treesitter/nvim-treesitter",
+          run = ":TSUpdate",
+          config = function()
+                  require'nvim-treesitter.configs'.setup{
+                          ensure_installed = 'maintained',
+                          highlight = { enable = true },
+                          indent = { enable = true }
+                  }
+          end
+
+  }
+
 	-- use {"heavenshell/vim-jsdoc", run = "make install", ft = {"javascript", "javascript.jsx", "typescript"}}
 	-- use {"windwp/nvim-ts-autotag"}
 	-- use { "windwp/nvim-autopairs", requires = "nvim-treesitter/nvim-treesitter", config = function() require "primalivet.plugins.autopairs".init() end }
 	-- use { "sindrets/diffview.nvim", config = function() require "primalivet.plugins.diffview".init() end }
-	-- use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = function() require "primalivet.plugins.treesitter".init() end }
 	-- use { "nvim-treesitter/playground", requires = {{"nvim-treesitter/nvim-treesitter"}}, config = function() require "primalivet.plugins.treesitter-playground".init() end }
 end
 

@@ -3,44 +3,29 @@ local g = vim.g
 local opt = vim.opt
 
 function M.init()
-        -- vim.cmd "filetype plugin on"
-        -- vim.cmd "filetype plugin indent on"
-        -- vim.opt.fillchars = "vert:|"
-        -- vim.opt.backup = false -- No backups,
-        -- vim.opt.clipboard = "unnamed"
-        -- vim.opt.cursorline = false -- show what line i'm on
-        -- vim.opt.diffopt = "vertical"
-        -- vim.opt.expandtab = true -- use space indentation
+        g.mapleader = " " -- Space is leader
+        opt.cursorline = false -- show what line i'm on
+        opt.diffopt = "vertical"
+        opt.fillchars = "vert:|"
         opt.foldenable = true --  use folds
         opt.foldlevel = 3 -- dont fold at start
         opt.foldmethod = "indent" --by indent
-        -- vim.opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
-        -- vim.opt.grepprg = "rg --vimgrep --no-heading --hidden"
-        -- vim.opt.ignorecase = true --  dont be case sensitive
-        -- vim.opt.listchars = "tab:>--,space:·,trail:·" -- make em look like this
-        -- vim.opt.relativenumber = true --relative to current row
-        -- vim.opt.scrolloff = 5 -- scroll view when cursor gets close to edge
-        -- vim.opt.shiftround = true
-        -- vim.opt.shiftwidth = 2
-        -- vim.opt.sidescrolloff = 5 -- in both directions
-        -- vim.opt.smartcase = true --  unless i type CAPS
-        -- vim.opt.softtabstop = 2
-        -- vim.opt.splitbelow = true -- and horizontal below
-        -- vim.opt.splitright = true -- vert splits to the right
-        -- vim.opt.tabstop = 2
-        -- vim.opt.termguicolors = false --use more colors than before :)
-        -- vim.opt.textwidth = 80 -- max text width 80,
-        -- vim.opt.wildignore = "*/node_modules/*,*/dist/*,*/build/*"
-        -- vim.opt.writebackup = false -- seems to be a problem with some lsps
-        -- vim.cmd ":packadd cfilter" -- enable filter quickfix list
-
-        g.mapleader = " " -- Space is leader
+        opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
+        opt.grepprg = "rg --vimgrep --no-heading --hidden"
         opt.hidden = true -- dont unload abandoned buffers, just hide em
+        opt.ignorecase = true --  dont be case sensitive
+        opt.listchars = "tab:>--,space:·,trail:·" -- make em look like this
         opt.number = true -- show numbers
         opt.path = "**"
+        opt.relativenumber = true --relative to current row
+        opt.scrolloff = 5 -- scroll view when cursor gets close to edge
+        opt.sidescrolloff = 5 -- in both directions
+        opt.smartcase = true --  unless i type CAPS
         opt.timeoutlen = 500 --timeout for mappings and
         opt.updatetime = 100 --updatetime for events
+        opt.wildignore = "*/node_modules/*,*/dist/*,*/build/*"
         opt.wrap = false -- but dont wrap
+        vim.cmd ":packadd cfilter" -- enable filter quickfix list
 
         _G.reload_config = function()
                 require("plenary.reload").reload_module("primalivet")
@@ -50,7 +35,6 @@ function M.init()
 
         require'primalivet.packer'.init()
         require'primalivet.mappings'.init()
-        -- require'primalivet.statusline'.init()
 end
 
 return M
