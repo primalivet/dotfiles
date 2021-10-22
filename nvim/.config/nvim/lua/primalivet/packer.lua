@@ -1,7 +1,7 @@
 local M = {}
-
 local cmd = vim.api.nvim_command
 local fn = vim.fn
+
 function M.init()
 	-- Bootstrap
 	local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -22,6 +22,12 @@ function M.init()
 	use 'tpope/vim-surround'
 	use 'tpope/vim-repeat'
 	use 'tpope/vim-fugitive'
+	use 'simrat39/symbols-outline.nvim'
+
+	use {
+          'ray-x/lsp_signature.nvim',
+          requires = {'neovim/nvim-lspconfig'}
+  }
 
 	use {
           'nvim-telescope/telescope.nvim',
@@ -94,8 +100,6 @@ function M.init()
 
 	use {
           'neovim/nvim-lspconfig',
-          requires = {
-          },
           config = function()
                   -- Integrate quickfix list with the nvim lsp
                   do
@@ -110,28 +114,29 @@ function M.init()
                           end
                   end
 
-                  -- Load language servers
-                  -- TODO: lsp "native" eslint
-                  require("primalivet.plugins.lsp.sumneko").init()
-                  require("primalivet.plugins.lsp.vimls").init()
-                  require("primalivet.plugins.lsp.tsserver").init()
-                  require("primalivet.plugins.lsp.jsonls").init()
+                  local function on_attach(client, bufnr)
+                          client.resolved_capabilities.document_formatting = false
+                          client.resolved_capabilities.document_range_formatting = false
+
+                          local lsp_signature = require("lsp_signature")
+                          lsp_signature.on_attach()
+
+                          if client.name == 'tsserver' then
+                                  print('TSSERVER!!')
+                          end
+                  end
+
+                  local nvim_lsp = require'lspconfig'
+                  nvim_lsp.tsserver.setup { on_attach = on_attach }
           end
   }
-
 
 	-- use {"heavenshell/vim-jsdoc", run = "make install", ft = {"javascript", "javascript.jsx", "typescript"}}
 	-- use {"windwp/nvim-ts-autotag"}
 	-- use { "windwp/nvim-autopairs", requires = "nvim-treesitter/nvim-treesitter", config = function() require "primalivet.plugins.autopairs".init() end }
-	-- use {"ray-x/lsp_signature.nvim", requires = {"neovim/nvim-lspconfig"}}
 	-- use { "sindrets/diffview.nvim", config = function() require "primalivet.plugins.diffview".init() end }
-	-- use {"iamcco/markdown-preview.nvim", run = "cd app && yarn install", ft = {"markdown"}}
 	-- use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = function() require "primalivet.plugins.treesitter".init() end }
 	-- use { "nvim-treesitter/playground", requires = {{"nvim-treesitter/nvim-treesitter"}}, config = function() require "primalivet.plugins.treesitter-playground".init() end }
-	-- use {"jose-elias-alvarez/null-ls.nvim", requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}}
-	-- use { "neovim/nvim-lspconfig", config = function() require "primalivet.plugins.lsp".init() end }
-	-- use { "jose-elias-alvarez/nvim-lsp-ts-utils", requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", "jose-elias-alvarez/null-ls.nvim"} }
-	-- use {"simrat39/symbols-outline.nvim"}
 end
 
 return M

@@ -55,7 +55,7 @@ function M.init()
     nvim_set_keymap("n", "]l", ":lnext", default_opt)
     nvim_set_keymap("n", "[L", ":lfirst", default_opt)
     nvim_set_keymap("n", "]L", ":llast", default_opt)
-    
+
     -- Prev/Next Quickfix list
     nvim_set_keymap("n", "[c", ":cprevious<CR>", default_opt)
     nvim_set_keymap("n", "]c", ":cnext<CR>", default_opt)
@@ -67,7 +67,7 @@ function M.init()
     nvim_set_keymap("n", "[h", ':lua require("gitsigns.actions").prev_hunk()<CR>', default_opt)
 
     -- Reloads the entire config, function is defined
-    nvim_set_keymap("n", "<leader>vs", ':lua require"primalivet.utils".reload_config()<CR>', default_opt)
+    nvim_set_keymap("n", "<leader>vs", ':lua _G.reload_config()<CR>', default_opt)
 end
 
 return M
