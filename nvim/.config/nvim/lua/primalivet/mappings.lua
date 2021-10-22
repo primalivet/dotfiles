@@ -36,14 +36,9 @@ function M.init()
     nvim_set_keymap("n", "<leader>sc", ':lua require"telescope.builtin".commands()<CR>', default_opt)
     nvim_set_keymap("n", "<leader>sf", ':lua require"telescope.builtin".find_files()<CR>', default_opt)
     nvim_set_keymap("n", "<leader>sg", ':lua require"telescope.builtin".git_files()<CR>', default_opt)
-    nvim_set_keymap(
-        "n",
-        "<leader>s/",
-        ':lua require"telescope.builtin".current_buffer_fuzzy_find({ previewer = false, sorting_strategy="ascending" })<CR>',
-        default_opt
-    )
+    nvim_set_keymap( "n", "<leader>s/", ':lua require"telescope.builtin".current_buffer_fuzzy_find({ previewer = false, sorting_strategy="ascending" })<CR>', default_opt)
     nvim_set_keymap("n", "<leader>sb", ':lua require"telescope.builtin".buffers()<CR>', default_opt)
-    nvim_set_keymap("n", "<leader>sd", ':lua require"primalivet.plugins.telescope".dotfiles()<CR>', default_opt)
+    nvim_set_keymap("n", "<leader>sd", ':lua require"telescope.builtin".git_files({ cwd = "~/Code/OSS/dotfiles", prompt_title = "Dotfiles" })<CR>', default_opt)
 
     -- Toggle
     nvim_set_keymap("n", "<leader>tl", ":set list!<CR>", default_opt)

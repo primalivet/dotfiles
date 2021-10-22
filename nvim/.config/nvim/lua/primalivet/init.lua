@@ -11,9 +11,9 @@ function M.init()
         -- vim.opt.cursorline = false -- show what line i'm on
         -- vim.opt.diffopt = "vertical"
         -- vim.opt.expandtab = true -- use space indentation
-        -- vim.opt.foldenable = true --  use folds
-        -- vim.opt.foldlevel = 999 -- dont fold at start
-        -- vim.opt.foldmethod = "indent" --by indent
+        opt.foldenable = true --  use folds
+        opt.foldlevel = 3 -- dont fold at start
+        opt.foldmethod = "indent" --by indent
         -- vim.opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
         -- vim.opt.grepprg = "rg --vimgrep --no-heading --hidden"
         -- vim.opt.ignorecase = true --  dont be case sensitive

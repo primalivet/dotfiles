@@ -101,7 +101,10 @@ function M.init()
 	use {
           'neovim/nvim-lspconfig',
           config = function()
+                  local nvim_lsp = require'lspconfig'
+                  --
                   -- Integrate quickfix list with the nvim lsp
+                  --
                   do
                           local lsp_method = "textDocument/publishDiagnostics"
                           local default_handler = vim.lsp.handlers[lsp_method]
@@ -114,7 +117,11 @@ function M.init()
                           end
                   end
 
+                  --
+                  -- Generic "On attach" function for all language servers
+                  --
                   local function on_attach(client, bufnr)
+                          -- Disable formatting for any language server
                           client.resolved_capabilities.document_formatting = false
                           client.resolved_capabilities.document_range_formatting = false
 
@@ -126,8 +133,105 @@ function M.init()
                           -- end
                   end
 
-                  local nvim_lsp = require'lspconfig'
+                  --
+                  -- LSP Setups
+                  --
+
                   nvim_lsp.tsserver.setup { on_attach = on_attach }
+                  nvim_lsp.gopls.setup{}
+                  nvim_lsp.vimls.setup {}
+
+
+                  -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
+                  USER = vim.fn.expand("$USER")
+
+                  local sumneko_root_path = ""
+                  local sumneko_binary = ""
+
+                  if vim.fn.has("mac") == 1 then
+                          sumneko_root_path = "/Users/" .. USER .. "/.local/lua-language-server"
+                          sumneko_binary = "/Users/" .. USER .. "/.local/lua-language-server/bin/macOS/lua-language-server"
+                  elseif vim.fn.has("unix") == 1 then
+                          sumneko_root_path = "/home/" .. USER .. "/.local/lua-language-server"
+                          sumneko_binary = "/home/" .. USER .. "/.local/lua-language-server/bin/Linux/lua-language-server"
+                  else
+                          print("Unsupported system for sumneko")
+                  end
+
+                  nvim_lsp.sumneko_lua.setup {
+                          cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+                          settings = {
+                                  Lua = {
+                                          runtime = {
+                                                  -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                                                  version = "LuaJIT",
+                                                  -- Setup your lua path
+                                                  path = vim.split(package.path, ";")
+                                          },
+                                          diagnostics = {
+                                                  -- Get the language server to recognize the `vim` global
+                                                  globals = {"vim"}
+                                          },
+                                          workspace = {
+                                                  -- Make the server aware of Neovim runtime files
+                                                  library = {
+                                                          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                                                          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
+                                                  }
+                                          }
+                                  }
+                          }
+                  }
+
+                  -- JSON and YAML LSP
+                  -- Capabilities are not resolved in on_attach as that is the servers
+                  -- capabilities, here we need to set neovims capabilities.
+                  -- Please tell me why it is this way???
+                  local capabilities = vim.lsp.protocol.make_client_capabilities()
+                  capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+                  nvim_lsp.jsonls.setup {
+                          capabilities = capabilities,
+                          on_attach = on_attach,
+                          settings = {
+                                  json = {
+                                          schemas = {
+                                                  {
+                                                          description = "TypeScript compiler configuration file",
+                                                          fileMatch = {"tsconfig.json", "tsconfig.*.json"},
+                                                          url = "http://json.schemastore.org/tsconfig"
+                                                  },
+                                                  {
+                                                          description = "ESLint config",
+                                                          fileMatch = {".eslintrc.json", ".eslintrc"},
+                                                          url = "http://json.schemastore.org/eslintrc"
+                                                  },
+                                                  {
+                                                          description = "Prettier config",
+                                                          fileMatch = {".prettierrc", ".prettierrc.json", "prettier.config.json"},
+                                                          url = "http://json.schemastore.org/prettierrc"
+                                                  }
+                                          }
+                                  }
+                          }
+                  }
+
+                  nvim_lsp.yamlls.setup {
+                          capabilities = capabilities,
+                          on_attach = on_attach,
+                          settings = {
+
+                          yaml = {
+                                  schemas = {
+                                          {
+                                                  description = "Docker Compose config",
+                                                  fileMatch = {"docker-compose.yml", "docker-compose.yaml"},
+                                                  url = "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"
+                                          }
+                                  }
+                          }
+                          }
+                  }
           end
   }
 
