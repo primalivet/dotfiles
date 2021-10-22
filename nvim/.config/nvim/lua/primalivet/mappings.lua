@@ -4,21 +4,15 @@ function M.init()
     local nvim_set_keymap = vim.api.nvim_set_keymap
     local default_opt = {noremap = true, silent = true}
 
-    -- hjkl style nativation in command line mode
-    nvim_set_keymap("c", "<C-h>", "<Left>", default_opt)
-    nvim_set_keymap("c", "<C-j>", "<Down>", default_opt)
-    nvim_set_keymap("c", "<C-k>", "<Up>", default_opt)
-    nvim_set_keymap("c", "<C-l>", "<Right>", default_opt)
-
-    -- make j and k work on wrapped lines
+    -- Go over wrapped lines
     nvim_set_keymap("n", "j", "gj", default_opt)
     nvim_set_keymap("n", "k", "gk", default_opt)
 
-    -- keep visual selection on >  and < keys
+    -- Keep selection in visual mode when indenting
     nvim_set_keymap("v", "<", "<gv", default_opt)
     nvim_set_keymap("v", ">", ">gv", default_opt)
 
-    -- move lines in visual mode
+    -- Move lines in visual mode
     nvim_set_keymap("v", "<C-j>", ":m '>+1<CR>gv=gv", default_opt)
     nvim_set_keymap("v", "<C-k>", ":m '<-2<CR>gv=gv", default_opt)
 
@@ -52,19 +46,25 @@ function M.init()
     nvim_set_keymap("n", "<leader>sd", ':lua require"primalivet.plugins.telescope".dotfiles()<CR>', default_opt)
 
     -- Toggle
-    nvim_set_keymap("n", "<leader>tt", ":lua require('primalivet.utils').toggle_quickfix()<CR>", default_opt)
     nvim_set_keymap("n", "<leader>tl", ":set list!<CR>", default_opt)
     nvim_set_keymap("n", "<leader>tp", ":set invpaste<CR>", default_opt)
     nvim_set_keymap("n", "<leader>ts", ":nohlsearch<CR>", default_opt)
 
+    -- Prev/Next Location list
     nvim_set_keymap("n", "[l", ":lprevious", default_opt)
     nvim_set_keymap("n", "]l", ":lnext", default_opt)
-
+    nvim_set_keymap("n", "[L", ":lfirst", default_opt)
+    nvim_set_keymap("n", "]L", ":llast", default_opt)
+    
+    -- Prev/Next Quickfix list
     nvim_set_keymap("n", "[c", ":cprevious<CR>", default_opt)
     nvim_set_keymap("n", "]c", ":cnext<CR>", default_opt)
-    -- These are here for transparency, as they are already defined by gitsign
-    nvim_set_keymap("n", "]c", ':lua require("gitsigns.actions").next_hunk()<CR>', default_opt)
-    nvim_set_keymap("n", "[c", ':lua require("gitsigns.actions").prev_hunk()<CR>', default_opt)
+    nvim_set_keymap("n", "[C", ":cfirst<CR>", default_opt)
+    nvim_set_keymap("n", "]C", ":clast<CR>", default_opt)
+
+    -- Prev/Next Hunks
+    nvim_set_keymap("n", "]h", ':lua require("gitsigns.actions").next_hunk()<CR>', default_opt)
+    nvim_set_keymap("n", "[h", ':lua require("gitsigns.actions").prev_hunk()<CR>', default_opt)
 
     -- Reloads the entire config, function is defined
     nvim_set_keymap("n", "<leader>vs", ':lua require"primalivet.utils".reload_config()<CR>', default_opt)
