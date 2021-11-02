@@ -24,6 +24,14 @@ function M.init()
     use "simrat39/symbols-outline.nvim"
     use "windwp/nvim-ts-autotag"
     use "mfussenegger/nvim-dap"
+    use {
+        "dracula/vim",
+        as = "dracula",
+        config = function()
+            vim.opt.background = "dark"
+            vim.cmd "colorscheme dracula"
+        end
+    }
 
     use {
         "nvim-telescope/telescope.nvim",
@@ -34,7 +42,12 @@ function M.init()
         "nvim-lualine/lualine.nvim",
         requires = {"kyazdani42/nvim-web-devicons", opt = true},
         config = function()
-            require("lualine").setup()
+            require("lualine").setup {
+                options = {
+                    section_separators = "",
+                    component_separators = ""
+                }
+            }
         end
     }
 
@@ -51,7 +64,8 @@ function M.init()
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
-            "hrsh7th/cmp-emoji"
+            "hrsh7th/cmp-emoji",
+            "onsails/lspkind-nvim"
         },
         config = function()
             require "cmp".setup {
@@ -61,17 +75,7 @@ function M.init()
                     end
                 },
                 formatting = {
-                    format = function(entry, vim_item)
-                        vim_item.menu =
-                            ({
-                            buffer = "[Buffer]",
-                            path = "[Path]",
-                            nvim_lsp = "[LSP]",
-                            nvim_lua = "[Lua]",
-                            emoji = "[Emoji]"
-                        })[entry.source.name]
-                        return vim_item
-                    end
+                    format = require "lspkind".cmp_format({with_text = true, maxwidth = 50})
                 },
                 sources = {
                     {name = "buffer"},
