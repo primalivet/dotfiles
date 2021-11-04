@@ -25,11 +25,11 @@ function M.init()
     use "windwp/nvim-ts-autotag"
     use "mfussenegger/nvim-dap"
     use {
-        "dracula/vim",
-        as = "dracula",
+        "gruvbox-community/gruvbox",
         config = function()
+            vim.g.gruvbox_contrast_dark = "hard"
             vim.opt.background = "dark"
-            vim.cmd "colorscheme dracula"
+            vim.cmd "colorscheme gruvbox"
         end
     }
 

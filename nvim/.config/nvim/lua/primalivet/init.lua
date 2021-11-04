@@ -8,7 +8,8 @@ function M.init()
     opt.diffopt = "vertical"
     opt.fillchars = "vert:|"
     opt.foldenable = true --  use folds
-    opt.foldlevel = 3 -- dont fold at start
+    opt.foldlevel = 100 -- start folding at level 100 (never)
+    opt.showcmd = true -- show what I type
     opt.foldmethod = "indent" --by indent
     opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
     opt.grepprg = "rg --vimgrep --no-heading --hidden"
