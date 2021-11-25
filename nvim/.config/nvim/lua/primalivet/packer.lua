@@ -23,32 +23,10 @@ function M.init()
     use "tpope/vim-fugitive"
     use "simrat39/symbols-outline.nvim"
     use "windwp/nvim-ts-autotag"
-    use "mfussenegger/nvim-dap"
-    use {
-        "gruvbox-community/gruvbox",
-        config = function()
-            vim.g.gruvbox_contrast_dark = "hard"
-            vim.opt.background = "dark"
-            vim.cmd "colorscheme gruvbox"
-        end
-    }
 
     use {
         "nvim-telescope/telescope.nvim",
-        requires = {{"nvim-lua/plenary.nvim"}}
-    }
-
-    use {
-        "nvim-lualine/lualine.nvim",
-        requires = {"kyazdani42/nvim-web-devicons", opt = true},
-        config = function()
-            require("lualine").setup {
-                options = {
-                    section_separators = "",
-                    component_separators = ""
-                }
-            }
-        end
+        requires = {"nvim-lua/plenary.nvim"}
     }
 
     use {
@@ -60,6 +38,7 @@ function M.init()
         "hrsh7th/nvim-cmp",
         requires = {
             "hrsh7th/vim-vsnip",
+            "hrsh7th/vim-vsnip-integ",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-nvim-lsp",
@@ -160,67 +139,26 @@ function M.init()
 
                 local lsp_signature = require("lsp_signature")
                 lsp_signature.on_attach()
-
-                -- Handle specific lsps
-                -- if client.name == 'tsserver' then
-                -- end
             end
 
             --
             -- LSP Setups
             --
 
-            nvim_lsp.tsserver.setup {on_attach = on_attach}
-            nvim_lsp.gopls.setup {}
-            nvim_lsp.vimls.setup {}
-
-            -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
-            USER = vim.fn.expand("$USER")
-
-            local sumneko_root_path = ""
-            local sumneko_binary = ""
-
-            if vim.fn.has("mac") == 1 then
-                sumneko_root_path = "/Users/" .. USER .. "/.local/lua-language-server"
-                sumneko_binary = "/Users/" .. USER .. "/.local/lua-language-server/bin/macOS/lua-language-server"
-            elseif vim.fn.has("unix") == 1 then
-                sumneko_root_path = "/home/" .. USER .. "/.local/lua-language-server"
-                sumneko_binary = "/home/" .. USER .. "/.local/lua-language-server/bin/Linux/lua-language-server"
-            else
-                print("Unsupported system for sumneko")
-            end
-
-            nvim_lsp.sumneko_lua.setup {
-                cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-                settings = {
-                    Lua = {
-                        runtime = {
-                            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                            version = "LuaJIT",
-                            -- Setup your lua path
-                            path = vim.split(package.path, ";")
-                        },
-                        diagnostics = {
-                            -- Get the language server to recognize the `vim` global
-                            globals = {"vim"}
-                        },
-                        workspace = {
-                            -- Make the server aware of Neovim runtime files
-                            library = {
-                                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                                [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
-                            }
-                        }
-                    }
-                }
-            }
-
-            -- JSON and YAML LSP
+            -- CSS, JSON and YAML LSP
             -- Capabilities are not resolved in on_attach as that is the servers
             -- capabilities, here we need to set neovims capabilities.
             -- Please tell me why it is this way???
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+            nvim_lsp.tsserver.setup {on_attach = on_attach}
+            nvim_lsp.gopls.setup {}
+            nvim_lsp.vimls.setup {}
+
+            nvim_lsp.cssls.setup {
+                capabilities = capabilities
+            }
 
             nvim_lsp.jsonls.setup {
                 capabilities = capabilities,
@@ -263,6 +201,48 @@ function M.init()
                     }
                 }
             }
+
+            -- Sumneko LSP
+            if vim.fn.has("mac") == 1 or vim.fn.has("linux") == 1 then
+                -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
+                USER = vim.fn.expand("$USER")
+
+                local sumneko_root_path = ""
+                local sumneko_binary = ""
+
+                if vim.fn.has("mac") == 1 then
+                    sumneko_root_path = "/Users/" .. USER .. "/.local/lua-language-server"
+                    sumneko_binary = "/Users/" .. USER .. "/.local/lua-language-server/bin/macOS/lua-language-server"
+                elseif vim.fn.has("unix") == 1 then
+                    sumneko_root_path = "/home/" .. USER .. "/.local/lua-language-server"
+                    sumneko_binary = "/home/" .. USER .. "/.local/lua-language-server/bin/Linux/lua-language-server"
+                end
+
+                nvim_lsp.sumneko_lua.setup {
+                    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+                    settings = {
+                        Lua = {
+                            runtime = {
+                                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                                version = "LuaJIT",
+                                -- Setup your lua path
+                                path = vim.split(package.path, ";")
+                            },
+                            diagnostics = {
+                                -- Get the language server to recognize the `vim` global
+                                globals = {"vim"}
+                            },
+                            workspace = {
+                                -- Make the server aware of Neovim runtime files
+                                library = {
+                                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                                    [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
+                                }
+                            }
+                        }
+                    }
+                }
+            end
         end
     }
 
@@ -271,17 +251,6 @@ function M.init()
         config = function()
             local null_ls = require "null-ls"
             local helpers = require "null-ls.helpers"
-
-            local source_luafmt = {
-                method = null_ls.methods.FORMATTING,
-                filetypes = {"lua"},
-                name = "luafmt",
-                generator = helpers.formatter_factory {
-                    command = "luafmt",
-                    args = {"--stdin"}, -- go with luafmt defaults, it does not support a per project config as for now.
-                    to_stdin = true
-                }
-            }
 
             local eslint_options = {
                 condition = function(utils)
@@ -295,6 +264,17 @@ function M.init()
                     return utils.root_has_file ".prettierrc" or utils.root_has_file ".prettierrc.json"
                 end,
                 command = "./node_modules/.bin/prettier"
+            }
+
+            local source_luafmt = {
+                method = null_ls.methods.FORMATTING,
+                filetypes = {"lua"},
+                name = "luafmt",
+                generator = helpers.formatter_factory {
+                    command = "luafmt",
+                    args = {"--stdin"}, -- go with luafmt defaults, it does not support a per project config as for now.
+                    to_stdin = true
+                }
             }
 
             local sources = {
