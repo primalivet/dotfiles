@@ -22,7 +22,7 @@ alias ga='git add'
 [ -f ~/.zsh_private ] && source ~/.zsh_private
 
 # Oh My Zsh
-export ZSH="/Users/gustaf/.oh-my-zsh"
+export ZSH=$HOME/.oh-my-zsh
 export FZF_BASE=/opt/homebrew/opt/fzf
 export FZF_DEFAULT_OPTS='--height=100%'
 ZSH_THEME="robbyrussell"
