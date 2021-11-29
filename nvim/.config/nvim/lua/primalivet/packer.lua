@@ -26,7 +26,10 @@ function M.init()
 
     use {
         "nvim-telescope/telescope.nvim",
-        requires = {"nvim-lua/plenary.nvim"}
+        requires = {"nvim-lua/plenary.nvim", {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}},
+        config = function()
+            require "telescope".load_extension "fzf"
+        end
     }
 
     use {
@@ -124,7 +127,7 @@ function M.init()
                     default_handler(err, method, result, client_id, bufnr, config)
                     local diagnostics = vim.lsp.diagnostic.get_all()
                     local items = vim.lsp.util.diagnostics_to_items(diagnostics)
-
+                    -- TODO: consider filtering out diagnostics with typescript source
                     vim.lsp.util.set_loclist(items)
                 end
             end
@@ -285,6 +288,7 @@ function M.init()
             }
 
             null_ls.config {
+                debug = true,
                 sources = sources
             }
 
