@@ -1,7 +1,8 @@
 # Node version manager install directory
 export N_PREFIX=$HOME/.n
 # Homebrew/Linuxbrew paths
-export BREW_PATH=/opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin
+[[ $(eval uname) = "Darwin" ]] && export BREW_PATH=/opt/homebrew/bin
+[[ $(eval uname) = "Linux" ]] && export BREW_PATH=/home/linuxbrew/.linuxbrew/bin
 # Path
 export PATH=$N_PREFIX/bin:$BREW_PATH:$PATH
 
@@ -23,7 +24,8 @@ alias ga='git add'
 
 # Oh My Zsh
 export ZSH=$HOME/.oh-my-zsh
-export FZF_BASE=/opt/homebrew/opt/fzf
+[[ $(eval uname) = "Darwin" ]] && export FZF_BASE=/opt/homebrew/opt/fzf
+[[ $(eval uname) = "Linux" ]] && export FZF_BASE=/home/linuxbrew/.linuxbrew/opt/fzf
 export FZF_DEFAULT_OPTS='--height=100%'
 ZSH_THEME="robbyrussell"
 plugins=(git zsh-autosuggestions fzf)
