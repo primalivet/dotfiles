@@ -22,7 +22,6 @@ function M.init()
     use "tpope/vim-repeat"
     use "tpope/vim-fugitive"
     use "simrat39/symbols-outline.nvim"
-    use "windwp/nvim-ts-autotag"
 
     use {
         "junegunn/fzf",
@@ -114,6 +113,11 @@ function M.init()
             local cmp = require("cmp")
             cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({map_char = {tex = ""}}))
         end
+    }
+    use {
+        "windwp/nvim-ts-autotag",
+        cond = vim.fn.has("mac") == 1 or vim.fn.has("linux") == 1,
+        requires = "nvim-treesitter/nvim-treesitter"
     }
 
     use {
