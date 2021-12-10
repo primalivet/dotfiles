@@ -31,14 +31,13 @@ function M.init()
     nvim_set_keymap("n", "<leader>gh", ":lua vim.lsp.buf.hover()<CR>", default_opt)
     nvim_set_keymap("n", "<leader>gf", "gf", default_opt)
 
-    -- Search (Telescope, defined as Lua strings)
-    nvim_set_keymap("n", "<leader>ss", ':lua require"telescope.builtin".builtin()<CR>', default_opt)
-    nvim_set_keymap("n", "<leader>sc", ':lua require"telescope.builtin".commands()<CR>', default_opt)
-    nvim_set_keymap("n", "<leader>sf", ':lua require"telescope.builtin".find_files()<CR>', default_opt)
-    nvim_set_keymap("n", "<leader>sg", ':lua require"telescope.builtin".git_files()<CR>', default_opt)
-    nvim_set_keymap( "n", "<leader>s/", ':lua require"telescope.builtin".current_buffer_fuzzy_find({ previewer = false, sorting_strategy="ascending" })<CR>', default_opt)
-    nvim_set_keymap("n", "<leader>sb", ':lua require"telescope.builtin".buffers()<CR>', default_opt)
-    nvim_set_keymap("n", "<leader>sd", ':lua require"telescope.builtin".git_files({ cwd = "~/Code/OSS/dotfiles", prompt_title = "Dotfiles" })<CR>', default_opt)
+    -- Search (FZF)
+    nvim_set_keymap("n", "<leader>sc", ":Commands<CR>", default_opt)
+    nvim_set_keymap("n", "<leader>sf", ":Files<CR>", default_opt)
+    nvim_set_keymap("n", "<leader>sg", ":GitFiles<CR>", default_opt)
+    nvim_set_keymap("n", "<leader>s/", ":Lines<CR>", default_opt)
+    nvim_set_keymap("n", "<leader>sb", ":Buffers<CR>", default_opt)
+    nvim_set_keymap("n", "<leader>sd", ":GitFiles ~/Code/OSS/dotfiles<CR>", default_opt)
 
     -- Toggle
     nvim_set_keymap("n", "<leader>tl", ":set list!<CR>", default_opt)
@@ -62,7 +61,7 @@ function M.init()
     nvim_set_keymap("n", "[h", ':lua require("gitsigns.actions").prev_hunk()<CR>', default_opt)
 
     -- Reloads the entire config, function is defined
-    nvim_set_keymap("n", "<leader>vs", ':lua _G.reload_config()<CR>', default_opt)
+    nvim_set_keymap("n", "<leader>vs", ":lua _G.reload_config()<CR>", default_opt)
 end
 
 return M

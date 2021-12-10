@@ -25,10 +25,11 @@ function M.init()
     use "windwp/nvim-ts-autotag"
 
     use {
-        "nvim-telescope/telescope.nvim",
-        requires = {"nvim-lua/plenary.nvim", {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}},
+        "junegunn/fzf",
+        requires = {"junegunn/fzf.vim"},
         config = function()
-            require "telescope".load_extension "fzf"
+            vim.g.fzf_layout = {down = "40%"}
+            vim.g.fzf_preview_window = {}
         end
     }
 
