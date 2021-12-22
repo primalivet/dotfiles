@@ -132,10 +132,7 @@ function M.init()
                 local default_handler = vim.lsp.handlers[lsp_method]
                 vim.lsp.handlers[lsp_method] = function(err, method, result, client_id, bufnr, config)
                     default_handler(err, method, result, client_id, bufnr, config)
-                    local diagnostics = vim.lsp.diagnostic.get_all()
-                    local items = vim.lsp.util.diagnostics_to_items(diagnostics)
-                    -- TODO: consider filtering out diagnostics with typescript source
-                    vim.lsp.util.set_loclist(items)
+                    vim.diagnostic.setloclist({open = false})
                 end
             end
 
@@ -163,8 +160,6 @@ function M.init()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
 
             nvim_lsp.tsserver.setup {on_attach = on_attach}
-            nvim_lsp.gopls.setup {}
-            nvim_lsp.vimls.setup {}
 
             nvim_lsp.cssls.setup {
                 capabilities = capabilities
@@ -265,15 +260,13 @@ function M.init()
             local eslint_options = {
                 condition = function(utils)
                     return utils.root_has_file ".eslintrc" or utils.root_has_file(".eslintrc.json")
-                end,
-                command = "./node_modules/.bin/eslint"
+                end
             }
 
             local prettier_options = {
                 condition = function(utils)
                     return utils.root_has_file ".prettierrc" or utils.root_has_file ".prettierrc.json"
-                end,
-                command = "./node_modules/.bin/prettier"
+                end
             }
 
             local source_luafmt = {
@@ -287,29 +280,18 @@ function M.init()
                 }
             }
 
-            local sources = {
-                null_ls.builtins.formatting.eslint_d.with(eslint_options),
-                null_ls.builtins.diagnostics.eslint_d.with(eslint_options),
-                null_ls.builtins.formatting.prettier.with(prettier_options),
-                source_luafmt
-            }
-
-            null_ls.config {
+            require "null-ls".setup {
                 debug = true,
-                sources = sources
-            }
-
-            require "lspconfig"["null-ls"].setup {
+                sources = {
+                    null_ls.builtins.diagnostics.eslint_d.with(eslint_options),
+                    null_ls.builtins.formatting.eslint_d.with(eslint_options),
+                    source_luafmt
+                },
                 on_attach = function(client)
-                    client.resolved_capabilities.document_formatting = true
-                    vim.cmd("command -buffer Formatting lua vim.lsp.buf.formatting()")
-                    vim.cmd("command -buffer FormattingSync lua vim.lsp.buf.formatting_sync()")
-
-                    vim.cmd [[
-                                        augroup PRIMALIVET_FORMATTING
-                                        autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-                                        augroup END
-                                        ]]
+                    if client.resolved_capabilities.document_formatting then
+                        vim.cmd("command -buffer Formatting lua vim.lsp.buf.formatting()")
+                        vim.cmd("command -buffer FormattingSync lua vim.lsp.buf.formatting_sync()")
+                    end
                 end
             }
         end
