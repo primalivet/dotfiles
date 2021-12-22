@@ -3,6 +3,8 @@ export N_PREFIX=$HOME/.n
 # Homebrew/Linuxbrew paths
 [[ $(eval uname) = "Darwin" ]] && export BREW_PATH=/opt/homebrew/bin
 [[ $(eval uname) = "Linux" ]] && export BREW_PATH=/home/linuxbrew/.linuxbrew/bin
+[[ $(eval uname) = "Darwin" ]] && source /opt/homebrew/etc/profile.d/z.sh
+[[ $(eval uname) = "Linux" ]] && source /home/linuxbrew/.linuxbrew/etc/profile.d/z.sh
 # Path
 export PATH=$N_PREFIX/bin:$BREW_PATH:$PATH
 
