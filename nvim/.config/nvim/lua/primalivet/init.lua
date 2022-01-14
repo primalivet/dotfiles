@@ -7,6 +7,7 @@ function M.init()
     opt.cursorline = false -- show what line i'm on
     opt.diffopt = "vertical"
     opt.fillchars = "vert:|"
+    opt.fileformats = "unix"
     opt.foldenable = true --  use folds
     opt.foldlevel = 100 -- start folding at level 100 (never)
     opt.showcmd = true -- show what I type
@@ -15,7 +16,7 @@ function M.init()
     opt.grepprg = "rg --vimgrep --no-heading --hidden"
     opt.hidden = true -- dont unload abandoned buffers, just hide em
     opt.ignorecase = true --  dont be case sensitive
-    opt.listchars = "tab:>--,space:·,trail:·" -- make em look like this
+    opt.listchars = "tab:>--,space:·,trail:·,eol:¶" -- make em look like this
     opt.number = true -- show numbers
     opt.path = "**"
     opt.relativenumber = true --relative to current row

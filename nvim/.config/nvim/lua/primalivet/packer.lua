@@ -92,11 +92,9 @@ function M.init()
 
     use {
         "nvim-treesitter/nvim-treesitter",
-        cond = vim.fn.has("mac") == 1 or vim.fn.has("linux") == 1,
         run = ":TSUpdate",
         config = function()
             require "nvim-treesitter.configs".setup {
-                ensure_installed = "maintained",
                 highlight = {enable = true},
                 indent = {enable = true}
             }
@@ -105,7 +103,6 @@ function M.init()
 
     use {
         "windwp/nvim-autopairs",
-        cond = vim.fn.has("mac") == 1 or vim.fn.has("linux") == 1,
         requires = "nvim-treesitter/nvim-treesitter",
         config = function()
             require "nvim-autopairs".setup {}
@@ -116,7 +113,6 @@ function M.init()
     }
     use {
         "windwp/nvim-ts-autotag",
-        cond = vim.fn.has("mac") == 1 or vim.fn.has("linux") == 1,
         requires = "nvim-treesitter/nvim-treesitter"
     }
 
