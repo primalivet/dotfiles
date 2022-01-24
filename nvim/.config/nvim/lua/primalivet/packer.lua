@@ -254,9 +254,26 @@ function M.init()
             local helpers = require "null-ls.helpers"
 
             local opts = {
-                eslint = {
+                -- Run eslint (formatting) if no prettier config exists but
+                -- eslint config does exist
+                eslint_formatting = {
+                    condition = function(utils)
+                        local has_eslint  = utils.root_has_file ".eslintrc" or utils.root_has_file(".eslintrc.json")
+                        local has_prettier  = utils.root_has_file ".prettierrc" or utils.root_has_file(".prettierrc.json")
+
+                        return has_eslint and not(has_prettier)
+                    end
+                },
+                -- Run eslint if eslint config file exists
+                eslint_diagnostics = {
                     condition = function(utils)
                         return utils.root_has_file ".eslintrc" or utils.root_has_file(".eslintrc.json")
+                    end
+                },
+                -- Run prettier if prettier config exitst
+                prettier_formatting = {
+                    condition = function(utils)
+                        return utils.root_has_file ".prettierrc" or utils.root_has_file(".prettierrc.json")
                     end
                 }
             }
@@ -277,8 +294,9 @@ function M.init()
             require "null-ls".setup {
                 debug = true,
                 sources = {
-                    null_ls.builtins.diagnostics.eslint_d.with(opts.eslint),
-                    null_ls.builtins.formatting.eslint_d.with(opts.eslint),
+                    null_ls.builtins.diagnostics.eslint_d.with(opts.eslint_diagnostics),
+                    null_ls.builtins.formatting.eslint_d.with(opts.eslint_formatting),
+                    null_ls.builtins.formatting.prettier.with(opts.prettier_formatting),
                     sources.luafmt
                 },
                 on_attach = function(client)
