@@ -17,6 +17,7 @@ function M.init()
     opt.hidden = true -- dont unload abandoned buffers, just hide em
     opt.ignorecase = true --  dont be case sensitive
     opt.listchars = "tab:>--,space:·,trail:·,eol:¶" -- make em look like this
+    opt.mouse = "nv" -- Mouse support in normal and visual mode
     opt.number = true -- show numbers
     opt.path = "**"
     opt.relativenumber = true --relative to current row
