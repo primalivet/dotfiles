@@ -322,6 +322,16 @@ function M.init()
             }
         end
     }
+
+    use(
+        {
+            "catppuccin/nvim",
+            as = "catppuccin",
+            config = function()
+                vim.cmd [[colorscheme catppuccin]]
+            end
+        }
+    )
 end
 
 return M
