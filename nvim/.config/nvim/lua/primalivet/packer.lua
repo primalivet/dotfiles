@@ -118,6 +118,7 @@ function M.init()
 
     use {
         "neovim/nvim-lspconfig",
+        requires = {"jose-elias-alvarez/nvim-lsp-ts-utils"},
         config = function()
             local nvim_lsp = require "lspconfig"
             --
@@ -140,6 +141,15 @@ function M.init()
                 client.resolved_capabilities.document_formatting = false
                 client.resolved_capabilities.document_range_formatting = false
 
+                if client.name == "tsserver" then
+                    local ts_utils = require "nvim-lsp-ts-utils"
+                    ts_utils.setup {
+                        always_organize_imports = false,
+                        filter_out_diagnostics_by_severity = {"hint"}
+                    }
+                    ts_utils.setup_client(client)
+                end
+
                 local lsp_signature = require("lsp_signature")
                 lsp_signature.on_attach()
             end
@@ -155,7 +165,10 @@ function M.init()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-            nvim_lsp.tsserver.setup {on_attach = on_attach}
+            nvim_lsp.tsserver.setup {
+                init_options = require "nvim-lsp-ts-utils".init_options,
+                on_attach = on_attach
+            }
 
             nvim_lsp.cssls.setup {
                 capabilities = capabilities
@@ -258,10 +271,11 @@ function M.init()
                 -- eslint config does exist
                 eslint_formatting = {
                     condition = function(utils)
-                        local has_eslint  = utils.root_has_file ".eslintrc" or utils.root_has_file(".eslintrc.json")
-                        local has_prettier  = utils.root_has_file ".prettierrc" or utils.root_has_file(".prettierrc.json")
+                        local has_eslint = utils.root_has_file ".eslintrc" or utils.root_has_file(".eslintrc.json")
+                        local has_prettier =
+                            utils.root_has_file ".prettierrc" or utils.root_has_file(".prettierrc.json")
 
-                        return has_eslint and not(has_prettier)
+                        return has_eslint and not (has_prettier)
                     end
                 },
                 -- Run eslint if eslint config file exists
