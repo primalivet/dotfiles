@@ -331,15 +331,26 @@ function M.init()
         end
     }
 
-    use(
-        {
-            "catppuccin/nvim",
-            as = "catppuccin",
-            config = function()
-                vim.cmd [[colorscheme catppuccin]]
-            end
-        }
-    )
+    use {
+        "catppuccin/nvim",
+        as = "catppuccin",
+        config = function()
+            vim.cmd [[colorscheme catppuccin]]
+        end
+    }
+
+    use {
+        "nvim-lualine/lualine.nvim",
+        requires = {"kyazdani42/nvim-web-devicons", opt = true},
+        config = function()
+            require "lualine".setup {
+                options = {
+                    component_separators = {left = "", right = ""},
+                    section_separators = {left = "", right = ""}
+                }
+            }
+        end
+    }
 end
 
 return M
