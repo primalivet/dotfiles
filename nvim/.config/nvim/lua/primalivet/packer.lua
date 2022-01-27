@@ -320,8 +320,8 @@ function M.init()
                 },
                 on_attach = function(client)
                     if client.resolved_capabilities.document_formatting then
-                        vim.cmd("command -buffer Formatting lua vim.lsp.buf.formatting()")
-                        vim.cmd("command -buffer FormattingSync lua vim.lsp.buf.formatting_sync()")
+                        vim.cmd("command! -buffer Formatting lua vim.lsp.buf.formatting()")
+                        vim.cmd("command! -buffer FormattingSync lua vim.lsp.buf.formatting_sync()")
                     end
                 end
             }
