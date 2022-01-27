@@ -351,6 +351,12 @@ function M.init()
             }
         end
     }
+
+    use {
+        "heavenshell/vim-jsdoc",
+        ft = {"javascript", "typescript", "typescriptreact", "javascriptreact"},
+        run = "make install"
+    }
 end
 
 return M
