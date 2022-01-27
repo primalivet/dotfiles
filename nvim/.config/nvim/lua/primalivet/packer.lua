@@ -33,6 +33,11 @@ function M.init()
     }
 
     use {
+        "nvim-telescope/telescope.nvim",
+        requires = {{"nvim-lua/plenary.nvim"}}
+    }
+
+    use {
         "ray-x/lsp_signature.nvim",
         requires = {"neovim/nvim-lspconfig"}
     }
