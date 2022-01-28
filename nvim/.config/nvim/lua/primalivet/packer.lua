@@ -129,14 +129,14 @@ function M.init()
             --
             -- Integrate quickfix list with the nvim lsp
             --
-            do
-                local lsp_method = "textDocument/publishDiagnostics"
-                local default_handler = vim.lsp.handlers[lsp_method]
-                vim.lsp.handlers[lsp_method] = function(err, method, result, client_id, bufnr, config)
-                    default_handler(err, method, result, client_id, bufnr, config)
-                    vim.diagnostic.setloclist({open = false})
-                end
-            end
+            -- do
+            --     local lsp_method = "textDocument/publishDiagnostics"
+            --     local default_handler = vim.lsp.handlers[lsp_method]
+            --     vim.lsp.handlers[lsp_method] = function(err, method, result, client_id, bufnr, config)
+            --         default_handler(err, method, result, client_id, bufnr, config)
+            --         vim.diagnostic.setloclist({open = false})
+            --     end
+            -- end
 
             --
             -- Generic "On attach" function for all language servers
