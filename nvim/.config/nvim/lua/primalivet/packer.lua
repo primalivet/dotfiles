@@ -14,6 +14,11 @@ function M.init()
     -- Initialize
     packer.init()
 
+    -- use {
+    --     "ray-x/lsp_signature.nvim",
+    --     requires = {"neovim/nvim-lspconfig"}
+    -- }
+
     -- Load packages
     use "wbthomason/packer.nvim"
     use "editorconfig/editorconfig-vim"
@@ -38,11 +43,6 @@ function M.init()
     }
 
     use {
-        "ray-x/lsp_signature.nvim",
-        requires = {"neovim/nvim-lspconfig"}
-    }
-
-    use {
         "hrsh7th/nvim-cmp",
         requires = {
             "hrsh7th/vim-vsnip",
@@ -52,6 +52,7 @@ function M.init()
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-emoji",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
             "onsails/lspkind-nvim"
         },
         config = function()
@@ -69,7 +70,8 @@ function M.init()
                     {name = "path"},
                     {name = "nvim_lsp"},
                     {name = "nvim_lua"},
-                    {name = "emoji"}
+                    {name = "emoji"},
+                    {name = "nvim_lsp_signature_help"}
                 }
             }
         end
@@ -155,8 +157,8 @@ function M.init()
                     ts_utils.setup_client(client)
                 end
 
-                local lsp_signature = require("lsp_signature")
-                lsp_signature.on_attach()
+                -- local lsp_signature = require("lsp_signature")
+                -- lsp_signature.on_attach()
             end
 
             --
