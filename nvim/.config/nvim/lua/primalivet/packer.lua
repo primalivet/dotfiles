@@ -14,11 +14,6 @@ function M.init()
     -- Initialize
     packer.init()
 
-    -- use {
-    --     "ray-x/lsp_signature.nvim",
-    --     requires = {"neovim/nvim-lspconfig"}
-    -- }
-
     -- Load packages
     use "wbthomason/packer.nvim"
     use "editorconfig/editorconfig-vim"
@@ -129,18 +124,6 @@ function M.init()
         config = function()
             local nvim_lsp = require "lspconfig"
             --
-            -- Integrate quickfix list with the nvim lsp
-            --
-            -- do
-            --     local lsp_method = "textDocument/publishDiagnostics"
-            --     local default_handler = vim.lsp.handlers[lsp_method]
-            --     vim.lsp.handlers[lsp_method] = function(err, method, result, client_id, bufnr, config)
-            --         default_handler(err, method, result, client_id, bufnr, config)
-            --         vim.diagnostic.setloclist({open = false})
-            --     end
-            -- end
-
-            --
             -- Generic "On attach" function for all language servers
             --
             local function on_attach(client)
@@ -156,9 +139,6 @@ function M.init()
                     }
                     ts_utils.setup_client(client)
                 end
-
-                -- local lsp_signature = require("lsp_signature")
-                -- lsp_signature.on_attach()
             end
 
             --

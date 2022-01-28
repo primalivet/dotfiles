@@ -24,7 +24,7 @@ function M.init()
     opt.scrolloff = 5 -- scroll view when cursor gets close to edge
     opt.sidescrolloff = 5 -- in both directions
     opt.smartcase = true --  unless i type CAPS
-    opt.termguicolors = false
+    opt.termguicolors = true
     opt.timeoutlen = 500 --timeout for mappings and
     opt.updatetime = 100 --updatetime for events
     opt.wildignore = "*/node_modules/*,*/dist/*,*/build/*"
