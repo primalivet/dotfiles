@@ -319,12 +319,11 @@ function M.init()
     }
 
     use {
-        "RRethy/nvim-base16",
-        config = function()
-                vim.cmd('colorscheme base16-cupertino')
-        end
+            "https://gitlab.com/yorickpeterse/nvim-grey.git",
+            config = function()
+                    vim.cmd[[colorscheme grey]]
+            end
     }
-
     use {
         "nvim-lualine/lualine.nvim",
         requires = {"kyazdani42/nvim-web-devicons", opt = true},
