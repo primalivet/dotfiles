@@ -319,10 +319,9 @@ function M.init()
     }
 
     use {
-        "catppuccin/nvim",
-        as = "catppuccin",
+        "RRethy/nvim-base16",
         config = function()
-            vim.cmd [[colorscheme catppuccin]]
+                vim.cmd('colorscheme base16-cupertino')
         end
     }
 
