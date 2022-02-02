@@ -27,7 +27,7 @@ function M.init()
     opt.termguicolors = true
     opt.timeoutlen = 500 --timeout for mappings and
     opt.updatetime = 100 --updatetime for events
-    opt.wildignore = "*/node_modules/*,*/dist/*,*/build/*"
+    opt.wildignore = ""
     opt.wrap = false -- but dont wrap
     vim.cmd ":packadd cfilter" -- enable filter quickfix list
 
