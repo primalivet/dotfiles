@@ -312,9 +312,15 @@ function M.init()
 
     use {
         "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
         config = function()
-            require("trouble").setup {}
+            require("trouble").setup {
+                icons = false,
+                padding = false,
+                indent_lines = false,
+                auto_open = true,
+                auto_close = true,
+                use_diagnostic_signs = true
+            }
         end
     }
 
@@ -323,18 +329,6 @@ function M.init()
             config = function()
                     vim.cmd[[colorscheme grey]]
             end
-    }
-    use {
-        "nvim-lualine/lualine.nvim",
-        requires = {"kyazdani42/nvim-web-devicons", opt = true},
-        config = function()
-            require "lualine".setup {
-                options = {
-                    component_separators = {left = "", right = ""},
-                    section_separators = {left = "", right = ""}
-                }
-            }
-        end
     }
 
     use {
