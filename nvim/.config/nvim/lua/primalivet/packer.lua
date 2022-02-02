@@ -326,19 +326,6 @@ function M.init()
 
     use {
         "https://gitlab.com/yorickpeterse/nvim-grey.git",
-        cond = function()
-            return vim.fn.isdirectory(vim.fn.expand("~/Code/OSS/nvim-grey")) == 0
-        end,
-        config = function()
-            vim.cmd [[colorscheme grey]]
-        end
-    }
-
-    use {
-        "~/Code/OSS/nvim-grey",
-        cond = function()
-            return vim.fn.isdirectory(vim.fn.expand("~/Code/OSS/nvim-grey")) == 1
-        end,
         config = function()
             vim.cmd [[colorscheme grey]]
         end
