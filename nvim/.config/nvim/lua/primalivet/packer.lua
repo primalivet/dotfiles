@@ -15,6 +15,7 @@ function M.init()
     packer.init()
 
     -- Load packages
+    use "kyazdani42/nvim-web-devicons"
     use "wbthomason/packer.nvim"
     use "editorconfig/editorconfig-vim"
     use "tpope/vim-commentary"
@@ -329,11 +330,7 @@ function M.init()
         "folke/trouble.nvim",
         config = function()
             require("trouble").setup {
-                icons = false,
                 padding = false,
-                indent_lines = false,
-                auto_open = true,
-                auto_close = true,
                 use_diagnostic_signs = true
             }
         end
@@ -343,7 +340,7 @@ function M.init()
         "catppuccin/nvim",
         as = "catppuccin",
         config = function()
-                vim.cmd[[colorscheme catppuccin]]
+            vim.cmd [[colorscheme catppuccin]]
         end
     }
 
