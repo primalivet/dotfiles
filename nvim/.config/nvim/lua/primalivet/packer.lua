@@ -34,7 +34,22 @@ function M.init()
 
     use {
         "nvim-telescope/telescope.nvim",
-        requires = {{"nvim-lua/plenary.nvim"}}
+        requires = {{"nvim-lua/plenary.nvim"}},
+        config = function()
+            local picker_defaults = {
+                theme = "ivy"
+            }
+            require "telescope".setup {
+                pickers = {
+                    commands = picker_defaults,
+                    find_files = picker_defaults,
+                    git_files = picker_defaults,
+                    live_grep = picker_defaults,
+                    current_buffer_fuzzy_find = picker_defaults,
+                    buffers = picker_defaults
+                }
+            }
+        end
     }
 
     use {
