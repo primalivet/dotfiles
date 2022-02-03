@@ -340,9 +340,10 @@ function M.init()
     }
 
     use {
-        "https://gitlab.com/yorickpeterse/nvim-grey.git",
+        "catppuccin/nvim",
+        as = "catppuccin",
         config = function()
-            vim.cmd [[colorscheme grey]]
+                vim.cmd[[colorscheme catppuccin]]
         end
     }
 
