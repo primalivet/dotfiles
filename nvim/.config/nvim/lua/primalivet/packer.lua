@@ -15,14 +15,12 @@ function M.init()
     packer.init()
 
     -- Load packages
-    use "kyazdani42/nvim-web-devicons"
     use "wbthomason/packer.nvim"
     use "editorconfig/editorconfig-vim"
     use "tpope/vim-commentary"
     use "tpope/vim-surround"
     use "tpope/vim-repeat"
     use "tpope/vim-fugitive"
-    use "simrat39/symbols-outline.nvim"
 
     use {
         "junegunn/fzf",
@@ -63,8 +61,7 @@ function M.init()
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-emoji",
-            "hrsh7th/cmp-nvim-lsp-signature-help",
-            "onsails/lspkind-nvim"
+            "hrsh7th/cmp-nvim-lsp-signature-help"
         },
         config = function()
             require "cmp".setup {
@@ -72,9 +69,6 @@ function M.init()
                     expand = function(args)
                         vim.fn["vsnip#anonymous"](args.body)
                     end
-                },
-                formatting = {
-                    format = require "lspkind".cmp_format({with_text = true, maxwidth = 50})
                 },
                 sources = {
                     {name = "buffer"},
@@ -101,10 +95,6 @@ function M.init()
                     changedelete = {text = "±"}
                 }
             }
-            vim.cmd "command! GitsignsResetHunk exe 'Gitsigns reset_hunk'"
-            vim.cmd "command! GitsignsNextHunk exe 'Gitsigns next_hunk'"
-            vim.cmd "command! GitsignsPrevHunk exe 'Gitsigns prev_hunk'"
-            vim.cmd "command! GitsignsPreviewHunk exe 'Gitsigns preview_hunk'"
         end
     }
 
@@ -120,25 +110,19 @@ function M.init()
     }
 
     use {
-        "windwp/nvim-autopairs",
-        requires = "nvim-treesitter/nvim-treesitter",
-        config = function()
-            require "nvim-autopairs".setup {}
-            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-            local cmp = require("cmp")
-            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({map_char = {tex = ""}}))
-        end
-    }
-    use {
-        "windwp/nvim-ts-autotag",
-        requires = "nvim-treesitter/nvim-treesitter"
-    }
-
-    use {
         "neovim/nvim-lspconfig",
         requires = {"jose-elias-alvarez/nvim-lsp-ts-utils"},
         config = function()
             local nvim_lsp = require "lspconfig"
+
+            do
+                local method_name = "textDocument/publishDiagnostics"
+                local default_handler = vim.lsp.handlers[method_name]
+                vim.lsp.handlers[method_name] = function(err, method, result, client_id, bufnr, config)
+                    default_handler(err, method, result, client_id, bufnr, config)
+                    vim.diagnostic.setloclist({open = false})
+                end
+            end
             --
             -- Generic "On attach" function for all language servers
             --
@@ -175,48 +159,6 @@ function M.init()
 
             nvim_lsp.cssls.setup {
                 capabilities = capabilities
-            }
-
-            nvim_lsp.jsonls.setup {
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
-                    json = {
-                        schemas = {
-                            {
-                                description = "TypeScript compiler configuration file",
-                                fileMatch = {"tsconfig.json", "tsconfig.*.json"},
-                                url = "http://json.schemastore.org/tsconfig"
-                            },
-                            {
-                                description = "ESLint config",
-                                fileMatch = {".eslintrc.json", ".eslintrc"},
-                                url = "http://json.schemastore.org/eslintrc"
-                            },
-                            {
-                                description = "Prettier config",
-                                fileMatch = {".prettierrc", ".prettierrc.json", "prettier.config.json"},
-                                url = "http://json.schemastore.org/prettierrc"
-                            }
-                        }
-                    }
-                }
-            }
-
-            nvim_lsp.yamlls.setup {
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
-                    yaml = {
-                        schemas = {
-                            {
-                                description = "Docker Compose config",
-                                fileMatch = {"docker-compose.yml", "docker-compose.yaml"},
-                                url = "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"
-                            }
-                        }
-                    }
-                }
             }
 
             -- Sumneko LSP
@@ -324,30 +266,6 @@ function M.init()
                 end
             }
         end
-    }
-
-    use {
-        "folke/trouble.nvim",
-        config = function()
-            require("trouble").setup {
-                padding = false,
-                use_diagnostic_signs = true
-            }
-        end
-    }
-
-    use {
-        "catppuccin/nvim",
-        as = "catppuccin",
-        config = function()
-            vim.cmd [[colorscheme catppuccin]]
-        end
-    }
-
-    use {
-        "heavenshell/vim-jsdoc",
-        ft = {"javascript", "typescript", "typescriptreact", "javascriptreact"},
-        run = "make install"
     }
 end
 
