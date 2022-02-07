@@ -26,7 +26,7 @@ function M.init()
         "junegunn/fzf",
         requires = {"junegunn/fzf.vim"},
         config = function()
-            vim.g.fzf_layout = {down = "80%"}
+            vim.g.fzf_layout = {window = "enew"}
             vim.g.fzf_preview_window = {}
         end
     }
