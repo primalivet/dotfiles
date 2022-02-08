@@ -27,8 +27,11 @@ function M.init()
     opt.termguicolors = false
     opt.timeoutlen = 500 --timeout for mappings and
     opt.updatetime = 100 --updatetime for events
+    opt.wildmenu = true -- show current complete in statusline
+    opt.wildmode = "list,full" -- on cmd complete, show a list, then complete full
     opt.wildignore = ""
-    opt.wrap = false -- but dont wrap
+    opt.wrap = false -- dont wrap
+
     vim.cmd ":packadd cfilter" -- enable filter quickfix list
 
     _G.reload_config = function()
