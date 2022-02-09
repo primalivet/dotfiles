@@ -23,6 +23,16 @@ function M.init()
     use "tpope/vim-fugitive"
 
     use {
+        "sindrets/diffview.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+            require "diffview.config".setup {
+                use_icons = false
+            }
+        end
+    }
+
+    use {
         "junegunn/fzf",
         requires = {"junegunn/fzf.vim"},
         config = function()
