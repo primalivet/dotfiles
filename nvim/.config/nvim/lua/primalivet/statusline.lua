@@ -19,30 +19,29 @@ local function git_status()
 end
 
 local function diagnostics_status()
-    local diagnostics = vim.diagnostic.get()
+    local diagnostics = vim.diagnostic.get(0)
     local items = vim.diagnostic.toqflist(diagnostics)
-    local es = 0
-    local ws = 0
-    local is = 0
-
-    vim.cmd "hi! link StatusLineError Error"
-    vim.cmd "hi! link StatusLineWarning Warning"
+    local errors = 0
+    local warnings = 0
+    local infos = 0
+    local hints = 0
 
     for _, item in ipairs(items) do
         if item.type == "E" then
-            es = es + 1
+            errors = errors + 1
         elseif item.type == "W" then
-            ws = ws + 1
+            warnings = warnings + 1
         elseif item.type == "I" then
-            is = is + 1
+            infos = infos + 1
+        elseif item.type == "N" then
+            hints = hints + 1
         end
     end
 
-    if es == 0 and ws == 0 and is == 0 then
+    if errors == 0 and warnings == 0 and infos == 0 and hints == 0 then
         return ""
     else
-        -- return string.format("%#StatusLineError#E:%s %#StatusLineWarning#W:%s I:%s", es, ws, is) or ""
-        return "%#StatusLineError#E:" .. es .. "%#StatusLineWarning#W:" .. ws .. "%#StatusLine#I:" .. is
+        return string.format("[E:%s W:%s I:%s H:%s]", errors, warnings, infos, hints)
     end
 end
 
@@ -71,30 +70,68 @@ local function lsp_status()
     end
 end
 
-M.print_status = function()
-    local diagnostic = diagnostics_status()
-    local git = git_status() ~= "" and git_status() .. "  " or ""
-    local lsp = lsp_status() ~= "" and lsp_status() .. "  " or ""
-    local fn = get_filename() ~= "" and get_filename() .. "  " or ""
-    -- TODO turn into function and parse if empty
-    local ft = "%y"
-    local row_col = "%l:%c"
+M.print_status = function(which)
+    -- approximate default statusline:
+    -- %f\ %h%w%m%r\ %=%(%l,%c%V\ %=\ %P%)
+    local filename = "%f"
+    local modified = "%m"
+    local help = "%h"
+    local preview = "%w"
+    local readonly = "%r"
+    local line = "%l"
+    local column = "%c"
+    local virtual_column = "%V"
+    local percentage = "%P"
     local divider = "%="
+    local git = git_status() ~= "" and "[" .. git_status() .. "]" or ""
 
-    -- approximate default statusline: %f\ %h%w%m%r\ %=%(%l,%c%V\ %=\ %P%)
-    return string.format("%s%s%s%s%s%s %s", git, fn, diagnostic, divider, lsp, ft, row_col)
+    if which == "inactive" then
+        return string.format(
+            "%s %s%s%s%s %s %s:%s%s %s",
+            filename,
+            help,
+            preview,
+            modified,
+            readonly,
+            divider,
+            line,
+            column,
+            virtual_column,
+            percentage
+        )
+    elseif which == "active" then
+        local diagnostic = diagnostics_status()
+        -- local lsp = lsp_status() ~= "" and lsp_status() .. "  " or ""
+
+        return string.format(
+            "%s %s%s%s%s %s %s %s %s:%s%s %s",
+            filename,
+            help,
+            preview,
+            modified,
+            readonly,
+            divider,
+            git,
+            diagnostic,
+            line,
+            column,
+            virtual_column,
+            percentage
+        )
+    else
+        return ""
+    end
 end
 
-MyStatusline = M
+_G.MyStatusline = M
 
 function M.init()
     vim.cmd(
         [[
         augroup Statusline
         au!
-        au WinEnter,BufEnter * setlocal statusline=%!v:lua.MyStatusline.print_status()
-        au WinLeave,BufLeave * setlocal statusline=%!v:lua.MyStatusline.print_status()
-        au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.MyStatusline.print_status()
+        au WinEnter,BufEnter * setlocal statusline=%!v:lua.MyStatusline.print_status('active')
+        au WinLeave,BufLeave * setlocal statusline=%!v:lua.MyStatusline.print_status('inactive')
         augroup END
         ]]
     )
