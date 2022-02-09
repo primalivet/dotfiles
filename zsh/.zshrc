@@ -1,3 +1,6 @@
+export EDITOR=nvim
+export GIT_EDITOR=nvim
+
 # Node version manager install directory
 export N_PREFIX=$HOME/.n
 # Homebrew/Linuxbrew paths
@@ -8,6 +11,8 @@ export N_PREFIX=$HOME/.n
 # Path
 export PATH=$N_PREFIX/bin:$BREW_PATH:$PATH
 
+alias vi='nvim'
+alias vim='nvim'
 alias reload='. ~/.zshrc'
 alias l='ls -al'
 alias ll='ls -al'

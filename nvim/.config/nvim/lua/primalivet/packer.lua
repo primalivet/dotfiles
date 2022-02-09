@@ -45,6 +45,10 @@ function M.init()
                   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
             augroup END
             ]]
+
+            if vim.fn.isdirectory("~/Code/OSS/dotfiles") then
+                vim.cmd("command! Dotfiles FZF ~/Code/OSS/dotfiles")
+            end
         end
     }
 
@@ -112,6 +116,8 @@ function M.init()
                     changedelete = {text = "±"}
                 }
             }
+            vim.cmd("command! ResetHunk Gitsigns reset_hunk")
+            vim.cmd("command! PreviewHunk Gitsigns preview_hunk")
         end
     }
 

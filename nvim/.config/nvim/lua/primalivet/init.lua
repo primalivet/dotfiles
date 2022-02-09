@@ -43,8 +43,9 @@ function M.init()
     _G.reload_config = function()
         require("plenary.reload").reload_module("primalivet")
         require("primalivet").init()
-        print("Reloaded config")
+        print("Config reloaded")
     end
+    vim.cmd('command! ReloadConfig lua reload_config()<CR>')
 
     require "primalivet.packer".init()
     require "primalivet.mappings".init()
