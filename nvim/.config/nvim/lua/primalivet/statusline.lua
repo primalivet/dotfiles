@@ -70,46 +70,40 @@ local function lsp_status()
     end
 end
 
+local function if_else(pred, trueVal, falseVal)
+    if pred then
+        return trueVal
+    else
+        return falseVal
+    end
+end
+
 M.print_status = function(which)
+    local width = vim.api.nvim_win_get_width(0)
     -- approximate default statusline:
     -- %f\ %h%w%m%r\ %=%(%l,%c%V\ %=\ %P%)
-    local filename = "%f"
-    local modified = "%m"
+    local filename = if_else(width < 100, "%t", "%f")
     local help = "%h"
     local preview = "%w"
+    local modified = "%m"
     local readonly = "%r"
+    local flags = help .. preview .. modified .. readonly
     local line = "%l"
     local column = "%c"
     local virtual_column = "%V"
     local percentage = "%P"
     local divider = "%="
-    local git = git_status() ~= "" and "[" .. git_status() .. "]" or ""
+    local git = if_else(width < 80, "", if_else(git_status() ~= "", "[" .. git_status() .. "]", ""))
 
     if which == "inactive" then
-        return string.format(
-            "%s %s%s%s%s %s %s:%s%s %s",
-            filename,
-            help,
-            preview,
-            modified,
-            readonly,
-            divider,
-            line,
-            column,
-            virtual_column,
-            percentage
-        )
+        return string.format("%s %s %s %s:%s%s %s", filename, flags, divider, line, column, virtual_column, percentage)
     elseif which == "active" then
-        local diagnostic = diagnostics_status()
-        -- local lsp = lsp_status() ~= "" and lsp_status() .. "  " or ""
+        local diagnostic = if_else(width < 60, "", diagnostics_status())
 
         return string.format(
-            "%s %s%s%s%s %s %s %s %s:%s%s %s",
+            "%s %s %s %s %s %s:%s%s %s",
             filename,
-            help,
-            preview,
-            modified,
-            readonly,
+            flags,
             divider,
             git,
             diagnostic,
