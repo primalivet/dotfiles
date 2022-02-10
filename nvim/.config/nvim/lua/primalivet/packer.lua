@@ -21,6 +21,7 @@ function M.init()
     use "tpope/vim-surround"
     use "tpope/vim-repeat"
     use "tpope/vim-fugitive"
+    use "wincent/ferret"
 
     use {
         "sindrets/diffview.nvim",
@@ -38,6 +39,17 @@ function M.init()
         config = function()
             vim.g.fzf_layout = {window = "enew"}
             vim.g.fzf_preview_window = {}
+            vim.g.fzf_action = {
+                ["ctrl-q"] = function(lines)
+                    local items = {}
+                    for _, line in ipairs(lines) do
+                        table.insert(items, {filename = line})
+                    end
+                    vim.fn.setqflist(items, " ", {title = "Search results", id = "FZF Search Results"})
+                end,
+                ["ctrl-x"] = "split",
+                ["ctrl-v"] = "vsplit"
+            }
             vim.cmd [[
             augroup UserFZF!
                 autocmd! FileType fzf
