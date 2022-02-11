@@ -32,14 +32,6 @@ function M.init()
     nvim_set_keymap("n", "<leader>gh", ":lua vim.lsp.buf.hover()<CR>", default_opt)
     nvim_set_keymap("n", "<leader>gf", "gf", default_opt)
 
-    -- Search (Telescope)
-    -- nvim_set_keymap("n", "<leader>sc", ":Telescope commands<CR>", default_opt)
-    -- nvim_set_keymap("n", "<leader>sf", ":Telescope find_files<CR>", default_opt)
-    -- nvim_set_keymap("n", "<leader>sg", ":Telescope git_files<CR>", default_opt)
-    -- nvim_set_keymap("n", "<leader>sl", ":Telescope live_grep<CR>", default_opt)
-    -- nvim_set_keymap("n", "<leader>s/", ":Telescope current_buffer_fuzzy_find<CR>", default_opt)
-    -- nvim_set_keymap("n", "<leader>sb", ":Telescope buffers<CR>", default_opt)
-
     -- Search (FZF)
     nvim_set_keymap("n", "<leader>sc", ":Commands<CR>", default_opt)
     nvim_set_keymap("n", "<leader>sf", ":Files<CR>", default_opt)
@@ -52,10 +44,6 @@ function M.init()
     nvim_set_keymap("n", "<leader>tl", ":set list!<CR>", default_opt)
     nvim_set_keymap("n", "<leader>tp", ":set invpaste<CR>", default_opt)
     nvim_set_keymap("n", "<leader>ts", ":nohlsearch<CR>", default_opt)
-
-    -- Prev/Next Diagnostic
-    nvim_set_keymap("n", "[d", ":lua vim.diagnostic.goto_prev()<CR>", default_opt)
-    nvim_set_keymap("n", "]d", ":lua vim.diagnostic.goto_next()<CR>", default_opt)
 
     -- Prev/Next Location list
     nvim_set_keymap("n", "[l", ":lprevious<CR>", default_opt)
