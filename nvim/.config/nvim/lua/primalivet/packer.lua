@@ -21,7 +21,7 @@ function M.init()
     use "tpope/vim-surround"
     use "tpope/vim-repeat"
     use "tpope/vim-fugitive"
-    use "wincent/ferret"
+    use "gerw/vim-HiLinkTrace"
 
     use {
         "sindrets/diffview.nvim",

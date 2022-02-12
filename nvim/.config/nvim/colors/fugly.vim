@@ -13,107 +13,112 @@ endif
 
 let colors_name = "fugly"
 
-"  hi  Normal          guifg=none  guibg=none
-"  hi  SignColumn      guifg=none  guibg=none
-"  hi  StatusLine      guifg=none  guibg=none
-"  hi  StatusLineNC    guifg=none  guibg=none
- hi  DiffAdd         guifg=Black  guibg=Green
- hi  DiffChange      guifg=Black  guibg=Olive
- hi  DiffDelete      guifg=Black  guibg=Maroon
- hi  DiffText        guifg=Black  guibg=Olive gui=bold
-"  hi  ColorColumn     guifg=none  guibg=none
-"  hi  Conceal         guifg=none  guibg=none
-"  hi  Cursor          guifg=none  guibg=none
-"  hi  CursorColumn    guifg=none  guibg=none
-"  hi  CursorIM        guifg=none  guibg=none
-hi  CursorLine      guifg=none  guibg=gray20
-hi  CursorLineNr    guifg=yellow  guibg=none gui=bold
-"  hi  Directory       guifg=none  guibg=none
-"  hi  EndOfBuffer     guifg=none  guibg=none
-"  hi  ErrorMsg        guifg=none  guibg=none
-"  hi  FoldColumn      guifg=none  guibg=none
-"  hi  Folded          guifg=none  guibg=none
-"  hi  IncSearch       guifg=none  guibg=none
-hi  LineNr          guifg=darkyellow  guibg=none
-"  hi  MatchParen      guifg=none  guibg=none
-"  hi  ModeMsg         guifg=none  guibg=none
-"  hi  MoreMsg         guifg=none  guibg=none
-"  hi  MsgArea         guifg=none  guibg=none
-"  hi  MsgSeparator    guifg=none  guibg=none
-"  hi  NonText         guifg=none  guibg=none
-"  hi  NormalFloat     guifg=none  guibg=none
-"  hi  NormalNC        guifg=none  guibg=none
-"  hi  Pmenu           guifg=none  guibg=none
-"  hi  PmenuSbar       guifg=none  guibg=none
-"  hi  PmenuSel        guifg=none  guibg=none
-"  hi  PmenuThumb      guifg=none  guibg=none
-"  hi  Question        guifg=none  guibg=none
-"  hi  QuickFixLine    guifg=none  guibg=none
-"  hi  Search          guifg=none  guibg=none
-hi  SignColumn      guifg=none  guibg=Grey
-"  hi  SpecialKey      guifg=none  guibg=none
-"  hi  SpellBad        guifg=none  guibg=none
-"  hi  SpellCap        guifg=none  guibg=none
-"  hi  SpellLocal      guifg=none  guibg=none
-"  hi  SpellRare       guifg=none  guibg=none
-"  hi  Substitute      guifg=none  guibg=none
-"  hi  TabLine         guifg=none  guibg=none
-"  hi  TabLineFill     guifg=none  guibg=none
-"  hi  TabLineSel      guifg=none  guibg=none
-"  hi  TermCursor      guifg=none  guibg=none
-"  hi  TermCursorNC    guifg=none  guibg=none
-"  hi  Title           guifg=none  guibg=none
-"  hi  VertSplit       guifg=none  guibg=none
-"  hi  Visual          guifg=none  guibg=none
-"  hi  VisualNOS       guifg=none  guibg=none
-"  hi  WarningMsg      guifg=none  guibg=none
-"  hi  Whitespace      guifg=none  guibg=none
-"  hi  WildMenu        guifg=none  guibg=none
-"  hi  lCursor         guifg=none  guibg=none
+"  hi  Normal          ctermfg=none  ctermbg=none
+"  hi  SignColumn      ctermfg=none  ctermbg=none
+"  hi  StatusLine      ctermfg=none  ctermbg=none
+"  hi  StatusLineNC    ctermfg=none  ctermbg=none
+hi  DiffAdd         ctermfg=10  ctermbg=2
+hi  DiffChange      ctermfg=11  ctermbg=3
+hi  DiffDelete      ctermfg=9  ctermbg=1
+hi  DiffText        ctermfg=11  ctermbg=3 gui=bold
+"  hi  ColorColumn     ctermfg=none  ctermbg=none
+"  hi  Conceal         ctermfg=none  ctermbg=none
+"  hi  Cursor          ctermfg=none  ctermbg=none
+"  hi  CursorColumn    ctermfg=none  ctermbg=none
+"  hi  CursorIM        ctermfg=none  ctermbg=none
+" hi  CursorLine      ctermfg=none  ctermbg=gray20
+" hi  CursorLineNr    ctermfg=yellow  ctermbg=none gui=bold
+"  hi  Directory       ctermfg=none  ctermbg=none
+"  hi  EndOfBuffer     ctermfg=none  ctermbg=none
+"  hi  ErrorMsg        ctermfg=none  ctermbg=none
+"  hi  FoldColumn      ctermfg=none  ctermbg=none
+"  hi  Folded          ctermfg=none  ctermbg=none
+"  hi  IncSearch       ctermfg=none  ctermbg=none
+" hi  LineNr          ctermfg=darkyellow  ctermbg=none
+"  hi  MatchParen      ctermfg=none  ctermbg=none
+"  hi  ModeMsg         ctermfg=none  ctermbg=none
+"  hi  MoreMsg         ctermfg=none  ctermbg=none
+"  hi  MsgArea         ctermfg=none  ctermbg=none
+"  hi  MsgSeparator    ctermfg=none  ctermbg=none
+"  hi  NonText         ctermfg=none  ctermbg=none
+"  hi  NormalFloat     ctermfg=none  ctermbg=none
+"  hi  NormalNC        ctermfg=none  ctermbg=none
+"  hi  Pmenu           ctermfg=none  ctermbg=none
+"  hi  PmenuSbar       ctermfg=none  ctermbg=none
+"  hi  PmenuSel        ctermfg=none  ctermbg=none
+"  hi  PmenuThumb      ctermfg=none  ctermbg=none
+"  hi  Question        ctermfg=none  ctermbg=none
+"  hi  QuickFixLine    ctermfg=none  ctermbg=none
+"  hi  Search          ctermfg=none  ctermbg=none
+" hi  SignColumn      ctermfg=none  ctermbg=Grey
+"  hi  SpecialKey      ctermfg=none  ctermbg=none
+"  hi  SpellBad        ctermfg=none  ctermbg=none
+"  hi  SpellCap        ctermfg=none  ctermbg=none
+"  hi  SpellLocal      ctermfg=none  ctermbg=none
+"  hi  SpellRare       ctermfg=none  ctermbg=none
+"  hi  Substitute      ctermfg=none  ctermbg=none
+"  hi  TabLine         ctermfg=none  ctermbg=none
+"  hi  TabLineFill     ctermfg=none  ctermbg=none
+"  hi  TabLineSel      ctermfg=none  ctermbg=none
+"  hi  TermCursor      ctermfg=none  ctermbg=none
+"  hi  TermCursorNC    ctermfg=none  ctermbg=none
+"  hi  Title           ctermfg=none  ctermbg=none
+"  hi  VertSplit       ctermfg=none  ctermbg=none
+"  hi  Visual          ctermfg=none  ctermbg=none
+"  hi  VisualNOS       ctermfg=none  ctermbg=none
+"  hi  WarningMsg      ctermfg=none  ctermbg=none
+"  hi  Whitespace      ctermfg=none  ctermbg=none
+"  hi  WildMenu        ctermfg=none  ctermbg=none
+"  hi  lCursor         ctermfg=none  ctermbg=none
 
-hi  Comment guifg=Green  gui=italic
+" hi  Comment ctermfg=Green  gui=italic
 
-hi! Constant guifg=none guibg=none
-hi String guifg=LightCoral guibg=none
-hi Character guifg=DarkOrange guibg=none
-hi Number guifg=LightCoral guibg=none
-hi Boolean guifg=Yellow guibg=none
-hi Float guifg=Yellow guibg=none
+" hi! Constant ctermfg=none ctermbg=none
+" hi String ctermfg=LightCoral ctermbg=none
+" hi Character ctermfg=DarkOrange ctermbg=none
+" hi Number ctermfg=LightCoral ctermbg=none
+" hi Boolean ctermfg=Yellow ctermbg=none
+" hi Float ctermfg=Yellow ctermbg=none
 
-hi Identifier guifg=Silver gui=none
+" hi Identifier ctermfg=Silver gui=none
 " hi Identifier ctermbg=none
 " hi Function ctermbg=none
 
-hi Statement guifg=Yellow gui=bold
+" hi Statement ctermfg=Yellow gui=bold
 " hi Statement ctermbg=none
 " hi Conditional ctermfg=13 ctermbg=none
 " hi Repeat ctermfg=13 ctermbg=none
 " hi Label ctermbg=none
 " hi Operator ctermfg=5 ctermbg=none
-" hi Keyword guifg=
+" hi Keyword ctermfg=
 " hi Exception ctermbg=none
 
-hi PreProc guifg=Silver
+" hi PreProc ctermfg=Silver
 " hi PreProc ctermbg=none
 " hi Include ctermbg=none
 " hi Define ctermbg=none
 " hi Macro ctermbg=none
 " hi PreCondit ctermbg=none
 
-hi Type guifg=Lime gui=bold
+" hi Type ctermfg=Lime gui=bold
 " hi Type ctermbg=none
 " hi StorageClass ctermbg=none
 " hi Structure ctermbg=none
 " hi Typedef ctermbg=none
 
-hi Special guifg=Fuchsia
+" hi Special ctermfg=Fuchsia
 " hi SpecialChar ctermbg=none
 " hi Tag ctermbg=none
-hi Delimiter guifg=White
+" hi Delimiter ctermfg=White
 " hi SpecialComment ctermbg=none
 " hi Debug ctermbg=none
 
-hi Underlined gui=underline
-hi Ignore guifg=none guibg=none gui=none
-hi Error guifg=Red guibg=none  gui=underline
-hi Todo guifg=Aqua guibg=none gui=none
+" hi Underlined gui=underline
+" hi Ignore ctermfg=none ctermbg=none gui=none
+" hi Error ctermfg=Red ctermbg=none  gui=underline
+" hi Todo ctermfg=Aqua ctermbg=none gui=none
+"
+"
+"
+"
+"
