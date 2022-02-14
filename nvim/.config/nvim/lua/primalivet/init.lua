@@ -30,7 +30,7 @@ function M.init()
     opt.sidescrolloff = 5 -- in both directions
     opt.smartcase = true --  unless i type CAPS
     opt.smartindent = true
-    opt.termguicolors = false
+    opt.termguicolors = true
     opt.timeoutlen = 500 --timeout for mappings and
     opt.updatetime = 100 --updatetime for events
     opt.wildignore = "*/node_modules/*,*/dist/*,*/build/*"
@@ -49,7 +49,6 @@ function M.init()
 
     require "primalivet.packer".init()
     require "primalivet.mappings".init()
-    require "primalivet.statusline".init()
 end
 
 return M

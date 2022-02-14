@@ -1,6 +1,7 @@
 local M = {}
 
 function M.init()
+    local wk = require "which-key"
     local nvim_set_keymap = vim.api.nvim_set_keymap
     local default_opt = {noremap = true, silent = true}
 
@@ -17,52 +18,67 @@ function M.init()
     nvim_set_keymap("v", "<C-k>", ":m '<-2<CR>gv=gv", default_opt)
 
     -- Edit
-    nvim_set_keymap("n", "<leader>er", ":lua vim.lsp.buf.rename()<CR>", default_opt)
-    nvim_set_keymap("v", "<leader>es", ":'<,'>sort<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>ea", ":lua vim.lsp.buf.code_action()<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>ef", ":lua vim.lsp.buf.formatting()<CR>", default_opt)
+    wk.register {
 
-    -- GoTo
-    nvim_set_keymap("n", "K", ":lua vim.lsp.buf.hover()<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>gd", ":lua vim.lsp.buf.definition()<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>gt", ":lua vim.lsp.buf.type_definition()<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>gi", ":lua vim.lsp.buf.implementation()<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>gr", ":lua vim.lsp.buf.references()<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>gs", ":lua vim.lsp.buf.signature_help()<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>gh", ":lua vim.lsp.buf.hover()<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>gf", "gf", default_opt)
-
-    -- Search (FZF)
-    nvim_set_keymap("n", "<leader>sc", ":Commands<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>sf", ":Files<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>sg", ":GitFiles<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>sl", ":Rg<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>s/", ":Lines<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>sb", ":Buffers<CR>", default_opt)
-
-    -- Toggle
-    nvim_set_keymap("n", "<leader>tl", ":set list!<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>tp", ":set invpaste<CR>", default_opt)
-    nvim_set_keymap("n", "<leader>ts", ":nohlsearch<CR>", default_opt)
-
-    -- Prev/Next Location list
-    nvim_set_keymap("n", "[l", ":lprevious<CR>", default_opt)
-    nvim_set_keymap("n", "]l", ":lnext<CR>", default_opt)
-    nvim_set_keymap("n", "[L", ":lfirst<CR>", default_opt)
-    nvim_set_keymap("n", "]L", ":llast<CR>", default_opt)
-
-    -- Prev/Next Quickfix list
-    nvim_set_keymap("n", "[c", ":cprevious<CR>", default_opt)
-    nvim_set_keymap("n", "]c", ":cnext<CR>", default_opt)
-    nvim_set_keymap("n", "[C", ":cfirst<CR>", default_opt)
-    nvim_set_keymap("n", "]C", ":clast<CR>", default_opt)
-
-    -- Prev/Next Hunks
-    nvim_set_keymap("n", "]h", ':lua require("gitsigns.actions").next_hunk()<CR>', default_opt)
-    nvim_set_keymap("n", "[h", ':lua require("gitsigns.actions").prev_hunk()<CR>', default_opt)
-
-    -- Reloads the entire config, function is defined
-    nvim_set_keymap("n", "<leader>vs", ":lua _G.reload_config()<CR>", default_opt)
+        ["<leader>"] = {
+            e = {
+                name = "+edit",
+                a = {":lua vim.lsp.buf.code_action()<CR>", "code-action-at-cursor"},
+                f = {":lua vim.lsp.buf.formatting()<CR>", "format-buffer"},
+                r = {":lua vim.lsp.buf.rename()<CR>", "rename-under-cursor"},
+                s = {":'<,'>sort<CR>", "sort-visual-selection", mode = "v"}
+            },
+            g = {
+                name = "+goto",
+                -- TODO: show on cursor hold nvim_set_keymap("n", "K", ":lua vim.lsp.buf.hover()<CR>", default_opt)
+                d = {":lua vim.lsp.buf.definition()<CR>", "goto-definition"},
+                f = {"gf", "goto-file"},
+                h = {":lua vim.lsp.buf.hover()<CR>", "goto-hover-info"},
+                i = {":lua vim.lsp.buf.implementation()<CR>", "goto-implmentation"},
+                r = {":lua vim.lsp.buf.references()<CR>", "goto-reference"},
+                s = {":lua vim.lsp.buf.signature_help()<CR>", "goto-signature-help"},
+                t = {":lua vim.lsp.buf.type_definition()<CR>", "goto-type-definition"}
+            },
+            s = {
+                name = "+search",
+                ["/"] = {":Lines<CR>", "search-lines"},
+                b = {":Buffers<CR>", "search-buffers"},
+                c = {":Commands<CR>", "search-commands"},
+                f = {":Files<CR>", "search-files"},
+                g = {":GitFiles<CR>", "search-git-files"},
+                h = {":History<CR>", "search-history"},
+                l = {":Rg<CR>", "search-ripgrep"}
+            },
+            t = {
+                name = "+toggle",
+                l = {":set list!<CR>", "toggle-list-chars"},
+                p = {":set invpaste<CR>", "toggle-paste-mode"},
+                s = {":nohlsearch<CR>", "toggle-search-highlight"}
+            },
+            ["["] = {
+                name = "+previous",
+                ["[C"] = {":cfirst<CR>", "first-quickfix-list"},
+                ["[L"] = {":lfirst<CR>", "first-location-list"},
+                ["[c"] = {":cprevious<CR>", "prev-quickfix-list"},
+                ["[h"] = {':lua require("gitsigns.actions").prev_hunk()<CR>', "prev-git-hunk"},
+                ["[l"] = {":lprevious<CR>", "prev-location-list"}
+            },
+            ["]"] = {
+                name = "+next",
+                ["]C"] = {":clast<CR>", "last-quickfix-list"},
+                ["]L"] = {":llast<CR>", "last-location-list"},
+                ["]c"] = {":cnext<CR>", "next-quickfix-list"},
+                ["]h"] = {':lua require("gitsigns.actions").next_hunk()<CR>', "next-git-hunk"},
+                ["]l"] = {":lnext<CR>", "next-location-list"}
+            },
+            c = {
+                name = "+config",
+                c = {":PackerCompile", "config-compile"},
+                r = {":lua _G.reload_config()<CR>", "config-reload"},
+                s = {":PackerSync<CR>", "config-sync"}
+            }
+        }
+    }
 end
 
 return M

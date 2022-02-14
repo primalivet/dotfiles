@@ -15,20 +15,26 @@ function M.init()
     packer.init()
 
     -- Load packages
+    use "kyazdani42/nvim-web-devicons"
     use "wbthomason/packer.nvim"
     use "editorconfig/editorconfig-vim"
     use "tpope/vim-commentary"
     use "tpope/vim-surround"
     use "tpope/vim-repeat"
     use "tpope/vim-fugitive"
-    use "gerw/vim-HiLinkTrace"
 
+    use {
+      "TimUntersberger/neogit",
+      config = function()
+        require'neogit'.setup{}
+      end
+    }
     use {
         "sindrets/diffview.nvim",
         requires = "nvim-lua/plenary.nvim",
         config = function()
             require "diffview.config".setup {
-                use_icons = false
+                use_icons = true
             }
         end
     }
@@ -37,7 +43,7 @@ function M.init()
         "junegunn/fzf",
         requires = {"junegunn/fzf.vim"},
         config = function()
-            vim.g.fzf_layout = {window = "enew"}
+            vim.g.fzf_layout = {down = "40%"}
             vim.g.fzf_preview_window = {}
             vim.g.fzf_action = {
                 ["ctrl-q"] = function(lines)
@@ -299,6 +305,40 @@ function M.init()
                         vim.cmd("command! -buffer FormattingSync lua vim.lsp.buf.formatting_sync()")
                     end
                 end
+            }
+        end
+    }
+
+    use {
+        "catppuccin/nvim",
+        as = "catppuccin",
+        config = function()
+            vim.cmd [[colorscheme catppuccin]]
+        end
+    }
+
+    use {
+        "nvim-lualine/lualine.nvim",
+        requires = {"kyazdani42/nvim-web-devicons", opt = true},
+        config = function()
+            require "lualine".setup {
+                options = {
+                    theme = "catppuccin",
+                    component_separators = {left = "", right = ""},
+                    section_separators = {left = "", right = ""}
+                }
+            }
+        end
+    }
+
+    use {
+        "folke/which-key.nvim",
+        config = function()
+            local wk = require("which-key")
+            wk.setup {
+                window = {
+                    margin = {0, 0, 0, 0}
+                }
             }
         end
     }

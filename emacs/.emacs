@@ -9,25 +9,21 @@
 (eval-when-compile
   (setq use-package-always-ensure t))
 
-;; lines numbers
 (use-package display-line-numbers
   :ensure nil
   :config
   (global-display-line-numbers-mode 1))
 
-;; change backup files directory (which package is this a part of?)
 (use-package files
   :ensure nil
   :config
   (setq backup-directory-alist `(("." . "~/.saves"))))
 
-;; emacs
 (use-package emacs
   :ensure nil
   :config
   (tool-bar-mode -1))
 
-;; frames
 (use-package frame
   :ensure nil
   :config
@@ -35,7 +31,6 @@
 			      (fullscreen . maximized)
 			      (font . "Fira Code-18"))))
 
-;; parens
 (use-package paren
   :ensure nil
   :init 
@@ -43,25 +38,36 @@
   :config
   (show-paren-mode +1))
 
-;; scroll
 (use-package scroll-bar
   :ensure nil
   :config
   (scroll-bar-mode -1))
 
-;; completion
+(use-package evil
+  :init
+  (setq evil-want-integration t) ;; required by evil-collection
+  (setq evil-want-keybinding nil) ;; required by evil-collection
+  (setq evil-want-C-u-scroll t)
+  :config
+  (evil-global-set-key 'normal (kbd "j") 'evil-next-visual-line)
+  (evil-global-set-key 'normal (kbd "k") 'evil-previous-visual-line)
+  (evil-mode))
+
+(use-package evil-collection
+  :custom (evil-collection-setup-minibuffer t)
+  :after evil
+  :config
+  (evil-collection-init))
+
 (use-package company
-  :ensure t
   :config
   (company-mode 1))
 
-;; include shell path
 (use-package exec-path-from-shell
   :config
   (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize)))
 
-;; language server protocol support
 (use-package lsp-mode
   :hook ((
 	  js-mode
@@ -71,36 +77,24 @@
 	  ) . lsp-deferred)
   :commands lsp)
 
-;; vi keybindings
-(use-package evil
-  :init
-  (setq evil-want-C-u-scroll t)
-  (evil-mode))
 
-;; list narrowing
 (use-package helm
   :preface (require 'helm-config)
   :bind (("M-x" . helm-M-x)
 	 ("C-x C-f" . helm-find-files))
   :config (helm-mode 1))
 
-;; projects
 (use-package projectile
   :init
   (setq projectile-project-search-path '(("~/Code/OSS/" . 1) ("~/Code/Work/" . 1)))
   (projectile-mode +1))
 
-;; git
-(use-package magit
-  :ensure t)
+(use-package magit)
 
-;; display "next keystroke" suggestions
 (use-package which-key
-  :ensure t
   :init
   (which-key-mode))
 
-;; themes from doom emacs
 (use-package doom-themes
   :config
   ;; Global Doom settings
@@ -113,6 +107,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
    '(ligature ligatures emacs zenburn-theme which-key use-package projectile magit helm evil doom-themes)))
 (custom-set-faces
