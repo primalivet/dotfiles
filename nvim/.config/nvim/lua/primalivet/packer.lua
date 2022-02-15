@@ -22,6 +22,13 @@ function M.init()
 	use("tpope/vim-surround")
 	use("tpope/vim-repeat")
 
+  use({
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require('colorizer').setup()
+    end
+  })
+
 	use({
 		"TimUntersberger/neogit",
     requires = { "sindrets/diffview.nvim", "nvim-lua/plenary.nvim" },
