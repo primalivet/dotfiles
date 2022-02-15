@@ -75,7 +75,7 @@ function M.init()
 			},
 			c = {
 				name = "+Config",
-				c = { ":PackerCompile", "Config: compile" },
+				c = { ":PackerCompile<CR>", "Config: compile" },
 				r = { ":lua _G.reload_config()<CR>", "Config: reload" },
 				s = { ":PackerSync<CR>", "Config: update and compile" },
 			},

@@ -6,7 +6,7 @@ function M.init()
     g.mapleader = " " -- Space is leader
 
     opt.autoindent = true
-    opt.cursorline = false -- show what line i'm on
+    opt.cursorline = true -- show what line i'm on
     opt.diffopt = "vertical"
     opt.expandtab = true
     opt.fileformats = "unix"
@@ -49,6 +49,7 @@ function M.init()
 
     require "primalivet.packer".init()
     require "primalivet.mappings".init()
+    require "primalivet.statusline".init()
 end
 
 return M

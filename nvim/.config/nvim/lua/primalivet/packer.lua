@@ -22,16 +22,16 @@ function M.init()
 	use("tpope/vim-surround")
 	use("tpope/vim-repeat")
 
-  use({
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require('colorizer').setup()
-    end
-  })
+	use({
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
+		end,
+	})
 
 	use({
 		"TimUntersberger/neogit",
-    requires = { "sindrets/diffview.nvim", "nvim-lua/plenary.nvim" },
+		requires = { "sindrets/diffview.nvim", "nvim-lua/plenary.nvim" },
 		config = function()
 			require("diffview.config").setup({
 				use_icons = true,
@@ -146,9 +146,13 @@ function M.init()
 
 	use({
 		"nvim-treesitter/nvim-treesitter",
+    requires = { "nvim-treesitter/playground" },
 		run = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
+        playground = {
+          enable = true
+        },
 				highlight = { enable = true },
 				indent = { enable = true },
 			})
@@ -314,19 +318,19 @@ function M.init()
 		end,
 	})
 
-	use({
-		"nvim-lualine/lualine.nvim",
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
-		config = function()
-			require("lualine").setup({
-				options = {
-					theme = "catppuccin",
-					component_separators = { left = "", right = "" },
-					section_separators = { left = "", right = "" },
-				},
-			})
-		end,
-	})
+	-- use({
+	-- 	"nvim-lualine/lualine.nvim",
+	-- 	requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	-- 	config = function()
+	-- 		require("lualine").setup({
+	-- 			options = {
+	-- 				theme = "catppuccin",
+	-- 				component_separators = { left = "", right = "" },
+	-- 				section_separators = { left = "", right = "" },
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- })
 
 	use({
 		"folke/which-key.nvim",
@@ -338,6 +342,16 @@ function M.init()
 				},
 			})
 		end,
+	})
+
+	use({
+		"~/Code/OSS/friendly.nvim",
+		condition = function()
+			vim.fn.isdirectory("~/Code/OSS/friendly.nvim")
+		end,
+    config = function()
+      print('Found Friendly theme')
+    end
 	})
 end
 
