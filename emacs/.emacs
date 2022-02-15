@@ -95,12 +95,9 @@
   :init
   (which-key-mode))
 
-(use-package doom-themes
-  :config
-  ;; Global Doom settings
-  (setq doom-themes-enable-bold t
-	doom-themes-enable-italic t)
-  (load-theme 'doom-one t))
+(use-package srcery-theme
+  :init
+  (load-theme 'srcery t))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -109,7 +106,7 @@
  ;; If there is more than one, they won't work right.
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(ligature ligatures emacs zenburn-theme which-key use-package projectile magit helm evil doom-themes)))
+   '(srcery-theme ligature ligatures emacs zenburn-theme which-key use-package projectile magit helm evil doom-themes)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

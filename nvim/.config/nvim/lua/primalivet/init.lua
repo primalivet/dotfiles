@@ -39,6 +39,7 @@ function M.init()
     opt.wrap = false -- dont wrap
 
     vim.cmd ":packadd cfilter" -- enable filter quickfix list
+    vim.cmd[[colorscheme friendly]]
 
     _G.reload_config = function()
         require("plenary.reload").reload_module("primalivet")

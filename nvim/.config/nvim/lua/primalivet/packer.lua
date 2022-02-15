@@ -314,7 +314,7 @@ function M.init()
 		"catppuccin/nvim",
 		as = "catppuccin",
 		config = function()
-			vim.cmd([[colorscheme catppuccin]])
+			-- vim.cmd([[colorscheme catppuccin]])
 		end,
 	})
 
@@ -344,15 +344,22 @@ function M.init()
 		end,
 	})
 
-	use({
-		"~/Code/OSS/friendly.nvim",
-		condition = function()
-			vim.fn.isdirectory("~/Code/OSS/friendly.nvim")
-		end,
+  use({
+    "srcery-colors/srcery-vim",
+    as = "srcery",
     config = function()
-      print('Found Friendly theme')
+      vim.cmd[[colorscheme srcery]]
     end
-	})
+  })
+
+	-- use({
+	-- 	"~/Code/OSS/friendly.nvim",
+	-- 	condition = function()
+	-- 		vim.fn.isdirectory("~/Code/OSS/friendly.nvim")
+	-- 	end,
+    -- config = function()
+    -- end
+	-- })
 end
 
 return M
