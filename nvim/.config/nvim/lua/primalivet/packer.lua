@@ -77,12 +77,21 @@ function M.init()
 
 	use({
 		"nvim-telescope/telescope.nvim",
-		requires = { { "nvim-lua/plenary.nvim" } },
+		requires = { { "nvim-lua/plenary.nvim" }, { "nvim-telescope/telescope-fzf-native.nvim", run = "make" } },
 		config = function()
+			local telescope = require("telescope")
 			local picker_defaults = {
 				theme = "ivy",
+				previewer = false,
+				layout_config = {
+					height = 0.4,
+				},
+				border = false,
 			}
-			require("telescope").setup({
+
+			telescope.load_extension("fzf")
+
+			telescope.setup({
 				pickers = {
 					commands = picker_defaults,
 					find_files = picker_defaults,
@@ -146,13 +155,13 @@ function M.init()
 
 	use({
 		"nvim-treesitter/nvim-treesitter",
-    requires = { "nvim-treesitter/playground" },
+		requires = { "nvim-treesitter/playground" },
 		run = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
-        playground = {
-          enable = true
-        },
+				playground = {
+					enable = true,
+				},
 				highlight = { enable = true },
 				indent = { enable = true },
 			})
@@ -344,21 +353,21 @@ function M.init()
 		end,
 	})
 
-  use({
-    "srcery-colors/srcery-vim",
-    as = "srcery",
-    config = function()
-      vim.cmd[[colorscheme srcery]]
-    end
-  })
+	use({
+		"srcery-colors/srcery-vim",
+		as = "srcery",
+		config = function()
+			vim.cmd([[colorscheme srcery]])
+		end,
+	})
 
 	-- use({
 	-- 	"~/Code/OSS/friendly.nvim",
 	-- 	condition = function()
 	-- 		vim.fn.isdirectory("~/Code/OSS/friendly.nvim")
 	-- 	end,
-    -- config = function()
-    -- end
+	-- config = function()
+	-- end
 	-- })
 end
 

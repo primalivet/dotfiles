@@ -1,3 +1,5 @@
+;; Setup
+
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
@@ -8,6 +10,8 @@
   (package-install 'use-package))
 (eval-when-compile
   (setq use-package-always-ensure t))
+
+;; Core packages
 
 (use-package display-line-numbers
   :ensure nil
@@ -27,8 +31,7 @@
 (use-package frame
   :ensure nil
   :config
-  (setq default-frame-alist '(
-			      (fullscreen . maximized)
+  (setq default-frame-alist '((fullscreen . maximized)
 			      (font . "Fira Code-18"))))
 
 (use-package paren
@@ -43,6 +46,8 @@
   :config
   (scroll-bar-mode -1))
 
+;; ELPA packages
+
 (use-package evil
   :init
   (setq evil-want-integration t) ;; required by evil-collection
@@ -52,6 +57,11 @@
   (evil-global-set-key 'normal (kbd "j") 'evil-next-visual-line)
   (evil-global-set-key 'normal (kbd "k") 'evil-previous-visual-line)
   (evil-mode))
+
+(use-package evil-commentary
+  :init
+  (evil-commentary-mode +1))
+
 
 (use-package evil-collection
   :custom (evil-collection-setup-minibuffer t)
@@ -77,17 +87,22 @@
 	  ) . lsp-deferred)
   :commands lsp)
 
-
-(use-package helm
-  :preface (require 'helm-config)
-  :bind (("M-x" . helm-M-x)
-	 ("C-x C-f" . helm-find-files))
-  :config (helm-mode 1))
-
-(use-package projectile
+(use-package ivy
   :init
-  (setq projectile-project-search-path '(("~/Code/OSS/" . 1) ("~/Code/Work/" . 1)))
-  (projectile-mode +1))
+  (setq ivy-use-virtual-buffers t)
+  :config
+  (ivy-mode 1))
+
+;; (use-package helm
+;;   :preface (require 'helm-config)
+;;   :bind (("M-x" . helm-M-x)
+;; 	 ("C-x C-f" . helm-find-files))
+;;   :config (helm-mode 1))
+
+;; (use-package projectile
+;;   :init
+;;   (setq projectile-project-search-path '(("~/Code/OSS/" . 1) ("~/Code/Work/" . 1)))
+;;   (projectile-mode +1))
 
 (use-package magit)
 
@@ -106,7 +121,7 @@
  ;; If there is more than one, they won't work right.
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(srcery-theme ligature ligatures emacs zenburn-theme which-key use-package projectile magit helm evil doom-themes)))
+   '(ivy evil-commentary srcery-theme ligature ligatures emacs zenburn-theme which-key use-package projectile magit helm evil doom-themes)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
