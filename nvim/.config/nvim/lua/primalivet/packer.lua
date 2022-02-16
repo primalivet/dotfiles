@@ -319,14 +319,6 @@ function M.init()
 		end,
 	})
 
-	use({
-		"catppuccin/nvim",
-		as = "catppuccin",
-		config = function()
-			-- vim.cmd([[colorscheme catppuccin]])
-		end,
-	})
-
 	-- use({
 	-- 	"nvim-lualine/lualine.nvim",
 	-- 	requires = { "kyazdani42/nvim-web-devicons", opt = true },
@@ -353,22 +345,30 @@ function M.init()
 		end,
 	})
 
-	use({
-		"srcery-colors/srcery-vim",
-		as = "srcery",
-		config = function()
-			vim.cmd([[colorscheme srcery]])
-		end,
-	})
-
 	-- use({
-	-- 	"~/Code/OSS/friendly.nvim",
-	-- 	condition = function()
-	-- 		vim.fn.isdirectory("~/Code/OSS/friendly.nvim")
+	-- 	"srcery-colors/srcery-vim",
+	-- 	as = "srcery",
+	-- 	config = function()
+	-- 		vim.cmd([[colorscheme srcery]])
+	-- vim.cmd[[hi! link MsgArea SrceryYellowBold]]
+	-- vim.cmd[[hi! link TelescopeNormal NormalFloat]]
+	-- vim.cmd[[hi StatusLineEmphasis guifg=#303030 guibg=#FBB829 gui=bold]]
+	-- vim.cmd[[hi StatusLineSuccess guifg=#519F50 guibg=#303030 gui=bold]]
+	-- vim.cmd[[hi StatusLineError guifg=#EF2F27 guibg=#303030 gui=bold]]
+	-- vim.cmd[[hi StatusLineWarning guifg=#FBB829 guibg=#303030 gui=bold]]
+	-- vim.cmd[[hi! link StatusLineInfo StatusLine]]
+	-- vim.cmd[[hi! link StatusLineHint StatusLine]]
 	-- 	end,
-	-- config = function()
-	-- end
 	-- })
+
+	use({
+		"~/Code/OSS/cabin.nvim",
+		condition = function()
+			vim.fn.isdirectory("~/Code/OSS/cabin.nvim")
+			vim.cmd([[colorscheme cabin]])
+		end,
+		config = function() end,
+	})
 end
 
 return M

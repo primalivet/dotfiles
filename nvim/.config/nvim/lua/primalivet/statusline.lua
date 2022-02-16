@@ -1,23 +1,18 @@
 local M = {}
 
 local colors = {
-	error = "%#SrceryRedBold#",
-	warning = "%#SrceryYellowBold#",
-	info = "%#SrceryBlueBold#",
-	hint = "%#SrceryBrightYellowBold#",
+	yellow_bg = "%#StatusLineYellowBg#",
+	green = "%#StatusLineGreen#",
+	red = "%#StatusLineRed#",
+	yellow = "%#StatusLineYellow#",
+	blue = "%#StatusLineBlue#",
+	cyan = "%#StatusLineCyan#",
+	magentan = "%#StatusLineMagentan#",
+	orange = "%#StatusLineOrange#",
+	pink = "%#StatusLinePink#",
+	purple = "%#StatusLinePurple#",
 	reset = "%#Statusline#",
 }
-
-local function get_filename()
-	local filename = vim.fn.expand("%:p")
-	local cwd = vim.fn.getcwd()
-
-	if filename == "" then
-		return ""
-	end
-
-	return filename:gsub(cwd, "")
-end
 
 local function git_status()
 	local signs = vim.b.gitsigns_status_dict or { head = "", added = 0, changed = 0, removed = 0 }
@@ -27,13 +22,13 @@ local function git_status()
 			and string.format(
 				"%s %s+%s%s %s~%s%s %s-%s%s",
 				signs.head,
-				colors.info,
+				colors.green,
 				signs.added,
 				colors.reset,
-				colors.warning,
+				colors.yellow,
 				signs.changed,
 				colors.reset,
-				colors.error,
+				colors.red,
 				signs.removed,
 				colors.reset
 			)
@@ -64,19 +59,17 @@ local function diagnostics_status()
 		return ""
 	else
 		return string.format(
-			"[%s%s%s %s%s%s %s%s%s %s%s%s]",
-			colors.error,
+			"LSP: %s%s%s %s%s%s %s%s%s %s",
+			colors.red,
 			errors,
 			colors.reset,
-			colors.warning,
+			colors.yellow,
 			warnings,
 			colors.reset,
-			colors.info,
+			colors.blue,
 			infos,
 			colors.reset,
-			colors.hint,
-			hints,
-			colors.reset
+			hints
 		)
 	end
 end
@@ -114,35 +107,77 @@ local function if_else(pred, trueVal, falseVal)
 	end
 end
 
-M.print_status = function(which)
+local function get_mode()
+	local current_mode = vim.api.nvim_get_mode().mode
+	local modes = {
+		["n"] = { "Normal", "N" },
+		["no"] = { "N·Pending", "N·P" },
+		["v"] = { "Visual", "V" },
+		["V"] = { "V·Line", "V·L" },
+		[""] = { "V·Block", "V·B" },
+		["s"] = { "Select", "S" },
+		["S"] = { "S·Line", "S·L" },
+		[""] = { "S·Block", "S·B" },
+		["i"] = { "Insert", "I" },
+		["ic"] = { "Insert", "I" },
+		["R"] = { "Replace", "R" },
+		["Rv"] = { "V·Replace", "V·R" },
+		["c"] = { "Command", "C" },
+		["cv"] = { "Vim·Ex ", "V·E" },
+		["ce"] = { "Ex ", "E" },
+		["r"] = { "Prompt ", "P" },
+		["rm"] = { "More ", "M" },
+		["r?"] = { "Confirm ", "C" },
+		["!"] = { "Shell ", "S" },
+		["t"] = { "Terminal ", "T" },
+	}
+
+	local mode = modes[current_mode]
+	if mode then
+		return mode
+	else
+		return { "Unknown", "U" }
+	end
+end
+
+function M.print_status(which)
 	local width = vim.api.nvim_win_get_width(0)
 	-- approximate default statusline:
 	-- %f\ %h%w%m%r\ %=%(%l,%c%V\ %=\ %P%)
-	local filename = if_else(width < 100, "%t", "%f")
+	local filename = if_else(width < 120, "%t", "%f")
+	local filetype = "%y"
 	local help = "%h"
 	local preview = "%w"
-	local modified = "%m"
-	local readonly = "%r"
+	local modified = colors.yellow .. "%m" .. colors.reset
+	local readonly = colors.red .. "%r" .. colors.reset
 	local flags = help .. preview .. modified .. readonly
 	local line = "%l"
 	local column = "%c"
 	local virtual_column = "%V"
 	local percentage = "%P"
 	local divider = "%="
-	local git = if_else(width < 80, "", if_else(git_status() ~= "", "[" .. git_status() .. "]", ""))
+	local git = if_else(width < 80, "", if_else(git_status() ~= "", "GIT:  " .. git_status(), ""))
 
 	if which == "inactive" then
 		return string.format("%s %s %s %s:%s%s %s", filename, flags, divider, line, column, virtual_column, percentage)
 	elseif which == "active" then
-		local diagnostic = if_else(width < 60, "", diagnostics_status())
+		local diagnostic = if_else(width < 80, "", diagnostics_status())
+    -- HINT: Only use short name for now
+		local mode = if_else(width < 120, get_mode()[2], get_mode()[2])
+		local lsps = lsp_status()
 
 		return string.format(
-			"%s %s %s %s %s %s:%s%s %s",
+			"%s %s %s %s %s %s %s %s %s %s %s:%s%s %s",
+			colors.yellow_bg, -- TODO: set color depending on mode?
+			mode,
+			colors.reset,
 			filename,
 			flags,
-			divider,
 			git,
 			diagnostic,
+			lsps,
+			divider,
+			filetype,
 			line,
 			column,
 			virtual_column,
