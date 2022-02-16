@@ -93,16 +93,19 @@
   :config
   (ivy-mode 1))
 
+(use-package swiper)
+(use-package counsel)
+
 ;; (use-package helm
 ;;   :preface (require 'helm-config)
 ;;   :bind (("M-x" . helm-M-x)
 ;; 	 ("C-x C-f" . helm-find-files))
 ;;   :config (helm-mode 1))
 
-;; (use-package projectile
-;;   :init
-;;   (setq projectile-project-search-path '(("~/Code/OSS/" . 1) ("~/Code/Work/" . 1)))
-;;   (projectile-mode +1))
+(use-package projectile
+  :init
+  (setq projectile-project-search-path '(("~/Code/OSS/" . 1) ("~/Code/Work/" . 1)))
+  (projectile-mode +1))
 
 (use-package magit)
 
@@ -121,7 +124,7 @@
  ;; If there is more than one, they won't work right.
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(ivy evil-commentary srcery-theme ligature ligatures emacs zenburn-theme which-key use-package projectile magit helm evil doom-themes)))
+   '(counsel swiper ivy evil-commentary srcery-theme ligature ligatures emacs zenburn-theme which-key use-package projectile magit helm evil doom-themes)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
