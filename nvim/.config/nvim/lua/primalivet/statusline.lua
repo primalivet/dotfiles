@@ -8,9 +8,6 @@ local colors = {
 	blue = "%#StatusLineBlue#",
 	cyan = "%#StatusLineCyan#",
 	magentan = "%#StatusLineMagentan#",
-	orange = "%#StatusLineOrange#",
-	pink = "%#StatusLinePink#",
-	purple = "%#StatusLinePurple#",
 	reset = "%#Statusline#",
 }
 

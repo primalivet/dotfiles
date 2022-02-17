@@ -21,6 +21,7 @@ function M.init()
 	use("tpope/vim-commentary")
 	use("tpope/vim-surround")
 	use("tpope/vim-repeat")
+	use("gerw/vim-HiLinkTrace")
 
 	use({
 		"norcalli/nvim-colorizer.lua",
@@ -345,30 +346,31 @@ function M.init()
 		end,
 	})
 
-	-- use({
-	-- 	"srcery-colors/srcery-vim",
-	-- 	as = "srcery",
-	-- 	config = function()
-	-- 		vim.cmd([[colorscheme srcery]])
-	-- vim.cmd[[hi! link MsgArea SrceryYellowBold]]
-	-- vim.cmd[[hi! link TelescopeNormal NormalFloat]]
-	-- vim.cmd[[hi StatusLineEmphasis guifg=#303030 guibg=#FBB829 gui=bold]]
-	-- vim.cmd[[hi StatusLineSuccess guifg=#519F50 guibg=#303030 gui=bold]]
-	-- vim.cmd[[hi StatusLineError guifg=#EF2F27 guibg=#303030 gui=bold]]
-	-- vim.cmd[[hi StatusLineWarning guifg=#FBB829 guibg=#303030 gui=bold]]
-	-- vim.cmd[[hi! link StatusLineInfo StatusLine]]
-	-- vim.cmd[[hi! link StatusLineHint StatusLine]]
-	-- 	end,
-	-- })
-
 	use({
-		"~/Code/OSS/cabin.nvim",
-		condition = function()
-			vim.fn.isdirectory("~/Code/OSS/cabin.nvim")
-			vim.cmd([[colorscheme cabin]])
+		"srcery-colors/srcery-vim",
+		as = "srcery",
+		config = function()
+			vim.cmd([[colorscheme srcery]])
+			vim.cmd([[hi! link MsgArea SrceryYellowBold]])
+			vim.cmd([[hi! link TelescopeNormal NormalFloat]])
+			vim.cmd([[hi StatusLineYellowBg guifg=#303030 guibg=#FBB829 gui=bold]])
+			vim.cmd([[hi StatusLineRed guifg=#EF2F27 guibg=#303030 gui=bold]])
+			vim.cmd([[hi StatusLineGreen guifg=#519F50 guibg=#303030 gui=bold]])
+			vim.cmd([[hi StatusLineYellow guifg=#FBB829 guibg=#303030 gui=bold]])
+			vim.cmd([[hi StatusLineBlue guifg=#2C78BF guibg=#303030 gui=bold]])
+			vim.cmd([[hi StatusLineCyan guifg=#0AAEB3 guibg=#303030 gui=bold]])
+			vim.cmd([[hi StatusLineMagentan guifg=#E02C6D guibg=#303030 gui=bold]])
 		end,
-		config = function() end,
 	})
+
+	-- use({
+	-- 	"~/Code/OSS/cabin.nvim",
+	-- 	condition = function()
+	-- 		vim.fn.isdirectory("~/Code/OSS/cabin.nvim")
+	-- 		vim.cmd([[colorscheme cabin]])
+	-- 	end,
+	-- 	config = function() end,
+	-- })
 end
 
 return M

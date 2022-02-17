@@ -50,7 +50,6 @@ function M.init()
 	require("primalivet.packer").init()
 	require("primalivet.mappings").init()
 	require("primalivet.statusline").init()
-	vim.cmd([[ colorscheme cabin ]])
 end
 
 return M
