@@ -10,7 +10,6 @@ function M.init()
 
 	local packer = require("packer")
 	local use = packer.use
-
 	-- Initialize
 	packer.init()
 
@@ -269,7 +268,6 @@ function M.init()
 		"jose-elias-alvarez/null-ls.nvim",
 		config = function()
 			local null_ls = require("null-ls")
-			local helpers = require("null-ls.helpers")
 
 			local opts = {
 				-- Run eslint (formatting) if no prettier config exists but
@@ -320,19 +318,36 @@ function M.init()
 		end,
 	})
 
-	-- use({
-	-- 	"nvim-lualine/lualine.nvim",
-	-- 	requires = { "kyazdani42/nvim-web-devicons", opt = true },
-	-- 	config = function()
-	-- 		require("lualine").setup({
-	-- 			options = {
-	-- 				theme = "catppuccin",
-	-- 				component_separators = { left = "", right = "" },
-	-- 				section_separators = { left = "", right = "" },
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- })
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("trouble").setup({})
+		end,
+	})
+
+	use({
+		"~/Code/OSS/cabin.nvim",
+		condition = function()
+			vim.fn.isdirectory("~/Code/OSS/cabin.nvim")
+			vim.cmd([[colorscheme cabin]])
+		end,
+		config = function() end,
+	})
+
+	use({
+		"nvim-lualine/lualine.nvim",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+		config = function()
+			require("lualine").setup({
+				options = {
+					theme = "cabin",
+					component_separators = { left = "", right = "" },
+					section_separators = { left = "", right = "" },
+				},
+			})
+		end,
+	})
 
 	use({
 		"folke/which-key.nvim",
@@ -345,32 +360,6 @@ function M.init()
 			})
 		end,
 	})
-
-	use({
-		"srcery-colors/srcery-vim",
-		as = "srcery",
-		config = function()
-			vim.cmd([[colorscheme srcery]])
-			vim.cmd([[hi! link MsgArea SrceryYellowBold]])
-			vim.cmd([[hi! link TelescopeNormal NormalFloat]])
-			vim.cmd([[hi StatusLineYellowBg guifg=#303030 guibg=#FBB829 gui=bold]])
-			vim.cmd([[hi StatusLineRed guifg=#EF2F27 guibg=#303030 gui=bold]])
-			vim.cmd([[hi StatusLineGreen guifg=#519F50 guibg=#303030 gui=bold]])
-			vim.cmd([[hi StatusLineYellow guifg=#FBB829 guibg=#303030 gui=bold]])
-			vim.cmd([[hi StatusLineBlue guifg=#2C78BF guibg=#303030 gui=bold]])
-			vim.cmd([[hi StatusLineCyan guifg=#0AAEB3 guibg=#303030 gui=bold]])
-			vim.cmd([[hi StatusLineMagentan guifg=#E02C6D guibg=#303030 gui=bold]])
-		end,
-	})
-
-	-- use({
-	-- 	"~/Code/OSS/cabin.nvim",
-	-- 	condition = function()
-	-- 		vim.fn.isdirectory("~/Code/OSS/cabin.nvim")
-	-- 		vim.cmd([[colorscheme cabin]])
-	-- 	end,
-	-- 	config = function() end,
-	-- })
 end
 
 return M
