@@ -21,6 +21,7 @@ function M.init()
 	use("tpope/vim-surround")
 	use("tpope/vim-repeat")
 	use("gerw/vim-HiLinkTrace")
+  use("rafcamlet/nvim-luapad")
 
 	use({
 		"norcalli/nvim-colorizer.lua",
