@@ -48,7 +48,7 @@ function M.init()
 		"junegunn/fzf",
 		requires = { "junegunn/fzf.vim" },
 		config = function()
-			vim.g.fzf_layout = { down = "40%" }
+			vim.g.fzf_layout = { down = "30%" }
 			vim.g.fzf_preview_window = {}
 			vim.g.fzf_action = {
 				["ctrl-q"] = function(lines)
@@ -333,20 +333,6 @@ function M.init()
 			vim.cmd([[colorscheme cabin]])
 		end,
 		config = function() end,
-	})
-
-	use({
-		"nvim-lualine/lualine.nvim",
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
-		config = function()
-			require("lualine").setup({
-				options = {
-					theme = "cabin",
-					component_separators = { left = "", right = "" },
-					section_separators = { left = "", right = "" },
-				},
-			})
-		end,
 	})
 
 	use({

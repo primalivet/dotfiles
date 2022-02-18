@@ -7,7 +7,7 @@ local colors = {
 	yellow = "%#StatusLineYellow#",
 	blue = "%#StatusLineBlue#",
 	cyan = "%#StatusLineCyan#",
-	magentan = "%#StatusLineMagentan#",
+	magenta = "%#StatusLineMagenta#",
 	reset = "%#Statusline#",
 }
 
@@ -141,7 +141,7 @@ function M.print_status(which)
 	local width = vim.api.nvim_win_get_width(0)
 	-- approximate default statusline:
 	-- %f\ %h%w%m%r\ %=%(%l,%c%V\ %=\ %P%)
-	local filename = if_else(width < 120, "%t", "%f")
+	local filename = "%t"
 	local filetype = "%y"
 	local help = "%h"
 	local preview = "%w"
@@ -159,7 +159,7 @@ function M.print_status(which)
 		return string.format("%s %s %s %s:%s%s %s", filename, flags, divider, line, column, virtual_column, percentage)
 	elseif which == "active" then
 		local diagnostic = if_else(width < 80, "", diagnostics_status())
-    -- HINT: Only use short name for now
+		-- HINT: Only use short name for now
 		local mode = if_else(width < 120, get_mode()[2], get_mode()[2])
 		local lsps = lsp_status()
 
