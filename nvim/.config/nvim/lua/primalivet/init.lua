@@ -43,14 +43,19 @@ function M.init()
 	_G.reload_config = function()
 		require("plenary.reload").reload_module("primalivet")
 		require("primalivet").init()
-		print("Config reloaded")
+		print("Reloaded configuration successfully")
 	end
+
+  _G.P = function(x)
+    print(vim.inspect(x))
+    return x
+  end
+
 	vim.cmd("command! ReloadConfig lua reload_config()<CR>")
 
 	require("primalivet.packer").init()
 	require("primalivet.mappings").init()
 	require("primalivet.statusline").init()
-  vim.cmd[[colorscheme cabin]]
 end
 
 return M

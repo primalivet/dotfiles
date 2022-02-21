@@ -21,7 +21,7 @@ function M.init()
 	use("tpope/vim-surround")
 	use("tpope/vim-repeat")
 	use("gerw/vim-HiLinkTrace")
-  use("rafcamlet/nvim-luapad")
+	use("rafcamlet/nvim-luapad")
 
 	use({
 		"norcalli/nvim-colorizer.lua",
@@ -331,9 +331,14 @@ function M.init()
 		"~/Code/OSS/cabin.nvim",
 		condition = function()
 			vim.fn.isdirectory("~/Code/OSS/cabin.nvim")
-			vim.cmd([[colorscheme cabin]])
 		end,
-		config = function() end,
+    config = function()
+      require'cabin'.setup({
+        fat_vert_split = false,
+        colored_columns = false,
+      })
+      vim.cmd[[colorscheme cabin]]
+    end
 	})
 
 	use({
