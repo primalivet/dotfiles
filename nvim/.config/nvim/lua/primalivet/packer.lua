@@ -82,12 +82,12 @@ function M.init()
 		config = function()
 			local telescope = require("telescope")
 			local picker_defaults = {
-				theme = "ivy",
-				previewer = false,
-				layout_config = {
-					height = 0.4,
-				},
-				border = false,
+				-- 	theme = "ivy",
+				-- 	previewer = false,
+				-- 	layout_config = {
+				-- 		height = 0.4,
+				-- 	},
+				-- 	border = false,
 			}
 
 			telescope.load_extension("fzf")
@@ -108,29 +108,87 @@ function M.init()
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
-			"hrsh7th/vim-vsnip",
-			"hrsh7th/vim-vsnip-integ",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+			"lukas-reineke/cmp-rg",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-emoji",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"hrsh7th/cmp-calc",
 		},
 		config = function()
-			require("cmp").setup({
+			local has_words_before = function()
+				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+				return col ~= 0
+					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+			end
+			local cmp = require("cmp")
+			local luasnip = require("luasnip")
+			cmp.setup({
 				snippet = {
 					expand = function(args)
-						vim.fn["vsnip#anonymous"](args.body)
+						require("luasnip").lsp_expand(args.body)
 					end,
 				},
-				sources = {
+				mapping = {
+					["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+					["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+					["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+					["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+					["<C-e>"] = cmp.mapping({
+						i = cmp.mapping.abort(),
+						c = cmp.mapping.close(),
+					}),
+					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+					["<C-f>"] = cmp.mapping(function(fallback)
+						if luasnip.expand_or_jumpable() then
+							luasnip.expand_or_jump()
+						elseif has_words_before() then
+							cmp.complete()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+					["<C-b>"] = cmp.mapping(function(fallback)
+						if luasnip.jumpable(-1) then
+							luasnip.jump(-1)
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+				},
+				sources = cmp.config.sources({
+					{ name = "nvim_lsp" },
+					{ name = "luasnip" },
 					{ name = "buffer" },
 					{ name = "path" },
-					{ name = "nvim_lsp" },
 					{ name = "nvim_lua" },
 					{ name = "emoji" },
 					{ name = "nvim_lsp_signature_help" },
+					{ name = "rg" },
+					{ name = "calc" },
+				}),
+				formatting = {
+					format = function(entry, vim_item)
+						-- fancy icons and a name of kind
+						-- vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+						-- set a name for each source
+						vim_item.menu = ({
+							buffer = "[Buffer]",
+							nvim_lsp = "[LSP]",
+							luasnip = "[Snippet]",
+							nvim_lua = "[NvimLua]",
+							path = "[Path]",
+							calc = "[Calc]",
+							nvim_lsp_signature_help = "[Signature]",
+							rg = "[Ripgrep]",
+							emoji = "[Emoji]",
+						})[entry.source.name]
+						return vim_item
+					end,
 				},
 			})
 		end,
@@ -332,13 +390,15 @@ function M.init()
 		condition = function()
 			vim.fn.isdirectory("~/Code/OSS/cabin.nvim")
 		end,
-    config = function()
-      require'cabin'.setup({
-        fat_vert_split = false,
-        colored_columns = false,
-      })
-      vim.cmd[[colorscheme cabin]]
-    end
+		config = function()
+			require("cabin").setup({
+				fat_vert_split = true,
+				colored_columns = true,
+        -- fear_of_the_dark = false,
+				-- colors = {},
+			})
+			vim.cmd([[colorscheme cabin]])
+		end,
 	})
 
 	use({

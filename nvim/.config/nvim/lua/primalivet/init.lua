@@ -6,6 +6,7 @@ function M.init()
 	g.mapleader = " " -- Space is leader
 
 	opt.autoindent = true
+  opt.completeopt = "menu,menuone,noselect"
 	opt.cursorline = true -- show what line i'm on
 	opt.diffopt = "vertical"
 	opt.expandtab = true
