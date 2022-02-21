@@ -57,11 +57,11 @@ function M.init()
 				s = { ":lua vim.lsp.buf.signature_help()<CR>", "Go to signature help" },
 				t = { ":lua vim.lsp.buf.type_definition()<CR>", "Go to type definition" },
 			},
-      b = {
-        name = "+Browse",
-        x = { ":Sex<CR>", "Browse files in horizontal split" },
-        v = { ":Vex<CR>", "Browse files in vertival split" }
-      },
+			b = {
+				name = "+Browse",
+				x = { ":Sex<CR>", "Browse files in horizontal split" },
+				v = { ":Vex<CR>", "Browse files in vertival split" },
+			},
 			s = {
 				name = "+Search",
 				["/"] = { ":Lines<CR>", "Search lines" },
@@ -84,6 +84,11 @@ function M.init()
 				l = { ":set list!<CR>", "Toggle invisiable charaters" },
 				p = { ":set invpaste<CR>", "Toggle paste mode" },
 				s = { ":nohlsearch<CR>", "Toggle search highlighting" },
+			},
+			r = {
+				name = "+Run",
+				n = { ":!node %", "Run file in Node" },
+				l = { ":!lua %", "Run file in Lua" },
 			},
 			c = {
 				name = "+Config",
