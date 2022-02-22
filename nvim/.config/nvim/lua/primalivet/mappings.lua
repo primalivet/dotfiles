@@ -1,5 +1,17 @@
 local M = {}
 
+-- _G.attatch_debugger_node2 = function()
+-- 	print("Attaching 'node2' debugger")
+-- 	require("dap").run({
+-- 		type = "node2",
+-- 		request = "attach",
+-- 		cwd = vim.fn.getcwd(),
+-- 		sourceMaps = true,
+-- 		protocol = "inspector",
+-- 		skipFiles = { "<node_internals>/**/*.js" },
+-- 	})
+-- end
+
 function M.init()
 	local wk = require("which-key")
 	local nvim_set_keymap = vim.api.nvim_set_keymap
@@ -39,6 +51,21 @@ function M.init()
 			l = { ":lnext<CR>", "Next in location list" },
 		},
 		["<leader>"] = {
+      d = {
+        name = "+Debug",
+        c = {":lua require('dap').continue()<CR>", "Debug: Continue" },
+        s = {
+          name = "+Debug: Step...",
+          O = {":lua require('dap').step_out()<CR>", "Debug: Step out" },
+          o = {":lua require('dap').step_over()<CR>", "Debug: Step over" },
+          i = {":lua require('dap').step_into()<CR>", "Debug: Step into" }
+        },
+        b = {
+          t ={":lua require('dap').toggle_breakpoint()<CR>", "Debug: Toggle breakpoint" },
+          c ={":lua require('dap').clear_breakpoints()<CR>", "Debug: Clear breakpoint" }
+        },
+        r ={":lua require('dap').repl.toggle()<CR>", "Debug: Toggle Repl" },
+      },
 			e = {
 				name = "+Edit",
 				a = { ":lua vim.lsp.buf.code_action()<CR>", "Code action at cursor" },

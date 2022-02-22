@@ -9,7 +9,7 @@ export N_PREFIX=$HOME/.n
 [[ $(eval uname) = "Darwin" ]] && source /opt/homebrew/etc/profile.d/z.sh
 [[ $(eval uname) = "Linux" ]] && source /home/linuxbrew/.linuxbrew/etc/profile.d/z.sh
 # Path
-export PATH=$N_PREFIX/bin:$BREW_PATH:$PATH
+export PATH=$N_PREFIX/bin:$BREW_PATH:$HOME/.local/bin:$PATH
 
 alias vi='nvim'
 alias vim='nvim'

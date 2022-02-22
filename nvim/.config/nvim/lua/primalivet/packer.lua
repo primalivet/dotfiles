@@ -394,7 +394,7 @@ function M.init()
 			require("cabin").setup({
 				fat_vert_split = true,
 				colored_columns = true,
-        -- fear_of_the_dark = false,
+				-- fear_of_the_dark = false,
 				-- colors = {},
 			})
 			vim.cmd([[colorscheme cabin]])
@@ -410,6 +410,72 @@ function M.init()
 					margin = { 0, 0, 0, 0 },
 				},
 			})
+		end,
+	})
+
+	use({
+		"mfussenegger/nvim-dap",
+		config = function()
+			local dap = require("dap")
+			dap.set_log_level("TRACE")
+			dap.adapters = {
+				node2 = {
+					type = "executable",
+					command = "node",
+					args = { os.getenv("HOME") .. "/.local/bin/vscode-node-debug2/out/src/nodeDebug.js" },
+				},
+				-- chrome = {
+				-- 	type = "executable",
+				-- 	command = "node",
+				-- 	args = { os.getenv("HOME") .. "/path/to/vscode-chrome-debug/out/src/chromeDebug.js" }, -- TODO adjust
+				-- },
+			}
+
+			dap.configurations = {
+				javascript = {
+					{
+						name = "Launch",
+						type = "node2",
+						request = "launch",
+						program = "${file}",
+						cwd = vim.fn.getcwd(),
+						sourceMaps = true,
+						protocol = "inspector",
+						console = "integratedTerminal",
+					},
+					{
+						-- For this to work you need to make sure the node process is started with the `--inspect` flag.
+						name = "Attach to process",
+						type = "node2",
+						request = "attach",
+						processId = require("dap.utils").pick_process,
+					},
+				},
+				-- javascriptreact = {
+				-- 	{
+				-- 		type = "chrome",
+				-- 		request = "attach",
+				-- 		program = "${file}",
+				-- 		cwd = vim.fn.getcwd(),
+				-- 		sourceMaps = true,
+				-- 		protocol = "inspector",
+				-- 		port = 9222,
+				-- 		webRoot = "${workspaceFolder}",
+				-- 	},
+				-- },
+				-- typescriptreact = {
+				-- 	{
+				-- 		type = "chrome",
+				-- 		request = "attach",
+				-- 		program = "${file}",
+				-- 		cwd = vim.fn.getcwd(),
+				-- 		sourceMaps = true,
+				-- 		protocol = "inspector",
+				-- 		port = 9222,
+				-- 		webRoot = "${workspaceFolder}",
+				-- 	},
+				-- },
+			}
 		end,
 	})
 end
