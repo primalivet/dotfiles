@@ -54,6 +54,11 @@ function M.init()
 
 	vim.cmd("command! ReloadConfig lua reload_config()<CR>")
 
+  vim.cmd([[
+    augroup PRIMA_FILETYPES
+    autocmd BufRead,BufNewFile *.json set filetype=jsonc
+    augroup END
+  ]])
 	require("primalivet.packer").init()
 	require("primalivet.mappings").init()
 	require("primalivet.statusline").init()
