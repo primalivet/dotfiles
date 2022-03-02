@@ -252,6 +252,7 @@ function M.init()
 				if client.name == "tsserver" then
 					local ts_utils = require("nvim-lsp-ts-utils")
 					ts_utils.setup({
+            auto_inlay_hints = false,
 						always_organize_imports = false,
 						filter_out_diagnostics_by_severity = { "hint" },
 					})
@@ -274,6 +275,8 @@ function M.init()
 				init_options = require("nvim-lsp-ts-utils").init_options,
 				on_attach = on_attach,
 			})
+
+      nvim_lsp.elmls.setup{}
 
 			nvim_lsp.cssls.setup({
 				capabilities = capabilities,
@@ -357,6 +360,11 @@ function M.init()
 						return utils.root_has_file({ "stylua.toml", ".stylua.toml" })
 					end,
 				},
+				elm_format_formatting = {
+					condition = function(utils)
+						return utils.root_has_file({ "elm.json" })
+					end,
+				},
 			}
 
 			require("null-ls").setup({
@@ -366,6 +374,7 @@ function M.init()
 					null_ls.builtins.formatting.eslint_d.with(opts.eslint_formatting),
 					null_ls.builtins.formatting.prettier.with(opts.prettier_formatting),
 					null_ls.builtins.formatting.stylua.with(opts.stylua_formatting),
+          null_ls.builtins.formatting.elm_format.with(opts.elm_format_formatting),
 				},
 				on_attach = function(client)
 					if client.resolved_capabilities.document_formatting then
