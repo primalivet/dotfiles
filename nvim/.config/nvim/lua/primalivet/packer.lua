@@ -276,7 +276,8 @@ function M.init()
 				on_attach = on_attach,
 			})
 
-      nvim_lsp.elmls.setup{}
+      nvim_lsp.hls.setup{} -- Haskell
+      nvim_lsp.elmls.setup{} -- Elm
 
 			nvim_lsp.cssls.setup({
 				capabilities = capabilities,

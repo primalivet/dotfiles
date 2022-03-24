@@ -37,5 +37,3 @@ export FZF_DEFAULT_OPTS='--height=100%'
 ZSH_THEME="robbyrussell"
 plugins=(git zsh-autosuggestions fzf)
 source $ZSH/oh-my-zsh.sh
-
-[ -f "/Users/gustaf/.ghcup/env" ] && source "/Users/gustaf/.ghcup/env" # ghcup-env
