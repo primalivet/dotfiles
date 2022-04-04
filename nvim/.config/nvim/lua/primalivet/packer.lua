@@ -276,8 +276,10 @@ function M.init()
 				on_attach = on_attach,
 			})
 
+      -- Ionide plugin should do the setup automatically for fsautocomplete
+      -- similar to: nvim_lsp.fsautocomplete.setup{}
+
       nvim_lsp.hls.setup{ on_attach = on_attach } -- Haskell
-      nvim_lsp.fsautocomplete.setup{} -- FSharp
       nvim_lsp.elmls.setup{} -- Elm
 
 			nvim_lsp.cssls.setup({
@@ -327,6 +329,8 @@ function M.init()
 			end
 		end,
 	})
+
+  use ({ "ionide/Ionide-vim", requires = { "nvim-lspconfig" }})
 
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
