@@ -3,13 +3,16 @@ export GIT_EDITOR=nvim
 
 # Node version manager install directory
 export N_PREFIX=$HOME/.n
+
+export DOTNET_ROOT=$HOME/.dotnet
 # Homebrew/Linuxbrew paths
 [[ $(eval uname) = "Darwin" ]] && export BREW_PATH=/opt/homebrew/bin
 [[ $(eval uname) = "Linux" ]] && export BREW_PATH=/home/linuxbrew/.linuxbrew/bin
 [[ $(eval uname) = "Darwin" ]] && source /opt/homebrew/etc/profile.d/z.sh
 [[ $(eval uname) = "Linux" ]] && source /home/linuxbrew/.linuxbrew/etc/profile.d/z.sh
+
 # Path
-export PATH=$N_PREFIX/bin:$BREW_PATH:$HOME/.local/bin:$PATH
+export PATH=$HOME/.dotnet:$HOME/.dotnet/tools:$N_PREFIX/bin:$BREW_PATH:$HOME/.local/bin:/opt/homebrew/opt/llvm/bin:$PATH
 
 alias vi='nvim'
 alias vim='nvim'
@@ -38,4 +41,4 @@ ZSH_THEME="robbyrussell"
 plugins=(git zsh-autosuggestions fzf)
 source $ZSH/oh-my-zsh.sh
 
-[ -f "/Users/gustaf/.ghcup/env" ] && source "/Users/gustaf/.ghcup/env" # ghcup-env
+[ -f "/Users/gustaf/.ghcup/env" ] && source "/Users/gustaf/.ghcup/env" # ghcup-envexport PATH="/opt/homebrew/opt/llvm/bin:$PATH"
