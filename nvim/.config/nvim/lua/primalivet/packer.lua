@@ -276,7 +276,8 @@ function M.init()
 				on_attach = on_attach,
 			})
 
-      nvim_lsp.hls.setup{} -- Haskell
+      nvim_lsp.hls.setup{ on_attach = on_attach } -- Haskell
+      nvim_lsp.fsautocomplete.setup{} -- FSharp
       nvim_lsp.elmls.setup{} -- Elm
 
 			nvim_lsp.cssls.setup({
