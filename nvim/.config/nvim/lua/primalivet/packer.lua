@@ -22,6 +22,13 @@ function M.init()
 	use("tpope/vim-repeat")
 	use("gerw/vim-HiLinkTrace")
 	use("rafcamlet/nvim-luapad")
+  use("tpope/vim-fugitive")
+
+	use({
+		"heavenshell/vim-jsdoc",
+		ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+		run = "make install",
+	})
 
 	use({
 		"norcalli/nvim-colorizer.lua",
@@ -252,7 +259,7 @@ function M.init()
 				if client.name == "tsserver" then
 					local ts_utils = require("nvim-lsp-ts-utils")
 					ts_utils.setup({
-            auto_inlay_hints = false,
+						auto_inlay_hints = false,
 						always_organize_imports = false,
 						filter_out_diagnostics_by_severity = { "hint" },
 					})
@@ -276,11 +283,11 @@ function M.init()
 				on_attach = on_attach,
 			})
 
-      -- Ionide plugin should do the setup automatically for fsautocomplete
-      -- similar to: nvim_lsp.fsautocomplete.setup{}
+			-- Ionide plugin should do the setup automatically for fsautocomplete
+			-- similar to: nvim_lsp.fsautocomplete.setup{}
 
-      nvim_lsp.hls.setup{ on_attach = on_attach } -- Haskell
-      nvim_lsp.elmls.setup{} -- Elm
+			nvim_lsp.hls.setup({ on_attach = on_attach }) -- Haskell
+			nvim_lsp.elmls.setup({}) -- Elm
 
 			nvim_lsp.cssls.setup({
 				capabilities = capabilities,
@@ -330,7 +337,7 @@ function M.init()
 		end,
 	})
 
-  use ({ "ionide/Ionide-vim", requires = { "nvim-lspconfig" }})
+	use({ "ionide/Ionide-vim", requires = { "nvim-lspconfig" } })
 
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
@@ -342,9 +349,8 @@ function M.init()
 				-- eslint config does exist
 				eslint_formatting = {
 					condition = function(utils)
-						local has_eslint = utils.root_has_file(".eslintrc") or utils.root_has_file(".eslintrc.json")
-						local has_prettier = utils.root_has_file(".prettierrc")
-							or utils.root_has_file(".prettierrc.json")
+						local has_eslint = utils.root_has_file({".eslintrc", ".eslintrc.js", ".eslintrc.json"})
+						local has_prettier = utils.root_has_file({".prettierrc", ".prettierrc.js", ".prettierrc.json"})
 
 						return has_eslint and not has_prettier
 					end,
@@ -352,13 +358,13 @@ function M.init()
 				-- Run eslint if eslint config file exists
 				eslint_diagnostics = {
 					condition = function(utils)
-						return utils.root_has_file({ ".eslintrc", ".eslintrc.json" })
+						return utils.root_has_file({ ".eslintrc", ".eslintrc.js", ".eslintrc.json" })
 					end,
 				},
 				-- Run prettier if prettier config exitst
 				prettier_formatting = {
 					condition = function(utils)
-						return utils.root_has_file({ ".prettierrc", ".prettierrc.json" })
+						return utils.root_has_file({ ".prettierrc", ".prettierrc.js", ".prettierrc.json" })
 					end,
 				},
 				stylua_formatting = {
@@ -380,7 +386,7 @@ function M.init()
 					null_ls.builtins.formatting.eslint_d.with(opts.eslint_formatting),
 					null_ls.builtins.formatting.prettier.with(opts.prettier_formatting),
 					null_ls.builtins.formatting.stylua.with(opts.stylua_formatting),
-          null_ls.builtins.formatting.elm_format.with(opts.elm_format_formatting),
+					null_ls.builtins.formatting.elm_format.with(opts.elm_format_formatting),
 				},
 				on_attach = function(client)
 					if client.resolved_capabilities.document_formatting then
