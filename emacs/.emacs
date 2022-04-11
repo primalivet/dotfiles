@@ -31,7 +31,8 @@
 (use-package frame
   :ensure nil
   :config
-  (setq default-frame-alist '((fullscreen . maximized)
+  (setq default-frame-alist '(
+			      ;; (fullscreen . maximized)
 			      (font . "Fira Code-18"))))
 
 (use-package paren
@@ -79,28 +80,24 @@
   (exec-path-from-shell-initialize)))
 
 (use-package lsp-mode
-  :hook ((
-	  js-mode
-	  js-jsx-mode
-	  typescript-mode
-	  web-mode
-	  ) . lsp-deferred)
+  :hook(
+	(typescript-mode . lsp)
+	(js-mode . lsp)
+	(js-jsx-mode . lsp)
+	(lsp-mode . lsp-enable-which-key-integration)
+	)
   :commands lsp)
 
 (use-package ivy
   :init
   (setq ivy-use-virtual-buffers t)
   :config
+  (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
   (ivy-mode 1))
 
 (use-package swiper)
 (use-package counsel)
 
-;; (use-package helm
-;;   :preface (require 'helm-config)
-;;   :bind (("M-x" . helm-M-x)
-;; 	 ("C-x C-f" . helm-find-files))
-;;   :config (helm-mode 1))
 
 (use-package projectile
   :init
