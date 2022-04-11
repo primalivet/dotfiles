@@ -54,6 +54,8 @@ function M.init()
 
 	vim.cmd("command! ReloadConfig lua reload_config()<CR>")
 
+  vim.cmd("autocmd CursorHold * lua vim.lsp.buf.document_highlight()")
+
   vim.cmd([[
     augroup PRIMA_FILETYPES
     autocmd BufRead,BufNewFile *.json set filetype=jsonc

@@ -17,7 +17,7 @@ local function git_status()
 
 	return has_branch
 			and string.format(
-				"%s %s+%s%s %s~%s%s %s-%s%s",
+				"[%s][%s%s%s%s%s%s%s%s%s]",
 				signs.head,
 				colors.green,
 				signs.added,
@@ -56,7 +56,7 @@ local function diagnostics_status()
 		return ""
 	else
 		return string.format(
-			"LSP: %s%s%s %s%s%s %s%s%s %s",
+			"DIAG:[%s%s%s%s%s%s%s%s%s%s]",
 			colors.red,
 			errors,
 			colors.reset,
@@ -72,7 +72,7 @@ local function diagnostics_status()
 end
 
 local function lsp_status()
-	local no_lsp_msg = ""
+	local no_lsp_msg = "[none]"
 	local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 	local clients = vim.lsp.get_active_clients()
 	local lsp_names = {}
@@ -91,7 +91,7 @@ local function lsp_status()
 	if not next(lsp_names) then -- table is empty
 		return no_lsp_msg
 	else
-		local lsp_names_msg = table.concat(lsp_names, ", ")
+		local lsp_names_msg = "LSP:[" .. table.concat(lsp_names, ",") .. "]"
 		return lsp_names_msg
 	end
 end
@@ -153,7 +153,7 @@ function M.print_status(which)
 	local virtual_column = "%V"
 	local percentage = "%P"
 	local divider = "%="
-	local git = if_else(width < 80, "", if_else(git_status() ~= "", "GIT:  " .. git_status(), ""))
+	local git = if_else(width < 80, "", if_else(git_status() ~= "", "GIT:" .. git_status(), ""))
 
 	if which == "inactive" then
 		return string.format("%s %s %s %s:%s%s %s", filename, flags, divider, line, column, virtual_column, percentage)
