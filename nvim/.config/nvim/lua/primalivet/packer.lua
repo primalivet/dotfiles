@@ -415,8 +415,7 @@ function M.init()
 			require("cabin").setup({
 				fat_vert_split = true,
 				colored_columns = true,
-				-- fear_of_the_dark = false,
-				-- colors = {},
+				fear_of_the_dark = false,
 			})
 			vim.cmd([[colorscheme cabin]])
 		end,
