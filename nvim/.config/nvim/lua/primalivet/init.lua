@@ -54,8 +54,12 @@ function M.init()
 
 	vim.cmd("command! ReloadConfig lua reload_config()<CR>")
 
-  vim.cmd("autocmd CursorHold * lua vim.lsp.buf.document_highlight()")
-  vim.cmd("autocmd CursorMoved * lua vim.lsp.buf.clear_references()")
+  vim.cmd([[
+  augroup PRIMA_CURSOR_HOLD
+  autocmd CursorHold * lua vim.lsp.buf.document_highlight()
+  autocmd CursorMoved * lua vim.lsp.buf.clear_references()
+  augroup END
+  ]])
 
   vim.cmd([[
     augroup PRIMA_FILETYPES

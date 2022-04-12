@@ -28,6 +28,11 @@
   :config
   (tool-bar-mode -1))
 
+(use-package emacs
+  :ensure nil
+  :config
+  (setq inhibit-startup-screen t))
+
 (use-package frame
   :ensure nil
   :config
