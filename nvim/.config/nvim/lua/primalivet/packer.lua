@@ -255,6 +255,13 @@ function M.init()
         client.resolved_capabilities.document_formatting = false
         client.resolved_capabilities.document_range_formatting = false
 
+        vim.cmd([[
+        augroup PRIMA_CURSOR_HOLD
+        autocmd CursorHold * lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved * lua vim.lsp.buf.clear_references()
+        augroup END
+        ]])
+
         if client.name == "tsserver" then
           local ts_utils = require("nvim-lsp-ts-utils")
           ts_utils.setup({
