@@ -1,6 +1,10 @@
 local M = {}
 local fn = vim.fn
 
+-- Install languages server for: TS,JS,CSS,Eslint,Json
+-- npm i -g vscode-langservers-extracted typescript typescript-language-server eslint_d
+-- brew install stylua
+
 function M.init()
   -- Bootstrap
   local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -342,8 +346,6 @@ function M.init()
       end
     end,
   })
-
-  use({ "ionide/Ionide-vim", requires = { "nvim-lspconfig" } })
 
   use({
     "jose-elias-alvarez/null-ls.nvim",
