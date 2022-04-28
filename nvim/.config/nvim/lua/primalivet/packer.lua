@@ -365,8 +365,8 @@ function M.init()
       require("null-ls").setup({
         debug = true,
         sources = {
-          null_ls.builtins.diagnostics.eslint.with(opts.eslint_diagnostics),
-          null_ls.builtins.formatting.eslint.with(opts.eslint_formatting),
+          null_ls.builtins.diagnostics.eslint_d.with(opts.eslint_diagnostics),
+          null_ls.builtins.formatting.eslint_d.with(opts.eslint_formatting),
           null_ls.builtins.formatting.prettier.with(opts.prettier_formatting),
           null_ls.builtins.formatting.stylua.with(opts.stylua_formatting),
           null_ls.builtins.formatting.elm_format.with(opts.elm_format_formatting),
