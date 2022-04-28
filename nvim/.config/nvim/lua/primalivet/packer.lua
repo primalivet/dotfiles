@@ -99,64 +99,35 @@ function M.init()
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-emoji",
       "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-calc",
     },
     config = function()
-      local has_words_before = function()
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      end
       local cmp = require("cmp")
-      local luasnip = require("luasnip")
       cmp.setup({
         snippet = {
           expand = function(args)
             require("luasnip").lsp_expand(args.body)
           end,
         },
-        mapping = {
-          ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-          ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-          ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-          ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-          ["<C-e>"] = cmp.mapping({
-            i = cmp.mapping.abort(),
-            c = cmp.mapping.close(),
-          }),
+        mapping = cmp.mapping.preset.insert({
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-          ["<C-f>"] = cmp.mapping(function(fallback)
-            if luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<C-b>"] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-        },
+        }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" },
-          { name = "buffer" },
-          { name = "path" },
-          { name = "nvim_lua" },
-          { name = "emoji" },
           { name = "nvim_lsp_signature_help" },
+          { name = "nvim_lua" },
+        }, {
+          { name = "path" },
+          { name = "buffer" },
           { name = "rg" },
-          { name = "calc" },
+          { name = "emoji" },
         }),
         formatting = {
           format = function(entry, vim_item)
-            -- fancy icons and a name of kind
-            -- vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
-            -- set a name for each source
             vim_item.menu = ({
               buffer = "[Buffer]",
               nvim_lsp = "[LSP]",
@@ -248,30 +219,18 @@ function M.init()
         end
       end
 
-      --
       -- LSP Setups
-      --
 
-      -- CSS, JSON and YAML LSP
-      -- Capabilities are not resolved in on_attach as that is the servers
-      -- capabilities, here we need to set neovims capabilities.
-      -- Please tell me why it is this way???
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
       capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+      nvim_lsp.elmls.setup({ capabilities = capabilities }) -- Elm
+      nvim_lsp.cssls.setup({ capabilities = capabilities, on_attach = on_attach })
+      nvim_lsp.hls.setup({ capabilities = capabilities, on_attach = on_attach }) -- Haskell
       nvim_lsp.tsserver.setup({
+        capabilities = capabilities,
         init_options = require("nvim-lsp-ts-utils").init_options,
         on_attach = on_attach,
-      })
-
-      -- Ionide plugin should do the setup automatically for fsautocomplete
-      -- similar to: nvim_lsp.fsautocomplete.setup{}
-
-      nvim_lsp.hls.setup({ on_attach = on_attach }) -- Haskell
-      nvim_lsp.elmls.setup({}) -- Elm
-
-      nvim_lsp.cssls.setup({
-        capabilities = capabilities,
       })
 
       -- Sumneko LSP
