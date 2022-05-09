@@ -34,7 +34,7 @@ function M.init()
   opt.termguicolors = true
   opt.timeoutlen = 500 --timeout for mappings and
   opt.updatetime = 100 --updatetime for events
-  opt.wildignore = "*/node_modules/*,*/dist/*,*/build/*"
+  opt.wildignore = ""
   opt.wildmenu = true -- show current complete in statusline
   opt.wildmode = "list,full" -- on cmd complete, show a list, then complete full
   opt.wrap = false -- dont wrap
