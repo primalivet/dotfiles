@@ -61,7 +61,7 @@ function M.init()
   ]])
   require("primalivet.packer").init()
   require("primalivet.mappings").init()
-  require("primalivet.statusline").init()
+  -- require("primalivet.statusline").init()
 end
 
 return M
