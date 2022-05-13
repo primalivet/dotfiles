@@ -1,18 +1,29 @@
+export LANG="en-US.UTF-8"
 export EDITOR=nvim
 export GIT_EDITOR=nvim
 
 # Node version manager install directory
 export N_PREFIX=$HOME/.n
 
+# Dotnet
 export DOTNET_ROOT=$HOME/.dotnet
-# Homebrew/Linuxbrew paths
+
+# Set Homebrew/Linuxbrew path
 [[ $(eval uname) = "Darwin" ]] && export BREW_PATH=/opt/homebrew/bin
 [[ $(eval uname) = "Linux" ]] && export BREW_PATH=/home/linuxbrew/.linuxbrew/bin
+
+# Source z command from Homebrew/Linuxbrew
 [[ $(eval uname) = "Darwin" ]] && source /opt/homebrew/etc/profile.d/z.sh
 [[ $(eval uname) = "Linux" ]] && source /home/linuxbrew/.linuxbrew/etc/profile.d/z.sh
 
+# LLVM explicit Homebrew path
+export LLVM_PATH=/opt/homebrew/opt/llvm/bin
+
+# Home .local/bin
+export LOCAL_BIN=$HOME/.local/bin
+
 # Path
-export PATH=$HOME/.dotnet:$HOME/.dotnet/tools:$N_PREFIX/bin:$BREW_PATH:$HOME/.local/bin:/opt/homebrew/opt/llvm/bin:$PATH
+export PATH=$DOTNET_ROOT:$DOTNET_ROOT/tools:$N_PREFIX/bin:$BREW_PATH:$LOCAL_BIN:$LLVM_PATH:$PATH
 
 alias vi='nvim'
 alias vim='nvim'
