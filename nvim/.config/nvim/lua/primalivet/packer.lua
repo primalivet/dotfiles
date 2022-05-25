@@ -27,6 +27,12 @@ function M.init()
   use("gerw/vim-HiLinkTrace")
   use("rafcamlet/nvim-luapad")
   use("tpope/vim-fugitive")
+  use("github/copilot.vim")
+
+  use({
+    "yardnsm/vim-import-cost",
+    run = "npm install --production",
+  })
 
   use({
     "heavenshell/vim-jsdoc",

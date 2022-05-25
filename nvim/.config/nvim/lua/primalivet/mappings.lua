@@ -25,13 +25,17 @@ function M.init()
   nvim_set_keymap("v", "<", "<gv", default_opt)
   nvim_set_keymap("v", ">", ">gv", default_opt)
 
+
   -- Move lines in visual mode
   nvim_set_keymap("v", "<C-j>", ":m '>+1<CR>gv=gv", default_opt)
   nvim_set_keymap("v", "<C-k>", ":m '<-2<CR>gv=gv", default_opt)
 
   -- Edit
   wk.register({
-
+    -- Copilot (default to Tab for completion)
+    ["<C-d>"] = {"<Plug>(copilot-dismiss)", "Dismiss copilot", mode = "i" }, -- Insert
+    ["<C-[>"] = {"<Plug>(copilot-previous)", "Previous copilot command", mode = "i" }, -- Insert
+    ["<C-]>"] = {"<Plug>(copilot-next)", "Next copilot command", mode = "i" }, -- Insert
     ["["] = {
       name = "+Previous",
       C = { ":cfirst<CR>", "First in quickfix list" },
@@ -71,7 +75,7 @@ function M.init()
         a = { ":lua vim.lsp.buf.code_action()<CR>", "Code action at cursor" },
         f = { ":lua vim.lsp.buf.formatting()<CR>", "Format buffer" },
         r = { ":lua vim.lsp.buf.rename()<CR>", "Rename under cursor" },
-        s = { ":'<,'>sort<CR>", "Sort visual selection", mode = "v" },
+        s = { ":'<,'>sort<CR>", "Sort visual selection", mode = "v" }, -- Visual
       },
       g = {
         name = "+Go to",
