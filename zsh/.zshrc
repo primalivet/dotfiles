@@ -53,3 +53,4 @@ plugins=(git zsh-autosuggestions fzf)
 source $ZSH/oh-my-zsh.sh
 
 [ -f "/Users/gustaf/.ghcup/env" ] && source "/Users/gustaf/.ghcup/env" # ghcup-envexport PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+unset NODE_OPTIONS

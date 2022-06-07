@@ -328,7 +328,6 @@ function M.init()
       }
 
       require("null-ls").setup({
-        debug = true,
         sources = {
           null_ls.builtins.diagnostics.eslint_d.with(opts.eslint_diagnostics),
           null_ls.builtins.formatting.eslint_d.with(opts.eslint_formatting),
@@ -390,12 +389,14 @@ function M.init()
         node2 = {
           type = "executable",
           command = "node",
+          -- Download at: https://github.com/microsoft/vscode-node-debug2/tags
           args = { os.getenv("HOME") .. "/.local/bin/vscode-node-debug2/out/src/nodeDebug.js" },
         },
         -- chrome = {
         -- 	type = "executable",
         -- 	command = "node",
-        -- 	args = { os.getenv("HOME") .. "/path/to/vscode-chrome-debug/out/src/chromeDebug.js" }, -- TODO adjust
+        -- 	Download at: https://github.com/microsoft/vscode-chrome-debug/releases
+        -- 	args = { os.getenv("HOME") .. "/path/to/vscode-chrome-debug/out/src/chromeDebug.js" },
         -- },
       }
 
