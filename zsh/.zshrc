@@ -8,6 +8,8 @@ export N_PREFIX=$HOME/.n
 # Dotnet
 export DOTNET_ROOT=$HOME/.dotnet
 
+export RUST_ROOT=$HOME/.cargo/env
+
 # Set Homebrew/Linuxbrew path
 [[ $(eval uname) = "Darwin" ]] && export BREW_PATH=/opt/homebrew/bin
 [[ $(eval uname) = "Linux" ]] && export BREW_PATH=/home/linuxbrew/.linuxbrew/bin
@@ -23,7 +25,7 @@ export LLVM_PATH=/opt/homebrew/opt/llvm/bin
 export LOCAL_BIN=$HOME/.local/bin
 
 # Path
-export PATH=$DOTNET_ROOT:$DOTNET_ROOT/tools:$N_PREFIX/bin:$BREW_PATH:$LOCAL_BIN:$LLVM_PATH:$PATH
+export PATH=$RUST_ROOT:$DOTNET_ROOT:$DOTNET_ROOT/tools:$N_PREFIX/bin:$BREW_PATH:$LOCAL_BIN:$LLVM_PATH:$PATH
 
 alias vi='nvim'
 alias vim='nvim'
