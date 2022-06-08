@@ -363,7 +363,7 @@ function M.init()
         fat_vert_split = true,
         colored_columns = true,
         fear_of_the_dark = false,
-        light = true,
+        light = false,
       })
       vim.cmd([[colorscheme cabin]])
     end,
