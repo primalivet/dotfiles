@@ -51,7 +51,7 @@ export ZSH=$HOME/.oh-my-zsh
 [[ $(eval uname) = "Darwin" ]] && export FZF_BASE=/opt/homebrew/opt/fzf
 [[ $(eval uname) = "Linux" ]] && export FZF_BASE=/home/linuxbrew/.linuxbrew/opt/fzf
 export FZF_DEFAULT_OPTS='--height=100%'
-ZSH_THEME="robbyrussell"
+ZSH_THEME="primalivet"
 plugins=(git zsh-autosuggestions fzf)
 source $ZSH/oh-my-zsh.sh
 
