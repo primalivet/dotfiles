@@ -27,6 +27,7 @@ export LOCAL_BIN=$HOME/.local/bin
 # Path
 export PATH=$RUST_ROOT:$DOTNET_ROOT:$DOTNET_ROOT/tools:$N_PREFIX/bin:$BREW_PATH:$LOCAL_BIN:$LLVM_PATH:$PATH
 
+alias vil='vim -c "set background=light"'
 alias vi='nvim'
 alias vim='nvim'
 alias reload='. ~/.zshrc'

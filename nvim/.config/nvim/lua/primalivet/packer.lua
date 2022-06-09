@@ -359,12 +359,7 @@ function M.init()
       vim.fn.isdirectory("~/Code/OSS/cabin.nvim")
     end,
     config = function()
-      require("cabin").setup({
-        fat_vert_split = true,
-        colored_columns = true,
-        fear_of_the_dark = false,
-        light = false,
-      })
+      require("cabin").setup()
       vim.cmd([[colorscheme cabin]])
     end,
   })
