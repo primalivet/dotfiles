@@ -5,7 +5,6 @@ export GIT_EDITOR=nvim
 # Node version manager install directory
 export N_PREFIX=$HOME/.n
 
-# Dotnet
 export DOTNET_ROOT=$HOME/.dotnet
 
 export RUST_ROOT=$HOME/.cargo/env
