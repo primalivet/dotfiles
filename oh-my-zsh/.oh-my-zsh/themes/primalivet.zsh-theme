@@ -1,12 +1,11 @@
-PROMPT='%c $(git_prompt_info)'
+PROMPT='%c $(git_prompt_info) $(git_prompt_status) '
 PROMPT+="%{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_PREFIX="on "
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 
+ZSH_THEME_GIT_PROMPT_DIRTY=""
 ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[grey]%}[%{$fg[yellow]%}✦%{$fg[grey]%}]%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[grey]%}[%{$fg[green]%}✓%{$fg[grey]%}]%{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[cyan]%}↑%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[red]%}↓%{$reset_color%}"
