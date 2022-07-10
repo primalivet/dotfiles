@@ -1,10 +1,6 @@
 local M = {}
 local fn = vim.fn
 
--- Install languages server for: TS,JS,CSS,Eslint,Json
--- npm i -g vscode-langservers-extracted typescript typescript-language-server eslint_d
--- brew install stylua
-
 function M.init()
   -- Bootstrap
   local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -18,7 +14,7 @@ function M.init()
   packer.init()
 
   -- Load packages
-  use("kyazdani42/nvim-web-devicons")
+  use("nvim-lua/plenary.nvim")
   use("wbthomason/packer.nvim")
   use("editorconfig/editorconfig-vim")
   use("tpope/vim-commentary")
@@ -27,40 +23,6 @@ function M.init()
   use("gerw/vim-HiLinkTrace")
   use("rafcamlet/nvim-luapad")
   use("tpope/vim-fugitive")
-  use("github/copilot.vim")
-
-  use({
-    "yardnsm/vim-import-cost",
-    run = "npm install --production",
-  })
-
-  use({
-    "heavenshell/vim-jsdoc",
-    ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
-    run = "make install",
-  })
-
-  use({
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup()
-    end,
-  })
-
-  use({
-    "TimUntersberger/neogit",
-    requires = { "sindrets/diffview.nvim", "nvim-lua/plenary.nvim" },
-    config = function()
-      require("diffview.config").setup({
-        use_icons = true,
-      })
-      require("neogit").setup({
-        integrations = {
-          diffview = true,
-        },
-      })
-    end,
-  })
 
   use({
     "junegunn/fzf",
@@ -69,27 +31,9 @@ function M.init()
       vim.g.fzf_layout = { down = "30%" }
       vim.g.fzf_preview_window = {}
       vim.g.fzf_action = {
-        ["ctrl-q"] = function(lines)
-          local items = {}
-          for _, line in ipairs(lines) do
-            table.insert(items, { filename = line })
-          end
-          vim.fn.setqflist(items, " ", { title = "Search results", id = "FZF Search Results" })
-        end,
         ["ctrl-x"] = "split",
         ["ctrl-v"] = "vsplit",
       }
-      vim.cmd([[
-            augroup UserFZF!
-                autocmd! FileType fzf
-                autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
-                  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
-            augroup END
-            ]])
-
-      if vim.fn.isdirectory("~/Code/OSS/dotfiles") then
-        vim.cmd("command! Dotfiles FZF ~/Code/OSS/dotfiles")
-      end
     end,
   })
 
@@ -165,8 +109,6 @@ function M.init()
           changedelete = { text = "±" },
         },
       })
-      vim.cmd("command! ResetHunk Gitsigns reset_hunk")
-      vim.cmd("command! PreviewHunk Gitsigns preview_hunk")
     end,
   })
 
@@ -347,9 +289,8 @@ function M.init()
 
   use({
     "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
     config = function()
-      require("trouble").setup({})
+      require("trouble").setup({ icons = false })
     end,
   })
 
@@ -361,18 +302,6 @@ function M.init()
     config = function()
       require("cabin").setup()
       vim.cmd([[colorscheme cabin]])
-    end,
-  })
-
-  use({
-    "folke/which-key.nvim",
-    config = function()
-      local wk = require("which-key")
-      wk.setup({
-        window = {
-          margin = { 0, 0, 0, 0 },
-        },
-      })
     end,
   })
 

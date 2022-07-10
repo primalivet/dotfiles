@@ -39,29 +39,13 @@ function M.init()
   opt.wildmode = "list,full" -- on cmd complete, show a list, then complete full
   opt.wrap = false -- dont wrap
 
-  vim.cmd(":packadd cfilter") -- enable filter quickfix list
-
   _G.reload_config = function()
     require("plenary.reload").reload_module("primalivet")
     require("primalivet").init()
     print("Reloaded configuration successfully")
   end
 
-  _G.P = function(x)
-    print(vim.inspect(x))
-    return x
-  end
-
-  vim.cmd("command! ReloadConfig lua reload_config()<CR>")
-
-  vim.cmd([[
-    augroup PRIMA_FILETYPES
-    autocmd BufRead,BufNewFile *.json set filetype=jsonc
-    augroup END
-  ]])
   require("primalivet.packer").init()
-  require("primalivet.mappings").init()
-  -- require("primalivet.statusline").init()
 end
 
 return M
