@@ -1,51 +1,50 @@
-local M = {}
-local g = vim.g
-local opt = vim.opt
+vim.g.mapleader = " " -- Space is leader
 
-function M.init()
-  g.mapleader = " " -- Space is leader
+-- Linenumbers
+vim.opt.number = true -- show numbers
+vim.opt.relativenumber = true --relative to current row
 
-  opt.autoindent = true
-  opt.completeopt = "menu,menuone,noselect"
-  opt.cursorline = true -- show what line i'm on
-  opt.diffopt = "vertical"
-  opt.expandtab = true
-  opt.fileformats = "unix"
-  opt.fillchars = "vert:|"
-  opt.foldenable = true --  use folds
-  opt.foldlevel = 100 -- start folding at level 100 (never)
-  opt.foldmethod = "indent" --by indent
-  opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
-  opt.grepprg = "rg --vimgrep --no-heading --hidden"
-  opt.hidden = true -- dont unload abandoned buffers, just hide em
-  opt.ignorecase = true --  dont be case sensitive
-  opt.listchars = "tab:>--,space:·,trail:·,eol:¶" -- make em look like this
-  opt.mouse = "nv" -- Mouse support in normal and visual mode
-  opt.number = true -- show numbers
-  opt.path = "**"
-  opt.relativenumber = true --relative to current row
-  opt.scrolloff = 5 -- scroll view when cursor gets close to edge
-  opt.shiftround = true
-  opt.shiftwidth = 2
-  opt.showcmd = true -- show what I type
-  opt.sidescrolloff = 5 -- in both directions
-  opt.smartcase = true --  unless i type CAPS
-  opt.smartindent = true
-  opt.termguicolors = true
-  opt.timeoutlen = 500 --timeout for mappings and
-  opt.updatetime = 100 --updatetime for events
-  opt.wildignore = ""
-  opt.wildmenu = true -- show current complete in statusline
-  opt.wildmode = "list,full" -- on cmd complete, show a list, then complete full
-  opt.wrap = false -- dont wrap
+-- Indents
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 
-  _G.reload_config = function()
-    require("plenary.reload").reload_module("primalivet")
-    require("primalivet").init()
-    print("Reloaded configuration successfully")
-  end
+-- Spaces and tabs
+vim.opt.expandtab = true
+vim.opt.shiftround = true
+vim.opt.shiftwidth = 2
 
-  require("primalivet.packer").init()
-end
+-- Scrolloff (scroll when close to the edge)
+vim.opt.scrolloff = 5
+vim.opt.sidescrolloff = 5
 
-return M
+-- Folds
+vim.opt.foldenable = true
+vim.opt.foldlevel = 100
+vim.opt.foldmethod = "indent"
+
+-- Wildmenu
+vim.opt.wildignore = ""
+vim.opt.wildmenu = true
+vim.opt.wildmode = "list,full" -- on cmd complete, show a list, then complete full
+
+vim.opt.grepformat = "%f:%l:%c:%m,%f:%l:%m" -- grep in this format (see :h grepformat)
+vim.opt.grepprg = "rg --vimgrep --no-heading --hidden" -- with this program
+
+vim.opt.ignorecase = true --  dont be case sensitive
+vim.opt.smartcase = true --  unless i type CAPS
+
+vim.opt.completeopt = "menu,menuone,noselect"
+vim.opt.diffopt = "vertical"
+vim.opt.fileformats = "unix"
+vim.opt.fillchars = "vert:|"
+vim.opt.hidden = true -- dont unload abandoned buffers, just hide em
+vim.opt.listchars = "tab:>--,space:·,trail:·,eol:¶" -- make em look like this
+vim.opt.mouse = "nv" -- Mouse support in normal and visual mode
+vim.opt.path = "**"
+vim.opt.showcmd = true -- show what I type
+vim.opt.termguicolors = true
+vim.opt.timeoutlen = 500 --timeout for mappings and
+vim.opt.updatetime = 100 --updatetime for events
+vim.opt.wrap = false -- dont wrap
+
+require("primalivet.packer").init()
