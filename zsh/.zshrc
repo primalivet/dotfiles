@@ -1,3 +1,4 @@
+export TERM=xterm-256color
 export LANG="en-US.UTF-8"
 export EDITOR=nvim
 export GIT_EDITOR=nvim
