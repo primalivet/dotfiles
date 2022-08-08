@@ -23,6 +23,8 @@ export LOCAL_BIN=$HOME/.local/bin
 # Path
 export PATH=$RUST_ROOT:$HOME/.fzf/bin:$N_PREFIX/bin:$BREW_PATH:$LOCAL_BIN:$LLVM_PATH:$PATH
 
+[[ -f "$HOME/z/z.sh" ]] && source $HOME/z/z.sh
+
 alias vil='vim -c "set background=light"'
 alias vi='nvim'
 alias vim='nvim'
