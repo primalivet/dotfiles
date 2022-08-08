@@ -12,14 +12,12 @@ export RUST_ROOT=$HOME/.cargo/env
 
 # Set Homebrew/Linuxbrew path
 [[ $(eval uname) = "Darwin" ]] && export BREW_PATH=/opt/homebrew/bin
-[[ $(eval uname) = "Linux" ]] && export BREW_PATH=/home/linuxbrew/.linuxbrew/bin
 
-# Source z command from Homebrew/Linuxbrew
+# Source z command from Homebrew
 [[ $(eval uname) = "Darwin" ]] && source /opt/homebrew/etc/profile.d/z.sh
-[[ $(eval uname) = "Linux" ]] && source /home/linuxbrew/.linuxbrew/etc/profile.d/z.sh
 
 # LLVM explicit Homebrew path
-export LLVM_PATH=/opt/homebrew/opt/llvm/bin
+[[ $(eval uname) = "Darwin" ]] && export LLVM_PATH=/opt/homebrew/opt/llvm/bin
 
 # Home .local/bin
 export LOCAL_BIN=$HOME/.local/bin
@@ -47,13 +45,12 @@ alias ga='git add'
 [ -f ~/.zsh_private ] && source ~/.zsh_private
 
 # Oh My Zsh
-export ZSH=$HOME/.oh-my-zsh
-[[ $(eval uname) = "Darwin" ]] && export FZF_BASE=/opt/homebrew/opt/fzf
-[[ $(eval uname) = "Linux" ]] && export FZF_BASE=/home/linuxbrew/.linuxbrew/opt/fzf
-export FZF_DEFAULT_OPTS='--height=100%'
-ZSH_THEME="primalivet"
-plugins=(git zsh-autosuggestions fzf)
-source $ZSH/oh-my-zsh.sh
+# export ZSH=$HOME/.oh-my-zsh
+# [[ $(eval uname) = "Darwin" ]] && export FZF_BASE=/opt/homebrew/opt/fzf
+# export FZF_DEFAULT_OPTS='--height=100%'
+# ZSH_THEME="primalivet"
+# plugins=(git zsh-autosuggestions fzf)
+# source $ZSH/oh-my-zsh.sh
 
-[ -f "/Users/gustaf/.ghcup/env" ] && source "/Users/gustaf/.ghcup/env" # ghcup-envexport PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-unset NODE_OPTIONS
+# [ -f "/Users/gustaf/.ghcup/env" ] && source "/Users/gustaf/.ghcup/env" # ghcup-envexport PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+# unset NODE_OPTIONS
