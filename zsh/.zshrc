@@ -6,8 +6,6 @@ export GIT_EDITOR=nvim
 # Node version manager install directory
 export N_PREFIX=$HOME/.n
 
-export DOTNET_ROOT=$HOME/.dotnet
-
 export RUST_ROOT=$HOME/.cargo/env
 
 # Set Homebrew/Linuxbrew path
@@ -23,7 +21,7 @@ export RUST_ROOT=$HOME/.cargo/env
 export LOCAL_BIN=$HOME/.local/bin
 
 # Path
-export PATH=$RUST_ROOT:$DOTNET_ROOT:$DOTNET_ROOT/tools:$N_PREFIX/bin:$BREW_PATH:$LOCAL_BIN:$LLVM_PATH:$PATH
+export PATH=$RUST_ROOT:$HOME/.fzf/bin:$N_PREFIX/bin:$BREW_PATH:$LOCAL_BIN:$LLVM_PATH:$PATH
 
 alias vil='vim -c "set background=light"'
 alias vi='nvim'
