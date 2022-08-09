@@ -47,10 +47,29 @@ fi
 
 # Programs
 
+# Z
 if [ -f "$HOME/.local/src/z/z.sh" ]; then
   source "$HOME/.local/src/z/z.sh"
 else
   echo 'z (jump around) was not found'
+fi
+
+# FZF
+
+export FZF_DEFAULT_COMMAND='rg --files --hidden'
+export FZF_DEFAULT_OPTS='--height=100%'
+export MANPATH=$HOME/.local/src/fzf/man:$MANPATH
+
+if [ -f "$HOME/.local/src/fzf/shell/key-bindings.zsh" ]; then
+  source "$HOME/.local/src/fzf/shell/key-bindings.zsh"
+else
+  echo 'fzf key bindings not found'
+fi
+
+if [ -f "$HOME/.local/src/fzf/shell/completion.zsh" ]; then
+  source "$HOME/.local/src/fzf/shell/completion.zsh"
+else
+  echo 'fzf completion not found'
 fi
 
 # Aliases
