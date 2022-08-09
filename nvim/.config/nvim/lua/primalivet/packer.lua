@@ -190,11 +190,11 @@ function M.init()
         local sumneko_binary = ""
 
         if vim.fn.has("mac") == 1 then
-          sumneko_root_path = "/Users/" .. USER .. "/.local/lua-language-server"
-          sumneko_binary = "/Users/" .. USER .. "/.local/lua-language-server/bin/macOS/lua-language-server"
+          sumneko_root_path = "/Users/" .. USER .. "/.local/src/lua-language-server"
+          sumneko_binary = "/Users/" .. USER .. "/.local/src/lua-language-server/bin/lua-language-server"
         elseif vim.fn.has("unix") == 1 then
-          sumneko_root_path = "/home/" .. USER .. "/.local/lua-language-server"
-          sumneko_binary = "/home/" .. USER .. "/.local/lua-language-server/bin/Linux/lua-language-server"
+          sumneko_root_path = "/home/" .. USER .. "/.local/src/lua-language-server"
+          sumneko_binary = "/home/" .. USER .. "/.local/src/lua-language-server/bin/lua-language-server"
         end
 
         nvim_lsp.sumneko_lua.setup({
