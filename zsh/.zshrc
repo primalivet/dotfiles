@@ -19,6 +19,9 @@ export VISUAL=nvim
 export EDITOR=nvim
 export GIT_EDITOR=nvim
 
+# More speed (especially when going in and out of insert mode (vi))
+export KEYTIMEOUT=1
+
 # Rust
 export RUST_ROOT=$HOME/.cargo/env
 
@@ -54,12 +57,6 @@ export FZF_DEFAULT_OPTS="--height=100% --color=$FZF_COLORS"
 # OPTIONS
 #------------------------------------------------------------------------------
 
-# Make sure completion is on
-autoload -U compinit; compinit
-# Allow to select in completion menu
-zstyle ':completion:*' menu select
-
-
 # History
 # do not put duplicated command into history list
 setopt HIST_IGNORE_ALL_DUPS
@@ -74,6 +71,18 @@ setopt EXTENDED_HISTORY
 
 # auto cd into directories
 setopt AUTO_CD
+
+# Allow to select in completion menu
+zstyle ':completion:*' menu select
+
+# Keybindings
+#------------------------------------------------------------------------------
+
+# Vi mode
+bindkey -v
+
+# Reverse through completion with Shift-Tab
+bindkey '^[[Z' reverse-menu-complete
 
 # "PLUGINS"
 #------------------------------------------------------------------------------
@@ -133,8 +142,51 @@ zstyle ':vcs_info:*' formats ' %b' # format branch name
 setopt prompt_subst
 export PROMPT='%1~${vcs_info_msg_0_} $ '
 
+# Vi mode cursor
+#------------------------------------------------------------------------------
+# Borrowed from: https://thevaluable.dev/zsh-install-configure-mouseless/
+# See https://ttssh2.osdn.jp/manual/4/en/usage/tips/vim.html for cursor shapes
+
+cursor_mode() {
+    cursor_block='\e[2 q'
+    cursor_beam='\e[6 q'
+
+    function zle-keymap-select {
+        if [[ ${KEYMAP} == vicmd ]] ||
+            [[ $1 = 'block' ]]; then
+            echo -ne $cursor_block
+        elif [[ ${KEYMAP} == main ]] ||
+            [[ ${KEYMAP} == viins ]] ||
+            [[ ${KEYMAP} = '' ]] ||
+            [[ $1 = 'beam' ]]; then
+            echo -ne $cursor_beam
+        fi
+    }
+
+    zle-line-init() {
+        echo -ne $cursor_beam
+    }
+
+    zle -N zle-keymap-select
+    zle -N zle-line-init
+}
+
+cursor_mode
 
 # PRIVATE
 #------------------------------------------------------------------------------
 
 [ -f ~/.zsh_private ] && source ~/.zsh_private
+
+# LOAD COMPLETION
+#------------------------------------------------------------------------------
+# What does it mean?
+
+# The autoload command load a file containing shell commands. To find this file,
+# Zsh will look in the directories of the Zsh file search path, defined in the
+# variable $fpath, and search a file called compinit.
+
+# When compinit is found, its content will be loaded as a function. The function
+# name will be the name of the file. You can then call this function like any
+# other shell function.
+autoload -U compinit; compinit
