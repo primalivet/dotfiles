@@ -1,92 +1,111 @@
-# Prompt
-
-autoload -Uz vcs_info # enable vcs info
-precmd () { vcs_info }  # make sure vcs info is loaded before displaying prompt
-zstyle ':vcs_info:*' formats ' %b' # format branch name
-setopt prompt_subst
-export PROMPT='%1~${vcs_info_msg_0_} $ '
-
-# History
-
-# the detailed meaning of the below three variable can be found in `man zshparam`.
-export HISTFILE=~/.histfile
-export HISTSIZE=1000000   # the number of items for the internal history list
-export SAVEHIST=1000000   # maximum number of items for the history file
-
-# The meaning of these options can be found in man page of `zshoptions`.
-setopt HIST_IGNORE_ALL_DUPS  # do not put duplicated command into history list
-setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
-setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
-setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
-setopt EXTENDED_HISTORY  # record command start time
-
-# Variables
+# ENVIRONMENT VARIABLES
+#------------------------------------------------------------------------------
 
 export TERM=xterm-256color
 export LANG="en-US.UTF-8"
+export LOCAL_BIN=$HOME/.local/bin
+export LOCAL_SRC=$HOME/.local/src
+
+# History
+export HISTFILE=~/.histfile
+export HISTSIZE=1000000
+export SAVEHIST=1000000
+
+# Open man pages in nvim
+export MANPAGER="nvim +Man!"
+
+# Editor
+export VISUAL=nvim
 export EDITOR=nvim
 export GIT_EDITOR=nvim
-export N_PREFIX=$HOME/.local/src/n # Node version manager install directory
+
+# Rust
 export RUST_ROOT=$HOME/.cargo/env
-export LOCAL_BIN=$HOME/.local/bin
 
-# Path
+# Node version manager install directory
+export N_PREFIX=$HOME/.local/src/n
 
-if [ $(eval uname) = "Darwin" ]; then
-  export BREW_PATH=/opt/homebrew/bin
-  export PATH=$BREW_PATH:$PATH
-fi
+#Path
+export PATH=$LOCAL_BIN:$PATH
+export PATH=$RUST_ROOT:$PATH
+export PATH=$N_PREFIX/bin:$PATH
 
-export PATH=$RUST_ROOT:$LOCAL_BIN:$N_PREFIX/bin:$PATH
+[[ $(eval uname) = "Darwin" ]] && export BREW_PATH=/opt/homebrew/bin
+[[ $(eval uname) = "Darwin" ]] && export PATH=$BREW_PATH:$PATH
 
-# ZSH extentions
+# Fzf (fuzzy file search)
+FZF_COLORS="bg+:-1,\
+fg:white,\
+fg+:yellow,\
+border:-1,\
+spinner:white,\
+hl:yellow,\
+header:white,\
+info:white,\
+pointer:yellow,\
+marker:yellow,\
+prompt:white,\
+hl+:yellow"
 
-if [ -f "$HOME/.local/src/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
-  source "$HOME/.local/src/zsh-autosuggestions/zsh-autosuggestions.zsh"
-else
-  echo 'zsh-autosuggestions was not found'
-fi
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+export FZF_DEFAULT_OPTS="--height=100% --color=$FZF_COLORS"
 
-if [ -d "$HOME/.local/src/zsh-completions/src" ]; then
-  fpath=("$HOME/.local/src/zsh-completions/src" $fpath) # add completions
-else
-  echo 'zsh-completions was not found'
-fi
 
-if [ -f "$HOME/.local/src/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
-  source "$HOME/.local/src/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-else
-  echo 'zsh-syntax-highlighting was not found'
-fi
+# OPTIONS
+#------------------------------------------------------------------------------
 
-# Programs
+# Make sure completion is on
+autoload -U compinit; compinit
+# Allow to select in completion menu
+zstyle ':completion:*' menu select
 
-# Z
-if [ -f "$HOME/.local/src/z/z.sh" ]; then
-  source "$HOME/.local/src/z/z.sh"
-else
-  echo 'z (jump around) was not found'
-fi
 
-# FZF
+# History
+# do not put duplicated command into history list
+setopt HIST_IGNORE_ALL_DUPS
+# do not save duplicated command
+setopt HIST_SAVE_NO_DUPS
+# remove unnecessary blanks
+setopt HIST_REDUCE_BLANKS
+# append command to history file immediately after execution
+setopt INC_APPEND_HISTORY_TIME
+# record command start time
+setopt EXTENDED_HISTORY
 
-export FZF_DEFAULT_COMMAND='rg --files --hidden'
-export FZF_DEFAULT_OPTS='--height=100%'
-export MANPATH=$HOME/.local/src/fzf/man:$MANPATH
+# auto cd into directories
+setopt AUTO_CD
 
-if [ -f "$HOME/.local/src/fzf/shell/key-bindings.zsh" ]; then
-  source "$HOME/.local/src/fzf/shell/key-bindings.zsh"
-else
-  echo 'fzf key bindings not found'
-fi
+# "PLUGINS"
+#------------------------------------------------------------------------------
 
-if [ -f "$HOME/.local/src/fzf/shell/completion.zsh" ]; then
-  source "$HOME/.local/src/fzf/shell/completion.zsh"
-else
-  echo 'fzf completion not found'
-fi
+# Autosuggestions
+[[ -f "$LOCAL_SRC/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && \
+  source "$LOCAL_SRC/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# Completion
+[[ -d "$LOCAL_SRC/zsh-completions/src" ]] && \
+  fpath=("$LOCAL_SRC/zsh-completions/src" $fpath)
+# Sytax highlight
+[[ -f "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
+  source "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-# Aliases
+# PROGRAMS
+#------------------------------------------------------------------------------
+
+# Z "junp around"
+[[ -f "$LOCAL_SRC/z/z.sh" ]] && source "$LOCAL_SRC/z/z.sh"
+
+# Add fzf man pages
+[[ -d "$LOCAL_SRC/fzf/man" ]] && \
+  export MANPATH=$LOCAL_SRC/fzf/man:$MANPATH
+# Fzf key bindings
+[[ -f "$LOCAL_SRC/fzf/shell/key-bindings.zsh" ]] && \
+  source "$LOCAL_SRC/fzf/shell/key-bindings.zsh"
+# Fzf completion
+[[ -f "$LOCAL_SRC/fzf/shell/completion.zsh" ]] && \
+  source "$LOCAL_SRC/fzf/shell/completion.zsh"
+
+# ALIASES
+#------------------------------------------------------------------------------
 
 alias vil='vim -c "set background=light"'
 alias vi='nvim'
@@ -105,8 +124,17 @@ alias glo='git log --oneline'
 alias gc='git commit'
 alias ga='git add'
 
-# Private
+# PROMPT
+#------------------------------------------------------------------------------
+
+autoload -Uz vcs_info # enable vcs info
+precmd () { vcs_info }  # make sure vcs info is loaded before displaying prompt
+zstyle ':vcs_info:*' formats ' %b' # format branch name
+setopt prompt_subst
+export PROMPT='%1~${vcs_info_msg_0_} $ '
+
+
+# PRIVATE
+#------------------------------------------------------------------------------
 
 [ -f ~/.zsh_private ] && source ~/.zsh_private
-
-# [ -f "/Users/gustaf/.ghcup/env" ] && source "/Users/gustaf/.ghcup/env" # ghcup-envexport PATH="/opt/homebrew/opt/llvm/bin:$PATH"
