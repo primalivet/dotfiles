@@ -130,6 +130,7 @@ alias gs='git status'
 alias gd='git diff'
 alias gl='git log'
 alias glo='git log --oneline'
+alias glog='git log --oneline --graph'
 alias gc='git commit'
 alias ga='git add'
 
