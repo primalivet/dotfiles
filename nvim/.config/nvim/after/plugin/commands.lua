@@ -5,17 +5,22 @@ vim.api.nvim_create_user_command("PreviewHunk", "Gitsigns preview_hunk", {})
 
 -- Autocommands
 
-local group_id = vim.api.nvim_create_augroup("PRIMALIVET", {})
+local group = vim.api.nvim_create_augroup("PRIMALIVET", {})
 
 vim.api.nvim_create_autocmd(
   { "BufRead", "BufNewFile" },
-  { group = group_id, pattern = "*.json", command = "set filetype=jsonc" }
+  { group = group, pattern = "*.json", command = "set filetype=jsonc" }
+)
+
+vim.api.nvim_create_autocmd(
+  { "TextYankPost"},
+  { group = group, pattern = "*", callback = function() vim.highlight.on_yank() end }
 )
 
 -- When in FZF buffer, hide irrelavant stuff and show it again when the user
 -- leaves the fzf buffer
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = group_id,
+  group = group,
   pattern = "fzf",
   callback = function()
     local user_opts = {
@@ -31,7 +36,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.opt.number = false
     vim.opt.relativenumber = false
     vim.api.nvim_create_autocmd({ "BufLeave" }, {
-      group = group_id,
+      group = group,
       buffer = 0,
       callback = function()
         vim.opt.laststatus = user_opts.laststatus
