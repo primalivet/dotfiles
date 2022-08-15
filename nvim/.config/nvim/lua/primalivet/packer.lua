@@ -181,6 +181,8 @@ function M.init()
         on_attach = on_attach,
       })
 
+      nvim_lsp.rust_analyzer.setup({})
+
       -- Sumneko LSP
       if vim.fn.has("mac") == 1 or vim.fn.has("linux") == 1 then
         -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)

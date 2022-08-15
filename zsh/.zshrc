@@ -23,7 +23,7 @@ export GIT_EDITOR=nvim
 export KEYTIMEOUT=1
 
 # Rust
-export RUST_ROOT=$HOME/.cargo/env
+[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
 # Node version manager install directory
 export N_PREFIX=$HOME/.local/src/n
@@ -83,6 +83,9 @@ bindkey -v
 
 # Reverse through completion with Shift-Tab
 bindkey '^[[Z' reverse-menu-complete
+
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
 
 # "PLUGINS"
 #------------------------------------------------------------------------------
