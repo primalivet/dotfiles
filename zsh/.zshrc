@@ -22,9 +22,6 @@ export GIT_EDITOR=nvim
 # More speed (especially when going in and out of insert mode (vi))
 export KEYTIMEOUT=1
 
-# Rust
-[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
-
 # Node version manager install directory
 export N_PREFIX=$HOME/.local/src/n
 
@@ -32,9 +29,8 @@ export N_PREFIX=$HOME/.local/src/n
 export PATH=$LOCAL_BIN:$PATH
 export PATH=$RUST_ROOT:$PATH
 export PATH=$N_PREFIX/bin:$PATH
-
-[[ $(eval uname) = "Darwin" ]] && export BREW_PATH=/opt/homebrew/bin
-[[ $(eval uname) = "Darwin" ]] && export PATH=$BREW_PATH:$PATH
+[[ $(eval uname) = "Darwin" ]] && export PATH=$/opt/homebrew/bin/:$PATH
+[[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 # Fzf (fuzzy file search)
 FZF_COLORS="bg+:-1,\
@@ -52,7 +48,6 @@ hl+:yellow"
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
 export FZF_DEFAULT_OPTS="--height=100% --color=$FZF_COLORS"
-
 
 # OPTIONS
 #------------------------------------------------------------------------------
@@ -103,16 +98,20 @@ bindkey '^N' history-beginning-search-forward
 # PROGRAMS
 #------------------------------------------------------------------------------
 
+# Rust
+[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+
+# Haskell (GHCup)
+[[ -f "$HOME/.ghcup/env" ]] && source "$HOME/.ghcup/env"
+
 # Z "junp around"
 [[ -f "$LOCAL_SRC/z/z.sh" ]] && source "$LOCAL_SRC/z/z.sh"
 
-# Add fzf man pages
+# Fzf man pages, key bindings and completion
 [[ -d "$LOCAL_SRC/fzf/man" ]] && \
   export MANPATH=$LOCAL_SRC/fzf/man:$MANPATH
-# Fzf key bindings
 [[ -f "$LOCAL_SRC/fzf/shell/key-bindings.zsh" ]] && \
   source "$LOCAL_SRC/fzf/shell/key-bindings.zsh"
-# Fzf completion
 [[ -f "$LOCAL_SRC/fzf/shell/completion.zsh" ]] && \
   source "$LOCAL_SRC/fzf/shell/completion.zsh"
 
