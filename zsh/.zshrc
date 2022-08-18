@@ -29,7 +29,7 @@ export N_PREFIX=$HOME/.local/src/n
 export PATH=$LOCAL_BIN:$PATH
 export PATH=$RUST_ROOT:$PATH
 export PATH=$N_PREFIX/bin:$PATH
-[[ $(eval uname) = "Darwin" ]] && export PATH=$/opt/homebrew/bin/:$PATH
+[[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/bin/:$PATH"
 [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 # Fzf (fuzzy file search)
@@ -46,7 +46,7 @@ marker:yellow,\
 prompt:white,\
 hl+:yellow"
 
-export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git" --glob "!.stack-work"'
 export FZF_DEFAULT_OPTS="--height=100% --color=$FZF_COLORS"
 
 # OPTIONS

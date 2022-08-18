@@ -16,6 +16,7 @@
 (use-package display-line-numbers
   :ensure nil
   :config
+  (setq display-line-numbers-type 'relative)
   (global-display-line-numbers-mode 1))
 
 (use-package files
@@ -38,7 +39,7 @@
   :config
   (setq default-frame-alist '(
 			      ;; (fullscreen . maximized)
-			      (font . "Fira Code-18"))))
+			      (font . "Iosevka-18"))))
 
 (use-package paren
   :ensure nil
@@ -119,6 +120,8 @@
   :init
   (load-theme 'srcery t))
 
+(use-package haskell-mode)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -126,7 +129,7 @@
  ;; If there is more than one, they won't work right.
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(counsel swiper ivy evil-commentary srcery-theme ligature ligatures emacs zenburn-theme which-key use-package projectile magit helm evil doom-themes)))
+   '(haskell-mode counsel swiper ivy evil-commentary srcery-theme ligature ligatures emacs zenburn-theme which-key use-package projectile magit helm evil doom-themes)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
