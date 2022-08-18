@@ -4,7 +4,7 @@
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
- 
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -53,7 +53,21 @@
   :config
   (scroll-bar-mode -1))
 
+(use-package ido
+  :ensure nil
+  :config
+  (setq ido-everywhere t)
+  (ido-mode))
+
 ;; ELPA packages
+
+(use-package ido-completing-read+
+  :config
+  (ido-ubiquitous-mode 1))
+(use-package ido-vertical-mode
+  :config
+  (setq ido-vertical-define-keys 'C-n-and-C-p-only)
+  (ido-vertical-mode 1))
 
 (use-package evil
   :init
@@ -94,17 +108,6 @@
 	)
   :commands lsp)
 
-(use-package ivy
-  :init
-  (setq ivy-use-virtual-buffers t)
-  :config
-  (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
-  (ivy-mode 1))
-
-(use-package swiper)
-(use-package counsel)
-
-
 (use-package projectile
   :init
   (setq projectile-project-search-path '(("~/Code/OSS/" . 1) ("~/Code/Work/" . 1)))
@@ -121,6 +124,7 @@
   (load-theme 'srcery t))
 
 (use-package haskell-mode)
+(use-package lua-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -129,7 +133,7 @@
  ;; If there is more than one, they won't work right.
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(haskell-mode counsel swiper ivy evil-commentary srcery-theme ligature ligatures emacs zenburn-theme which-key use-package projectile magit helm evil doom-themes)))
+   '(ido-vertical-mode lua-mode haskell-mode counsel swiper ivy evil-commentary srcery-theme ligature ligatures emacs zenburn-theme which-key use-package projectile magit helm evil doom-themes)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
