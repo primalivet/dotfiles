@@ -11,9 +11,6 @@ export HISTFILE=~/.histfile
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 
-# Open man pages in nvim
-export MANPAGER="nvim +Man!"
-
 # Editor
 export VISUAL=nvim
 export EDITOR=nvim
