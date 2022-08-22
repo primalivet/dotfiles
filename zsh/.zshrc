@@ -26,6 +26,7 @@ export N_PREFIX=$HOME/.local/src/n
 export PATH=$LOCAL_BIN:$PATH
 export PATH=$RUST_ROOT:$PATH
 export PATH=$N_PREFIX/bin:$PATH
+export PATH="$LOCAL_SRC/lua-language-server/bin":$PATH
 [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/bin/:$PATH"
 [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
