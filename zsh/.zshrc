@@ -70,12 +70,10 @@ zstyle ':completion:*' menu select
 # Keybindings
 #------------------------------------------------------------------------------
 
-# Vi mode
-bindkey -v
-
 # Reverse through completion with Shift-Tab
 bindkey '^[[Z' reverse-menu-complete
 
+# Use C-p and C-n to traverse history
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 
