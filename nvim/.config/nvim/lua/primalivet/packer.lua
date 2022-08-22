@@ -17,12 +17,18 @@ function M.init()
   use("nvim-lua/plenary.nvim")
   use("wbthomason/packer.nvim")
   use("editorconfig/editorconfig-vim")
-  use("tpope/vim-commentary")
   use("tpope/vim-surround")
   use("tpope/vim-repeat")
   use("gerw/vim-HiLinkTrace")
   use("rafcamlet/nvim-luapad")
   use("tpope/vim-fugitive")
+
+  use({
+    "numToStr/Comment.nvim",
+    config = function()
+      require('Comment').setup()
+    end
+  })
 
   use({
     "junegunn/fzf",
