@@ -12,10 +12,13 @@ vim.api.nvim_create_autocmd(
   { group = group, pattern = "*.json", command = "set filetype=jsonc" }
 )
 
-vim.api.nvim_create_autocmd(
-  { "TextYankPost"},
-  { group = group, pattern = "*", callback = function() vim.highlight.on_yank() end }
-)
+vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+  group = group,
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
 
 -- When in FZF buffer, hide irrelavant stuff and show it again when the user
 -- leaves the fzf buffer

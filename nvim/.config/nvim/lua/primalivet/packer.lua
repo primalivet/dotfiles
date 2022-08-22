@@ -26,8 +26,8 @@ function M.init()
   use({
     "numToStr/Comment.nvim",
     config = function()
-      require('Comment').setup()
-    end
+      require("Comment").setup()
+    end,
   })
 
   use({
@@ -155,13 +155,6 @@ function M.init()
         client.resolved_capabilities.document_formatting = false
         client.resolved_capabilities.document_range_formatting = false
 
-        -- vim.cmd([[
-        -- augroup PRIMA_CURSOR_HOLD
-        -- autocmd CursorHold * lua vim.lsp.buf.document_highlight()
-        -- autocmd CursorMoved * lua vim.lsp.buf.clear_references()
-        -- augroup END
-        -- ]])
-
         if client.name == "tsserver" then
           local ts_utils = require("nvim-lsp-ts-utils")
           ts_utils.setup({
@@ -189,47 +182,21 @@ function M.init()
 
       nvim_lsp.rust_analyzer.setup({})
 
-      -- Sumneko LSP
-      if vim.fn.has("mac") == 1 or vim.fn.has("linux") == 1 then
-        -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
-        USER = vim.fn.expand("$USER")
-
-        local sumneko_root_path = ""
-        local sumneko_binary = ""
-
-        if vim.fn.has("mac") == 1 then
-          sumneko_root_path = "/Users/" .. USER .. "/.local/src/lua-language-server"
-          sumneko_binary = "/Users/" .. USER .. "/.local/src/lua-language-server/bin/lua-language-server"
-        elseif vim.fn.has("unix") == 1 then
-          sumneko_root_path = "/home/" .. USER .. "/.local/src/lua-language-server"
-          sumneko_binary = "/home/" .. USER .. "/.local/src/lua-language-server/bin/lua-language-server"
-        end
-
-        nvim_lsp.sumneko_lua.setup({
-          cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
-          settings = {
-            Lua = {
-              runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = "LuaJIT",
-                -- Setup your lua path
-                path = vim.split(package.path, ";"),
-              },
-              diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { "vim" },
-              },
-              workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = {
-                  [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                  [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-                },
-              },
-            },
+      nvim_lsp.sumneko_lua.setup({
+        on_attach = on_attach,
+        settings = {
+          Lua = {
+            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+            runtime = { version = "LuaJIT" },
+            -- Get the language server to recognize the `vim` global
+            diagnostics = { globals = { "vim" } },
+            -- Make the server aware of Neovim runtime files
+            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = { enable = false },
           },
-        })
-      end
+        },
+      })
     end,
   })
 
