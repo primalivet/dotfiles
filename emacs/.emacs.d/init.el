@@ -1,4 +1,9 @@
-;; Setup
+;;; .emacs --- Emacs configuration
+
+;;; Commentary:
+;; Entry point for personal configuration of Emacs
+
+;;; Code:
 
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
@@ -11,63 +16,43 @@
 (eval-when-compile
   (setq use-package-always-ensure t))
 
-;; Core packages
 
 (use-package display-line-numbers
-  :ensure nil
+  :ensure nil ;; Built in package
   :config
   (setq display-line-numbers-type 'relative)
   (global-display-line-numbers-mode 1))
 
 (use-package files
-  :ensure nil
+  :ensure nil ;; Built in package
   :config
   (setq backup-directory-alist `(("." . "~/.saves"))))
 
 (use-package emacs
-  :ensure nil
+  :ensure nil ;; Built in package
   :config
+  (set-default 'truncate-lines 0)
+  (setq inhibit-startup-screen t)
   (tool-bar-mode -1))
 
-(use-package emacs
-  :ensure nil
-  :config
-  (setq inhibit-startup-screen t))
-
 (use-package frame
-  :ensure nil
+  :ensure nil ;; Built in package
   :config
   (setq default-frame-alist '(
 			      ;; (fullscreen . maximized)
 			      (font . "Iosevka-18"))))
 
 (use-package paren
-  :ensure nil
-  :init 
+  :ensure nil ;; Built in package
+  :init
   (setq show-paren-delay 0)
   :config
   (show-paren-mode +1))
 
 (use-package scroll-bar
-  :ensure nil
+  :ensure nil ;; Built in package
   :config
   (scroll-bar-mode -1))
-
-(use-package ido
-  :ensure nil
-  :config
-  (setq ido-everywhere t)
-  (ido-mode))
-
-;; ELPA packages
-
-(use-package ido-completing-read+
-  :config
-  (ido-ubiquitous-mode 1))
-(use-package ido-vertical-mode
-  :config
-  (setq ido-vertical-define-keys 'C-n-and-C-p-only)
-  (ido-vertical-mode 1))
 
 (use-package evil
   :init
@@ -83,7 +68,6 @@
   :init
   (evil-commentary-mode +1))
 
-
 (use-package evil-collection
   :custom (evil-collection-setup-minibuffer t)
   :after evil
@@ -92,20 +76,41 @@
 
 (use-package company
   :config
+  (add-hook 'after-init-hook 'global-company-mode)
   (company-mode 1))
+
+(use-package ivy
+  :config
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (ivy-mode 1)
+  (counsel-mode 1))
 
 (use-package exec-path-from-shell
   :config
   (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize)))
 
+(use-package flycheck
+  :config
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (global-flycheck-mode))
+
+(use-package tide
+  :config
+  (defun setup-tide-mode ()
+    (interactive)
+    (tide-setup)
+    (eldoc-mode +1)
+    (tide-hl-identifier-mode +1)
+    (company-mode +1))
+  (add-hook 'typescript-mode-hook #'setup-tide-mode))
+
 (use-package lsp-mode
-  :hook(
-	(typescript-mode . lsp)
+  :hook((typescript-mode . lsp)
 	(js-mode . lsp)
 	(js-jsx-mode . lsp)
-	(lsp-mode . lsp-enable-which-key-integration)
-	)
+	(lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
 
 (use-package projectile
@@ -126,17 +131,6 @@
 (use-package haskell-mode)
 (use-package lua-mode)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(helm-minibuffer-history-key "M-p")
- '(package-selected-packages
-   '(ido-vertical-mode lua-mode haskell-mode counsel swiper ivy evil-commentary srcery-theme ligature ligatures emacs zenburn-theme which-key use-package projectile magit helm evil doom-themes)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file)
+;;; init.el ends here
