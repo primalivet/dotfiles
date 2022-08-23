@@ -30,17 +30,15 @@ function M.init()
   })
 
   use({
-    "ibhagwan/fzf-lua",
-    requires = { "junegunn/fzf" },
+    "junegunn/fzf",
+    requires = { "junegunn/fzf.vim" },
     config = function()
-      require("fzf-lua").setup({
-        winopts = {
-          split = "belowright new",
-          preview = {
-            hidden = 'hidden'
-          }
-        },
-      })
+      vim.g.fzf_layout = { down = "20%" }
+      vim.g.fzf_preview_window = {}
+      vim.g.fzf_action = {
+        ["ctrl-x"] = "split",
+        ["ctrl-v"] = "vsplit",
+      }
     end,
   })
 
