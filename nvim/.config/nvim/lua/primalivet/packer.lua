@@ -20,7 +20,6 @@ function M.init()
   use("tpope/vim-surround")
   use("tpope/vim-repeat")
   use("gerw/vim-HiLinkTrace")
-  use("rafcamlet/nvim-luapad")
   use("tpope/vim-fugitive")
 
   use({
@@ -31,15 +30,17 @@ function M.init()
   })
 
   use({
-    "junegunn/fzf",
-    requires = { "junegunn/fzf.vim" },
+    "ibhagwan/fzf-lua",
+    requires = { "junegunn/fzf" },
     config = function()
-      vim.g.fzf_layout = { down = "30%" }
-      vim.g.fzf_preview_window = {}
-      vim.g.fzf_action = {
-        ["ctrl-x"] = "split",
-        ["ctrl-v"] = "vsplit",
-      }
+      require("fzf-lua").setup({
+        winopts = {
+          split = "belowright new",
+          preview = {
+            hidden = 'hidden'
+          }
+        },
+      })
     end,
   })
 
@@ -259,13 +260,6 @@ function M.init()
           end
         end,
       })
-    end,
-  })
-
-  use({
-    "folke/trouble.nvim",
-    config = function()
-      require("trouble").setup({ icons = false })
     end,
   })
 
