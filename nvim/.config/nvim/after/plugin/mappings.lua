@@ -12,23 +12,27 @@ vim.keymap.set("v", ">", ">gv", default_opt)
 vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", default_opt)
 vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", default_opt)
 
--- Previous
-vim.keymap.set("n", "[C", ":cfirst<CR>", default_opt)
-vim.keymap.set("n", "[L", ":lfirst<CR>", default_opt)
+-- Previous and Next: Quickfix
 vim.keymap.set("n", "[c", ":cprevious<CR>", default_opt)
+vim.keymap.set("n", "]c", ":cnext<CR>", default_opt)
+vim.keymap.set("n", "[C", ":cfirst<CR>", default_opt)
+vim.keymap.set("n", "]C", ":clast<CR>", default_opt)
+-- Previous and Next: Loclist
 vim.keymap.set("n", "[l", ":lprevious<CR>", default_opt)
+vim.keymap.set("n", "]l", ":lnext<CR>", default_opt)
+vim.keymap.set("n", "[L", ":lfirst<CR>", default_opt)
+vim.keymap.set("n", "]L", ":llast<CR>", default_opt)
+-- Previous and Next: Buffer
+vim.keymap.set("n", "[b", ":bprevious<CR>", default_opt)
+vim.keymap.set("n", "]b", ":bnext<CR>", default_opt)
+-- Previous and Next: Hunk
 vim.keymap.set("n", "[h", function()
   require("gitsigns.actions").prev_hunk()
 end, default_opt)
-
--- Next
-vim.keymap.set("n", "]C", ":clast<CR>", default_opt)
-vim.keymap.set("n", "]L", ":llast<CR>", default_opt)
-vim.keymap.set("n", "]c", ":cnext<CR>", default_opt)
-vim.keymap.set("n", "]l", ":lnext<CR>", default_opt)
 vim.keymap.set("n", "]h", function()
   require("gitsigns.actions").next_hunk()
 end, default_opt)
+
 
 -- Search
 vim.keymap.set("n", "<leader>s/", ":Lines<CR>", default_opt)
