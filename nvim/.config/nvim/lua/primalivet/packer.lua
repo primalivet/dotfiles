@@ -28,22 +28,31 @@ function M.init()
     end,
   })
 
-  -- use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-
-  -- use({
-  --   "nvim-telescope/telescope.nvim",
-  --   branch = "0.1.x",
-  --   requires = { "nvim-telescope/telescope-fzf-native.nvim", "nvim-lua/plenary.nvim" },
-  --   config = function()
-  --     local telescope = require("telescope")
-  --     telescope.setup({
-  --       defaults = {
-  --         layout_strategy = "vertical",
-  --       },
-  --     })
-  --     telescope.load_extension("fzf")
-  --   end,
-  -- })
+  use({
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
+    requires = { { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, "nvim-lua/plenary.nvim" },
+    config = function()
+      local picker_defaults = { results_title = false, prompt_title = false, previewer = false }
+      require("telescope").setup({
+        defaults = {
+          layout_strategy = "vertical",
+          mappings = {
+            i = {
+              ["<Esc"] = require("telescope.actions").close,
+            },
+          },
+        },
+        pickers = {
+          buffers = picker_defaults,
+          commands = picker_defaults,
+          find_files = picker_defaults,
+          git_files = picker_defaults,
+        },
+      })
+      require("telescope").load_extension("fzf")
+    end,
+  })
 
   use({
     "junegunn/fzf",

@@ -1,4 +1,18 @@
 local default_opt = { noremap = true, silent = true }
+local gitsigns = require("gitsigns")
+
+local telescope_theme = {
+    theme = "fzf",
+
+    sorting_strategy = "ascending",
+
+    layout_strategy = "bottom_pane",
+    layout_config = {
+      height = 10,
+      prompt_position = "bottom"
+    },
+    border = false,
+  }
 
 -- Go over wrapped lines
 vim.keymap.set("n", "j", "gj", default_opt)
@@ -17,31 +31,36 @@ vim.keymap.set("n", "[c", ":cprevious<CR>", default_opt)
 vim.keymap.set("n", "]c", ":cnext<CR>", default_opt)
 vim.keymap.set("n", "[C", ":cfirst<CR>", default_opt)
 vim.keymap.set("n", "]C", ":clast<CR>", default_opt)
+
 -- Previous and Next: Loclist
 vim.keymap.set("n", "[l", ":lprevious<CR>", default_opt)
 vim.keymap.set("n", "]l", ":lnext<CR>", default_opt)
 vim.keymap.set("n", "[L", ":lfirst<CR>", default_opt)
 vim.keymap.set("n", "]L", ":llast<CR>", default_opt)
+
+-- Previous and Next: Diagnostics
+vim.keymap.set("n", "[d", vim.lsp.diagnostic.goto_next, default_opt)
+vim.keymap.set("n", "]d", vim.lsp.diagnostic.goto_prev, default_opt)
+
 -- Previous and Next: Buffer
 vim.keymap.set("n", "[b", ":bprevious<CR>", default_opt)
 vim.keymap.set("n", "]b", ":bnext<CR>", default_opt)
--- Previous and Next: Hunk
-vim.keymap.set("n", "[h", function()
-  require("gitsigns.actions").prev_hunk()
-end, default_opt)
-vim.keymap.set("n", "]h", function()
-  require("gitsigns.actions").next_hunk()
-end, default_opt)
 
+-- Previous and Next: Hunk
+vim.keymap.set("n", "[h", gitsigns.prev_hunk, default_opt)
+vim.keymap.set("n", "]h", gitsigns.next_hunk, default_opt)
 
 -- Search
-vim.keymap.set("n", "<leader>s/", ":Lines<CR>", default_opt)
 vim.keymap.set("n", "<leader>sb", ":Buffers<CR>", default_opt)
 vim.keymap.set("n", "<leader>sc", ":Commands<CR>", default_opt)
 vim.keymap.set("n", "<leader>sf", ":Files<CR>", default_opt)
 vim.keymap.set("n", "<leader>sg", ":GitFiles<CR>", default_opt)
-vim.keymap.set("n", "<leader>sh", ":History<CR>", default_opt)
-vim.keymap.set("n", "<leader>sl", ":Rg<CR>", default_opt)
+
+-- Search (find) alternative with Telescope
+vim.keymap.set("n", "<leader>fb", function () require('telescope.builtin').buffers(telescope_theme) end, default_opt)
+vim.keymap.set("n", "<leader>fc", function () require('telescope.builtin').commands(telescope_theme) end, default_opt)
+vim.keymap.set("n", "<leader>ff", function () require('telescope.builtin').find_files(telescope_theme) end, default_opt)
+vim.keymap.set("n", "<leader>fg", function () require('telescope.builtin').git_files(telescope_theme) end, default_opt)
 
 -- Edit
 vim.keymap.set("n", "<leader>ea", vim.lsp.buf.code_action, default_opt)
