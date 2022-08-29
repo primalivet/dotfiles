@@ -5,7 +5,6 @@
 
 ;;; Code:
 
-;; Bootstrap for stright.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -19,57 +18,73 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; Install use-package
 (straight-use-package 'use-package)
-;; Configure use-package to use straight.el by default
-;; (use-package straight
-;;              :custom (straight-use-package-by-default t))
+(eval-and-compile (require 'use-package))
+
+(use-package ns-win
+  :straight (:type built-in)
+  :init
+  (setq mac-command-modifier 'meta))
 
 (use-package display-line-numbers
-  :config
+  :straight (:type built-in)
+  :init
   (setq display-line-numbers-type 'relative)
+  :config
   (global-display-line-numbers-mode 1))
 
-(use-package files
+(use-package recentf
+  :straight (:type built-in)
+  :init
+  (setq recentf-max-menu-items 25)
+  (setq recentf-max-saved-items 25)
   :config
+  (global-set-key "\C-x\ \C-r" 'recentf-open-files)
+  (recentf-mode 1))
+
+(use-package files
+  :straight (:type built-in)
+  :init
   (setq backup-directory-alist `(("." . "~/.saves"))))
 
+
 (use-package emacs
-  :config
-  (set-default 'truncate-lines 0)
+  :straight (:type built-in)
+  :init
   (setq inhibit-startup-screen t)
+  (set-default 'truncate-lines 0)
+  :config
   (tool-bar-mode -1))
 
 (use-package frame
-  :config
+  :straight (:type built-in)
+  :init
   (setq default-frame-alist '(
-			      ;; (fullscreen . maximized)
-			      (font . "Iosevka-18"))))
+			      (fullscreen . maximized)
+			      (font . "Iosevka-20"))))
 
 (use-package paren
+  :straight (:type built-in)
   :init
   (setq show-paren-delay 0)
   :config
   (show-paren-mode +1))
 
 (use-package scroll-bar
+  :straight (:type built-in)
   :config
   (scroll-bar-mode -1))
 
-;; (use-package nano-emacs
-;;   :straight t
-;;   :host github
-;;   :repo: "rougier/nano-emacs"
-;;   :config
-;;     (setq nano-font-family-monospaced "Iosevka")
-;;     (setq nano-font-size 18)
-;;     (require nano))
+(use-package zoom-frm
+  :straight t
+  :bind (
+	 ("C-x C-=" . zoom-in)
+	 ("C-x C--" . zoom-out)))
 
-;; (straight-use-package
-;;   '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
-;; (setq nano-font-family-monospaced "Iosevka")
-;; (setq nano-font-size 18)
-
+(use-package editorconfig
+  :straight t
+  :config
+  (editorconfig-mode 1))
 
 (use-package evil
   :straight t
@@ -77,57 +92,72 @@
   (setq evil-want-integration t) ;; required by evil-collection
   (setq evil-want-keybinding nil) ;; required by evil-collection
   (setq evil-want-C-u-scroll t)
+  (setq evil-shift-width 2)
+  (setq evil-shift-round 2)
+  (setq evil-undo-system 'undo-redo)
   :config
   (evil-global-set-key 'normal (kbd "j") 'evil-next-visual-line)
   (evil-global-set-key 'normal (kbd "k") 'evil-previous-visual-line)
   (evil-mode))
 
-;; (use-package evil-collection
-;;   :custom (evil-collection-setup-minibuffer t)
-;;   :after evil
-;;   :config
-;;   (evil-collection-init))
-
 (use-package evil-commentary
   :straight t
+  :requires (evil)
   :init
   (evil-commentary-mode +1))
 
+
+(use-package evil-collection
+  :straight t
+  :custom (evil-collection-setup-minibuffer t)
+  :after evil
+  :config
+  (evil-collection-init))
+
 (use-package magit
-  :straight t)
+  :straight t
+  :bind (("C-x C-g" . magit-status)))
 
 (use-package which-key
   :straight t
   :init
   (which-key-mode))
 
-;; (use-package ivy
-;;   :config
-;;   (setq ivy-use-virtual-buffers t)
-;;   (setq ivy-count-format "(%d/%d) ")
-;;   (ivy-mode 1)
-;;   (counsel-mode 1))
+(use-package ivy
+  :straight t
+  :init
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  :config
+  (ivy-mode 1))
 
 ;; Include my regular shell PATH variable in emacs.
-(use-package exec-path-from-shell
-  :straight t
-  :config
-  (when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize)))
+;; (use-package exec-path-from-shell
+;;   :straight t
+;;   :config
+;;   (when (memq window-system '(mac ns x))
+;;   (exec-path-from-shell-initialize)))
 
-;; Linting (and formatting?)
 (use-package flycheck
   :straight t
-  :config
+  :init
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  :config
   (global-flycheck-mode))
 
-;; Completion
 (use-package company
   :straight t
+  :init
+  (setq company-idle-delay 0.0)
   :config
   (add-hook 'after-init-hook 'global-company-mode)
   (company-mode 1))
+
+;; (use-package projectile
+;;   :straight t
+;;   :init
+;;   (setq projectile-project-search-path '(("~/Code/OSS/" . 1) ("~/Code/Work/" . 1)))
+;;   (projectile-mode +1))
 
 ;; (use-package tide
 ;;   :config
@@ -146,10 +176,6 @@
 ;; 	(lsp-mode . lsp-enable-which-key-integration))
 ;;   :commands lsp)
 ;;
-;; (use-package projectile
-;;   :init
-;;   (setq projectile-project-search-path '(("~/Code/OSS/" . 1) ("~/Code/Work/" . 1)))
-;;   (projectile-mode +1))
 ;;
 ;;
 ;; (use-package srcery-theme
