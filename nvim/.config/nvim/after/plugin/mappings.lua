@@ -1,19 +1,6 @@
 local default_opt = { noremap = true, silent = true }
 local gitsigns = require("gitsigns")
 
-local telescope_theme = {
-    theme = "fzf",
-
-    sorting_strategy = "ascending",
-
-    layout_strategy = "bottom_pane",
-    layout_config = {
-      height = 10,
-      prompt_position = "bottom"
-    },
-    border = false,
-  }
-
 -- Go over wrapped lines
 vim.keymap.set("n", "j", "gj", default_opt)
 vim.keymap.set("n", "k", "gk", default_opt)
@@ -57,10 +44,10 @@ vim.keymap.set("n", "<leader>sf", ":Files<CR>", default_opt)
 vim.keymap.set("n", "<leader>sg", ":GitFiles<CR>", default_opt)
 
 -- Search (find) alternative with Telescope
-vim.keymap.set("n", "<leader>fb", function () require('telescope.builtin').buffers(telescope_theme) end, default_opt)
-vim.keymap.set("n", "<leader>fc", function () require('telescope.builtin').commands(telescope_theme) end, default_opt)
-vim.keymap.set("n", "<leader>ff", function () require('telescope.builtin').find_files(telescope_theme) end, default_opt)
-vim.keymap.set("n", "<leader>fg", function () require('telescope.builtin').git_files(telescope_theme) end, default_opt)
+vim.keymap.set("n", "<leader>fb", require('telescope.builtin').buffers, default_opt)
+vim.keymap.set("n", "<leader>fc", require('telescope.builtin').commands, default_opt)
+vim.keymap.set("n", "<leader>ff", require('telescope.builtin').find_files, default_opt)
+vim.keymap.set("n", "<leader>fg", require('telescope.builtin').git_files, default_opt)
 
 -- Edit
 vim.keymap.set("n", "<leader>ea", vim.lsp.buf.code_action, default_opt)

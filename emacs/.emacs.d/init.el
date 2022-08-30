@@ -19,6 +19,7 @@
   (load bootstrap-file nil 'nomessage))
 
 (straight-use-package 'use-package)
+
 (eval-and-compile (require 'use-package))
 
 (use-package ns-win
@@ -46,7 +47,6 @@
   :straight (:type built-in)
   :init
   (setq backup-directory-alist `(("." . "~/.saves"))))
-
 
 (use-package emacs
   :straight (:type built-in)
@@ -220,11 +220,12 @@
 ;; 	(js-jsx-mode . lsp)
 ;; 	(lsp-mode . lsp-enable-which-key-integration))
 ;;   :commands lsp)
-;;
-;; (use-package srcery-theme
-;;   :init
-;;   (load-theme 'srcery t))
-;;
+
+(use-package srcery-theme
+  :straight t
+  :init
+  (load-theme 'srcery t))
+
 ;; (use-package haskell-mode)
 ;; (use-package lua-mode)
 
