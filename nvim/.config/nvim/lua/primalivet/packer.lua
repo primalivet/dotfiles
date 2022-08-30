@@ -19,6 +19,7 @@ function M.init()
   use("tpope/vim-surround")
   use("tpope/vim-repeat")
   use("gerw/vim-HiLinkTrace")
+  use("NvChad/nvim-colorizer.lua")
   use("tpope/vim-fugitive")
 
   use({
