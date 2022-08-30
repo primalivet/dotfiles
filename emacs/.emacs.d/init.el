@@ -96,9 +96,26 @@
   (setq evil-shift-round 2)
   (setq evil-undo-system 'undo-redo)
   :config
-  (evil-global-set-key 'normal (kbd "j") 'evil-next-visual-line)
-  (evil-global-set-key 'normal (kbd "k") 'evil-previous-visual-line)
+  ;; (evil-global-set-key 'normal (kbd "j") 'evil-next-visual-line)
+  ;; (evil-global-set-key 'normal (kbd "k") 'evil-previous-visual-line)
   (evil-mode))
+
+(use-package general
+  :straight t
+  :init
+  (general-define-key
+   :states 'normal
+   "j" 'evil-next-visual-line
+   "k" 'evil-previous-visual-line)
+  (general-create-definer my-leader-def ;; Define leader key
+    :prefix "SPC")
+  (my-leader-def
+   :states 'normal
+   "sb" 'switch-to-buffer
+   "sf" 'projectile-find-file
+   "sc" 'execute-extended-command))
+
+
 
 (use-package evil-commentary
   :straight t
@@ -123,20 +140,30 @@
   :init
   (which-key-mode))
 
-(use-package ivy
-  :straight t
+(use-package savehist
+  :straight (:type built-in)
   :init
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) ")
-  :config
-  (ivy-mode 1))
+  (savehist-mode))
 
-;; Include my regular shell PATH variable in emacs.
-;; (use-package exec-path-from-shell
-;;   :straight t
-;;   :config
-;;   (when (memq window-system '(mac ns x))
-;;   (exec-path-from-shell-initialize)))
+(use-package vertico
+  :straight t
+  :after (savehist) ;; vertico sorts by history position
+  :init
+  (vertico-mode))
+
+(use-package orderless
+  :straight t
+  :after (vertico)
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
+(use-package marginalia
+  :straight t
+  :after (vertico)
+  :init
+  (marginalia-mode))
+
 
 (use-package flycheck
   :straight t
@@ -153,11 +180,29 @@
   (add-hook 'after-init-hook 'global-company-mode)
   (company-mode 1))
 
-;; (use-package projectile
+;; Include my regular shell PATH variable in emacs.
+;; (use-package exec-path-from-shell
 ;;   :straight t
-;;   :init
-;;   (setq projectile-project-search-path '(("~/Code/OSS/" . 1) ("~/Code/Work/" . 1)))
-;;   (projectile-mode +1))
+;;   :config
+;;   (when (memq window-system '(mac ns x))
+;;   (exec-path-from-shell-initialize)))
+
+
+(use-package projectile
+  :straight t
+  :init
+  (setq projectile-project-search-path '(("~/Code/OSS/" . 1) ("~/Code/Work/" . 1)))
+  (projectile-mode +1))
+
+(use-package tree-sitter
+  :straight t
+  :init
+  (global-tree-sitter-mode 1))
+
+(use-package tree-sitter-langs
+  :straight t
+  :requires (tree-sitter))
+
 
 ;; (use-package tide
 ;;   :config
@@ -175,8 +220,6 @@
 ;; 	(js-jsx-mode . lsp)
 ;; 	(lsp-mode . lsp-enable-which-key-integration))
 ;;   :commands lsp)
-;;
-;;
 ;;
 ;; (use-package srcery-theme
 ;;   :init
