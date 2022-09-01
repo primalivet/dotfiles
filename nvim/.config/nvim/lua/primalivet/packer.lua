@@ -30,6 +30,17 @@ function M.init()
   })
 
   use({
+    "~/Code/OSS/cabin.nvim",
+    condition = function()
+      vim.fn.isdirectory("~/Code/OSS/cabin.nvim")
+    end,
+    config = function()
+      require("cabin").setup()
+      vim.cmd([[colorscheme cabin]])
+    end,
+  })
+
+  use({
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     requires = { { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, "nvim-lua/plenary.nvim" },
@@ -284,17 +295,6 @@ function M.init()
           end
         end,
       })
-    end,
-  })
-
-  use({
-    "~/Code/OSS/cabin.nvim",
-    condition = function()
-      vim.fn.isdirectory("~/Code/OSS/cabin.nvim")
-    end,
-    config = function()
-      require("cabin").setup()
-      vim.cmd([[colorscheme cabin]])
     end,
   })
 
