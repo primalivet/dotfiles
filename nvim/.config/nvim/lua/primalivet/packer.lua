@@ -23,12 +23,12 @@ function M.init()
   use("tpope/vim-fugitive")
   use({
     "nvim-lualine/lualine.nvim",
-    -- requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     config = function()
       require("lualine").setup({
         options = {
-          component_separators = { left = "", right = "" },
+          icons_enabled = false,
           section_separators = { left = "", right = "" },
+          component_separators = { left = "", right = "" },
         },
       })
     end,
