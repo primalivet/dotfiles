@@ -21,6 +21,18 @@ function M.init()
   use("gerw/vim-HiLinkTrace")
   use("NvChad/nvim-colorizer.lua")
   use("tpope/vim-fugitive")
+  use({
+    "nvim-lualine/lualine.nvim",
+    -- requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    config = function()
+      require("lualine").setup({
+        options = {
+          component_separators = { left = "", right = "" },
+          section_separators = { left = "", right = "" },
+        },
+      })
+    end,
+  })
 
   use({
     "numToStr/Comment.nvim",
