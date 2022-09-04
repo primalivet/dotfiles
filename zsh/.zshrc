@@ -71,6 +71,9 @@ zstyle ':completion:*' menu select
 # Keybindings
 #------------------------------------------------------------------------------
 
+# Use vi keybindings
+bindkey -v
+
 # Reverse through completion with Shift-Tab
 bindkey '^[[Z' reverse-menu-complete
 
@@ -135,11 +138,13 @@ alias ga='git add'
 # PROMPT
 #------------------------------------------------------------------------------
 
-autoload -Uz vcs_info # enable vcs info
-precmd () { vcs_info }  # make sure vcs info is loaded before displaying prompt
-zstyle ':vcs_info:*' formats ' %b' # format branch name
-setopt prompt_subst
-export PROMPT='%1~${vcs_info_msg_0_} $ '
+# autoload -Uz vcs_info # enable vcs info
+# precmd () { vcs_info }  # make sure vcs info is loaded before displaying prompt
+# zstyle ':vcs_info:*' formats ' %b' # format branch name
+# setopt prompt_subst
+# export PROMPT='%1~${vcs_info_msg_0_} $ '
+
+export PROMPT='%1~ $ '
 
 # Vi mode cursor
 #------------------------------------------------------------------------------
