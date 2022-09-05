@@ -19,7 +19,6 @@ function M.init()
   use("tpope/vim-surround")
   use("tpope/vim-repeat")
   use("gerw/vim-HiLinkTrace")
-  use("NvChad/nvim-colorizer.lua")
   use("tpope/vim-fugitive")
   use({
     "nvim-lualine/lualine.nvim",
@@ -183,9 +182,10 @@ function M.init()
 
   use({
     "neovim/nvim-lspconfig",
-    requires = { "jose-elias-alvarez/nvim-lsp-ts-utils" },
+    requires = { "simrat39/rust-tools.nvim", "jose-elias-alvarez/nvim-lsp-ts-utils" },
     config = function()
       local nvim_lsp = require("lspconfig")
+      local rusttools = require("rust-tools")
 
       do
         local method_name = "textDocument/publishDiagnostics"
@@ -198,10 +198,19 @@ function M.init()
       --
       -- Generic "On attach" function for all language servers
       --
-      local function on_attach(client)
+      local function on_attach(client, _)
         -- Disable formatting for any language server
         client.resolved_capabilities.document_formatting = false
         client.resolved_capabilities.document_range_formatting = false
+
+        if client.name == "rust_analyzer" then
+          client.resolved_capabilities.document_formatting = true
+          client.resolved_capabilities.document_range_formatting = true
+          --     -- Hover actions
+          --     vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+          --     -- Code action groups
+          --     vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+        end
 
         if client.name == "tsserver" then
           local ts_utils = require("nvim-lsp-ts-utils")
@@ -228,7 +237,7 @@ function M.init()
         on_attach = on_attach,
       })
 
-      nvim_lsp.rust_analyzer.setup({})
+      rusttools.setup({ server = { on_attach = on_attach } })
 
       nvim_lsp.sumneko_lua.setup({
         on_attach = on_attach,
@@ -294,6 +303,7 @@ function M.init()
 
       require("null-ls").setup({
         sources = {
+          -- null_ls.builtins.formatting.rustfmt, -- Is used under the hood of rust-tools in lsp setup
           null_ls.builtins.diagnostics.eslint_d.with(opts.eslint_diagnostics),
           null_ls.builtins.formatting.eslint_d.with(opts.eslint_formatting),
           null_ls.builtins.formatting.prettier.with(opts.prettier_formatting),
