@@ -20,18 +20,18 @@ function M.init()
   use("tpope/vim-repeat")
   use("gerw/vim-HiLinkTrace")
   use("tpope/vim-fugitive")
-  use({
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      require("lualine").setup({
-        options = {
-          icons_enabled = false,
-          section_separators = { left = "", right = "" },
-          component_separators = { left = "", right = "" },
-        },
-      })
-    end,
-  })
+  -- use({
+  --   "nvim-lualine/lualine.nvim",
+  --   config = function()
+  --     require("lualine").setup({
+  --       options = {
+  --         icons_enabled = false,
+  --         section_separators = { left = "", right = "" },
+  --         component_separators = { left = "", right = "" },
+  --       },
+  --     })
+  --   end,
+  -- })
 
   use({
     "numToStr/Comment.nvim",
