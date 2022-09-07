@@ -172,7 +172,6 @@
 ;;   (when (memq window-system '(mac ns x))
 ;;   (exec-path-from-shell-initialize)))
 
-
 (use-package projectile
   :straight t
   :init
@@ -188,36 +187,10 @@
   :straight t
   :requires (tree-sitter))
 
-
-;; (use-package tide
-;;   :config
-;;   (defun setup-tide-mode ()
-;;     (interactive)
-;;     (tide-setup)
-;;     (eldoc-mode +1)
-;;     (tide-hl-identifier-mode +1)
-;;     (company-mode +1))
-;;   (add-hook 'typescript-mode-hook #'setup-tide-mode))
-;;
-;; (use-package lsp-mode
-;;   :hook((typescript-mode . lsp)
-;; 	(js-mode . lsp)
-;; 	(js-jsx-mode . lsp)
-;; 	(lsp-mode . lsp-enable-which-key-integration))
-;;   :commands lsp)
-
 (use-package gruber-darker-theme
   :straight t
   :init
   (load-theme 'gruber-darker t))
-
-;; (use-package srcery-theme
-;;   :straight t
-;;   :init
-;;   (load-theme 'srcery t))
-
-;; (use-package haskell-mode)
-;; (use-package lua-mode)
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
