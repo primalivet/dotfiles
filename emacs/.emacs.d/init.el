@@ -221,10 +221,15 @@
 ;; 	(lsp-mode . lsp-enable-which-key-integration))
 ;;   :commands lsp)
 
-(use-package srcery-theme
+(use-package gruber-darker-theme
   :straight t
   :init
-  (load-theme 'srcery t))
+  (load-theme 'gruber-darker t))
+
+;; (use-package srcery-theme
+;;   :straight t
+;;   :init
+;;   (load-theme 'srcery t))
 
 ;; (use-package haskell-mode)
 ;; (use-package lua-mode)
