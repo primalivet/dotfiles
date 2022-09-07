@@ -24,6 +24,8 @@
 
 (use-package ns-win
   :straight (:type built-in)
+  :if (string=
+       system-type "darwin")
   :init
   (setq mac-command-modifier 'meta))
 
