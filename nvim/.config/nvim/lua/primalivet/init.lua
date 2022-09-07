@@ -41,3 +41,4 @@ vim.api.nvim_set_hl(0, "DiffDelete", { ctermfg = 0, ctermbg = 1 })
 vim.api.nvim_set_hl(0, "DiffText", { ctermfg = 0, ctermbg = 3, underline = 1 })
 
 require("primalivet.packer").init()
+vim.cmd'colorscheme sixteen'
