@@ -34,15 +34,6 @@
   :config
   (global-display-line-numbers-mode 1))
 
-(use-package recentf
-  :straight (:type built-in)
-  :init
-  (setq recentf-max-menu-items 25)
-  (setq recentf-max-saved-items 25)
-  :config
-  (global-set-key "\C-x\ \C-r" 'recentf-open-files)
-  (recentf-mode 1))
-
 (use-package files
   :straight (:type built-in)
   :init
@@ -58,10 +49,7 @@
 
 (use-package frame
   :straight (:type built-in)
-  :init
-  (setq default-frame-alist '(
-			      (fullscreen . maximized)
-			      (font . "Iosevka-20"))))
+  :init (setq default-frame-alist '((font . "Iosevka-20"))))
 
 (use-package paren
   :straight (:type built-in)
@@ -76,10 +64,7 @@
   (scroll-bar-mode -1))
 
 (use-package zoom-frm
-  :straight t
-  :bind (
-	 ("C-x C-=" . zoom-in)
-	 ("C-x C--" . zoom-out)))
+  :straight t)
 
 (use-package editorconfig
   :straight t
@@ -96,8 +81,6 @@
   (setq evil-shift-round 2)
   (setq evil-undo-system 'undo-redo)
   :config
-  ;; (evil-global-set-key 'normal (kbd "j") 'evil-next-visual-line)
-  ;; (evil-global-set-key 'normal (kbd "k") 'evil-previous-visual-line)
   (evil-mode))
 
 (use-package general
@@ -106,16 +89,16 @@
   (general-define-key
    :states 'normal
    "j" 'evil-next-visual-line
-   "k" 'evil-previous-visual-line)
-  (general-create-definer my-leader-def ;; Define leader key
-    :prefix "SPC")
+   "k" 'evil-previous-visual-line
+   "C-=" 'zoom-in
+   "C--" 'zoom-out)
+  (general-create-definer my-leader-def
+    :prefix "SPC") ;; Space is  the leader key
   (my-leader-def
    :states 'normal
    "sb" 'switch-to-buffer
    "sf" 'projectile-find-file
    "sc" 'execute-extended-command))
-
-
 
 (use-package evil-commentary
   :straight t
