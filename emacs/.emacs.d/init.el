@@ -51,7 +51,7 @@
 
 (use-package frame
   :straight (:type built-in)
-  :init (setq default-frame-alist '((font . "Iosevka-20"))))
+  :init (setq default-frame-alist '((font . "Iosevka Term-20"))))
 
 (use-package paren
   :straight (:type built-in)
