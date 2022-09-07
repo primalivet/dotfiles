@@ -5,6 +5,7 @@
 
 ;;; Code:
 
+;; Boostrap Straight package manager
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -18,6 +19,7 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+;; Use 'use-package' ontop of Straight
 (straight-use-package 'use-package)
 
 (eval-and-compile (require 'use-package))
