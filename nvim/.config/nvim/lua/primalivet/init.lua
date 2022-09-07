@@ -34,11 +34,5 @@ vim.opt.updatetime = 100 --updatetime for events
 vim.opt.fileformats = "unix"
 vim.opt.hidden = true -- dont unload abandoned buffers, just hide em
 vim.opt.listchars = "tab:>--,space:·,trail:·,eol:¶" -- chars to use in :list mode
-
-vim.api.nvim_set_hl(0, "DiffAdd", { ctermfg = 0, ctermbg = 2 })
-vim.api.nvim_set_hl(0, "DiffChange", { ctermfg = 0, ctermbg = 3 })
-vim.api.nvim_set_hl(0, "DiffDelete", { ctermfg = 0, ctermbg = 1 })
-vim.api.nvim_set_hl(0, "DiffText", { ctermfg = 0, ctermbg = 3, underline = 1 })
-
-require("primalivet.packer").init()
 vim.cmd'colorscheme sixteen'
+require("primalivet.packer").init()
