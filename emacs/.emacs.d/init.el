@@ -67,6 +67,14 @@
   :config
   (scroll-bar-mode -1))
 
+;; Include my regular shell PATH variable in emacs.
+(use-package exec-path-from-shell
+  :straight t
+  :config
+  (when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize)))
+
+
 (use-package zoom-frm
   :straight t)
 
