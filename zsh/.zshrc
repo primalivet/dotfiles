@@ -32,20 +32,21 @@ export PATH="$LOCAL_SRC/lua-language-server/bin":$PATH
 
 # Fzf (fuzzy file search)
 FZF_COLORS="bg+:-1,\
-fg:white,\
-fg+:yellow,\
+fg:15,\
+fg+:5,\
 border:-1,\
-spinner:white,\
-hl:yellow,\
-header:white,\
-info:white,\
-pointer:yellow,\
-marker:yellow,\
-prompt:white,\
-hl+:yellow"
+spinner:15,\
+hl:14,\
+header:15,\
+info:15,\
+pointer:15,\
+marker:15,\
+prompt:15,\
+hl+:11"
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git" --glob "!.stack-work"'
 export FZF_DEFAULT_OPTS="--height=100% --color=$FZF_COLORS"
+#export FZF_DEFAULT_OPTS="--height=100%"
 
 # OPTIONS
 #------------------------------------------------------------------------------
@@ -90,9 +91,9 @@ bindkey '^N' history-beginning-search-forward
 # Completion
 [[ -d "$LOCAL_SRC/zsh-completions/src" ]] && \
   fpath=("$LOCAL_SRC/zsh-completions/src" $fpath)
-# Sytax highlight
-[[ -f "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
-  source "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# # Sytax highlight
+# [[ -f "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
+#   source "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # PROGRAMS
 #------------------------------------------------------------------------------
@@ -117,9 +118,9 @@ bindkey '^N' history-beginning-search-forward
 # ALIASES
 #------------------------------------------------------------------------------
 
-alias vil='vim -c "set background=light"'
+alias vil='nvim -c "set background=light"'
+alias v='nvim --clean -u ~/.vim/vimrc'
 alias vi='nvim'
-alias vim='nvim'
 alias reload='. ~/.zshrc'
 alias l='ls -al'
 alias ll='ls -al'

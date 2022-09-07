@@ -1,0 +1,14 @@
+filetype plugin indent on            " turn on included plugins
+syntax on                            " turn syntax on
+
+set backspace=indent,eol,start       " allow me to backspace over: start of insertion indents, and end of lines
+set hidden                           " allow me to switch from an unsaved buffer
+set hlsearch incsearch               " highlight search results, do it incrementally as i type
+set nocompatible                     " dont try to be compatible with older vi
+set noswapfile                       " dont use a swap fil
+set path+=**                         " include all subdirectories and files below the current working directory
+set ruler                            " show where I am in the buffer
+set wildmenu                         " show me a completion menu for commands
+
+let $RTP=split(&runtimepath, ',')[0] " shortcut to edit my part of the runtimepath
+let $RC="$HOME/.vim/vimrc"           " shortcut to edit my vimrc

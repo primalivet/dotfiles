@@ -7,6 +7,8 @@ vim.api.nvim_create_user_command("PreviewHunk", "Gitsigns preview_hunk", {})
 
 local group = vim.api.nvim_create_augroup("PRIMALIVET", {})
 
+vim.api.nvim_create_autocmd({ "VimResized" }, { group = group, command = "wincmd=" })
+
 vim.api.nvim_create_autocmd(
   { "BufRead", "BufNewFile" },
   { group = group, pattern = "*.json", command = "set filetype=jsonc" }

@@ -1,7 +1,6 @@
 local M = {}
 
 function M.init()
-  -- Bootstrap
   local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
@@ -9,47 +8,15 @@ function M.init()
 
   local packer = require("packer")
   local use = packer.use
-  -- Initialize
-  packer.init()
+  packer.init() -- Initialize
 
-  -- Load packages
   use("nvim-lua/plenary.nvim")
   use("wbthomason/packer.nvim")
   use("editorconfig/editorconfig-vim")
   use("tpope/vim-surround")
   use("tpope/vim-repeat")
-  use("gerw/vim-HiLinkTrace")
   use("tpope/vim-fugitive")
-  -- use({
-  --   "nvim-lualine/lualine.nvim",
-  --   config = function()
-  --     require("lualine").setup({
-  --       options = {
-  --         icons_enabled = false,
-  --         section_separators = { left = "", right = "" },
-  --         component_separators = { left = "", right = "" },
-  --       },
-  --     })
-  --   end,
-  -- })
-
-  use({
-    "numToStr/Comment.nvim",
-    config = function()
-      require("Comment").setup()
-    end,
-  })
-
-  use({
-    "~/Code/OSS/cabin.nvim",
-    condition = function()
-      vim.fn.isdirectory("~/Code/OSS/cabin.nvim")
-    end,
-    config = function()
-      require("cabin").setup()
-      vim.cmd([[colorscheme cabin]])
-    end,
-  })
+  use("tpope/vim-commentary")
 
   use({
     "nvim-telescope/telescope.nvim",
@@ -188,6 +155,7 @@ function M.init()
       local rusttools = require("rust-tools")
 
       do
+        -- Update loclist as diagnostics comes in
         local method_name = "textDocument/publishDiagnostics"
         local default_handler = vim.lsp.handlers[method_name]
         vim.lsp.handlers[method_name] = function(err, method, result, client_id, bufnr, config)
@@ -195,9 +163,7 @@ function M.init()
           vim.diagnostic.setloclist({ open = false })
         end
       end
-      --
-      -- Generic "On attach" function for all language servers
-      --
+
       local function on_attach(client, _)
         -- Disable formatting for any language server
         client.resolved_capabilities.document_formatting = false
@@ -263,8 +229,6 @@ function M.init()
       local null_ls = require("null-ls")
 
       local opts = {
-        -- Run eslint (formatting) if no prettier config exists but
-        -- eslint config does exist
         eslint_formatting = {
           condition = function(utils)
             local has_eslint = utils.root_has_file({ ".eslintrc", ".eslintrc.js", ".eslintrc.json" })
@@ -277,13 +241,11 @@ function M.init()
             return has_eslint and not has_prettier
           end,
         },
-        -- Run eslint if eslint config file exists
         eslint_diagnostics = {
           condition = function(utils)
             return utils.root_has_file({ ".eslintrc", ".eslintrc.js", ".eslintrc.json" })
           end,
         },
-        -- Run prettier if prettier config exitst
         prettier_formatting = {
           condition = function(utils)
             return utils.root_has_file({ ".prettierrc", ".prettierrc.js", ".prettierrc.json" })
@@ -301,9 +263,8 @@ function M.init()
         },
       }
 
-      require("null-ls").setup({
+      null_ls.setup({
         sources = {
-          -- null_ls.builtins.formatting.rustfmt, -- Is used under the hood of rust-tools in lsp setup
           null_ls.builtins.diagnostics.eslint_d.with(opts.eslint_diagnostics),
           null_ls.builtins.formatting.eslint_d.with(opts.eslint_formatting),
           null_ls.builtins.formatting.prettier.with(opts.prettier_formatting),
@@ -320,73 +281,73 @@ function M.init()
     end,
   })
 
-  use({
-    "mfussenegger/nvim-dap",
-    config = function()
-      local dap = require("dap")
-      dap.set_log_level("TRACE")
-      dap.adapters = {
-        node2 = {
-          type = "executable",
-          command = "node",
-          -- Download at: https://github.com/microsoft/vscode-node-debug2/tags
-          args = { os.getenv("HOME") .. "/.local/bin/vscode-node-debug2/out/src/nodeDebug.js" },
-        },
-        -- chrome = {
-        -- 	type = "executable",
-        -- 	command = "node",
-        -- 	Download at: https://github.com/microsoft/vscode-chrome-debug/releases
-        -- 	args = { os.getenv("HOME") .. "/path/to/vscode-chrome-debug/out/src/chromeDebug.js" },
-        -- },
-      }
+  -- use({
+  --   "mfussenegger/nvim-dap",
+  --   config = function()
+  --     local dap = require("dap")
+  --     dap.set_log_level("TRACE")
+  --     dap.adapters = {
+  --       node2 = {
+  --         type = "executable",
+  --         command = "node",
+  --         -- Download at: https://github.com/microsoft/vscode-node-debug2/tags
+  --         args = { os.getenv("HOME") .. "/.local/bin/vscode-node-debug2/out/src/nodeDebug.js" },
+  --       },
+  --       -- chrome = {
+  --       -- 	type = "executable",
+  --       -- 	command = "node",
+  --       -- 	Download at: https://github.com/microsoft/vscode-chrome-debug/releases
+  --       -- 	args = { os.getenv("HOME") .. "/path/to/vscode-chrome-debug/out/src/chromeDebug.js" },
+  --       -- },
+  --     }
 
-      dap.configurations = {
-        javascript = {
-          {
-            name = "Launch",
-            type = "node2",
-            request = "launch",
-            program = "${file}",
-            cwd = vim.fn.getcwd(),
-            sourceMaps = true,
-            protocol = "inspector",
-            console = "integratedTerminal",
-          },
-          {
-            -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-            name = "Attach to process",
-            type = "node2",
-            request = "attach",
-            processId = require("dap.utils").pick_process,
-          },
-        },
-        -- javascriptreact = {
-        -- 	{
-        -- 		type = "chrome",
-        -- 		request = "attach",
-        -- 		program = "${file}",
-        -- 		cwd = vim.fn.getcwd(),
-        -- 		sourceMaps = true,
-        -- 		protocol = "inspector",
-        -- 		port = 9222,
-        -- 		webRoot = "${workspaceFolder}",
-        -- 	},
-        -- },
-        -- typescriptreact = {
-        -- 	{
-        -- 		type = "chrome",
-        -- 		request = "attach",
-        -- 		program = "${file}",
-        -- 		cwd = vim.fn.getcwd(),
-        -- 		sourceMaps = true,
-        -- 		protocol = "inspector",
-        -- 		port = 9222,
-        -- 		webRoot = "${workspaceFolder}",
-        -- 	},
-        -- },
-      }
-    end,
-  })
+  --     dap.configurations = {
+  --       javascript = {
+  --         {
+  --           name = "Launch",
+  --           type = "node2",
+  --           request = "launch",
+  --           program = "${file}",
+  --           cwd = vim.fn.getcwd(),
+  --           sourceMaps = true,
+  --           protocol = "inspector",
+  --           console = "integratedTerminal",
+  --         },
+  --         {
+  --           -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+  --           name = "Attach to process",
+  --           type = "node2",
+  --           request = "attach",
+  --           processId = require("dap.utils").pick_process,
+  --         },
+  --       },
+  --       -- javascriptreact = {
+  --       -- 	{
+  --       -- 		type = "chrome",
+  --       -- 		request = "attach",
+  --       -- 		program = "${file}",
+  --       -- 		cwd = vim.fn.getcwd(),
+  --       -- 		sourceMaps = true,
+  --       -- 		protocol = "inspector",
+  --       -- 		port = 9222,
+  --       -- 		webRoot = "${workspaceFolder}",
+  --       -- 	},
+  --       -- },
+  --       -- typescriptreact = {
+  --       -- 	{
+  --       -- 		type = "chrome",
+  --       -- 		request = "attach",
+  --       -- 		program = "${file}",
+  --       -- 		cwd = vim.fn.getcwd(),
+  --       -- 		sourceMaps = true,
+  --       -- 		protocol = "inspector",
+  --       -- 		port = 9222,
+  --       -- 		webRoot = "${workspaceFolder}",
+  --       -- 	},
+  --       -- },
+  --     }
+  --   end,
+  -- })
 end
 
 return M
