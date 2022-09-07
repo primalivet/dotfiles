@@ -103,7 +103,10 @@
    "j" 'evil-next-visual-line
    "k" 'evil-previous-visual-line
    "C-=" 'zoom-in
-   "C--" 'zoom-out)
+   "C--" 'zoom-out
+   "C-x p" 'projectile-switch-project
+   "C-x f" 'projectile-find-file
+   "C-x C-g" 'magit-status)
   (general-create-definer my-leader-def
     :prefix "SPC") ;; Space is  the leader key
   (my-leader-def
@@ -127,8 +130,7 @@
   (evil-collection-init))
 
 (use-package magit
-  :straight t
-  :bind (("C-x C-g" . magit-status)))
+  :straight t)
 
 (use-package which-key
   :straight t
