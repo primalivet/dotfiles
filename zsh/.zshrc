@@ -32,11 +32,11 @@ export PATH="$LOCAL_SRC/lua-language-server/bin":$PATH
 
 # Fzf (fuzzy file search)
 FZF_COLORS="bg+:-1,\
-fg:15,\
-fg+:5,\
+fg:-1,\
+fg+:11,\
 border:-1,\
 spinner:15,\
-hl:14,\
+hl:11,\
 header:15,\
 info:15,\
 pointer:15,\

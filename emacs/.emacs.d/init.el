@@ -26,8 +26,7 @@
 
 (use-package ns-win
   :straight (:type built-in)
-  :if (string=
-       system-type "darwin")
+  :if (memq window-system '(mac ns))
   :init
   (setq mac-command-modifier 'meta))
 
@@ -53,7 +52,7 @@
 
 (use-package frame
   :straight (:type built-in)
-  :init (setq default-frame-alist '((font . "Iosevka Term-20"))))
+  :init (setq default-frame-alist '((font . "Iosevka Term-25"))))
 
 (use-package paren
   :straight (:type built-in)
@@ -106,7 +105,9 @@
    "C--" 'zoom-out
    "C-x p" 'projectile-switch-project
    "C-x f" 'projectile-find-file
-   "C-x C-g" 'magit-status)
+   "C-x C-g" 'magit-status
+   "[d" 'flycheck-previous-error
+   "]d" 'flycheck-next-error)
   (general-create-definer my-leader-def
     :prefix "SPC") ;; Space is  the leader key
   (my-leader-def
