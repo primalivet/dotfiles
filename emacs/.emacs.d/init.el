@@ -105,7 +105,7 @@
    "C--" 'zoom-out
    "C-x p" 'projectile-switch-project
    "C-x f" 'projectile-find-file
-   "C-x C-g" 'magit-status
+   "C-x g" 'magit-status
    "[d" 'flycheck-previous-error
    "]d" 'flycheck-next-error)
   (general-create-definer my-leader-def
