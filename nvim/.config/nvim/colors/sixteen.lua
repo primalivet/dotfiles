@@ -32,10 +32,7 @@ end
 
 vim.g.colors_name = "sixteen"
 
-local hl = function(group, values)
-  vim.api.nvim_set_hl(0, group, values)
-end
-
+local set_hl = vim.api.nvim_set_hl
 local reset = function(group)
   vim.api.nvim_set_hl(0, group, { ctermfg = "NONE", ctermbg = "NONE" })
 end
@@ -53,11 +50,9 @@ reset("Directory")
 reset("EndOfBuffer")
 reset("FoldColumn")
 reset("Folded")
-reset("ModeMsg")
 reset("MoreMsg")
 reset("MsgArea")
 reset("MsgSeparator")
-reset("NonText")
 reset("Normal")
 reset("NormalNC")
 reset("Question")
@@ -78,60 +73,60 @@ reset("Whitespace")
 reset("WildMenu")
 reset("lCursor")
 
-hl("NormalFloat", { ctermfg = "NONE", ctermbg = bright_black })
+set_hl(0,"NonText", { ctermfg = bright_black })
 
-hl("Pmenu", { ctermfg = "NONE", ctermbg = bright_black })
-hl("PmenuSbar", { reverse = bright_black })
-hl("PmenuSel", { reverse = 1 })
-hl("PmenuThumb", { ctermbg = black })
+set_hl(0,"ModeMsg", { ctermfg = bright_yellow, bold = 1 })
 
-hl("StatusLine", { ctermfg = bright_black, ctermbg = white, bold = 1 })
-hl("StatusLineNC", { ctermfg = white, ctermbg = bright_black })
-hl("QuickFixLine", { ctermfg = black, ctermbg = green })
+set_hl(0,"NormalFloat", { ctermfg = "NONE", ctermbg = bright_black })
 
-hl("VertSplit", { ctermfg = black, ctermbg = white })
-hl("WinSeparator", { ctermfg = black, ctermbg = white })
+set_hl(0,"Pmenu", { ctermfg = "NONE", ctermbg = bright_black })
+set_hl(0,"PmenuSbar", { reverse = bright_black })
+set_hl(0,"PmenuSel", { reverse = 1 })
+set_hl(0,"PmenuThumb", { ctermbg = black })
 
-hl("MatchParen", { ctermfg = black, ctermbg = bright_magenta })
+set_hl(0,"StatusLine", { ctermfg = black, ctermbg = white, bold = 1 })
+set_hl(0,"StatusLineNC", { ctermfg = black, ctermbg = bright_black })
+set_hl(0,"QuickFixLine", { ctermfg = black, ctermbg = green })
 
-hl("ErrorMsg", { ctermfg = bright_white, ctermbg = bright_red })
-hl("WarningMsg", { ctermfg = black, ctermbg = bright_yellow })
+set_hl(0,"VertSplit", { ctermfg = black, ctermbg = white })
+set_hl(0,"WinSeparator", { ctermfg = black, ctermbg = white })
 
-hl("Visual", { ctermfg = black, ctermbg = bright_yellow })
-hl("VisualNOS", { ctermfg = black, ctermbg = bright_yellow })
+set_hl(0,"MatchParen", { ctermfg = black, ctermbg = bright_magenta })
 
-hl("Search", { ctermfg = black, ctermbg = bright_yellow })
-hl("IncSearch", { ctermfg = black, ctermbg = bright_yellow })
+set_hl(0,"ErrorMsg", { ctermfg = bright_white, ctermbg = bright_red })
+set_hl(0,"WarningMsg", { ctermfg = black, ctermbg = bright_yellow })
 
-hl("DiffAdd", { ctermfg = green, ctermbg = "NONE" })
-hl("DiffChange", { ctermfg = yellow, ctermbg = "NONE" })
-hl("DiffDelete", { ctermfg = red, ctermbg = "NONE" })
-hl("DiffText", { ctermfg = yellow, ctermbg = "NONE", bold = 1 })
+set_hl(0,"Visual", { ctermfg = black, ctermbg = bright_yellow })
+set_hl(0,"VisualNOS", { ctermfg = black, ctermbg = bright_yellow })
 
-hl("LineNr", { ctermfg = bright_yellow })
-hl("LineNrAbove", { ctermfg = bright_yellow })
-hl("LineNrBelow", { ctermfg = bright_yellow })
+set_hl(0,"Search", { ctermfg = black, ctermbg = bright_yellow })
+set_hl(0,"IncSearch", { ctermfg = black, ctermbg = bright_yellow })
 
-hl("Comment", { ctermfg = cyan })
+set_hl(0,"DiffAdd", { ctermbg = green, ctermfg = 0 })
+set_hl(0,"DiffChange", { ctermbg = yellow, ctermfg = 0 })
+set_hl(0,"DiffDelete", { ctermbg = red, ctermfg = 0 })
+set_hl(0,"DiffText", { ctermbg = yellow, ctermfg = 0, underline = 1})
 
+set_hl(0,"LineNr", { ctermfg = bright_yellow })
+set_hl(0,"LineNrAbove", { ctermfg = bright_yellow })
+set_hl(0,"LineNrBelow", { ctermfg = bright_yellow })
+
+-- Suggested Group names (by Vim, see :h group-name)
 reset("Constant")
-hl("String", { ctermfg = green })
-hl("Character", { ctermfg = green })
-
 reset("Identifier")
-
-hl("Statement", { ctermfg = bright_yellow })
-
 reset("PreProc")
-
-hl("Type", { ctermfg = bright_cyan })
-
 reset("Special")
-
-hl("Underlined", { underline = 1 })
-
 reset("Ignore")
+set_hl(0,"Comment", { ctermfg = cyan, italic = 1 })
+set_hl(0,"String", { ctermfg = green })
+set_hl(0,"Character", { ctermfg = green })
+set_hl(0,"Statement", { ctermfg = bright_yellow })
+set_hl(0,"Type", { ctermfg = bright_cyan })
+set_hl(0,"Underlined", { underline = 1 })
+set_hl(0,"Error", { ctermfg = red })
+set_hl(0,"Todo", { ctermfg = black, ctermbg = bright_yellow })
 
-hl("Error", { ctermfg = red })
-
-hl("Todo", { ctermfg = black, ctermbg = bright_yellow })
+-- GitSigns (plugin)
+set_hl(0,"GitSignsAdd", { ctermfg = green })
+set_hl(0,"GitSignsChange", { ctermfg = yellow })
+set_hl(0,"GitSignsDelete", { ctermfg = red })
