@@ -92,8 +92,8 @@ bindkey '^N' history-beginning-search-forward
 [[ -d "$LOCAL_SRC/zsh-completions/src" ]] && \
   fpath=("$LOCAL_SRC/zsh-completions/src" $fpath)
 # # Sytax highlight
-# [[ -f "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
-#   source "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[[ -f "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
+  source "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # PROGRAMS
 #------------------------------------------------------------------------------
@@ -122,6 +122,7 @@ alias vil='nvim -c "set background=light"'
 alias v='nvim --clean -u ~/.vim/vimrc'
 alias vi='nvim'
 alias reload='. ~/.zshrc'
+alias ls='ls --color=auto'
 alias l='ls -al'
 alias ll='ls -al'
 alias ..='cd ..'
