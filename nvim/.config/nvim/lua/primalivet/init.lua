@@ -9,7 +9,10 @@ vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.signcolumn = "yes:1"
-vim.opt.path = "**"
+vim.opt.path:append("**")
+vim.opt.path:append("nvim/.config/**")
+vim.opt.path:append("vim/.vim/**")
+vim.opt.path:append("tmux/.**")
 vim.opt.wildignore = "*/node_modules/**,*/elm-stuff/**"
 vim.opt.wildmenu = true
 vim.opt.wildmode = "lastused:list:full"
