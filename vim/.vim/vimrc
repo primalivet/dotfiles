@@ -1,24 +1,24 @@
 " turn on included plugins
-filetype plugin indent on            
+filetype plugin indent on
 " turn syntax on
-syntax on                            
+syntax on
 
 " allow me to backspace over: start of insertion indents, and end of lines
-set backspace=indent,eol,start       
+set backspace=indent,eol,start
 " allow me to switch from an unsaved buffer
-set hidden                           
+set hidden
 " highlight search results, do it incrementally as i type
-set hlsearch incsearch               
+set hlsearch incsearch
 " only be case sensitive in programs when i type capital letters
 set ignorecase smartcase
 " give me some space when i reach the window edge
 set scrolloff=5 sidescrolloff=5
 " dont try to be compatible with older vi
-set nocompatible                     
+set nocompatible
 " dont use a swap fil
-set noswapfile                       
+set noswapfile
 " include all subdirectories and files below the current working directory
-set path+=**                         
+set path+=**
 " show where I am in the buffer, and only use laststatus when window has splits
 set ruler laststatus=1
 " show me a completion menu for commands
@@ -29,6 +29,8 @@ set fileignorecase
 set grepprg=rg\ --vimgrep\ --no-heading\ --hidden grepformat=%f:%l:%c:%m:%f:%l:%m
 " dont wrap lines
 set nowrap
+" Set number of colors
+set t_Co=16
 
 let $RTP=split(&runtimepath, ',')[0] " shortcut to edit my part of the runtimepath
 let $RC="$HOME/.vim/vimrc"           " shortcut to edit my vimrc
