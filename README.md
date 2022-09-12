@@ -23,6 +23,14 @@ $ brew install stow
 When GNU Stow is installed you just `cd` into the dotfiles directory and then
 use the following commands to put the dotfiles in your `~` directory.
 
+```
+# switch <dir> for the directory of the program configs your want to install
+$ stow --no-folding <dir> -t ~
+
+# this is how you would install the config for neovim for example.
+$ stow --no-folding nvim -t ~
+```
+
 ## A note on `--no-folding`
 
 The `--no-folding` option traverses the source directory and symlinks each file
@@ -33,19 +41,11 @@ Without the `--no-folding` option only the files and folder directly inside
 the "stowed dir" will be symlinked, on level only. _This is generally not the
 wanted behaviour for dotfiles_.
 
-## Examples
-
 __ATTN__ As `karabiner` is unable to use symlinked configuration files we have
 to skip the `--no-folding` when linking Karabiner dotfiles. Read more at
 [Karabiner documentation](https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/).
 
 ```
-# switch <dir> for the directory of the program configs your want to install
-$ stow --no-folding <dir> -t ~
-
-# this is how you would install the config for neovim for example.
-$ stow --no-folding nvim -t ~
-
 # As the above note says this is how to do it for Karabiner
 $ stow karabiner -t ~
 ```
