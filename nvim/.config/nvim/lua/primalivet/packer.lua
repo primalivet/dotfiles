@@ -3,14 +3,14 @@ local M = {}
 function M.init()
   local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    -- Bootstrap (installs packer, requires restart after execution)
     vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
   end
 
   local packer = require("packer")
   local use = packer.use
-  packer.init() -- Initialize
+  packer.init()
 
-  use("nvim-lua/plenary.nvim")
   use("wbthomason/packer.nvim")
   use("editorconfig/editorconfig-vim")
   use("tpope/vim-surround")
@@ -19,41 +19,12 @@ function M.init()
   use("tpope/vim-commentary")
 
   use({
-    "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
-    requires = { { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, "nvim-lua/plenary.nvim" },
-    config = function()
-      local picker_defaults = { results_title = false, prompt_title = false, previewer = false }
-      require("telescope").setup({
-        defaults = {
-          layout_strategy = "vertical",
-          mappings = {
-            i = {
-              ["<Esc"] = require("telescope.actions").close,
-            },
-          },
-        },
-        pickers = {
-          buffers = picker_defaults,
-          commands = picker_defaults,
-          find_files = picker_defaults,
-          git_files = picker_defaults,
-        },
-      })
-      require("telescope").load_extension("fzf")
-    end,
-  })
-
-  use({
     "junegunn/fzf",
     requires = { "junegunn/fzf.vim" },
     config = function()
       vim.g.fzf_layout = { down = "30%" }
       vim.g.fzf_preview_window = {}
-      vim.g.fzf_action = {
-        ["ctrl-x"] = "split",
-        ["ctrl-v"] = "vsplit",
-      }
+      vim.g.fzf_action = { ["ctrl-x"] = "split", ["ctrl-v"] = "vsplit" }
     end,
   })
 
@@ -67,7 +38,6 @@ function M.init()
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
-      "hrsh7th/cmp-emoji",
       "hrsh7th/cmp-nvim-lsp-signature-help",
     },
     config = function()
@@ -94,20 +64,17 @@ function M.init()
           { name = "path" },
           { name = "buffer" },
           { name = "rg" },
-          { name = "emoji" },
         }),
         formatting = {
           format = function(entry, vim_item)
             vim_item.menu = ({
-              buffer = "[Buffer]",
-              nvim_lsp = "[LSP]",
-              luasnip = "[Snippet]",
-              nvim_lua = "[NvimLua]",
-              path = "[Path]",
-              calc = "[Calc]",
-              nvim_lsp_signature_help = "[Signature]",
-              rg = "[Ripgrep]",
-              emoji = "[Emoji]",
+              buffer = "[buffer]",
+              nvim_lsp = "[lsp]",
+              luasnip = "[snippet]",
+              nvim_lua = "[nvimlua]",
+              path = "[path]",
+              nvim_lsp_signature_help = "[signature]",
+              rg = "[rg]",
             })[entry.source.name]
             return vim_item
           end,
@@ -138,9 +105,7 @@ function M.init()
     run = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup({
-        playground = {
-          enable = true,
-        },
+        playground = { enable = true },
         highlight = { enable = true },
         indent = { enable = true },
       })
@@ -149,7 +114,7 @@ function M.init()
 
   use({
     "neovim/nvim-lspconfig",
-    requires = { "simrat39/rust-tools.nvim", "jose-elias-alvarez/nvim-lsp-ts-utils" },
+    requires = { "hrsh7th/nvim-cmp", "jose-elias-alvarez/nvim-lsp-ts-utils", "simrat39/rust-tools.nvim" },
     config = function()
       local nvim_lsp = require("lspconfig")
       local rusttools = require("rust-tools")
@@ -165,20 +130,23 @@ function M.init()
       end
 
       local function on_attach(client, _)
-        -- Disable formatting for any language server
+        -- Disable LSP formatting for any language server
+        -- In most cases I tend to use null-ls for formatting and linting, as
+        -- they are generally better to configure with widley used tools such
+        -- as prettier and eslint.
         client.resolved_capabilities.document_formatting = false
         client.resolved_capabilities.document_range_formatting = false
 
         if client.name == "rust_analyzer" then
+          -- For rust, we do want to use the LSP formatting though as it's
+          -- widley accepted.
           client.resolved_capabilities.document_formatting = true
           client.resolved_capabilities.document_range_formatting = true
-          --     -- Hover actions
-          --     vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-          --     -- Code action groups
-          --     vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
         end
 
         if client.name == "tsserver" then
+          -- For Typescript (javascript) we do use some extra tools built ontop
+          -- of nvim-lsp to get us smarter code actions around imports, types etc.
           local ts_utils = require("nvim-lsp-ts-utils")
           ts_utils.setup({
             auto_inlay_hints = false,
@@ -189,33 +157,30 @@ function M.init()
         end
       end
 
-      -- LSP Setups
-
       local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
       capabilities.textDocument.completion.completionItem.snippetSupport = true
 
       nvim_lsp.elmls.setup({ capabilities = capabilities }) -- Elm
-      nvim_lsp.cssls.setup({ capabilities = capabilities, on_attach = on_attach })
+
+      nvim_lsp.cssls.setup({ capabilities = capabilities, on_attach = on_attach }) -- Css
+
       nvim_lsp.hls.setup({ capabilities = capabilities, on_attach = on_attach }) -- Haskell
-      nvim_lsp.tsserver.setup({
+
+      rusttools.setup({ server = { on_attach = on_attach } }) -- Rust
+
+      nvim_lsp.tsserver.setup({ -- Typescript
         capabilities = capabilities,
         init_options = require("nvim-lsp-ts-utils").init_options,
         on_attach = on_attach,
       })
 
-      rusttools.setup({ server = { on_attach = on_attach } })
-
-      nvim_lsp.sumneko_lua.setup({
+      nvim_lsp.sumneko_lua.setup({ -- Lua
         on_attach = on_attach,
         settings = {
           Lua = {
-            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
             runtime = { version = "LuaJIT" },
-            -- Get the language server to recognize the `vim` global
             diagnostics = { globals = { "vim" } },
-            -- Make the server aware of Neovim runtime files
             workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-            -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = { enable = false },
           },
         },

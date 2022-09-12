@@ -43,12 +43,6 @@ vim.keymap.set("n", "<leader>sc", ":Commands<CR>", default_opt)
 vim.keymap.set("n", "<leader>sf", ":Files<CR>", default_opt)
 vim.keymap.set("n", "<leader>sg", ":GitFiles<CR>", default_opt)
 
--- Search (find) alternative with Telescope
-vim.keymap.set("n", "<leader>fb", require('telescope.builtin').buffers, default_opt)
-vim.keymap.set("n", "<leader>fc", require('telescope.builtin').commands, default_opt)
-vim.keymap.set("n", "<leader>ff", require('telescope.builtin').find_files, default_opt)
-vim.keymap.set("n", "<leader>fg", require('telescope.builtin').git_files, default_opt)
-
 -- Edit
 vim.keymap.set("n", "<leader>ea", vim.lsp.buf.code_action, default_opt)
 vim.keymap.set("n", "<leader>ef", vim.lsp.buf.formatting, default_opt)
