@@ -29,6 +29,9 @@ vim.keymap.set("n", "]L", ":llast<CR>", default_opt)
 vim.keymap.set("n", "[d", vim.lsp.diagnostic.goto_next, default_opt)
 vim.keymap.set("n", "]d", vim.lsp.diagnostic.goto_prev, default_opt)
 
+-- Diagnostics
+vim.keymap.set("n", "<leader>dc", ":Diagnostics<CR>", default_opt)
+
 -- Previous and Next: Buffer
 vim.keymap.set("n", "[b", ":bprevious<CR>", default_opt)
 vim.keymap.set("n", "]b", ":bnext<CR>", default_opt)
