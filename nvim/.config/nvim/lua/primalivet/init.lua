@@ -15,7 +15,7 @@ opt.ignorecase = true
 opt.laststatus = 1
 opt.listchars = "tab:>--,space:·,trail:·,eol:¶" -- chars in :list mode
 opt.number = true
-opt.path:append("**,nvim/.config/**,vim/.vim/**,tmux/.**")
+opt.path:append("**,bin/.local/**,nvim/.config/**,vim/.vim/**,tmux/.**")
 opt.relativenumber = true
 opt.scrolloff = 5
 opt.shiftround = true
