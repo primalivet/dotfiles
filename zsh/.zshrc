@@ -1,8 +1,6 @@
 # ENVIRONMENT VARIABLES
 #------------------------------------------------------------------------------
-
 export TERM=xterm-256color
-export LANG="en-US.UTF-8"
 export LOCAL_BIN=$HOME/.local/bin
 export LOCAL_SRC=$HOME/.local/src
 
@@ -22,11 +20,12 @@ export KEYTIMEOUT=1
 # Node version manager install directory
 export N_PREFIX=$HOME/.local/src/n
 
-#Path
+# Path
 export PATH=$LOCAL_BIN:$PATH
-export PATH=$RUST_ROOT:$PATH
 export PATH=$N_PREFIX/bin:$PATH
 export PATH="$LOCAL_SRC/lua-language-server/bin":$PATH
+
+# Homebrew paths (only on mac / Darwin) systems
 [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/bin/:$PATH"
 [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
@@ -46,7 +45,6 @@ hl+:11"
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git" --glob "!.stack-work"'
 export FZF_DEFAULT_OPTS="--height=100% --color=$FZF_COLORS"
-#export FZF_DEFAULT_OPTS="--height=100%"
 
 # OPTIONS
 #------------------------------------------------------------------------------
@@ -98,7 +96,7 @@ bindkey '^N' history-beginning-search-forward
 # PROGRAMS
 #------------------------------------------------------------------------------
 
-# Rust
+# Rust (cargo env script also add Rust bins to PATH)
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
 # Haskell (GHCup)
