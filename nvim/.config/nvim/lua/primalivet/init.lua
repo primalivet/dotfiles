@@ -2,6 +2,7 @@ local opt = vim.opt
 vim.g.mapleader = " "
 
 opt.autoindent = true
+opt.backup = false
 opt.completeopt = "menu,menuone,noselect"
 opt.diffopt = "internal,filler,closeoff,vertical"
 opt.expandtab = true
