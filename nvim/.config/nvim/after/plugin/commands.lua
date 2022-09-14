@@ -6,7 +6,7 @@ vim.api.nvim_create_user_command("PreviewHunk", "Gitsigns preview_hunk", {})
 vim.api.nvim_create_user_command("Diagnostics", function()
   print("put in qf list")
   vim.diagnostic.setqflist({
-    title = "Diagnostics"
+    title = "Workspace Diagnostics",
   })
 end, {})
 
