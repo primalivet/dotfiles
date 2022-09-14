@@ -16,6 +16,14 @@ local group = vim.api.nvim_create_augroup("PRIMALIVET", {})
 
 vim.api.nvim_create_autocmd({ "VimResized" }, { group = group, command = "wincmd=" })
 
+vim.api.nvim_create_autocmd({ "DiagnosticChanged" }, {
+  group = group,
+  pattern = "*",
+  callback = function()
+    vim.diagnostic.setloclist({ open = false, title = "Buffer Diagnostics" })
+  end,
+})
+
 vim.api.nvim_create_autocmd(
   { "BufRead", "BufNewFile" },
   { group = group, pattern = "*.json", command = "set filetype=jsonc" }
