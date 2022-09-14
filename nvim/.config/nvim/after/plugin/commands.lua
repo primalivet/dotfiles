@@ -16,7 +16,7 @@ local group = vim.api.nvim_create_augroup("PRIMALIVET", {})
 
 vim.api.nvim_create_autocmd({ "VimResized" }, { group = group, command = "wincmd=" })
 
-vim.api.nvim_create_autocmd({ "DiagnosticChanged" }, {
+vim.api.nvim_create_autocmd({ "DiagnosticChanged", "BufEnter" }, {
   group = group,
   pattern = "*",
   callback = function()
