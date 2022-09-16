@@ -22,21 +22,40 @@ function M.init()
     return
   end
 
+  -- Packer itself, it beeing here enables packer to update itself
   use("wbthomason/packer.nvim")
+  -- Dependency lib used by alot of packages
+  use("nvim-lua/plenary.nvim")
+  -- Common editor configuration
   use("editorconfig/editorconfig-vim")
+  -- Surround text objects with e.g. ",',[,(,{ etc
   use("tpope/vim-surround")
+  -- Enable "." (dot command) on for example surrounds
   use("tpope/vim-repeat")
+  -- Git integration
   use("tpope/vim-fugitive")
+  -- Enable language agnostic comments
   use("tpope/vim-commentary")
+  -- Fuzzy finder
+  use({ "junegunn/fzf", requires = { "junegunn/fzf.vim" } })
+  -- Git signs in the signcolumn, also handles "reset a hunk", "preview hunk"
+  -- etc.
+  use({ "lewis6991/gitsigns.nvim" })
+  -- Treesitter config abstraction and "playground" to see treesitter the
+  -- parsed Abstract Syntax Tree
   use({
-    "junegunn/fzf",
-    requires = { "junegunn/fzf.vim" },
-    config = function()
-      vim.g.fzf_layout = { down = "30%" }
-      vim.g.fzf_preview_window = {}
-      vim.g.fzf_action = { ["ctrl-x"] = "split", ["ctrl-v"] = "vsplit" }
-    end,
+    "nvim-treesitter/nvim-treesitter",
+    requires = { "nvim-treesitter/playground" },
+    run = ":TSUpdate",
   })
+  -- Language Sever Protocol "LSP" config abstraction
+  use({
+    "neovim/nvim-lspconfig",
+    requires = { "hrsh7th/nvim-cmp", "jose-elias-alvarez/nvim-lsp-ts-utils", "simrat39/rust-tools.nvim" },
+  })
+  -- LSP integration for formatting, linting, codeactions etc.
+  use({ "jose-elias-alvarez/null-ls.nvim" })
+  -- Completion engine and "completers" for several things
   use({
     "hrsh7th/nvim-cmp",
     requires = {
@@ -50,17 +69,7 @@ function M.init()
       "hrsh7th/cmp-nvim-lsp-signature-help",
     },
   })
-  use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    requires = { "nvim-treesitter/playground" },
-    run = ":TSUpdate",
-  })
-  use({
-    "neovim/nvim-lspconfig",
-    requires = { "hrsh7th/nvim-cmp", "jose-elias-alvarez/nvim-lsp-ts-utils", "simrat39/rust-tools.nvim" },
-  })
-  use({ "jose-elias-alvarez/null-ls.nvim" })
+  -- Debugger for DAP protocol
   -- use({ "mfussenegger/nvim-dap" })
 end
 
