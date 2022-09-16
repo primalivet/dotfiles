@@ -1,7 +1,7 @@
 window:
   dimensions:
-    columns: 80
-    lines: 30
+    columns: 90
+    lines: 32
   position:
     x: 100
     y: 100
@@ -24,15 +24,12 @@ font:
 
 #Colors (Srcery)
 colors:
-  # Default colors
   primary:
     background: '#1c1b19'
     foreground: '#fce8c3'
-  # Cursor colors
   cursor:
     text: CellBackground
     cursor: '#fbb829'
-  # Normal colors
   normal:
     black:   '#1c1b19'
     red:     '#ef2f27'
@@ -42,7 +39,6 @@ colors:
     magenta: '#e02c6d'
     cyan:    '#0aaeb3'
     white:   '#baa67f'
-  # Bright colors
   bright:
     black:   '#918175'
     red:     '#f75341'
@@ -53,9 +49,22 @@ colors:
     cyan:    '#2be4d0'
     white:   '#fce8c3'
 
-shell:
- program: "C:\\Windows\\System32\\wsl.exe -d Ubuntu-22.04"
+# HINT: All options below are Windows (WSL presumed) exclusive
+# ---
+# As of now it doesn't seem to be a way to conditionally set options depending
+# on platform
+#
+# So on Windows, copy this file to
+# `/mnt/c/Users/[username]/AppData/Roaming/alacritty/` and uncomment the lines
+# below.
 
-working_directory: "//wsl$/Ubuntu-22.04/home/primalivet"
-key_bindings:
-- { key: Space, mods: Control, chars: "\x00" }
+# Below you want to set the specific name of the WSL Linux distribution you
+# want to start in `shell.program` and the directory you want to start in in
+# `working_directory`. Both for the shell.program and for the working_directory
+
+# shell:
+#  program: "C:\\Windows\\System32\\wsl.exe -d Ubuntu-22.04"
+
+# working_directory: "//wsl$/Ubuntu-22.04/home/primalivet"
+# key_bindings:
+# - { key: Space, mods: Control, chars: "\x00" }
