@@ -1,7 +1,7 @@
 window:
   dimensions:
-    columns: 90
-    lines: 32
+    columns: 120
+    lines: 40
   position:
     x: 100
     y: 100
@@ -9,18 +9,17 @@ window:
 font:
   normal:
     family: Iosevka Term
-    style: Semibold
+    style: Medium
   bold:
     family: Iosevka Term
-    style: Heavy
+    style: Bold
   italic:
     family: Iosevka Term
-    style: Semibold Oblique
+    style: Medium Oblique
   bold_italic:
     family: Iosevka Term
-    style: Heavy Oblique
-  size: 16.0
-
+    style: Bold Oblique
+  size: 18.0
 
 #Colors (Srcery)
 colors:
