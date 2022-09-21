@@ -32,19 +32,19 @@ export PATH="$LOCAL_SRC/lua-language-server/bin":$PATH
 # Fzf (fuzzy file search)
 FZF_COLORS="bg+:-1,\
 fg:-1,\
-fg+:11,\
+fg+:-1,\
 border:-1,\
-spinner:15,\
-hl:11,\
+spinner:11,\
+hl:12,\
 header:15,\
-info:15,\
-pointer:15,\
-marker:15,\
-prompt:15,\
-hl+:11"
+info:11,\
+pointer:11,\
+marker:11,\
+prompt:11,\
+hl+:12"
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git" --glob "!.stack-work"'
-export FZF_DEFAULT_OPTS="--height=100% --color=$FZF_COLORS"
+export FZF_DEFAULT_OPTS="--height=100% --reverse --color=$FZF_COLORS"
 
 # OPTIONS
 #------------------------------------------------------------------------------
