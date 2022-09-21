@@ -48,6 +48,33 @@ colors:
     cyan:    '#2be4d0'
     white:   '#fce8c3'
 
+#Colors (WebSafe)
+# colors:
+#   primary:
+#     background: '#ffffff'
+#     foreground: '#000000'
+#   cursor:
+#     text: CellBackground
+#     cursor: '#fbb829'
+#   normal:
+#     black:   '#000000'
+#     red:     '#660000'
+#     green:   '#006600'
+#     yellow:  '#ffcc00'
+#     blue:    '#000066'
+#     magenta: '#990099'
+#     cyan:    '#006666'
+#     white:   '#efefef'
+#   bright:
+#     black:   '#212121'
+#     red:     '#ff0000'
+#     green:   '#00ff00'
+#     yellow:  '#ffff00'
+#     blue:    '#0000ff'
+#     magenta: '#993399'
+#     cyan:    '#009999'
+#     white:   '#ffffff'
+
 # HINT: All options below are Windows (WSL presumed) exclusive
 # ---
 # As of now it doesn't seem to be a way to conditionally set options depending
