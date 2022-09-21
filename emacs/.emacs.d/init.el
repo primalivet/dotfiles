@@ -213,10 +213,15 @@
   :after (lsp-mode)
   :commands lsp-ui-mode)
 
-(use-package gruber-darker-theme
+(use-package srcery-theme
   :straight t
   :init
-  (load-theme 'gruber-darker t))
+  (load-theme 'srcery t))
+
+;; (use-package gruber-darker-theme
+;;   :straight t
+;;   :init
+;;   (load-theme 'gruber-darker t))
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
