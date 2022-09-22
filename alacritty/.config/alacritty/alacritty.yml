@@ -20,6 +20,8 @@ font:
     family: Iosevka Term
     style: Bold Oblique
   size: 18.0
+  title: Alacritty
+  dynamic_title: false
 
 #Colors (Srcery)
 colors:
