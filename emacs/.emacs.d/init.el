@@ -48,6 +48,7 @@
   (setq inhibit-startup-screen t)
   (set-default 'truncate-lines 0)
   :config
+  (menu-bar-mode -1)
   (tool-bar-mode -1))
 
 (use-package frame
