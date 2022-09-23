@@ -214,10 +214,10 @@
   :after (lsp-mode)
   :commands lsp-ui-mode)
 
-(use-package srcery-theme
-  :straight t
-  :init
-  (load-theme 'srcery t))
+;; (use-package srcery-theme
+;;   :straight t
+;;   :init
+;;   (load-theme 'srcery t))
 
 ;; (use-package gruber-darker-theme
 ;;   :straight t
