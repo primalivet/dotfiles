@@ -1,6 +1,6 @@
 window:
   dimensions:
-    columns: 140
+    columns: 120
     lines: 40
   position:
     x: 200
@@ -23,59 +23,60 @@ font:
   title: Alacritty
   dynamic_title: false
 
-#Colors (Srcery)
-colors:
-  primary:
-    background: '#1c1b19'
-    foreground: '#fce8c3'
-  cursor:
-    text: CellBackground
-    cursor: '#fbb829'
-  normal:
-    black:   '#1c1b19'
-    red:     '#ef2f27'
-    green:   '#519f50'
-    yellow:  '#fbb829'
-    blue:    '#2c78bf'
-    magenta: '#e02c6d'
-    cyan:    '#0aaeb3'
-    white:   '#baa67f'
-  bright:
-    black:   '#918175'
-    red:     '#f75341'
-    green:   '#98bc37'
-    yellow:  '#fed06e'
-    blue:    '#68a8e4'
-    magenta: '#ff5c8f'
-    cyan:    '#2be4d0'
-    white:   '#fce8c3'
+##Colors (Srcery)
+#colors:
+#  primary:
+#    background: '#1c1b19'
+#    foreground: '#fce8c3'
+#  cursor:
+#    text: CellBackground
+#    cursor: '#fbb829'
+#  normal:
+#    black:   '#1c1b19'
+#    red:     '#ef2f27'
+#    green:   '#519f50'
+#    yellow:  '#fbb829'
+#    blue:    '#2c78bf'
+#    magenta: '#e02c6d'
+#    cyan:    '#0aaeb3'
+#    white:   '#baa67f'
+#  bright:
+#    black:   '#918175'
+#    red:     '#f75341'
+#    green:   '#98bc37'
+#    yellow:  '#fed06e'
+#    blue:    '#68a8e4'
+#    magenta: '#ff5c8f'
+#    cyan:    '#2be4d0'
+#    white:   '#fce8c3'
 
 #Colors (WebSafe)
-# colors:
-#   primary:
-#     background: '#ffffff'
-#     foreground: '#000000'
-#   cursor:
-#     text: CellBackground
-#     cursor: '#fbb829'
-#   normal:
-#     black:   '#000000'
-#     red:     '#660000'
-#     green:   '#006600'
-#     yellow:  '#ffcc00'
-#     blue:    '#000066'
-#     magenta: '#990099'
-#     cyan:    '#006666'
-#     white:   '#efefef'
-#   bright:
-#     black:   '#212121'
-#     red:     '#ff0000'
-#     green:   '#00ff00'
-#     yellow:  '#ffff00'
-#     blue:    '#0000ff'
-#     magenta: '#993399'
-#     cyan:    '#009999'
-#     white:   '#ffffff'
+colors:
+  primary:
+    # background: '#f8f9fa'
+    background: '#e5e9ea'
+    foreground: '#000000'
+  cursor:
+    text: CellBackground
+    cursor: '#000000'
+  normal:
+    black:   '#000000'
+    red:     '#B00040'
+    green:   '#008000'
+    yellow:  '#7D5B08'
+    blue:    '#000080'
+    magenta: '#800080'
+    cyan:    '#3D7b7b'
+    white:   '#eeeeee'
+  bright:
+    black:   '#333333'
+    red:     '#BA2121'
+    green:   '#008400'
+    yellow:  '#B8860B'
+    blue:    '#0000ff'
+    magenta: '#AA22FF'
+    cyan:    '#749494'
+    white:   '#ffffff'
 
 # HINT: All options below are Windows (WSL presumed) exclusive
 # ---
