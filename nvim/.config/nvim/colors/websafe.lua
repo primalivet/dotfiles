@@ -1,4 +1,4 @@
--- " Sixteen
+-- " Websafe
 -- " ----------------------------------------------------------------------------
 -- " This is opinionated
 -- "
@@ -30,7 +30,7 @@ if vim.fn.exists("syntax_on") then
   vim.cmd("syntax reset")
 end
 
-vim.g.colors_name = "sixteen"
+vim.g.colors_name = "websafe"
 
 local set_hl = vim.api.nvim_set_hl
 local reset = function(group)
@@ -50,8 +50,11 @@ reset("Directory")
 reset("EndOfBuffer")
 reset("FoldColumn")
 reset("Folded")
-reset("MoreMsg")
+reset("LineNr")
+reset("LineNrAbove")
+reset("LineNrBelow")
 reset("ModeMsg")
+reset("MoreMsg")
 reset("MsgArea")
 reset("MsgSeparator")
 reset("Normal")
@@ -83,47 +86,46 @@ set_hl(0, "PmenuSbar", { reverse = white })
 set_hl(0, "PmenuSel", { reverse = 1 })
 set_hl(0, "PmenuThumb", { ctermbg = black })
 
-set_hl(0, "StatusLine", { ctermfg = black, ctermbg = white, bold = 1 })
-set_hl(0, "StatusLineNC", { ctermfg = black, ctermbg = bright_black })
+set_hl(0, "StatusLine", { ctermfg = bright_white, ctermbg = black, bold = 1 })
+set_hl(0, "StatusLineNC", { ctermfg = white, ctermbg = black })
 set_hl(0, "QuickFixLine", { ctermfg = black, ctermbg = green })
 
-set_hl(0, "VertSplit", { ctermfg = black, ctermbg = white })
-set_hl(0, "WinSeparator", { ctermfg = black, ctermbg = white })
+set_hl(0, "VertSplit", { ctermfg = white, ctermbg = black })
+set_hl(0, "WinSeparator", { ctermfg = white, ctermbg = black })
 
 set_hl(0, "MatchParen", { ctermfg = black, ctermbg = bright_magenta })
 
-set_hl(0, "ErrorMsg", { ctermfg = bright_white, ctermbg = bright_red })
-set_hl(0, "WarningMsg", { ctermfg = black, ctermbg = bright_yellow })
+set_hl(0, "ErrorMsg", { ctermfg = bright_white, ctermbg = red })
+set_hl(0, "WarningMsg", { ctermfg = black, ctermbg = yellow })
 
-set_hl(0, "Visual", { ctermfg = black, ctermbg = bright_yellow })
-set_hl(0, "VisualNOS", { ctermfg = black, ctermbg = bright_yellow })
+set_hl(0, "Visual", { ctermfg = white, ctermbg = blue })
+set_hl(0, "VisualNOS", { ctermfg = white, ctermbg = blue })
 
-set_hl(0, "Search", { ctermfg = black, ctermbg = bright_yellow })
-set_hl(0, "IncSearch", { ctermfg = black, ctermbg = bright_yellow })
+set_hl(0, "Search", { ctermfg = white, ctermbg = bright_blue})
+set_hl(0, "IncSearch", { ctermfg = white, ctermbg = blue})
 
-set_hl(0, "DiffAdd", { ctermbg = green, ctermfg = 0 })
-set_hl(0, "DiffChange", { ctermbg = yellow, ctermfg = 0 })
-set_hl(0, "DiffDelete", { ctermbg = red, ctermfg = 0 })
-set_hl(0, "DiffText", { ctermbg = yellow, ctermfg = 0, underline = 1 })
+set_hl(0, "DiffAdd", { ctermbg = bright_green, ctermfg = black })
+set_hl(0, "DiffChange", { ctermbg = bright_yellow, ctermfg = black })
+set_hl(0, "DiffDelete", { ctermbg = bright_red, ctermfg = black })
+set_hl(0, "DiffText", { ctermbg = yellow, ctermfg = black })
 
-set_hl(0, "LineNr", { ctermfg = bright_black })
-set_hl(0, "LineNrAbove", { ctermfg = bright_black })
-set_hl(0, "LineNrBelow", { ctermfg = bright_black })
 
 -- Suggested Group names (by Vim, see :h group-name)
 set_hl(0, "Comment", { ctermfg = cyan, italic = 1 })
 set_hl(0, "Constant", { ctermfg = red })
-set_hl(0, "Identifier", { bold = 1 })
+set_hl(0, "Identifier", { ctermfg = blue })
 set_hl(0, "Statement", { ctermfg = green, bold = 1 })
-set_hl(0, "PreProc", { ctermfg = bright_blue })
-set_hl(0, "Type", { ctermfg = bright_cyan })
+set_hl(0, "PreProc", { ctermfg = "NONE" })
+set_hl(0, "Macro", { ctermfg = green })
+set_hl(0, "Type", { ctermfg = bright_blue, bold = 1 })
 reset("Special")
 reset("Ignore")
 set_hl(0, "Underlined", { underline = 1 })
-set_hl(0, "Error", { ctermfg = red })
+
+set_hl(0,"Error", { ctermfg = red })
 set_hl(0, "Todo", { ctermfg = black, ctermbg = bright_yellow })
 
 -- GitSigns (plugin)
-set_hl(0, "GitSignsAdd", { ctermfg = green })
-set_hl(0, "GitSignsChange", { ctermfg = yellow })
-set_hl(0, "GitSignsDelete", { ctermfg = red })
+set_hl(0, "GitSignsAdd", { ctermfg = bright_green })
+set_hl(0, "GitSignsChange", { ctermfg = bright_yellow })
+set_hl(0, "GitSignsDelete", { ctermfg = bright_red })
