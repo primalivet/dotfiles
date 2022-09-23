@@ -57,6 +57,7 @@ reset("ModeMsg")
 reset("MoreMsg")
 reset("MsgArea")
 reset("MsgSeparator")
+reset("NonText")
 reset("Normal")
 reset("NormalNC")
 reset("Question")
@@ -77,38 +78,32 @@ reset("Whitespace")
 reset("WildMenu")
 reset("lCursor")
 
-set_hl(0, "NonText", { ctermfg = bright_black })
-
 set_hl(0, "NormalFloat", { ctermfg = "NONE", ctermbg = white })
-
 set_hl(0, "Pmenu", { ctermfg = "NONE", ctermbg = white })
 set_hl(0, "PmenuSbar", { reverse = white })
 set_hl(0, "PmenuSel", { reverse = 1 })
 set_hl(0, "PmenuThumb", { ctermbg = black })
 
-set_hl(0, "StatusLine", { ctermfg = bright_white, ctermbg = black, bold = 1 })
-set_hl(0, "StatusLineNC", { ctermfg = white, ctermbg = black })
-set_hl(0, "QuickFixLine", { ctermfg = black, ctermbg = green })
+set_hl(0, "StatusLine", { reverse = 1, bold = 1 })
+set_hl(0, "StatusLineNC", { reverse = 1 })
+set_hl(0, "QuickFixLine", { ctermfg = white, ctermbg = green })
+set_hl(0, "VertSplit", { reverse = 1 })
+set_hl(0, "WinSeparator", { reverse = 1 })
 
-set_hl(0, "VertSplit", { ctermfg = white, ctermbg = black })
-set_hl(0, "WinSeparator", { ctermfg = white, ctermbg = black })
+set_hl(0, "Visual", { reverse = 1 })
+set_hl(0, "VisualNOS", { reverse = 1 })
+set_hl(0, "MatchParen", { reverse = 1 })
 
-set_hl(0, "MatchParen", { ctermfg = black, ctermbg = bright_magenta })
+set_hl(0, "ErrorMsg", { ctermfg = white, ctermbg = red })
+set_hl(0, "WarningMsg", { ctermfg = white, ctermbg = yellow })
 
-set_hl(0, "ErrorMsg", { ctermfg = bright_white, ctermbg = red })
-set_hl(0, "WarningMsg", { ctermfg = black, ctermbg = yellow })
-
-set_hl(0, "Visual", { ctermfg = white, ctermbg = blue })
-set_hl(0, "VisualNOS", { ctermfg = white, ctermbg = blue })
-
-set_hl(0, "Search", { ctermfg = white, ctermbg = bright_blue})
-set_hl(0, "IncSearch", { ctermfg = white, ctermbg = blue})
+set_hl(0, "Search", { ctermfg = white, ctermbg = green })
+set_hl(0, "IncSearch", { ctermfg = white, ctermbg = bright_green })
 
 set_hl(0, "DiffAdd", { ctermbg = bright_green, ctermfg = black })
 set_hl(0, "DiffChange", { ctermbg = bright_yellow, ctermfg = black })
 set_hl(0, "DiffDelete", { ctermbg = bright_red, ctermfg = black })
 set_hl(0, "DiffText", { ctermbg = yellow, ctermfg = black })
-
 
 -- Suggested Group names (by Vim, see :h group-name)
 set_hl(0, "Comment", { ctermfg = cyan, italic = 1 })
@@ -122,7 +117,7 @@ reset("Special")
 reset("Ignore")
 set_hl(0, "Underlined", { underline = 1 })
 
-set_hl(0,"Error", { ctermfg = red })
+set_hl(0, "Error", { ctermfg = red })
 set_hl(0, "Todo", { ctermfg = black, ctermbg = bright_yellow })
 
 -- GitSigns (plugin)
