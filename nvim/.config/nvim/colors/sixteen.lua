@@ -83,12 +83,12 @@ set_hl(0, "PmenuSbar", { reverse = bright_black })
 set_hl(0, "PmenuSel", { reverse = 1 })
 set_hl(0, "PmenuThumb", { ctermbg = black })
 
-set_hl(0, "StatusLine", { ctermfg = black, ctermbg = white, bold = 1 })
+set_hl(0, "StatusLine", { ctermfg = black, ctermbg = bright_white, bold = 1 })
 set_hl(0, "StatusLineNC", { ctermfg = black, ctermbg = bright_black })
 set_hl(0, "QuickFixLine", { ctermfg = black, ctermbg = green })
 
-set_hl(0, "VertSplit", { ctermfg = black, ctermbg = white })
-set_hl(0, "WinSeparator", { ctermfg = black, ctermbg = white })
+set_hl(0, "VertSplit", { ctermfg = black, ctermbg = bright_black })
+set_hl(0, "WinSeparator", { ctermfg = black, ctermbg = bright_black })
 
 set_hl(0, "MatchParen", { ctermfg = black, ctermbg = bright_magenta })
 
