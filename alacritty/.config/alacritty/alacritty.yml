@@ -1,10 +1,10 @@
 window:
   dimensions:
-    columns: 120
+    columns: 140
     lines: 40
   position:
-    x: 100
-    y: 100
+    x: 200
+    y: 200
   title: Alacritty
 font:
   normal:
