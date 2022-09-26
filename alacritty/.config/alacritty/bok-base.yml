@@ -1,0 +1,12 @@
+# Nano base
+window:
+  padding:
+    x: 30
+    y: 30
+font:
+  offset:
+    x: 0
+    y: 8
+  glyph_offset:
+    x: 0
+    y: 4
