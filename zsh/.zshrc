@@ -34,14 +34,14 @@ FZF_COLORS="bg+:-1,\
 fg:-1,\
 fg+:-1,\
 border:-1,\
-spinner:11,\
-hl:12,\
-header:15,\
-info:11,\
-pointer:11,\
-marker:11,\
-prompt:11,\
-hl+:12"
+spinner:-1,\
+hl:4,\
+header:-1,\
+info:-1,\
+pointer:-1,\
+marker:-1,\
+prompt:-1,\
+hl+:4"
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git" --glob "!.stack-work"'
 export FZF_DEFAULT_OPTS="--height=100% --reverse --color=$FZF_COLORS"
