@@ -30,12 +30,12 @@
   :init
   (setq mac-command-modifier 'meta))
 
-;; (use-package display-line-numbers
-;;   :straight (:type built-in)
-;;   :init
-;;   (setq display-line-numbers-type 'relative)
-;;   :config
-;;   (global-display-line-numbers-mode 1))
+(use-package display-line-numbers
+  :straight (:type built-in)
+  :init
+  (setq display-line-numbers-type 'relative)
+  :config
+  (global-display-line-numbers-mode 1))
 
 (use-package files
   :straight (:type built-in)
@@ -55,12 +55,12 @@
 ;;   :straight (:type built-in)
 ;;   :init (setq default-frame-alist '((font . "Iosevka Term-25"))))
 
-;; (use-package paren
-;;   :straight (:type built-in)
-;;   :init
-;;   (setq show-paren-delay 0)
-;;   :config
-;;   (show-paren-mode +1))
+(use-package paren
+  :straight (:type built-in)
+  :init
+  (setq show-paren-delay 0)
+  :config
+  (show-paren-mode +1))
 
 ;; (use-package scroll-bar
 ;;   :straight (:type built-in)
@@ -91,6 +91,9 @@
 (nano-theme)
 ;; (use-package zoom-frm
 ;;   :straight t)
+
+(use-package vterm
+  :straight t)
 
 (use-package editorconfig
   :straight t
