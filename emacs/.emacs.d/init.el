@@ -30,42 +30,42 @@
   :init
   (setq mac-command-modifier 'meta))
 
-(use-package display-line-numbers
-  :straight (:type built-in)
-  :init
-  (setq display-line-numbers-type 'relative)
-  :config
-  (global-display-line-numbers-mode 1))
+;; (use-package display-line-numbers
+;;   :straight (:type built-in)
+;;   :init
+;;   (setq display-line-numbers-type 'relative)
+;;   :config
+;;   (global-display-line-numbers-mode 1))
 
 (use-package files
   :straight (:type built-in)
   :init
   (setq backup-directory-alist `(("." . "~/.saves"))))
 
-(use-package emacs
-  :straight (:type built-in)
-  :init
-  (setq inhibit-startup-screen t)
-  (set-default 'truncate-lines 0)
-  :config
-  (menu-bar-mode -1)
-  (tool-bar-mode -1))
+;; (use-package emacs
+;;   :straight (:type built-in)
+;;   :init
+;;   (setq inhibit-startup-screen t)
+;;   (set-default 'truncate-lines 0)
+;;   :config
+;;   (menu-bar-mode -1)
+;;   (tool-bar-mode -1))
 
-(use-package frame
-  :straight (:type built-in)
-  :init (setq default-frame-alist '((font . "Iosevka Term-25"))))
+;; (use-package frame
+;;   :straight (:type built-in)
+;;   :init (setq default-frame-alist '((font . "Iosevka Term-25"))))
 
-(use-package paren
-  :straight (:type built-in)
-  :init
-  (setq show-paren-delay 0)
-  :config
-  (show-paren-mode +1))
+;; (use-package paren
+;;   :straight (:type built-in)
+;;   :init
+;;   (setq show-paren-delay 0)
+;;   :config
+;;   (show-paren-mode +1))
 
-(use-package scroll-bar
-  :straight (:type built-in)
-  :config
-  (scroll-bar-mode -1))
+;; (use-package scroll-bar
+;;   :straight (:type built-in)
+;;   :config
+;;   (scroll-bar-mode -1))
 
 ;; Include my regular shell PATH variable in emacs.
 (use-package exec-path-from-shell
@@ -74,9 +74,23 @@
   (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize)))
 
+(straight-use-package
+  '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
 
-(use-package zoom-frm
-  :straight t)
+(require 'nano-layout)
+(require 'nano-faces)
+(nano-faces)
+(require 'nano-theme)
+(nano-theme)
+(require 'nano-defaults)
+(require 'nano-modeline)
+(nano-modeline)
+(require 'nano-faces)
+(nano-faces)
+(require 'nano-theme)
+(nano-theme)
+;; (use-package zoom-frm
+;;   :straight t)
 
 (use-package editorconfig
   :straight t
