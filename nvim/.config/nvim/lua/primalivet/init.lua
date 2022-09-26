@@ -8,7 +8,7 @@ opt.diffopt = "internal,filler,closeoff,vertical"
 opt.expandtab = true
 opt.fileformats = "unix"
 opt.fileignorecase = true
-opt.fillchars = "vert:|"
+-- opt.fillchars = "vert:|"
 opt.grepformat:append("%f:%l:%c:%m,%f:%l:%m")
 opt.grepprg = "rg --vimgrep --no-heading --hidden"
 opt.hidden = true -- dont unload abandoned buffers, just hide em
@@ -28,7 +28,7 @@ opt.smartcase = true
 opt.smartindent = true
 opt.softtabstop = 2
 opt.swapfile = false
-opt.termguicolors = false
+opt.termguicolors = true
 opt.timeoutlen = 500 --timeout for mappings
 opt.undofile = true -- uses the default undodir "~/.local/share/nvim/undo
 opt.updatetime = 100 --updatetime for events
@@ -37,6 +37,6 @@ opt.wildmenu = true
 opt.wildmode = "lastused:list:full"
 opt.wrap = false
 
-vim.cmd("colorscheme sixteen")
+vim.cmd("colorscheme bok")
 
 require("primalivet.packer").init()
