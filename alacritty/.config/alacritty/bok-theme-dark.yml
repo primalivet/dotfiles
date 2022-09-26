@@ -1,26 +1,26 @@
-# Nano dark
+# Bok dark
 colors:
   primary:
-    background: '#f8f9fa' # gray 0
-    foreground: '#212529' # gray 9
+    background: '#212529' # gray 9
+    foreground: '#e9ecef' # gray 2
   cursor:
     text: CellBackground
-    cursor: '#000000'
+    cursor: '#ffffff'
   normal:
     black:   '#212529' # gray 9
-    red:     '#c92a2a' # red 9
-    green:   '#2b8a3e' # green 9
-    yellow:  '#e67700' # yellow 9
-    blue:    '#1864ab' # blue 9
-    magenta: '#862e9c' # grape 9
-    cyan:    '#0b7285' # cyan 9
-    white:   '#ced4da' # gray 4
+    red:     '#fa5252' # red 6
+    green:   '#40c057' # green 6
+    yellow:  '#fab005' # yellow 6
+    blue:    '#228be6' # blue 6
+    magenta: '#be4bdb' # grape 6
+    cyan:    '#15aabf' # cyan 6
+    white:   '#adb5bd' # gray 5 (faded)
   bright:
-    black:   '#adb5bd' # gray 5
-    red:     '#f03e3e' # red 7
-    green:   '#37b24d' # green 7
-    yellow:  '#f59f00' # yellow 7
-    blue:    '#1c7ed6' # blue 7
-    magenta: '#ae3ec9' # grape 7
-    cyan:    '#1098ad' # cyan 7
-    white:   '#f8f9fa' # gray 0
+    black:   '#495057' # gray 7 (subtle)
+    red:     '#ff8787' # red 4
+    green:   '#69db7c' # green 4
+    yellow:  '#ffd43b' # yellow 4
+    blue:    '#4dabf7' # blue 4
+    magenta: '#da77f2' # grape 4
+    cyan:    '#3bc9db' # cyan 4
+    white:   '#e9ecef' # gray 0
