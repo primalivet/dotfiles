@@ -1,7 +1,6 @@
 -- " Nano
 -- " ----------------------------------------------------------------------------
 -- Open color
-
 local colors = {
   black = "#000000",
   blue0 = "#e7f5ff",
@@ -137,16 +136,37 @@ local colors = {
   yellow9 = "#e67700",
 }
 
-local palette = {
-  bg = colors.gray0,
-  body = colors.gray8,
-  subtle = colors.gray2,
-  popout = colors.orange8,
-  selection = colors.yellow0,
-  salient = colors.violet8,
-  faded = colors.gray5,
-  critical = colors.red8,
-}
+local palette = vim.opt.background:get() == "light"
+    and {
+      bg = colors.gray1,
+      body = colors.gray8,
+      faded = colors.gray6,
+      subtle = colors.gray3,
+      popout = colors.orange9,
+      salient = colors.violet9,
+      selection = colors.yellow0,
+      critical = colors.red9,
+      critical_bg = colors.yellow0,
+      success = colors.green9,
+      success_bg = colors.green0,
+      warning = colors.yellow9,
+      warning_bg = colors.yellow0,
+    }
+  or {
+    bg = colors.gray9,
+    body = colors.gray2,
+    faded = colors.gray5,
+    subtle = colors.gray7,
+    popout = colors.orange4,
+    salient = colors.violet4,
+    selection = colors.yellow9,
+    critical = colors.red4, -- TODO
+    critical_bg = colors.yellow9, -- TODO
+    success = colors.green4, -- TODO
+    success_bg = colors.green9, -- TODO
+    warning = colors.yellow4, -- TODO
+    warning_bg = colors.yellow9, -- TODO
+  }
 
 vim.cmd("hi clear")
 
@@ -156,8 +176,12 @@ end
 
 vim.g.colors_name = "bok"
 
-local hl = function(hldef)
-  return function(group)
+local hi = function(group)
+  return function(hldefs)
+    local hldef = {}
+    for _, f in pairs(hldefs) do
+      hldef = f(hldef)
+    end
     vim.api.nvim_set_hl(0, group, hldef)
   end
 end
@@ -194,14 +218,14 @@ local faded = function(hldef)
   return merge(hldef or {}, { fg = palette.faded })
 end
 
--- inforamtion that require immediate action
-local critical = function(hldef)
-  return merge(hldef or {}, { fg = palette.body, bg = palette.red8 })
-end
-
 -- information that has structural meaning
 local strong = function(hldef)
   return merge(hldef or {}, { bold = 1 })
+end
+
+-- information that can indicate a link or similar
+local underline = function(hldef)
+  return merge(hldef or {}, { underline = 1 })
 end
 
 -- physical area on the screen
@@ -218,109 +242,100 @@ local italic = function(hldef)
   return merge(hldef or {}, { italic = 1 })
 end
 
-local underline = function(hldef)
-  return merge(hldef or {}, { underline = 1 })
+local reverse = function(hldef)
+  return merge(hldef or {}, { reverse = 1 })
 end
 
-local hl_body = function(group)
-  hl(body())(group)
+local diff_add = function(hldef)
+  return merge(hldef or {}, { fg = palette.success, bg = palette.success_bg })
+end
+local diff_change = function(hldef)
+  return merge(hldef or {}, { fg = palette.warning, bg = palette.warning_bg })
+end
+local diff_remove = function(hldef)
+  return merge(hldef or {}, { fg = palette.critical, bg = palette.critical_bg })
 end
 
-local hl_faded = function(group)
-  hl(faded())(group)
-end
+hi("ColorColumn")({ body })
+hi("Conceal")({ body })
+hi("Cursor")({ body })
+hi("CursorColumn")({ body })
+hi("CursorIM")({ body })
+hi("CursorLine")({ body })
+hi("CursorLineFold")({ body })
+hi("CursorLineNr")({ body })
+hi("CursorLineSign")({ body })
+hi("Directory")({ body })
+hi("ErrorMsg")({ body })
+hi("FoldColumn")({ body })
+hi("Folded")({ body })
+hi("ModeMsg")({ body })
+hi("MoreMsg")({ body })
+hi("MsgSeparator")({ body })
+hi("NonText")({ body })
+hi("Normal")({ body })
+hi("NormalNC")({ body })
+hi("Question")({ body })
+hi("SpecialKey")({ body })
+hi("SpellBad")({ body })
+hi("SpellCap")({ body })
+hi("SpellLocal")({ body })
+hi("SpellRare")({ body })
+hi("Substitute")({ body })
+hi("TabLine")({ body })
+hi("TabLineFill")({ body })
+hi("TabLineSel")({ body })
+hi("TermCursor")({ body })
+hi("TermCursorNC")({ body })
+hi("Title")({ body })
+hi("VisualNOS")({ body })
+hi("WarningMsg")({ body })
+hi("Whitespace")({ body })
+hi("WildMenu")({ body })
+hi("lCursor")({ body })
 
-local hl_hide = function(group)
-  hl(hide())(group)
-end
+hi("LineNr")({ faded })
+hi("LineNrAbove")({ faded })
+hi("LineNrBelow")({ faded })
+hi("SignColumn")({ faded })
+hi("EndOfBuffer")({ hide })
+hi("MatchParen")({ selection })
 
-local hl_subtle = function(group)
-  hl(subtle())(group)
-end
+hi("DiffAdd")({ diff_add })
+hi("DiffChange")({ diff_change })
+hi("DiffDelete")({ diff_remove })
+hi("DiffText")({ diff_change, italic })
 
-local hl_selection = function(group)
-  hl(selection())(group)
-end
+hi("Pmenu")({ subtle })
+hi("PmenuSbar")({ subtle })
+hi("PmenuSel")({ strong, popout })
+hi("PmenuThumb")({ faded, reverse })
 
-hl_body("ColorColumn")
-hl_body("Conceal")
-hl_body("Cursor")
-hl_body("CursorColumn")
-hl_body("CursorIM")
-hl_body("CursorLine")
-hl_body("CursorLineFold")
-hl_body("CursorLineNr")
-hl_body("CursorLineSign")
-hl_body("DiffAdd")
-hl_body("DiffChange")
-hl_body("DiffDelete")
-hl_body("DiffText")
-hl_body("Directory")
-hl_hide("EndOfBuffer")
-hl_body("ErrorMsg")
-hl_body("FoldColumn")
-hl_body("Folded")
-hl_faded("LineNr")
-hl_faded("LineNrAbove")
-hl_faded("LineNrBelow")
-hl_selection("MatchParen")
-hl_body("ModeMsg")
-hl_body("MoreMsg")
-hl_body("MsgSeparator")
-hl_body("NonText")
-hl_body("Normal")
-hl_body("NormalNC")
-hl_body("Question")
-hl_faded("SignColumn")
-hl_body("SpecialKey")
-hl_body("SpellBad")
-hl_body("SpellCap")
-hl_body("SpellLocal")
-hl_body("SpellRare")
-hl_body("Substitute")
-hl_body("TabLine")
-hl_body("TabLineFill")
-hl_body("TabLineSel")
-hl_body("TermCursor")
-hl_body("TermCursorNC")
-hl_body("Title")
-hl_body("VisualNOS")
-hl_body("WarningMsg")
-hl_body("Whitespace")
-hl_body("WildMenu")
-hl_body("lCursor")
-
-hl_subtle("Pmenu")
-hl_subtle("PmenuSbar")
-hl_selection("PmenuSel")
-hl(faded({ reverse = 1 }))("PmenuThumb")
-
-hl(subtle())("Search")
-hl(subtle())("IncSearch")
-hl(subtle_bg())("Visual")
-hl(subtle())("MsgArea")
-hl(subtle(underline(strong())))("StatusLine")
-hl(subtle(underline()))("StatusLineNC")
-hl_selection("QuickFixLine")
-hl_subtle("NormalFloat")
-hl(faded())("VertSplit")
-hl(faded())("WinSeparator")
+hi("Search")({ subtle })
+hi("IncSearch")({ subtle })
+hi("Visual")({ subtle_bg })
+hi("MsgArea")({ faded })
+hi("StatusLine")({ subtle, strong })
+hi("StatusLineNC")({ subtle })
+hi("QuickFixLine")({ selection })
+hi("NormalFloat")({ subtle })
+hi("VertSplit")({ faded })
+hi("WinSeparator")({ faded })
 
 -- Suggested Group names (by Vim, see :h group-name)
--- TODO: Switch for Treesitter groups
-hl_faded("Comment")
-hl(popout())("Constant")
-hl_body("Identifier")
-hl(salient())("Statement")
-hl_body("PreProc")
-hl(strong(italic()))("Type")
-hl_body("Special")
-hl_body("Ignore")
-hl_body("Underlined")
-hl_body("Error")
-hl_selection("Todo")
+hi("Comment")({ faded, italic })
+hi("Constant")({ popout })
+hi("Identifier")({ body })
+hi("Statement")({ salient })
+hi("PreProc")({ body })
+hi("Type")({ strong, italic })
+hi("Special")({ body })
+hi("Ignore")({ body })
+hi("Underlined")({ underline })
+hi("Error")({ body }) -- TODO
+hi("Todo")({ selection })
 
 -- GitSigns (plugin)
-hl_faded("GitSignsAdd")
-hl_faded("GitSignsChange")
-hl_faded("GitSignsDelete")
+hi("GitSignsAdd")({ faded })
+hi("GitSignsChange")({ faded })
+hi("GitSignsDelete")({ faded })
