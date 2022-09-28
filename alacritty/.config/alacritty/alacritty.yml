@@ -22,7 +22,7 @@ font:
   size: 18.0
 import:
   - ~/.config/alacritty/bok-base.yml
-  - ~/.config/alacritty/bok-theme-light.yml
+  - ~/.config/alacritty/bok-theme-dark.yml
 
 #Colors (Open color)
 # colors:

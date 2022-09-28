@@ -37,7 +37,7 @@ opt.wildmenu = true
 opt.wildmode = "lastused:list:full"
 opt.wrap = false
 
-vim.opt.background = "light"
+vim.opt.background = "dark"
 vim.cmd("colorscheme bok")
 
 require("primalivet.packer").init()

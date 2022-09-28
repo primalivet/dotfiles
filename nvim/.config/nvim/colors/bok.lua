@@ -161,7 +161,7 @@ local palette = vim.opt.background:get() == "light"
     salient = colors.violet4,
     selection = colors.yellow9,
     critical = colors.red4, -- TODO
-    critical_bg = colors.yellow9, -- TODO
+    critical_bg = colors.red9, -- TODO
     success = colors.green4, -- TODO
     success_bg = colors.green9, -- TODO
     warning = colors.yellow4, -- TODO
@@ -266,10 +266,10 @@ hi("CursorLineFold")({ body })
 hi("CursorLineNr")({ body })
 hi("CursorLineSign")({ body })
 hi("Directory")({ body })
-hi("ErrorMsg")({ body })
+hi("ErrorMsg")({ body }) -- TODO
 hi("FoldColumn")({ body })
 hi("Folded")({ body })
-hi("ModeMsg")({ body })
+hi("ModeMsg")({ faded })
 hi("MoreMsg")({ body })
 hi("MsgSeparator")({ body })
 hi("NonText")({ body })

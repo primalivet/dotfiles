@@ -42,18 +42,18 @@
   :init
   (setq backup-directory-alist `(("." . "~/.saves"))))
 
-;; (use-package emacs
-;;   :straight (:type built-in)
-;;   :init
-;;   (setq inhibit-startup-screen t)
-;;   (set-default 'truncate-lines 0)
-;;   :config
-;;   (menu-bar-mode -1)
-;;   (tool-bar-mode -1))
+(use-package emacs
+  :straight (:type built-in)
+  :init
+  (setq inhibit-startup-screen t)
+  (set-default 'truncate-lines 0)
+  :config
+  (menu-bar-mode -1)
+  (tool-bar-mode -1))
 
-;; (use-package frame
-;;   :straight (:type built-in)
-;;   :init (setq default-frame-alist '((font . "Iosevka Term-25"))))
+(use-package frame
+  :straight (:type built-in)
+  :init (setq default-frame-alist '((font . "Iosevka Term-25"))))
 
 (use-package paren
   :straight (:type built-in)
@@ -62,10 +62,10 @@
   :config
   (show-paren-mode +1))
 
-;; (use-package scroll-bar
-;;   :straight (:type built-in)
-;;   :config
-;;   (scroll-bar-mode -1))
+(use-package scroll-bar
+  :straight (:type built-in)
+  :config
+  (scroll-bar-mode -1))
 
 ;; Include my regular shell PATH variable in emacs.
 (use-package exec-path-from-shell
@@ -74,23 +74,23 @@
   (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize)))
 
-(straight-use-package
-  '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
+;; (straight-use-package
+;;   '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
+;; (require 'nano-layout)
+;; (require 'nano-faces)
+;; (nano-faces)
+;; (require 'nano-theme)
+;; (nano-theme)
+;; (require 'nano-defaults)
+;; (require 'nano-modeline)
+;; (nano-modeline)
+;; (require 'nano-faces)
+;; (nano-faces)
+;; (require 'nano-theme)
+;; (nano-theme)
 
-(require 'nano-layout)
-(require 'nano-faces)
-(nano-faces)
-(require 'nano-theme)
-(nano-theme)
-(require 'nano-defaults)
-(require 'nano-modeline)
-(nano-modeline)
-(require 'nano-faces)
-(nano-faces)
-(require 'nano-theme)
-(nano-theme)
-;; (use-package zoom-frm
-;;   :straight t)
+(use-package zoom-frm
+  :straight t)
 
 (use-package vterm
   :straight t)
