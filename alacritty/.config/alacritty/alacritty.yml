@@ -1,11 +1,11 @@
 window:
   dimensions:
     columns: 120
-    lines: 40
+    lines: 32
   position:
     x: 200
     y: 200
-  title: Alacritty
+  title: ""
 font:
   normal:
     family: Iosevka Term
@@ -20,120 +20,35 @@ font:
     family: Iosevka Term
     style: Bold Oblique
   size: 18.0
-import:
-  - ~/.config/alacritty/bok-base.yml
-  - ~/.config/alacritty/bok-theme-dark.yml
 
-#Colors (Open color)
-# colors:
-#   primary:
-#     background: '#f8f9fa' # gray 0
-#     foreground: '#212529' # gray 9
-#   cursor:
-#     text: CellBackground
-#     cursor: '#000000'
-#   normal:
-#     black:   '#212529' # gray 9
-#     red:     '#c92a2a' # red 9
-#     green:   '#2b8a3e' # green 9
-#     yellow:  '#e67700' # yellow 9
-#     blue:    '#1864ab' # blue 9
-#     magenta: '#862e9c' # grape 9
-#     cyan:    '#0b7285' # cyan 9
-#     white:   '#ced4da' # gray 4
-#   bright:
-#     black:   '#adb5bd' # gray 5
-#     red:     '#f03e3e' # red 7
-#     green:   '#37b24d' # green 7
-#     yellow:  '#f59f00' # yellow 7
-#     blue:    '#1c7ed6' # blue 7
-#     magenta: '#ae3ec9' # grape 7
-#     cyan:    '#1098ad' # cyan 7
-#     white:   '#f8f9fa' # gray 0
+# Colors (iTerm 2 default theme)
+colors:
+  # Default colors
+  primary:
+    background: '0x101421'
+    foreground: '0xfffbf6'
 
-##Colors (Srcery)
-# colors:
-#   primary:
-#     background: '#1c1b19'
-#     foreground: '#fce8c3'
-#   cursor:
-#     text: CellBackground
-#     cursor: '#fbb829'
-#   normal:
-#     black:   '#1c1b19'
-#     red:     '#ef2f27'
-#     green:   '#519f50'
-#     yellow:  '#fbb829'
-#     blue:    '#2c78bf'
-#     magenta: '#e02c6d'
-#     cyan:    '#0aaeb3'
-#     white:   '#baa67f'
-#   bright:
-#     black:   '#918175'
-#     red:     '#f75341'
-#     green:   '#98bc37'
-#     yellow:  '#fed06e'
-#     blue:    '#68a8e4'
-#     magenta: '#ff5c8f'
-#     cyan:    '#2be4d0'
-#     white:   '#fce8c3'
+  # Normal colors
+  normal:
+    black:   '0x2e2e2e'
+    red:     '0xeb4129'
+    green:   '0xabe047'
+    yellow:  '0xf6c744'
+    blue:    '0x47a0f3'
+    magenta: '0x7b5cb0'
+    cyan:    '0x64dbed'
+    white:   '0xe5e9f0'
 
-# Colors (Accent light)
-# colors:
-#   primary:
-#     background: '#e1e1e1'
-#     foreground: '#212121'
-#   cursor:
-#     text: CellBackground
-#     cursor: '#fbb829'
-#   normal:
-#     black:   '#212121'
-#     red:     '#ff0000'
-#     green:   '#00ff00'
-#     yellow:  '#ffff00'
-#     blue:    '#0000ff'
-#     magenta: '#ff00ff'
-#     cyan:    '#00ffff'
-#     white:   '#333333'
-#   bright:
-#     black:   '#bbbbbb'
-#     red:     '#ff0000'
-#     green:   '#00ff00'
-#     yellow:  '#ffff00'
-#     blue:    '#0000ff'
-#     magenta: '#ff00ff'
-#     cyan:    '#00ffff'
-#     white:   '#e1e1e1'
-
-
-#Colors (WebSafe)
-# colors:
-#   primary:
-#     # background: '#fffedd'
-#     background: '#ffffff'
-#     # background: '#e5e9ea'
-#     foreground: '#000000'
-#   cursor:
-#     text: CellBackground
-#     cursor: '#000000'
-#   normal:
-#     black:   '#000000'
-#     red:     '#B00040'
-#     green:   '#008000'
-#     yellow:  '#7D5B08'
-#     blue:    '#000080'
-#     magenta: '#800080'
-#     cyan:    '#3D7b7b'
-#     white:   '#eeeeee'
-#   bright:
-#     black:   '#333333'
-#     red:     '#BA2121'
-#     green:   '#008400'
-#     yellow:  '#B8860B'
-#     blue:    '#0000ff'
-#     magenta: '#AA22FF'
-#     cyan:    '#749494'
-#     white:   '#ffffff'
+  # Bright colors
+  bright:
+    black:   '0x565656'
+    red:     '0xec5357'
+    green:   '0xc0e17d'
+    yellow:  '0xf9da6a'
+    blue:    '0x49a4f8'
+    magenta: '0xa47de9'
+    cyan:    '0x99faf2'
+    white:   '0xffffff'
 
 
 # HINT: All options below are Windows (WSL presumed) exclusive
