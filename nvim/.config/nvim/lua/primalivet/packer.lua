@@ -26,6 +26,8 @@ function M.init()
   use("wbthomason/packer.nvim")
   -- Dependency lib used by alot of packages
   use("nvim-lua/plenary.nvim")
+  -- Show colors
+  use('norcalli/nvim-colorizer.lua')
   -- Common editor configuration
   use("editorconfig/editorconfig-vim")
   -- Surround text objects with e.g. ",',[,(,{ etc

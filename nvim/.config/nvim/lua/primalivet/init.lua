@@ -37,5 +37,5 @@ opt.wildmenu = true
 opt.wildmode = "lastused:list:full"
 opt.wrap = false
 
-vim.cmd("colorscheme sixteen")
+vim.cmd("colorscheme websafe")
 require("primalivet.packer").init()
