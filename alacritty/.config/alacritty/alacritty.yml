@@ -21,9 +21,6 @@ font:
     style: Bold Oblique
   size: 18.0
 
-import:
-  - ~/.config/alacritty/alacritty-websafe.yml
-
 # # Colors (iTerm 2 default theme)
 # colors:
 #   # Default colors
