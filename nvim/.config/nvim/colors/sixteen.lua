@@ -90,7 +90,7 @@ set_hl(0, "QuickFixLine", { ctermfg = black, ctermbg = green })
 set_hl(0, "VertSplit", { ctermfg = black, ctermbg = bright_black })
 set_hl(0, "WinSeparator", { ctermfg = black, ctermbg = bright_black })
 
-set_hl(0, "MatchParen", { ctermfg = black, ctermbg = bright_magenta })
+set_hl(0, "MatchParen", { bold = 1, ctermfg = yellow })
 
 set_hl(0, "ErrorMsg", { ctermfg = bright_white, ctermbg = bright_red })
 set_hl(0, "WarningMsg", { ctermfg = black, ctermbg = bright_yellow })
