@@ -10,14 +10,14 @@ local function on_attach(client, _)
   -- In most cases I tend to use null-ls for formatting and linting, as
   -- they are generally better to configure with widley used tools such
   -- as prettier and eslint.
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
+  client.server_capabilities.document_formatting = false
+  client.server_capabilities.document_range_formatting = false
 
   if client.name == "rust_analyzer" then
     -- For rust, we do want to use the LSP formatting though as it's
     -- widley accepted.
-    client.resolved_capabilities.document_formatting = true
-    client.resolved_capabilities.document_range_formatting = true
+    client.server_capabilities.document_formatting = true
+    client.server_capabilities.document_range_formatting = true
   end
 
   if client.name == "tsserver" then
