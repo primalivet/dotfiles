@@ -26,8 +26,8 @@ vim.keymap.set("n", "[L", ":lfirst<CR>", default_opt)
 vim.keymap.set("n", "]L", ":llast<CR>", default_opt)
 
 -- Previous and Next: Diagnostics
-vim.keymap.set("n", "[d", vim.diagnostic.goto_next, default_opt)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, default_opt)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, default_opt)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, default_opt)
 
 -- Diagnostics
 vim.keymap.set("n", "<leader>dc", ":Diagnostics<CR>", default_opt)
