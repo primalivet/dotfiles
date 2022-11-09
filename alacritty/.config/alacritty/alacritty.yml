@@ -38,5 +38,5 @@ font:
 #  program: "C:\\Windows\\System32\\wsl.exe -d Ubuntu-22.04"
 
 # working_directory: "//wsl$/Ubuntu-22.04/home/primalivet"
-# key_bindings:
-# - { key: Space, mods: Control, chars: "\x00" }
+key_bindings:
+- { key: Space, mods: Control, chars: "\x00" }
