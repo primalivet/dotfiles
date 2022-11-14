@@ -46,6 +46,11 @@ nvim_lsp.hls.setup({
 })
 
 rusttools.setup({
+  tools = {
+    inlay_hints = {
+      highlight = "DiagnosticHint"
+    }
+  },
   server = { on_attach = on_attach },
 })
 
