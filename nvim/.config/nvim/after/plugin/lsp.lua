@@ -3,21 +3,19 @@ local rusttools = require("rust-tools")
 local lsp_ts_utils = require("nvim-lsp-ts-utils")
 local cmp_lsp = require("cmp_nvim_lsp")
 
-local capabilities = cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = cmp_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local function on_attach(client, _)
   -- Disable LSP formatting for all language server
   -- In most cases I tend to use null-ls for formatting and linting, as
   -- they are generally better to configure with widley used tools such
   -- as prettier and eslint.
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
+  client.server_capabilities.documentFormattingProvider = false
 
   if client.name == "rust_analyzer" then
     -- For rust, we do want to use the LSP formatting though as it's
     -- widley accepted.
-    client.resolved_capabilities.document_formatting = true
-    client.resolved_capabilities.document_range_formatting = true
+    client.server_capabilities.documentFormattingProvider = true
   end
 
   if client.name == "tsserver" then
@@ -34,6 +32,7 @@ end
 
 nvim_lsp.elmls.setup({
   capabilities = capabilities,
+  on_attach = on_attach,
 })
 
 nvim_lsp.cssls.setup({
@@ -47,6 +46,11 @@ nvim_lsp.hls.setup({
 })
 
 rusttools.setup({
+  tools = {
+    inlay_hints = {
+      highlight = "DiagnosticHint"
+    }
+  },
   server = { on_attach = on_attach },
 })
 
@@ -54,6 +58,11 @@ nvim_lsp.tsserver.setup({
   capabilities = capabilities,
   init_options = lsp_ts_utils.init_options,
   on_attach = on_attach,
+})
+
+nvim_lsp.tailwindcss.setup({
+  capabilities = capabilities,
+  on_attach = on_attach
 })
 
 nvim_lsp.sumneko_lua.setup({ -- Lua

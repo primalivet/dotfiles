@@ -1,6 +1,10 @@
 local default_opt = { noremap = true, silent = true }
 local gitsigns = require("gitsigns")
 
+local lsp_format_async = function()
+  vim.lsp.buf.format({ async = true })
+end
+
 -- Go over wrapped lines
 vim.keymap.set("n", "j", "gj", default_opt)
 vim.keymap.set("n", "k", "gk", default_opt)
@@ -48,7 +52,7 @@ vim.keymap.set("n", "<leader>sg", ":GitFiles<CR>", default_opt)
 
 -- Edit
 vim.keymap.set("n", "<leader>ea", vim.lsp.buf.code_action, default_opt)
-vim.keymap.set("n", "<leader>ef", vim.lsp.buf.formatting, default_opt)
+vim.keymap.set("n", "<leader>ef", lsp_format_async, default_opt)
 vim.keymap.set("n", "<leader>er", vim.lsp.buf.rename, default_opt)
 vim.keymap.set("v", "<leader>es", ":'<,'>sort<CR>", default_opt)
 

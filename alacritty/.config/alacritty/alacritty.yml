@@ -21,6 +21,10 @@ font:
     style: Bold Oblique
   size: 18.0
 
+colors:
+  primary:
+    background: '#000000'
+
 # HINT: All options below are Windows (WSL presumed) exclusive
 # ---
 # As of now it doesn't seem to be a way to conditionally set options depending

@@ -34,7 +34,7 @@ local opts = {
 }
 
 local function on_attach(client, _)
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     vim.cmd("command! -buffer Formatting lua vim.lsp.buf.formatting()")
     vim.cmd("command! -buffer FormattingSync lua vim.lsp.buf.formatting_sync()")
   end

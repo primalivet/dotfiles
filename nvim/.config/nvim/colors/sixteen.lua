@@ -123,6 +123,12 @@ set_hl(0, "Underlined", { underline = 1 })
 set_hl(0, "Error", { ctermfg = red })
 set_hl(0, "Todo", { ctermfg = black, ctermbg = bright_yellow })
 
+-- Diagnostics
+set_hl(0, "DiagnosticError", { ctermfg = red })
+set_hl(0, "DiagnosticWarn", { ctermfg = yellow })
+set_hl(0, "DiagnosticInfo", { ctermfg = bright_black  })
+set_hl(0, "DiagnosticHint", { ctermfg =  bright_black })
+
 -- GitSigns (plugin)
 set_hl(0, "GitSignsAdd", { ctermfg = green })
 set_hl(0, "GitSignsChange", { ctermfg = yellow })
