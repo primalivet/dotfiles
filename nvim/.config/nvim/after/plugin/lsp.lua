@@ -24,7 +24,6 @@ local function on_attach(client, _)
     lsp_ts_utils.setup({
       auto_inlay_hints = false,
       always_organize_imports = false,
-      filter_out_diagnostics_by_severity = { "hint" },
     })
     lsp_ts_utils.setup_client(client)
   end
