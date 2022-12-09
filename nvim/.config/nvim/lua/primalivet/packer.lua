@@ -8,10 +8,14 @@ local function initialize_packer()
     vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
     return nil
   end
-  local packer = require("packer")
-  local use = packer.use
-  packer.init()
-  return use
+  local packer_ok, packer = pcall(require, "packer")
+  if not packer_ok then
+    return nil
+  else
+    local use = packer.use
+    packer.init()
+    return use
+  end
 end
 
 function M.init()
@@ -27,7 +31,7 @@ function M.init()
   -- Dependency lib used by alot of packages
   use("nvim-lua/plenary.nvim")
   -- Show colors
-  use('norcalli/nvim-colorizer.lua')
+  use("norcalli/nvim-colorizer.lua")
   -- Common editor configuration
   use("editorconfig/editorconfig-vim")
   -- Surround text objects with e.g. ",',[,(,{ etc
@@ -53,7 +57,14 @@ function M.init()
   -- Language Sever Protocol "LSP" config abstraction
   use({
     "neovim/nvim-lspconfig",
-    requires = { "hrsh7th/nvim-cmp", "jose-elias-alvarez/nvim-lsp-ts-utils", "simrat39/rust-tools.nvim" },
+    requires = {
+      -- Completion engine
+      "hrsh7th/nvim-cmp",
+      -- Utils on top of typescript-langauge-server
+      "jose-elias-alvarez/nvim-lsp-ts-utils",
+      -- Json schemastore
+      "b0o/schemastore.nvim",
+    },
   })
   -- LSP integration for formatting, linting, codeactions etc.
   use({ "jose-elias-alvarez/null-ls.nvim" })
@@ -68,6 +79,7 @@ function M.init()
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
+      "hrsh7th/cmp-emoji",
       "hrsh7th/cmp-nvim-lsp-signature-help",
     },
   })

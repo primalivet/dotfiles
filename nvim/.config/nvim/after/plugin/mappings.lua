@@ -1,5 +1,5 @@
 local default_opt = { noremap = true, silent = true }
-local gitsigns = require("gitsigns")
+local gitsigns_ok, gitsigns = pcall(require, "gitsigns")
 
 local lsp_format_async = function()
   vim.lsp.buf.format({ async = true })
@@ -41,8 +41,10 @@ vim.keymap.set("n", "[b", ":bprevious<CR>", default_opt)
 vim.keymap.set("n", "]b", ":bnext<CR>", default_opt)
 
 -- Previous and Next: Hunk
-vim.keymap.set("n", "[h", gitsigns.prev_hunk, default_opt)
-vim.keymap.set("n", "]h", gitsigns.next_hunk, default_opt)
+if gitsigns_ok then
+  vim.keymap.set("n", "[h", gitsigns.prev_hunk, default_opt)
+  vim.keymap.set("n", "]h", gitsigns.next_hunk, default_opt)
+end
 
 -- Search
 vim.keymap.set("n", "<leader>sb", ":Buffers<CR>", default_opt)

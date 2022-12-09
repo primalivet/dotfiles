@@ -1,4 +1,8 @@
-local null_ls = require("null-ls")
+local null_ls_ok, null_ls = pcall(require, "null-ls")
+
+if not null_ls_ok then
+  return
+end
 
 local root_has_file = function(files)
   return function(utils)
@@ -47,7 +51,7 @@ null_ls.setup({
     null_ls.builtins.formatting.prettier.with(opts.prettier_formatting),
     null_ls.builtins.formatting.stylua.with(opts.stylua_formatting),
     null_ls.builtins.formatting.elm_format.with(opts.elm_format_formatting),
-    null_ls.builtins.code_actions.eslint_d.with(opts.eslint_diagnostics)
+    null_ls.builtins.code_actions.eslint_d.with(opts.eslint_diagnostics),
   },
   on_attach = on_attach,
 })
