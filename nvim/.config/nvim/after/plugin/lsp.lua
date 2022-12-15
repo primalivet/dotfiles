@@ -60,10 +60,19 @@ if vim.fn.executable("vscode-css-language-server") then
   })
 end
 
-nvim_lsp.hls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
+if vim.fn.executable("clangd") then
+  nvim_lsp.clangd.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+  })
+end
+
+if vim.fn.executable("haskell-language-server-wrapper") then
+  nvim_lsp.hls.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+  })
+end
 
 if vim.fn.executable("rust-analyzer") then
   nvim_lsp.rust_analyzer.setup({})
