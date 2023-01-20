@@ -47,10 +47,18 @@ if gitsigns_ok then
 end
 
 -- Search
-vim.keymap.set("n", "<leader>sb", ":Buffers<CR>", default_opt)
-vim.keymap.set("n", "<leader>sc", ":Commands<CR>", default_opt)
-vim.keymap.set("n", "<leader>sf", ":Files<CR>", default_opt)
-vim.keymap.set("n", "<leader>sg", ":GitFiles<CR>", default_opt)
+vim.keymap.set("n", "<leader>sb", function()
+  require("telescope.builtin").buffers()
+end, default_opt)
+vim.keymap.set("n", "<leader>sc", function()
+  require("telescope.builtin").commands()
+end, default_opt)
+vim.keymap.set("n", "<leader>sf", function()
+  require("telescope.builtin").find_files()
+end, default_opt)
+vim.keymap.set("n", "<leader>sg", function()
+  require("telescope.builtin").git_files()
+end, default_opt)
 
 -- Edit
 vim.keymap.set("n", "<leader>ea", vim.lsp.buf.code_action, default_opt)
