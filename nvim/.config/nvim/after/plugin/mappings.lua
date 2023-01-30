@@ -46,7 +46,7 @@ if gitsigns_ok then
   vim.keymap.set("n", "]h", gitsigns.next_hunk, default_opt)
 end
 
--- Search
+-- Search (Telescope)
 vim.keymap.set("n", "<leader>sb", function()
   require("telescope.builtin").buffers()
 end, default_opt)

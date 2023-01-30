@@ -50,10 +50,11 @@ reset("Directory")
 reset("EndOfBuffer")
 reset("FoldColumn")
 reset("Folded")
-reset("MoreMsg")
 reset("ModeMsg")
+reset("MoreMsg")
 reset("MsgArea")
 reset("MsgSeparator")
+reset("NonText")
 reset("Normal")
 reset("NormalNC")
 reset("Question")
@@ -71,17 +72,16 @@ reset("TermCursor")
 reset("TermCursorNC")
 reset("Title")
 reset("Whitespace")
-reset("WildMenu")
 reset("lCursor")
-
-set_hl(0, "NonText", { ctermfg = bright_black })
 
 set_hl(0, "NormalFloat", { ctermfg = "NONE", ctermbg = bright_black })
 
 set_hl(0, "Pmenu", { ctermfg = "NONE", ctermbg = bright_black })
 set_hl(0, "PmenuSbar", { reverse = bright_black })
-set_hl(0, "PmenuSel", { reverse = 1 })
+set_hl(0, "PmenuSel", { ctermbg = bright_yellow, ctermfg = black })
 set_hl(0, "PmenuThumb", { ctermbg = black })
+
+set_hl(0, "WildMenu", { ctermbg = bright_yellow, ctermfg = black })
 
 set_hl(0, "StatusLine", { ctermfg = black, ctermbg = bright_white, bold = 1 })
 set_hl(0, "StatusLineNC", { ctermfg = black, ctermbg = bright_black })
@@ -124,12 +124,68 @@ set_hl(0, "Error", { ctermfg = red })
 set_hl(0, "Todo", { ctermfg = black, ctermbg = bright_yellow })
 
 -- Diagnostics
-set_hl(0, "DiagnosticError", { ctermfg = red })
-set_hl(0, "DiagnosticWarn", { ctermfg = yellow })
-set_hl(0, "DiagnosticInfo", { ctermfg = bright_black  })
-set_hl(0, "DiagnosticHint", { ctermfg =  bright_black })
+set_hl(0, "DiagnosticError", { ctermfg = bright_red })
+set_hl(0, "DiagnosticWarn", { ctermfg = bright_yellow })
+set_hl(0, "DiagnosticInfo", { ctermfg = bright_blue })
+set_hl(0, "DiagnosticHint", { ctermfg = bright_blue })
 
 -- GitSigns (plugin)
 set_hl(0, "GitSignsAdd", { ctermfg = green })
 set_hl(0, "GitSignsChange", { ctermfg = yellow })
 set_hl(0, "GitSignsDelete", { ctermfg = red })
+
+-- TelescopeBorder xxx links to TelescopeNormal
+-- TelescopeMatching xxx links to Special
+-- TelescopeMultiIcon xxx links to Identifier
+-- TelescopeMultiSelection xxx links to Type
+-- TelescopeNormal xxx links to Normal
+-- TelescopePreviewBlock xxx links to Constant
+-- TelescopePreviewBorder xxx links to TelescopeBorder
+-- TelescopePreviewCharDev xxx links to Constant
+-- TelescopePreviewDate xxx links to Directory
+-- TelescopePreviewDirectory xxx links to Directory
+-- TelescopePreviewExecute xxx links to String
+-- TelescopePreviewGroup xxx links to Constant
+-- TelescopePreviewHyphen xxx links to NonText
+-- TelescopePreviewLine xxx links to Visual
+-- TelescopePreviewLink xxx links to Special
+-- TelescopePreviewMatch xxx links to Search
+-- TelescopePreviewMessage xxx links to TelescopePreviewNormal
+-- TelescopePreviewMessageFillchar xxx links to TelescopePreviewMessage
+-- TelescopePreviewNormal xxx links to TelescopeNormal
+-- TelescopePreviewPipe xxx links to Constant
+-- TelescopePreviewRead xxx links to Constant
+-- TelescopePreviewSize xxx links to String
+-- TelescopePreviewSocket xxx links to Statement
+-- TelescopePreviewSticky xxx links to Keyword
+-- TelescopePreviewTitle xxx links to TelescopeTitle
+-- TelescopePreviewUser xxx links to Constant
+-- TelescopePreviewWrite xxx links to Statement
+-- TelescopePromptBorder xxx links to TelescopeBorder
+-- TelescopePromptCounter xxx links to NonText
+-- TelescopePromptNormal xxx links to TelescopeNormal
+-- TelescopePromptPrefix xxx links to Identifier
+-- TelescopePromptTitle xxx links to TelescopeTitle
+-- TelescopeResultsBorder xxx links to TelescopeBorder
+-- TelescopeResultsClass xxx links to Function
+-- TelescopeResultsComment xxx links to Comment
+-- TelescopeResultsConstant xxx links to Constant
+-- TelescopeResultsDiffAdd xxx links to DiffAdd
+-- TelescopeResultsDiffChange xxx links to DiffChange
+-- TelescopeResultsDiffDelete xxx links to DiffDelete
+-- TelescopeResultsDiffUntracked xxx links to NonText
+-- TelescopeResultsField xxx links to Function
+-- TelescopeResultsFunction xxx links to Function
+-- TelescopeResultsIdentifier xxx links to Identifier
+-- TelescopeResultsLineNr xxx links to LineNr
+-- TelescopeResultsMethod xxx links to Method
+-- TelescopeResultsNormal xxx links to TelescopeNormal
+-- TelescopeResultsNumber xxx links to Number
+-- TelescopeResultsOperator xxx links to Operator
+-- TelescopeResultsSpecialComment xxx links to SpecialComment
+-- TelescopeResultsStruct xxx links to Struct
+-- TelescopeResultsTitle xxx links to TelescopeTitle
+-- TelescopeResultsVariable xxx links to SpecialChar
+-- TelescopeSelection xxx links to Visual
+-- TelescopeSelectionCaret xxx links to TelescopeSelection
+-- TelescopeTitle xxx links to TelescopeBorder

@@ -4,14 +4,8 @@ return {
   "tpope/vim-surround",
   "tpope/vim-repeat",
   "tpope/vim-commentary",
-  {
-    dir = "~/Code/OSS/cabin.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("cabin").setup()
-      vim.cmd([[colorscheme cabin]])
-    end,
-  },
-  { "nvim-lualine/lualine.nvim", opts = {} },
+  { "EdenEast/nightfox.nvim", config = function()
+    -- require('nightfox').setup({})
+    vim.cmd[[colorscheme dayfox]]
+  end}
 }

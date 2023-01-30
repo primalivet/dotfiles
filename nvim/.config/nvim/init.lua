@@ -3,7 +3,7 @@ vim.g.mapleader = " "
 
 opt.autoindent = true
 opt.backup = false
-opt.completeopt = "menu,menuone,noselect"
+opt.completeopt = "menu,menuone,noselect" -- needed for cmp nvim
 opt.diffopt = "internal,filler,closeoff,vertical"
 opt.expandtab = true
 opt.fileformats = "unix"
