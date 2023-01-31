@@ -6,6 +6,10 @@ return {
   "tpope/vim-commentary",
   { "EdenEast/nightfox.nvim", config = function()
     -- require('nightfox').setup({})
-    vim.cmd[[colorscheme dayfox]]
+    if tonumber(vim.api.nvim_call_function('system', {'date "+%H"'})) >= 16 then
+      vim.cmd[[colorscheme nightfox]]
+    else
+      vim.cmd[[colorscheme dayfox]]
+    end
   end}
 }
