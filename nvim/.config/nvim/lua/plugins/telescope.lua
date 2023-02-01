@@ -6,19 +6,18 @@ return {
   },
   config = function()
     local telescope = require("telescope")
-    local width = vim.api.nvim_win_get_width(0)
-    local height = math.floor(vim.api.nvim_win_get_height(0) / 2)
+    local height = vim.api.nvim_win_get_height(0)
     telescope.setup({
       defaults = {
         layout_strategy = "bottom_pane",
-        layout_config = { prompt_position = "top", width = width, height = height },
+        layout_config = { bottom_pane = { height = height } },
         sorting_strategy = "ascending",
         winblend = 0,
-        border = true,
-        borderchars = {
-          prompt = { " ", " ", " ", " ", " ", " ", " ", " " },
-          results = { " ", " ", " ", " ", " ", " ", " ", " " },
-          preview = { " ", " ", " ", " ", " ", " ", " ", " " },
+        border = false,
+      },
+      pickers = {
+        find_files = {
+          find_command = { "rg", "--files", "--hidden", "--glob", "!.git", "--glob", "!.stack-work" },
         },
       },
     })
