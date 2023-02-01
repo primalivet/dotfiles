@@ -59,6 +59,9 @@ end, default_opt)
 vim.keymap.set("n", "<leader>sg", function()
   require("telescope.builtin").git_files()
 end, default_opt)
+vim.keymap.set("n", "<leader>sn", function()
+  require("telescope.builtin").find_files({ find_command = { "rg", "--hidden", "--files", "node_modules" } })
+end, default_opt)
 
 -- Edit
 vim.keymap.set("n", "<leader>ea", vim.lsp.buf.code_action, default_opt)
