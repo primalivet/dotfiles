@@ -19,7 +19,7 @@ font:
   bold_italic:
     family: Iosevka Term
     style: Bold Oblique
-  size: 18.0
+  size: 20.0
 
 # Nightfox Alacritty Colors
 # Style: nightfox
