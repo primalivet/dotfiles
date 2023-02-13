@@ -80,6 +80,9 @@ bindkey '^[[Z' reverse-menu-complete
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 
+# Backspace as expected in Emacs
+bindkey "^?" backward-delete-char
+
 # "PLUGINS"
 #------------------------------------------------------------------------------
 
