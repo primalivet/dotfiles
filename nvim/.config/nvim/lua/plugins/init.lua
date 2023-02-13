@@ -4,12 +4,17 @@ return {
   "tpope/vim-surround",
   "tpope/vim-repeat",
   "tpope/vim-commentary",
-  { "EdenEast/nightfox.nvim", config = function()
-    -- require('nightfox').setup({})
-    if tonumber(vim.api.nvim_call_function('system', {'date "+%H"'})) >= 16 then
-      vim.cmd[[colorscheme nightfox]]
-    else
-      vim.cmd[[colorscheme dayfox]]
-    end
-  end}
+  "uga-rosa/ccc.nvim",
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = {}
+  },
+  {
+    dir = "~/Code/OSS/cabin.nvim",
+    config = function()
+      require('cabin').setup({})
+      vim.opt.background = "dark"
+      vim.cmd([[colorscheme cabin]])
+    end,
+  },
 }

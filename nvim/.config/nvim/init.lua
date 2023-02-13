@@ -37,7 +37,5 @@ opt.wildmenu = true
 opt.wildmode = "lastused:list:full"
 opt.wrap = false
 
-vim.cmd("colorscheme sixteen")
-
 require("bootstrap-lazy").setup()
 require("lazy").setup("plugins")
