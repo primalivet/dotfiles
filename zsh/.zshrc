@@ -20,10 +20,14 @@ export KEYTIMEOUT=1
 # Node version manager install directory
 export N_PREFIX=$HOME/.local/src/n
 
+# Wasmtime (wasm runtime)
+export WASMTIME_HOME="$HOME/.wasmtime"
+
 # Path
 export PATH=$LOCAL_BIN:$PATH
 export PATH=$N_PREFIX/bin:$PATH
 export PATH="$LOCAL_SRC/lua-language-server/bin":$PATH
+export PATH="$WASMTIME_HOME/bin:$PATH"
 
 # Homebrew paths (only on mac / Darwin) systems
 [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/bin/:$PATH"
