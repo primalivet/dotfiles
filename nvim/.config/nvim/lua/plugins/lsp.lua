@@ -98,7 +98,7 @@ return {
       end
 
       if vim.fn.executable("lua-language-server") then
-        lspconfig.sumneko_lua.setup({ -- Lua
+        lspconfig.lua_ls.setup({ -- Lua
           on_attach = on_attach,
           settings = {
             Lua = {
