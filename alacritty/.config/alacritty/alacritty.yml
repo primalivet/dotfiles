@@ -15,7 +15,7 @@ font:
     style: Bold
   italic:
     family: Iosevka Term
-    style: Regular Oblique
+    style: Oblique
   bold_italic:
     family: Iosevka Term
     style: Bold Oblique
