@@ -30,6 +30,10 @@ if vim.fn.exists("syntax_on") then
   vim.cmd("syntax reset")
 end
 
+if vim.opt.termguicolors:get() then
+  print("Colorscheme \"Sixteen\" should be used without option 'termguicolors")
+end
+
 vim.g.colors_name = "sixteen"
 
 local set_hl = vim.api.nvim_set_hl
