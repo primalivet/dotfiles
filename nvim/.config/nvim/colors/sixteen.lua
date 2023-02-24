@@ -62,7 +62,6 @@ reset("NonText")
 reset("Normal")
 reset("NormalNC")
 reset("Question")
-reset("SignColumn")
 reset("SpecialKey")
 reset("SpellBad")
 reset("SpellCap")
@@ -78,6 +77,7 @@ reset("Title")
 reset("Whitespace")
 reset("lCursor")
 
+set_hl(0,"SignColumn", { ctermbg = bright_black })
 set_hl(0, "NormalFloat", { ctermfg = "NONE", ctermbg = bright_black })
 
 set_hl(0, "Pmenu", { ctermfg = "NONE", ctermbg = bright_black })
@@ -106,9 +106,9 @@ set_hl(0, "Search", { ctermfg = black, ctermbg = bright_yellow })
 set_hl(0, "IncSearch", { ctermfg = black, ctermbg = bright_yellow })
 
 set_hl(0, "DiffAdd", { ctermbg = green, ctermfg = 0 })
-set_hl(0, "DiffChange", { ctermbg = yellow, ctermfg = 0 })
+set_hl(0, "DiffChange", {})
 set_hl(0, "DiffDelete", { ctermbg = red, ctermfg = 0 })
-set_hl(0, "DiffText", { ctermbg = yellow, ctermfg = 0, underline = 1 })
+set_hl(0, "DiffText", { ctermbg = blue, ctermfg = 0, underline = 1 })
 
 set_hl(0, "LineNr", { ctermfg = bright_yellow })
 set_hl(0, "LineNrAbove", { ctermfg = bright_yellow })
@@ -135,7 +135,7 @@ set_hl(0, "DiagnosticHint", { ctermfg = bright_blue })
 
 -- GitSigns (plugin)
 set_hl(0, "GitSignsAdd", { ctermfg = green })
-set_hl(0, "GitSignsChange", { ctermfg = yellow })
+set_hl(0, "GitSignsChange", { ctermfg = blue })
 set_hl(0, "GitSignsDelete", { ctermfg = red })
 
 -- TelescopeBorder xxx links to TelescopeNormal
