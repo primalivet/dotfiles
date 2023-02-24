@@ -21,8 +21,33 @@ font:
     style: Bold Oblique
   size: 20.0
 
-import:
-  - "~/Code/OSS/cabin.nvim/extras/cabin-alacritty.yml"
+# Cabin theme
+colors:
+  primary:
+    # background:    '#211D18' # shade_dark1
+    background:    '#000000' # shade_dark1
+    foreground:    '#D4C0B0' # shade_light3
+  cursor:
+    text: CellBackground
+    cursor: CellForeground
+  normal:
+    black:         '#211D18' # shade_dark1
+    blue:          '#69B3DD' # blue_lighter
+    cyan:          '#077264' # cyan_medium
+    green:         '#59A83E' # green_medium
+    purple:        '#C92778' # magenta_medium
+    red:           '#B93B00' # red_medium
+    white:         '#C5B697' # shade_light6
+    yellow:        '#F88F24' # orange_medium
+  bright:
+    black:   '#403B31' # shade_dark3
+    blue:    '#93c8e6' # blue_light
+    cyan:    '#00B594' # cyan_light
+    green:   '#A8D52B' # green_light
+    purple:  '#F57796' # magenta_light
+    red:     '#EE560D' # red_light
+    white:   '#D4C0B0' # shade_light3
+    yellow:  '#FFC427' #yellow_light
 
 # HINT: All options below are Windows (WSL presumed) exclusive
 # ---
