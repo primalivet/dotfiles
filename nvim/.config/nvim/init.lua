@@ -28,7 +28,7 @@ opt.smartcase = true
 opt.smartindent = true
 opt.softtabstop = 2
 opt.swapfile = false
-opt.termguicolors = true
+opt.termguicolors = false
 opt.timeoutlen = 500 --timeout for mappings
 opt.undofile = true -- uses the default undodir "~/.local/share/nvim/undo
 opt.updatetime = 100 --updatetime for events
@@ -36,6 +36,8 @@ opt.wildignore = "*/node_modules/**,*/elm-stuff/**"
 opt.wildmenu = true
 opt.wildmode = "lastused:list:full"
 opt.wrap = false
+
+vim.cmd[[colorscheme sixteen]]
 
 require("bootstrap-lazy").setup()
 require("lazy").setup("plugins")

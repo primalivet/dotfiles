@@ -21,7 +21,10 @@ return {
           "yaml",
         },
         playground = { enable = true },
-        highlight = { enable = true },
+        highlight = {
+          enable = true,
+          disable = {'help'}
+        },
         indent = { enable = true },
       })
     end,
