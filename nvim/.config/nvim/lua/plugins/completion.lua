@@ -11,9 +11,14 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-emoji",
       "hrsh7th/cmp-nvim-lsp-signature-help",
+      "davidsierradz/cmp-conventionalcommits",
     },
     config = function()
       local cmp = require("cmp")
+      if not cmp then
+        -- Lsp seem to not recognize type of nvim-cmp
+        return print("Neovim CMP not present")
+      end
       cmp.setup({
         snippet = {
           expand = function(args)
@@ -34,8 +39,17 @@ return {
           { name = "nvim_lua" },
           { name = "path" },
           { name = "buffer" },
-        },{
+        }, {
           { name = "emoji" },
+          { name = "rg" },
+        }),
+      })
+      cmp.setup.filetype("gitcommit", {
+        sources = cmp.config.sources({
+          { name = "conventionalcommits" },
+          { name = "buffer" },
+          { name = "path" },
+        }, {
           { name = "rg" },
         }),
       })
