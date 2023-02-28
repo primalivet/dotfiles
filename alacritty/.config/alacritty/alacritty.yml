@@ -6,6 +6,7 @@ window:
     x: 200
     y: 200
   title: ""
+  decorations_theme_variant: Dark
 font:
   normal:
     family: Iosevka Term
