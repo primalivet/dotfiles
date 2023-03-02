@@ -17,6 +17,10 @@ vim.keymap.set("v", ">", ">gv", default_opt)
 vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", default_opt)
 vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", default_opt)
 
+-- Center on search jump
+vim.keymap.set("n", "n", "nzz", default_opt)
+vim.keymap.set("n", "N", "Nzz", default_opt)
+
 -- Previous and Next: Quickfix
 vim.keymap.set("n", "[c", ":cprevious<CR>", default_opt)
 vim.keymap.set("n", "]c", ":cnext<CR>", default_opt)
