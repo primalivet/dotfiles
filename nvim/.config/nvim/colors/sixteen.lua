@@ -31,7 +31,7 @@ if vim.fn.exists("syntax_on") then
 end
 
 if vim.opt.termguicolors:get() then
-  print("Colorscheme \"Sixteen\" should be used without option 'termguicolors")
+  print('Colorscheme "Sixteen" should be used without option \'termguicolors')
 end
 
 vim.g.colors_name = "sixteen"
@@ -40,6 +40,8 @@ local set_hl = vim.api.nvim_set_hl
 local reset = function(group)
   vim.api.nvim_set_hl(0, group, { ctermfg = "NONE", ctermbg = "NONE" })
 end
+
+local is_dark = vim.opt.background:get() == "dark"
 
 reset("ColorColumn")
 reset("Conceal")
@@ -77,15 +79,15 @@ reset("Title")
 reset("Whitespace")
 reset("lCursor")
 
-set_hl(0,"SignColumn", { ctermbg = bright_black })
-set_hl(0, "NormalFloat", { ctermfg = "NONE", ctermbg = bright_black })
+set_hl(0, "SignColumn", { ctermbg = is_dark and bright_black or white })
+set_hl(0, "NormalFloat", { ctermfg = "NONE", ctermbg = is_dark and bright_black or white })
 
-set_hl(0, "Pmenu", { ctermfg = "NONE", ctermbg = bright_black })
-set_hl(0, "PmenuSbar", { reverse = bright_black })
-set_hl(0, "PmenuSel", { ctermbg = bright_yellow, ctermfg = black })
+set_hl(0, "Pmenu", { link = "NormalFloat" })
+set_hl(0, "PmenuSbar", {})
+set_hl(0, "PmenuSel", { link = "WildMenu" })
 set_hl(0, "PmenuThumb", { ctermbg = black })
 
-set_hl(0, "WildMenu", { ctermbg = bright_yellow, ctermfg = black })
+set_hl(0, "WildMenu", { ctermfg = is_dark and black or bright_white, ctermbg = is_dark and bright_yellow or blue })
 
 set_hl(0, "StatusLine", { ctermfg = black, ctermbg = bright_white, bold = 1 })
 set_hl(0, "StatusLineNC", { ctermfg = black, ctermbg = bright_black })
@@ -94,33 +96,33 @@ set_hl(0, "QuickFixLine", { ctermfg = black, ctermbg = green })
 set_hl(0, "VertSplit", { ctermfg = black, ctermbg = bright_black })
 set_hl(0, "WinSeparator", { ctermfg = black, ctermbg = bright_black })
 
-set_hl(0, "MatchParen", { bold = 1, ctermfg = yellow })
+set_hl(0, "MatchParen", { bold = 1 })
 
 set_hl(0, "ErrorMsg", { ctermfg = bright_white, ctermbg = bright_red })
 set_hl(0, "WarningMsg", { ctermfg = black, ctermbg = bright_yellow })
 
-set_hl(0, "Visual", { ctermfg = black, ctermbg = bright_yellow })
-set_hl(0, "VisualNOS", { ctermfg = black, ctermbg = bright_yellow })
+set_hl(0, "Visual", { link = "WildMenu" })
+set_hl(0, "VisualNOS", { link = "Visual" })
 
-set_hl(0, "Search", { ctermfg = black, ctermbg = bright_yellow })
-set_hl(0, "IncSearch", { ctermfg = black, ctermbg = bright_yellow })
+set_hl(0, "Search", { link = "WildMenu" })
+set_hl(0, "IncSearch", { link = "Search" })
 
 set_hl(0, "DiffAdd", { ctermbg = green, ctermfg = 0 })
 set_hl(0, "DiffChange", {})
 set_hl(0, "DiffDelete", { ctermbg = red, ctermfg = 0 })
 set_hl(0, "DiffText", { ctermbg = blue, ctermfg = 0, underline = 1 })
 
-set_hl(0, "LineNr", { ctermfg = bright_yellow })
-set_hl(0, "LineNrAbove", { ctermfg = bright_yellow })
-set_hl(0, "LineNrBelow", { ctermfg = bright_yellow })
+set_hl(0, "LineNr", { ctermfg = is_dark and bright_yellow or blue })
+set_hl(0, "LineNrAbove", { link = "LineNr" })
+set_hl(0, "LineNrBelow", { link = "LineNr" })
 
 -- Suggested Group names (by Vim, see :h group-name)
-set_hl(0, "Comment", { ctermfg = cyan, italic = 1 })
-set_hl(0, "Constant", { ctermfg = bright_magenta })
+set_hl(0, "Comment", { ctermfg = is_dark and cyan or green, italic = 1 })
+set_hl(0, "Constant", { ctermfg = is_dark and bright_magenta or red })
 set_hl(0, "Identifier", { bold = 1 })
-set_hl(0, "Statement", { ctermfg = bright_yellow, bold = 1 })
-set_hl(0, "PreProc", { ctermfg = bright_blue })
-set_hl(0, "Type", { ctermfg = bright_cyan })
+set_hl(0, "Statement", { ctermfg = is_dark and bright_yellow or blue, bold = 1 })
+set_hl(0, "PreProc", { bold = 1})
+set_hl(0, "Type", { ctermfg = is_dark and bright_cyan or bright_blue })
 reset("Special")
 reset("Ignore")
 set_hl(0, "Underlined", { underline = 1 })

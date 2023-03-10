@@ -36,13 +36,6 @@ return {
         end
       end
 
-      if vim.fn.executable("elm-language-server") then
-        lspconfig.elmls.setup({
-          capabilities = capabilities,
-          on_attach = on_attach,
-        })
-      end
-
       if vim.fn.executable("vscode-json-language-server") then
         local schemastore_ok, schemastore = pcall(require, "schemastore")
         lspconfig.jsonls.setup({
@@ -66,13 +59,6 @@ return {
 
       if vim.fn.executable("clangd") then
         lspconfig.clangd.setup({
-          capabilities = capabilities,
-          on_attach = on_attach,
-        })
-      end
-
-      if vim.fn.executable("haskell-language-server-wrapper") then
-        lspconfig.hls.setup({
           capabilities = capabilities,
           on_attach = on_attach,
         })
