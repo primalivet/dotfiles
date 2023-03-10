@@ -65,6 +65,7 @@ return {
           null_ls.builtins.formatting.prettier.with(opts.prettier_formatting),
           null_ls.builtins.formatting.stylua.with(opts.stylua_formatting),
           null_ls.builtins.code_actions.eslint_d.with(opts.eslint_diagnostics),
+          null_ls.builtins.code_actions.gitsigns
         },
         on_attach = on_attach,
       })
