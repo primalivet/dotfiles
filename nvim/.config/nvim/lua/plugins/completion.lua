@@ -12,6 +12,24 @@ return {
       "hrsh7th/cmp-emoji",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "davidsierradz/cmp-conventionalcommits",
+      {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+          require("copilot").setup({
+            suggestion = { enable = false },
+            panel = { enable = false },
+          })
+        end,
+      },
+      {
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+        config = function()
+          require("copilot_cmp").setup()
+        end,
+      },
     },
     config = function()
       local cmp = require("cmp")
@@ -33,24 +51,23 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp_signature_help" },
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "nvim_lua" },
-          { name = "path" },
-          { name = "buffer" },
-        }, {
-          { name = "emoji" },
-          { name = "rg" },
+          { name = "copilot", group_index = 1 },
+          { name = "nvim_lsp_signature_help", group_index = 3 },
+          { name = "nvim_lsp", group_index = 3 },
+          { name = "luasnip", group_index = 3 },
+          { name = "nvim_lua", group_index = 3 },
+          { name = "path", group_index = 3 },
+          { name = "buffer", group_index = 3 },
+          { name = "emoji", group_index = 5 },
+          { name = "rg", group_index = 5 },
         }),
       })
       cmp.setup.filetype("gitcommit", {
         sources = cmp.config.sources({
-          { name = "conventionalcommits" },
-          { name = "buffer" },
-          { name = "path" },
-        }, {
-          { name = "rg" },
+          { name = "conventionalcommits", group_index = 1 },
+          { name = "buffer", group_index = 3 },
+          { name = "path", group_index = 3 },
+          { name = "rg", group_index = 5 },
         }),
       })
     end,
