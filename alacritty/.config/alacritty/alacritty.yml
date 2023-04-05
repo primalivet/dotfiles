@@ -23,7 +23,7 @@ font:
   size: 20.0
 
 import:
-  - ~/Code/OSS/nightfox.nvim/extra/nightfox/nightfox_alacritty.yml
+  - ~/Code/OSS/kanagawa.nvim/extras/alacritty_kanagawa.yml
 
 # HINT: All options below are Windows (WSL presumed) exclusive
 # ---
