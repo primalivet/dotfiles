@@ -12,6 +12,7 @@ return {
       "hrsh7th/cmp-emoji",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "davidsierradz/cmp-conventionalcommits",
+      "roobert/tailwindcss-colorizer-cmp.nvim",
       {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
@@ -42,6 +43,9 @@ return {
           expand = function(args)
             require("luasnip").lsp_expand(args.body)
           end,
+        },
+        formatting = {
+          format = require("tailwindcss-colorizer-cmp").formatter,
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
