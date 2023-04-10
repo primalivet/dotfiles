@@ -13,7 +13,6 @@ return {
       },
     },
   },
-  { "EdenEast/nightfox.nvim" },
   {
     "rebelot/kanagawa.nvim",
     opts = {
@@ -31,5 +30,5 @@ return {
       end,
       colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
     },
-  },
+  }
 }

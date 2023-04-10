@@ -82,7 +82,7 @@ return {
           on_attach = on_attach,
           settings = {
             tailwindCSS = {
-              classAttributes = { "class", "className", "classList", "ngClass" },
+              classAttributes = { "class", "className", "classList", "ngClass", ".*Classes*" },
               lint = {
                 cssConflict = "warning",
                 invalidApply = "error",
