@@ -30,5 +30,6 @@ return {
       end,
       colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
     },
-  }
+  },
+  { dir = "~/Code/OSS/cabin.nvim", opts = {} },
 }
