@@ -4,7 +4,7 @@ colors:
     background: '#ededed'
     foreground: '#232323'
   normal:
-    black: '#232323'
+    black: '#000000'
     red: '#660000'
     green: '#006600'
     yellow: '#666600'
@@ -20,4 +20,4 @@ colors:
     blue: "#0000aa"
     magenta: "#aa00aa"
     cyan: "#00aaaa"
-    white: '#ededed'
+    white: '#ffffff'
