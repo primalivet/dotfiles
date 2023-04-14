@@ -28,7 +28,7 @@ font:
 
 import:
   # - ~/Code/OSS/kanagawa.nvim/extras/alacritty_kanagawa.yml
-  - ~/Code/OSS/cabin.nvim/extras/cabin-alacritty.yml
+  - ~/Code/OSS/dotfiles/nvim/.config/nvim/colors/gettit-alacritty.yml
 
 # HINT: All options below are Windows (WSL presumed) exclusive
 # ---
