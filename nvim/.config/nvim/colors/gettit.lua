@@ -2,7 +2,7 @@
 -- " ----------------------------------------------------------------------------
 -- " This is opinionated
 
-local black = "#000000"
+local black = "#232332"
 local red = "#660000"
 local green = "#006600"
 local yellow = "#666600"
@@ -10,13 +10,14 @@ local blue = "#000066"
 local magenta = "#660066"
 local cyan = "#006666"
 local white = "#dddddd"
+
 local bright_black = "#999999"
-local bright_red = "#ff0000"
-local bright_green = "#00ff00"
-local bright_yellow = "#ffff00"
-local bright_blue = "#0000ff"
-local bright_magenta = "#ff00ff"
-local bright_cyan = "#00ffff"
+local bright_red = "#aa0000"
+local bright_green = "#00aa00"
+local bright_yellow = "#aaaa00"
+local bright_blue = "#0000aa"
+local bright_magenta = "#aa00aa"
+local bright_cyan = "#00aaaa"
 local bright_white = "#ededed"
 
 local extra_bright_red = "#ffdddd"
@@ -49,14 +50,12 @@ reset("CursorLineFold")
 reset("CursorLineNr")
 reset("CursorLineSign")
 reset("Directory")
-reset("EndOfBuffer")
 reset("FoldColumn")
 reset("Folded")
 reset("ModeMsg")
 reset("MoreMsg")
 reset("MsgArea")
 reset("MsgSeparator")
-reset("NonText")
 reset("Normal")
 reset("NormalNC")
 reset("Question")
@@ -74,9 +73,13 @@ reset("TermCursorNC")
 reset("Title")
 reset("Whitespace")
 reset("lCursor")
-reset("LineNr")
-reset("LineNrAbove")
-reset("LineNrBelow")
+
+set_hl(0, "NonText", { fg = bright_black })
+set_hl(0, "EndOfBuffer", { link = "NonText" })
+
+set_hl(0, "LineNr", { fg = bright_black })
+set_hl(0, "LineNrAbove", { link = "LineNr" })
+set_hl(0, "LineNrBelow", { link = "LineNr" })
 
 set_hl(0, "SignColumn", {})
 set_hl(0, "NormalFloat", { fg = "NONE", bg = white })
@@ -88,12 +91,12 @@ set_hl(0, "PmenuThumb", { bg = black })
 
 set_hl(0, "WildMenu", { bg = bright_yellow })
 
-set_hl(0, "StatusLine", { fg = black, bg = bright_white, bold = 1 })
-set_hl(0, "StatusLineNC", { fg = black, bg = bright_black })
+set_hl(0, "StatusLine", { fg = black, bg = bright_black })
+set_hl(0, "StatusLineNC", { fg = black, bg = white })
 set_hl(0, "QuickFixLine", { fg = black, bg = green })
 
-set_hl(0, "VertSplit", { fg = black, bg = bright_black })
-set_hl(0, "WinSeparator", { fg = black, bg = bright_black })
+set_hl(0, "VertSplit", { fg = white })
+set_hl(0, "WinSeparator", { link = "VertSplit" })
 
 set_hl(0, "MatchParen", { bold = 1 })
 
@@ -112,13 +115,13 @@ set_hl(0, "DiffDelete", { bg = extra_bright_red })
 set_hl(0, "DiffText", { bg = extra_bright_blue })
 
 -- Suggested Group names (by Vim, see :h group-name)
-set_hl(0, "Comment", { fg = green, italic = 1 })
+set_hl(0, "Comment", { fg = cyan, italic = 1 })
 set_hl(0, "Constant", { fg = red })
-set_hl(0, "Identifier", {})
-set_hl(0, "Function", { fg = magenta })
-set_hl(0, "Statement", { fg = magenta })
-set_hl(0, "PreProc", { fg = magenta })
-set_hl(0, "Type", { fg = bright_blue })
+set_hl(0, "Identifier", { fg = blue })
+set_hl(0, "Function", { fg = "NONE" })
+set_hl(0, "Statement", { fg = green, bold = true })
+set_hl(0, "PreProc", { fg = green, bold = true })
+set_hl(0, "Type", { fg = magenta })
 reset("Special")
 reset("Ignore")
 set_hl(0, "Underlined", { underline = 1 })

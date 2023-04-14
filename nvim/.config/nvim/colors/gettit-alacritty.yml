@@ -2,9 +2,9 @@
 colors:
   primary:
     background: '#ededed'
-    foreground: '#000000'
+    foreground: '#232323'
   normal:
-    black: '#000000'
+    black: '#232323'
     red: '#660000'
     green: '#006600'
     yellow: '#666600'
@@ -14,10 +14,10 @@ colors:
     white: '#dddddd'
   bright:
     black: '#999999'
-    red: '#ff0000'
-    green: '#00ff00'
-    yellow: '#ffff00'
-    blue: '#0000ff'
-    magenta: '#ff00ff'
-    cyan: '#00ffff'
+    red: "#aa0000"
+    green: "#00aa00"
+    yellow: "#aaaa00"
+    blue: "#0000aa"
+    magenta: "#aa00aa"
+    cyan: "#00aaaa"
     white: '#ededed'
