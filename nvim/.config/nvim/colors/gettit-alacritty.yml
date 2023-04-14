@@ -1,23 +1,23 @@
 # Gettit theme
 colors:
   primary:
-    background: '#ededed'
-    foreground: '#232323'
+    background: '0xededed'
+    foreground: '0x232323'
   normal:
-    black: '#000000'
-    red: '#660000'
-    green: '#006600'
-    yellow: '#666600'
-    blue: '#000066'
-    magenta: '#660066'
-    cyan: '#006666'
-    white: '#dddddd'
+    black: '0x000000'
+    red: '0x660000'
+    green: '0x006600'
+    yellow: '0x666600'
+    blue: '0x000066'
+    magenta: '0x660066'
+    cyan: '0x006666'
+    white: '0xdddddd'
   bright:
-    black: '#999999'
-    red: "#aa0000"
-    green: "#00aa00"
-    yellow: "#aaaa00"
-    blue: "#0000aa"
-    magenta: "#aa00aa"
-    cyan: "#00aaaa"
-    white: '#ffffff'
+    black: '0x999999'
+    red: "0xaa0000"
+    green: "0x00aa00"
+    yellow: "0xaaaa00"
+    blue: "0x0000aa"
+    magenta: "0xaa00aa"
+    cyan: "0x00aaaa"
+    white: '0xffffff'
