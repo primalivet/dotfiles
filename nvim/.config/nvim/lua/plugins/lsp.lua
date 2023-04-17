@@ -111,6 +111,18 @@ return {
           },
         })
       end
+
+      require("lspconfig").ocamllsp.setup({})
+
+      if vim.fn.executable("dotnet") then
+        require("lspconfig").fsautocomplete.setup({
+          cmd = { "fsautocomplete", "--background-service-enabled" },
+          filetypes = { "fsharp" },
+          init_options = { AutomaticWorkspaceInit = true },
+          capabilities = capabilities,
+          on_attach = on_attach,
+        })
+      end
     end,
   },
 }

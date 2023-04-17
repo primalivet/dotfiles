@@ -32,7 +32,7 @@ opt.termguicolors = true
 opt.timeoutlen = 500 --timeout for mappings
 opt.undofile = true -- uses the default undodir "~/.local/share/nvim/undo
 opt.updatetime = 100 --updatetime for events
-opt.wildignore = "*/node_modules/**,*/elm-stuff/**"
+opt.wildignore = "*/node_modules/**,*/elm-stuff/**,**/_build/**,**bin**"
 opt.wildmenu = true
 opt.wildmode = "lastused:list:full"
 opt.wrap = false
@@ -40,5 +40,5 @@ opt.wrap = false
 require("bootstrap-lazy").setup()
 require("lazy").setup("plugins")
 
-vim.cmd[[colorscheme gettit]]
+vim.cmd[[colorscheme cabin]]
 

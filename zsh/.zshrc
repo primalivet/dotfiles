@@ -28,6 +28,7 @@ export PATH=$LOCAL_BIN:$PATH
 export PATH=$N_PREFIX/bin:$PATH
 export PATH="$LOCAL_SRC/lua-language-server/bin":$PATH
 export PATH="$WASMTIME_HOME/bin:$PATH"
+export PATH="$HOME/.dotnet:$HOME/.dotnet/tools:$PATH"
 
 # Homebrew paths (only on mac / Darwin) systems
 [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/bin/:$PATH"
@@ -102,6 +103,12 @@ bindkey "^?" backward-delete-char
 
 # PROGRAMS
 #------------------------------------------------------------------------------
+
+# DotNet
+[[ -d "$HOME/.dotnet" ]] && export DOTNET_ROOT="$HOME/.dotnet"
+
+# Ocaml
+[[ ! -r /Users/gustaf/.opam/opam-init/init.zsh ]] || source /Users/gustaf/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
 # Rust (cargo env script also add Rust bins to PATH)
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
@@ -201,3 +208,6 @@ cursor_mode
 # name will be the name of the file. You can then call this function like any
 # other shell function.
 autoload -U compinit; compinit
+
+# opam configuration
+[[ ! -r /Users/gustaf/.opam/opam-init/init.zsh ]] || source /Users/gustaf/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null

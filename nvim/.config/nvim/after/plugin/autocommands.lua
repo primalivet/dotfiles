@@ -23,6 +23,12 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  group = group,
+  pattern ="*.fs,*.fsx,*.fsi",
+  command = "set filetype=fsharp"
+})
+
 -- When in FZF buffer, hide irrelavant stuff and show it again when the user
 -- leaves the fzf buffer
 vim.api.nvim_create_autocmd({ "FileType" }, {
