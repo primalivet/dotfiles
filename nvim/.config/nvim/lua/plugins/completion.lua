@@ -13,17 +13,18 @@ return {
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "davidsierradz/cmp-conventionalcommits",
       "roobert/tailwindcss-colorizer-cmp.nvim",
-      {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-          require("copilot").setup({
-            suggestion = { enable = false },
-            panel = { enable = false },
-          })
-        end,
-      },
+      "Exafunction/codeium.vim",
+      -- {
+      --   "zbirenbaum/copilot.lua",
+      --   cmd = "Copilot",
+      --   event = "InsertEnter",
+      --   config = function()
+      --     require("copilot").setup({
+      --       suggestion = { enable = false },
+      --       panel = { enable = false },
+      --     })
+      --   end,
+      -- },
       {
         "zbirenbaum/copilot-cmp",
         after = { "copilot.lua" },

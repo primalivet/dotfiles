@@ -5,6 +5,7 @@ return {
       "hrsh7th/nvim-cmp",
       "jose-elias-alvarez/nvim-lsp-ts-utils",
       "b0o/schemastore.nvim",
+      "ionide/Ionide-vim",
     },
     config = function()
       local lspconfig = require("lspconfig")
@@ -80,9 +81,27 @@ return {
         lspconfig.tailwindcss.setup({
           capabilities = capabilities,
           on_attach = on_attach,
+          filetypes = {
+            "html",
+            "markdown",
+            "mdx",
+            "css",
+            "less",
+            "postcss",
+            "sass",
+            "scss",
+            "javascript",
+            "javascriptreact",
+            "reason",
+            "ocaml",
+            "typescript",
+            "typescriptreact",
+            "vue",
+            "svelte",
+          },
           settings = {
             tailwindCSS = {
-              classAttributes = { "class", "className", "classList", "ngClass", ".*Classes*" },
+              classAttributes = { "a_class", "class", "className", "classList", "ngClass", ".*Classes*" },
               lint = {
                 cssConflict = "warning",
                 invalidApply = "error",
@@ -114,15 +133,15 @@ return {
 
       require("lspconfig").ocamllsp.setup({})
 
-      if vim.fn.executable("dotnet") then
-        require("lspconfig").fsautocomplete.setup({
-          cmd = { "fsautocomplete", "--background-service-enabled" },
-          filetypes = { "fsharp" },
-          init_options = { AutomaticWorkspaceInit = true },
-          capabilities = capabilities,
-          on_attach = on_attach,
-        })
-      end
+      -- if vim.fn.executable("dotnet") then
+      --   require("lspconfig").fsautocomplete.setup({
+      --     cmd = { "fsautocomplete", "--background-service-enabled" },
+      --     filetypes = { "fsharp" },
+      --     init_options = { AutomaticWorkspaceInit = true },
+      --     capabilities = capabilities,
+      --     on_attach = on_attach,
+      --   })
+      -- end
     end,
   },
 }
