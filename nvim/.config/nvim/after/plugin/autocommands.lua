@@ -25,9 +25,17 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   group = group,
-  pattern ="*.fs,*.fsx,*.fsi",
-  command = "set filetype=fsharp"
+  pattern = "*.fs,*.fsx,*.fsi",
+  callback = function()
+    vim.cmd([[set filetype=fsharp]])
+    vim.cmd([[setlocal commentstring=//\ %s]])
+  end,
 })
+
+vim.api.nvim_create_autocmd(
+  { "BufNewFile", "BufRead" },
+  { group = group, pattern = "*.fsproj", command = "set filetype=xml" }
+)
 
 -- When in FZF buffer, hide irrelavant stuff and show it again when the user
 -- leaves the fzf buffer
