@@ -28,7 +28,8 @@ export PATH=$LOCAL_BIN:$PATH
 export PATH=$N_PREFIX/bin:$PATH
 export PATH="$LOCAL_SRC/lua-language-server/bin":$PATH
 export PATH="$WASMTIME_HOME/bin:$PATH"
-export PATH="$HOME/.dotnet:$HOME/.dotnet/tools:$PATH"
+export PATH="$HOME/.dotnet/tools:$PATH"
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Homebrew paths (only on mac / Darwin) systems
 [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/bin/:$PATH"
@@ -105,7 +106,7 @@ bindkey "^?" backward-delete-char
 #------------------------------------------------------------------------------
 
 # DotNet
-[[ -d "$HOME/.dotnet" ]] && export DOTNET_ROOT="$HOME/.dotnet"
+# [[ -d "$HOME/.dotnet" ]] && export DOTNET_ROOT="$HOME/.dotnet"
 
 # Ocaml
 [[ ! -r /Users/gustaf/.opam/opam-init/init.zsh ]] || source /Users/gustaf/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
