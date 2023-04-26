@@ -3,9 +3,9 @@
 -- " This is opinionated
 
 local fg = "#323232"
-local bg = "#ededed"
+local bg = "#f4f5f7"
 
-local black = "#000000"
+local black = "#212121"
 local red = "#660000"
 local green = "#006600"
 local yellow = "#666600"
@@ -21,7 +21,7 @@ local bright_yellow = "#aaaa00"
 local bright_blue = "#0000aa"
 local bright_magenta = "#aa00aa"
 local bright_cyan = "#00aaaa"
-local bright_white = "#ffffff"
+local bright_white = "#eeeeee"
 
 local extra_bright_red = "#ffdddd"
 local extra_bright_green = "#ddffdd"
