@@ -13,6 +13,16 @@ return {
       local cmp_lsp = require("cmp_nvim_lsp")
       local capabilities = cmp_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+      do
+        -- Control lsp diagnostics
+        vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+          underline = true,
+          virtual_text = false,
+          signs = true,
+          update_in_insert = false,
+        })
+      end
+
       local function on_attach(client, _)
         -- Disable LSP formatting for all language server
         -- In most cases I tend to use null-ls for formatting and linting, as
