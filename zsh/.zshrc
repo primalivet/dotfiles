@@ -197,6 +197,22 @@ cursor_mode
 
 [ -f ~/.zsh_private ] && source ~/.zsh_private
 
+# LOAD COMPLETION
+#------------------------------------------------------------------------------
+# What does it mean?
+
+# The autoload command load a file containing shell commands. To find this file,
+# Zsh will look in the directories of the Zsh file search path, defined in the
+# variable $fpath, and search a file called compinit.
+
+# When compinit is found, its content will be loaded as a function. The function
+# name will be the name of the file. You can then call this function like any
+# other shell function.
+autoload -U compinit; compinit
+
+# opam configuration
+[[ ! -r /Users/gustaf/.opam/opam-init/init.zsh ]] || source /Users/gustaf/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
 # COMPLETION
 #------------------------------------------------------------------------------
 
@@ -216,18 +232,3 @@ _dotnet_zsh_complete() {
 
 compdef _dotnet_zsh_complete dotnet
 
-# LOAD COMPLETION
-#------------------------------------------------------------------------------
-# What does it mean?
-
-# The autoload command load a file containing shell commands. To find this file,
-# Zsh will look in the directories of the Zsh file search path, defined in the
-# variable $fpath, and search a file called compinit.
-
-# When compinit is found, its content will be loaded as a function. The function
-# name will be the name of the file. You can then call this function like any
-# other shell function.
-autoload -U compinit; compinit
-
-# opam configuration
-[[ ! -r /Users/gustaf/.opam/opam-init/init.zsh ]] || source /Users/gustaf/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
