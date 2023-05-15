@@ -2,10 +2,10 @@
 -- " ----------------------------------------------------------------------------
 -- " This is opinionated
 
-local fg = "#323232"
-local bg = "#f4f5f7"
+local bg = "#ededed"
+local fg = "#232323"
 
-local black = "#212121"
+local black = "#000000"
 local red = "#660000"
 local green = "#006600"
 local yellow = "#666600"
@@ -21,12 +21,12 @@ local bright_yellow = "#aaaa00"
 local bright_blue = "#0000aa"
 local bright_magenta = "#aa00aa"
 local bright_cyan = "#00aaaa"
-local bright_white = "#eeeeee"
+local bright_white = "#ffffff"
 
-local extra_bright_red = "#ffdddd"
-local extra_bright_green = "#ddffdd"
+local extra_bright_red = "#fae2e2"
+local extra_bright_green = "#e2fae2"
 local extra_bright_yellow = "#ffffdd"
-local extra_bright_blue = "#ddeeff"
+local extra_bright_blue = "#d1e4f7"
 local extra_bright_magenta = "#ffddff"
 local extra_bright_cyan = "#ddffff"
 
@@ -92,7 +92,7 @@ set_hl(0, "PmenuSbar", {})
 set_hl(0, "PmenuSel", { link = "WildMenu" })
 set_hl(0, "PmenuThumb", { bg = black })
 
-set_hl(0, "WildMenu", { bg = bright_yellow })
+set_hl(0, "WildMenu", { fg = white, bg = blue })
 
 set_hl(0, "StatusLine", { fg = black, bg = bright_black })
 set_hl(0, "StatusLineNC", { fg = black, bg = white })
@@ -106,7 +106,7 @@ set_hl(0, "MatchParen", { bold = 1 })
 set_hl(0, "ErrorMsg", { fg = bright_white, bg = bright_red })
 set_hl(0, "WarningMsg", { fg = black, bg = bright_yellow })
 
-set_hl(0, "Visual", { link = "WildMenu" })
+set_hl(0, "Visual", { bg = extra_bright_yellow })
 set_hl(0, "VisualNOS", { link = "Visual" })
 
 set_hl(0, "Search", { link = "WildMenu" })

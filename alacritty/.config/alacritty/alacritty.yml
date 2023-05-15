@@ -6,11 +6,6 @@ window:
     x: 200
     y: 200
   title: ""
-  decorations_theme_variant: Dark
-  padding:
-    x: 10
-    y: 10
-  dynamic_padding: true
 font:
   normal:
     family: Iosevka Term
@@ -27,7 +22,7 @@ font:
   size: 20.0
 
 import:
-  - ~/Code/OSS/cabin.nvim/extras/cabin-alacritty.yml
+  - ~/Code/OSS/dotfiles/nvim/.config/nvim/colors/gettit-alacritty.yml
 
 # HINT: All options below are Windows (WSL presumed) exclusive
 # ---

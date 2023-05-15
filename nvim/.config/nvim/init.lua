@@ -40,5 +40,5 @@ opt.wrap = false
 require("bootstrap-lazy").setup()
 require("lazy").setup("plugins")
 
-vim.cmd[[colorscheme cabin]]
+vim.cmd[[colorscheme gettit]]
 
