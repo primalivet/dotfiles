@@ -117,6 +117,10 @@ bindkey "^?" backward-delete-char
 # Haskell (GHCup)
 [[ -f "$HOME/.ghcup/env" ]] && source "$HOME/.ghcup/env"
 
+# Emscripten
+export EMSDK_QUIET=1
+[[ -f "$HOME/.local/src/emsdk/emsdk_env.sh" ]] && source "$HOME/.local/src/emsdk/emsdk_env.sh"
+
 # Z "junp around"
 [[ -f "$LOCAL_SRC/z/z.sh" ]] && source "$LOCAL_SRC/z/z.sh"
 
