@@ -14,10 +14,10 @@ colors:
     white: '#dddddd'
   bright:
     black: '#999999'
-    red: "#aa0000"
-    green: "#00aa00"
-    yellow: "#aaaa00"
-    blue: "#0000aa"
-    magenta: "#aa00aa"
-    cyan: "#00aaaa"
+    red: '#910000'
+    green: '#009000'
+    yellow: '#909000'
+    blue: '#0000aa'
+    magenta: '#900090'
+    cyan: '#009090'
     white: '#ffffff'

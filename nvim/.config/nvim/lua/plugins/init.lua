@@ -5,7 +5,7 @@ return {
   "tpope/vim-repeat",
   "tpope/vim-commentary",
   "uga-rosa/ccc.nvim",
-  "NvChad/nvim-colorizer.lua",
+  { "NvChad/nvim-colorizer.lua", opts = {} },
   {
     "rebelot/kanagawa.nvim",
     opts = {
