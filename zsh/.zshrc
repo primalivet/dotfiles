@@ -109,7 +109,7 @@ bindkey "^?" backward-delete-char
 # [[ -d "$HOME/.dotnet" ]] && export DOTNET_ROOT="$HOME/.dotnet"
 
 # Ocaml
-[[ ! -r /Users/gustaf/.opam/opam-init/init.zsh ]] || source /Users/gustaf/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh"  > /dev/null 2> /dev/null
 
 # Rust (cargo env script also add Rust bins to PATH)
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
