@@ -40,5 +40,6 @@ opt.wrap = false
 require("bootstrap-lazy").setup()
 require("lazy").setup("plugins")
 
-vim.cmd[[colorscheme gettit]]
-
+if not require("utils").is_dark_mode() then
+  vim.cmd([[colorscheme gettit]])
+end

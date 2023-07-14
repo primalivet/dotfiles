@@ -1,6 +1,6 @@
 [user]
-        name=Primalivet
-        email=gustaf.holn@icloud.com
+        name=Gustaf Holm
+        email=gustaf.holm@icloud.com
 
 [push]
         default=simple
@@ -15,4 +15,6 @@
 [status]
         submodulesummary=true
 [difftool]
-	prompt = false
+        prompt = false
+[includeIf "gitdir:~/Code/Work/"]
+        path = ~/.git_private
