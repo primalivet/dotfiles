@@ -31,6 +31,8 @@ local appearance = wezterm.gui.get_appearance()
 
 local config = {
   enable_tab_bar = false,
+  adjust_window_size_when_changing_font_size = false,
+  window_close_confirmation = 'NeverPrompt',
   window_padding = {
     left = 0,
     right = 0,
