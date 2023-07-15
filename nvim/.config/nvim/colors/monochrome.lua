@@ -130,7 +130,7 @@ set_hl(0, "DiagnosticWarn", { ctermfg = is_dark and bright_yellow or yellow })
 set_hl(0, "DiagnosticInfo", { ctermfg = is_dark and bright_blue or blue })
 set_hl(0, "DiagnosticHint", { ctermfg = is_dark and bright_blue or blue })
 
--- GitSigns (plugin)
+-- GitSigns
 set_hl(0, "GitSignsAdd", { ctermfg = is_dark and bright_green or green })
 set_hl(0, "GitSignsChange", { ctermfg = is_dark and bright_blue or blue })
 set_hl(0, "GitSignsDelete", { ctermfg = is_dark and bright_red or red })
@@ -148,3 +148,6 @@ set_hl(0, "@exception", { bold = true })
 set_hl(0, "@constant.builtin", { bold = true })
 set_hl(0, "@string", { ctermfg = is_dark and bright_grey or grey })
 set_hl(0, "@comment", { ctermfg = is_dark and bright_grey or grey, italic = true })
+
+-- Telescope
+set_hl(0, "TelescopeSelection", { reverse = true })
