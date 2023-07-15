@@ -13,7 +13,7 @@ local config = {
     bottom = 0,
   },
   font = wezterm.font("Iosevka Term", { weight = "Regular" }),
-  font_size = 20,
+  font_size = 21,
 }
 
 if appearance:find("Dark") then
