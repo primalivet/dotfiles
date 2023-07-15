@@ -36,6 +36,11 @@ vim.api.nvim_create_autocmd(
   { "BufNewFile", "BufRead" },
   { group = group, pattern = "*.fsproj", command = "set filetype=xml" }
 )
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = group,
+  pattern = "zsh",
+  command = "set filetype=bash",
+})
 
 -- When in FZF buffer, hide irrelavant stuff and show it again when the user
 -- leaves the fzf buffer
