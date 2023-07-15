@@ -136,6 +136,7 @@ set_hl(0, "GitSignsChange", { ctermfg = is_dark and bright_blue or blue })
 set_hl(0, "GitSignsDelete", { ctermfg = is_dark and bright_red or red })
 
 -- Treesitter
+-- TODO: move these to linked values of original groups
 set_hl(0, "@function.call", { bold = true })
 set_hl(0, "@method.call", { bold = true })
 set_hl(0, "@tag", { bold = true })
