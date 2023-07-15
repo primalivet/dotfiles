@@ -1,32 +1,5 @@
-local gettit = {
-  background = "#ededed",
-  foreground = "#232323",
-  selection_fg = "none",
-  selection_bg = "#ffffdd",
-  ansi = {
-    "#000000",
-    "#660000",
-    "#006600",
-    "#666600",
-    "#000066",
-    "#660066",
-    "#006666",
-    "#dddddd",
-  },
-  brights = {
-    "#999999",
-    "#910000",
-    "#009000",
-    "#909000",
-    "#0000aa",
-    "#900090",
-    "#009090",
-    "#ffffff",
-  },
-}
-
 local wezterm = require("wezterm")
-local wezdir = os.getenv("HOME") .. ".config/wezterm"
+-- local wezdir = os.getenv("HOME") .. ".config/wezterm"
 local appearance = wezterm.gui.get_appearance()
 
 local config = {
@@ -43,8 +16,12 @@ local config = {
   font_size = 20,
 }
 
-if not appearance:find("Dark") then
-  config.colors = gettit
+if appearance:find("Dark") then
+  config.window_background_opacity = 0.8
+  config.color_scheme = "Builtin Tango Dark"
+else
+  config.color_scheme = "Builtin Tango Light"
+  config.window_background_opacity = 0.9
 end
 
 return config

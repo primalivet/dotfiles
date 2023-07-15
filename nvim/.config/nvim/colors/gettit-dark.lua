@@ -2,33 +2,33 @@
 -- " ----------------------------------------------------------------------------
 -- " This is opinionated
 
-local bg = "#ededed"
-local fg = "#232323"
+local bg = "#232323"
+local fg = "#ededed"
 
 local black = "#000000"
-local red = "#660000"
-local green = "#006600"
-local yellow = "#666600"
-local blue = "#000066"
-local magenta = "#660066"
-local cyan = "#006666"
-local white = "#dddddd"
+local red = "#ad1d1d"
+local green = "#1dad1d"
+local yellow = "#adad1d"
+local blue = "#2222cc"
+local magenta = "#cc22cc"
+local cyan = "#22cccc"
+local white = "#aaaaaa"
 
-local bright_black = "#999999"
-local bright_red = "#910000"
-local bright_green = "#009000"
-local bright_yellow = "#909000"
-local bright_blue = "#0000aa"
-local bright_magenta = "#900090"
-local bright_cyan = "#009090"
+local bright_black = "#636363"
+local bright_red = "#ff5858"
+local bright_green = "#58ff58"
+local bright_yellow = "#ffff58"
+local bright_blue = "#5858aa"
+local bright_magenta = "#ff58ff"
+local bright_cyan = "#58ffff"
 local bright_white = "#ffffff"
 
-local extra_bright_red = "#fae2e2"
-local extra_bright_green = "#e2fae2"
-local extra_bright_yellow = "#ffffdd"
-local extra_bright_blue = "#d1e4f7"
-local extra_bright_magenta = "#ffddff"
-local extra_bright_cyan = "#ddffff"
+local extra_dark_red = "#841717"
+local extra_dark_green = "#178417"
+local extra_dark_yellow = "#9b9b00"
+local extra_dark_blue = "#174e84"
+local extra_dark_magenta = "#9b009b"
+local extra_dark_cyan = "#009b9b"
 
 vim.cmd("hi clear")
 
@@ -36,7 +36,7 @@ if vim.fn.exists("syntax_on") then
   vim.cmd("syntax reset")
 end
 
-vim.g.colors_name = "gettit"
+vim.g.colors_name = "gettit-dark"
 
 local set_hl = vim.api.nvim_set_hl
 local reset = function(group)
@@ -85,7 +85,7 @@ set_hl(0, "LineNrAbove", { link = "LineNr" })
 set_hl(0, "LineNrBelow", { link = "LineNr" })
 
 set_hl(0, "SignColumn", {})
-set_hl(0, "NormalFloat", { fg = "NONE", bg = white })
+set_hl(0, "NormalFloat", { fg = "NONE", bg = bright_black })
 
 set_hl(0, "Pmenu", { link = "NormalFloat" })
 set_hl(0, "PmenuSbar", {})
@@ -106,16 +106,16 @@ set_hl(0, "MatchParen", { bold = 1 })
 set_hl(0, "ErrorMsg", { fg = bright_white, bg = bright_red })
 set_hl(0, "WarningMsg", { fg = black, bg = bright_yellow })
 
-set_hl(0, "Visual", { bg = extra_bright_yellow })
+set_hl(0, "Visual", { bg = extra_dark_yellow })
 set_hl(0, "VisualNOS", { link = "Visual" })
 
 set_hl(0, "Search", { link = "WildMenu" })
 set_hl(0, "IncSearch", { link = "Search" })
 
-set_hl(0, "DiffAdd", { bg = extra_bright_green })
+set_hl(0, "DiffAdd", { bg = extra_dark_green })
 set_hl(0, "DiffChange", {})
-set_hl(0, "DiffDelete", { bg = extra_bright_red })
-set_hl(0, "DiffText", { bg = extra_bright_blue })
+set_hl(0, "DiffDelete", { bg = extra_dark_red })
+set_hl(0, "DiffText", { bg = extra_dark_blue })
 
 -- Suggested Group names (by Vim, see :h group-name)
 set_hl(0, "Comment", { fg = cyan, italic = 1 })
@@ -136,10 +136,10 @@ set_hl(0, "DiagnosticError", { fg = red })
 set_hl(0, "DiagnosticWarn", { fg = yellow })
 set_hl(0, "DiagnosticInfo", { fg = blue })
 set_hl(0, "DiagnosticHint", { fg = blue })
-set_hl(0, "DiagnosticVirtualTextError", { fg = red, bg = extra_bright_red, italic = 1 })
-set_hl(0, "DiagnosticVirtualTextWarn", { fg = yellow, bg = extra_bright_yellow, italic = 1 })
-set_hl(0, "DiagnosticVirtualTextInfo", { fg = blue, bg = extra_bright_blue, italic = 1 })
-set_hl(0, "DiagnosticVirtualTextHint", { fg = green, bg = extra_bright_green, italic = 1 })
+set_hl(0, "DiagnosticVirtualTextError", { fg = red, bg = extra_dark_red, italic = 1 })
+set_hl(0, "DiagnosticVirtualTextWarn", { fg = yellow, bg = extra_dark_yellow, italic = 1 })
+set_hl(0, "DiagnosticVirtualTextInfo", { fg = blue, bg = extra_dark_blue, italic = 1 })
+set_hl(0, "DiagnosticVirtualTextHint", { fg = green, bg = extra_dark_green, italic = 1 })
 
 -- GitSigns (plugin)
 set_hl(0, "GitSignsAdd", { fg = green })

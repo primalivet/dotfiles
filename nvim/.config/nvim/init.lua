@@ -22,6 +22,7 @@ opt.scrolloff = 5
 opt.shiftround = true
 opt.shiftwidth = 2
 opt.showcmd = false
+opt.cmdheight = 0
 opt.sidescrolloff = 5
 opt.signcolumn = "yes:1"
 opt.smartcase = true
@@ -40,6 +41,9 @@ opt.wrap = false
 require("bootstrap-lazy").setup()
 require("lazy").setup("plugins")
 
-if not require("utils").is_dark_mode() then
-  vim.cmd([[colorscheme gettit]])
+if require("utils").is_dark_mode() then
+  opt.background = 'dark'
+else
+  opt.background = 'light'
 end
+vim.cmd([[colorscheme monochrome]])
