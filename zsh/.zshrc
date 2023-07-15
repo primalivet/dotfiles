@@ -99,8 +99,8 @@ bindkey "^?" backward-delete-char
 [[ -d "$LOCAL_SRC/zsh-completions/src" ]] && \
   fpath=("$LOCAL_SRC/zsh-completions/src" $fpath)
 # # Sytax highlight
-[[ -f "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
-  source "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# [[ -f "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
+#   source "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # PROGRAMS
 #------------------------------------------------------------------------------
