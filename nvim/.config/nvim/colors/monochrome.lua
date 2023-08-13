@@ -69,8 +69,9 @@ reset("Whitespace")
 reset("lCursor")
 reset("VertSplit")
 reset("SignColumn")
-reset("NonText")
-reset("EndOfBuffer")
+
+set_hl(0, "NonText",  { ctermfg =  is_dark and bright_grey or grey  })
+set_hl(0, "EndOfBuffer", { link = 'NonText' })
 
 set_hl(0, "Folded", { ctermfg = is_dark and bright_grey or grey })
 
