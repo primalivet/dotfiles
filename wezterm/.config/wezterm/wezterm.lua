@@ -17,11 +17,11 @@ local config = {
 }
 
 if appearance:find("Dark") then
-  config.window_background_opacity = 0.8
-  config.color_scheme = "Builtin Tango Dark"
+  config.window_background_opacity = 1
+  config.color_scheme = "Londontube (dark) (terminal.sexy)"
 else
-  config.color_scheme = "Builtin Tango Light"
-  config.window_background_opacity = 0.9
+  config.color_scheme = "Londontube (light) (terminal.sexy)"
+  config.window_background_opacity = 1
 end
 
 return config
