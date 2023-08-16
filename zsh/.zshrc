@@ -43,15 +43,15 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 FZF_COLORS="bg+:-1,\
 fg:-1,\
 fg+:-1,\
-border:-1,\
+border:1,\
 spinner:-1,\
-hl:4,\
+hl:3,\
 header:-1,\
 info:-1,\
 pointer:-1,\
 marker:-1,\
-prompt:-1,\
-hl+:4"
+prompt:8,\
+hl+:3"
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git" --glob "!.stack-work"'
 export FZF_DEFAULT_OPTS="--height=100% --reverse --color=$FZF_COLORS"
