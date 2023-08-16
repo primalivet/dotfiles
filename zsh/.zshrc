@@ -35,6 +35,9 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/bin/:$PATH"
 [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
+[[ $(eval uname) = "Darwin" ]] && export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+[[ $(eval uname) = "Darwin" ]] && export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+
 # Fzf (fuzzy file search)
 FZF_COLORS="bg+:-1,\
 fg:-1,\
@@ -156,12 +159,6 @@ alias ga='git add'
 
 # PROMPT
 #------------------------------------------------------------------------------
-
-# autoload -Uz vcs_info # enable vcs info
-# precmd () { vcs_info }  # make sure vcs info is loaded before displaying prompt
-# zstyle ':vcs_info:*' formats ' %b' # format branch name
-# setopt prompt_subst
-# export PROMPT='%1~${vcs_info_msg_0_} $ '
 
 export PROMPT='%1~ $ '
 
