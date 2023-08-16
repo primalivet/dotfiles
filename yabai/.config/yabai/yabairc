@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 yabai -m config layout bsp
-yabai -m config window_gap 16
-yabai -m config top_padding 16
-yabai -m config bottom_padding 16
-yabai -m config left_padding 16
-yabai -m config right_padding 16
+yabai -m config window_gap 0
+yabai -m config top_padding 0
+yabai -m config bottom_padding 0
+yabai -m config left_padding 0
+yabai -m config right_padding 0
 
 # yabai -m focus_follows_mouse autofocus
 
