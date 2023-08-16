@@ -51,16 +51,16 @@ if gitsigns_ok then
 end
 
 -- Search (FZF)
--- vim.keymap.set("n", "<leader>sb", ":Buffers<CR>")
--- vim.keymap.set("n", "<leader>sc", ":Commands<CR>")
--- vim.keymap.set("n", "<leader>sf", ":Files<CR>")
--- vim.keymap.set("n", "<leader>sg", ":GitFiles<CR>")
+vim.keymap.set("n", "<leader>sb", ":Buffers<CR>")
+vim.keymap.set("n", "<leader>sc", ":Commands<CR>")
+vim.keymap.set("n", "<leader>sf", ":Files<CR>")
+vim.keymap.set("n", "<leader>sg", ":GitFiles<CR>")
 
 -- Search (Telescope)
-vim.keymap.set("n", "<leader>sb", ":Telescope buffers<CR>")
-vim.keymap.set("n", "<leader>sc", ":Telescope commands<CR>")
-vim.keymap.set("n", "<leader>sf", ":Telescope find_files<CR>")
-vim.keymap.set("n", "<leader>sg", ":Telescope git_files<CR>")
+-- vim.keymap.set("n", "<leader>sb", ":Telescope buffers<CR>")
+-- vim.keymap.set("n", "<leader>sc", ":Telescope commands<CR>")
+-- vim.keymap.set("n", "<leader>sf", ":Telescope find_files<CR>")
+-- vim.keymap.set("n", "<leader>sg", ":Telescope git_files<CR>")
 
 -- Edit
 vim.keymap.set("n", "<leader>ea", vim.lsp.buf.code_action, default_opt)

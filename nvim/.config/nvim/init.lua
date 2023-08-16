@@ -40,10 +40,3 @@ opt.wrap = false
 
 require("bootstrap-lazy").setup()
 require("lazy").setup("plugins")
-
-if require("utils").is_dark_mode() then
-  opt.background = 'dark'
-else
-  opt.background = 'light'
-end
-vim.cmd([[colorscheme monochrome]])
