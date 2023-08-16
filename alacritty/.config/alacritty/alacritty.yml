@@ -19,10 +19,7 @@ font:
   bold_italic:
     family: Iosevka Term
     style: Bold Oblique
-  size: 20.0
-
-import:
-  - ~/Code/OSS/dotfiles/nvim/.config/nvim/colors/gettit-alacritty.yml
+  size: 22.0
 
 # HINT: All options below are Windows (WSL presumed) exclusive
 # ---
