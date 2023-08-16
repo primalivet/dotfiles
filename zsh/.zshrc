@@ -33,6 +33,7 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 
 # Homebrew paths (only on mac / Darwin) systems
 [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/bin/:$PATH"
+[[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/sbin:$PATH"
 [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 [[ $(eval uname) = "Darwin" ]] && export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
@@ -102,8 +103,8 @@ bindkey "^?" backward-delete-char
 [[ -d "$LOCAL_SRC/zsh-completions/src" ]] && \
   fpath=("$LOCAL_SRC/zsh-completions/src" $fpath)
 # # Sytax highlight
-# [[ -f "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
-#   source "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[[ -f "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
+  source "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # PROGRAMS
 #------------------------------------------------------------------------------
@@ -213,23 +214,3 @@ autoload -U compinit; compinit
 
 # opam configuration
 [[ ! -r /Users/gustaf/.opam/opam-init/init.zsh ]] || source /Users/gustaf/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
-
-# COMPLETION
-#------------------------------------------------------------------------------
-
-# zsh parameter completion for the dotnet CLI
-
-_dotnet_zsh_complete() {
-  local completions=("$(dotnet complete "$words")")
-  # If the completion list is empty, just continue with filename selection
-  if [ -z "$completions" ]
-  then
-    _arguments '*::arguments: _normal'
-    return
-  fi
-  # This is not a variable assignment, don't remove spaces!
-  _values = "${(ps:\n:)completions}"
-}
-
-compdef _dotnet_zsh_complete dotnet
-
