@@ -79,9 +79,9 @@ reset("WarningMsg")
 set_hl(0, "WildMenu", { fg = yellow, bg = bright_black })
 
 set_hl(0, "DiffAdd", { fg = green })
-set_hl(0, "DiffChange", { bg = "none" }) -- TODO: missing definition
+set_hl(0, "DiffChange", { fg = "none" }) -- TODO: missing definition
 set_hl(0, "DiffDelete", { fg = red })
-set_hl(0, "DiffText", { bg = "none" }) -- TODO: missing definition
+set_hl(0, "DiffText", { fg = blue }) -- TODO: missing definition
 
 set_hl(0, "DiagnosticError", { fg = bright_red })
 set_hl(0, "DiagnosticHint", { fg = bright_blue })
