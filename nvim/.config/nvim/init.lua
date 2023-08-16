@@ -8,7 +8,6 @@ opt.diffopt = "internal,filler,closeoff,vertical"
 opt.expandtab = true
 opt.fileformats = "unix"
 opt.fileignorecase = true
-opt.fillchars = "vert:|"
 opt.grepformat:append("%f:%l:%c:%m,%f:%l:%m")
 opt.grepprg = "rg --vimgrep --no-heading --hidden"
 opt.hidden = true -- dont unload abandoned buffers, just hide em
@@ -40,3 +39,4 @@ opt.wrap = false
 
 require("bootstrap-lazy").setup()
 require("lazy").setup("plugins")
+vim.cmd[[colorscheme primaliv]]

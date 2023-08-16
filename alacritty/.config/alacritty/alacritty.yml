@@ -1,3 +1,7 @@
+cursor:
+  style:
+    shape: Block
+    blinking: Always
 window:
   dimensions:
     columns: 120
@@ -8,18 +12,44 @@ window:
   title: ""
 font:
   normal:
-    family: Iosevka Term
-    style: Regular
+    family: Iosevka Term Light
+    style: Light
   bold:
     family: Iosevka Term
     style: Bold
   italic:
     family: Iosevka Term
-    style: Oblique
+    style: Light Oblique
   bold_italic:
     family: Iosevka Term
     style: Bold Oblique
   size: 22.0
+colors:
+  # colors matching nvim primaliv
+  primary:
+    foreground: '#dadada'
+    background: '#1c1c1c'
+  cursor:
+    text: '#000000'
+    background: '#ffd800' # same as yellow below
+  normal:
+    black    :  '#1c1c1c'  # ANSI: 234 --  same  as  background
+    red      :  '#fd5e00'  # ANSI: 202
+    green    :  '#00875f'  # ANSI: 29
+    yellow   :  '#ffd800'  # ANSI: 220
+    blue     :  '#005faf'  # ANSI: 25
+    magenta  :  '#870087'  # ANSI: 90
+    cyan     :  '#00605f'  # ANSI: 23
+    white    :  '#9e9e9e'  # ANSI: 247
+  bright:
+    black    :  '#3a3a3a' #  ANSI: 237
+    red      :  '#ff875f' #  ANSI: 209
+    green    :  '#01af87' #  ANSI: 36
+    yellow   :  '#ffff5f' #  ANSI: 227
+    blue     :  '#01afff' #  ANSI: 39
+    magenta  :  '#875faf' #  ANSI: 97
+    cyan     :  '#008787' #  ANSI: 30
+    white    :  '#dadada' #  ANSI: 253  --  same  as  foreground
 
 # HINT: All options below are Windows (WSL presumed) exclusive
 # ---
