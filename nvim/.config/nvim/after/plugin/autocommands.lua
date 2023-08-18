@@ -2,6 +2,12 @@ local group = vim.api.nvim_create_augroup("PRIMALIVET", {})
 
 vim.api.nvim_create_autocmd({ "VimResized" }, { group = group, command = "wincmd=" })
 
+vim.api.nvim_create_autocmd({ "BufReadPost", "FileReadPost" }, {
+  group = group,
+  pattern = "*",
+  command = "normal zR",
+})
+
 vim.api.nvim_create_autocmd({ "DiagnosticChanged" }, {
   group = group,
   pattern = "*",

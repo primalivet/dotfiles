@@ -36,6 +36,8 @@ opt.wildignore = "*/node_modules/**,*/elm-stuff/**,**/_build/**,**bin**"
 opt.wildmenu = true
 opt.wildmode = "lastused:list:full"
 opt.wrap = false
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 require("bootstrap-lazy").setup()
 require("lazy").setup("plugins")
