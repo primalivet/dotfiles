@@ -40,7 +40,7 @@ vim.g.colors_name = "gettit-dark"
 
 local set_hl = vim.api.nvim_set_hl
 local reset = function(group)
-  vim.api.nvim_set_hl(0, group, { fg = fg, bg = 'none' })
+  vim.api.nvim_set_hl(0, group, { fg = fg, bg = "none" })
 end
 
 reset("ColorColumn")

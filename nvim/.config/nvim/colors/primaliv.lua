@@ -88,7 +88,7 @@ set_hl(0, "MatchParen", { bg = bright_blue })
 
 set_hl(0, "Visual", { bg = bright_black })
 
-set_hl(0,"QuickFixLine", {  fg = yellow, bg = almost_black2 })
+set_hl(0, "QuickFixLine", { fg = yellow, bg = almost_black2 })
 
 set_hl(0, "Normal", { fg = bright_white, bg = black })
 link("NormalNC", "Normal")

@@ -8,4 +8,3 @@ vim.api.nvim_create_user_command("Diagnostics", function()
     title = "Workspace Diagnostics",
   })
 end, {})
-

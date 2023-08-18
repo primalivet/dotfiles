@@ -23,7 +23,7 @@ return {
         playground = { enable = true },
         highlight = {
           enable = true,
-          disable = {'help'}
+          disable = { "help" },
         },
         indent = { enable = true },
       })

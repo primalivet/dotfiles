@@ -41,4 +41,4 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 require("bootstrap-lazy").setup()
 require("lazy").setup("plugins")
-vim.cmd[[colorscheme primaliv]]
+vim.cmd([[colorscheme primaliv]])

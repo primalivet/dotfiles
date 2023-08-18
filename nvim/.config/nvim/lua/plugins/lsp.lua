@@ -112,7 +112,16 @@ return {
           },
           settings = {
             tailwindCSS = {
-              classAttributes = { ".*class*", "_class", "a_class", "class", "className", "classList", "ngClass", ".*Classes*" },
+              classAttributes = {
+                ".*class*",
+                "_class",
+                "a_class",
+                "class",
+                "className",
+                "classList",
+                "ngClass",
+                ".*Classes*",
+              },
               lint = {
                 cssConflict = "warning",
                 invalidApply = "error",
