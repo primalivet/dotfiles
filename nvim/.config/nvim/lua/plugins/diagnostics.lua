@@ -32,6 +32,7 @@ return {
       local prettier_root_files = { ".prettierrc", ".prettierrc.js", ".prettierrc.json" }
       local stylua_root_files = { "stylua.toml", ".stylua.toml" }
       local ocamlformat_root_files = { "ocamlformat", ".ocamlformat" }
+      local clang_format_root_files = { ".clang-format" }
 
       local opts = {
         eslint_formatting = {
@@ -53,6 +54,9 @@ return {
         ocamlformat_formatting = {
           condition = root_has_file(ocamlformat_root_files),
         },
+        clang_format_formatting = {
+          condition = root_has_file(clang_format_root_files),
+        },
       }
 
       local function on_attach(client, _)
@@ -68,8 +72,9 @@ return {
           null_ls.builtins.formatting.eslint_d.with(opts.eslint_formatting),
           null_ls.builtins.formatting.prettier.with(opts.prettier_formatting),
           null_ls.builtins.formatting.stylua.with(opts.stylua_formatting),
-          null_ls.builtins.code_actions.eslint_d.with(opts.eslint_diagnostics),
           null_ls.builtins.formatting.ocamlformat.with(opts.ocamlformat_formatting),
+          null_ls.builtins.formatting.clang_format.with(opts.clang_format_formatting),
+          null_ls.builtins.code_actions.eslint_d.with(opts.eslint_diagnostics),
           null_ls.builtins.code_actions.gitsigns,
         },
         on_attach = on_attach,
