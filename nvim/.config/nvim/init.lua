@@ -13,7 +13,7 @@ opt.grepprg = "rg --vimgrep --no-heading --hidden"
 opt.hidden = true -- dont unload abandoned buffers, just hide em
 opt.ignorecase = true
 opt.laststatus = 1
-opt.listchars = "tab:>--,space:·,trail:·,eol:¶" -- chars in :list mode
+opt.listchars:append("space:·") -- chars in :list mode
 opt.list = true -- show hidden (list)chars
 opt.number = true
 opt.path:append("**,bin/.local/**,nvim/.config/**,vim/.vim/**,tmux/.**")
