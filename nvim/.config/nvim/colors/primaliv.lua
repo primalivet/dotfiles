@@ -24,7 +24,7 @@ local bright_cyan = "#008787" -- ANSI: 30   --  HEX:  #008787
 local bright_white = "#dadada" -- ANSI: 253  --  HEX:  #dadada  --  same  as  foreground
 
 -- extra colors
-local almost_black1 = "#262626" -- ANSI: 235 -- HEX: #303030
+local almost_black1 = "#262626" -- ANSI: 235 -- HEX: #262626
 local almost_black2 = "#303030" -- ANSI: 236 -- HEX: #303030
 
 local set_hl = vim.api.nvim_set_hl
