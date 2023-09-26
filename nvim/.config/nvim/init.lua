@@ -14,7 +14,6 @@ opt.hidden = true -- dont unload abandoned buffers, just hide em
 opt.ignorecase = true
 opt.laststatus = 1
 opt.listchars:append("space:·") -- chars in :list mode
-opt.list = true -- show hidden (list)chars
 opt.number = true
 opt.path:append("**,bin/.local/**,nvim/.config/**,vim/.vim/**,tmux/.**")
 opt.relativenumber = true
@@ -39,6 +38,7 @@ opt.wildmode = "lastused:list:full"
 opt.wrap = false
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.hlsearch = false
 
 require("bootstrap-lazy").setup()
 require("lazy").setup("plugins")
