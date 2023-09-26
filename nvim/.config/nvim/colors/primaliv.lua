@@ -127,7 +127,7 @@ set_hl(0, "Comment", { fg = bright_cyan, italic = true })
 
 link("Constant", "Normal")
 set_hl(0, "String", { fg = bright_green })
-link("Character", "Constant")
+set_hl(0, "Character", { fg = green })
 link("Number", "Constant")
 set_hl(0, "Boolean", { fg = yellow, bold = true })
 link("Float", "Constant")
