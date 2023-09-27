@@ -1,4 +1,4 @@
-local ok, gitsigns = pcall(require, "lewis6991/gitsigns.nvim")
+local ok, gitsigns = pcall(require, "gitsigns")
 
 if not ok then
   return
