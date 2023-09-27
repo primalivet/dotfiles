@@ -3,6 +3,7 @@ cursor:
     shape: Block
     blinking: Always
 window:
+  resize_increments: true
   dimensions:
     columns: 120
     lines: 28
