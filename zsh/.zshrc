@@ -136,6 +136,14 @@ export EMSDK_QUIET=1
 [[ -f "$LOCAL_SRC/fzf/shell/completion.zsh" ]] && \
   source "$LOCAL_SRC/fzf/shell/completion.zsh"
 
+# FUNCTIONS
+#------------------------------------------------------------------------------
+
+function fuzzy_charge_project() {
+  directory="$(find ~/Code -maxdepth 2 -type d | fzf)"
+  if [[ ! -z "$directory" ]] && cd $directory;
+}
+
 # ALIASES
 #------------------------------------------------------------------------------
 
@@ -157,6 +165,7 @@ alias glo='git log --oneline'
 alias glog='git log --oneline --graph'
 alias gc='git commit'
 alias ga='git add'
+alias c=fuzzy_charge_project
 
 # PROMPT
 #------------------------------------------------------------------------------
