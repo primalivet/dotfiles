@@ -2,6 +2,8 @@ local opt = vim.opt
 vim.g.mapleader = " "
 
 opt.autoindent = true
+opt.cursorline = true
+opt.cursorlineopt="number"
 opt.backup = false
 opt.completeopt = "menu,menuone,noselect" -- needed for cmp nvim
 opt.diffopt = "internal,filler,closeoff,vertical"
