@@ -72,6 +72,8 @@ reset("VisualNOS")
 reset("WarningMsg")
 reset("lCursor")
 
+set_hl(0, "CursorLine", { underline = true})
+
 set_hl(0, "WildMenu", { fg = yellow, bg = bright_black, bold = true })
 
 set_hl(0, "DiffAdd", { fg = green })
@@ -117,7 +119,8 @@ set_hl(0, "StatusLineNC", { fg = white, bg = almost_black2 })
 set_hl(0, "WinSeparator", { fg = almost_black2 })
 link("VertSplit", "WinSeparator")
 
-set_hl(0, "LineNr", { fg = yellow })
+set_hl(0, "LineNr", { fg = bright_black })
+set_hl(0, "CursorLineNr", { fg = white })
 set_hl(0, "LineNrAbove", { fg = bright_black })
 set_hl(0, "LineNrBelow", { fg = bright_black })
 
@@ -159,6 +162,7 @@ link("Tag", "Special")
 link("Delimiter", "Special")
 link("SpecialComment", "Special")
 link("Debug", "Special")
+
 -- Plugins
 
 reset("GitSignsAdd")
