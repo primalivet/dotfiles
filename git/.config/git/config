@@ -16,5 +16,7 @@
         submodulesummary=true
 [difftool]
         prompt = false
-[includeIf "gitdir:~/Code/Work/"]
+[includeIf "gitdir:~/Code/OSS/"]
         path = ~/.git_private
+[includeIf "gitdir:~/Code/Work/"]
+        path = ~/.git_work
