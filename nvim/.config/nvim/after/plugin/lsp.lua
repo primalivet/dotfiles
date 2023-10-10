@@ -74,6 +74,10 @@ if vim.fn.executable("vscode-css-language-server") then
   })
 end
 
+if vim.fn.executable("terraform-ls") then
+  lspconfig.terraformls.setup({})
+end
+
 if vim.fn.executable("clangd") then
   lspconfig.clangd.setup({
     capabilities = capabilities,

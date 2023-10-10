@@ -219,7 +219,13 @@ cursor_mode
 # When compinit is found, its content will be loaded as a function. The function
 # name will be the name of the file. You can then call this function like any
 # other shell function.
-autoload -U compinit; compinit
+autoload -Uz compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# aws specific completer
+complete -C '~/.local/bin/aws_completer' aws
 
 # opam configuration
 [[ ! -r /Users/gustaf/.opam/opam-init/init.zsh ]] || source /Users/gustaf/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+

@@ -31,6 +31,15 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   group = group,
+  pattern = "*.tf,*.tfvars",
+  callback = function()
+    vim.cmd([[set filetype=terraform]])
+    vim.cmd([[setlocal commentstring=#\ %s]])
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  group = group,
   pattern = "*.fs,*.fsx,*.fsi",
   callback = function()
     vim.cmd([[set filetype=fsharp]])
