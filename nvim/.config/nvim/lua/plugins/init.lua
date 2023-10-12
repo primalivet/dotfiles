@@ -1,9 +1,42 @@
 return {
-  { "jose-elias-alvarez/null-ls.nvim" },
+  -- Misc
+  "tpope/vim-fugitive",
+  "lewis6991/gitsigns.nvim",
+  "nvim-lua/plenary.nvim",
+  "editorconfig/editorconfig-vim",
+  "tpope/vim-surround",
+  "tpope/vim-repeat",
+  "tpope/vim-commentary",
+  -- Treesitter
+  "nvim-treesitter/nvim-treesitter",
   {
-    "hrsh7th/nvim-cmp",
+    "nvim-treesitter/playground",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    cmd = "TSPlaygroundToggle",
+  },
+  { "junegunn/fzf", dependencies = "junegunn/fzf.vim" },
+  {
+    "echasnovski/mini.nvim",
+    version = "*",
+    config = function()
+      require("mini.align").setup()
+    end,
+  },
+  -- LSP
+  {
+    "VonHeikemen/lsp-zero.nvim",
+    branch = "v3.x",
+    lazy = false,
+    config = false,
     dependencies = {
+      "jose-elias-alvarez/null-ls.nvim",
+      "neovim/nvim-lspconfig",
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      -- Completion (and snippets)
+      "hrsh7th/nvim-cmp",
       "L3MON4D3/LuaSnip",
+      -- Sources
       "saadparwaiz1/cmp_luasnip",
       "lukas-reineke/cmp-rg",
       "hrsh7th/cmp-buffer",
@@ -16,40 +49,5 @@ return {
       "roobert/tailwindcss-colorizer-cmp.nvim",
       "Exafunction/codeium.vim",
     },
-  },
-  -- finding stuff
-  { "junegunn/fzf", dependencies = "junegunn/fzf.vim" },
-  -- treesitter (highlightning, indentation, etc)
-  { "nvim-treesitter/nvim-treesitter" },
-  {
-    "nvim-treesitter/playground",
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    cmd = "TSPlaygroundToggle",
-  },
-  -- lsp
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "hrsh7th/nvim-cmp",
-      "jose-elias-alvarez/nvim-lsp-ts-utils",
-      "b0o/schemastore.nvim",
-      "ionide/Ionide-vim",
-    },
-  },
-  -- git
-  { "tpope/vim-fugitive" },
-  { "lewis6991/gitsigns.nvim" },
-  -- utils, dependency to alot of plugins
-  "nvim-lua/plenary.nvim",
-  "editorconfig/editorconfig-vim",
-  "tpope/vim-surround",
-  "tpope/vim-repeat",
-  "tpope/vim-commentary",
-  {
-    "echasnovski/mini.nvim",
-    version = "*",
-    config = function()
-      require("mini.align").setup()
-    end,
   },
 }

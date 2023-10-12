@@ -1,164 +1,55 @@
-local ok_lspconfig, lspconfig = pcall(require, "lspconfig")
-local ok_lsp_ts_utils, lsp_ts_utils = pcall(require, "nvim-lsp-ts-utils")
-local ok_cmp_lsp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+local lsp_zero = require("lsp-zero")
 
-if not ok_lspconfig then
-  print("lspconfig not found!")
-  return
-end
+lsp_zero.on_attach(function(client, bufnr)
+  -- see :help lsp-zero-keybindings
+  -- to learn the available actions
+  lsp_zero.default_keymaps({ buffer = bufnr })
+end)
 
-if not ok_lsp_ts_utils then
-  print("nvim-lsp-ts-utils!")
-  return
-end
+require("mason").setup({})
+require("mason-lspconfig").setup({
+  ensure_installed = { "tsserver", "clangd", "cssls", "jsonls", "tailwindcss" },
+  handlers = {
+    lsp_zero.default_setup,
+  },
+})
 
-if not ok_cmp_lsp then
-  print("cmp_nvim_lsp not found!")
-  return
-end
+local cmp = require("cmp")
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-do
-  -- Control lsp diagnostics
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-    virtual_text = false,
-    signs = true,
-    update_in_insert = false,
-  })
-end
+local cmp = require('cmp')
+local cmp_action = require('lsp-zero').cmp_action()
 
-local function on_attach(client, _)
-  -- Disable LSP formatting for all language server
-  -- In most cases I tend to use null-ls for formatting and linting, as
-  -- they are generally better to configure with widley used tools such
-  -- as prettier and eslint.
-  client.server_capabilities.documentFormattingProvider = false
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-x>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+  }),
+  sources = cmp.config.sources({
+    { name = "nvim_lsp_signature_help", group_index = 3 },
+    { name = "nvim_lsp", group_index = 3 },
+    { name = "luasnip", group_index = 3 },
+    { name = "nvim_lua", group_index = 3 },
+    { name = "path", group_index = 3 },
+    { name = "buffer", group_index = 3 },
+    { name = "emoji", group_index = 5 },
+    { name = "rg", group_index = 5 },
+  }),
+})
 
-  if client.name == "rust_analyzer" then
-    -- For rust, we do want to use the LSP formatting though as it's
-    -- widley accepted.
-    client.server_capabilities.documentFormattingProvider = true
-  end
-
-  if client.name == "tsserver" then
-    -- For Typescript (javascript) we do use some extra tools built ontop
-    -- of nvim-lsp to get us smarter code actions around imports, types etc.
-    lsp_ts_utils.setup({
-      auto_inlay_hints = false,
-      always_organize_imports = false,
-    })
-    lsp_ts_utils.setup_client(client)
-  end
-end
-
-local capabilities = cmp_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-if vim.fn.executable("vscode-json-language-server") then
-  local schemastore_ok, schemastore = pcall(require, "schemastore")
-  lspconfig.jsonls.setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {
-      json = schemastore_ok and {
-        schemas = schemastore.json.schemas(),
-        validate = { enable = true },
-      } or {},
-    },
-  })
-end
-
-if vim.fn.executable("vscode-css-language-server") then
-  lspconfig.cssls.setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-  })
-end
-
-if vim.fn.executable("terraform-ls") then
-  lspconfig.terraformls.setup({})
-end
-
-if vim.fn.executable("clangd") then
-  lspconfig.clangd.setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-  })
-end
-
-if vim.fn.executable("rust-analyzer") then
-  lspconfig.rust_analyzer.setup({})
-end
-
-if vim.fn.executable("typescript") and vim.fn.executable("typescript-language-server") then
-  lspconfig.tsserver.setup({
-    capabilities = capabilities,
-    init_options = lsp_ts_utils.init_options,
-    on_attach = on_attach,
-  })
-end
-
-if vim.fn.executable("tailwindcss-langauge-server") then
-  lspconfig.tailwindcss.setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-    filetypes = {
-      "css",
-      "fsharp",
-      "html",
-      "javascript",
-      "javascriptreact",
-      "less",
-      "markdown",
-      "mdx",
-      "ocaml",
-      "postcss",
-      "reason",
-      "sass",
-      "scss",
-      "svelte",
-      "typescript",
-      "typescriptreact",
-      "vue",
-    },
-    settings = {
-      tailwindCSS = {
-        classAttributes = {
-          ".*class*",
-          "_class",
-          "a_class",
-          "class",
-          "className",
-          "classList",
-          "ngClass",
-          ".*Classes*",
-        },
-        lint = {
-          cssConflict = "warning",
-          invalidApply = "error",
-          invalidConfigPath = "error",
-          invalidScreen = "error",
-          invalidTailwindDirective = "error",
-          invalidVariant = "error",
-          recommendedVariantOrder = "warning",
-        },
-        validate = true,
-      },
-    },
-  })
-end
-
-if vim.fn.executable("lua-language-server") then
-  lspconfig.lua_ls.setup({ -- Lua
-    on_attach = on_attach,
-    settings = {
-      Lua = {
-        runtime = { version = "LuaJIT" },
-        diagnostics = { globals = { "vim" } },
-        workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-        telemetry = { enable = false },
-      },
-    },
-  })
-end
-
-lspconfig.ocamllsp.setup({})
+cmp.setup.filetype("gitcommit", {
+  sources = cmp.config.sources({
+    { name = "conventionalcommits", group_index = 1 },
+    { name = "buffer", group_index = 3 },
+    { name = "path", group_index = 3 },
+    { name = "rg", group_index = 5 },
+  }),
+})
