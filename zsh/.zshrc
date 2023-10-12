@@ -221,7 +221,10 @@ cursor_mode
 # other shell function.
 autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
+
+# terraform and tfschema completion
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
+complete -o nospace -C /opt/homebrew/bin/tfschema tfschema
 
 # aws specific completer
 complete -C '~/.local/bin/aws_completer' aws
