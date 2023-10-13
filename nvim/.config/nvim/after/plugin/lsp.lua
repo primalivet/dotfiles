@@ -1,25 +1,58 @@
 local lsp_zero = require("lsp-zero")
+local lsp_conf = require("lspconfig")
+local luasnip = require("luasnip")
+local mason = require("mason")
+local mason_lspconf = require("mason-lspconfig")
+local cmp = require("cmp")
 
-lsp_zero.on_attach(function(client, bufnr)
-  -- see :help lsp-zero-keybindings
-  -- to learn the available actions
-  lsp_zero.default_keymaps({ buffer = bufnr })
+lsp_zero.on_attach(function(client, _)
+  -- disable virtual text
+  vim.diagnostic.handlers.virtual_text = {}
+
+  if client.name == "tsserver" then
+    -- disable tsserver formatting
+    client.server_capabilities.document_formatting = false
+  end
 end)
 
-require("mason").setup({})
-require("mason-lspconfig").setup({
-  ensure_installed = { "tsserver", "clangd", "cssls", "jsonls", "tailwindcss" },
+-- make the lua-langauge-server work in neovim environment
+local lua_opts = lsp_zero.nvim_lua_ls()
+lsp_conf.lua_ls.setup(lua_opts)
+
+-- Add json schemas
+lsp_conf.jsonls.setup({
+  settings = {
+    json = {
+      schemas = require("schemastore").json.schemas(),
+      validate = { enable = true },
+    },
+  },
+})
+
+-- Add yaml schemas
+lsp_conf.yamlls.setup({
+  settings = {
+    yaml = {
+      schemaStore = {
+        -- recommended config from author: https://github.com/b0o/SchemaStore.nvim
+        enable = false,
+        url = "",
+      },
+      schemas = require("schemastore").yaml.schemas(),
+    },
+  },
+})
+
+-- Install servers
+mason.setup({})
+mason_lspconf.setup({
+  ensure_installed = { "tsserver", "clangd", "cssls", "jsonls", "yamlls", "tailwindcss", "lua_ls" },
   handlers = {
     lsp_zero.default_setup,
   },
 })
 
-local cmp = require("cmp")
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-local cmp = require('cmp')
-local cmp_action = require('lsp-zero').cmp_action()
-
+-- Completion
 cmp.setup({
   snippet = {
     expand = function(args)

@@ -30,6 +30,7 @@ return {
     config = false,
     dependencies = {
       "jose-elias-alvarez/null-ls.nvim",
+      "b0o/schemastore.nvim",
       "neovim/nvim-lspconfig",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
