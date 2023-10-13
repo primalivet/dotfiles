@@ -1,3 +1,6 @@
+-- Remove float borders
+vim.g.lsp_zero_ui_float_border = 0
+
 return {
   -- Misc
   "tpope/vim-fugitive",
