@@ -74,6 +74,9 @@ setopt EXTENDED_HISTORY
 # auto cd into directories
 setopt AUTO_CD
 
+## case insensitive path-completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
 # Allow to select in completion menu
 zstyle ':completion:*' menu select
 
@@ -141,7 +144,34 @@ export EMSDK_QUIET=1
 
 function fuzzy_charge_project() {
   directory="$(find ~/Code -maxdepth 2 -type d | fzf)"
+  if [[ $? -ne 0 ]]; then
+    return # exit if prev command was canceled
+  fi
   if [[ ! -z "$directory" ]] && cd $directory;
+}
+
+function fuzzy_start_tmux_session() {
+  directory_path="$(find ~/Code -maxdepth 2 -type d | fzf)"
+  if [[ $? -ne 0 ]]; then
+    return # exit if prev command was canceled
+  fi
+  directory="$(basename $directory_path)"
+  existing_session="$(tmux ls 2>/dev/null | awk '{ print $1 }' | sed 's/://' | grep $directory)"
+
+  if [[ -n "$existing_session" ]]; then
+    if [[ -n "$TMUX" ]]; then
+      tmux switch-client -t $existing_session
+    else
+      tmux attach -t $matching_session
+    fi
+  else
+    if [[ -n "$TMUX" ]]; then
+      tmux new -d -s $directory -c $directory_path
+      tmux switch-client -t $directory
+    else
+      tmux new -s $directory -c $directory_path
+    fi
+  fi
 }
 
 # ALIASES
@@ -158,6 +188,7 @@ alias ..='cd ..'
 alias ~="cd $HOME"
 alias ta='tmux attach'
 alias tl='tmux ls'
+alias tn=fuzzy_start_tmux_session
 alias gs='git status'
 alias gd='git diff'
 alias gl='git log'
@@ -228,6 +259,9 @@ complete -o nospace -C /opt/homebrew/bin/tfschema tfschema
 
 # aws specific completer
 complete -C '~/.local/bin/aws_completer' aws
+
+# azure specific completions
+source '/opt/homebrew/etc/bash_completion.d/az'
 
 # opam configuration
 [[ ! -r /Users/gustaf/.opam/opam-init/init.zsh ]] || source /Users/gustaf/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
