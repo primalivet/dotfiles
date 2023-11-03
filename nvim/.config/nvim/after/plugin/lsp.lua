@@ -47,7 +47,7 @@ lsp_conf.yamlls.setup({
 mason.setup({})
 mason_lspconf.setup({
   -- Manual (not supported by Mason registery): eslint_d, prettierd, stylua, clang-format, commitlint
-  ensure_installed = { "tsserver", "clangd", "cssls", "jsonls", "yamlls", "html", "tailwindcss", "lua_ls" },
+  ensure_installed = { "tsserver", "clangd", "cssls", "jsonls", "yamlls", "html", "tailwindcss", "lua_ls", "prismals" },
   handlers = {
     lsp_zero.default_setup,
   },
