@@ -39,6 +39,7 @@ opt.wildmenu = true
 opt.wildmode = "lastused:list:full"
 opt.wrap = false
 opt.foldmethod = "expr"
+opt.foldenable = false
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.hlsearch = false
 
