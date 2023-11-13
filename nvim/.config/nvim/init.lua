@@ -30,7 +30,7 @@ opt.smartcase = true
 opt.smartindent = true
 opt.softtabstop = 2
 opt.swapfile = false
-opt.termguicolors = true
+opt.termguicolors = false
 opt.timeoutlen = 500 --timeout for mappings
 opt.undofile = true -- uses the default undodir "~/.local/share/nvim/undo
 opt.updatetime = 100 --updatetime for events
@@ -45,4 +45,4 @@ opt.hlsearch = false
 
 require("bootstrap-lazy").setup()
 require("lazy").setup("plugins")
-vim.cmd([[colorscheme primaliv]])
+vim.cmd([[colorscheme sixteen]])
