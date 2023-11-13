@@ -32,7 +32,7 @@ return {
     lazy = false,
     config = false,
     dependencies = {
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim",
       "b0o/schemastore.nvim",
       "neovim/nvim-lspconfig",
       "williamboman/mason.nvim",
