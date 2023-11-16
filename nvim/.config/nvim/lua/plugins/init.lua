@@ -10,6 +10,16 @@ return {
   "tpope/vim-surround",
   "tpope/vim-repeat",
   "tpope/vim-commentary",
+  {
+    "ThePrimeagen/harpoon",
+    config = function()
+      require("harpoon").setup({
+        menu = {
+          borderchars = {"", "", "", "", "", "", "", ""},
+        },
+      })
+    end,
+  },
   -- Treesitter
   "nvim-treesitter/nvim-treesitter",
   {

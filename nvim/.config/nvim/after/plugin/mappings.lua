@@ -1,5 +1,6 @@
 local default_opt = { noremap = true, silent = true }
 local gitsigns_ok, gitsigns = pcall(require, "gitsigns")
+local harpoon_ok, harpoon = pcall(require, "harpoon")
 
 local lsp_format_async = function()
   vim.lsp.buf.format({ async = true })
@@ -70,6 +71,14 @@ vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, default_opt)
 vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, default_opt)
 vim.keymap.set("n", "<leader>gs", vim.lsp.buf.signature_help, default_opt)
 vim.keymap.set("n", "<leader>gt", vim.lsp.buf.type_definition, default_opt)
+
+-- Harpoon (Jump)
+if harpoon_ok then
+  vim.keymap.set("n", "<leader>jj", require('harpoon.ui').toggle_quick_menu, default_opt)
+  vim.keymap.set("n", "<leader>ja", require('harpoon.mark').add_file, default_opt)
+  vim.keymap.set("n", "<leader>jn", require('harpoon.ui').nav_next, default_opt)
+  vim.keymap.set("n", "<leader>jp", require('harpoon.ui').nav_prev, default_opt)
+end
 
 -- Toggle
 vim.keymap.set("n", "<leader>tl", ":set list!<CR>", default_opt)

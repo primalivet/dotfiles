@@ -175,3 +175,5 @@ reset("GitSignsAdd")
 reset("GitSignsChange")
 reset("GitSignsDelete")
 reset("TelescopeSelection")
+
+link("HarpoonWindow", "NormalFloat")
