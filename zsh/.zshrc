@@ -197,6 +197,7 @@ alias glog='git log --oneline --graph'
 alias gc='git commit'
 alias ga='git add'
 alias c=fuzzy_charge_project
+alias docker=podman
 
 # PROMPT
 #------------------------------------------------------------------------------
