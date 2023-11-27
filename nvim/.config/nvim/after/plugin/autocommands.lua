@@ -12,7 +12,10 @@ vim.api.nvim_create_autocmd({ "DiagnosticChanged" }, {
   group = group,
   pattern = "*",
   callback = function()
-    vim.diagnostic.setloclist({ open = false, title = "Buffer Diagnostics" })
+    if vim.fn.pumvisible == 0 then
+      -- Somehow DiagnosticsChanged seem to trigger in pmenu
+      vim.diagnostic.setloclist({ open = false, title = "Buffer Diagnostics" })
+    end
   end,
 })
 
