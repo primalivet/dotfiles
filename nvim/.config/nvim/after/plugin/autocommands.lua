@@ -1,5 +1,15 @@
 local group = vim.api.nvim_create_augroup("PRIMALIVET", {})
 
+vim.api.nvim_create_autocmd({ "BufRead", "DirChanged" }, {
+  group = group,
+  pattern = "*",
+  callback = function()
+    if not string.match(vim.fn.getcwd(), "/Code/OSS") then
+      vim.cmd("CodeiumDisable")
+    end
+  end,
+})
+
 vim.api.nvim_create_autocmd({ "VimResized" }, { group = group, command = "wincmd=" })
 
 vim.api.nvim_create_autocmd({ "BufReadPost", "FileReadPost" }, {
