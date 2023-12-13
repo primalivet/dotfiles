@@ -11,7 +11,7 @@ local root_has_file = function(files)
   end
 end
 
-local eslint_root_files = { ".eslintrc", ".eslintrc.js", ".eslintrc.json" }
+local eslint_root_files = { ".eslintrc", ".eslintrc.cjs", ".eslintrc.js", ".eslintrc.json" }
 local prettier_root_files = { ".prettierrc", ".prettierrc.js", ".prettierrc.json" }
 local stylua_root_files = { "stylua.toml", ".stylua.toml" }
 local ocamlformat_root_files = { "ocamlformat", ".ocamlformat" }
@@ -51,8 +51,8 @@ end
 
 null_ls.setup({
   sources = {
-    null_ls.builtins.diagnostics.eslint_d.with(opts.eslint_diagnostics),
-    null_ls.builtins.formatting.eslint_d.with(opts.eslint_formatting),
+    null_ls.builtins.diagnostics.eslint.with(opts.eslint_diagnostics),
+    null_ls.builtins.formatting.eslint.with(opts.eslint_formatting),
     null_ls.builtins.formatting.prettier.with(opts.prettier_formatting),
     null_ls.builtins.formatting.stylua.with(opts.stylua_formatting),
     null_ls.builtins.formatting.ocamlformat.with(opts.ocamlformat_formatting),
