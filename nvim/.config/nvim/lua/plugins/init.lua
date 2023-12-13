@@ -1,8 +1,5 @@
 -- Remove float borders
 vim.g.lsp_zero_ui_float_border = 0
--- Disable Codeium bindings
-vim.g.codeium_disable_bindings = 1
-vim.g.codeium_manual = 1
 
 return {
   -- Misc
