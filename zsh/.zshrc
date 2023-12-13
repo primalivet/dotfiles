@@ -267,3 +267,4 @@ source '/opt/homebrew/etc/bash_completion.d/az'
 
 # opam configuration
 [[ ! -r /Users/gustaf/.opam/opam-init/init.zsh ]] || source /Users/gustaf/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
