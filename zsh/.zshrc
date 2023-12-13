@@ -198,6 +198,7 @@ alias gc='git commit'
 alias ga='git add'
 alias c=fuzzy_charge_project
 alias docker=podman
+alias pm=podman
 
 # PROMPT
 #------------------------------------------------------------------------------
@@ -266,4 +267,3 @@ source '/opt/homebrew/etc/bash_completion.d/az'
 
 # opam configuration
 [[ ! -r /Users/gustaf/.opam/opam-init/init.zsh ]] || source /Users/gustaf/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
-
