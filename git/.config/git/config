@@ -20,3 +20,5 @@
         path = ~/.git_private
 [includeIf "gitdir:~/Code/Work/"]
         path = ~/.git_work
+[includeIf "gitdir:~/Code/VCE/"]
+        path = ~/.git_vce
