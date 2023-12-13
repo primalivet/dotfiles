@@ -85,3 +85,6 @@ vim.keymap.set("n", "<leader>tl", ":set list!<CR>", default_opt)
 vim.keymap.set("n", "<leader>tp", ":set invpaste<CR>", default_opt)
 vim.keymap.set("n", "<leader>ts", ":nohlsearch<CR>", default_opt)
 vim.keymap.set("n", "<leader>tc", ":ColorizerToggle<CR>", default_opt)
+
+-- Terminal
+vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", default_opt)
