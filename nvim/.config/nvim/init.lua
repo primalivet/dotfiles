@@ -14,7 +14,7 @@ opt.grepformat:append("%f:%l:%c:%m,%f:%l:%m")
 opt.grepprg = "rg --vimgrep --no-heading --hidden"
 opt.hidden = true -- dont unload abandoned buffers, just hide em
 opt.ignorecase = true
-opt.laststatus = 1
+opt.laststatus = 2
 opt.listchars:append("space:·") -- chars in :list mode
 opt.number = true
 opt.path:append("**,bin/.local/**,nvim/.config/**,vim/.vim/**,tmux/.**")
@@ -34,14 +34,14 @@ opt.termguicolors = false
 opt.timeoutlen = 500 --timeout for mappings
 opt.undofile = true -- uses the default undodir "~/.local/share/nvim/undo
 opt.updatetime = 100 --updatetime for events
-opt.wildignore = "*/node_modules/**,*/elm-stuff/**,**/_build/**,**bin**"
+opt.wildignore = "*/node_modules/**,*/elm-stuff/**,**/_build/**,**bin**,**/_opam/**"
 opt.wildmenu = true
 opt.wildmode = "lastused:list:full"
 opt.wrap = false
 opt.foldmethod = "expr"
 opt.foldenable = false
 opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.hlsearch = false
+opt.hlsearch = true
 
 require("bootstrap-lazy").setup()
 require("lazy").setup("plugins")
