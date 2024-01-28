@@ -22,14 +22,14 @@ local opts = {
     condition = function(utils)
       local has_eslint = root_has_file(eslint_root_files)(utils)
       local has_prettier = root_has_file(prettier_root_files)(utils)
-      return has_eslint and not has_prettier
+      return (has_eslint and not has_prettier) or (string.match(vim.fn.getcwd(), "Code/VCE"))
     end,
   },
   eslint_diagnostics = {
-    condition = root_has_file(eslint_root_files),
+    condition = root_has_file(eslint_root_files) or (string.match(vim.fn.getcwd(), "Code/VCE")),
   },
   prettier_formatting = {
-    condition = root_has_file(prettier_root_files),
+    condition = root_has_file(prettier_root_files) or (string.match(vim.fn.getcwd(), "Code/VCE")),
   },
   stylua_formatting = {
     condition = root_has_file(stylua_root_files),
