@@ -70,6 +70,8 @@ setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY_TIME
 # record command start time
 setopt EXTENDED_HISTORY
+# share history between sessions
+setopt SHARE_HISTORY
 
 # auto cd into directories
 setopt AUTO_CD
@@ -264,6 +266,8 @@ complete -C '~/.local/bin/aws_completer' aws
 
 # azure specific completions
 source '/opt/homebrew/etc/bash_completion.d/az'
+
+source <(kubectl completion zsh)
 
 # opam configuration
 [[ ! -r /Users/gustaf/.opam/opam-init/init.zsh ]] || source /Users/gustaf/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
