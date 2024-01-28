@@ -20,6 +20,7 @@ treesitter_configs.setup({
     "typescript",
     "vim",
     "yaml",
+    "vimdoc"
   },
   playground = { enable = true },
   highlight = {
