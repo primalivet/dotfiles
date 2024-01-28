@@ -70,8 +70,6 @@ setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY_TIME
 # record command start time
 setopt EXTENDED_HISTORY
-# share history between sessions
-setopt SHARE_HISTORY
 
 # auto cd into directories
 setopt AUTO_CD
