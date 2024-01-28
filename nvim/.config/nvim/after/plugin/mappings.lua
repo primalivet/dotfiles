@@ -74,10 +74,10 @@ vim.keymap.set("n", "<leader>gt", vim.lsp.buf.type_definition, default_opt)
 
 -- Harpoon (Jump)
 if harpoon_ok then
-  vim.keymap.set("n", "<leader>jj", require('harpoon.ui').toggle_quick_menu, default_opt)
-  vim.keymap.set("n", "<leader>ja", require('harpoon.mark').add_file, default_opt)
-  vim.keymap.set("n", "<leader>jn", require('harpoon.ui').nav_next, default_opt)
-  vim.keymap.set("n", "<leader>jp", require('harpoon.ui').nav_prev, default_opt)
+  vim.keymap.set("n", "<leader>jj", require("harpoon.ui").toggle_quick_menu, default_opt)
+  vim.keymap.set("n", "<leader>ja", require("harpoon.mark").add_file, default_opt)
+  vim.keymap.set("n", "<leader>jn", require("harpoon.ui").nav_next, default_opt)
+  vim.keymap.set("n", "<leader>jp", require("harpoon.ui").nav_prev, default_opt)
 end
 
 -- Toggle
@@ -87,4 +87,7 @@ vim.keymap.set("n", "<leader>ts", ":nohlsearch<CR>", default_opt)
 vim.keymap.set("n", "<leader>tc", ":ColorizerToggle<CR>", default_opt)
 
 -- Terminal
-vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", default_opt)
+vim.keymap.set("t", "<ESC>", [[<C-\><C-n>]], default_opt)
+
+-- TODO: Convert this to lua
+vim.cmd[[tnoremap <expr> <esc> &filetype == 'fzf' ? "\<esc>" : "\<c-\>\<c-n>"]]
