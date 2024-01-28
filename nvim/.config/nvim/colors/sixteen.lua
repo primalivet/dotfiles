@@ -103,8 +103,8 @@ link("NormalNC", "Normal")
 
 set_hl(0, "NormalFloat", { ctermbg = almost_black1 })
 
-link("Pmenu", "StatusLine")
-link("PmenuSbar", "StatusLine")
+set_hl(0, "Pmenu", { ctermfg = bright_white, ctermbg = bright_black })
+link("PmenuSbar", "Pmenu")
 link("PmenuSel", "WildMenu")
 set_hl(0, "PmenuThumb", { ctermbg = white })
 
@@ -119,8 +119,8 @@ link("SpecialKey", "Whitespace")
 
 set_hl(0, "Folded", { ctermbg = almost_black1 })
 
-set_hl(0, "StatusLine", { ctermfg = bright_white, ctermbg = bright_black })
-set_hl(0, "StatusLineNC", { ctermfg = white, ctermbg = almost_black2 })
+set_hl(0, "StatusLine", { ctermfg = black, ctermbg = bright_white })
+set_hl(0, "StatusLineNC", { ctermfg = black, ctermbg = white })
 
 set_hl(0, "WinSeparator", { ctermfg = almost_black2 })
 link("VertSplit", "WinSeparator")
@@ -174,6 +174,7 @@ link("Debug", "Special")
 reset("GitSignsAdd")
 reset("GitSignsChange")
 reset("GitSignsDelete")
-reset("TelescopeSelection")
 
 link("HarpoonWindow", "NormalFloat")
+
+link("TelescopeNormal", "NormalFloat")
