@@ -70,34 +70,9 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   command = "set filetype=bash",
 })
 
--- When in FZF buffer, hide irrelavant stuff and show it again when the user
--- leaves the fzf buffer
-vim.api.nvim_create_autocmd({ "FileType" }, {
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
   group = group,
-  pattern = "fzf",
-  callback = function()
-    local user_opts = {
-      laststatus = vim.opt.laststatus:get(),
-      showmode = vim.opt.showmode:get(),
-      ruler = vim.opt.ruler:get(),
-      number = vim.opt.number:get(),
-      relativenumber = vim.opt.relativenumber:get(),
-    }
-    vim.opt.laststatus = 0
-    vim.opt.showmode = false
-    vim.opt.ruler = false
-    vim.opt.number = false
-    vim.opt.relativenumber = false
-    vim.api.nvim_create_autocmd({ "BufLeave" }, {
-      group = group,
-      buffer = 0,
-      callback = function()
-        vim.opt.laststatus = user_opts.laststatus
-        vim.opt.showmode = user_opts.showmode
-        vim.opt.ruler = user_opts.ruler
-        vim.opt.number = user_opts.number
-        vim.opt.relativenumber = user_opts.relativenumber
-      end,
-    })
-  end,
+  pattern = "*",
+  command = "setlocal nonumber norelativenumber",
 })
+
