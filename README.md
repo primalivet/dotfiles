@@ -41,15 +41,6 @@ Without the `--no-folding` option only the files and folder directly inside
 the "stowed dir" will be symlinked, on level only. _This is generally not the
 wanted behaviour for dotfiles_.
 
-__ATTN__ As `karabiner` is unable to use symlinked configuration files we have
-to skip the `--no-folding` when linking Karabiner dotfiles. Read more at
-[Karabiner documentation](https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/).
-
-```
-# As the above note says this is how to do it for Karabiner
-$ stow karabiner -t ~
-```
-
 If you clone the dotfiles to `~/dotfiles` you don't need the `-t <target>` flag
 when using GNU Stow. It will default to the parent directory of your current
 working directory.
