@@ -39,6 +39,8 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 [[ $(eval uname) = "Darwin" ]] && export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 [[ $(eval uname) = "Darwin" ]] && export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+
 # Fzf (fuzzy file search)
 FZF_COLORS="bg+:-1,\
 fg:-1,\
