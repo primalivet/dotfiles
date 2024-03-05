@@ -1,5 +1,6 @@
 -- Remove float borders
 vim.g.lsp_zero_ui_float_border = 0
+vim.g.codeium_manual = true
 
 return {
   -- Misc
@@ -10,16 +11,6 @@ return {
   "tpope/vim-surround",
   "tpope/vim-repeat",
   "tpope/vim-commentary",
-  {
-    "ThePrimeagen/harpoon",
-    config = function()
-      require("harpoon").setup({
-        menu = {
-          borderchars = { "", "", "", "", "", "", "", "" },
-        },
-      })
-    end,
-  },
   -- Treesitter
   "nvim-treesitter/nvim-treesitter",
   {
@@ -28,22 +19,7 @@ return {
     cmd = "TSPlaygroundToggle",
   },
   {"junegunn/fzf", dependencies = "junegunn/fzf.vim" },
-  -- {
-  --   "nvim-telescope/telescope.nvim",
-  --   dependencies = {
-  --     {
-  --       "nvim-telescope/telescope-fzf-native.nvim",
-  --       build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-  --     },
-  --   },
-  -- },
-  {
-    "echasnovski/mini.nvim",
-    version = "*",
-    config = function()
-      require("mini.align").setup()
-    end,
-  },
+  { "echasnovski/mini.nvim", version = "*" },
   -- LSP
   {
     "VonHeikemen/lsp-zero.nvim",
@@ -51,7 +27,7 @@ return {
     lazy = false,
     config = false,
     dependencies = {
-      "nvimtools/none-ls.nvim",
+      { "nvimtools/none-ls.nvim", commit = "bb680d752cec37949faca7a1f509e2fe67ab418a" },
       "b0o/schemastore.nvim",
       "neovim/nvim-lspconfig",
       "williamboman/mason.nvim",

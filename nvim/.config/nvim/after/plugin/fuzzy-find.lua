@@ -7,6 +7,6 @@ end
 --   copen
 --   cc
 -- endfunction
-vim.g.fzf_layout = { down = "30%" }
+vim.g.fzf_layout = { down = "50%" }
 vim.g.fzf_preview_window = {}
 vim.g.fzf_action = { ["ctrl-q"] = build_quickfix_list, ["ctrl-x"] = "split", ["ctrl-v"] = "vsplit" }

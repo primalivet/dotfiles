@@ -51,7 +51,7 @@ lsp_conf.ocamllsp.setup({
 mason.setup({})
 mason_lspconf.setup({
   -- Manual (not supported by Mason registery): eslint_d, prettierd, stylua, clang-format, commitlint
-  ensure_installed = { "tsserver", "clangd", "cssls", "jsonls", "yamlls", "html", "tailwindcss", "lua_ls", "prismals"},
+  ensure_installed = { "tsserver", "clangd", "cssls", "jsonls", "yamlls", "html", "tailwindcss", "lua_ls", "prismals" },
   handlers = {
     lsp_zero.default_setup,
   },
@@ -69,7 +69,7 @@ cmp.setup({
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-x>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.abort(),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    ["<C-y>"] = cmp.mapping.confirm({ select = true }),
   }),
   sources = cmp.config.sources({
     { name = "nvim_lsp_signature_help", group_index = 3 },

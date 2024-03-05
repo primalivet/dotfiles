@@ -18,16 +18,18 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "FileReadPost" }, {
   command = "normal zR",
 })
 
-vim.api.nvim_create_autocmd({ "DiagnosticChanged" }, {
-  group = group,
-  pattern = "*",
-  callback = function()
-    if vim.fn.pumvisible == 0 then
-      -- Somehow DiagnosticsChanged seem to trigger in pmenu
-      vim.diagnostic.setloclist({ open = false, title = "Buffer Diagnostics" })
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "DiagnosticChanged" }, {
+--   group = group,
+--   pattern = "*",
+--   callback = function(args)
+--     print("DiagnosticChanged", vim.inspect(args))
+--     if vim.fn["pumvisible"]() == 0 then
+--       print("Set loclist")
+--       -- Somehow DiagnosticsChanged seem to trigger in pmenu
+--       vim.diagnostic.setloclist({ open = false, title = "Buffer Diagnostics" })
+--     end
+--   end,
+-- })
 
 vim.api.nvim_create_autocmd(
   { "BufRead", "BufNewFile" },

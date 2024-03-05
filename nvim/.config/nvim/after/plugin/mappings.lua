@@ -1,6 +1,4 @@
 local default_opt = { noremap = true, silent = true }
-local gitsigns_ok, gitsigns = pcall(require, "gitsigns")
-local harpoon_ok, harpoon = pcall(require, "harpoon")
 
 local lsp_format_async = function()
   vim.lsp.buf.format({ async = true })
@@ -46,10 +44,8 @@ vim.keymap.set("n", "[b", ":bprevious<CR>", default_opt)
 vim.keymap.set("n", "]b", ":bnext<CR>", default_opt)
 
 -- Previous and Next: Hunk
-if gitsigns_ok then
-  vim.keymap.set("n", "[h", gitsigns.prev_hunk, default_opt)
-  vim.keymap.set("n", "]h", gitsigns.next_hunk, default_opt)
-end
+vim.keymap.set("n", "[h", require('gitsigns').prev_hunk, default_opt)
+vim.keymap.set("n", "]h", require('gitsigns').next_hunk, default_opt)
 
 -- Search (FZF)
 vim.keymap.set("n", "<leader>sb", ":Buffers<CR>")
@@ -72,22 +68,22 @@ vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, default_opt)
 vim.keymap.set("n", "<leader>gs", vim.lsp.buf.signature_help, default_opt)
 vim.keymap.set("n", "<leader>gt", vim.lsp.buf.type_definition, default_opt)
 
--- Harpoon (Jump)
-if harpoon_ok then
-  vim.keymap.set("n", "<leader>jj", require("harpoon.ui").toggle_quick_menu, default_opt)
-  vim.keymap.set("n", "<leader>ja", require("harpoon.mark").add_file, default_opt)
-  vim.keymap.set("n", "<leader>jn", require("harpoon.ui").nav_next, default_opt)
-  vim.keymap.set("n", "<leader>jp", require("harpoon.ui").nav_prev, default_opt)
-end
-
 -- Toggle
 vim.keymap.set("n", "<leader>tl", ":set list!<CR>", default_opt)
 vim.keymap.set("n", "<leader>tp", ":set invpaste<CR>", default_opt)
 vim.keymap.set("n", "<leader>ts", ":nohlsearch<CR>", default_opt)
 vim.keymap.set("n", "<leader>tc", ":ColorizerToggle<CR>", default_opt)
 
+
+vim.keymap.set("i", "<C-x><C-a>", require('primalivet.ai').manual_trigger_suggestion, default_opt)
+
 -- Terminal
 vim.keymap.set("t", "<ESC>", [[<C-\><C-n>]], default_opt)
 
 -- TODO: Convert this to lua
-vim.cmd[[tnoremap <expr> <esc> &filetype == 'fzf' ? "\<esc>" : "\<c-\>\<c-n>"]]
+vim.cmd [[tnoremap <expr> <esc> &filetype == 'fzf' ? "\<esc>" : "\<c-\>\<c-n>"]]
+
+-- DEFAULT OVERRIDES
+
+-- Override the Omnicomplete mapping
+vim.keymap.set("i", "<C-x><C-o>", require('cmp').complete, default_opt)
