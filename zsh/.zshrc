@@ -20,16 +20,16 @@ export KEYTIMEOUT=1
 # Node version manager install directory
 export N_PREFIX=$HOME/.local/src/n
 
-# Wasmtime (wasm runtime)
-export WASMTIME_HOME="$HOME/.wasmtime"
+# # Wasmtime (wasm runtime)
+# export WASMTIME_HOME="$HOME/.wasmtime"
 
 # Path
 export PATH=$LOCAL_BIN:$PATH
 export PATH=$N_PREFIX/bin:$PATH
-export PATH="$LOCAL_SRC/lua-language-server/bin":$PATH
-export PATH="$WASMTIME_HOME/bin:$PATH"
-export PATH="$HOME/.dotnet/tools:$PATH"
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+# export PATH="$LOCAL_SRC/lua-language-server/bin":$PATH
+# export PATH="$WASMTIME_HOME/bin:$PATH"
+# export PATH="$HOME/.dotnet/tools:$PATH"
+# export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Homebrew paths (only on mac / Darwin) systems
 [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/bin/:$PATH"
@@ -121,14 +121,14 @@ bindkey "^?" backward-delete-char
 [[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh"  > /dev/null 2> /dev/null
 
 # Rust (cargo env script also add Rust bins to PATH)
-[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+# [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
 # Haskell (GHCup)
-[[ -f "$HOME/.ghcup/env" ]] && source "$HOME/.ghcup/env"
+# [[ -f "$HOME/.ghcup/env" ]] && source "$HOME/.ghcup/env"
 
 # Emscripten
-export EMSDK_QUIET=1
-[[ -f "$HOME/.local/src/emsdk/emsdk_env.sh" ]] && source "$HOME/.local/src/emsdk/emsdk_env.sh"
+# export EMSDK_QUIET=1
+# [[ -f "$HOME/.local/src/emsdk/emsdk_env.sh" ]] && source "$HOME/.local/src/emsdk/emsdk_env.sh"
 
 # Z "junp around"
 [[ -f "$LOCAL_SRC/z/z.sh" ]] && source "$LOCAL_SRC/z/z.sh"
@@ -258,16 +258,16 @@ autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
 # terraform and tfschema completion
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
-complete -o nospace -C /opt/homebrew/bin/tfschema tfschema
+# complete -o nospace -C /opt/homebrew/bin/terraform terraform
+# complete -o nospace -C /opt/homebrew/bin/tfschema tfschema
 
 # aws specific completer
-complete -C '~/.local/bin/aws_completer' aws
+# complete -C '~/.local/bin/aws_completer' aws
 
 # azure specific completions
 source '/opt/homebrew/etc/bash_completion.d/az'
 
-source <(kubectl completion zsh)
+# source <(kubectl completion zsh)
 
 # opam configuration
 [[ ! -r /Users/gustaf/.opam/opam-init/init.zsh ]] || source /Users/gustaf/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
