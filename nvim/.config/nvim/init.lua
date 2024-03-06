@@ -2,7 +2,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.cmd([[colorscheme sixteen]])
-
 vim.cmd(":packadd cfilter") -- enable filter quickfix list
 
 vim.opt.autoindent = true
@@ -17,7 +16,7 @@ vim.opt.fileignorecase = true
 vim.opt.grepformat:append("%f:%l:%c:%m,%f:%l:%m")
 vim.opt.grepprg = "rg --vimgrep --no-heading --hidden"
 vim.opt.ignorecase = true
-vim.opt.listchars:append("space:·") -- chars in :list mode
+vim.opt.listchars:append("space:·")
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 5
@@ -29,64 +28,45 @@ vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.softtabstop = 2
 vim.opt.swapfile = false
-vim.opt.timeoutlen = 500 --timeout for mappings
+vim.opt.timeoutlen = 500
 vim.opt.undofile = true -- uses the default undodir "~/.local/share/nvim/undo
-vim.opt.updatetime = 100 --updatetime for events
-vim.opt.wildignore:append("*/node_modules/**,*/elm-stuff/**,**/_build/**,**bin**,**/_opam/**")
+vim.opt.updatetime = 100
+vim.opt.wildignore:append("*/node_modules/**,**/_build/**,**bin**,**/_opam/**")
 vim.opt.wildmode = "lastused:list:full"
 vim.opt.wrap = false
 
 -- KEYMAPS
 
-local default_opt = { noremap = true, silent = true }
+local function keymap_set(mode, lhs, rhs, opts)
+  local default_opt = { noremap = true, silent = true }
+  vim.keymap.set(mode, lhs, rhs, vim.tbl_deep_extend("force", default_opt, opts))
+end
 
--- Go over wrapped lines
-vim.keymap.set("n", "j", "gj", default_opt)
-vim.keymap.set("n", "k", "gk", default_opt)
-
--- Keep selection in visual mode when indenting
-vim.keymap.set("v", "<", "<gv", default_opt)
-vim.keymap.set("v", ">", ">gv", default_opt)
-
--- Move lines in visual mode
-vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", default_opt)
-vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", default_opt)
-
--- Center on search jump
-vim.keymap.set("n", "n", "nzz", default_opt)
-vim.keymap.set("n", "N", "Nzz", default_opt)
-
--- Previous and Next: Quickfix
-vim.keymap.set("n", "[c", ":cprevious<CR>", default_opt)
-vim.keymap.set("n", "]c", ":cnext<CR>", default_opt)
-vim.keymap.set("n", "[C", ":cfirst<CR>", default_opt)
-vim.keymap.set("n", "]C", ":clast<CR>", default_opt)
-
--- Previous and Next: Loclist
-vim.keymap.set("n", "[l", ":lprevious<CR>", default_opt)
-vim.keymap.set("n", "]l", ":lnext<CR>", default_opt)
-vim.keymap.set("n", "[L", ":lfirst<CR>", default_opt)
-vim.keymap.set("n", "]L", ":llast<CR>", default_opt)
-
--- Previous and Next: Diagnostics
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, default_opt)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, default_opt)
-
--- Diagnostics
-vim.keymap.set("n", "<leader>dc", ":Diagnostics<CR>", default_opt)
-
--- Previous and Next: Buffer
-vim.keymap.set("n", "[b", ":bprevious<CR>", default_opt)
-vim.keymap.set("n", "]b", ":bnext<CR>", default_opt)
-
--- Toggle
-vim.keymap.set("n", "<leader>tl", ":set list!<CR>", default_opt)
-vim.keymap.set("n", "<leader>tp", ":set invpaste<CR>", default_opt)
-vim.keymap.set("n", "<leader>ts", ":nohlsearch<CR>", default_opt)
-vim.keymap.set("n", "<leader>tc", ":ColorizerToggle<CR>", default_opt)
-
--- TODO: Convert this to lua
-vim.cmd([[tnoremap <expr> <esc> &filetype == 'fzf' ? "\<esc>" : "\<c-\>\<c-n>"]])
+keymap_set("n", "j", "gj", { desc = "Move down over wrapped lines" })
+keymap_set("n", "k", "gk", { desc = "Move up over wrapped lines" })
+keymap_set("v", "<", "<gv", { desc = "Keep visual selection while indenting" })
+keymap_set("v", ">", ">gv", { desc = "Keep visual selection while indenting" })
+keymap_set("v", "<C-j>", ":m '>+1<CR>gv=gv", { desc = "Move visual selection down" })
+keymap_set("v", "<C-k>", ":m '<-2<CR>gv=gv", { desc = "Move visual selection up" })
+keymap_set("n", "n", "nzz", { desc = "Center on search jump natural direction" })
+keymap_set("n", "N", "Nzz", { desc = "Center on search jump unnatural direction" })
+keymap_set("n", "[c", ":cprevious<CR>", { desc = "Previous Quickfix item" })
+keymap_set("n", "]c", ":cnext<CR>", { desc = "Next Quickfix item" })
+keymap_set("n", "[C", ":cfirst<CR>", { desc = "First Quickfix item" })
+keymap_set("n", "]C", ":clast<CR>", { desc = "Last Quickfix item" })
+keymap_set("n", "[l", ":lprevious<CR>", { desc = "Previous Location list item" })
+keymap_set("n", "]l", ":lnext<CR>", { desc = "Next Location list item" })
+keymap_set("n", "[L", ":lfirst<CR>", { desc = "First Location list item" })
+keymap_set("n", "]L", ":llast<CR>", { desc = "Last Location list item" })
+keymap_set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic item" })
+keymap_set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic item" })
+keymap_set("n", "<leader>d", vim.diagnostic.setloclist, { desc = "Add buffer diagnostics to Location list" })
+keymap_set("n", "[b", ":bprevious<CR>", { desc = "Previous buffer" })
+keymap_set("n", "]b", ":bnext<CR>", { desc = "Next buffer" })
+keymap_set("n", "<leader>tl", ":set list!<CR>", { desc = "Toggle list chars" })
+keymap_set("n", "<leader>tp", ":set invpaste<CR>", { desc = "Toggle paste mode" })
+keymap_set("n", "<leader>ts", ":nohlsearch<CR>", { desc = "Toggle search highlight" })
+keymap_set("t", "<Esc>", "<C-\\><C-n>", { desc = "Escape in terminal" })
 
 -- AUTOCOMMANDS
 
@@ -104,11 +84,6 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
   command = "setlocal nonumber norelativenumber",
 })
 
--- USERCOMMANDS
-
-vim.api.nvim_create_user_command("Wq", "wq", {})
-vim.api.nvim_create_user_command("W", "w", {})
-
 -- PLUGINS
 
 local path_package = vim.fn.stdpath("data") .. "/site/"
@@ -122,7 +97,6 @@ if not vim.loop.fs_stat(mini_path) then
 end
 
 require("mini.deps").setup({ path = { package = path_package } })
-
 local add, now = MiniDeps.add, MiniDeps.now
 
 now(function()
@@ -141,15 +115,15 @@ now(function()
 
   vim.ui.select = MiniPick.ui_select
 
-  vim.keymap.set("n", "<leader>ss", ":Pick resume<CR>", { desc = "Search Same (as before)" })
-  vim.keymap.set("n", "<leader>sf", ":Pick files<CR>", { desc = "Search Files" })
-  vim.keymap.set("n", "<leader>sb", ":Pick buffers<CR>", { desc = "Search Buffers" })
-  vim.keymap.set("n", "<leader>sh", ":Pick help<CR>", { desc = "Search Help" })
-  vim.keymap.set("n", "<leader>sl", ":Pick grep_live<CR>", { desc = "Search Live" })
-  vim.keymap.set("n", "<leader>sc", ":Pick git_commits<CR>", { desc = "Search Commits" })
-  vim.keymap.set("n", "<leader>sr", ":Pick lsp scope='references'<CR>", { desc = "Search References" })
-  vim.keymap.set("n", "<leader>sws", ":Pick lsp scope='workspace_symbol'<CR>", { desc = "Search Workspace Symbol" })
-  vim.keymap.set("n", "<leader>sds", ":Pick lsp scope='document_symbol'<CR>", { desc = "Search Document Symbol" })
+  keymap_set("n", "<leader>ss", ":Pick resume<CR>", { desc = "Search Same (as before)" })
+  keymap_set("n", "<leader>sf", ":Pick files<CR>", { desc = "Search Files" })
+  keymap_set("n", "<leader>sb", ":Pick buffers<CR>", { desc = "Search Buffers" })
+  keymap_set("n", "<leader>sh", ":Pick help<CR>", { desc = "Search Help" })
+  keymap_set("n", "<leader>sl", ":Pick grep_live<CR>", { desc = "Search Live" })
+  keymap_set("n", "<leader>sc", ":Pick git_commits<CR>", { desc = "Search Commits" })
+  keymap_set("n", "<leader>sr", ":Pick lsp scope='references'<CR>", { desc = "Search References" })
+  keymap_set("n", "<leader>sws", ":Pick lsp scope='workspace_symbol'<CR>", { desc = "Search Workspace Symbol" })
+  keymap_set("n", "<leader>sds", ":Pick lsp scope='document_symbol'<CR>", { desc = "Search Document Symbol" })
 
   require("mini.completion").setup({
     lsp_completion = {
@@ -174,7 +148,6 @@ end)
 
 now(function()
   add("lewis6991/gitsigns.nvim")
-  local default_opt = { noremap = true, silent = true }
   require("gitsigns").setup({
     signs = {
       add = { text = "+" },
@@ -186,11 +159,32 @@ now(function()
     },
   })
 
-  vim.keymap.set("n", "[h", require("gitsigns").prev_hunk, default_opt)
-  vim.keymap.set("n", "]h", require("gitsigns").next_hunk, default_opt)
+  keymap_set("n", "[h", require("gitsigns").prev_hunk, { desc = "Previous Git hunk" })
+  keymap_set("n", "]h", require("gitsigns").next_hunk, { desc = "Next Git hunk" })
 
-  vim.api.nvim_create_user_command("ResetHunk", "Gitsigns reset_hunk", {})
-  vim.api.nvim_create_user_command("PreviewHunk", "Gitsigns preview_hunk", {})
+  vim.api.nvim_create_user_command("ResetHunk", "Gitsigns reset_hunk", { desc = "Reset hunk under cursor" })
+  vim.api.nvim_create_user_command("PreviewHunk", "Gitsigns preview_hunk", { desc = "Preview hunk under cursor" })
+end)
+
+now(function()
+  add("stevearc/conform.nvim")
+  require("conform").setup({
+    formatters_by_ft = {
+      lua = { "stylua" },
+      javascript = { { "prettierd", "prettier" } },
+      typescript = { { "prettierd", "prettier" } },
+    },
+  })
+
+  keymap_set("n", "<leader>f", function()
+    require("conform").format({
+      async = true,
+      lsp_fallback = true,
+      filter = function(client)
+        return client.name ~= "tsserver"
+      end,
+    })
+  end, { desc = "Format buffer" })
 end)
 
 now(function()
@@ -207,19 +201,16 @@ now(function()
     group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
     callback = function(event)
       vim.bo[event.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
-      local default_opt = { buffer = event.buf, noremap = true, silent = true }
-      -- Edit
-      vim.keymap.set("n", "<leader>ea", vim.lsp.buf.code_action, default_opt)
-      vim.keymap.set("n", "<leader>ef", function()
-        vim.lsp.buf.format({ async = true })
-      end, default_opt)
-      vim.keymap.set("n", "<leader>er", vim.lsp.buf.rename, default_opt)
-      vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, default_opt)
-      vim.keymap.set("n", "<leader>gh", vim.lsp.buf.hover, default_opt)
-      vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, default_opt)
-      vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, default_opt)
-      vim.keymap.set("n", "<leader>gs", vim.lsp.buf.signature_help, default_opt)
-      vim.keymap.set("n", "<leader>gt", vim.lsp.buf.type_definition, default_opt)
+      -- HINT: Formatting is setup with conform (which falls back to lsp)
+      keymap_set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+      keymap_set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
+      keymap_set("n", "K", vim.lsp.buf.hover, { desc = "Hover information" })
+      keymap_set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition" })
+      keymap_set("n", "gD", vim.lsp.buf.declaration, { desc = "Goto declaration" })
+      keymap_set("n", "gr", vim.lsp.buf.references, { desc = "Goto references" })
+      keymap_set("n", "gi", vim.lsp.buf.implementation, { desc = "Goto implementation" })
+      keymap_set("n", "gtd", vim.lsp.buf.type_definition, { desc = "Goto type definition" })
+      keymap_set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })
     end,
   })
 
@@ -228,6 +219,7 @@ now(function()
   local servers = {
     clangd = {},
     tsserver = {},
+    eslint = {},
     lua_ls = {
       settings = {
         Lua = {
@@ -261,80 +253,6 @@ now(function()
 end)
 
 now(function()
-  add({
-    source = "nvimtools/none-ls.nvim",
-    checkout = "bb680d752cec37949faca7a1f509e2fe67ab418a",
-    depends = { "nvim-lua/plenary.nvim" },
-  })
-  local null_ls = require("null-ls")
-  local root_has_file = function(file)
-    return function(utils)
-      local has_file = utils.root_has_file(file)
-      return has_file
-    end
-  end
-
-  local eslint_root_files = { ".eslintrc", ".eslintrc.cjs", ".eslintrc.js", ".eslintrc.json" }
-  local prettier_root_files = { ".prettierrc", ".prettierrc.js", ".prettierrc.json" }
-  local stylua_root_files = { "stylua.toml", ".stylua.toml" }
-  local ocamlformat_root_files = { "ocamlformat", ".ocamlformat" }
-  local clang_format_root_files = { ".clang-format" }
-
-  local json_file_has_field = function(filename, fieldname)
-    return function(utils)
-      if not utils.root_has_file(filename) then
-        return false
-      end
-      local contents = vim.fn.readfile(vim.fn.getcwd() .. "/" .. filename)
-      return vim.fn.json_decode(contents)[fieldname] ~= nil
-    end
-  end
-
-  local opts = {
-    eslint_formatting = {
-      condition = function(utils)
-        local has_eslint = root_has_file(eslint_root_files)(utils)
-        local has_prettier = root_has_file(prettier_root_files)(utils)
-        local has_package_json_eslint = json_file_has_field("package.json", "eslintConfig")(utils)
-        local has_package_json_prettier = json_file_has_field("package.json", "prettier")(utils)
-        local has_package_json_config = has_package_json_eslint and not has_package_json_prettier
-        return (has_eslint and not has_prettier) or has_package_json_config
-      end,
-    },
-    eslint_diagnostics = { condition = root_has_file(eslint_root_files) },
-    prettier_formatting = {
-      condition = function(utils)
-        local has_package_json_prettier = json_file_has_field("package.json", "prettier")(utils)
-        return root_has_file(prettier_root_files)(utils) or has_package_json_prettier
-      end,
-    },
-    stylua_formatting = { condition = root_has_file(stylua_root_files) },
-    ocamlformat_formatting = { condition = root_has_file(ocamlformat_root_files) },
-    clang_format_formatting = { condition = root_has_file(clang_format_root_files) },
-  }
-
-  local function on_attach(client, _)
-    if client.server_capabilities.document_formatting then
-      vim.cmd("command! -buffer Formatting lua vim.lsp.buf.formatting()")
-      vim.cmd("command! -buffer FormattingSync lua vim.lsp.buf.formatting_sync()")
-    end
-  end
-
-  null_ls.setup({
-    sources = {
-      null_ls.builtins.diagnostics.eslint.with(opts.eslint_diagnostics),
-      null_ls.builtins.formatting.eslint.with(opts.eslint_formatting),
-      null_ls.builtins.formatting.prettier.with(opts.prettier_formatting),
-      null_ls.builtins.formatting.stylua.with(opts.stylua_formatting),
-      null_ls.builtins.formatting.ocamlformat.with(opts.ocamlformat_formatting),
-      null_ls.builtins.formatting.clang_format.with(opts.clang_format_formatting),
-      null_ls.builtins.code_actions.eslint.with(opts.eslint_diagnostics),
-    },
-    on_attach = on_attach,
-  })
-end)
-
-now(function()
   vim.g.codeium_manual = true
   add("Exafunction/codeium.vim")
   vim.api.nvim_create_autocmd({ "BufRead", "DirChanged" }, {
@@ -346,11 +264,11 @@ now(function()
         return
       end
 
-      vim.keymap.set("i", "<C-x><C-a>", vim.fn["codeium#Complete"], { desc = "Codeium complete" })
-      -- vim.keymap.set("i", "XXXXXXX", function() vim.fn["codeium#CycleCompletions"](1) end, { desc = "Codium next suggestion"})
-      -- vim.keymap.set("i", "XXXXXXX", function() vim.fn["codeium#CycleCompletions"](-1) end, { desc = "Codeium previous suggestion"})
-      -- vim.keymap.set("i", "XXXXXXX", vim.fn["codeium#Clear"], { desc = "Codeium clear suggestion"})
-      -- vim.keymap.set("i", "XXXXXXX", vim.fn["codeium#Accept"], { desc = "Codeium accept suggestion"})
+      keymap_set("i", "<C-x><C-a>", vim.fn["codeium#Complete"], { desc = "Codeium complete" })
+      -- keymap_set("i", "XXXXXXX", function() vim.fn["codeium#CycleCompletions"](1) end, { desc = "Codium next suggestion"})
+      -- keymap_set("i", "XXXXXXX", function() vim.fn["codeium#CycleCompletions"](-1) end, { desc = "Codeium previous suggestion"})
+      -- keymap_set("i", "XXXXXXX", vim.fn["codeium#Clear"], { desc = "Codeium clear suggestion"})
+      -- keymap_set("i", "XXXXXXX", vim.fn["codeium#Accept"], { desc = "Codeium accept suggestion"})
     end,
   })
 end)
