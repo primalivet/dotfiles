@@ -238,7 +238,6 @@ return {
           null_ls.builtins.formatting.ocamlformat.with(opts.ocamlformat_formatting),
           null_ls.builtins.formatting.clang_format.with(opts.clang_format_formatting),
           null_ls.builtins.code_actions.eslint.with(opts.eslint_diagnostics),
-          null_ls.builtins.code_actions.gitsigns,
         },
         on_attach = on_attach,
       })
