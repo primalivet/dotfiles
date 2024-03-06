@@ -11,7 +11,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.cmdheight = 1
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
-vim.opt.diffopt:append('vertical')
+vim.opt.diffopt:append("vertical")
 vim.opt.expandtab = true
 vim.opt.fileignorecase = true
 vim.opt.grepformat:append("%f:%l:%c:%m,%f:%l:%m")
@@ -138,6 +138,8 @@ now(function()
       end,
     },
   })
+
+  vim.ui.select = MiniPick.ui_select
 
   vim.keymap.set("n", "<leader>ss", ":Pick resume<CR>", { desc = "Search Same (as before)" })
   vim.keymap.set("n", "<leader>sf", ":Pick files<CR>", { desc = "Search Files" })

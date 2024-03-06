@@ -175,6 +175,16 @@ reset("GitSignsAdd")
 reset("GitSignsChange")
 reset("GitSignsDelete")
 
-link("HarpoonWindow", "NormalFloat")
-
-link("TelescopeNormal", "NormalFloat")
+set_hl(0, "MiniPickBorder", { ctermfg = almost_black1, ctermbg = almost_black1 }) -- window border.
+link("MiniPickBorderBusy", "DiagnosticWarn") -- window border while picker is busy processing.
+reset("MiniPickBorderText") -- non-prompt on border.
+set_hl(0, "MiniPickIconDirectory", { ctermfg = almost_black1, ctermbg = almost_black1 }) -- default icon for directory.
+set_hl(0, "MiniPickIconFile", { ctermfg = almost_black1, ctermbg = almost_black1 }) -- default icon for file.
+reset("MiniPickHeader") -- headers in info buffer and previews.
+link("MiniPickMatchCurrent", "PmenuSel") -- current matched item.
+reset("MiniPickMatchMarked") -- marked matched items.
+link("MiniPickMatchRanges", "QuickFixLine") -- ranges matching query elements.
+link("MiniPickNormal", "NormalFloat") -- basic foreground/background highlighting.
+reset("MiniPickPreviewLine") -- target line in preview.
+reset("MiniPickPreviewRegion") -- target region in preview.
+reset("MiniPickPrompt") -- prompt.
