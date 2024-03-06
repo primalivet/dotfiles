@@ -118,7 +118,9 @@ return {
           local default_opt = { buffer = event.buf, noremap = true, silent = true }
           -- Edit
           vim.keymap.set("n", "<leader>ea", vim.lsp.buf.code_action, default_opt)
-          vim.keymap.set("n", "<leader>ef", function() vim.lsp.buf.format({ async = true }) end, default_opt) vim.keymap.set("n", "<leader>er", vim.lsp.buf.rename, default_opt) -- Goto vim.keymap.set("n", "<leader>gf", "gf", default_opt) vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, default_opt)
+          vim.keymap.set("n", "<leader>ef", function() vim.lsp.buf.format({ async = true }) end, default_opt)
+          vim.keymap.set("n", "<leader>er", vim.lsp.buf.rename, default_opt)
+          vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, default_opt)
           vim.keymap.set("n", "<leader>gh", vim.lsp.buf.hover, default_opt)
           vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, default_opt)
           vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, default_opt)
