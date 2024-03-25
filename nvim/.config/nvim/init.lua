@@ -217,6 +217,7 @@ now(function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
   local servers = {
+    terraformls = {},
     clangd = {},
     tsserver = {},
     eslint = {},
