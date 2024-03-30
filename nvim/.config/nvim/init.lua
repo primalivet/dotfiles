@@ -275,5 +275,3 @@ now(function()
     end,
   })
 end)
-
-require('primalivet.robot')
