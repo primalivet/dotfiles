@@ -29,8 +29,6 @@
 
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
-;; (add-to-list 'package-archives
-;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 (defvar rc/package-contents-refreshed nil)
 
@@ -57,8 +55,7 @@
  'evil
  'evil-commentary
  'vterm
- 'exec-path-from-shell
- 'gruber-darker-theme)
+ 'exec-path-from-shell)
 
 ;; Ido ubercompletion thing, dont know really
 (ido-ubiquitous-mode 1)
@@ -76,7 +73,6 @@
 
 ;; Recognize path from shell
 (exec-path-from-shell-initialize)
-(load-theme 'gruber-darker)
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
