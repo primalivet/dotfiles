@@ -1,145 +1,113 @@
 # ENVIRONMENT VARIABLES
 #------------------------------------------------------------------------------
+
 export TERM=xterm-256color
-export LOCAL_BIN=$HOME/.local/bin
+
+# Local (src/bin)
 export LOCAL_SRC=$HOME/.local/src
+export LOCAL_BIN=$HOME/.local/bin
+export PATH=$LOCAL_BIN:$PATH
 
-# History
-export HISTFILE=~/.histfile
-export HISTSIZE=1000000
-export SAVEHIST=1000000
+# Homebrew
+export PATH="/opt/homebrew/bin/:$PATH"
+# [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/sbin:$PATH"
+# [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+# [[ $(eval uname) = "Darwin" ]] && export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+# [[ $(eval uname) = "Darwin" ]] && export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
-# Editor
-export VISUAL=nvim
-export EDITOR=nvim
-export GIT_EDITOR=nvim
+# N (node version manager)
+export N_PREFIX=$HOME/.local/src/n
+export PATH=$N_PREFIX/bin:$PATH
+
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
 # More speed (especially when going in and out of insert mode (vi))
 export KEYTIMEOUT=1
 
-# Node version manager install directory
-export N_PREFIX=$HOME/.local/src/n
+if type nvim &> /dev/null; then
+  export VISUAL=nvim
+  export EDITOR=nvim
+  export GIT_EDITOR=nvim
+else
+  export VISUAL=vim
+  export EDITOR=vim
+  export GIT_EDITOR=vim
+fi
 
-# # Wasmtime (wasm runtime)
-# export WASMTIME_HOME="$HOME/.wasmtime"
+if type fzf &> /dev/null && type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git" --glob'
+  export FZF_DEFAULT_OPTS="--height=100% --reverse --color=bw"
+fi
 
-# Path
-export PATH=$LOCAL_BIN:$PATH
-export PATH=$N_PREFIX/bin:$PATH
-# export PATH="$LOCAL_SRC/lua-language-server/bin":$PATH
-# export PATH="$WASMTIME_HOME/bin:$PATH"
-# export PATH="$HOME/.dotnet/tools:$PATH"
-# export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-
-# Homebrew paths (only on mac / Darwin) systems
-[[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/bin/:$PATH"
-[[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/sbin:$PATH"
-[[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-
-[[ $(eval uname) = "Darwin" ]] && export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
-[[ $(eval uname) = "Darwin" ]] && export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-
-export RIPGREP_CONFIG_PATH=~/.ripgreprc
-
-# Fzf (fuzzy file search)
-FZF_COLORS="bg+:-1,\
-fg:-1,\
-fg+:-1,\
-border:1,\
-spinner:-1,\
-hl:3,\
-header:-1,\
-info:-1,\
-pointer:-1,\
-marker:-1,\
-prompt:8,\
-hl+:3"
-
-export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git" --glob "!.stack-work"'
-export FZF_DEFAULT_OPTS="--height=100% --reverse --color=$FZF_COLORS"
-
-# OPTIONS
-#------------------------------------------------------------------------------
-
-# History
-# do not put duplicated command into history list
-setopt HIST_IGNORE_ALL_DUPS
-# do not save duplicated command
-setopt HIST_SAVE_NO_DUPS
-# remove unnecessary blanks
-setopt HIST_REDUCE_BLANKS
-# append command to history file immediately after execution
-setopt INC_APPEND_HISTORY_TIME
-# record command start time
-setopt EXTENDED_HISTORY
-
-# auto cd into directories
-setopt AUTO_CD
-
-## case insensitive path-completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-
-# Allow to select in completion menu
-zstyle ':completion:*' menu select
-
-# Keybindings
-#------------------------------------------------------------------------------
-
-# Use vi keybindings
-bindkey -v
-
-# Reverse through completion with Shift-Tab
-bindkey '^[[Z' reverse-menu-complete
-
-# Use C-p and C-n to traverse history
-bindkey '^P' history-beginning-search-backward
-bindkey '^N' history-beginning-search-forward
-
-# Backspace as expected in Emacs
-bindkey "^?" backward-delete-char
-
-# "PLUGINS"
-#------------------------------------------------------------------------------
-
-# Autosuggestions
 [[ -f "$LOCAL_SRC/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && \
   source "$LOCAL_SRC/zsh-autosuggestions/zsh-autosuggestions.zsh"
-# Completion
-[[ -d "$LOCAL_SRC/zsh-completions/src" ]] && \
-  fpath=("$LOCAL_SRC/zsh-completions/src" $fpath)
-# # Sytax highlight
-[[ -f "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
-  source "$LOCAL_SRC/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-# PROGRAMS
-#------------------------------------------------------------------------------
-
-# DotNet
-# [[ -d "$HOME/.dotnet" ]] && export DOTNET_ROOT="$HOME/.dotnet"
 
 # Ocaml
 [[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh"  > /dev/null 2> /dev/null
 
 # Rust (cargo env script also add Rust bins to PATH)
-# [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
-# Haskell (GHCup)
-# [[ -f "$HOME/.ghcup/env" ]] && source "$HOME/.ghcup/env"
+# History
+#------------------------------------------------------------------------------
 
-# Emscripten
-# export EMSDK_QUIET=1
-# [[ -f "$HOME/.local/src/emsdk/emsdk_env.sh" ]] && source "$HOME/.local/src/emsdk/emsdk_env.sh"
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
 
-# Z "junp around"
-[[ -f "$LOCAL_SRC/z/z.sh" ]] && source "$LOCAL_SRC/z/z.sh"
+setopt INC_APPEND_HISTORY_TIME # Immediately append after execution
+setopt EXTENDED_HISTORY # Timestamps in history
+setopt HIST_EXPIRE_DUPS_FIRST # Duplicates goes first when trimming
+setopt HIST_IGNORE_DUPS # Dont record entry which was just recorded
+setopt HIST_IGNORE_ALL_DUPS # Don't put duplicated command into history list
+setopt HIST_SAVE_NO_DUPS # Don't save duplicated command
+setopt HIST_REDUCE_BLANKS # Remove unnecessary blanks
+setopt HIST_IGNORE_SPACE # Don't save entry if staring with space
+setopt SHARE_HISTORY # Share history between sessions
+unsetopt HIST_VERIFY # Execute commands using history (e.g.: using !$) immediately
 
-# Fzf man pages, key bindings and completion
-[[ -d "$LOCAL_SRC/fzf/man" ]] && \
-  export MANPATH=$LOCAL_SRC/fzf/man:$MANPATH
-[[ -f "$LOCAL_SRC/fzf/shell/key-bindings.zsh" ]] && \
-  source "$LOCAL_SRC/fzf/shell/key-bindings.zsh"
-[[ -f "$LOCAL_SRC/fzf/shell/completion.zsh" ]] && \
-  source "$LOCAL_SRC/fzf/shell/completion.zsh"
+# Completion
+#------------------------------------------------------------------------------
+
+# Add completions installed through Homebrew packages
+# See: https://docs.brew.sh/Shell-Completion
+if type brew &>/dev/null; then
+  FPATH=/usr/local/share/zsh/site-functions:$FPATH
+fi
+
+# Speed up completion (https://gist.github.com/ctechols/ca1035271ad134841284)
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+
+unsetopt flowcontrol
+setopt auto_menu
+setopt complete_in_word
+setopt always_to_end
+setopt auto_pushd
+
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive path-completion
+zstyle ':completion:*' menu select # Allow to select in completion menu
+
+# azure specific completions
+# source '/opt/homebrew/etc/bash_completion.d/az'
+
+# Key bindings
+#------------------------------------------------------------------------------
+
+bindkey '^[[Z' reverse-menu-complete # Reverse through completion with Shift-Tab
+bindkey -v # Use vi keybindings
+
+bindkey '^R' history-incremental-search-backward
+bindkey '^S' history-incremental-search-forward
+
+bindkey '^P' history-search-backward
+bindkey '^N' history-search-forward
+
+bindkey '^Y' accept-search
+
+bindkey '^?' backward-delete-char # Backspace as expected in Emacs
 
 # FUNCTIONS
 #------------------------------------------------------------------------------
@@ -179,12 +147,10 @@ function fuzzy_start_tmux_session() {
 # ALIASES
 #------------------------------------------------------------------------------
 
-alias vil='nvim -c "set background=light"'
-alias v='nvim --clean -u ~/.vim/vimrc'
+alias history='history 1'
 alias vi='nvim'
 alias reload='. ~/.zshrc'
 alias ls='ls --color=auto'
-alias l='ls -al'
 alias ll='ls -al'
 alias ..='cd ..'
 alias ~="cd $HOME"
@@ -200,18 +166,15 @@ alias gc='git commit'
 alias ga='git add'
 alias c=fuzzy_charge_project
 alias docker=podman
-alias pm=podman
+alias h='history | fzf'
 
 # PROMPT
 #------------------------------------------------------------------------------
 
-export PROMPT='%1~ $ '
+setopt prompt_subst
 
-# Vi mode cursor
-#------------------------------------------------------------------------------
 # Borrowed from: https://thevaluable.dev/zsh-install-configure-mouseless/
 # See https://ttssh2.osdn.jp/manual/4/en/usage/tips/vim.html for cursor shapes
-
 cursor_mode() {
     cursor_block='\e[2 q'
     cursor_beam='\e[6 q'
@@ -236,39 +199,24 @@ cursor_mode() {
     zle -N zle-line-init
 }
 
-cursor_mode
+git_prompt_info() {
+  local dirstatus=" OK"
+  local dirty=" DIRTY"
+
+  if [[ ! -z $(git status --porcelain 2> /dev/null | tail -n1) ]]; then
+    dirstatus=$dirty
+  fi
+
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+  echo " ${ref#refs/heads/}$dirstatus"
+}
+
+
+PROMPT='%1~$(git_prompt_info) $ '
+
 
 # PRIVATE
 #------------------------------------------------------------------------------
 
 [ -f ~/.zsh_private ] && source ~/.zsh_private
-
-# LOAD COMPLETION
-#------------------------------------------------------------------------------
-# What does it mean?
-
-# The autoload command load a file containing shell commands. To find this file,
-# Zsh will look in the directories of the Zsh file search path, defined in the
-# variable $fpath, and search a file called compinit.
-
-# When compinit is found, its content will be loaded as a function. The function
-# name will be the name of the file. You can then call this function like any
-# other shell function.
-autoload -Uz compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-
-# terraform and tfschema completion
-# complete -o nospace -C /opt/homebrew/bin/terraform terraform
-# complete -o nospace -C /opt/homebrew/bin/tfschema tfschema
-
-# aws specific completer
-# complete -C '~/.local/bin/aws_completer' aws
-
-# azure specific completions
-source '/opt/homebrew/etc/bash_completion.d/az'
-
-# source <(kubectl completion zsh)
-
-# opam configuration
-[[ ! -r /Users/gustaf/.opam/opam-init/init.zsh ]] || source /Users/gustaf/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
-
