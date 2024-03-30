@@ -172,7 +172,9 @@ now(function()
     formatters_by_ft = {
       lua = { "stylua" },
       javascript = { { "prettierd", "prettier" } },
+      javascriptreact = { { "prettierd", "prettier" } },
       typescript = { { "prettierd", "prettier" } },
+      typescriptreact = { { "prettierd", "prettier" } },
     },
   })
 
@@ -273,3 +275,5 @@ now(function()
     end,
   })
 end)
+
+require('primalivet.robot')
