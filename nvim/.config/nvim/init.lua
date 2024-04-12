@@ -223,6 +223,8 @@ now(function()
     clangd = {},
     tsserver = {},
     eslint = {},
+    gopls = {},
+    prismals ={},
     lua_ls = {
       settings = {
         Lua = {
