@@ -12,10 +12,10 @@ vim.opt.termguicolors = false
 vim.g.colors_name = "sixteen"
 
 local black = 0
-local red = 1
+-- local red = 1
 local green = 2
 local yellow = 3
-local blue = 4
+-- local blue = 4
 -- local magenta = 5
 -- local cyan = 6
 local white = 7
@@ -31,6 +31,10 @@ local bright_white = 15
 -- extra colors (Cheating)
 local almost_black1 = 235
 local almost_black2 = 236
+local diff_add = 22
+local diff_change = 22
+local diff_delete = 52
+local diff_text = 28
 
 local set_hl = vim.api.nvim_set_hl
 
@@ -82,10 +86,10 @@ set_hl(0, "CursorLine", { underline = true })
 
 set_hl(0, "WildMenu", { ctermfg = yellow, ctermbg = bright_black, bold = true })
 
-set_hl(0, "DiffAdd", { ctermfg = green })
-set_hl(0, "DiffChange", { ctermfg = "none" }) -- TODO: missing definition
-set_hl(0, "DiffDelete", { ctermfg = red })
-set_hl(0, "DiffText", { ctermfg = blue }) -- TODO: missing definition
+set_hl(0, "DiffAdd", { ctermbg = diff_add })
+set_hl(0, "DiffChange", { ctermbg = diff_change })
+set_hl(0, "DiffDelete", { ctermbg = diff_delete })
+set_hl(0, "DiffText", { ctermbg = diff_text })
 
 set_hl(0, "DiagnosticError", { ctermfg = bright_red })
 set_hl(0, "DiagnosticHint", { ctermfg = bright_blue })
