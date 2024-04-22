@@ -1,5 +1,5 @@
 {
-  description = "Example Darwin system flake";
+  description = "AARCH64 Darwin system flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -14,7 +14,11 @@
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
         [ pkgs.vim
+          pkgs.neovim
+          pkgs.tmux
+          pkgs.ripgrep
           pkgs.neofetch
+          pkgs.jq
         ];
 
       # Auto upgrade nix package and the daemon service.
