@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 
 local config = wezterm.config_builder()
-config.font = wezterm.font 'Iosevka Term'
+config.font = wezterm.font 'GitLab Mono'
 config.color_scheme = 'AdventureTime'
 config.font_size = 22.0
 config.enable_tab_bar = false
