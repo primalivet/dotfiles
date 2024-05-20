@@ -278,4 +278,9 @@ now(function()
   })
 end)
 
+now(function()
+  add("dmmulroy/tsc.nvim")
+  require("tsc").setup({})
+end)
+
 require('primalivet.robot')
