@@ -19,6 +19,10 @@ For __Macintosh__
 ```
 $ brew install stow
 ```
+Or from the `Brewfile`
+```
+$ brew bundle # Or minimum `brew install stow`
+```
 
 When GNU Stow is installed you just `cd` into the dotfiles directory and then
 use the following commands to put the dotfiles in your `~` directory.
