@@ -9,11 +9,8 @@ export LOCAL_BIN=$HOME/.local/bin
 export PATH=$LOCAL_BIN:$PATH
 
 # Homebrew
-export PATH="/opt/homebrew/bin/:$PATH"
-# [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/sbin:$PATH"
-# [[ $(eval uname) = "Darwin" ]] && export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-# [[ $(eval uname) = "Darwin" ]] && export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
-# [[ $(eval uname) = "Darwin" ]] && export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+export BREW_PREFIX="/opt/homebrew"
+export PATH=$BREW_PREFIX/bin/:$PATH
 
 # N (node version manager)
 export N_PREFIX=$HOME/.local/src/n
@@ -39,14 +36,9 @@ if type fzf &> /dev/null && type rg &> /dev/null; then
   export FZF_DEFAULT_OPTS="--height=100% --reverse --color=bw"
 fi
 
-[[ -f "$LOCAL_SRC/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && \
-  source "$LOCAL_SRC/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[[ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && \
+  source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-# Ocaml
-[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh"  > /dev/null 2> /dev/null
-
-# Rust (cargo env script also add Rust bins to PATH)
-[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
 # History
 #------------------------------------------------------------------------------
@@ -73,14 +65,16 @@ unsetopt HIST_VERIFY # Execute commands using history (e.g.: using !$) immediate
 # See: https://docs.brew.sh/Shell-Completion
 if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  autoload -Uz compinit
+  compinit
 fi
 
 
-# Speed up completion (https://gist.github.com/ctechols/ca1035271ad134841284)
-autoload -Uz compinit
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
+# # Speed up completion (https://gist.github.com/ctechols/ca1035271ad134841284)
+# autoload -Uz compinit
+# for dump in ~/.zcompdump(N.mh+24); do
+#   compinit
+# done
 
 unsetopt flowcontrol
 setopt auto_menu
@@ -109,6 +103,10 @@ bindkey '^N' history-search-forward
 bindkey '^Y' accept-search
 
 bindkey '^?' backward-delete-char # Backspace as expected in Emacs
+
+if type brew &>/dev/null; then
+        eval "$(fzf --zsh)"
+fi
 
 # FUNCTIONS
 #------------------------------------------------------------------------------
@@ -148,7 +146,6 @@ function fuzzy_start_tmux_session() {
 # ALIASES
 #------------------------------------------------------------------------------
 
-alias history='history 1'
 alias vi='nvim'
 alias reload='. ~/.zshrc'
 alias ls='ls --color=auto'
@@ -158,59 +155,51 @@ alias ~="cd $HOME"
 alias ta='tmux attach'
 alias tl='tmux ls'
 alias tn=fuzzy_start_tmux_session
-alias gs='git status'
-alias gd='git diff'
-alias gl='git log'
-alias glo='git log --oneline'
-alias glog='git log --oneline --graph'
-alias gc='git commit'
-alias ga='git add'
 alias c=fuzzy_charge_project
 alias docker=podman
-alias h='history | fzf'
 
 # PROMPT
 #------------------------------------------------------------------------------
 
 setopt prompt_subst
 
-# Borrowed from: https://thevaluable.dev/zsh-install-configure-mouseless/
-# See https://ttssh2.osdn.jp/manual/4/en/usage/tips/vim.html for cursor shapes
-cursor_mode() {
-    cursor_block='\e[2 q'
-    cursor_beam='\e[6 q'
-
-    function zle-keymap-select {
-        if [[ ${KEYMAP} == vicmd ]] ||
-            [[ $1 = 'block' ]]; then
-            echo -ne $cursor_block
-        elif [[ ${KEYMAP} == main ]] ||
-            [[ ${KEYMAP} == viins ]] ||
-            [[ ${KEYMAP} = '' ]] ||
-            [[ $1 = 'beam' ]]; then
-            echo -ne $cursor_beam
-        fi
-    }
-
-    zle-line-init() {
-        echo -ne $cursor_beam
-    }
-
-    zle -N zle-keymap-select
-    zle -N zle-line-init
-}
-
+# Define a function to get the current git status
 git_prompt_info() {
-  local dirstatus=" OK"
-  local dirty=" DIRTY"
+  if git rev-parse --is-inside-work-tree &> /dev/null; then
+    local branch=$(git symbolic-ref --short HEAD 2> /dev/null)
+    local git_status=""
+    local rebase_commit=""
 
-  if [[ ! -z $(git status --porcelain 2> /dev/null | tail -n1) ]]; then
-    dirstatus=$dirty
+    if [ -d "$(git rev-parse --git-dir)/rebase-merge" ]; then
+      local current_step=$(cat "$(git rev-parse --git-dir)/rebase-merge/msgnum")
+      local total_steps=$(cat "$(git rev-parse --git-dir)/rebase-merge/end")
+      rebase_commit=$(cat "$(git rev-parse --git-dir)/rebase-merge/current_commit")
+      git_status="REBASING $current_step/$total_steps"
+    elif [ -d "$(git rev-parse --git-dir)/rebase-apply" ]; then
+      if [ -f "$(git rev-parse --git-dir)/rebase-apply/rebasing" ]; then
+        local current_step=$(cat "$(git rev-parse --git-dir)/rebase-apply/next")
+        local total_steps=$(cat "$(git rev-parse --git-dir)/rebase-apply/last")
+        rebase_commit=$(cat "$(git rev-parse --git-dir)/rebase-apply/last")
+        git_status="REBASING $current_step/$total_steps"
+      elif [ -f "$(git rev-parse --git-dir)/rebase-apply/applying" ]; then
+        git_status="AM"
+      else
+        git_status="REBASING"
+      fi
+    else
+      if git diff --quiet && git diff --cached --quiet; then
+        git_status="OK"
+      else
+        git_status="DIRTY"
+      fi
+    fi
+
+    if [ -n "$rebase_commit" ]; then
+      echo " $rebase_commit $git_status"
+    else
+      echo " $branch $git_status"
+    fi
   fi
-
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
-  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
-  echo " ${ref#refs/heads/}$dirstatus"
 }
 
 
