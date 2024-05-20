@@ -22,3 +22,12 @@
         path = ~/.git_work
 [includeIf "gitdir:~/Code/VCE/"]
         path = ~/.git_vce
+[alias]
+  co = checkout
+  c = commit
+  s = status
+  d = diff
+  l = log
+  lo = log --oneline
+  lg = log --oneline --graph
+  a = add
