@@ -85,6 +85,11 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
 })
 
 -- PLUGINS
+local function executable(name)
+  return vim.fn["executable"](name) == 1
+end
+
+-- PLUGINS
 
 local path_package = vim.fn.stdpath("data") .. "/site/"
 local mini_path = path_package .. "pack/deps/start/mini.nvim"
@@ -224,7 +229,13 @@ now(function()
     tsserver = {},
     eslint = {},
     gopls = {},
-    prismals ={},
+    prismals = {},
+    ocamllsp = {
+      settings = {
+        codelens = true,
+        inlayHints = true,
+      },
+    },
     lua_ls = {
       settings = {
         Lua = {
@@ -242,7 +253,12 @@ now(function()
 
   require("mason").setup()
 
-  local ensure_installed = vim.tbl_keys(servers or {})
+  local servers_to_install = vim.tbl_filter(function(name)
+    local blacklist = { "ocamllsp" }
+    return not vim.tbl_contains(blacklist, name)
+  end, vim.tbl_keys(servers))
+
+  local ensure_installed = servers_to_install
   vim.list_extend(ensure_installed, { "stylua" })
   require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -283,4 +299,4 @@ now(function()
   require("tsc").setup({})
 end)
 
-require('primalivet.robot')
+require("primalivet.robot")
