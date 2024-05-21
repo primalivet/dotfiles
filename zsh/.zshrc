@@ -39,6 +39,10 @@ fi
 [[ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && \
   source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
+# opam configuration
+[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || \
+  source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
 # History
 #------------------------------------------------------------------------------
 
@@ -67,7 +71,6 @@ if type brew &>/dev/null; then
   autoload -Uz compinit
   compinit
 fi
-
 
 # # Speed up completion (https://gist.github.com/ctechols/ca1035271ad134841284)
 # autoload -Uz compinit
