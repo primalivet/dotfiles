@@ -63,7 +63,7 @@ unsetopt HIST_VERIFY # Execute commands using history (e.g.: using !$) immediate
 # Add completions installed through Homebrew packages
 # See: https://docs.brew.sh/Shell-Completion
 if type brew &>/dev/null; then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  FPATH="$BREW_PREFIX/share/zsh/site-functions:${FPATH}"
   autoload -Uz compinit
   compinit
 fi
