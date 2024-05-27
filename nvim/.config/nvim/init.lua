@@ -112,7 +112,6 @@ local add, now = MiniDeps.add, MiniDeps.now
 now(function()
   require("mini.extra").setup()
   require("mini.surround").setup()
-  require("mini.comment").setup()
   require("mini.pick").setup({
     window = {
       config = function()
