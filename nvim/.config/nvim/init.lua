@@ -17,13 +17,13 @@ vim.opt.grepformat:append("%f:%l:%c:%m,%f:%l:%m")
 vim.opt.grepprg = "rg --vimgrep --no-heading --hidden"
 vim.opt.ignorecase = true
 vim.opt.listchars:append("space:·")
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.number = false
+vim.opt.relativenumber = false
 vim.opt.scrolloff = 5
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.sidescrolloff = 5
-vim.opt.signcolumn = "yes:1"
+vim.opt.signcolumn = "yes:2"
 vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.softtabstop = 2
@@ -36,6 +36,11 @@ vim.opt.wildmode = "lastused:list:full"
 vim.opt.wrap = false
 
 -- KEYMAPS
+
+local function toggle_numbers()
+  vim.opt.number = not vim.opt.number:get()
+  vim.opt.relativenumber = not vim.opt.relativenumber:get()
+end
 
 local function keymap_set(mode, lhs, rhs, opts)
   local default_opt = { noremap = true, silent = true }
@@ -66,6 +71,8 @@ keymap_set("n", "]b", ":bnext<CR>", { desc = "Next buffer" })
 keymap_set("n", "<leader>tl", ":set list!<CR>", { desc = "Toggle list chars" })
 keymap_set("n", "<leader>tp", ":set invpaste<CR>", { desc = "Toggle paste mode" })
 keymap_set("n", "<leader>ts", ":nohlsearch<CR>", { desc = "Toggle search highlight" })
+keymap_set("n", "<leader>tn", toggle_numbers, { desc = "Toggle relative numbers" })
+
 keymap_set("t", "<Esc>", "<C-\\><C-n>", { desc = "Escape in terminal" })
 
 -- AUTOCOMMANDS
