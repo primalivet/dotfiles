@@ -12,6 +12,9 @@ export PATH=$LOCAL_BIN:$PATH
 export BREW_PREFIX="/opt/homebrew"
 export PATH=$BREW_PREFIX/bin/:$PATH
 
+# Not vim
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
 # N (node version manager)
 export N_PREFIX=$HOME/.local/src/n
 export PATH=$N_PREFIX/bin:$PATH
