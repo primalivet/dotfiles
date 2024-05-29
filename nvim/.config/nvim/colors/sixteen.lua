@@ -5,7 +5,7 @@ if vim.fn.exists("syntax_on") then
 end
 
 if vim.opt.termguicolors:get() then
-  print('Colorscheme "Sixteen" should be used without option \'termguicolors')
+  print('Colorscheme "Sixteen" should be used without option \'termguicolors\', \nATTN: disabling termguicolors')
 end
 
 vim.opt.termguicolors = false
@@ -102,7 +102,8 @@ set_hl(0, "Visual", { ctermbg = bright_black })
 
 set_hl(0, "QuickFixLine", { ctermfg = yellow, ctermbg = almost_black2 })
 
-set_hl(0, "Normal", { ctermfg = bright_white, ctermbg = black })
+-- set_hl(0, "Normal", { ctermfg = bright_white, ctermbg = black })
+reset("Normal")
 link("NormalNC", "Normal")
 
 set_hl(0, "NormalFloat", { ctermbg = almost_black1 })
