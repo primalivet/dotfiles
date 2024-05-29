@@ -1,0 +1,32 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "theme": "macOS Classic Light",
+  "ui_font_size": 18,
+  "buffer_font_size": 18,
+  "buffer_font_family": "GitLab Mono",
+  "ui_font_family": "GitLab Mono",
+  "vim_mode": true,
+  "cursor_blink": false,
+  "current_line_highlight": "none",
+  "relative_line_numbers": true,
+  "project_panel": {
+    "file_icons": false,
+    "folder_icons": false
+  },
+  "gutter": {
+    "line_numbers": false
+  },
+  "tab_bar": {
+    "show": false
+  },
+  "scrollbar": {
+    "show": "never"
+  }
+}

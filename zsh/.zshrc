@@ -14,6 +14,7 @@ export PATH=$BREW_PREFIX/bin/:$PATH
 
 # Not vim
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="$PATH:/Applications/Zed.app/Contents/MacOS"
 
 # N (node version manager)
 export N_PREFIX=$HOME/.local/src/n
