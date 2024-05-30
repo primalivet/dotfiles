@@ -4,6 +4,7 @@ vim.g.maplocalleader = " "
 vim.cmd([[colorscheme sixteen]])
 vim.cmd(":packadd cfilter") -- enable filter quickfix list
 
+vim.opt.background = "dark"
 vim.opt.autoindent = true
 vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
