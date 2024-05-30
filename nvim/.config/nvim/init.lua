@@ -1,10 +1,11 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.cmd([[colorscheme sixteen]])
+vim.opt.termguicolors = true
+vim.opt.background = "dark"
+vim.cmd([[colorscheme sixteen-tc]])
 vim.cmd(":packadd cfilter") -- enable filter quickfix list
 
-vim.opt.background = "dark"
 vim.opt.autoindent = true
 vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
@@ -43,6 +44,14 @@ local function toggle_numbers()
   vim.opt.relativenumber = not vim.opt.relativenumber:get()
 end
 
+local function toggle_background()
+  if vim.opt.background:get() == "dark" then
+    vim.opt.background = "light"
+  else
+    vim.opt.background = "dark"
+  end
+end
+
 local function keymap_set(mode, lhs, rhs, opts)
   local default_opt = { noremap = true, silent = true }
   vim.keymap.set(mode, lhs, rhs, vim.tbl_deep_extend("force", default_opt, opts))
@@ -71,6 +80,7 @@ keymap_set("n", "<leader>tl", ":set list!<CR>", { desc = "Toggle list chars" })
 keymap_set("n", "<leader>tp", ":set invpaste<CR>", { desc = "Toggle paste mode" })
 keymap_set("n", "<leader>ts", ":nohlsearch<CR>", { desc = "Toggle search highlight" })
 keymap_set("n", "<leader>tn", toggle_numbers, { desc = "Toggle relative numbers" })
+keymap_set("n", "<leader>tb", toggle_background, { desc = "Toggle background color" })
 
 keymap_set("t", "<Esc>", "<C-\\><C-n>", { desc = "Escape in terminal" })
 
