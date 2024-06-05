@@ -16,6 +16,12 @@ export PATH=$BREW_PREFIX/bin/:$PATH
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="$PATH:/Applications/Zed.app/Contents/MacOS"
 
+# GO
+export PATH="$HOME/go/bin:$PATH"
+
+# Rust
+[[ -f "$HOME/.cargo" ]] && source "$HOME/.cargo/env"
+
 # N (node version manager)
 export N_PREFIX=$HOME/.local/src/n
 export PATH=$N_PREFIX/bin:$PATH
