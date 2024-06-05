@@ -247,6 +247,9 @@ now(function()
     eslint = {},
     gopls = {},
     prismals = {},
+    cssls = {},
+    html = {},
+    htmx = {},
     ocamllsp = {
       settings = {
         codelens = true,
