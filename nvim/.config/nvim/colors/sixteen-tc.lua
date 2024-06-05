@@ -57,7 +57,6 @@ local link = function(group, target)
   vim.api.nvim_set_hl(0, group, { link = target })
 end
 
-
 reset("ColorColumn")
 reset("Conceal")
 reset("Cursor")
@@ -205,3 +204,9 @@ link("MiniPickMatchRanges", "QuickFixLine") -- ranges matching query elements.
 reset("MiniPickPreviewLine") -- target line in preview.
 reset("MiniPickPreviewRegion") -- target region in preview.
 reset("MiniPickPrompt") -- prompt.
+
+-- Treesitter
+set_hl(0, "@tag", { bold = true, fg = keyword }) -- XML-style tag names (e.g. in XML, HTML, etc.)
+set_hl(0, "@tag.builtin", { bold = true, fg = keyword }) -- XML-style tag names (e.g. HTML5 tags)
+reset("@tag.attribute") -- XML-style tag attributes
+set_hl(0, "@tag.delimiter", { bold = true, fg = keyword }) -- XML-style tag delimiters
