@@ -246,6 +246,7 @@ now(function()
     tsserver = {},
     eslint = {},
     gopls = {},
+    templ = {},
     prismals = {},
     cssls = {},
     html = {},
