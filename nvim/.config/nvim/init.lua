@@ -121,6 +121,10 @@ require("mini.deps").setup({ path = { package = path_package } })
 local add, now = MiniDeps.add, MiniDeps.now
 
 now(function()
+  add("tpope/vim-dadbod")
+end)
+
+now(function()
   require("mini.extra").setup()
   require("mini.surround").setup()
   require("mini.pick").setup({
@@ -144,13 +148,10 @@ now(function()
   keymap_set("n", "<leader>sr", ":Pick lsp scope='references'<CR>", { desc = "Search References" })
   keymap_set("n", "<leader>sws", ":Pick lsp scope='workspace_symbol'<CR>", { desc = "Search Workspace Symbol" })
   keymap_set("n", "<leader>sds", ":Pick lsp scope='document_symbol'<CR>", { desc = "Search Document Symbol" })
+end)
 
-  require("mini.completion").setup({
-    lsp_completion = {
-      source_func = "omnifunc",
-      auto_setup = false,
-    },
-  })
+now(function()
+  add("junegunn/fzf.vim")
 end)
 
 now(function()
@@ -191,6 +192,7 @@ now(function()
   require("conform").setup({
     formatters_by_ft = {
       lua = { "stylua" },
+      templ = { "templ" },
       javascript = { { "prettierd", "prettier" } },
       javascriptreact = { { "prettierd", "prettier" } },
       typescript = { { "prettierd", "prettier" } },
@@ -216,13 +218,14 @@ now(function()
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
+      "hrsh7th/cmp-nvim-lsp",
     },
   })
 
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
     callback = function(event)
-      vim.bo[event.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+      -- vim.bo[event.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
       -- HINT: Formatting is setup with conform (which falls back to lsp)
       keymap_set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
       keymap_set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
@@ -239,11 +242,13 @@ now(function()
   })
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
   local servers = {
     terraformls = {},
     clangd = {},
     tsserver = {},
+    -- vtsls
     eslint = {},
     gopls = {},
     templ = {},
@@ -291,6 +296,40 @@ now(function()
         require("lspconfig")[server_name].setup(server)
       end,
     },
+  })
+end)
+
+now(function()
+  add({
+    source = "hrsh7th/nvim-cmp",
+    depends = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "neovim/nvim-lspconfig",
+    },
+  })
+
+  local cmp = require("cmp")
+
+  cmp.setup({
+    expand = function(args)
+      vim.snippet.expand(args.body)
+    end,
+    mapping = cmp.mapping.preset.insert({
+      ["<C-n>"] = cmp.mapping.select_next_item(),
+      ["<C-p>"] = cmp.mapping.select_prev_item(),
+      ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-f>"] = cmp.mapping.scroll_docs(4),
+      ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+      -- ["<C-l"] = TODO: move right in snippet
+      -- ["<C-h"] = TODO: move left in snippet
+    }),
+    sources = require("cmp").config.sources({
+      { name = "nvim_lsp" },
+      { name = "buffer" },
+      { name = "path" },
+    }),
   })
 end)
 
