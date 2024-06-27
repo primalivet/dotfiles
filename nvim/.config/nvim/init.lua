@@ -107,17 +107,7 @@ end
 
 -- PLUGINS
 
-local path_package = vim.fn.stdpath("data") .. "/site/"
-local mini_path = path_package .. "pack/deps/start/mini.nvim"
-if not vim.loop.fs_stat(mini_path) then
-  vim.cmd('echo "Installing `mini.nvim`" | redraw')
-  local clone_cmd = { "git", "clone", "--filter=blob:none", "https://github.com/echasnovski/mini.nvim", mini_path }
-  vim.fn.system(clone_cmd)
-  vim.cmd("packadd mini.nvim | helptags ALL")
-  vim.cmd('echo "Installed `mini.nvim`" | redraw')
-end
-
-require("mini.deps").setup({ path = { package = path_package } })
+require("primalivet.mini")
 local add, now = MiniDeps.add, MiniDeps.now
 
 now(function()
@@ -148,10 +138,6 @@ now(function()
   keymap_set("n", "<leader>sr", ":Pick lsp scope='references'<CR>", { desc = "Search References" })
   keymap_set("n", "<leader>sws", ":Pick lsp scope='workspace_symbol'<CR>", { desc = "Search Workspace Symbol" })
   keymap_set("n", "<leader>sds", ":Pick lsp scope='document_symbol'<CR>", { desc = "Search Document Symbol" })
-end)
-
-now(function()
-  add("junegunn/fzf.vim")
 end)
 
 now(function()
@@ -322,8 +308,12 @@ now(function()
       ["<C-b>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-      -- ["<C-l"] = TODO: move right in snippet
-      -- ["<C-h"] = TODO: move left in snippet
+      ["<C-l"] = cmp.mapping(function()
+        -- TODO: move right in snippet
+      end),
+      ["<C-h"] = cmp.mapping(function()
+        -- TODO: move left in snippet
+      end),
     }),
     sources = require("cmp").config.sources({
       { name = "nvim_lsp" },
