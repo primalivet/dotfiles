@@ -10,7 +10,7 @@ style = { shape = "Block", blinking = "Always" }
 
 
 [font]
-normal = { family =  "GitLab Mono", style = "Medium" }
+normal = { family =  "GitLab Mono" }
 size = 18.0
 
 [colors.cursor]
