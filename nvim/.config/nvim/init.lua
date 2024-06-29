@@ -18,6 +18,7 @@ vim.opt.fileignorecase = true
 vim.opt.grepformat:append("%f:%l:%c:%m,%f:%l:%m")
 vim.opt.grepprg = "rg --vimgrep --no-heading --hidden"
 vim.opt.ignorecase = true
+vim.opt.laststatus = 1
 vim.opt.listchars:append("space:·")
 vim.opt.number = false
 vim.opt.relativenumber = false
@@ -33,6 +34,7 @@ vim.opt.swapfile = false
 vim.opt.timeoutlen = 500
 vim.opt.undofile = true -- uses the default undodir "~/.local/share/nvim/undo
 vim.opt.updatetime = 100
+vim.opt.path:append("**,nvim/.config/**")
 vim.opt.wildignore:append("*/node_modules/**,**/_build/**,**bin**,**/_opam/**")
 vim.opt.wildmode = "lastused:list:full"
 vim.opt.wrap = false
@@ -115,6 +117,17 @@ now(function()
 end)
 
 now(function()
+  vim.g.fzf_layout = { down = "~70%" }
+  add({
+    source = "junegunn/fzf",
+    depends = {
+      "junegunn/fzf.vim",
+    },
+  })
+  vim.g.fzf_preview_window = {}
+end)
+
+now(function()
   require("mini.extra").setup()
   require("mini.surround").setup()
   require("mini.pick").setup({
@@ -134,7 +147,10 @@ now(function()
   keymap_set("n", "<leader>sb", ":Pick buffers<CR>", { desc = "Search Buffers" })
   keymap_set("n", "<leader>sh", ":Pick help<CR>", { desc = "Search Help" })
   keymap_set("n", "<leader>sl", ":Pick grep_live<CR>", { desc = "Search Live" })
-  keymap_set("n", "<leader>sc", ":Pick git_commits<CR>", { desc = "Search Commits" })
+  keymap_set("n", "<leader>sc", ":Pick commands<CR>", { desc = "Search Commits" })
+  keymap_set("n", "<leader>sk", ":Pick keymaps<CR>", { desc = "Search Keymaps" })
+  keymap_set("n", "<leader>sd", ":Pick diagnostic<CR>", { desc = "Search Diagnostics" })
+  keymap_set("n", "<leader>st", ":Pick explorer<CR>", { desc = "Search File Tree" })
   keymap_set("n", "<leader>sr", ":Pick lsp scope='references'<CR>", { desc = "Search References" })
   keymap_set("n", "<leader>sws", ":Pick lsp scope='workspace_symbol'<CR>", { desc = "Search Workspace Symbol" })
   keymap_set("n", "<leader>sds", ":Pick lsp scope='document_symbol'<CR>", { desc = "Search Document Symbol" })
