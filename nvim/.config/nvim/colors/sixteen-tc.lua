@@ -192,8 +192,8 @@ reset("GitSignsChange")
 reset("GitSignsDelete")
 
 link("MiniPickNormal", "Normal") -- basic foreground/background highlighting.
-reset("MiniPickBorder") -- window border.
-link("MiniPickBorderBusy", "DiagnosticWarn") -- window border while picker is busy processing.
+set_hl(0, "MiniPickBorder", { fg = background, bg = background }) -- window border.
+set_hl(0, "MiniPickBorderBusy", { fg = warn, bg = warn }) -- window border while picker is busy processing.
 reset("MiniPickBorderText") -- non-prompt on border.
 set_hl(0, "MiniPickIconDirectory", { fg = background, bg = background }) -- default icon for directory.
 set_hl(0, "MiniPickIconFile", { fg = background, bg = background }) -- default icon for file.
