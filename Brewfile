@@ -17,7 +17,7 @@ brew "podman"
 brew "podman-compose"
 brew "postgresql@15", link: true
 brew "ripgrep"
-brew "rustup-init"
+brew "rustup"
 brew "stow"
 brew "tfenv"
 brew "tmux"
