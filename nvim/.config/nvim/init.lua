@@ -114,6 +114,9 @@ local add, now = MiniDeps.add, MiniDeps.now
 
 now(function()
   add("tpope/vim-dadbod")
+  add("kristijanhusak/vim-dadbod-ui")
+  add("kristijanhusak/vim-dadbod-completion")
+  vim.cmd("autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni")
 end)
 
 now(function()
@@ -227,19 +230,14 @@ now(function()
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
     callback = function(event)
+      --HINT: Formatting is setup with conform (which falls back to lsp)
       -- vim.bo[event.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
-      -- HINT: Formatting is setup with conform (which falls back to lsp)
-      keymap_set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
-      keymap_set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
-      keymap_set("n", "<leader>th", function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }))
-      end, { desc = "Toggle inlay hints" })
-      keymap_set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition" })
-      keymap_set("n", "gD", vim.lsp.buf.declaration, { desc = "Goto declaration" })
-      keymap_set("n", "gr", vim.lsp.buf.references, { desc = "Goto references" })
-      keymap_set("n", "gi", vim.lsp.buf.implementation, { desc = "Goto implementation" })
-      keymap_set("n", "gtd", vim.lsp.buf.type_definition, { desc = "Goto type definition" })
-      keymap_set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })
+
+      -- Neovim defaults coming in 0.11.X (TODO: remove when on 0.11)
+      keymap_set("n", "grn", vim.lsp.buf.rename, { desc = "vim.lsp.buf.rename()" })
+      keymap_set({ "n", "x" }, "gra", vim.lsp.buf.code_action, { desc = "vim.lsp.buf.code_action()" })
+      keymap_set("n", "grr", vim.lsp.buf.references, { desc = "vim.lsp.buf.references()" })
+      keymap_set("i", "<C-S>", vim.lsp.buf.signature_help, { desc = "vim.lsp.buf.signature_help()" })
     end,
   })
 
