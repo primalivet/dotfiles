@@ -67,19 +67,7 @@ keymap_set("v", "<C-j>", ":m '>+1<CR>gv=gv", { desc = "Move visual selection dow
 keymap_set("v", "<C-k>", ":m '<-2<CR>gv=gv", { desc = "Move visual selection up" })
 keymap_set("n", "n", "nzz", { desc = "Center on search jump natural direction" })
 keymap_set("n", "N", "Nzz", { desc = "Center on search jump unnatural direction" })
-keymap_set("n", "[c", ":cprevious<CR>", { desc = "Previous Quickfix item" })
-keymap_set("n", "]c", ":cnext<CR>", { desc = "Next Quickfix item" })
-keymap_set("n", "[C", ":cfirst<CR>", { desc = "First Quickfix item" })
-keymap_set("n", "]C", ":clast<CR>", { desc = "Last Quickfix item" })
-keymap_set("n", "[l", ":lprevious<CR>", { desc = "Previous Location list item" })
-keymap_set("n", "]l", ":lnext<CR>", { desc = "Next Location list item" })
-keymap_set("n", "[L", ":lfirst<CR>", { desc = "First Location list item" })
-keymap_set("n", "]L", ":llast<CR>", { desc = "Last Location list item" })
 keymap_set("n", "<leader>d", vim.diagnostic.setloclist, { desc = "Add buffer diagnostics to Location list" })
-keymap_set("n", "[b", ":bprevious<CR>", { desc = "Previous buffer" })
-keymap_set("n", "]b", ":bnext<CR>", { desc = "Next buffer" })
-keymap_set("n", "<leader>tl", ":set list!<CR>", { desc = "Toggle list chars" })
-keymap_set("n", "<leader>tp", ":set invpaste<CR>", { desc = "Toggle paste mode" })
 keymap_set("n", "<leader>ts", ":nohlsearch<CR>", { desc = "Toggle search highlight" })
 keymap_set("n", "<leader>tn", toggle_numbers, { desc = "Toggle relative numbers" })
 keymap_set("n", "<leader>tb", toggle_background, { desc = "Toggle background color" })
@@ -90,7 +78,7 @@ keymap_set("t", "<Esc>", "<C-\\><C-n>", { desc = "Escape in terminal" })
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   group = vim.api.nvim_create_augroup("PrimalivetHighlightYank", { clear = true }),
-  pattern = "*",
+  -- pattern = "*",
   callback = function()
     vim.highlight.on_yank()
   end,
