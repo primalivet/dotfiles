@@ -42,7 +42,7 @@ else
 fi
 
 if type fzf &> /dev/null && type rg &> /dev/null; then
-  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git" --glob'
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
   export FZF_DEFAULT_OPTS="--height=100% --reverse --color=bw"
 fi
 
