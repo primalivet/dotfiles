@@ -2,31 +2,23 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.opt.termguicolors = true
-vim.opt.background = "dark"
 vim.cmd([[colorscheme sixteen-tc]])
 vim.cmd(":packadd cfilter") -- enable filter quickfix list
 
-vim.opt.autoindent = true
 vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
-vim.opt.cmdheight = 1
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.diffopt:append("vertical")
 vim.opt.expandtab = true
-vim.opt.fileignorecase = true
-vim.opt.grepformat:append("%f:%l:%c:%m,%f:%l:%m")
-vim.opt.grepprg = "rg --vimgrep --no-heading --hidden"
 vim.opt.ignorecase = true
 vim.opt.laststatus = 1
 vim.opt.listchars:append("space:·")
-vim.opt.number = false
-vim.opt.relativenumber = false
 vim.opt.scrolloff = 5
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.sidescrolloff = 5
-vim.opt.signcolumn = "yes:2"
+vim.opt.signcolumn = "yes"
 vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.softtabstop = 2
