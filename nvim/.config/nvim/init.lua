@@ -150,7 +150,7 @@ now(function()
     },
   })
 
-  keymap_set("n", "<leader>f", function()
+  local function format_buffer()
     require("conform").format({
       async = true,
       lsp_fallback = true,
@@ -158,7 +158,8 @@ now(function()
         return client.name ~= "tsserver"
       end,
     })
-  end, { desc = "Format buffer" })
+  end
+  keymap_set("n", "<leader>f", format_buffer, { desc = "Format buffer" })
 end)
 
 now(function()
