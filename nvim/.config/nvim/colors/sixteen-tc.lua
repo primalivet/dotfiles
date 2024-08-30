@@ -204,6 +204,13 @@ link("MiniPickMatchRanges", "QuickFixLine") -- ranges matching query elements.
 reset("MiniPickPreviewLine") -- target line in preview.
 reset("MiniPickPreviewRegion") -- target region in preview.
 reset("MiniPickPrompt") -- prompt.
+reset("MiniDiffSignAdd")
+reset("MiniDiffSignChange")
+reset("MiniDiffSignDelete")
+reset("MiniDiffOverAdd")
+reset("MiniDiffOverChange")
+reset("MiniDiffOverContext")
+reset("MiniDiffOverDelete")
 
 -- Treesitter
 set_hl(0, "@tag", { bold = true, fg = keyword }) -- XML-style tag names (e.g. in XML, HTML, etc.)

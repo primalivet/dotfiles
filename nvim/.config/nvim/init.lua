@@ -110,6 +110,12 @@ end)
 now(function()
   require("mini.extra").setup()
   require("mini.surround").setup()
+  require("mini.diff").setup({
+    view = {
+      style = "sign",
+      signs = { add = "+", change = "~", delete = "_" },
+    },
+  })
   require("mini.pick").setup({
     window = {
       config = function()
@@ -142,26 +148,6 @@ end)
 
 now(function()
   add("tpope/vim-fugitive")
-end)
-
-now(function()
-  add("lewis6991/gitsigns.nvim")
-  require("gitsigns").setup({
-    signs = {
-      add = { text = "+" },
-      change = { text = "~" },
-      delete = { text = "_" },
-      topdelete = { text = "‾" },
-      changedelete = { text = "±" },
-      untracked = { text = "" },
-    },
-  })
-
-  keymap_set("n", "[h", require("gitsigns").prev_hunk, { desc = "Previous Git hunk" })
-  keymap_set("n", "]h", require("gitsigns").next_hunk, { desc = "Next Git hunk" })
-
-  vim.api.nvim_create_user_command("ResetHunk", "Gitsigns reset_hunk", { desc = "Reset hunk under cursor" })
-  vim.api.nvim_create_user_command("PreviewHunk", "Gitsigns preview_hunk", { desc = "Preview hunk under cursor" })
 end)
 
 now(function()
