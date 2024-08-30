@@ -33,7 +33,7 @@ vim.opt.wrap = false
 
 -- KEYMAPS
 
-local function toggle_numbers()
+local function toggle_relative_numbers()
   vim.opt.number = not vim.opt.number:get()
   vim.opt.relativenumber = not vim.opt.relativenumber:get()
 end
@@ -61,7 +61,7 @@ keymap_set("n", "n", "nzz", { desc = "Center on search jump natural direction" }
 keymap_set("n", "N", "Nzz", { desc = "Center on search jump unnatural direction" })
 keymap_set("n", "<leader>d", vim.diagnostic.setloclist, { desc = "Add buffer diagnostics to Location list" })
 keymap_set("n", "<leader>ts", ":nohlsearch<CR>", { desc = "Toggle search highlight" })
-keymap_set("n", "<leader>tn", toggle_numbers, { desc = "Toggle relative numbers" })
+keymap_set("n", "<leader>tn", toggle_relative_numbers, { desc = "Toggle relative numbers" })
 keymap_set("n", "<leader>tb", toggle_background, { desc = "Toggle background color" })
 
 keymap_set("t", "<Esc>", "<C-\\><C-n>", { desc = "Escape in terminal" })
