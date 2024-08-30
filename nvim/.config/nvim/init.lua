@@ -2,9 +2,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.opt.termguicolors = true
-vim.cmd([[colorscheme sixteen-tc]])
-vim.cmd(":packadd cfilter") -- enable filter quickfix list
-
 vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cursorline = true
@@ -30,6 +27,9 @@ vim.opt.path:append("**,nvim/.config/**")
 vim.opt.wildignore:append("*/node_modules/**,**/_build/**,**bin**,**/_opam/**")
 vim.opt.wildmode = "lastused:list:full"
 vim.opt.wrap = false
+
+vim.cmd([[colorscheme sixteen-tc]])
+vim.cmd(":packadd cfilter") -- enable filter quickfix list
 
 -- KEYMAPS
 
@@ -63,7 +63,6 @@ keymap_set("n", "<leader>d", vim.diagnostic.setloclist, { desc = "Add buffer dia
 keymap_set("n", "<leader>ts", ":nohlsearch<CR>", { desc = "Toggle search highlight" })
 keymap_set("n", "<leader>tn", toggle_relative_numbers, { desc = "Toggle relative numbers" })
 keymap_set("n", "<leader>tb", toggle_background, { desc = "Toggle background color" })
-
 keymap_set("t", "<Esc>", "<C-\\><C-n>", { desc = "Escape in terminal" })
 
 -- AUTOCOMMANDS
@@ -194,7 +193,6 @@ now(function()
     terraformls = {},
     clangd = {},
     tsserver = {},
-    -- vtsls
     eslint = {},
     gopls = {},
     templ = {},
