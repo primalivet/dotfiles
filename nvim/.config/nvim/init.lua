@@ -108,17 +108,6 @@ now(function()
 end)
 
 now(function()
-  vim.g.fzf_layout = { down = "~70%" }
-  add({
-    source = "junegunn/fzf",
-    depends = {
-      "junegunn/fzf.vim",
-    },
-  })
-  vim.g.fzf_preview_window = {}
-end)
-
-now(function()
   require("mini.extra").setup()
   require("mini.surround").setup()
   require("mini.pick").setup({
