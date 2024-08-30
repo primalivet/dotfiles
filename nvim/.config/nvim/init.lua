@@ -83,11 +83,6 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
 })
 
 -- PLUGINS
-local function executable(name)
-  return vim.fn["executable"](name) == 1
-end
-
--- PLUGINS
 
 require("primalivet.mini")
 local add, now = MiniDeps.add, MiniDeps.now
