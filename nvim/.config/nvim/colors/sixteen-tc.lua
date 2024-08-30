@@ -207,10 +207,10 @@ reset("MiniPickPrompt") -- prompt.
 reset("MiniDiffSignAdd")
 reset("MiniDiffSignChange")
 reset("MiniDiffSignDelete")
-reset("MiniDiffOverAdd")
-reset("MiniDiffOverChange")
-reset("MiniDiffOverContext")
-reset("MiniDiffOverDelete")
+-- reset("MiniDiffOverAdd")
+-- reset("MiniDiffOverChange")
+-- reset("MiniDiffOverContext")
+-- reset("MiniDiffOverDelete")
 
 -- Treesitter
 set_hl(0, "@tag", { bold = true, fg = keyword }) -- XML-style tag names (e.g. in XML, HTML, etc.)
