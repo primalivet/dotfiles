@@ -123,6 +123,10 @@ if type brew &>/dev/null && type fzf &> /dev/null; then
   eval "$(fzf --zsh)" # Overwrites any existing bindings that conflicts, eg. CTRL_R
 fi
 
+if [ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+  bindkey '^y' autosuggest-accept
+fi
+
 # FUNCTIONS
 #------------------------------------------------------------------------------
 
