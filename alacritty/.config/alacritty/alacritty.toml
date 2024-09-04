@@ -10,8 +10,6 @@ style = { shape = "Block", blinking = "Always" }
 
 
 [font]
-# normal = { family =  "Monocraft"  }
-# normal = { family =  "GitLab Mono"  }
 normal = { family =  "Iosevka Term", style = "Regular"  }
 size = 18.0
 
