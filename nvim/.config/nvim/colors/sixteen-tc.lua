@@ -31,10 +31,10 @@ local bright_cyan = "#008787"
 local bright_white = "#dadada"
 
 -- extra colors (Cheating)
-local diff_add = is_dark and "#006C00" or "#C4DFCD"
+local diff_add = is_dark and "#003800" or "#C4DFCD"
 local diff_change = diff_add
-local diff_delete = is_dark and "#760000" or "#E3CBC9"
-local diff_text = is_dark and "#009500" or "#D5F4E1"
+local diff_delete = is_dark and "#3b0000" or "#E3CBC9"
+local diff_text = is_dark and "#005200" or "#D5F4E1"
 
 local foreground = is_dark and bright_white or black
 local background = is_dark and black or bright_white
@@ -42,7 +42,7 @@ local elevation = is_dark and bright_black or white
 local keyword = is_dark and bright_yellow or blue
 local string = is_dark and bright_green or green
 local comment = is_dark and bright_cyan or cyan
-local type = foreground
+local type = white
 local error = is_dark and bright_red or red
 local info = comment
 local warn = is_dark and bright_yellow or bright_red
@@ -148,7 +148,7 @@ set_hl(0, "LineNrBelow", { fg = elevation })
 
 -- Syntax
 
-set_hl(0, "Comment", { fg = comment, italic = true })
+set_hl(0, "Comment", { fg = comment })
 
 link("Constant", "Normal")
 set_hl(0, "String", { fg = string })
@@ -174,7 +174,7 @@ link("Define", "PreProc")
 link("Macro", "PreProc")
 link("PreCondit", "PreProc")
 
-set_hl(0, "Type", { fg = type, italic = true })
+set_hl(0, "Type", { fg = type })
 link("StorageClass", "Normal")
 link("Structure", "Type")
 link("Typedef", "Type")
