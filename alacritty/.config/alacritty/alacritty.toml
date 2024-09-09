@@ -8,13 +8,15 @@ title = ""
 [cursor]
 style = { shape = "Block", blinking = "Always" }
 
-
 [font]
-normal = { family =  "Iosevka Term", style = "Regular"  }
+normal      = { family = "Iosevka", style = "Light" }
+italic      = { family = "Iosevka", style = "Light Italic" }
+bold        = { family = "Iosevka", style = "Medium" }
+bold_italic = { family = "Iosevka", style = "Bold Italic" }
 size = 18.0
 
 [colors.cursor]
-text = "#000000"
+text   = "#000000"
 cursor = "#ffd800"
 
 [colors.primary]
