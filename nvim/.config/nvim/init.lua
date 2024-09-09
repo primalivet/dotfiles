@@ -96,6 +96,7 @@ end)
 now(function()
   require("mini.extra").setup()
   require("mini.surround").setup()
+  require("mini.align").setup()
   require("mini.diff").setup({
     view = {
       style = "sign",
@@ -139,13 +140,16 @@ end)
 now(function()
   add("stevearc/conform.nvim")
   require("conform").setup({
+    default_format_opts = {
+      stop_after_first = true,
+    },
     formatters_by_ft = {
       lua = { "stylua" },
       templ = { "templ" },
-      javascript = { { "prettierd", "prettier" } },
-      javascriptreact = { { "prettierd", "prettier" } },
-      typescript = { { "prettierd", "prettier" } },
-      typescriptreact = { { "prettierd", "prettier" } },
+      javascript = { "prettierd", "prettier" },
+      javascriptreact = { "prettierd", "prettier" },
+      typescript = { "prettierd", "prettier" },
+      typescriptreact = { "prettierd", "prettier" },
     },
   })
 
