@@ -277,9 +277,15 @@ now(function()
       end),
     }),
     sources = require("cmp").config.sources({
-      { name = "nvim_lsp" },
-      { name = "buffer" },
-      { name = "path" },
+      { name = "nvim_lsp", group_index = 1 },
+      {
+        name = "buffer",
+        group_index = 2,
+        option = {
+          get_bufnrs = vim.api.nvim_list_bufs, -- search in all buffers
+        },
+      },
+      { name = "path", group_index = 3 },
     }),
   })
 end)
