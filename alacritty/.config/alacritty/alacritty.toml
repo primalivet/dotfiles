@@ -1,3 +1,5 @@
+# import = [ "~/Code/OSS/alacritty-theme/themes/xterm.toml" ]
+
 [window]
 decorations_theme_variant = "Dark"
 resize_increments = true
@@ -21,10 +23,10 @@ cursor = "#ffd800"
 
 [colors.primary]
 foreground = "#dadada"
-background = "#111111"
+background = "#000000"
 
 [colors.normal]
-black   = "#111111"
+black   = "#000000"
 red     = "#fd5e00"
 green   = "#00875f"
 yellow  = "#ffd800"

@@ -13,7 +13,7 @@ vim.g.colors_name = "sixteen-tc"
 
 local is_dark = vim.opt.background:get() == "dark"
 
-local black = "#111111"
+local black = "#000000"
 local red = "#fd5e00"
 local green = "#066D4D"
 local yellow = "#ffd800"
