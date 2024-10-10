@@ -144,6 +144,7 @@ alias ~="cd $HOME"
 alias ta='tmux attach'
 alias tl='tmux ls'
 alias tn=fuzzy_start_tmux_session
+alias tk=grep_kill_tmux_sessions
 alias c=fuzzy_charge_project
 alias docker=podman
 

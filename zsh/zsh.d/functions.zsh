@@ -6,6 +6,10 @@ function fuzzy_charge_project() {
   if [[ ! -z "$directory" ]] && cd $directory;
 }
 
+function grep_kill_tmux_sessions() {
+  tmux ls | sed "s/://"  | awk '{print $1}' | grep $1 | xargs -I{} tmux kill-session -t {}
+}
+
 function fuzzy_start_tmux_session() {
   directory_path="$(find ~/Code -maxdepth 2 -type d | fzf)"
   if [[ $? -ne 0 ]]; then
