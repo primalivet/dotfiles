@@ -5,7 +5,7 @@ if vim.fn.exists("syntax_on") then
 end
 
 if not vim.opt.termguicolors:get() then
-  print("Colorscheme \"Sixteen\" should be used with option 'termguicolors', \nATTN: enabling termguicolors")
+  print("Colorscheme \"Sixteen TC\" should be used with option 'termguicolors', \nATTN: enabling termguicolors")
 end
 
 vim.opt.termguicolors = true

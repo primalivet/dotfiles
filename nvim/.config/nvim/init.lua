@@ -1,16 +1,18 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.opt.termguicolors = true
+vim.opt.termguicolors = false
 vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.diffopt:append("vertical")
 vim.opt.expandtab = true
+vim.opt.fillchars ="vert:|"
 vim.opt.ignorecase = true
 vim.opt.laststatus = 1
 vim.opt.listchars:append("space:·")
+vim.opt.path:append("**,nvim/.config/**")
 vim.opt.scrolloff = 5
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
@@ -23,12 +25,11 @@ vim.opt.swapfile = false
 vim.opt.timeoutlen = 500
 vim.opt.undofile = true -- uses the default undodir "~/.local/share/nvim/undo
 vim.opt.updatetime = 100
-vim.opt.path:append("**,nvim/.config/**")
 vim.opt.wildignore:append("*/node_modules/**,**/_build/**,**bin**,**/_opam/**")
 vim.opt.wildmode = "lastused:list:full"
 vim.opt.wrap = false
 
-vim.cmd([[colorscheme sixteen-tc]])
+vim.cmd([[colorscheme sixteen]])
 vim.cmd(":packadd cfilter") -- enable filter quickfix list
 
 -- KEYMAPS
@@ -278,6 +279,7 @@ now(function()
     }),
     sources = require("cmp").config.sources({
       { name = "nvim_lsp", group_index = 1 },
+      { name = "copilot", group_index = 2 },
       {
         name = "buffer",
         group_index = 2,
@@ -291,17 +293,16 @@ now(function()
 end)
 
 now(function()
+  if not string.match(vim.fn.getcwd(), "/Code/OSS") then
+    return
+  end
+
   vim.g.codeium_manual = true
   add("Exafunction/codeium.vim")
   vim.api.nvim_create_autocmd({ "BufRead", "DirChanged" }, {
     group = vim.api.nvim_create_augroup("PrimalivetCodeium", { clear = true }),
     pattern = "*",
     callback = function()
-      if not string.match(vim.fn.getcwd(), "/Code/OSS") then
-        vim.cmd("CodeiumDisable")
-        return
-      end
-
       keymap_set("i", "<C-x><C-a>", vim.fn["codeium#Complete"], { desc = "Codeium complete" })
       -- keymap_set("i", "XXXXXXX", function() vim.fn["codeium#CycleCompletions"](1) end, { desc = "Codium next suggestion"})
       -- keymap_set("i", "XXXXXXX", function() vim.fn["codeium#CycleCompletions"](-1) end, { desc = "Codeium previous suggestion"})
@@ -309,6 +310,23 @@ now(function()
       -- keymap_set("i", "XXXXXXX", vim.fn["codeium#Accept"], { desc = "Codeium accept suggestion"})
     end,
   })
+end)
+
+now(function()
+  if not string.match(vim.fn.getcwd(), "/Code/VCE") then
+    return
+  end
+
+  add({
+    source = "zbirenbaum/copilot.lua",
+    depends = { "zbirenbaum/copilot-cmp" }
+  })
+
+  require("copilot").setup({
+    suggestion = { enabled = false },
+    panel = { enabled = true }
+  })
+  require("copilot_cmp").setup()
 end)
 
 now(function()

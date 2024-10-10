@@ -34,26 +34,26 @@ local diff_change = 22
 local diff_delete = 52
 local diff_text = 28
 
+local foreground = bright_white
+local background = black
+local elevation = bright_black
+local keyword = bright_yellow
+local string = bright_green
+local comment = bright_cyan
+local type = white
+local error = bright_red
+local info = comment
+local warn = bright_yellow
+
 local set_hl = vim.api.nvim_set_hl
 
 local reset = function(group)
-  vim.api.nvim_set_hl(0, group, { ctermfg = bright_white })
+  vim.api.nvim_set_hl(0, group, { ctermfg = foreground })
 end
 
 local link = function(group, target)
   vim.api.nvim_set_hl(0, group, { link = target })
 end
-
-local foreground = bright_white
-local background = black
-local elevation = bright_black
-local keyword = yellow
-local string = bright_green
-local comment = bright_cyan
-local type = foreground
-local error = bright_red
-local info = comment
-local warn = bright_yellow
 
 reset("ColorColumn")
 reset("Conceal")
@@ -136,7 +136,7 @@ set_hl(0, "Folded", { ctermbg = elevation })
 set_hl(0, "StatusLine", { reverse = true })
 set_hl(0, "StatusLineNC", { ctermbg = elevation })
 
-set_hl(0, "WinSeparator", { ctermfg = elevation })
+set_hl(0, "WinSeparator", { ctermfg = white, ctermbg = bright_black })
 link("VertSplit", "WinSeparator")
 
 set_hl(0, "LineNr", { ctermfg = elevation })
@@ -146,19 +146,19 @@ set_hl(0, "LineNrBelow", { ctermfg = elevation })
 
 -- Syntax
 
-set_hl(0, "Comment", { ctermfg = comment, italic = true })
+set_hl(0, "Comment", { ctermfg = comment })
 
 link("Constant", "Normal")
 set_hl(0, "String", { ctermfg = string })
 link("Character", "String")
 link("Number", "Constant")
-set_hl(0, "Boolean", { ctermfg = keyword, bold = true })
+set_hl(0, "Boolean", { ctermfg = keyword })
 link("Float", "Constant")
 
 reset("Identifier")
 link("Function", "Identifier")
 
-set_hl(0, "Statement", { ctermfg = keyword, bold = true })
+set_hl(0, "Statement", { ctermfg = keyword })
 link("Conditional", "Statement")
 link("Repeat", "Statement")
 link("Label", "Statement")
@@ -172,12 +172,12 @@ link("Define", "PreProc")
 link("Macro", "PreProc")
 link("PreCondit", "PreProc")
 
-set_hl(0, "Type", { ctermfg = type, italic = true })
+set_hl(0, "Type", { ctermfg = type })
 link("StorageClass", "Normal")
 link("Structure", "Type")
 link("Typedef", "Type")
 
-reset("Special")
+link("Special")
 link("Tag", "Special")
 link("Delimiter", "Special")
 link("SpecialComment", "Special")
@@ -190,8 +190,8 @@ reset("GitSignsChange")
 reset("GitSignsDelete")
 
 link("MiniPickNormal", "Normal") -- basic foreground/background highlighting.
-reset("MiniPickBorder") -- window border.
-link("MiniPickBorderBusy", "DiagnosticWarn") -- window border while picker is busy processing.
+set_hl(0, "MiniPickBorder", { ctermfg = background, ctermbg = background }) -- window border.
+set_hl(0, "MiniPickBorderBusy", { ctermfg = warn, ctermbg = warn }) -- window border while picker is busy processing.
 reset("MiniPickBorderText") -- non-prompt on border.
 set_hl(0, "MiniPickIconDirectory", { ctermfg = background, ctermbg = background }) -- default icon for directory.
 set_hl(0, "MiniPickIconFile", { ctermfg = background, ctermbg = background }) -- default icon for file.
@@ -202,3 +202,12 @@ link("MiniPickMatchRanges", "QuickFixLine") -- ranges matching query elements.
 reset("MiniPickPreviewLine") -- target line in preview.
 reset("MiniPickPreviewRegion") -- target region in preview.
 reset("MiniPickPrompt") -- prompt.
+reset("MiniDiffSignAdd")
+reset("MiniDiffSignChange")
+reset("MiniDiffSignDelete")
+
+set_hl(0, "@tag", { ctermfg = keyword }) -- XML-style tag names (e.g. in XML, HTML, etc.)
+set_hl(0, "@tag.builtin", { ctermfg = keyword }) -- XML-style tag names (e.g. HTML5 tags)
+reset("@tag.attribute") -- XML-style tag attributes
+set_hl(0, "@tag.delimiter", { ctermfg = keyword }) -- XML-style tag delimiters
+set_hl(0, "@type.builtin.c", { ctermfg = type })
