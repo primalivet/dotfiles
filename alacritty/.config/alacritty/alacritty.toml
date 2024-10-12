@@ -1,5 +1,3 @@
-# import = [ "~/Code/OSS/alacritty-theme/themes/xterm.toml" ]
-
 [window]
 decorations_theme_variant = "Dark"
 resize_increments = true
@@ -11,11 +9,12 @@ title = ""
 style = { shape = "Block", blinking = "Always" }
 
 [font]
-normal      = { family = "Iosevka", style = "Light" }
-italic      = { family = "Iosevka", style = "Light Italic" }
-bold        = { family = "Iosevka", style = "Medium" }
-bold_italic = { family = "Iosevka", style = "Bold Italic" }
-size = 18.0
+# normal      = { family = "Iosevka", style = "Light" }
+# italic      = { family = "Iosevka", style = "Light Italic" }
+# bold        = { family = "Iosevka", style = "Medium" }
+# bold_italic = { family = "Iosevka", style = "Bold Italic" }
+normal = { family = "AcPlus IBM VGA 9x16" }
+size = 22.0
 
 [colors.cursor]
 text   = "#000000"
