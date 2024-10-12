@@ -89,6 +89,18 @@ require("primalivet.mini")
 local add, now = MiniDeps.add, MiniDeps.now
 
 now(function()
+  -- TODO: make sure fzf is in path and get fzf path dynamically
+  vim.opt.runtimepath:append('/opt/homebrew/opt/fzf')
+  add("junegunn/fzf.vim")
+  vim.g.fzf_layout = { down = "50%" }
+  vim.g.fzf_preview_window = {}
+
+  keymap_set("n", "<leader>sf", ":Files<CR>", { desc = "Search Files" })
+  keymap_set("n", "<leader>sl", ":Rg<CR>", { desc = "Search Live" })
+  keymap_set("n", "<leader>sc", ":Commands<CR>", { desc = "Search Commands" })
+end)
+
+now(function()
   add("tpope/vim-dadbod")
   add("kristijanhusak/vim-dadbod-ui")
   add("kristijanhusak/vim-dadbod-completion")
@@ -105,25 +117,6 @@ now(function()
       signs = { add = "+", change = "~", delete = "_" },
     },
   })
-  require("mini.pick").setup({
-    window = {
-      config = function()
-        local height = math.floor(0.5 * vim.o.lines)
-        local row = math.floor(vim.o.lines - height)
-        return { anchor = "NW", width = vim.o.columns, height = height, row = row, col = 0 }
-      end,
-    },
-  })
-
-  vim.ui.select = MiniPick.ui_select
-
-  keymap_set("n", "<leader>ss", ":Pick resume<CR>", { desc = "Search Same (as before)" })
-  keymap_set("n", "<leader>sf", ":Pick files<CR>", { desc = "Search Files" })
-  keymap_set("n", "<leader>sl", ":Pick grep_live<CR>", { desc = "Search Live" })
-  keymap_set("n", "<leader>sc", ":Pick commands<CR>", { desc = "Search Commands" })
-  keymap_set("n", "<leader>sr", ":Pick lsp scope='references'<CR>", { desc = "Search References" })
-  keymap_set("n", "<leader>sws", ":Pick lsp scope='workspace_symbol'<CR>", { desc = "Search Workspace Symbol" })
-  keymap_set("n", "<leader>sds", ":Pick lsp scope='document_symbol'<CR>", { desc = "Search Document Symbol" })
 end)
 
 now(function()
