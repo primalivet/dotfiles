@@ -3,15 +3,12 @@ vim.g.maplocalleader = " "
 
 vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
-vim.opt.cursorline = true
-vim.opt.cursorlineopt = "number"
 vim.opt.diffopt:append("vertical")
 vim.opt.expandtab = true
 vim.opt.fillchars ="vert:|"
 vim.opt.guicursor=""
 vim.opt.ignorecase = true
 vim.opt.laststatus = 1
-vim.opt.listchars:append("space:·")
 vim.opt.path:append("**,nvim/.config/**")
 vim.opt.scrolloff = 5
 vim.opt.shiftround = true
@@ -22,7 +19,6 @@ vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.softtabstop = 2
 vim.opt.swapfile = false
-vim.opt.termguicolors = false
 vim.opt.timeoutlen = 500
 vim.opt.undofile = true -- uses the default undodir "~/.local/share/nvim/undo
 vim.opt.updatetime = 100
