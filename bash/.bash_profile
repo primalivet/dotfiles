@@ -3,21 +3,40 @@
 ################################################################################
 
 export TERM=xterm-256color
-export LOCAL_SRC=$HOME/.local/src
-export LOCAL_BIN=$HOME/.local/bin
+# This variable shall represent the terminal type for which output is to be
+# prepared. This information is used by utilities and application programs
+# wishing to exploit special capabilities specific to a terminal. The format
+# and allowable values of this environment variable are unspecified.
+
+if command -v nvim >/dev/null 2>&1;
+then export EDITOR=nvim
+else export EDITOR=vim
+fi
+# Used by programs that need to run an editor for you to modify lengthy input
+# (pine, for example, uses a default editor normally, but may be configured to
+# use an alternate editor, either automatically or via the ^_ key).
+
+export VISUAL=$EDITOR
+# Use the $VISUAL variable to set up a VISUAL text editor for editing text
+# files on both GUI and CLI terminals. Some examples of a full-screen editor on
+# Linux and Unix are: vim or vi, emacs, nano
+#
+# Generally, you will want to set it to the same value as the $EDITOR variable.
+
 export BREW_PREFIX="/opt/homebrew"
+# This variable points to the directory in which Homebrew is installed. All
+# formulas and binaries installed with Homebrew is located in subdirectories to
+# this directory.
+
 export N_PREFIX=$HOME/.local/src/n
+# The n command downloads and installs to /usr/local by default, but you may
+# override this location by defining N_PREFIX.
+
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
-if command -v nvim >/dev/null 2>&1; then
-  export VISUAL=nvim
-  export EDITOR=nvim
-  export GIT_EDITOR=nvim
-else
-  export VISUAL=vim
-  export EDITOR=vim
-  export GIT_EDITOR=vim
-fi
+export LOCAL_SRC=$HOME/.local/src
+export LOCAL_BIN=$HOME/.local/bin
+
 
 ################################################################################
 # PATH
@@ -27,6 +46,26 @@ export PATH=$LOCAL_BIN:$PATH
 export PATH=$BREW_PREFIX/bin/:$PATH
 export PATH="$HOME/go/bin:$PATH"
 export PATH=$N_PREFIX/bin:$PATH
+# This variable shall represent the sequence of path prefixes that certain
+# functions and utilities apply in searching for an executable file known only
+# by a filename. The prefixes shall be separated by a <colon> ( ':' ). When a
+# non-zero-length prefix is applied to this filename, a <slash> shall be
+# inserted between the prefix and the filename if the prefix did not end in
+# <slash>. A zero-length prefix is a legacy feature that indicates the current
+# working directory. It appears as two adjacent <colon> characters ( "::" ), as
+# an initial <colon> preceding the rest of the list, or as a trailing <colon>
+# following the rest of the list. A strictly conforming application shall use
+# an actual pathname (such as .) to represent the current working directory in
+# PATH. The list shall be searched from beginning to end, applying the filename
+# to each prefix, until an executable file with the specified name and
+# appropriate execution permissions is found. If the pathname being sought
+# contains a <slash>, the search through the path prefixes shall not be
+# performed. If the pathname begins with a <slash>, the specified path is
+# resolved (see Pathname Resolution). If PATH is unset or is set to null, the
+# path search is implementation-defined.
+#
+# Since <colon> is a separator in this context, directory names that might be
+# used in PATH should not include a <colon> character.
 
 ################################################################################
 # BASH VARIABLES
