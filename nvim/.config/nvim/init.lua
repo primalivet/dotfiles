@@ -96,6 +96,9 @@ now(function()
       signs = { add = "+", change = "~", delete = "_" },
     },
   })
+  require("mini.completion").setup({
+    lsp_completion = { source_func = "omnifunc", auto_setup = false },
+  })
 end)
 
 now(function()
@@ -146,7 +149,6 @@ now(function()
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      "hrsh7th/cmp-nvim-lsp",
     },
   })
 
@@ -154,7 +156,7 @@ now(function()
     group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
     callback = function(event)
       --HINT: Formatting is setup with conform (which falls back to lsp)
-      -- vim.bo[event.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+      vim.bo[event.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
 
       -- Neovim defaults coming in 0.11.X (TODO: remove when on 0.11)
       keymap_set("n", "grn", vim.lsp.buf.rename, { desc = "vim.lsp.buf.rename()" })
@@ -165,7 +167,6 @@ now(function()
   })
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
   local servers = {
     terraformls = {},
@@ -217,50 +218,6 @@ now(function()
         require("lspconfig")[server_name].setup(server)
       end,
     },
-  })
-end)
-
-now(function()
-  add({
-    source = "hrsh7th/nvim-cmp",
-    depends = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "neovim/nvim-lspconfig",
-    },
-  })
-
-  local cmp = require("cmp")
-
-  cmp.setup({
-    expand = function(args)
-      vim.snippet.expand(args.body)
-    end,
-    mapping = cmp.mapping.preset.insert({
-      ["<C-n>"] = cmp.mapping.select_next_item(),
-      ["<C-p>"] = cmp.mapping.select_prev_item(),
-      ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-      ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-      ["<C-l"] = cmp.mapping(function()
-        -- TODO: move right in snippet
-      end),
-      ["<C-h"] = cmp.mapping(function()
-        -- TODO: move left in snippet
-      end),
-    }),
-    sources = require("cmp").config.sources({
-      { name = "nvim_lsp", group_index = 1 },
-      {
-        name = "buffer",
-        group_index = 2,
-        option = {
-          get_bufnrs = vim.api.nvim_list_bufs, -- search in all buffers
-        },
-      },
-      { name = "path", group_index = 3 },
-    }),
   })
 end)
 
