@@ -5,8 +5,8 @@ vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.diffopt:append("vertical")
 vim.opt.expandtab = true
-vim.opt.fillchars ="vert:|"
-vim.opt.guicursor=""
+vim.opt.fillchars = "vert:|"
+vim.opt.guicursor = ""
 vim.opt.ignorecase = true
 vim.opt.laststatus = 1
 vim.opt.path:append("**,nvim/.config/**")
@@ -36,14 +36,6 @@ local function toggle_relative_numbers()
   vim.opt.relativenumber = not vim.opt.relativenumber:get()
 end
 
-local function toggle_background()
-  if vim.opt.background:get() == "dark" then
-    vim.opt.background = "light"
-  else
-    vim.opt.background = "dark"
-  end
-end
-
 local function keymap_set(mode, lhs, rhs, opts)
   local default_opt = { noremap = true, silent = true }
   vim.keymap.set(mode, lhs, rhs, vim.tbl_deep_extend("force", default_opt, opts))
@@ -60,7 +52,6 @@ keymap_set("n", "N", "Nzz", { desc = "Center on search jump unnatural direction"
 keymap_set("n", "<leader>d", vim.diagnostic.setloclist, { desc = "Add buffer diagnostics to Location list" })
 keymap_set("n", "<leader>ts", ":nohlsearch<CR>", { desc = "Toggle search highlight" })
 keymap_set("n", "<leader>tn", toggle_relative_numbers, { desc = "Toggle relative numbers" })
-keymap_set("n", "<leader>tb", toggle_background, { desc = "Toggle background color" })
 keymap_set("t", "<Esc>", "<C-\\><C-n>", { desc = "Escape in terminal" })
 
 -- AUTOCOMMANDS
@@ -86,7 +77,7 @@ local add, now = MiniDeps.add, MiniDeps.now
 
 now(function()
   -- TODO: make sure fzf is in path and get fzf path dynamically
-  vim.opt.runtimepath:append('/opt/homebrew/opt/fzf')
+  vim.opt.runtimepath:append("/opt/homebrew/opt/fzf")
   add("junegunn/fzf.vim")
   vim.g.fzf_layout = { down = "50%" }
   vim.g.fzf_preview_window = {}
@@ -97,14 +88,6 @@ now(function()
 end)
 
 now(function()
-  add("tpope/vim-dadbod")
-  add("kristijanhusak/vim-dadbod-ui")
-  add("kristijanhusak/vim-dadbod-completion")
-  vim.cmd("autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni")
-end)
-
-now(function()
-  require("mini.extra").setup()
   require("mini.surround").setup()
   require("mini.align").setup()
   require("mini.diff").setup({
@@ -269,7 +252,6 @@ now(function()
     }),
     sources = require("cmp").config.sources({
       { name = "nvim_lsp", group_index = 1 },
-      { name = "copilot", group_index = 2 },
       {
         name = "buffer",
         group_index = 2,
@@ -283,45 +265,11 @@ now(function()
 end)
 
 now(function()
-  if not string.match(vim.fn.getcwd(), "/Code/OSS") then
-    return
-  end
-
-  vim.g.codeium_manual = true
-  add("Exafunction/codeium.vim")
-  vim.api.nvim_create_autocmd({ "BufRead", "DirChanged" }, {
-    group = vim.api.nvim_create_augroup("PrimalivetCodeium", { clear = true }),
-    pattern = "*",
-    callback = function()
-      keymap_set("i", "<C-x><C-a>", vim.fn["codeium#Complete"], { desc = "Codeium complete" })
-      -- keymap_set("i", "XXXXXXX", function() vim.fn["codeium#CycleCompletions"](1) end, { desc = "Codium next suggestion"})
-      -- keymap_set("i", "XXXXXXX", function() vim.fn["codeium#CycleCompletions"](-1) end, { desc = "Codeium previous suggestion"})
-      -- keymap_set("i", "XXXXXXX", vim.fn["codeium#Clear"], { desc = "Codeium clear suggestion"})
-      -- keymap_set("i", "XXXXXXX", vim.fn["codeium#Accept"], { desc = "Codeium accept suggestion"})
-    end,
-  })
-end)
-
-now(function()
-  if not string.match(vim.fn.getcwd(), "/Code/VCE") then
-    return
-  end
-
-  add({
-    source = "zbirenbaum/copilot.lua",
-    depends = { "zbirenbaum/copilot-cmp" }
-  })
-
+  add("zbirenbaum/copilot.lua")
   require("copilot").setup({
     suggestion = { enabled = false },
-    panel = { enabled = true }
+    panel = { enabled = true, auto_refresh = true },
   })
-  require("copilot_cmp").setup()
-end)
-
-now(function()
-  add("dmmulroy/tsc.nvim")
-  require("tsc").setup({})
 end)
 
 require("primalivet.robot")
