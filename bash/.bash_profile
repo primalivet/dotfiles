@@ -33,6 +33,10 @@ export N_PREFIX=$HOME/.local/src/n
 # override this location by defining N_PREFIX.
 
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
+# Ripgrep supports configuration files. Setting up a configuration file is
+# simple. ripgrep will not look in any predetermined directory for a config
+# file automatically. Instead, you need to set the RIPGREP_CONFIG_PATH
+# environment variable to the file path of your config file.
 
 export LOCAL_SRC=$HOME/.local/src
 export LOCAL_BIN=$HOME/.local/bin
