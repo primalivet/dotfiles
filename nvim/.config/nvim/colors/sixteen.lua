@@ -185,23 +185,6 @@ link("Debug", "Special")
 
 -- Plugins
 
-reset("GitSignsAdd")
-reset("GitSignsChange")
-reset("GitSignsDelete")
-
-link("MiniPickNormal", "Normal") -- basic foreground/background highlighting.
-set_hl(0, "MiniPickBorder", { ctermfg = background, ctermbg = background }) -- window border.
-set_hl(0, "MiniPickBorderBusy", { ctermfg = warn, ctermbg = warn }) -- window border while picker is busy processing.
-reset("MiniPickBorderText") -- non-prompt on border.
-set_hl(0, "MiniPickIconDirectory", { ctermfg = background, ctermbg = background }) -- default icon for directory.
-set_hl(0, "MiniPickIconFile", { ctermfg = background, ctermbg = background }) -- default icon for file.
-reset("MiniPickHeader") -- headers in info buffer and previews.
-link("MiniPickMatchCurrent", "PmenuSel") -- current matched item.
-reset("MiniPickMatchMarked") -- marked matched items.
-link("MiniPickMatchRanges", "QuickFixLine") -- ranges matching query elements.
-reset("MiniPickPreviewLine") -- target line in preview.
-reset("MiniPickPreviewRegion") -- target region in preview.
-reset("MiniPickPrompt") -- prompt.
 reset("MiniDiffSignAdd")
 reset("MiniDiffSignChange")
 reset("MiniDiffSignDelete")
