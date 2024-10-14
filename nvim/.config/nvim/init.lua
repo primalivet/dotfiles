@@ -76,6 +76,15 @@ require("primalivet.mini")
 local add, now = MiniDeps.add, MiniDeps.now
 
 now(function()
+  add("nvim-treesitter/nvim-treesitter")
+  require("nvim-treesitter.configs").setup({
+    auto_install = true,
+    highlight = { enable = true },
+    indent = { enable = true },
+  })
+end)
+
+now(function()
   -- TODO: make sure fzf is in path and get fzf path dynamically
   vim.opt.runtimepath:append("/opt/homebrew/opt/fzf")
   add("junegunn/fzf.vim")
@@ -85,6 +94,13 @@ now(function()
   keymap_set("n", "<leader>sf", ":Files<CR>", { desc = "Search Files" })
   keymap_set("n", "<leader>sl", ":Rg<CR>", { desc = "Search Live" })
   keymap_set("n", "<leader>sc", ":Commands<CR>", { desc = "Search Commands" })
+
+  vim.cmd [[autocmd! FileType fzf set laststatus=0 noshowmode noruler
+         \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler]]
+end)
+
+now(function()
+  add("tpope/vim-fugitive")
 end)
 
 now(function()
@@ -101,42 +117,23 @@ now(function()
   })
 end)
 
-now(function()
-  add("nvim-treesitter/nvim-treesitter")
-  require("nvim-treesitter.configs").setup({
-    auto_install = true,
-    highlight = { enable = true },
-    indent = { enable = true },
-  })
-end)
-
-now(function()
-  add("tpope/vim-fugitive")
-end)
 
 now(function()
   add("stevearc/conform.nvim")
   require("conform").setup({
-    default_format_opts = {
-      stop_after_first = true,
-    },
+    default_format_opts = { stop_after_first = true },
     formatters_by_ft = {
-      lua = { "stylua" },
-      templ = { "templ" },
       javascript = { "prettierd", "prettier" },
       javascriptreact = { "prettierd", "prettier" },
       typescript = { "prettierd", "prettier" },
       typescriptreact = { "prettierd", "prettier" },
     },
   })
-
   local function format_buffer()
     require("conform").format({
       async = true,
       lsp_fallback = true,
-      filter = function(client)
-        return client.name ~= "tsserver"
-      end,
+      filter = function(client) return client.name ~= "tsserver" end,
     })
   end
   keymap_set("n", "<leader>f", format_buffer, { desc = "Format buffer" })
