@@ -211,7 +211,7 @@ if command -v fzf >/dev/null; then
   if command -v rg >/dev/null; then
     export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
   fi
-  export FZF_DEFAULT_OPTS="--height=100% --reverse --color=bw"
+  export FZF_DEFAULT_OPTS="--height=100% --layout=reverse --no-separator --no-scrollbar --color=16"
   eval "$(fzf --bash)" # Source fzf keybindings and completion
 fi
 
