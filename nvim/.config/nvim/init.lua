@@ -54,6 +54,19 @@ keymap_set("n", "<leader>ts", ":nohlsearch<CR>", { desc = "Toggle search highlig
 keymap_set("n", "<leader>tn", toggle_relative_numbers, { desc = "Toggle relative numbers" })
 keymap_set("t", "<Esc>", "<C-\\><C-n>", { desc = "Escape in terminal" })
 
+-- USERCOMMANDS
+
+vim.api.nvim_create_user_command("Prettier", function()
+  local prettier_exec = vim.fn.filereadable(vim.fn.getcwd() .. "/node_modules/.bin/prettier")
+  if prettier_exec == 0 then
+    print("Local Prettier executable not found in node_modules")
+    return
+  else
+    print("Format with prettier")
+    vim.cmd [[%!npx prettier --stdin-filepath %]]
+  end
+end, {})
+
 -- AUTOCOMMANDS
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
@@ -116,7 +129,16 @@ end)
 
 
 now(function()
-  add("stevearc/conform.nvim")
+  add({
+    source = "neovim/nvim-lspconfig",
+    depends = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      "hrsh7th/cmp-nvim-lsp",
+      "stevearc/conform.nvim"
+    },
+  })
   require("conform").setup({
     default_format_opts = { stop_after_first = true },
     formatters_by_ft = {
@@ -126,6 +148,7 @@ now(function()
       typescriptreact = { "prettierd", "prettier" },
     },
   })
+
   local function format_buffer()
     require("conform").format({
       async = true,
@@ -133,25 +156,12 @@ now(function()
       filter = function(client) return client.name ~= "tsserver" end,
     })
   end
-  keymap_set("n", "<leader>f", format_buffer, { desc = "Format buffer" })
-end)
-
-now(function()
-  add({
-    source = "neovim/nvim-lspconfig",
-    depends = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
-      "hrsh7th/cmp-nvim-lsp",
-    },
-  })
-
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
     callback = function(event)
-      --HINT: Formatting is setup with conform (which falls back to lsp)
-      -- vim.bo[event.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+      --HINT: format_buffer calls vim.lsp.buf.format() for all filetypes except
+      --black sheep tsserver, for js/ts we use prettier :/
+      keymap_set("n", "<leader>f", format_buffer, { desc = "Format buffer" })
 
       -- Neovim defaults coming in 0.11.X (TODO: remove when on 0.11)
       keymap_set("n", "grn", vim.lsp.buf.rename, { desc = "vim.lsp.buf.rename()" })
@@ -256,7 +266,7 @@ now(function()
           get_bufnrs = vim.api.nvim_list_bufs, -- search in all buffers
         },
       },
-      { name = "path", group_index = 3 },
+      { name = "path",     group_index = 3 },
     }),
   })
 end)
@@ -269,4 +279,4 @@ now(function()
   })
 end)
 
-require("primalivet.robot")
+-- require("primalivet.robot")
