@@ -14,6 +14,10 @@
         tool=vimdiff
 [status]
         submodulesummary=true
+[color]
+        diff=auto
+        status=auto
+        ui=auto
 [difftool]
         prompt = false
 [includeIf "gitdir:~/Code/OSS/"]
@@ -27,7 +31,7 @@
   c = commit
   s = status
   d = diff
-  l = log
+  l = "!. ~/.config/git/helpers && git_pretty_log"
   lo = log --oneline
   lg = log --oneline --graph
   a = add
