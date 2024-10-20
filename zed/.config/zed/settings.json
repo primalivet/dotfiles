@@ -7,21 +7,18 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "theme": "macOS Classic Light",
+  "theme": "Gruvbox Dark Hard",
   "ui_font_size": 18,
   "buffer_font_size": 18,
   "buffer_font_family": "GitLab Mono",
   "ui_font_family": "GitLab Mono",
   "vim_mode": true,
-  "cursor_blink": false,
+  "cursor_blink": true,
   "current_line_highlight": "none",
   "relative_line_numbers": true,
   "project_panel": {
-    "file_icons": false,
-    "folder_icons": false
-  },
-  "gutter": {
-    "line_numbers": false
+    "file_icons": true,
+    "folder_icons": true
   },
   "tab_bar": {
     "show": false
