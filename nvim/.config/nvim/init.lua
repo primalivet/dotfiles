@@ -5,7 +5,6 @@ vim.opt.backup = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.diffopt:append("vertical")
 vim.opt.expandtab = true
-vim.opt.fillchars = "vert:|"
 vim.opt.guicursor = ""
 vim.opt.ignorecase = true
 vim.opt.laststatus = 1
@@ -14,7 +13,7 @@ vim.opt.scrolloff = 5
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 2
 vim.opt.sidescrolloff = 5
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "auto:1-3"
 vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.softtabstop = 2
@@ -81,6 +80,10 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
   group = vim.api.nvim_create_augroup("PrimalivetTerm", { clear = true }),
   pattern = "*",
   command = "setlocal nonumber norelativenumber",
+})
+
+vim.diagnostic.config({
+  virtual_text = false,
 })
 
 -- PLUGINS
@@ -279,4 +282,5 @@ now(function()
   })
 end)
 
+-- require("primalivet.cmd-comp")
 -- require("primalivet.robot")
