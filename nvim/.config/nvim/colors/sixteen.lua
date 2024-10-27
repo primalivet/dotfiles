@@ -33,22 +33,29 @@ local diff_add = 22
 local diff_change = 22
 local diff_delete = 52
 local diff_text = 28
+local almost_black = 235
+local almost_blacker = 234
 
+local added = green
+local changed = yellow
+local removed = red
 local foreground = bright_white
+local foreground_dim_1 = white
 local background = black
-local elevation = bright_black
-local keyword = bright_yellow
+local background_elevation_1 = almost_blacker
+local background_elevation_2 = almost_black
+local keyword = yellow
 local string = bright_green
 local comment = bright_cyan
 local type = white
-local error = bright_red
+local error = red
 local info = comment
-local warn = bright_yellow
+local warn = yellow
 
 local set_hl = vim.api.nvim_set_hl
 
 local reset = function(group)
-  vim.api.nvim_set_hl(0, group, { ctermfg = foreground })
+  vim.api.nvim_set_hl(0, group, { ctermfg = "NONE", ctermbg = "NONE" })
 end
 
 local link = function(group, target)
@@ -62,7 +69,6 @@ reset("CursorColumn")
 reset("CursorIM")
 reset("CursorLine")
 reset("CursorLineFold")
-reset("CursorLineNr")
 reset("CursorLineSign")
 reset("Directory")
 reset("Error")
@@ -73,6 +79,7 @@ reset("ModeMsg")
 reset("MoreMsg")
 reset("MsgArea")
 reset("MsgSeparator")
+reset("Normal")
 reset("Question")
 reset("SignColumn")
 reset("SpellBad")
@@ -88,13 +95,11 @@ reset("VisualNOS")
 reset("WarningMsg")
 reset("lCursor")
 
-set_hl(0, "TabLine", { ctermfg = foreground, ctermbg = elevation })
-set_hl(0, "TabLineFill", { ctermbg = elevation })
+set_hl(0, "TabLine", { ctermfg = foreground, ctermbg = background_elevation_1 })
+set_hl(0, "TabLineFill", { ctermbg = background_elevation_1 })
 reset("TabLineSel")
 
-set_hl(0, "CursorLine", { underline = true })
-
-set_hl(0, "WildMenu", { ctermfg = keyword, ctermbg = elevation, bold = true })
+set_hl(0, "WildMenu", { ctermfg = keyword, ctermbg = background_elevation_1, bold = true })
 
 set_hl(0, "DiffAdd", { ctermbg = diff_add })
 set_hl(0, "DiffChange", { ctermbg = diff_change })
@@ -108,16 +113,15 @@ set_hl(0, "DiagnosticWarn", { ctermfg = warn })
 
 set_hl(0, "MatchParen", { reverse = true })
 
-set_hl(0, "Visual", { ctermbg = elevation })
+set_hl(0, "Visual", { ctermbg = background_elevation_1 })
 
-set_hl(0, "QuickFixLine", { ctermfg = keyword, ctermbg = elevation })
+set_hl(0, "QuickFixLine", { ctermfg = keyword, ctermbg = background_elevation_1 })
 
-set_hl(0, "Normal", { ctermfg = foreground, ctermbg = background })
 link("NormalNC", "Normal")
 
-set_hl(0, "NormalFloat", { ctermbg = elevation })
+set_hl(0, "NormalFloat", { ctermbg = background_elevation_1 })
 
-set_hl(0, "Pmenu", { ctermbg = elevation })
+set_hl(0, "Pmenu", { ctermbg = background_elevation_1 })
 link("PmenuSbar", "Pmenu")
 link("PmenuSel", "WildMenu")
 link("PmenuThumb", "PmenuSbar")
@@ -126,23 +130,23 @@ set_hl(0, "Search", { ctermfg = keyword, reverse = true })
 link("IncSearch", "Search")
 link("Substitute", "Search")
 
-set_hl(0, "Whitespace", { ctermfg = elevation })
+set_hl(0, "Whitespace", { ctermfg = background_elevation_2 })
 link("NonText", "Whitespace")
 link("EndOfBuffer", "Whitespace")
 link("SpecialKey", "Whitespace")
 
-set_hl(0, "Folded", { ctermbg = elevation })
+set_hl(0, "Folded", { ctermbg = background_elevation_1 })
 
-set_hl(0, "StatusLine", { reverse = true })
-set_hl(0, "StatusLineNC", { ctermbg = elevation })
+set_hl(0, "StatusLine", { ctermbg = background_elevation_2 })
+set_hl(0, "StatusLineNC", { ctermfg = foreground_dim_1, ctermbg = background_elevation_1 })
 
-set_hl(0, "WinSeparator", { ctermfg = white, ctermbg = bright_black })
+set_hl(0, "WinSeparator", { ctermfg = background_elevation_1 })
 link("VertSplit", "WinSeparator")
 
-set_hl(0, "LineNr", { ctermfg = elevation })
-set_hl(0, "CursorLineNr", { ctermfg = keyword })
-set_hl(0, "LineNrAbove", { ctermfg = elevation })
-set_hl(0, "LineNrBelow", { ctermfg = elevation })
+set_hl(0, "LineNr", { ctermfg = foreground_dim_1 })
+set_hl(0, "CursorLineNr", { ctermfg = foreground })
+set_hl(0, "LineNrAbove", { ctermfg = foreground_dim_1 })
+set_hl(0, "LineNrBelow", { ctermfg = foreground_dim_1 })
 
 -- Syntax
 
@@ -152,7 +156,7 @@ link("Constant", "Normal")
 set_hl(0, "String", { ctermfg = string })
 link("Character", "String")
 link("Number", "Constant")
-set_hl(0, "Boolean", { ctermfg = keyword })
+link("Boolean", "Constant")
 link("Float", "Constant")
 
 reset("Identifier")
@@ -183,14 +187,29 @@ link("Delimiter", "Special")
 link("SpecialComment", "Special")
 link("Debug", "Special")
 
--- Plugins
+set_hl(0, "Added", { ctermfg = added })
+set_hl(0, "Changed", { ctermfg = changed })
+set_hl(0, "Removed", { ctermfg = removed })
 
-reset("MiniDiffSignAdd")
-reset("MiniDiffSignChange")
-reset("MiniDiffSignDelete")
 
-set_hl(0, "@tag", { ctermfg = keyword }) -- XML-style tag names (e.g. in XML, HTML, etc.)
-set_hl(0, "@tag.builtin", { ctermfg = keyword }) -- XML-style tag names (e.g. HTML5 tags)
-reset("@tag.attribute") -- XML-style tag attributes
+reset("DiagnosticSignError")
+reset("DiagnosticSignWarn")
+reset("DiagnosticSignInfo")
+reset("DiagnosticSignHint")
+reset("DiagnosticSignOk")
+
+-- Treesitter
+-- see :h treesitter-highlight
+
+set_hl(0, "@tag", { ctermfg = keyword })           -- XML-style tag names (e.g. in XML, HTML, etc.)
+set_hl(0, "@tag.builtin", { ctermfg = keyword })   -- XML-style tag names (e.g. HTML5 tags)
+reset("@tag.attribute")                            -- XML-style tag attributes
 set_hl(0, "@tag.delimiter", { ctermfg = keyword }) -- XML-style tag delimiters
-set_hl(0, "@type.builtin.c", { ctermfg = type })
+
+link( "@type.builtin", "Type")
+-- set_hl(0, "@type.builtin.c", { ctermfg = type })
+
+-- Plugins
+link("MiniDiffSignAdd", "Normal")
+link("MiniDiffSignChange", "Normal")
+link("MiniDiffSignDelete", "Normal")
