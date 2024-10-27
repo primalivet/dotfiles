@@ -14,7 +14,8 @@ style = { shape = "Block", blinking = "Always" }
 # bold        = { family = "Iosevka", style = "Medium" }
 # bold_italic = { family = "Iosevka", style = "Bold Italic" }
 # normal = { family = "AcPlus IBM VGA 9x16" }
-normal = { family = "GitLab Mono", style = "Light" }
+# normal = { family = "GitLab Mono", style = "Light" }
+normal = { family = "Monaco", style = "Regular" }
 size = 22.0
 
 [colors.cursor]
