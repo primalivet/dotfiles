@@ -9,7 +9,7 @@ if vim.opt.termguicolors:get() then
 end
 
 vim.opt.termguicolors = false
-vim.g.colors_name = "sixteen"
+vim.g.colors_name = "sixteen-lua"
 
 local black = 0
 local red = 1

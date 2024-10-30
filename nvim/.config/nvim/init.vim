@@ -1,0 +1,91 @@
+set nocompatible
+
+filetype plugin indent on
+syntax on
+
+colorscheme sixteen
+
+set expandtab softtabstop=2 shiftwidth=2 smartindent
+set backspace=indent,eol,start
+set signcolumn=yes
+set hidden
+set hlsearch incsearch ignorecase smartcase
+set nowrap scrolloff=5 sidescrolloff=5
+set path+=**,vim/.vim/**,nvim/.config/**
+set showcmd ruler laststatus=1
+set wildmenu wildmode=lastused:list:full
+set wildignore+=**/node_modules/**,**/_build/**,**bin**,**/_opam/**,**/pack/user/**
+set grepprg=rg\ --vimgrep\ --no-heading\ --hidden grepformat=%f:%l:%c:%m
+set timeoutlen=500
+set nobackup noswapfile undofile
+set clipboard^=unnamed | if has('unnamedplus') | set clipboard^=unnamedplus | endif
+
+let g:mapleader=" "
+let $RTP=split(&runtimepath, ',')[0] " shortcut to edit my part of the runtimepath
+let $RC="$HOME/.vim/vimrc"           " shortcut to edit my vimrc
+
+packadd cfilter
+packadd vim-fugitive
+packadd fzf
+packadd fzf.vim
+
+" Keep visual selection while indenting
+vnoremap < <gv
+vnoremap > >gv
+
+" Move visual selection up and down
+vnoremap <C-k> :m '<-2<CR>gv=gv
+vnoremap <C-j> :m '>+<CR>gv=gv
+
+" Center cursor on search jump
+nnoremap n nzz
+nnoremap N Nzz
+
+" Toggle search highlight
+nnoremap <leader>ts :set hlsearch!<CR>
+
+" Toggle number and relative numbers
+nnoremap <leader>tn :set number! relativenumber!<CR>
+
+" Search keymaps
+nnoremap <leader>sf :Files<CR>
+nnoremap <leader>sl :Rg<CR>
+
+" Format whole buffer
+nnoremap <leader>= :%normal! gg=G<CR>
+
+packadd nvim-treesitter
+packadd nvim-lspconfig
+packadd copilot.lua
+
+" Add buffer diagnostics to location list
+nnoremap <leader>d :lua vim.diagnostic.setloclist()<CR>
+
+" Escape in the terminal
+tnoremap <Esc> <C-\><C-n>
+
+" Highlight on yank
+augroup HighlightYanked
+  autocmd!
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup='Visual', timeout=200}
+augroup END
+
+lua require("user")
+lua require("user.language-servers")
+
+augroup LanguageServerConnect
+  " HINT: the <leader>gq mappings below is here rather then general since
+  " the neovim sets the 'formatexpr' to vim.lsp.formatexpr() on LspAttach.
+  " However, since most ts/js projects use prettier (instead of typescript
+  " lsp for mysterious reasons) we override the mapping for ts/js files.
+  "
+  " HINT: the mf an 'f in the <leader>gq mappings sets a mark we can jump
+  " back to.
+  autocmd!
+  autocmd LspAttach * nnoremap <buffer> <leader>gq mf:%normal! gggqG<CR>'f
+  autocmd LspAttach *.ts,*.tsx,*.js,*.jsx nnoremap <buffer> <leader>gq mf:%!./node_modules/.bin/prettier --stdin-filepath %<CR>'f
+  autocmd LspAttach * nnoremap <buffer> grn :lua vim.lsp.buf.rename()<CR>
+  autocmd LspAttach * nnoremap <buffer> gra :lua vim.lsp.buf.code_action()<CR>
+  autocmd LspAttach * nnoremap <buffer> grr :lua vim.lsp.buf.references()<CR>
+  autocmd LspAttach * inoremap <buffer> <C-s> :lua vim.lsp.buf.signature_help()<CR>
+augroup END
