@@ -28,6 +28,11 @@ packadd cfilter
 packadd vim-fugitive
 packadd fzf
 packadd fzf.vim
+packadd nvim-treesitter
+packadd nvim-lspconfig
+packadd copilot.lua
+
+nnoremap se :edit **/
 
 " Keep visual selection while indenting
 vnoremap < <gv
@@ -54,10 +59,6 @@ nnoremap <leader>sl :Rg<CR>
 " Format whole buffer
 nnoremap <leader>= :%normal! gg=G<CR>
 
-packadd nvim-treesitter
-packadd nvim-lspconfig
-packadd copilot.lua
-
 " Add buffer diagnostics to location list
 nnoremap <leader>d :lua vim.diagnostic.setloclist()<CR>
 
@@ -70,8 +71,7 @@ augroup HighlightYanked
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup='Visual', timeout=200}
 augroup END
 
-lua require("user")
-lua require("user.language-servers")
+lua vim.diagnostic.config { virtual_text = false }
 
 augroup LanguageServerConnect
   " HINT: the <leader>gq mappings below is here rather then general since

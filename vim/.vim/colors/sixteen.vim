@@ -87,13 +87,13 @@ hi!  link              Boolean         Constant
 hi!  link              Float           Constant
 hi   Identifier        NONE
 hi!  link              Function        Identifier
-hi   Statement         ctermfg=3
-hi!  link              Conditional     Statement
-hi!  link              Repeat          Statement
-hi!  link              Label           Statement
+hi   Statement         NONE
+hi   Conditional       ctermfg=3
+hi   Repeat            ctermfg=3
+hi   Label             ctermfg=3
 hi!  link              Operator        Normal
-hi!  link              Keyword         Statement
-hi!  link              Exception       Statement
+hi   Keyword           ctermfg=3
+hi   Exception         ctermfg=3
 hi   PreProc           NONE
 hi!  link              Include         PreProc
 hi!  link              Define          PreProc

@@ -1,7 +1,3 @@
-vim.diagnostic.config({
-  virtual_text = false,
-})
-
 require("nvim-treesitter.configs").setup({
   auto_install = true,
   highlight = { enable = true },

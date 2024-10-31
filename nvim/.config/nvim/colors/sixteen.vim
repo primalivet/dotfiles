@@ -130,7 +130,7 @@ if has('nvim')
         hi!  link         WinBarNC      StatusLineNC
         hi!  link         CurSearch     Search
 
-	" Mimic Vim's StatusLineTerm and StatusLineTermNC
+        " Mimic Vim's StatusLineTerm and StatusLineTermNC
         autocmd TermOpen,WinEnter * if &buftype=='terminal'
                                 \|setlocal winhighlight=StatusLine:StatusLineTerm,StatusLineNC:StatusLineTermNC
                                 \|else|setlocal winhighlight=|endif
