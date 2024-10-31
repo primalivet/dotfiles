@@ -5,20 +5,22 @@ syntax on
 
 colorscheme sixteen
 
-set expandtab softtabstop=2 shiftwidth=2 smartindent
+set showmatch matchtime=2
 set backspace=indent,eol,start
-set signcolumn=yes
+set clipboard^=unnamed | if has('unnamedplus') | set clipboard^=unnamedplus | endif
+set completeopt=menu,popup,longest
+set expandtab softtabstop=2 shiftwidth=2 smartindent
+set grepprg=rg\ --vimgrep\ --no-heading\ --hidden grepformat=%f:%l:%c:%m
 set hidden
-set hlsearch incsearch ignorecase smartcase
+set incsearch ignorecase smartcase inccommand=split
+set nobackup noswapfile undofile
 set nowrap scrolloff=5 sidescrolloff=5
 set path+=**,vim/.vim/**,nvim/.config/**
 set showcmd ruler laststatus=1
-set wildmenu wildmode=lastused:list:full
-set wildignore+=**/node_modules/**,**/_build/**,**bin**,**/_opam/**,**/pack/user/**
-set grepprg=rg\ --vimgrep\ --no-heading\ --hidden grepformat=%f:%l:%c:%m
+set signcolumn=yes
 set timeoutlen=500
-set nobackup noswapfile undofile
-set clipboard^=unnamed | if has('unnamedplus') | set clipboard^=unnamedplus | endif
+set wildignore+=**/node_modules/**,**/_build/**,**bin**,**/_opam/**,**/pack/user/**
+set wildmenu wildmode=lastused:list:full
 
 let g:mapleader=" "
 let $RTP=split(&runtimepath, ',')[0] " shortcut to edit my part of the runtimepath
@@ -41,6 +43,9 @@ vnoremap > >gv
 " Move visual selection up and down
 vnoremap <C-k> :m '<-2<CR>gv=gv
 vnoremap <C-j> :m '>+<CR>gv=gv
+
+" !column -t on visual selection
+vnoremap <leader>c :'<,'>!column -t<CR>
 
 " Center cursor on search jump
 nnoremap n nzz
@@ -69,6 +74,12 @@ tnoremap <Esc> <C-\><C-n>
 augroup HighlightYanked
   autocmd!
   autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup='Visual', timeout=200}
+augroup END
+
+augroup HighlightIncSearch
+  autocmd!
+  autocmd CmdlineEnter /,\? :set hlsearch
+  autocmd CmdlineLeave /,\? :set nohlsearch
 augroup END
 
 lua vim.diagnostic.config { virtual_text = false }

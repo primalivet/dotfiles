@@ -2,208 +2,203 @@ set background=dark
 hi clear
 
 if has('nvim')
-        set notermguicolors
+  set notermguicolors
 endif
 
 let g:colors_name = "sixteen"
 
-"  | SemanticType     | ANSI Color | Color Name (unreliable) |
-"  | -----------------|------------|-------------------------|
-"  | Foreground       | -          | -                       |
-"  | Background       | -          | -                       |
-"  | PopupBackground  | 8          | DarkGrey                |
-"  | Keyword          | 3          | DarkYellow              |
-"  | String           | 10         | LightGreen              |
-"  | Comment          | 14         | LightCyan               |
-"  | Type             | 7          | LightGrey               |
-"  | Error            | 4          | DarkRed                 |
-"  | Warning          | 6          | DarkYellow              |
+" Guide
+" -----------------------------------------------------------------------------
 
-hi   ColorColumn       NONE
-hi   Conceal           NONE
-hi   Cursor            NONE
-hi   CursorColumn      NONE
-hi   CursorIM          NONE
-hi   CursorLine        NONE
-hi   CursorLineFold    NONE
-hi   CursorLineSign    NONE
-hi   Directory         NONE
-hi   Error             NONE
-hi   ErrorMsg          NONE
-hi   FoldColumn        NONE
-hi   Ignore            NONE
-hi   ModeMsg           NONE
-hi   MoreMsg           NONE
-hi   MsgArea           NONE
-hi   MsgSeparator      NONE
-hi   Normal            NONE
-hi   Question          NONE
-hi   SignColumn        NONE
-hi   SpellBad          NONE
-hi   SpellCap          NONE
-hi   SpellLocal        NONE
-hi   SpellRare         NONE
-hi   Title             NONE
-hi   VisualNOS         NONE
-hi   WarningMsg        NONE
-hi   lCursor           NONE
-hi   TabLineSel        NONE
-hi   LineNr            NONE
-hi   CursorLineNr      NONE
-hi   LineNrAbove       NONE
-hi   LineNrBelow       NONE
-hi   Pmenu             ctermfg=0       ctermbg=7   cterm=NONE
-hi   PmenuSel          ctermfg=15      ctermbg=4   cterm=NONE
-hi!  link              PmenuSbar       Pmenu
-hi!  link              PmenuThumb      Pmenu
-hi   Search            ctermfg=15      ctermbg=4
-hi!  link              IncSearch       Search
-hi!  link              Substitute      Search
-hi   NonText           ctermfg=13
-hi!  link              EndOfBuffer     NonText
-hi!  link              SpecialKey      NonText
-hi   StatusLine        cterm=NONE      ctermfg=0   ctermbg=15
-hi   StatusLineNC      cterm=NONE      ctermfg=0   ctermbg=7
-hi!  StatusLineTerm    ctermfg=0       ctermbg=10
-hi!  StatusLineTermNC  ctermfg=0       ctermbg=2
-hi   TabLine           ctermfg=NONE    ctermbg=8
-hi   TabLineFill       ctermfg=8
-hi   DiffAdd           ctermfg=NONE    ctermbg=22
-hi   DiffChange        ctermfg=NONE    ctermbg=22
-hi   DiffDelete        ctermfg=NONE    ctermbg=52
-hi   DiffText          ctermfg=NONE    ctermbg=28
-hi   MatchParen        cterm=reverse
-hi   Visual            ctermfg=NONE    ctermbg=4
-hi   QuickFixLine      ctermfg=0       ctermbg=2
-hi   WildMenu          ctermfg=15      ctermbg=4
-hi   Folded            ctermfg=NONE    ctermbg=8
-hi   VertSplit         cterm=NONE      ctermfg=0   ctermbg=7
+"  | -----------------|------------|
+"  | SemanticType     | ANSI Color |
+"  | -----------------|------------|
+"  | Foreground       | -          |
+"  | Background       | -          |
+"  | PopupBackground  | 8          |
+"  | Keyword          | 3          |
+"  | String           | 10         |
+"  | Comment          | 14         |
+"  | Type             | 7          |
+"  | Error            | 4          |
+"  | Warning          | 6          |
+"  | -----------------|------------|
 
+" -----------------------------------------------------------------------------
+"  Highlight groups
+" -----------------------------------------------------------------------------
+
+hi  ColorColumn       NONE
+hi  Conceal           NONE
+hi  Cursor            NONE
+hi  CursorColumn      NONE
+hi  CursorIM          NONE
+hi  CursorLine        NONE
+hi  CursorLineFold    NONE
+hi  CursorLineNr      NONE
+hi  CursorLineSign    NONE
+hi  DiffAdd           ctermfg=NONE   ctermbg=22
+hi  DiffChange        ctermfg=NONE   ctermbg=22
+hi  DiffDelete        ctermfg=NONE   ctermbg=52
+hi  DiffText          ctermfg=NONE   ctermbg=28
+hi  Directory         ctermfg=13
+hi  ErrorMsg          NONE
+hi  FloatBorder       ctermfg=7
+hi  FoldColumn        NONE
+hi  Folded            ctermfg=NONE   ctermbg=8
+hi  IncSearch         ctermfg=15     ctermbg=5
+hi  LineNr            ctermfg=7
+hi  LineNrAbove       NONE
+hi  LineNrBelow       NONE
+hi  MatchParen        cterm=reverse
+hi  ModeMsg           NONE
+hi  MoreMsg           NONE
+hi  MsgArea           NONE
+hi  MsgSeparator      NONE
+hi  NonText           ctermfg=13
+hi  Normal            NONE
+hi  NormalFloat       ctermfg=NONE   ctermbg=8
+hi  NormalNC          NONE
+hi  Pmenu             ctermfg=0      ctermbg=7     cterm=NONE
+hi  PmenuSbar         ctermfg=0      ctermbg=7     cterm=NONE
+hi  PmenuSel          ctermfg=15     ctermbg=4     cterm=NONE
+hi  PmenuThumb        ctermfg=0      ctermbg=8     cterm=NONE
+hi  Question          NONE
+hi  QuickFixLine      ctermfg=0      ctermbg=2
+hi  Search            ctermfg=15     ctermbg=13
+hi  SignColumn        NONE
+hi  SpellBad          ctermfg=1      ctermbg=NONE  cterm=underline
+hi  SpellCap          ctermfg=1      ctermbg=NONE  cterm=underline
+hi  SpellLocal        ctermfg=1      ctermbg=NONE  cterm=underline
+hi  SpellRare         ctermfg=1      ctermbg=NONE  cterm=underline
+hi  StatusLine        ctermfg=0      ctermbg=15    cterm=NONE
+hi  StatusLineNC      ctermfg=0      ctermbg=7     cterm=NONE
+hi  StatusLineTerm    ctermfg=0      ctermbg=10
+hi  StatusLineTermNC  ctermfg=0      ctermbg=2
+hi  TabLine           ctermfg=NONE   ctermbg=8
+hi  TabLineFill       ctermfg=8
+hi  TabLineSel        NONE
+hi  Title             NONE
+hi  VertSplit         ctermfg=7      ctermbg=7     cterm=NONE
+hi  Visual            ctermfg=NONE   ctermbg=4
+hi  VisualNOS         NONE
+hi  WarningMsg        NONE
+hi  WildMenu          ctermfg=15     ctermbg=4     cterm=NONE
+hi  lCursor           NONE
+
+hi!  link  Substitute    Search
+hi!  link  CurSearch     IncSearch
+
+hi!  link  WinSeparator  VertSplit
+
+hi!  link  WinBar        StatusLine
+hi!  link  WinBarNC      StatusLineNC
+
+hi!  link  FloatFooter   Title
+hi!  link  FloatTitle    Title
+
+hi!  link  TermCursor    Cursor
+hi!  link  TermCursorNC  Cursor
+
+hi!  link  EndOfBuffer   NonText
+hi!  link  SpecialKey    NonText
+hi!  link  Whitespace    NonText
+
+" Mimic Vim's StatusLineTerm and StatusLineTermNC
+autocmd TermOpen,WinEnter * if &buftype=='terminal'
+      \|setlocal winhighlight=StatusLine:StatusLineTerm,StatusLineNC:StatusLineTermNC
+      \|else|setlocal winhighlight=|endif
+
+" -----------------------------------------------------------------------------
 " Group names
+" -----------------------------------------------------------------------------
 
 hi   Comment           ctermfg=14
 
-hi!  link        Constant         Normal
+hi   Constant    NONE
 hi   String      ctermfg=10
 hi   Character   ctermfg=2
 hi!  link        Number           Constant
 hi!  link        Boolean          Constant
 hi!  link        Float            Constant
+
 hi!  link        Identifier       Normal
 hi!  link        Function         Identifier
+
 hi   Statement   ctermfg=3
 hi!  link        Conditional      Statement
 hi!  link        Repeat           Statement
 hi!  link        Label            Statement
-hi!  link        Operator         Normal
+hi   Operator    NONE
 hi!  link        Keyword          Statement
 hi!  link        Exception        Statement
-hi!  link        PreProc          Normal
+
+hi   PreProc     NONE
 hi!  link        Include          PreProc
 hi!  link        Define           PreProc
 hi!  link        Macro            PreProc
 hi!  link        PreCondit        PreProc
+
 hi   Type        ctermfg=7
 hi!  link        StorageClass     Normal
 hi!  link        Structure        Type
 hi!  link        Typedef          Type
-hi!  link        Special          Normal
+
+hi   Special     NONE
+hi!  link        SpecialChar      Special
 hi   link        Tag              Special
 hi!  link        Delimiter        Special
 hi!  link        SpecialComment   Special
 hi!  link        Debug            Special
+
 hi   Underlined  cterm=underline
+
 hi   Ignore      NONE
+
 hi   Error       ctermfg=9
+
 hi!  Todo        ctermfg=0        ctermbg=11
 
+hi!  link        Added            DiffAdd
+hi!  link        Changed          DiffText
+hi!  link        Removed          DiffDelete
+
+
+" -----------------------------------------------------------------------------
+" Diagnostic highlights
+" -----------------------------------------------------------------------------
+
+hi  DiagnosticError           ctermfg=1
+hi  DiagnosticWarn            ctermfg=3
+hi  DiagnosticInfo            ctermfg=6
+hi  DiagnosticHint            ctermfg=4
+hi  DiagnosticOk              ctermfg=2
+hi  DiagnosticDeprecated      ctermfg=1
+hi  DiagnosticUnnecessary     ctermfg=NONE
+
+hi  DiagnosticUnderlineError  ctermfg=1     cterm=underline
+hi  DiagnosticUnderlineWarn   ctermfg=3     cterm=underline
+hi  DiagnosticUnderlineInfo   ctermfg=6     cterm=underline
+hi  DiagnosticUnderlineHint   ctermfg=4     cterm=underline
+hi  DiagnosticUnderlineOk     ctermfg=2     cterm=underline
+
+" -----------------------------------------------------------------------------
+" LSP highlights
+" -----------------------------------------------------------------------------
+
+hi!  link  LspReferenceText             Search
+hi!  link  LspReferenceRead             Search
+hi!  link  LspReferenceWrite            Search
+hi!  link  LspInlayHint                 Comment
+hi!  link  LspCodeLens                  NonText
+hi!  link  LspCodeLensSeparator         NonText
+hi!  link  LspSignatureActiveParameter  Search
+
+" -----------------------------------------------------------------------------
+" Treesitter highlights
+" -----------------------------------------------------------------------------
+
 if has('nvim')
-  " Neovim highlight groups
-  hi!  link         NormalNC      Normal
-  hi   NormalFloat  ctermfg=NONE  ctermbg=8
-  hi   FloatBorder  ctermfg=7
-  hi!  link         FloatTitle    FloatNormal
-  hi!  link         FloatFooter   FloatNormal
-  hi!  link         MsgArea       Normal
-  hi!  link         MsgSeparator  Normal
-  hi!  link         Substitute    Search
-  hi!  link         TermCursor    Cursor
-  hi!  link         TermCursorNC  Cursor
-  hi!  link         WinSeparator  VertSplit
-  hi!  link         Whitespace    NonText
-  hi!  link         WinBar        StatusLine
-  hi!  link         WinBarNC      StatusLineNC
-  hi!  link         CurSearch     Search
-  hi!  link         Added         DiffAdd
-  hi!  link         Changed       DiffText
-  hi!  link         Removed       DiffDelete
-
-  " Mimic Vim's StatusLineTerm and StatusLineTermNC
-  autocmd TermOpen,WinEnter * if &buftype=='terminal'
-        \|setlocal winhighlight=StatusLine:StatusLineTerm,StatusLineNC:StatusLineTermNC
-        \|else|setlocal winhighlight=|endif
-
-
-  " Neovim Diagnostics highlight groups (see :help Diagnostic-highlight)
-  hi  DiagnosticError        ctermfg=1
-  hi  DiagnosticWarn         ctermfg=3
-  hi  DiagnosticInfo         ctermfg=6
-  hi  DiagnosticHint         ctermfg=4
-  hi  DiagnosticOk           ctermfg=2
-  hi  DiagnosticDeprecated   ctermfg=1
-  hi  DiagnosticUnnecessary  ctermfg=NONE
-
-  " Neovim Lsp highlight groups (see :help lsp-highlight)
-
-  " TODO: Update lsp-highlights
-  hi!  link  LspReferenceText             Search
-  hi!  link  LspReferenceRead             Search
-  hi!  link  LspReferenceWrite            Search
-  hi!  link  LspInlayHint                 NonText
-  hi!  link  LspCodeLens                  NonText
-  hi!  link  LspCodeLensSeparator         NonText
-  hi!  link  LspSignatureActiveParameter  Search
-
-  " Neovim Lsp Semantic highlights (see :help lsp-semantic-highlight)
-
-  " TODO: Support lsp-semantic-highlight)
-  hi @lsp.type.class          ctermfg=NONE " Identifiers that declare or reference a class type
-  hi @lsp.type.comment        ctermfg=NONE " Tokens that represent a comment
-  hi @lsp.type.decorator      ctermfg=NONE " Identifiers that declare or reference decorators and annotations
-  hi @lsp.type.enum           ctermfg=NONE " Identifiers that declare or reference an enumeration type
-  hi @lsp.type.enumMember     ctermfg=NONE " Identifiers that declare or reference an enumeration property, constant, or member
-  hi @lsp.type.event          ctermfg=NONE " Identifiers that declare an event property
-  hi @lsp.type.function       ctermfg=NONE " Identifiers that declare a function
-  hi @lsp.type.interface      ctermfg=NONE " Identifiers that declare or reference an interface type
-  hi @lsp.type.keyword        ctermfg=NONE " Tokens that represent a language keyword
-  hi @lsp.type.macro          ctermfg=NONE " Identifiers that declare a macro
-  hi @lsp.type.method         ctermfg=NONE " Identifiers that declare a member function or method
-  hi @lsp.type.modifier       ctermfg=NONE " Tokens that represent a modifier
-  hi @lsp.type.namespace      ctermfg=NONE " Identifiers that declare or reference a namespace, module, or package
-  hi @lsp.type.number         ctermfg=NONE " Tokens that represent a number literal
-  hi @lsp.type.operator       ctermfg=NONE " Tokens that represent an operator
-  hi @lsp.type.parameter      ctermfg=NONE " Identifiers that declare or reference a function or method parameters
-  hi @lsp.type.property       ctermfg=NONE " Identifiers that declare or reference a member property, member field, or member variable
-  hi @lsp.type.regexp         ctermfg=NONE " Tokens that represent a regular expression literal
-  hi @lsp.type.string         ctermfg=NONE " Tokens that represent a string literal
-  hi @lsp.type.struct         ctermfg=NONE " Identifiers that declare or reference a struct type
-  hi @lsp.type.type           ctermfg=NONE " Identifiers that declare or reference a type that is not covered above
-  hi @lsp.type.typeParameter  ctermfg=NONE " Identifiers that declare or reference a type parameter
-  hi @lsp.type.variable       ctermfg=NONE " Identifiers that declare or reference a local or global variable
-
-  hi @lsp.mod.abstract        ctermfg=NONE " Types and member functions that are abstract
-  hi @lsp.mod.async           ctermfg=NONE " Functions that are marked async
-  hi @lsp.mod.declaration     ctermfg=NONE " Declarations of symbols
-  hi @lsp.mod.defaultLibrary  ctermfg=NONE " Symbols that are part of the standard library
-  hi @lsp.mod.definition      ctermfg=NONE " Definitions of symbols, for example, in header files
-  hi @lsp.mod.deprecated      ctermfg=NONE " Symbols that should no longer be used
-  hi @lsp.mod.documentation   ctermfg=NONE " Occurrences of symbols in documentation
-  hi @lsp.mod.modification    ctermfg=NONE " Variable references where the variable is assigned to
-  hi @lsp.mod.readonly        ctermfg=NONE " Readonly variables and member fields (constants)
-  hi @lsp.mod.static          ctermfg=NONE " Class members (static members)
-
-  " Neovim Treesitter highlights (see :help treesitter-highlight-groups)
-
   hi! link @variable                    Identifier           " various variable names
   hi! link @variable.builtin            Identifier           " built-in variable names (e.g. `this`, `self`)
   hi! link @variable.parameter          Identifier           " parameters of a function
@@ -299,7 +294,8 @@ if has('nvim')
   hi! link @markup.quote                 Normal              " block quotes
   hi! link @markup.math                  Normal              " math environments (e.g. `$ ... $` in LaTeX)
 
-  hi! link @markup.link                  Normal              " text references, footnotes, citations, etc.
+
+  hi @markup.link                        ctermfg=4 cterm=underline " text references, footnotes, citations, etc.
   hi! link @markup.link.label            Normal              " link, reference descriptions
   hi! link @markup.link.url              Normal              " URL-style links
 
@@ -318,4 +314,45 @@ if has('nvim')
   hi! link @tag.builtin                  Tag                 " XML-style tag names (e.g. HTML5 tags)
   hi! link @tag.attribute                Tag                 " XML-style tag attributes
   hi! link @tag.delimiter                Tag                 " XML-style tag delimiters
+endif
+
+" -----------------------------------------------------------------------------
+" LSP semantic highlights
+" -----------------------------------------------------------------------------
+
+if has('nvim')
+  hi @lsp.type.class            ctermfg=NONE         " Identifiers that declare or reference a class type
+  hi @lsp.type.comment          ctermfg=NONE         " Tokens that represent a comment
+  hi @lsp.type.decorator        ctermfg=NONE         " Identifiers that declare or reference decorators and annotations
+  hi @lsp.type.enum             ctermfg=NONE         " Identifiers that declare or reference an enumeration type
+  hi @lsp.type.enumMember       ctermfg=NONE         " Identifiers that declare or reference an enumeration property, constant, or member
+  hi @lsp.type.event            ctermfg=NONE         " Identifiers that declare an event property
+  hi @lsp.type.function         ctermfg=NONE         " Identifiers that declare a function
+  hi @lsp.type.interface        ctermfg=NONE         " Identifiers that declare or reference an interface type
+  hi @lsp.type.keyword          ctermfg=NONE         " Tokens that represent a language keyword
+  hi @lsp.type.macro            ctermfg=NONE         " Identifiers that declare a macro
+  hi @lsp.type.method           ctermfg=NONE         " Identifiers that declare a member function or method
+  hi @lsp.type.modifier         ctermfg=NONE         " Tokens that represent a modifier
+  hi @lsp.type.namespace        ctermfg=NONE         " Identifiers that declare or reference a namespace, module, or package
+  hi @lsp.type.number           ctermfg=NONE         " Tokens that represent a number literal
+  hi @lsp.type.operator         ctermfg=NONE         " Tokens that represent an operator
+  hi @lsp.type.parameter        ctermfg=NONE         " Identifiers that declare or reference a function or method parameters
+  hi @lsp.type.property         ctermfg=NONE         " Identifiers that declare or reference a member property, member field, or member variable
+  hi @lsp.type.regexp           ctermfg=NONE         " Tokens that represent a regular expression literal
+  hi @lsp.type.string           ctermfg=NONE         " Tokens that represent a string literal
+  hi @lsp.type.struct           ctermfg=NONE         " Identifiers that declare or reference a struct type
+  hi @lsp.type.type             ctermfg=NONE         " Identifiers that declare or reference a type that is not covered above
+  hi @lsp.type.typeParameter    ctermfg=NONE         " Identifiers that declare or reference a type parameter
+  hi @lsp.type.variable         ctermfg=NONE         " Identifiers that declare or reference a local or global variable
+
+  hi @lsp.mod.abstract          ctermfg=NONE         " Types and member functions that are abstract
+  hi @lsp.mod.async             ctermfg=NONE         " Functions that are marked async
+  hi @lsp.mod.declaration       ctermfg=NONE         " Declarations of symbols
+  hi @lsp.mod.defaultLibrary    ctermfg=NONE         " Symbols that are part of the standard library
+  hi @lsp.mod.definition        ctermfg=NONE         " Definitions of symbols, for example, in header files
+  hi! link @lsp.mod.deprecated  DiagnosticDeprecated " Symbols that should no longer be used
+  hi @lsp.mod.documentation     ctermfg=NONE         " Occurrences of symbols in documentation
+  hi @lsp.mod.modification      ctermfg=NONE         " Variable references where the variable is assigned to
+  hi @lsp.mod.readonly          ctermfg=NONE         " Readonly variables and member fields (constants)
+  hi @lsp.mod.static            ctermfg=NONE         " Class members (static members)
 endif
