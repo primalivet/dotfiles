@@ -46,7 +46,7 @@ hi  ErrorMsg          NONE
 hi  FloatBorder       ctermfg=7
 hi  FoldColumn        NONE
 hi  Folded            ctermfg=NONE   ctermbg=8
-hi  IncSearch         ctermfg=15     ctermbg=5
+hi  IncSearch         ctermfg=0     ctermbg=3
 hi  LineNr            ctermfg=7
 hi  LineNrAbove       NONE
 hi  LineNrBelow       NONE
@@ -65,7 +65,7 @@ hi  PmenuSel          ctermfg=15     ctermbg=4     cterm=NONE
 hi  PmenuThumb        ctermfg=0      ctermbg=8     cterm=NONE
 hi  Question          NONE
 hi  QuickFixLine      ctermfg=0      ctermbg=2
-hi  Search            ctermfg=15     ctermbg=13
+hi  Search            ctermfg=0     ctermbg=2
 hi  SignColumn        NONE
 hi  SpellBad          ctermfg=1      ctermbg=NONE  cterm=underline
 hi  SpellCap          ctermfg=1      ctermbg=NONE  cterm=underline
