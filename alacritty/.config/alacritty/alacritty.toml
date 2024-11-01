@@ -20,7 +20,7 @@ size = 22.0
 
 [colors.cursor]
 text   = "#000000"
-cursor = "#ffd800"
+cursor = "#fd5e00"
 
 [colors.primary]
 foreground = "#dadada"
