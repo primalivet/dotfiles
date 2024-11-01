@@ -1,31 +1,47 @@
 [user]
-        name=Gustaf Holm
-        email=gustaf.holm@icloud.com
-
+  name=Gustaf Holm
+  email=gustaf.holm@icloud.com
 [push]
-        default=simple
-
+  default=simple
 [core]
-        editor=vim
-        filemode=false
+  editor=nvim
+  filemode=false
 [diff]
-        tool=vimdiff
-[merge]
-        tool=vimdiff
-[status]
-        submodulesummary=true
-[color]
-        diff=auto
-        status=auto
-        ui=auto
+  tool=nvim
 [difftool]
-        prompt = false
+  prompt = false
+[difftool "nvim"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[merge]
+  tool=nvim
+[mergetool]
+  keepBackup = false
+  prompt = false
+[mergetool "nvim"]
+  ; A short notice what is actually being executed here:
+  ; nvim -d opens neovim in diffmode.
+  ;
+  ; -c "wincmd l" executes <C-w>l to move the focus to the next split to the
+  ; right.
+  ;
+  ; -c "norm ]c" puts the cursor inside the split to the first change. It is the
+  ; equivalent of hitting ]c in command mode which is indicated by norm. Command
+  ; mode is also known as normal mode in vim.
+  ;
+  ; Taken from: https://smittie.de/posts/git-mergetool/
+  cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
+[status]
+  submodulesummary=true
+[color]
+  diff=auto
+  status=auto
+  ui=auto
 [includeIf "gitdir:~/Code/OSS/"]
-        path = ~/.git_private
+  path = ~/.git_private
 [includeIf "gitdir:~/Code/Work/"]
-        path = ~/.git_work
+  path = ~/.git_work
 [includeIf "gitdir:~/Code/VCE/"]
-        path = ~/.git_vce
+  path = ~/.git_vce
 [alias]
   co = checkout
   c = commit
