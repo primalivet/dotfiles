@@ -1,7 +1,3 @@
-set nocompatible
-
-filetype plugin indent on
-syntax on
 
 colorscheme sixteen
 
@@ -9,20 +5,15 @@ colorscheme sixteen
 " -----------------------------------------------------------------------------
 
 set showmatch matchtime=2
-set backspace=indent,eol,start
 set clipboard^=unnamed | if has('unnamedplus') | set clipboard^=unnamedplus | endif
 set completeopt=menu,popup,longest
 set grepprg=rg\ --vimgrep\ --no-heading\ --hidden grepformat=%f:%l:%c:%m
-set hidden
-set incsearch ignorecase smartcase inccommand=split
+set ignorecase smartcase inccommand=split
 set nobackup noswapfile undofile
-set nowrap scrolloff=5 sidescrolloff=5
+set nowrap
 set path+=**,vim/.vim/**,nvim/.config/**
-set showcmd ruler laststatus=2
-set signcolumn=yes
-set timeoutlen=500
 set wildignore+=**/node_modules/**,**/_build/**,**bin**,**/_opam/**,**/pack/user/**
-set wildmenu wildmode=lastused:list:full
+set wildmenu wildmode=lastused:list:full wildoptions=fuzzy,tagfile
 set listchars+=tab:>\ ,space:·,trail:·,nbsp:+
 
 lua vim.diagnostic.config { virtual_text = false }
