@@ -4,6 +4,7 @@ colorscheme sixteen
 " Options
 " -----------------------------------------------------------------------------
 
+set guicursor=
 set showmatch matchtime=2
 set clipboard^=unnamed | if has('unnamedplus') | set clipboard^=unnamedplus | endif
 set completeopt=menu,popup,longest
