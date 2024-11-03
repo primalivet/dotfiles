@@ -40,7 +40,7 @@ hi  CursorLineSign    NONE
 hi  DiffAdd           ctermfg=NONE   ctermbg=22
 hi  DiffChange        ctermfg=NONE   ctermbg=22
 hi  DiffDelete        ctermfg=NONE   ctermbg=52
-hi  DiffText          ctermfg=NONE   ctermbg=28
+hi  DiffText          ctermfg=0   ctermbg=28
 hi  Directory         ctermfg=13
 hi  ErrorMsg          NONE
 hi  FloatBorder       ctermfg=7
@@ -155,7 +155,7 @@ hi   Underlined  cterm=underline
 
 hi   Ignore      NONE
 
-hi   Error       ctermfg=9
+hi   Error       ctermfg=9        ctermbg=NONE
 
 hi!  Todo        ctermfg=0        ctermbg=11
 
