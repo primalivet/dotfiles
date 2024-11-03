@@ -47,6 +47,7 @@ export LOCAL_BIN=$HOME/.local/bin
 ################################################################################
 
 export PATH=$LOCAL_BIN:$PATH
+export PATH=$LOCAL_SRC/neovim/bin:$PATH
 export PATH=$BREW_PREFIX/bin/:$PATH
 export PATH="$HOME/go/bin:$PATH"
 export PATH=$N_PREFIX/bin:$PATH
