@@ -8,14 +8,21 @@ set guicursor=
 set showmatch matchtime=2
 set clipboard^=unnamed | if has('unnamedplus') | set clipboard^=unnamedplus | endif
 set completeopt=menu,popup,longest
-set grepprg=rg\ --vimgrep\ --no-heading\ --hidden grepformat=%f:%l:%c:%m
 set ignorecase smartcase inccommand=split
 set nobackup noswapfile undofile
 set nowrap
 set path+=**,vim/.vim/**,nvim/.config/**
-set wildignore+=**/node_modules/**,**/_build/**,**bin**,**/_opam/**,**/pack/user/**
+set wildignore+=**/node_modules,**/dist,**/_build,**/_opam,**/nvim/pack,**/.git
 set wildmenu wildmode=lastused:list:full wildoptions=fuzzy,tagfile
 set listchars+=tab:>\ ,space:·,trail:·,nbsp:+
+
+if system('git rev-parse --is-inside-work-tree 2> /dev/null') =~ 'true'
+		set grepprg=git\ --no-pager\ grep\ -rni\ --untracked\ --exclude-standard\ $*
+		set findfunc=findfunc#GitFiles
+else 
+		set grepprg=grep\ -rni\ --exclude-dir={dist,build,node_modules,.git}\ $*
+		set findfunc=findfunc#Find
+endif
 
 lua vim.diagnostic.config { virtual_text = false }
 
@@ -35,8 +42,6 @@ packadd copilot.lua
 
 let g:mapleader=" "
 
-nnoremap se :edit **/
-
 " Keep visual selection while indenting
 vnoremap < <gv
 vnoremap > >gv
@@ -45,8 +50,14 @@ vnoremap > >gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 vnoremap <C-j> :m '>+<CR>gv=gv
 
+" Open current buffer in diff split, move to $LOCAL and center
+nnoremap <leader>ds :Gdiffsplit<CR><C-W>lzz
+
 " !column -t on visual selection
 vnoremap <leader>c :'<,'>!column -t<CR>
+
+" Open quickfix if it has any items
+nnoremap <leader>q :cwindow<CR>
 
 " Center cursor on search jump
 nnoremap n nzz
