@@ -17,10 +17,12 @@ set wildmenu wildmode=lastused:list:full wildoptions=fuzzy,tagfile
 set listchars+=tab:>\ ,space:·,trail:·,nbsp:+
 
 if system('git rev-parse --is-inside-work-tree 2> /dev/null') =~ 'true'
-		set grepprg=git\ --no-pager\ grep\ -rni\ --untracked\ --exclude-standard\ $*
+		set grepprg=git\ --no-pager\ grep\ -rni\ --no-color\ --untracked\ --exclude-standard\ $*
+		set grepformat=%f:%l:%m,\ %m
 		set findfunc=findfunc#GitFiles
 else 
 		set grepprg=grep\ -rni\ --exclude-dir={dist,build,node_modules,.git}\ $*
+		set grepformat=%f:%l:%m,\ %m
 		" TODO: make this work properly, should have a max count, maybe max
 		" depth? Should not trigger prompt when autocompleting
 		"set findfunc=findfunc#Find
@@ -60,6 +62,9 @@ vnoremap <leader>c :'<,'>!column -t<CR>
 
 " Open quickfix if it has any items
 nnoremap <leader>q :cwindow<CR>
+
+" List buffers and be ready to select
+nnoremap <leader>b :ls<CR>:b<Space>
 
 " Center cursor on search jump
 nnoremap n nzz
