@@ -21,7 +21,9 @@ if system('git rev-parse --is-inside-work-tree 2> /dev/null') =~ 'true'
 		set findfunc=findfunc#GitFiles
 else 
 		set grepprg=grep\ -rni\ --exclude-dir={dist,build,node_modules,.git}\ $*
-		set findfunc=findfunc#Find
+		" TODO: make this work properly, should have a max count, maybe max
+		" depth? Should not trigger prompt when autocompleting
+		"set findfunc=findfunc#Find
 endif
 
 lua vim.diagnostic.config { virtual_text = false }
