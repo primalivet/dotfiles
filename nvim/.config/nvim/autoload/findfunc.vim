@@ -1,5 +1,5 @@
 func findfunc#GitFiles(cmdarg, cmdcomplete)
-		let fnames = systemlist('git ls-files --cached --others --exclude-standard')
+		let fnames = systemlist("git ls-files --cached --others --exclude-standard")
 		return fnames->filter('v:val =~? a:cmdarg')
 endfunc
 
