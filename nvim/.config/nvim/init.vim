@@ -1,9 +1,8 @@
 
-colorscheme sixteen
+colorscheme turbo
 
 " Options
 " -----------------------------------------------------------------------------
-
 set guicursor=
 set showmatch matchtime=2
 set clipboard^=unnamed | if has('unnamedplus') | set clipboard^=unnamedplus | endif
@@ -15,6 +14,7 @@ set path+=**,vim/.vim/**,nvim/.config/**
 set wildignore+=**/node_modules,**/dist,**/_build,**/_opam,**/nvim/pack,**/.git
 set wildmenu wildmode=lastused:list:full wildoptions=fuzzy,tagfile
 set listchars+=tab:>\ ,space:·,trail:·,nbsp:+
+set signcolumn=auto
 
 if system('git rev-parse --is-inside-work-tree 2> /dev/null') =~ 'true'
 		set grepprg=git\ --no-pager\ grep\ -rni\ --no-color\ --untracked\ --exclude-standard\ $*
@@ -28,7 +28,7 @@ else
 		"set findfunc=findfunc#Find
 endif
 
-lua vim.diagnostic.config { virtual_text = false }
+lua vim.diagnostic.config { virtual_text = false, float = { border = 'shadow' }}
 
 " Packages
 " -----------------------------------------------------------------------------
@@ -39,6 +39,7 @@ packadd fzf
 packadd fzf.vim
 packadd nvim-treesitter
 packadd nvim-lspconfig
+packadd gitsigns.nvim
 packadd copilot.lua
 
 " Mappings
