@@ -1,4 +1,4 @@
-let g:fzf_layout = { 'down': '50%' }
+let g:fzf_layout = { 'down': '30%' }
 let g:fzf_preview_window = {}
 
 autocmd! FileType fzf
