@@ -16,3 +16,6 @@
 [submodule "copilot.lua"]
 	path = nvim/.config/nvim/pack/user/opt/copilot.lua
 	url = https://github.com/zbirenbaum/copilot.lua
+[submodule "gitsigns.nvim"]
+	path = nvim/.config/nvim/pack/user/opt/gitsigns.nvim
+	url = https://github.com/lewis6991/gitsigns.nvim
