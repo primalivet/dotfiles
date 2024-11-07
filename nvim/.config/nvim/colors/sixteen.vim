@@ -1,4 +1,3 @@
-set background=dark
 hi clear
 
 if has('nvim')
@@ -28,63 +27,77 @@ let g:colors_name = "sixteen"
 "  Highlight groups
 " -----------------------------------------------------------------------------
 
-hi  ColorColumn       NONE
-hi  Conceal           NONE
+hi  Normal            NONE
+hi  NormalNC          NONE
+hi  NormalFloat       NONE
+hi  FloatBorder       ctermfg=8 ctermbg=8
+hi  NonText           NONE
+
 hi  Cursor            NONE
-hi  CursorColumn      NONE
 hi  CursorIM          NONE
+
+hi  LineNr            NONE
+hi  LineNrAbove       NONE
+hi  LineNrBelow       NONE
+
 hi  CursorLine        NONE
 hi  CursorLineFold    NONE
 hi  CursorLineNr      NONE
 hi  CursorLineSign    NONE
-hi  DiffAdd           ctermfg=NONE   ctermbg=22
-hi  DiffChange        ctermfg=NONE   ctermbg=22
-hi  DiffDelete        ctermfg=NONE   ctermbg=52
-hi  DiffText          ctermfg=0   ctermbg=28
-hi  Directory         ctermfg=13
+
+hi  ColorColumn       NONE
+hi  CursorColumn      NONE
+
 hi  ErrorMsg          NONE
-hi  FloatBorder       ctermfg=7
-hi  FoldColumn        NONE
-hi  Folded            ctermfg=NONE   ctermbg=8
-hi  IncSearch         ctermfg=0     ctermbg=3
-hi  LineNr            ctermfg=7
-hi  LineNrAbove       NONE
-hi  LineNrBelow       NONE
-hi  MatchParen        cterm=reverse
 hi  ModeMsg           NONE
 hi  MoreMsg           NONE
 hi  MsgArea           NONE
 hi  MsgSeparator      NONE
-hi  NonText           ctermfg=13
-hi  Normal            NONE
-hi  NormalFloat       ctermfg=NONE   ctermbg=8
-hi  NormalNC          NONE
+hi  Question          NONE
+hi  WarningMsg        NONE
+
+hi  FoldColumn        NONE
+hi  Folded            NONE
+
+hi  DiffAdd           ctermfg=0   ctermbg=22
+hi  DiffChange        ctermfg=0   ctermbg=22
+hi  DiffDelete        ctermfg=0   ctermbg=52
+hi  DiffText          ctermfg=0   ctermbg=28
+
 hi  Pmenu             ctermfg=0      ctermbg=7     cterm=NONE
 hi  PmenuSbar         ctermfg=0      ctermbg=7     cterm=NONE
 hi  PmenuSel          ctermfg=15     ctermbg=4     cterm=NONE
 hi  PmenuThumb        ctermfg=0      ctermbg=8     cterm=NONE
-hi  Question          NONE
-hi  QuickFixLine      ctermfg=0      ctermbg=2
-hi  Search            ctermfg=0     ctermbg=2
-hi  SignColumn        NONE
+
 hi  SpellBad          ctermfg=1      ctermbg=NONE  cterm=underline
 hi  SpellCap          ctermfg=1      ctermbg=NONE  cterm=underline
 hi  SpellLocal        ctermfg=1      ctermbg=NONE  cterm=underline
 hi  SpellRare         ctermfg=1      ctermbg=NONE  cterm=underline
+
 hi  StatusLine        ctermfg=0      ctermbg=15    cterm=NONE
 hi  StatusLineNC      ctermfg=0      ctermbg=7     cterm=NONE
 hi  StatusLineTerm    ctermfg=0      ctermbg=10
 hi  StatusLineTermNC  ctermfg=0      ctermbg=2
+
 hi  TabLine           ctermfg=NONE   ctermbg=8
 hi  TabLineFill       ctermfg=8
-hi  TabLineSel        NONE
-hi  Title             NONE
-hi  VertSplit         ctermfg=7      ctermbg=7     cterm=NONE
+
 hi  Visual            ctermfg=NONE   ctermbg=4
 hi  VisualNOS         NONE
-hi  WarningMsg        NONE
-hi  WildMenu          ctermfg=15     ctermbg=4     cterm=NONE
+
+hi  Conceal           NONE
+hi  Directory         NONE
+hi  IncSearch         NONE
+hi  SignColumn        NONE
+hi  TabLineSel        NONE
+hi  Title             NONE
 hi  lCursor           NONE
+
+hi  MatchParen        cterm=reverse
+hi  QuickFixLine      ctermfg=0      ctermbg=2
+hi  Search            ctermfg=0     ctermbg=2
+hi  VertSplit         ctermfg=7      ctermbg=7     cterm=NONE
+hi  WildMenu          ctermfg=15     ctermbg=4     cterm=NONE
 
 hi!  link  Substitute    Search
 hi!  link  CurSearch     IncSearch
@@ -113,7 +126,7 @@ autocmd TermOpen,WinEnter * if &buftype=='terminal'
 " Group names
 " -----------------------------------------------------------------------------
 
-hi   Comment           ctermfg=14
+hi   Comment           ctermfg=6
 
 hi   Constant    NONE
 hi   String      ctermfg=10
@@ -122,18 +135,19 @@ hi!  link        Number           Constant
 hi!  link        Boolean          Constant
 hi!  link        Float            Constant
 
-hi!  link        Identifier       Normal
-hi!  link        Function         Identifier
+hi   Identifier  NONE
+hi   Function    ctermfg=11
 
-hi   Statement   ctermfg=3
-hi!  link        Conditional      Statement
-hi!  link        Repeat           Statement
-hi!  link        Label            Statement
-hi   Operator    NONE
-hi!  link        Keyword          Statement
-hi!  link        Exception        Statement
+hi   Statement   ctermfg=11
 
-hi   PreProc     NONE
+hi!  link        Conditional  Statement
+hi!  link        Repeat       Statement
+hi!  link        Label        Statement
+hi!  Operator    NONE
+hi!  link        Keyword      Statement
+hi!  link        Exception    Statement
+
+hi   PreProc     ctermfg=11
 hi!  link        Include          PreProc
 hi!  link        Define           PreProc
 hi!  link        Macro            PreProc
@@ -250,18 +264,18 @@ if has('nvim')
 
   hi! link @keyword                      Keyword             " keywords not fitting into specific categories
   hi! link @keyword.coroutine            Keyword             " keywords related to coroutines (e.g. `go` in Go, `async/await` in Python)
-  hi! link @keyword.function             Keyword             " keywords that define a function (e.g. `func` in Go, `def` in Python)
-  hi! link @keyword.operator             Keyword             " operators that are English words (e.g. `and`, `or`)
-  hi! link @keyword.import               Keyword             " keywords for including modules (e.g. `import`, `from` in Python)
-  hi! link @keyword.type                 Keyword             " keywords defining composite types (e.g. `struct`, `enum`)
+  hi! link @keyword.function             Function            " keywords that define a function (e.g. `func` in Go, `def` in Python)
+  hi! link @keyword.operator             Operator            " operators that are English words (e.g. `and`, `or`)
+  hi! link @keyword.import               PreProc             " keywords for including modules (e.g. `import`, `from` in Python)
+  hi! link @keyword.type                 Type                " keywords defining composite types (e.g. `struct`, `enum`)
   hi! link @keyword.modifier             Keyword             " keywords defining type modifiers (e.g. `const`, `static`, `public`)
-  hi! link @keyword.repeat               Keyword             " keywords related to loops (e.g. `for`, `while`)
+  hi! link @keyword.repeat               Repeat              " keywords related to loops (e.g. `for`, `while`)
   hi! link @keyword.return               Keyword             " keywords like `return` and `yield`
   hi! link @keyword.debug                Keyword             " keywords related to debugging
-  hi! link @keyword.exception            Keyword             " keywords related to exceptions (e.g. `throw`, `catch`)
+  hi! link @keyword.exception            Exception             " keywords related to exceptions (e.g. `throw`, `catch`)
 
-  hi! link @keyword.conditional          Keyword             " keywords related to conditionals (e.g. `if`, `else`)
-  hi! link @keyword.conditional.ternary  Keyword             " ternary operator (e.g. `?`, `:`)
+  hi! link @keyword.conditional          Conditional             " keywords related to conditionals (e.g. `if`, `else`)
+  hi! link @keyword.conditional.ternary  Conditional             " ternary operator (e.g. `?`, `:`)
 
   hi! link @keyword.directive            Keyword             " various preprocessor directives and shebangs
   hi! link @keyword.directive.define     Keyword             " preprocessor definition directives
