@@ -370,3 +370,11 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'StatusLine'],
   \ 'spinner': ['fg', 'StatusLine'],
   \ 'header':  ['fg', 'StatusLine'] }
+
+" -----------------------------------------------------------------------------
+" GitSigns
+" -----------------------------------------------------------------------------
+
+hi GitSignsAdd ctermfg=46 ctermbg=17
+hi GitSignsChange ctermfg=51 ctermbg=17
+hi GitSignsDelete ctermfg=197 ctermbg=17
