@@ -12,12 +12,9 @@ title = ""
 style = { shape = "Block", blinking = "Always" }
 
 [font]
-# normal      = { family = "Iosevka", style = "Light" }
-# italic      = { family = "Iosevka", style = "Light Italic" }
-# bold        = { family = "Iosevka", style = "Medium" }
-# bold_italic = { family = "Iosevka", style = "Bold Italic" }
-#normal = { family = "AcPlus IBM VGA 9x16" }
-normal = { family = "Perfect DOS VGA 437" }
-# normal = { family = "GitLab Mono", style = "Light" }
-# normal = { family = "Monaco", style = "Regular" }
+# Original Perfect DOS VGA by Zeh Fernando and  narrower, "less perfect", by
+# Adam Moore
+# - https://zehfernando.com/2015/revisiting-vga-fonts/
+# - https://laemeur.sdf.org/fonts/
+normal = { family = "Less Perfect DOS VGA" } 
 size = 20.0
