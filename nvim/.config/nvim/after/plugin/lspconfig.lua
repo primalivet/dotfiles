@@ -4,7 +4,7 @@
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   opts = opts or {}
-  opts.border = opts.border or "shadow"
+  opts.border = opts.border or "double"
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
@@ -16,3 +16,4 @@ require"lspconfig".eslint.setup{ capabilities = capabilities }
 require"lspconfig".cssls.setup{ capabilities = capabilities }
 require"lspconfig".html.setup{ capabilities = capabilities }
 require"lspconfig".jsonls.setup{ capabilities = capabilities }
+require"lspconfig".gopls.setup{ capabilities = capabilities }
