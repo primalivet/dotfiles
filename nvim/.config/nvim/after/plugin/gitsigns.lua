@@ -7,8 +7,8 @@ require'gitsigns'.setup{
 		changedelete = { text = '~' },
 		untracked    = { text = ' ' },
 	},
-	signs_staged_enabled = false,
+	signs_staged_enable = false,
 	preview_config = {
-		border = 'shadow'
+		border = 'double'
 	}
 }
