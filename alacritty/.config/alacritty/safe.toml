@@ -8,12 +8,12 @@ background = "#000000"
 
 [colors.normal]
 black = "#000000"
-red = "#dd0000"
-green = "#00dd00"
-yellow = "#dddd00"
-blue = "#0000dd"
-magenta = "#dd00dd"
-cyan = "#00dddd"
+red = "#bb0000"
+green = "#00bb00"
+yellow = "#bbbb00"
+blue = "#0000bb"
+magenta = "#bb00bb"
+cyan = "#00bbbb"
 white = "#bbbbbb"
 
 [colors.bright]
