@@ -1,1 +1,1 @@
-setlocal expandtab softabstop=2 shiftwidth=2 smartindent
+setlocal expandtab softtabstop=2 shiftwidth=2 smartindent
