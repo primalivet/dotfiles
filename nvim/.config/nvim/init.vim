@@ -1,5 +1,5 @@
 
-colorscheme turbo
+colorscheme sixteen
 
 " Options
 " -----------------------------------------------------------------------------
@@ -14,7 +14,8 @@ set path+=**,vim/.vim/**,nvim/.config/**
 set wildignore+=**/node_modules,**/dist,**/_build,**/_opam,**/nvim/pack,**/.git
 set wildmenu wildmode=lastused:list:full wildoptions=fuzzy,tagfile
 set listchars+=tab:>\ ,space:·,trail:·,nbsp:+
-set signcolumn=auto
+set signcolumn=auto:1-2
+set number relativenumber
 
 if system('git rev-parse --is-inside-work-tree 2> /dev/null') =~ 'true'
 		set grepprg=git\ --no-pager\ grep\ -rni\ --no-color\ --untracked\ --exclude-standard\ $*
@@ -28,7 +29,7 @@ else
 		"set findfunc=findfunc#Find
 endif
 
-lua vim.diagnostic.config { virtual_text = false, float = { border = 'shadow' }}
+lua vim.diagnostic.config { virtual_text = false, float = { border = 'double' }}
 
 " Packages
 " -----------------------------------------------------------------------------
