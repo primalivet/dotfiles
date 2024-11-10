@@ -1,5 +1,5 @@
 [general]
-import = ["~/.config/alacritty/safe.toml"]
+import = ["~/Code/OSS/alacritty-theme/themes/hardhacker.toml"]
 
 [window]
 decorations_theme_variant = "Dark"
@@ -12,9 +12,8 @@ title = ""
 style = { shape = "Block", blinking = "Always" }
 
 [font]
-# Original Perfect DOS VGA by Zeh Fernando and  narrower, "less perfect", by
-# Adam Moore
-# - https://zehfernando.com/2015/revisiting-vga-fonts/
-# - https://laemeur.sdf.org/fonts/
-normal = { family = "Less Perfect DOS VGA" } 
+normal = { family = "GitLab Mono", style = "Medium" } 
+bold = { family = "GitLab Mono", style = "ExtraBold" } 
+# normal = { family = "Less Perfect DOS VGA" } 
+# normal = { family = "AcPlus IBM VGA 9x16" }
 size = 20.0
