@@ -6,139 +6,117 @@ endif
 
 let g:colors_name = "sixteen"
 
-" Guide
-" -----------------------------------------------------------------------------
-
-"  | -----------------|------------|
-"  | SemanticType     | ANSI Color |
-"  | -----------------|------------|
-"  | Foreground       | -          |
-"  | Background       | -          |
-"  | PopupBackground  | 8          |
-"  | Keyword          | 3          |
-"  | String           | 10         |
-"  | Comment          | 14         |
-"  | Type             | 7          |
-"  | Error            | 4          |
-"  | Warning          | 6          |
-"  | -----------------|------------|
-
 " -----------------------------------------------------------------------------
 "  Highlight groups
 " -----------------------------------------------------------------------------
 
-hi  Normal            NONE
-hi  NormalNC          NONE
-hi  NormalFloat       NONE
-hi  FloatBorder       ctermfg=8 ctermbg=8
-hi  NonText           NONE
+hi        Normal            NONE
+hi! link  NormalNC          Normal
+hi! link  NormalFloat       Normal
+hi! link  FloatBorder       Normal
+hi! link  FloatFooter   Normal
+hi! link  FloatTitle    Normal
 
-hi  Cursor            NONE
-hi  CursorIM          NONE
+hi! link  Cursor            Normal
+hi! link  CursorIM          Normal
+hi! link  lCursor           Normal
+hi! link  TermCursor        Normal
+hi! link  TermCursorNC      Normal
 
-hi  LineNr            NONE
-hi  LineNrAbove       NONE
-hi  LineNrBelow       NONE
+hi! link  CursorLine        Normal
+hi! link  CursorLineFold    Normal
+hi! link  CursorLineSign    Normal
 
-hi  CursorLine        NONE
-hi  CursorLineFold    NONE
-hi  CursorLineNr      NONE
-hi  CursorLineSign    NONE
+hi! link  ColorColumn       Normal
+hi! link  CursorColumn      Normal
 
-hi  ColorColumn       NONE
-hi  CursorColumn      NONE
+hi! link  ErrorMsg          Normal
+hi! link  ModeMsg           Normal
+hi! link  MoreMsg           Normal
+hi! link  MsgArea           Normal
+hi! link  MsgSeparator      Normal
+hi! link  Question          Normal
+hi! link  WarningMsg        Normal
 
-hi  ErrorMsg          NONE
-hi  ModeMsg           NONE
-hi  MoreMsg           NONE
-hi  MsgArea           NONE
-hi  MsgSeparator      NONE
-hi  Question          NONE
-hi  WarningMsg        NONE
+hi! link  FoldColumn        Normal
+hi! link  Folded            Normal
 
-hi  FoldColumn        NONE
-hi  Folded            NONE
+hi! link  Conceal           Normal
+hi! link  Directory         Normal
+hi! link  SignColumn        Normal
+hi! link  Title             Normal
+hi! link  SpecialKey        Normal
+hi! link  Whitespace        Normal
+hi! link  EndOfBuffer       Normal
+hi! link  NonText           Normal
 
-hi  DiffAdd           ctermfg=0   ctermbg=22
-hi  DiffChange        ctermfg=0   ctermbg=22
-hi  DiffDelete        ctermfg=0   ctermbg=52
-hi  DiffText          ctermfg=0   ctermbg=28
+hi        LineNr            ctermfg=8     ctermbg=NONE  cterm=NONE
+hi! link  LineNrAbove       LineNr
+hi! link  LineNrBelow       LineNr
+hi! link  CursorLineNr      LineNr
 
-hi  Pmenu             ctermfg=0      ctermbg=7     cterm=NONE
-hi  PmenuSbar         ctermfg=0      ctermbg=7     cterm=NONE
-hi  PmenuSel          ctermfg=15     ctermbg=4     cterm=NONE
-hi  PmenuThumb        ctermfg=0      ctermbg=8     cterm=NONE
+hi        DiffAdd           ctermfg=0     ctermbg=2     cterm=NONE
+hi        DiffChange        ctermfg=0     ctermbg=2     cterm=NONE
+hi        DiffDelete        ctermfg=0     ctermbg=1     cterm=NONE
+hi        DiffText          ctermfg=0     ctermbg=2     cterm=NONE
 
-hi  SpellBad          ctermfg=1      ctermbg=NONE  cterm=underline
-hi  SpellCap          ctermfg=1      ctermbg=NONE  cterm=underline
-hi  SpellLocal        ctermfg=1      ctermbg=NONE  cterm=underline
-hi  SpellRare         ctermfg=1      ctermbg=NONE  cterm=underline
+hi        Pmenu             ctermfg=NONE  ctermbg=8     cterm=NONE
+hi        PmenuSbar         ctermfg=NONE  ctermbg=8     cterm=NONE
+hi        PmenuSel          ctermfg=0     ctermbg=3     cterm=NONE
+hi        PmenuThumb        ctermfg=NONE  ctermbg=0     cterm=NONE
 
-hi  StatusLine        ctermfg=0      ctermbg=15    cterm=NONE
-hi  StatusLineNC      ctermfg=0      ctermbg=7     cterm=NONE
-hi  StatusLineTerm    ctermfg=0      ctermbg=10
-hi  StatusLineTermNC  ctermfg=0      ctermbg=2
+hi        SpellBad          ctermfg=1     ctermbg=NONE  cterm=underline
+hi        SpellCap          ctermfg=1     ctermbg=NONE  cterm=underline
+hi        SpellLocal        ctermfg=1     ctermbg=NONE  cterm=underline
+hi        SpellRare         ctermfg=1     ctermbg=NONE  cterm=underline
 
-hi  TabLine           ctermfg=NONE   ctermbg=8
-hi  TabLineFill       ctermfg=8
+hi        StatusLine        ctermfg=NONE     ctermbg=8    cterm=NONE
+hi        StatusLineNC      ctermfg=NONE     ctermbg=8    cterm=NONE
+hi        StatusLineTerm    ctermfg=NONE     ctermbg=8    cterm=NONE
+hi        StatusLineTermNC  ctermfg=NONE     ctermbg=8    cterm=NONE
+hi! link  WinBar            StatusLine
+hi! link  WinBarNC          StatusLine
 
-hi  Visual            ctermfg=NONE   ctermbg=4
-hi  VisualNOS         NONE
+hi        TabLine           ctermfg=0     ctermbg=15    cterm=NONE
+hi        TabLineFill       ctermfg=0     ctermbg=15    cterm=NONE
+hi! link  TabLineSel        Normal
 
-hi  Conceal           NONE
-hi  Directory         NONE
-hi  IncSearch         NONE
-hi  SignColumn        NONE
-hi  TabLineSel        NONE
-hi  Title             NONE
-hi  lCursor           NONE
+hi        Visual            ctermfg=15    ctermbg=4     cterm=NONE
+hi! link  VisualNOS         Visual
 
-hi  MatchParen        cterm=reverse
-hi  QuickFixLine      ctermfg=0      ctermbg=2
-hi  Search            ctermfg=0     ctermbg=2
-hi  VertSplit         ctermfg=7      ctermbg=7     cterm=NONE
-hi  WildMenu          ctermfg=15     ctermbg=4     cterm=NONE
+hi        Search            ctermfg=0     ctermbg=3     cterm=NONE
+hi        IncSearch         ctermfg=0     ctermbg=11    cterm=NONE
+hi! link  CurSearch         IncSearch
+hi! link  Substitute        Search
 
-hi!  link  Substitute    Search
-hi!  link  CurSearch     IncSearch
+hi        MatchParen        ctermfg=0     ctermbg=2     cterm=NONE
+hi        QuickFixLine      ctermfg=0     ctermbg=2     cterm=NONE
+hi        VertSplit         ctermfg=0     ctermbg=15    cterm=NONE
+hi        WildMenu          ctermfg=0     ctermbg=3     cterm=NONE
+
 
 hi!  link  WinSeparator  VertSplit
 
-hi!  link  WinBar        StatusLine
-hi!  link  WinBarNC      StatusLineNC
 
-hi!  link  FloatFooter   Title
-hi!  link  FloatTitle    Title
 
-hi!  link  TermCursor    Cursor
-hi!  link  TermCursorNC  Cursor
-
-hi!  link  EndOfBuffer   NonText
-hi!  link  SpecialKey    NonText
-hi!  link  Whitespace    NonText
-
-" Mimic Vim's StatusLineTerm and StatusLineTermNC
-autocmd TermOpen,WinEnter * if &buftype=='terminal'
-      \|setlocal winhighlight=StatusLine:StatusLineTerm,StatusLineNC:StatusLineTermNC
-      \|else|setlocal winhighlight=|endif
 
 " -----------------------------------------------------------------------------
 " Group names
 " -----------------------------------------------------------------------------
 
-hi   Comment           ctermfg=6
+hi   Comment     ctermfg=6        ctermbg=NONE  cterm=italic
 
 hi   Constant    NONE
-hi   String      ctermfg=10
+hi   String      ctermfg=2
 hi   Character   ctermfg=2
 hi!  link        Number           Constant
 hi!  link        Boolean          Constant
 hi!  link        Float            Constant
 
 hi   Identifier  NONE
-hi   Function    ctermfg=11
+hi   Function    ctermfg=11 ctermbg=NONE cterm=bold
 
-hi   Statement   ctermfg=11
+hi   Statement   ctermfg=11 ctermbg=NONE cterm=bold
 
 hi!  link        Conditional  Statement
 hi!  link        Repeat       Statement
@@ -147,13 +125,13 @@ hi!  Operator    NONE
 hi!  link        Keyword      Statement
 hi!  link        Exception    Statement
 
-hi   PreProc     ctermfg=11
+hi   PreProc     ctermfg=11 ctermbg=NONE cterm=bold
 hi!  link        Include          PreProc
 hi!  link        Define           PreProc
 hi!  link        Macro            PreProc
 hi!  link        PreCondit        PreProc
 
-hi   Type        ctermfg=7
+hi   Type        NONE
 hi!  link        StorageClass     Normal
 hi!  link        Structure        Type
 hi!  link        Typedef          Type
@@ -169,9 +147,9 @@ hi   Underlined  cterm=underline
 
 hi   Ignore      NONE
 
-hi   Error       ctermfg=9        ctermbg=NONE
+hi   Error       ctermfg=1        ctermbg=NONE
 
-hi!  Todo        ctermfg=0        ctermbg=11
+hi!  Todo        ctermfg=0        ctermbg=3
 
 hi!  link        Added            DiffAdd
 hi!  link        Changed          DiffText
@@ -370,3 +348,31 @@ if has('nvim')
   hi @lsp.mod.readonly          ctermfg=NONE         " Readonly variables and member fields (constants)
   hi @lsp.mod.static            ctermfg=NONE         " Class members (static members)
 endif
+
+" -----------------------------------------------------------------------------
+" GitSigns
+" -----------------------------------------------------------------------------
+
+hi GitSignsAdd ctermfg=10 ctermbg=NONE
+hi GitSignsChange ctermfg=10 ctermbg=NONE
+hi GitSignsDelete ctermfg=9 ctermbg=NONE
+
+" -----------------------------------------------------------------------------
+" FZF
+" -----------------------------------------------------------------------------
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Normal'],
+  \ 'fg+':     ['fg', 'Normal', 'Normal', 'Normal'],
+  \ 'bg+':     ['bg', 'Normal', 'Normal'],
+  \ 'hl+':     ['fg', 'Normal'],
+  \ 'info':    ['fg', 'Normal'],
+  \ 'border':  ['fg', 'Normal'],
+  \ 'prompt':  ['fg', 'Normal'],
+  \ 'pointer': ['fg', 'Normal'],
+  \ 'marker':  ['fg', 'Normal'],
+  \ 'spinner': ['fg', 'Normal'],
+  \ 'header':  ['fg', 'Normal'] }
+
