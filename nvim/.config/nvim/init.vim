@@ -12,7 +12,7 @@ set nobackup noswapfile undofile
 set nowrap
 set path+=**,vim/.vim/**,nvim/.config/**
 set wildignore+=**/node_modules,**/dist,**/_build,**/_opam,**/nvim/pack,**/.git
-set wildmenu wildmode=lastused:list:full wildoptions=fuzzy,tagfile
+set wildmenu wildmode=lastused:list:longest wildoptions=fuzzy,tagfile
 set listchars+=tab:>\ ,space:·,trail:·,nbsp:+
 set signcolumn=auto:1-2
 set number relativenumber
