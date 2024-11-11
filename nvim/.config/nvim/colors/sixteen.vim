@@ -41,14 +41,16 @@ hi! link  WarningMsg        Normal
 hi! link  FoldColumn        Normal
 hi! link  Folded            Normal
 
+hi  Whitespace              ctermfg=8     ctermbg=NONE  cterm=NONE
+hi! link  EndOfBuffer       Whitespace
+hi! link  NonText           Whitespace
+
 hi! link  Conceal           Normal
 hi! link  Directory         Normal
 hi! link  SignColumn        Normal
 hi! link  Title             Normal
 hi! link  SpecialKey        Normal
-hi! link  Whitespace        Normal
-hi! link  EndOfBuffer       Normal
-hi! link  NonText           Normal
+
 
 hi        LineNr            ctermfg=8     ctermbg=NONE  cterm=NONE
 hi! link  LineNrAbove       LineNr
