@@ -11,6 +11,10 @@ title = ""
 [cursor]
 style = { shape = "Block", blinking = "Always" }
 
+[colors.cursor]
+text = '#000000'
+cursor = '#ff00ff'
+
 [font]
 normal = { family = "GitLab Mono", style = "Medium" } 
 bold = { family = "GitLab Mono", style = "ExtraBold" } 
