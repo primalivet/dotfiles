@@ -94,6 +94,10 @@ nnoremap <leader>d :lua vim.diagnostic.setloclist()<CR>
 " Escape in the terminal
 tnoremap <Esc> <C-\><C-n>
 
+" Navigate git hunks
+nnoremap ]h :Gitsigns next_hunk<CR>
+nnoremap [h :Gitsigns prev_hunk<CR>
+
 " Autocommands
 " -----------------------------------------------------------------------------
 
