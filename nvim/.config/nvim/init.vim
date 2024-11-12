@@ -16,6 +16,7 @@ set wildmenu wildmode=lastused:list:longest wildoptions=fuzzy,tagfile
 set listchars+=tab:>\ ,space:·,trail:·,nbsp:+
 set signcolumn=auto:1-2
 set number relativenumber
+set shortmess+=I
 
 if system('git rev-parse --is-inside-work-tree 2> /dev/null') =~ 'true'
 		set grepprg=git\ --no-pager\ grep\ -rni\ --no-color\ --untracked\ --exclude-standard\ $*
@@ -122,7 +123,7 @@ augroup LanguageServerConnect
 	" HINT: the mf an 'f in the <leader>gq mappings sets a mark we can jump
 	" back to.
 	autocmd!
-	autocmd LspAttach * nnoremap <buffer> <leader>gq mf:%normal! gggqG<CR>'f
+	"autocmd LspAttach * nnoremap <buffer> <leader>gq mf:%normal! gggqG<CR>'f
 	autocmd LspAttach *.ts,*.tsx,*.js,*.jsx nnoremap <buffer> <leader>gq mf:%!./node_modules/.bin/prettier --stdin-filepath %<CR>'f
 	autocmd LspAttach * nnoremap <buffer> grn :lua vim.lsp.buf.rename()<CR>
 	autocmd LspAttach * nnoremap <buffer> gra :lua vim.lsp.buf.code_action()<CR>
