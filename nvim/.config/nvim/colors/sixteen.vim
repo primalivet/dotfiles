@@ -60,7 +60,7 @@ hi! link  CursorLineNr      LineNr
 hi        DiffAdd           ctermfg=0     ctermbg=2     cterm=NONE
 hi        DiffChange        ctermfg=0     ctermbg=2     cterm=NONE
 hi        DiffDelete        ctermfg=0     ctermbg=1     cterm=NONE
-hi        DiffText          ctermfg=0     ctermbg=2     cterm=NONE
+hi        DiffText          ctermfg=0     ctermbg=6     cterm=NONE
 
 hi        Pmenu             ctermfg=NONE  ctermbg=8     cterm=NONE
 hi        PmenuSbar         ctermfg=NONE  ctermbg=8     cterm=NONE
@@ -93,7 +93,7 @@ hi! link  Substitute        Search
 
 hi        MatchParen        ctermfg=0     ctermbg=2     cterm=NONE
 hi        QuickFixLine      ctermfg=0     ctermbg=2     cterm=NONE
-hi        VertSplit         ctermfg=0     ctermbg=15    cterm=NONE
+hi        VertSplit         ctermfg=8     ctermbg=NONE  cterm=NONE
 hi        WildMenu          ctermfg=0     ctermbg=3     cterm=NONE
 
 
