@@ -1,5 +1,5 @@
 #!/bin/bash
 
 git_pretty_log() {
-  git log --color --pretty="tformat:%C(red)%an{%C(blue)%as{%C(auto)%h{%d %s" $* | column -t -s '{' | less --chop-long-lines --quit-if-one-screen --RAW-CONTROL-CHARS
+  git log --color --pretty="tformat:%C(auto)%an{%C(auto)%as{%C(auto)%h{%d %s" $* | column -t -s '{' | less --chop-long-lines --quit-if-one-screen --RAW-CONTROL-CHARS
 }
