@@ -6,13 +6,13 @@ colorscheme sixteen
 set guicursor=
 set showmatch matchtime=2
 set clipboard^=unnamed | if has('unnamedplus') | set clipboard^=unnamedplus | endif
-set completeopt=menu,popup,longest
+set completeopt=menuone,popup,longest
 set ignorecase smartcase inccommand=split
 set nobackup noswapfile undofile
 set nowrap
 set path+=**,vim/.vim/**,nvim/.config/**
 set wildignore+=**/node_modules,**/dist,**/_build,**/_opam,**/nvim/pack,**/.git
-set wildmenu wildmode=lastused:list:longest wildoptions=fuzzy,tagfile
+set wildmenu wildmode=list:longest,list:full wildoptions=fuzzy,tagfile
 set listchars+=tab:>\ ,space:·,trail:·,nbsp:+
 set signcolumn=auto:1-2
 set number relativenumber
