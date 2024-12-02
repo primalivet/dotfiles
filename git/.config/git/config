@@ -3,6 +3,7 @@
   email=gustaf.holm@icloud.com
 [push]
   default=simple
+  autoSetupRemote=true
 [core]
   editor=nvim
   filemode=false
