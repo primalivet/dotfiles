@@ -27,7 +27,7 @@ hi! link  CursorLine        Normal
 hi! link  CursorLineFold    Normal
 hi! link  CursorLineSign    Normal
 
-hi! link  ColorColumn       Normal
+hi  ColorColumn             ctermfg=NONE ctermbg=8 cterm=NONE 
 hi! link  CursorColumn      Normal
 
 hi! link  ErrorMsg          Normal
@@ -358,23 +358,3 @@ endif
 hi GitSignsAdd ctermfg=10 ctermbg=NONE
 hi GitSignsChange ctermfg=10 ctermbg=NONE
 hi GitSignsDelete ctermfg=9 ctermbg=NONE
-
-" -----------------------------------------------------------------------------
-" FZF
-" -----------------------------------------------------------------------------
-
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Normal'],
-  \ 'fg+':     ['fg', 'Normal', 'Normal', 'Normal'],
-  \ 'bg+':     ['bg', 'Normal', 'Normal'],
-  \ 'hl+':     ['fg', 'Normal'],
-  \ 'info':    ['fg', 'Normal'],
-  \ 'border':  ['fg', 'Normal'],
-  \ 'prompt':  ['fg', 'Normal'],
-  \ 'pointer': ['fg', 'Normal'],
-  \ 'marker':  ['fg', 'Normal'],
-  \ 'spinner': ['fg', 'Normal'],
-  \ 'header':  ['fg', 'Normal'] }
-
