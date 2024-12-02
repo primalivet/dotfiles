@@ -1,5 +1,5 @@
 [general]
-import = ["~/Code/OSS/alacritty-theme/themes/hardhacker.toml"]
+import = ["~/Code/OSS/alacritty-theme/themes/gruvbox_material_hard_dark.toml"]
 
 [window]
 decorations_theme_variant = "Dark"
@@ -16,8 +16,12 @@ text = '#000000'
 cursor = '#ff00ff'
 
 [font]
+# normal = { family = "Ubuntu Mono", style = "Regular" } 
+# bold = { family = "Ubuntu Mono", style = "Bold" } 
 normal = { family = "GitLab Mono", style = "Medium" } 
 bold = { family = "GitLab Mono", style = "ExtraBold" } 
 # normal = { family = "Less Perfect DOS VGA" } 
 # normal = { family = "AcPlus IBM VGA 9x16" }
-size = 20.0
+size = 22.0
+offset = { x = 0, y = 4 }
+glyph_offset = { x = 0, y = 2 }
