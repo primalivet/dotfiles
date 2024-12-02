@@ -77,7 +77,7 @@ export PATH=$N_PREFIX/bin:$PATH
 ################################################################################
 # https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 
-export HISTCONTROL=ignorespace:ignoredups
+export HISTCONTROL=ignorespace:ignoredups:erasedups
 # A colon-separated list of values controlling how commands are saved on the
 # history list. If the list of values includes ‘ignorespace’, lines which begin
 # with a space character are not saved in the history list. A value of
@@ -95,7 +95,7 @@ export HISTFILE=~/.bash_history
 # The name of the file to which the command history is saved. The default value
 # is ~/.bash_history.
 
-export HISTFILESIZE=10000
+export HISTFILESIZE=500000
 # The maximum number of lines contained in the history file. When this variable
 # is assigned a value, the history file is truncated, if necessary, to contain
 # no more than that number of lines by removing the oldest entries. The history
@@ -118,6 +118,17 @@ export LANG='en_US.UTF-8'
 export LC_TIME='sv_SE.UTF-8'
 # This variable determines the locale category used for data and time
 # formatting.
+
+# unset PROMPT_COMMAND
+# If this variable is set, and is an array, the value of each set element is
+# interpreted as a command to execute before printing the primary prompt
+# ($PS1). If this is set but not an array variable, its value is used as a
+# command to execute instead.
+#
+# export PROMPT_COMMAND="history -n;history -w;history -c;history -r;$PROMPT_COMMAND"
+# HINT: The above value of this command append new history lines (-n), writes
+# (-w) history which trigger "erasedups", clear (-c) the history list, read
+# (-r) the history file.
 
 ################################################################################
 # ALIAS
