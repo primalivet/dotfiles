@@ -51,6 +51,7 @@ export PATH=$LOCAL_SRC/neovim/bin:$PATH
 export PATH=$BREW_PREFIX/bin/:$PATH
 export PATH="$HOME/go/bin:$PATH"
 export PATH=$N_PREFIX/bin:$PATH
+export PATH=$HOME/.docker/bin:$PATH
 # This variable shall represent the sequence of path prefixes that certain
 # functions and utilities apply in searching for an executable file known only
 # by a filename. The prefixes shall be separated by a <colon> ( ':' ). When a
@@ -214,6 +215,18 @@ function tn() {
     fi
   fi
 }
+
+################################################################################
+# Docker desktop
+################################################################################
+
+if [ -f "/Applications/Docker.app/Contents/Resources/etc/docker.bash-completion" ]; then
+  source "/Applications/Docker.app/Contents/Resources/etc/docker.bash-completion"  
+fi
+
+if [ -f "/Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion" ]; then
+  source "/Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion"  
+fi
 
 ################################################################################
 # FZF
