@@ -1,5 +1,4 @@
-
-colorscheme sixteen
+colorscheme seventeen
 
 " Options
 " -----------------------------------------------------------------------------
@@ -43,6 +42,8 @@ packadd nvim-treesitter
 packadd nvim-lspconfig
 packadd gitsigns.nvim
 packadd copilot.lua
+packadd nvim-colorizer.lua
+lua require('colorizer').setup()
 
 " Mappings
 " -----------------------------------------------------------------------------

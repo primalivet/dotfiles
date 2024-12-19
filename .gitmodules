@@ -22,3 +22,6 @@
 [submodule "gruvbox"]
 	path = nvim/.config/nvim/pack/user/opt/gruvbox
 	url = https://github.com/gruvbox-community/gruvbox
+[submodule "nvim-colorizer.lua"]
+	path = nvim/.config/nvim/pack/user/opt/nvim-colorizer.lua
+	url = https://github.com/norcalli/nvim-colorizer.lua
