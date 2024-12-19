@@ -7,9 +7,16 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "theme": "Gruvbox Dark Hard",
-  "ui_font_size": 18,
-  "buffer_font_size": 18,
+  "assistant": {
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-3-5-sonnet-latest"
+    },
+    "version": "2"
+  },
+  "theme": "macOS Classic Light",
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
   "buffer_font_family": "GitLab Mono",
   "ui_font_family": "GitLab Mono",
   "vim_mode": true,
