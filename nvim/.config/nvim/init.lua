@@ -143,6 +143,7 @@ end)
 --------------------------------------------------------------------------------
 
 now(function()
+  add({ source = "tpope/vim-fugitive" })
   add({ source = "lewis6991/gitsigns.nvim" })
   require'gitsigns'.setup{}
   vim.keymap.set("n", "]h", require'gitsigns'.next_hunk)
