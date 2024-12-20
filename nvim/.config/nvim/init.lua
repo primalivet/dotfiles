@@ -38,7 +38,8 @@ vim.keymap.set("v", "<", "<gv", { desc = "Keep visual selection while indenting 
 vim.keymap.set("v", ">", ">gv", { desc = "Keep visual selection while indenting right" })
 vim.keymap.set("n", "n", "nzz", { desc = "Center cursor on search jump natural direction" })
 vim.keymap.set("n", "N", "Nzz", { desc = "Center cursor on search jump unnatural direction" })
-vim.keymap.set("n", "<leader>d", vim.diagnostic.setloclist, { desc = "Add buffer diagnostics to location list"})
+vim.keymap.set("n", "<leader>ts", ":set hlsearch!<CR>", { desc = "Toggle highlight search" })
+vim.keymap.set("n", "<leader>d", vim.diagnostic.setqflist, { desc = "Add buffer diagnostics to quickfix list"})
 
 -- Syntax
 --------------------------------------------------------------------------------
@@ -174,6 +175,20 @@ end)
 
 -- Other
 --------------------------------------------------------------------------------
+
+-- Diagnositcs config
+vim.diagnostic.config{
+  virtual_text = { severity = vim.diagnostic.severity.WARN },
+  float = { border = "shadow", source = true },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "◉",
+      [vim.diagnostic.severity.WARN] = "◎",
+      [vim.diagnostic.severity.INFO] = "◯",
+      [vim.diagnostic.severity.HINT] = "◌",
+    }
+  },
+}
 
 -- Adapt theme to terminal foreground/background
 vim.api.nvim_set_hl(0, "Normal", { fg = "#D1D3D6", bg = "#1A1D21" })
