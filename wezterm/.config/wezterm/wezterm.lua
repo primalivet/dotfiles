@@ -61,19 +61,16 @@ local colors = {
   },
 }
 
-return {
-	adjust_window_size_when_changing_font_size = false,
-	initial_rows = 30,
-	initial_cols = 150,
-	enable_tab_bar = false,
-	font = wezterm.font 'GitLab Mono',
-	colors = colors,
-	window_padding = {
-		left = 16,
-		right = 16,
-		top = 16,
-		bottom = 16,
-	}
+config.adjust_window_size_when_changing_font_size = false
+config.initial_rows = 30
+config.initial_cols = 150
+config.enable_tab_bar = false
+config.font = wezterm.font 'GitLab Mono'
+config.colors = {
+  background = "#1A1D21",
+  foreground = "#e3e5e9"
 }
+config.window_padding = { left = 16, right = 16, top = 16, bottom = 16, }
 
+return config
 
