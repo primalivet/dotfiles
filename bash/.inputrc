@@ -110,7 +110,7 @@ set echo-control-characters off
 # echoes a character corresponding to a signal generated from the keyboard. The
 # default is ‘on’.
 
-set editing-mode vi
+set editing-mode emacs
 # The editing-mode variable controls which default set of key bindings is used.
 # By default, Readline starts up in Emacs editing mode, where the keystrokes are
 # most similar to Emacs. This variable can be set to either ‘emacs’ or ‘vi’.
@@ -270,7 +270,7 @@ set show-all-if-unmodified on
 # completions don’t share a common prefix) cause the matches to be listed
 # immediately instead of ringing the bell. The default value is ‘off’.
 
-set show-mode-in-prompt on
+# set show-mode-in-prompt on
 # If set to ‘on’, add a string to the beginning of the prompt indicating the
 # editing mode: emacs, vi command, or vi insertion. The mode strings are
 # user-settable (e.g., emacs-mode-string). The default value is ‘off’.

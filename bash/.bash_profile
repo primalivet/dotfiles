@@ -137,7 +137,7 @@ export LC_TIME='sv_SE.UTF-8'
 
 alias vi='nvim'
 alias reload='. ~/.bash_profile && bind -f ~/.inputrc'
-alias ls='ls'
+alias ls='ls --color'
 alias ll='ls -al'
 alias ..='cd ..'
 alias ~="cd $HOME"

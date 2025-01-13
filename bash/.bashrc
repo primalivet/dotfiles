@@ -39,7 +39,7 @@ git_prompt_info() {
   fi
 }
 
-PS1=' \W$(git_prompt_info) \$ '
+PS1='\W$(git_prompt_info) \$ '
 # The primary prompt string. The default value is ‘\s-\v\$ ’. See Controlling
 # the Prompt, for the complete list of escape sequences that are expanded
 # before PS1 is displayed.
