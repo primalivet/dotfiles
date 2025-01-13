@@ -3,8 +3,8 @@ local now, add = require 'user'.setup()
 -- Options
 --------------------------------------------------------------------------------
 
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.number = false
+vim.opt.relativenumber = false
 vim.opt.wrap = false
 vim.opt.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
@@ -53,6 +53,7 @@ vim.keymap.set("v", ">", ">gv", { desc = "Keep visual selection while indenting 
 vim.keymap.set("n", "n", "nzz", { desc = "Center cursor on search jump natural direction" })
 vim.keymap.set("n", "N", "Nzz", { desc = "Center cursor on search jump unnatural direction" })
 vim.keymap.set("n", "<leader>ts", ":set hlsearch!<CR>", { desc = "Toggle highlight search" })
+vim.keymap.set("n", "<leader>tn", ":set number! relativenumber!<CR>", { desc = "Toggle line numbers" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.setqflist, { desc = "Add buffer diagnostics to quickfix list"})
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Easily hit escape in terminal mode" })
 
