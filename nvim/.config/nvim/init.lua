@@ -16,7 +16,9 @@ vim.opt.undofile = true
 vim.opt.expandtab = true
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
+vim.opt.laststatus = 1
 vim.opt.smartindent = true
+vim.opt.completeopt = "menuone,popup,fuzzy,noinsert"
 
 -- Autocommands
 --------------------------------------------------------------------------------
@@ -29,6 +31,18 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   callback = function() vim.hl.on_yank() end
 })
 
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = group,
+  callback = function()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.scrolloff = 0
+
+    vim.bo.filetype = "terminal"
+  end,
+})
+
+
 -- Keymaps
 --------------------------------------------------------------------------------
 
@@ -40,6 +54,7 @@ vim.keymap.set("n", "n", "nzz", { desc = "Center cursor on search jump natural d
 vim.keymap.set("n", "N", "Nzz", { desc = "Center cursor on search jump unnatural direction" })
 vim.keymap.set("n", "<leader>ts", ":set hlsearch!<CR>", { desc = "Toggle highlight search" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.setqflist, { desc = "Add buffer diagnostics to quickfix list"})
+vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Easily hit escape in terminal mode" })
 
 -- Syntax
 --------------------------------------------------------------------------------
@@ -139,6 +154,7 @@ now(function()
   telescope.setup {
     defaults = { preview = false },
     pickers = {
+      builtin = { theme = "ivy" },
       find_files = { theme = "ivy" },
       live_grep = { theme = "ivy" }
     },
@@ -147,6 +163,7 @@ now(function()
   pcall(telescope.load_extension, 'fzf')
   pcall(telescope.load_extension, 'ui-select')
 
+  vim.keymap.set("n", "<leader>sc", builtin.builtin, { desc = "Find builtin Telescope commands" })
   vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Find files" })
   vim.keymap.set("n", "<leader>sl", builtin.live_grep, { desc = "Grep in files" })
 end)
@@ -191,7 +208,6 @@ vim.diagnostic.config{
 }
 
 -- Adapt theme to terminal foreground/background
-vim.api.nvim_set_hl(0, "Normal", { fg = "#D1D3D6", bg = "#1A1D21" })
 vim.api.nvim_set_hl(0, "DiffAdd", { fg = "#cbf9cb", bg = "#074008" })
 vim.api.nvim_set_hl(0, "DiffChange", { fg = "#cbf9f1", bg = "#074037" })
 vim.api.nvim_set_hl(0, "DiffText", { fg = "#cbf9f1", bg = "#0b6456" })
