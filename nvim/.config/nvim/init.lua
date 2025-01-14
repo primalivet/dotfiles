@@ -187,8 +187,16 @@ end)
 now(function()
   add({ source = "zbirenbaum/copilot.lua" })
   require "copilot".setup {
-    suggestion = { enable = false },
-    panel = { enable = true, auto_refresh = true }
+    suggestion = { enable = true, auto_trigger = true,
+      -- Resembles the default completion keymaps but with Modifier instead of Control
+      keymap = {
+        accept = "<M-y>",
+        next = "<M-n>",
+        prev = "<M-p>",
+        dismiss = "<M-c>"
+      }
+    },
+    panel = { enable = false, auto_refresh = true }
   }
 end)
 
