@@ -14,7 +14,7 @@ return {
       vim.cmd('echo "Installed `mini.nvim`" | redraw')
     end
     require('mini.deps').setup({ path = { package = path_package } })
-    local now, add = MiniDeps.now, MiniDeps.add
-    return now, add
+    local now, add, later = MiniDeps.now, MiniDeps.add, MiniDeps.later
+    return now, add, later
   end
 }

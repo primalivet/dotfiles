@@ -1,4 +1,4 @@
-local now, add = require 'user'.setup()
+local now, add, later = require 'user'.setup()
 
 -- Options
 --------------------------------------------------------------------------------
@@ -185,7 +185,28 @@ end)
 -- AI
 --------------------------------------------------------------------------------
 
-now(function()
+later(function()
+  add({
+    source = "olimorris/codecompanion.nvim",
+    depends = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    }
+  })
+  require'codecompanion'.setup {
+    strategies = {
+      inline = {
+        adapter = "copilot",
+        keymaps = {
+          accept_change = { modes = { n = "<leader>ca"}, description = "Accept change" },
+          reject_change = { modes = { n = "<leader>cr"}, description = "Reject change" },
+        }
+      }
+    }
+  }
+end)
+
+later(function()
   add({ source = "zbirenbaum/copilot.lua" })
   require "copilot".setup {
     suggestion = { enable = true, auto_trigger = true,
