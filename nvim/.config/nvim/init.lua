@@ -84,6 +84,7 @@ now(function()
     html = {},
     jsonls = {},
     gopls = {},
+    zls = {},
     lua_ls = { settings = { Lua = {} } },
     denols = {
       root_dir = function(fname)
