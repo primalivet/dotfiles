@@ -62,9 +62,29 @@ vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Easily hit escape in 
 --------------------------------------------------------------------------------
 
 now(function()
-  add({ source = 'nvim-treesitter/nvim-treesitter' })
+  add({
+    source = 'nvim-treesitter/nvim-treesitter',
+    depends = { "nvim-treesitter/nvim-treesitter-textobjects" }
+  })
   require "nvim-treesitter.configs".setup {
     auto_install = true,
+    incremental_selection = { enable = true },
+    textobjects = {
+      select = {
+        enable = true,
+        keymaps = {
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner",
+        }
+      },
+      swap = {
+        enable = true,
+        swap_next = { ["<leader>a"] = "@parameter.inner" },
+        swap_previous = { ["<leader>A"] = "@parameter.inner" },
+      }
+    },
     highlight = { enable = true },
     indent = { enable = true }
   }
