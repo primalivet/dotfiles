@@ -64,7 +64,8 @@ vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Easily hit escape in 
 now(function()
   add({
     source = 'nvim-treesitter/nvim-treesitter',
-    depends = { "nvim-treesitter/nvim-treesitter-textobjects" }
+    -- TODO: Getting error with this dependency, look into it
+    -- depends = { "nvim-treesitter/nvim-treesitter-textobjects" }
   })
   require "nvim-treesitter.configs".setup {
     auto_install = true,
@@ -102,7 +103,9 @@ now(function()
     prismals = {},
     eslint = {},
     cssls = {},
-    html = {},
+    html = {
+      filetypes = { "html", "templ", "htmlangular" }
+    },
     jsonls = {},
     gopls = {},
     zls = {},
@@ -244,6 +247,10 @@ end)
 
 -- Other
 --------------------------------------------------------------------------------
+
+now(function()
+  require'mini.surround'.setup{}
+end)
 
 -- Diagnositcs config
 vim.diagnostic.config{
