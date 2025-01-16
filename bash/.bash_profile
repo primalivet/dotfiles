@@ -2,7 +2,7 @@
 # EXPORT
 ################################################################################
 
-export TERM=xterm-256color
+export TERM=screen-256color
 # This variable shall represent the terminal type for which output is to be
 # prepared. This information is used by utilities and application programs
 # wishing to exploit special capabilities specific to a terminal. The format
