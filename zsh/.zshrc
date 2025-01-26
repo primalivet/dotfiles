@@ -1,68 +1,48 @@
-# ENVIRONMENT VARIABLES
-#------------------------------------------------------------------------------
+################################################################################
+# EXPORT
+################################################################################
 
-export TERM=xterm-256color
-
-# Local (src/bin)
+export LANG='en_US.UTF-8'
+export LC_TIME='sv_SE.UTF-8'
+export TERM=screen-256color
+export BREW_PREFIX="/opt/homebrew"
+export N_PREFIX=$HOME/.local/src/n
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export LOCAL_SRC=$HOME/.local/src
 export LOCAL_BIN=$HOME/.local/bin
-export PATH=$LOCAL_BIN:$PATH
+export KEYTIMEOUT=1 # Reduce key timeout to increase vi bindings responsiveness
 
-# Homebrew
-export BREW_PREFIX="/opt/homebrew"
+if type nvim &> /dev/null; 
+then export EDITOR=nvim
+else export EDITOR=vim
+fi
+export VISUAL=$EDITOR
+
+################################################################################
+# PATH
+################################################################################
+
 export PATH=$BREW_PREFIX/bin/:$PATH
-
-# Not vim
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-export PATH="$PATH:/Applications/Zed.app/Contents/MacOS"
-
-# GO
-export PATH="$HOME/go/bin:$PATH"
-
-# Rust
-[[ -f "$HOME/.cargo" ]] && source "$HOME/.cargo/env"
-
-# N (node version manager)
-export N_PREFIX=$HOME/.local/src/n
+export PATH=$HOME/.docker/bin:$PATH
+export PATH=$HOME/go/bin:$PATH
+export PATH=$LOCAL_BIN:$PATH
+export PATH=$LOCAL_SRC/neovim/bin:$PATH
 export PATH=$N_PREFIX/bin:$PATH
+export PATH=$PATH:/Applications/Zed.app/Contents/MacOS
 
-export RIPGREP_CONFIG_PATH=~/.ripgreprc
-
-# More speed (especially when going in and out of insert mode (vi))
-export KEYTIMEOUT=1
-
-if type nvim &> /dev/null; then
-  export VISUAL=nvim
-  export EDITOR=nvim
-  export GIT_EDITOR=nvim
-else
-  export VISUAL=vim
-  export EDITOR=vim
-  export GIT_EDITOR=vim
-fi
-
-if type fzf &> /dev/null && type rg &> /dev/null; then
-  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
-  export FZF_DEFAULT_OPTS="--height=100% --reverse --color=bw"
-fi
-
-[[ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && \
-  source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-
-# opam configuration
-[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || \
-  source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
-
-# direnv
-eval "$(direnv hook zsh)"
-
-# History
-#------------------------------------------------------------------------------
+################################################################################
+# ZSH VARIABLES https://zsh.sourceforge.io/Doc/Release/Parameters.html
+################################################################################
 
 HISTFILE=~/.zsh_history
 HISTSIZE=50000
 SAVEHIST=50000
 
+################################################################################
+# ZSH OPTIONS https://zsh.sourceforge.io/Doc/Release/Options.html
+################################################################################
+
+# HISTORY
 setopt INC_APPEND_HISTORY_TIME # Immediately append after execution
 setopt EXTENDED_HISTORY # Timestamps in history
 setopt HIST_EXPIRE_DUPS_FIRST # Duplicates goes first when trimming
@@ -74,8 +54,9 @@ setopt HIST_IGNORE_SPACE # Don't save entry if staring with space
 setopt SHARE_HISTORY # Share history between sessions
 unsetopt HIST_VERIFY # Execute commands using history (e.g.: using !$) immediately
 
-# Completion
-#------------------------------------------------------------------------------
+################################################################################
+# ZSH COMPLETION
+################################################################################
 
 # Add completions installed through Homebrew packages
 # See: https://docs.brew.sh/Shell-Completion
@@ -85,11 +66,15 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-# # Speed up completion (https://gist.github.com/ctechols/ca1035271ad134841284)
-# autoload -Uz compinit
-# for dump in ~/.zcompdump(N.mh+24); do
-#   compinit
-# done
+# COMPLETION (the hyphen makes the "." command follow symlinks)
+[[ -d $HOME/zsh.d ]] && source $HOME/zsh.d/completion_*(-.)
+
+
+# Speed up completion (https://gist.github.com/ctechols/ca1035271ad134841284)
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
 
 unsetopt flowcontrol
 setopt auto_menu
@@ -100,61 +85,96 @@ setopt auto_pushd
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive path-completion
 zstyle ':completion:*' menu select # Allow to select in completion menu
 
-# azure specific completions
-# source '/opt/homebrew/etc/bash_completion.d/az'
+################################################################################
+# KEY BINDINGS
+################################################################################
 
-# Key bindings
-#------------------------------------------------------------------------------
-
-bindkey '^[[Z' reverse-menu-complete # Reverse through completion with Shift-Tab
 bindkey -v # Use vi keybindings
 
-bindkey '^R' history-incremental-search-backward
-bindkey '^S' history-incremental-search-forward
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
 
-bindkey '^P' history-search-backward
-bindkey '^N' history-search-forward
-
-bindkey '^Y' accept-search
-
+bindkey '^[[Z' reverse-menu-complete # Reverse through completion with Shift-Tab
 bindkey '^?' backward-delete-char # Backspace as expected in Emacs
 
-if type brew &>/dev/null && type fzf &> /dev/null; then
-  eval "$(fzf --zsh)" # Overwrites any existing bindings that conflicts, eg. CTRL_R
+# Open line in Vim by pressing 'v' in Command-Mode
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
+# bindkey -v # Use vi keybindings
+#
+# bindkey '^R' history-incremental-search-backward
+# bindkey '^S' history-incremental-search-forward
+#
+# bindkey '^P' history-search-backward
+# bindkey '^N' history-search-forward
+#
+# bindkey '^Y' accept-search
+#
+#
+# if [ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+#   bindkey '^y' autosuggest-accept
+# fi
+
+
+################################################################################
+# SUPPORT
+################################################################################
+
+# AUTOSUGGESTION
+# [[ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && \
+#   source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# FZF
+if type fzf &> /dev/null; then
+  if type rg &> /dev/null; then
+    export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+  fi
+  export FZF_DEFAULT_OPTS="--height=100% --reverse --color=bw"
+  eval "$(fzf --zsh)"
 fi
 
-if [ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
-  bindkey '^y' autosuggest-accept
-fi
+# DIRENV
+eval "$(direnv hook zsh)"
 
-# FUNCTIONS
-#------------------------------------------------------------------------------
+# PYENV
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
 
-[ -f ~/zsh.d/functions.zsh ] && source ~/zsh.d/functions.zsh
+# DENO
+[ -f "$HOME/.deno/env" ] && source $HOME/.deno/env
+[ -f "$HOME/.local/share/bash-completion/completions/deno.zsh" ] && \
+	source $HOME/.local/share/bash-completion/completions/deno.zsh
 
+################################################################################
 # ALIASES
-#------------------------------------------------------------------------------
+################################################################################
 
 alias vi='nvim'
 alias reload='. ~/.zshrc'
-alias ls='ls --color=auto'
+alias ls='ls --color'
 alias ll='ls -al'
 alias ..='cd ..'
 alias ~="cd $HOME"
 alias ta='tmux attach'
 alias tl='tmux ls'
-alias tn=fuzzy_start_tmux_session
-alias tk=grep_kill_tmux_sessions
-alias c=fuzzy_charge_project
-alias docker=podman
 
-
+################################################################################
 # PROMPT
-#------------------------------------------------------------------------------
+################################################################################
 
 [ -f ~/zsh.d/prompt.zsh ] && source ~/zsh.d/prompt.zsh
 
+################################################################################
+# FUNCTIONS
+################################################################################
+
+[ -f ~/zsh.d/functions.zsh ] && source ~/zsh.d/functions.zsh
+
+################################################################################
 # PRIVATE
-#------------------------------------------------------------------------------
+################################################################################
 
 [ -f ~/.zsh_private ] && source ~/.zsh_private

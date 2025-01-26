@@ -17,17 +17,17 @@ git_prompt_info() {
         local current_step=$(cat "$(git rev-parse --git-dir)/rebase-apply/next")
         local total_steps=$(cat "$(git rev-parse --git-dir)/rebase-apply/last")
         rebase_commit=$(cat "$(git rev-parse --git-dir)/rebase-apply/last")
-        git_status="REBASING $current_step/$total_steps"
+        git_status="%F{yellow}REBASING%f $current_step/$total_steps"
       elif [ -f "$(git rev-parse --git-dir)/rebase-apply/applying" ]; then
-        git_status="AM"
+        git_status="%F{yellow}AM%f"
       else
-        git_status="REBASING"
+        git_status="%F{yellow}REBASING%f"
       fi
     else
       if git diff --quiet && git diff --cached --quiet; then
-        git_status="OK"
+        git_status="%F{green}OK%f"
       else
-        git_status="DIRTY"
+        git_status="%F{red}DIRTY%f"
       fi
     fi
 
@@ -40,6 +40,4 @@ git_prompt_info() {
 }
 
 
-PROMPT='%1~$(git_prompt_info) $ '
-
-
+PROMPT='%1~$(git_prompt_info) %# '

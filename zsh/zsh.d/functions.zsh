@@ -1,4 +1,4 @@
-function fuzzy_charge_project() {
+function c() {
   directory="$(find ~/Code -maxdepth 2 -type d | fzf)"
   if [[ $? -ne 0 ]]; then
     return # exit if prev command was canceled
@@ -6,11 +6,11 @@ function fuzzy_charge_project() {
   if [[ ! -z "$directory" ]] && cd $directory;
 }
 
-function grep_kill_tmux_sessions() {
+function tk() {
   tmux ls | sed "s/://"  | awk '{print $1}' | grep $1 | xargs -I{} tmux kill-session -t {}
 }
 
-function fuzzy_start_tmux_session() {
+function tn() {
   directory_path="$(find ~/Code -maxdepth 2 -type d | fzf)"
   if [[ $? -ne 0 ]]; then
     return # exit if prev command was canceled
