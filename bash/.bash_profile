@@ -251,7 +251,13 @@ if [ -f "$HOME/.local/share/bash-completion/completions/deno.bash" ]; then
 	source $HOME/.local/share/bash-completion/completions/deno.bash
 fi
 
+################################################################################
+# Pyenv
+################################################################################
 
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
 
 ################################################################################
 # NON LOGIN INTERACTIVE SHELL
