@@ -32,7 +32,7 @@
   ; Taken from: https://smittie.de/posts/git-mergetool/
   cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
 [status]
-  submodulesummary=true
+  #submodulesummary=true
 [color]
   diff=auto
   status=auto
@@ -48,7 +48,6 @@
   c = commit
   s = status
   d = diff
-  l = "!. ~/.config/git/helpers && git_pretty_log"
-  lo = log --oneline
-  lg = log --oneline --graph
+  l = log --oneline --graph
+  # l = "!. ~/.config/git/helpers && git_pretty_log"
   a = add
