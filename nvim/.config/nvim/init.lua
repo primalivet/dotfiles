@@ -107,6 +107,7 @@ now(function()
       filetypes = { "html", "templ", "htmlangular" }
     },
     jsonls = {},
+    graphql = {},
     gopls = {},
     zls = {},
     lua_ls = { settings = { Lua = {} } },
