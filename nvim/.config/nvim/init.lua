@@ -231,6 +231,11 @@ later(function()
 end)
 
 later(function()
+  add({ source = "David-Kunz/gen.nvim" })
+  require'gen'.setup{}
+end)
+
+later(function()
   add({ source = "zbirenbaum/copilot.lua" })
   require "copilot".setup {
     suggestion = { enable = true, auto_trigger = true,
