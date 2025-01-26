@@ -1,5 +1,5 @@
 font-size = 18
-font-family = Ubunto Mono
+font-family = GitLab Mono
 theme = NvimDark
 cursor-style = block
 shell-integration-features = no-cursor
