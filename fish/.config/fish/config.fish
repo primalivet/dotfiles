@@ -9,6 +9,8 @@ set -x RIPGREP_CONFIG_PATH ~/.ripgreprc
 set -x EDITOR (command -v nvim >/dev/null; and echo nvim; or echo vim)
 set -x VISUAL $EDITOR
 
+set -U fish_greeting
+
 fish_add_path $LOCAL_BIN
 fish_add_path $LOCAL_SRC/neovim/bin
 fish_add_path $BREW_PREFIX/bin
