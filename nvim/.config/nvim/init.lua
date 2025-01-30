@@ -110,6 +110,7 @@ now(function()
     graphql = {},
     gopls = {},
     zls = {},
+    pyright = {},
     lua_ls = { settings = { Lua = {} } },
     denols = {
       root_dir = function(fname)
