@@ -19,7 +19,8 @@
       ];
 
       shellHook = ''
-        source ~/.zsh_private_vce
+        export NPM_CONFIG_USERCONFIG=~/.vce/.npmrc
+        source ~/.vce/.zsh_private
       '';
     };
   };
