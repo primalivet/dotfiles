@@ -5,11 +5,7 @@
 export LANG='en_US.UTF-8'
 export LC_TIME='sv_SE.UTF-8'
 export TERM=screen-256color
-export BREW_PREFIX="/opt/homebrew"
-export N_PREFIX=$HOME/.local/src/n
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
-export LOCAL_SRC=$HOME/.local/src
-export LOCAL_BIN=$HOME/.local/bin
 export KEYTIMEOUT=1 # Reduce key timeout to increase vi bindings responsiveness
 
 if type nvim &> /dev/null; 
@@ -22,13 +18,7 @@ export VISUAL=$EDITOR
 # PATH
 ################################################################################
 
-export PATH=$BREW_PREFIX/bin/:$PATH
-export PATH=$HOME/.docker/bin:$PATH
-export PATH=$HOME/go/bin:$PATH
-export PATH=$LOCAL_BIN:$PATH
-export PATH=$LOCAL_SRC/neovim/bin:$PATH
-export PATH=$N_PREFIX/bin:$PATH
-export PATH=$PATH:/Applications/Zed.app/Contents/MacOS
+export PATH="/opt/homebrew/bin:$PATH"
 
 ################################################################################
 # ZSH VARIABLES https://zsh.sourceforge.io/Doc/Release/Parameters.html
@@ -58,14 +48,6 @@ unsetopt HIST_VERIFY # Execute commands using history (e.g.: using !$) immediate
 # ZSH COMPLETION
 ################################################################################
 
-# Add completions installed through Homebrew packages
-# See: https://docs.brew.sh/Shell-Completion
-if type brew &>/dev/null; then
-  FPATH="$BREW_PREFIX/share/zsh/site-functions:${FPATH}"
-  autoload -Uz compinit
-  compinit
-fi
-
 # COMPLETION (the hyphen makes the "." command follow symlinks)
 [[ -d $HOME/zsh.d ]] && source $HOME/zsh.d/completion_*(-.)
 
@@ -86,45 +68,8 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive pat
 zstyle ':completion:*' menu select # Allow to select in completion menu
 
 ################################################################################
-# KEY BINDINGS
-################################################################################
-
-bindkey -v # Use vi keybindings
-
-bindkey '^P' history-beginning-search-backward
-bindkey '^N' history-beginning-search-forward
-
-bindkey '^[[Z' reverse-menu-complete # Reverse through completion with Shift-Tab
-bindkey '^?' backward-delete-char # Backspace as expected in Emacs
-
-# Open line in Vim by pressing 'v' in Command-Mode
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
-
-# bindkey -v # Use vi keybindings
-#
-# bindkey '^R' history-incremental-search-backward
-# bindkey '^S' history-incremental-search-forward
-#
-# bindkey '^P' history-search-backward
-# bindkey '^N' history-search-forward
-#
-# bindkey '^Y' accept-search
-#
-#
-# if [ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
-#   bindkey '^y' autosuggest-accept
-# fi
-
-
-################################################################################
 # SUPPORT
 ################################################################################
-
-# AUTOSUGGESTION
-# [[ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && \
-#   source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # FZF
 if type fzf &> /dev/null; then
@@ -137,16 +82,6 @@ fi
 
 # DIRENV
 eval "$(direnv hook zsh)"
-
-# PYENV
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
-
-# DENO
-[ -f "$HOME/.deno/env" ] && source $HOME/.deno/env
-[ -f "$HOME/.local/share/bash-completion/completions/deno.zsh" ] && \
-	source $HOME/.local/share/bash-completion/completions/deno.zsh
 
 ################################################################################
 # ALIASES

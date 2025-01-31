@@ -30,6 +30,35 @@
           vscode-langservers-extracted
         ];
 
+      homebrew = {
+          enable = true;
+          onActivation.cleanup = "zap";
+          casks = [
+            "rectangle"
+            "ghostty@tip"
+          ];
+      };
+
+      security.pam.enableSudoTouchIdAuth = true;
+
+      system.defaults = {
+          dock = {
+            autohide = true;
+            show-recents = false;
+          };
+
+          screencapture.location = "${builtins.getEnv ("HOME")}/Documents/Screenshots";
+
+          finder = {
+            AppleShowAllExtensions = true;
+            _FXShowPosixPathInTitle = true;
+          };
+
+          NSGlobalDomain._HIHideMenuBar = true;
+
+          hitoolbox.AppleFnUsageType = "Change Input Source";
+      };
+
       programs.zsh.enable = true; 
 
       # Necessary for using flakes on this system.
