@@ -1,24 +1,7 @@
 inputs@{ pkgs, ... }: {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages =
-    with pkgs; [ 
-      ripgrep
-      fd
-      stow
-      vim
-      curl
-      direnv
-      fzf
-      git
-      jq
-      lua-language-server
-      inputs.neovim-nightly-overlay.packages.aarch64-darwin.default
-      nodejs_23
-      tree
-      typescript-language-server
-      vscode-langservers-extracted
-    ];
+  environment.systemPackages = with pkgs; [];
 
   homebrew = {
     enable = true;
