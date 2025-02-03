@@ -12,9 +12,7 @@
 
   outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, neovim-nightly-overlay, ... }:
   let
-    host = "papabear";
     user = "gustaf";
-    userPath = "/Users/${user}";
     system = "aarch64-darwin";
     pkgs = import nixpkgs { 
         inherit system; 
@@ -24,18 +22,16 @@
   {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#papabear
-    darwinConfigurations.${host} = nix-darwin.lib.darwinSystem {
-      inherit system;
+    darwinConfigurations.macbook-pro = nix-darwin.lib.darwinSystem {
       modules = [ 
         (import ./modules/darwin { 
-          inherit pkgs neovim-nightly-overlay;
+          inherit pkgs neovim-nightly-overlay user;
         }) 
         home-manager.darwinModules.home-manager
         {
-          users.users.${user}.home = userPath;
           home-manager.useGlobalPkgs = true;           
           home-manager.useUserPackages = true;
-          home-manager.users.gustaf = import ./modules/home-manager;
+          home-manager.users.${user} = import ./modules/home-manager;
           home-manager.extraSpecialArgs = { inherit inputs; };
         }
       ];
