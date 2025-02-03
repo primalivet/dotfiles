@@ -11,7 +11,13 @@
   vce = pkgs.mkShell {
     buildInputs = with pkgs; [ 
       kubectl
+      kubelogin
       nodejs_22
+      (azure-cli.withExtensions [ 
+        azure-cli.extensions.azure-devops 
+        azure-cli-extensions.aks-preview 
+      ])
+      postgresql
     ] ++ [
         (pkgs.writeShellScriptBin "vsu" ''npx @volvo/vce-service-util@latest $@'')
     ];
