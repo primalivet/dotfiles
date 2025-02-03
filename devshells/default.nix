@@ -12,6 +12,8 @@
     buildInputs = with pkgs; [ 
       kubectl
       nodejs_22
+    ] ++ [
+        (pkgs.writeShellScriptBin "vsu" ''npx @volvo/vce-service-util@latest $@'')
     ];
 
     shellHook = ''
