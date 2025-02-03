@@ -18,18 +18,18 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.laststatus = 1
 vim.opt.smartindent = true
-vim.opt.completeopt = "menuone,popup,noinsert"
+vim.opt.completeopt = "menuone,popup,fuzzy,noinsert"
 
 -- Autocommands
 --------------------------------------------------------------------------------
 
 local group = vim.api.nvim_create_augroup("USER", {})
 
--- vim.api.nvim_create_autocmd({ "TextYankPost" }, {
---   group = group,
---   pattern = "*",
---   callback = function() vim.hl.on_yank() end
--- })
+vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+  group = group,
+  pattern = "*",
+  callback = function() vim.hl.on_yank() end
+})
 
 vim.api.nvim_create_autocmd("TermOpen", {
   group = group,
