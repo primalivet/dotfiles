@@ -96,6 +96,12 @@ alias ~="cd $HOME"
 alias ta='tmux attach'
 alias tl='tmux ls'
 
+source "/nix/store/$(ls --color=never /nix/store | grep zsh-autosuggestions | grep -v .drv)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" || \
+  echo "zsh-autosuggestions not found in nix store - have you installed it?"
+source "/nix/store/$(ls --color=never /nix/store | grep zsh-syntax-highlighting | grep -v .drv)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" || \
+  echo "zsh-syntax-highlighting not found in nix store - have you installed it?"
+
+
 ################################################################################
 # PROMPT
 ################################################################################
