@@ -1,4 +1,4 @@
-inputs@{ pkgs, user, ... }: {
+user: { pkgs, ... }: {
 
   users.users.${user} =  {
     home = "/Users/${user}";
@@ -7,8 +7,6 @@ inputs@{ pkgs, user, ... }: {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    inputs.neovim-nightly-overlay.packages.aarch64-darwin.default 
-    ripgrep
     curl
     direnv
     fd
@@ -16,7 +14,9 @@ inputs@{ pkgs, user, ... }: {
     git
     jq
     lua-language-server
+    neovim
     nodejs_23
+    ripgrep
     stow
     tree
     typescript-language-server
@@ -63,7 +63,10 @@ inputs@{ pkgs, user, ... }: {
       show-recents = false;
     };
 
-    screencapture.location = "${builtins.getEnv ("HOME")}/Documents/Screenshots";
+    # Probably need to elevate permissions to set this has mac has "protection"
+    # for my self into ~/Documents, ~/Downloads etc.
+    # screencapture.location = "${builtins.getEnv ("HOME")}/Documents/Screenshots";
+    screencapture.location = "~/Screenshots";
 
     finder = {
       AppleShowAllExtensions = true;

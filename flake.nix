@@ -8,23 +8,26 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, neovim-nightly-overlay, ... }:
+  outputs = inputs@{ self, nixpkgs, nix-darwin, ... }:
   let
     user = "gustaf";
     system = "aarch64-darwin";
+
     pkgs = import nixpkgs { 
         inherit system; 
         config.allowUnfree = true; 
+        overlays = [
+          inputs.neovim-nightly-overlay.overlays.default
+        ];
     };
   in
   {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#papabear
     darwinConfigurations.macbook-pro = nix-darwin.lib.darwinSystem {
+      inherit pkgs;
       modules = [ 
-        (import ./modules/darwin { 
-          inherit pkgs neovim-nightly-overlay user;
-        }) 
+        (import ./modules/darwin user) 
       ];
     };
 
