@@ -16,6 +16,7 @@ user: { pkgs, ... }: {
     lua-language-server
     neovim
     nodejs_23
+    ollama
     ripgrep
     stow
     tree
