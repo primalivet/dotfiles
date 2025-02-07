@@ -1,32 +1,5 @@
 user: { pkgs, ... }: {
 
-  users.users.${user} =  {
-    home = "/Users/${user}";
-  };
-
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    curl
-    direnv
-    fd
-    fzf
-    git
-    jq
-    lua-language-server
-    neovim
-    nodejs_23
-    ollama
-    ripgrep
-    stow
-    tree
-    typescript-language-server
-    vim
-    vscode-langservers-extracted
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-  ];
-
   # There seem to have been issues with controling the users shell, these
   # issues are resolved below but require users.knownUsers to be set and
   # include the current ${user}. Like so:
@@ -41,11 +14,26 @@ user: { pkgs, ... }: {
   # https://github.com/LnL7/nix-darwin/issues/1237
   # https://github.com/LnL7/nix-darwin/pull/1120
 
+  users = {
+    knownUsers = [ "${user}" ];
+    users.${user} =  {
+      uid = 501; # https://github.com/LnL7/nix-darwin/issues/811#issuecomment-2227337970
+      home = "/Users/${user}";
+      shell = pkgs.zsh;
+    };
+  };
+
+  # List packages installed in system profile. To search by name, run:
+  # $ nix-env -qaP | grep wget
+  environment.systemPackages = with pkgs; [ ];
+
   environment.shells = with pkgs; [
     bashInteractive
     zsh
     fish
   ];
+
+  programs.zsh.enable = true;
 
   homebrew = {
     enable = true;

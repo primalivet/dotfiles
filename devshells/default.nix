@@ -1,5 +1,6 @@
 { pkgs }: {
   hb = pkgs.mkShell {
+    name = "HB";
     buildInputs = with pkgs; [];
 
     shellHook = ''
@@ -9,6 +10,7 @@
   };
 
   vce = pkgs.mkShell {
+    name = "VCE";
     buildInputs = with pkgs; [ 
       kubectl
       kubelogin
