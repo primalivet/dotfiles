@@ -11,24 +11,13 @@ $ git clone git@github.com:primalivet/dotfiles.git
 
 After cloning the repository you need to install Nix and Homebrew (Nix requires Homebrew to be installed separately but will manage the packages installed by Homebrew). To install Nix and Nix Darwin follow the `flake.nix` track in the [nix-darwin](https://github.com/LnL7/nix-darwin) project `README.md`.
 
-When installed make sure you replace the hostname in the `flake.nix` in this repository and then run `darwin-rebuilt --flake .`, also while in the root of this repository.
+When installed make sure you replace the hostname and the username in the `flake.nix` in this repository and then run `darwin-rebuild switch --flake .#[THE HOST NAME YOU PROVIDED]`, while in the root of this repository.
 
 ## Symlink configurations
 
-After that you'll need to have GNU Stow installed. It's an application that
-manages symlinks.
+After making a new "generation" with nix (that what we call the output of a "switch") you'll have a program called GNU Stow (`stow`) on you system, it is a good program to handle symbolic links.
 
-When the flake is rebuilt and a new Nix __switch__ is active you should have the `stow` (GNU Stow) program installed, among others. We'll use this `stow` program to symlink each applications configuration files. This is required as I don't use Home Manager in this repository (yet).
-
-So with the example commands below you'll end up with symlinks from your `$HOME` directory into this repository, while also keeping directory structure (important).
-
-```
-# switch <dir> for the directory of the program configs your want to install
-$ stow --no-folding <dir> -t ~
-
-# this is how you would install the config for neovim for example.
-$ stow --no-folding nvim -t ~
-```
+So to apply all the configuration for programs like zsh, git, neovim etc you can create symlinks in your `$HOME` directory to this repository, __note__ that you should change the name or `users/gustaf` to `users/yourname`. Then run `stow users --no-folding --target ~`.
 
 ## A note on `--no-folding`
 
