@@ -1,7 +1,10 @@
 { pkgs }: {
   hb = pkgs.mkShell {
     name = "HB";
-    buildInputs = with pkgs; [];
+    buildInputs = with pkgs; [
+      typescript-language-server
+      vscode-langservers-extracted
+    ];
 
     shellHook = ''
         export NPM_CONFIG_USERCONFIG=~/.hb/.npmrc
@@ -20,6 +23,8 @@
         azure-cli-extensions.aks-preview 
       ])
       postgresql
+      typescript-language-server
+      vscode-langservers-extracted
     ] ++ [
         (pkgs.writeShellScriptBin "vsu" ''npx @volvo/vce-service-util@latest $@'')
     ];

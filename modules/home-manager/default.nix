@@ -12,9 +12,7 @@
     ripgrep
     stow
     tree
-    typescript-language-server
     vim
-    vscode-langservers-extracted
   ];
 
   programs.zsh = {
