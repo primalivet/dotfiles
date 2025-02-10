@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs, ... }:
 
 {
@@ -39,20 +35,11 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.displayManager= {
-    gdm.enable = true;
-    # sessionCommands = ''
-    #   ${pkgs.xorg.xrandr}/bin/xrandr -s '3840x2160'
-    # '';
-  };
+  services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   services.spice-vdagentd.enable = true;
   services.spice-autorandr.enable = true;
-
-
-  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -74,7 +61,6 @@
 
   programs.zsh.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.gustaf = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
@@ -93,6 +79,7 @@
     git
     wget
     firefox
+    brave
     tree
     neovim
   ];
