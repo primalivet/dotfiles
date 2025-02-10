@@ -39,7 +39,7 @@
       ll = "ls -al";
     };
     initExtra = ''
-      export PATH="$HOME/.local/bin:$PATH"
+      [ -f ~/zsh.d/functions.zsh ] && source ~/zsh.d/functions.zsh
       [ -f ~/.zsh_private ] && source ~/.zsh_private
     '';
   };
@@ -97,9 +97,5 @@
     enable = true;
     defaultCommand = "rg --files --hidden --glob '!.git'";
     defaultOptions = [ "--height 100%" "--reverse" "--color=bw" ];
-  };
-
-  programs.zoxide = {
-    enable = true;
   };
 }
