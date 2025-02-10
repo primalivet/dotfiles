@@ -1,4 +1,4 @@
-user: { pkgs, ... }: {
+{ pkgs, ... }: {
 
   # There seem to have been issues with controling the users shell, these
   # issues are resolved below but require users.knownUsers to be set and
@@ -15,10 +15,10 @@ user: { pkgs, ... }: {
   # https://github.com/LnL7/nix-darwin/pull/1120
 
   users = {
-    knownUsers = [ "${user}" ];
-    users.${user} =  {
+    knownUsers = [ "gustaf" ];
+    users.gustaf =  {
       uid = 501; # https://github.com/LnL7/nix-darwin/issues/811#issuecomment-2227337970
-      home = "/Users/${user}";
+      home = "/Users/gustaf";
       shell = pkgs.zsh;
     };
   };

@@ -1,5 +1,5 @@
 {
-  description = "Configuration";
+  description = "System configuration flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -10,35 +10,54 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, ... }:
-  let
-    user = "gustaf";
-    system = "aarch64-darwin";
+  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, ... }: let
+    mkDevShell = system: 
+      let 
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+          overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
+        };
+      in import ./devshells { inherit pkgs; };
 
-    pkgs = import nixpkgs { 
-        inherit system; 
-        config.allowUnfree = true; 
-        overlays = [
-          inputs.neovim-nightly-overlay.overlays.default
-        ];
-    };
+    mkSystem = name: { system, user, darwin ? false }: 
+      let 
+        machineConfiguration = ./modules/${name}/configuration.nix;
+        systemFunc = if darwin 
+          then inputs.nix-darwin.lib.darwinSystem 
+        else nixpkgs.lib.nixosSystem;
+      in systemFunc {
+          inherit system;
+          modules = [
+            { nixpkgs.config.allowUnfree = true; }
+            { nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ]; }
+            machineConfiguration
+            (if darwin
+              then home-manager.darwinModules.home-manager
+            else home-manager.nixosModules.home-manager)
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${user} = import ./users/${user}/home.nix;
+            }
+          ];
+        };
   in
   {
-    darwinConfigurations.macbook-pro = nix-darwin.lib.darwinSystem {
-      inherit pkgs;
-      modules = [ 
-        (import ./modules/darwin user) 
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.${user} = import ./modules/home-manager;
-        }
-      ];
+    darwinConfigurations.macbook-pro = mkSystem "macbook-pro" {
+            system = "aarch64-darwin";
+            user = "gustaf";
+            darwin = true;
     };
 
-    devShells.${system} = import ./devshells { 
-        inherit pkgs; 
+    nixosConfigurations.vm-aarch64-utm = mkSystem "vm-aarch64-utm" {
+            system = "aarch64-linux";
+            user = "gustaf";
+    };
+
+    devShells = {
+      aarch64-darwin = mkDevShell "aarch64-darwin";
+      aarch64-linux = mkDevShell "aarch64-linux";
     };
   };
 }
