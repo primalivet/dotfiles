@@ -102,4 +102,12 @@
   programs.zoxide = {
     enable = true;
   };
+
+  xdg.configFile = {
+    nvim.source = ./.config/nvim;
+  };
+
+  home.file = {
+    ".local/bin/c".source = ./.local/bin/c;
+  };
 }
