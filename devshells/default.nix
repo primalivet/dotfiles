@@ -25,6 +25,7 @@
       postgresql
       typescript-language-server
       vscode-langservers-extracted
+      tenv
     ] ++ [
         (pkgs.writeShellScriptBin "vsu" ''npx @volvo/vce-service-util@latest $@'')
     ];
