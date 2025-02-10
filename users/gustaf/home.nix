@@ -105,6 +105,7 @@
 
   xdg.configFile = {
     nvim.source = ./.config/nvim;
+    ghostty.source = ./.config/ghostty;
   };
 
   home.file = {
