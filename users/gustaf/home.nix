@@ -39,6 +39,7 @@
       ll = "ls -al";
     };
     initExtra = ''
+      export C_DIRS="$HOME/Code:2"
       export PATH="$HOME/.local/bin:$PATH"
       [ -f ~/.zsh_private ] && source ~/.zsh_private
     '';
