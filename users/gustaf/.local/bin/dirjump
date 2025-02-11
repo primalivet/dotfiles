@@ -1,0 +1,36 @@
+#!/bin/bash
+# If called with init, output shell integration
+if [ "$1" = "init" ]; then
+    cat << 'INIT'
+c() {
+    target=$(\command dirjump --find) && [ -n "$target" ] && cd -- "${target}"
+}
+INIT
+    exit
+fi
+
+# If called with --find, do the directory finding
+if [ "$1" = "--find" ]; then
+    if [ -z "$DIRJUMP_DIRS" ]; then
+        DIRJUMP_DIRS="$PWD:1"
+    fi
+
+    cmd=""
+    IFS=',' read -ra PAIRS <<< "$DIRJUMP_DIRS"
+    for pair in "${PAIRS[@]}"; do
+        IFS=':' read -r dir depth <<< "$pair"
+        dir="${dir// /}"
+        dir="${dir/#\~/$HOME}"
+        if [ -z "$cmd" ]; then
+            cmd="find $dir -maxdepth $depth -type d"
+        else
+            cmd="$cmd; find $dir -maxdepth $depth -type d"
+        fi
+    done
+
+    eval "$cmd" | sort -u | fzf
+    exit
+fi
+
+# If called directly, show usage
+echo "Usage: eval \"\$(dirjump init)\""

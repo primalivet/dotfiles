@@ -36,8 +36,9 @@
       ll = "ls -al";
     };
     initExtra = ''
-      export C_DIRS="$HOME/Code:2"
       export PATH="$HOME/.local/bin:$PATH"
+      export DIRJUMP_DIRS="$HOME/Code:2"
+      eval $(dirjump init)
       [ -f ~/.zsh_private ] && source ~/.zsh_private
     '';
   };
