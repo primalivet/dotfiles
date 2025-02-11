@@ -9,7 +9,6 @@
     neovim
     nodejs_23
     ollama
-    ripgrep
     stow
     tree
     vim
@@ -102,6 +101,11 @@
 
   programs.zoxide = {
     enable = true;
+  };
+
+  programs.ripgrep = {
+    enable = true;
+    arguments = [ "--hidden" "--glob=!.git/*" "--smart-case" ];
   };
 
   xdg.configFile = {
