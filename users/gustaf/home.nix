@@ -114,6 +114,6 @@
   };
 
   home.file = {
-    ".local/bin/c".source = ./.local/bin/c;
+    ".local/bin".source = ./.local/bin;
   };
 }
