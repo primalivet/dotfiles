@@ -77,13 +77,13 @@
     enable = true;
     settings = {
       add_newline = false;
-      format = "$directory$git_branch$git_status$git_state$character";
+      format = "$directory$git_branch$git_state$git_status$character";
       right_format = "$nix_shell";
       directory = { format = "$path "; };
       character = { success_symbol = "%"; error_symbol = "%(bold red)"; };
-      git_branch = { format = "[$branch(:$remote_branch)]($style) "; };
-      git_state = { format = "[$state( $progress_current/$progress_total)]($style) "; };
-      git_status = { style = ""; };
+      git_branch = { format = "$branch(:$remote_branch) "; };
+      git_state = { format = "[$state($progress_current/$progress_total)]($style) "; };
+      git_status = { format = "([$all_status$ahead_behind]($style) )"; };
       nix_shell = { format = "$symbol$name $state "; symbol = "❄️"; };
     };
   };
