@@ -3,8 +3,6 @@
 
   home.packages = with pkgs; [
     curl
-    fd
-    jq
     lua-language-server
     neovim
     nodejs_23
@@ -74,10 +72,6 @@
     };
   };
 
-  programs.direnv = {
-    enable = true;
-  };
-
   programs.starship = {
     enable = true;
     settings = {
@@ -99,9 +93,13 @@
     defaultOptions = [ "--height 100%" "--reverse" "--color=bw" ];
   };
 
-  programs.zoxide = {
-    enable = true;
-  };
+  programs.fd.enable = true;
+
+  programs.jq.enable = true;
+
+  programs.direnv.enable = true;
+
+  programs.zoxide.enable = true;
 
   programs.ripgrep = {
     enable = true;
