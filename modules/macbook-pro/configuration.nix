@@ -43,6 +43,7 @@
     casks = [
       "rectangle"
       "ghostty@tip"
+      "firefox"
     ];
   };
 
