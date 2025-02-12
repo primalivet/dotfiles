@@ -26,6 +26,8 @@
       typescript-language-server
       vscode-langservers-extracted
       tenv
+      podman
+      podman-compose
     ] ++ [
         (pkgs.writeShellScriptBin "vsu" ''npx @volvo/vce-service-util@latest $@'')
     ];
