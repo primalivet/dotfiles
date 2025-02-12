@@ -44,6 +44,7 @@
       "rectangle"
       "ghostty@tip"
       "firefox"
+      "zed"
     ];
   };
 
