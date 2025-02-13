@@ -4,6 +4,7 @@
     buildInputs = with pkgs; [
       typescript-language-server
       vscode-langservers-extracted
+      python3
     ];
 
     shellHook = ''
