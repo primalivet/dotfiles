@@ -32,7 +32,7 @@
     };
     shellAliases = {
       vi = "nvim";
-      ll = "ls --color --group-directories-first --time-style=long-iso --human-readable -p";
+      ll = "ls -l --color --group-directories-first --time-style=long-iso --human-readable -p";
     };
     initExtra = ''
       export PATH="$HOME/.local/bin:$PATH"
