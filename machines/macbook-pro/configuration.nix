@@ -1,27 +1,5 @@
 { pkgs, ... }: {
 
-  # There seem to have been issues with controling the users shell, these
-  # issues are resolved below but require users.knownUsers to be set and
-  # include the current ${user}. Like so:
-  #
-  # users.knownUsers = [ "${user}" ];
-  # 
-  # The other way to do this is to change shell with assuming zsh and that the
-  # nix one is the first in $PATH. chsh -s $(which zsh) 
-  #
-  # Issues and pull request 
-  # https://github.com/LnL7/nix-darwin/issues/328
-  # https://github.com/LnL7/nix-darwin/issues/1237
-  # https://github.com/LnL7/nix-darwin/pull/1120
-
-  users = {
-    knownUsers = [ "gustaf" ];
-    users.gustaf =  {
-      uid = 501; # https://github.com/LnL7/nix-darwin/issues/811#issuecomment-2227337970
-      home = "/Users/gustaf";
-      shell = pkgs.zsh;
-    };
-  };
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -34,19 +12,6 @@
   ];
 
   programs.zsh.enable = true;
-
-  homebrew = {
-    enable = true;
-    onActivation.cleanup = "zap";
-    onActivation.autoUpdate = true;
-    onActivation.upgrade = true;
-    casks = [
-      "rectangle"
-      "ghostty@tip"
-      "firefox"
-      "zed"
-    ];
-  };
 
   security.pam.enableSudoTouchIdAuth = true;
 

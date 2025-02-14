@@ -11,18 +11,18 @@
   };
 
   outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, ... }: let
-    mkDevShell = system: 
+    mkShell = system: 
       let 
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
           overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
         };
-      in import ./devshells { inherit pkgs; };
+      in import ./shells { inherit pkgs; };
 
     mkSystem = name: { system, user, darwin ? false }: 
       let 
-        machineConfiguration = ./modules/${name}/configuration.nix;
+        machineConfiguration = ./machines/${name}/configuration.nix;
         systemFunc = if darwin 
           then inputs.nix-darwin.lib.darwinSystem 
         else nixpkgs.lib.nixosSystem;
@@ -32,6 +32,7 @@
             { nixpkgs.config.allowUnfree = true; }
             { nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ]; }
             machineConfiguration
+            (if darwin then ./users/${user}/darwin.nix else ./users/${user}/nixos.nix)
             (if darwin
               then home-manager.darwinModules.home-manager
             else home-manager.nixosModules.home-manager)
@@ -39,7 +40,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup";
-              home-manager.users.${user} = import ./users/${user}/home.nix;
+              home-manager.users.${user} = import ./users/${user}/home-manager.nix;
             }
           ];
         };
@@ -57,8 +58,8 @@
     };
 
     devShells = {
-      aarch64-darwin = mkDevShell "aarch64-darwin";
-      aarch64-linux = mkDevShell "aarch64-linux";
+      aarch64-darwin = mkShell "aarch64-darwin";
+      aarch64-linux = mkShell "aarch64-linux";
     };
   };
 }
