@@ -41,6 +41,7 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup";
               home-manager.users.${user} = import ./users/${user}/home-manager.nix;
+              home-manager.extraSpecialArgs = { darwin = darwin; };
             }
           ];
         };

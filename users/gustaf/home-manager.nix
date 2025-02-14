@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, darwin, ... }: {
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
@@ -106,6 +106,8 @@
     enable = true;
     arguments = [ "--hidden" "--glob=!.git/*" "--smart-case" ];
   };
+
+  programs.gnome-shell.enable = !darwin;
 
   xdg.configFile = {
     nvim.source = ./.config/nvim;
