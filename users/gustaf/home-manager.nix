@@ -47,12 +47,13 @@
     userName = "Gustaf Holm";
     userEmail = "gustafholm1@gmail.com";
     aliases = {
-      co = "checkout";
+      a = "add";
       c = "commit";
-      s = "status";
+      co = "checkout";
       d = "diff";
       l = "log --oneline --graph";
-      a = "add";
+      s = "status";
+      sw = "switch";
     };
     includes = [
       { condition = "gitdir:~/Code/HB/"; path = "~/.hb/gitconfig"; }
