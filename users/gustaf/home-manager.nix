@@ -10,6 +10,7 @@
     stow
     tree
     vim
+    inetutils
   ];
 
   programs.zsh = {
