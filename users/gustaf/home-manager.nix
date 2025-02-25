@@ -85,7 +85,7 @@
       git_branch = { format = "$branch(:$remote_branch) "; };
       git_state = { format = "[$state($progress_current/$progress_total)]($style) "; };
       git_status = { format = "([$all_status$ahead_behind]($style) )"; };
-      nix_shell = { format = "$symbol$name $state "; symbol = "❄️"; };
+      nix_shell = { format = "$state $name"; };
     };
   };
 
