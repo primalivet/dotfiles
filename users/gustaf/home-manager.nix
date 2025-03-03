@@ -59,7 +59,7 @@
     };
     includes = [
       { condition = "gitdir:~/Code/HB/"; path = "~/.hb/gitconfig"; }
-      { condition = "gitdir:~/Code/VCE/";  path = "~/.vce/gitconfig"; }
+      { condition = "gitdir:~/Code/VCE/"; path = "~/.vce/gitconfig"; }
     ];
 
     extraConfig = {

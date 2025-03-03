@@ -10,23 +10,27 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, ... }: let
-    mkShell = system: 
-      let 
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-          overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
-        };
-      in import ./shells { inherit pkgs; };
+  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, ... }:
+    let
+      mkShell = system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+            overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
+          };
+        in
+        import ./shells { inherit pkgs; };
 
-    mkSystem = name: { system, user, darwin ? false }: 
-      let 
-        machineConfiguration = ./machines/${name}/configuration.nix;
-        systemFunc = if darwin 
-          then inputs.nix-darwin.lib.darwinSystem 
-        else nixpkgs.lib.nixosSystem;
-      in systemFunc {
+      mkSystem = name: { system, user, darwin ? false }:
+        let
+          machineConfiguration = ./machines/${name}/configuration.nix;
+          systemFunc =
+            if darwin
+            then inputs.nix-darwin.lib.darwinSystem
+            else nixpkgs.lib.nixosSystem;
+        in
+        systemFunc {
           inherit system;
           modules = [
             { nixpkgs.config.allowUnfree = true; }
@@ -34,7 +38,7 @@
             machineConfiguration
             (if darwin then ./users/${user}/darwin.nix else ./users/${user}/nixos.nix)
             (if darwin
-              then home-manager.darwinModules.home-manager
+            then home-manager.darwinModules.home-manager
             else home-manager.nixosModules.home-manager)
             {
               home-manager.useGlobalPkgs = true;
@@ -45,22 +49,26 @@
             }
           ];
         };
-  in
-  {
-    darwinConfigurations.macbook-pro = mkSystem "macbook-pro" {
-            system = "aarch64-darwin";
-            user = "gustaf";
-            darwin = true;
-    };
+    in
+    {
+      formatter = {
+        aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
+      };
 
-    nixosConfigurations.vm-aarch64-utm = mkSystem "vm-aarch64-utm" {
-            system = "aarch64-linux";
-            user = "gustaf";
-    };
+      darwinConfigurations.macbook-pro = mkSystem "macbook-pro" {
+        system = "aarch64-darwin";
+        user = "gustaf";
+        darwin = true;
+      };
 
-    devShells = {
-      aarch64-darwin = mkShell "aarch64-darwin";
-      aarch64-linux = mkShell "aarch64-linux";
+      nixosConfigurations.vm-aarch64-utm = mkSystem "vm-aarch64-utm" {
+        system = "aarch64-linux";
+        user = "gustaf";
+      };
+
+      devShells = {
+        aarch64-darwin = mkShell "aarch64-darwin";
+        aarch64-linux = mkShell "aarch64-linux";
+      };
     };
-  };
 }

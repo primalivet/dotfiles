@@ -1,4 +1,4 @@
-{ pkgs, ... }: 
+{ pkgs, ... }:
 
 {
   # There seem to have been issues with controling the users shell, these
@@ -21,8 +21,8 @@
 
   users = {
     knownUsers = [ "gustaf" ];
-    users.gustaf =  {
-      uid = 501; 
+    users.gustaf = {
+      uid = 501;
       home = "/Users/gustaf";
       shell = pkgs.zsh;
     };
