@@ -11,6 +11,7 @@
     tree
     vim
     inetutils
+    claude-code
   ];
 
   programs.zsh = {
