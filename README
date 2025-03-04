@@ -1,0 +1,14 @@
+My nix configuration. It relies on nix flakes for setting up my machines, users
+and development environments.
+
+DARWIN
+
+Nix Darwin for darwin systems (flake track and derterminate systems installer)
+https://github.com/LnL7/nix-darwin
+
+LINUX
+
+NixOS for Linux systems (minimal ISO image)
+https://nixos.org/download/#nix-install-linux
+
+See the Makefile for commands.
