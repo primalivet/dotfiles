@@ -5,3 +5,9 @@ switch:
 
 check:
 	darwin-rebuild check --flake .#$(FLAKE)
+
+update:
+	nix flake update
+
+format:
+	nix fmt
