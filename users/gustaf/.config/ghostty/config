@@ -1,5 +1,6 @@
 font-size = 16
 font-family = GitLab Mono
+font-thicken = true
 theme = NvimDark
 cursor-style = block
 shell-integration-features = no-cursor
@@ -9,6 +10,7 @@ window-padding-balance = true
 window-save-state = always
 macos-titlebar-proxy-icon = hidden
 auto-update-channel = tip
+# custom-shader = ~/.config/ghostty/shaders/crt-shader-with-chromatic-aberration-glow-scanlines-dot-matrix.glsl
 
 # Sync the font size for all surfaces
 keybind = all:super+equal=increase_font_size:1
