@@ -26,6 +26,7 @@
       postgresql
       typescript-language-server
       vscode-langservers-extracted
+      nodePackages."@prisma/language-server"
       tenv
       podman
       podman-compose
