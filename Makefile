@@ -1,9 +1,7 @@
-FLAKE ?= macbook-pro
-
-switch:
+switch-macbook-pro:
 	darwin-rebuild switch --flake .#$(FLAKE)
 
-check:
+check-macbook-pro:
 	darwin-rebuild check --flake .#$(FLAKE)
 
 update:
