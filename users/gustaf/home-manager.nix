@@ -56,6 +56,7 @@
       l = "log --oneline --graph";
       s = "status";
       sw = "switch";
+      cop = "!fuzzy_co() { git checkout $(git branch | fzf); }; fuzzy_co";
     };
     includes = [
       { condition = "gitdir:~/Code/HB/"; path = "~/.hb/gitconfig"; }
