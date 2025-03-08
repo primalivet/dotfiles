@@ -36,7 +36,8 @@
     casks = [
       "rectangle"
       "ghostty@tip"
-      "firefox"
+      "google-drive"
+      "google-chrome"
       "zed"
     ];
   };
