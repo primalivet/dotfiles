@@ -39,6 +39,7 @@
       "google-drive"
       "google-chrome"
       "zed"
+      "httpie"
     ];
   };
 }
