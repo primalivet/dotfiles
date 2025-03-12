@@ -39,7 +39,8 @@
       "google-drive"
       "google-chrome"
       "zed"
-      "httpie"
+      "cursor"
+      "bruno"
     ];
   };
 }
