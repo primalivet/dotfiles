@@ -205,28 +205,23 @@ now(function()
   vim.keymap.set("n", "[h", require 'gitsigns'.prev_hunk, { desc = "Go to previous git hunk" })
 end)
 
+-- now(function()
+--   add({
+--     source = "MeanderingProgrammer/render-markdown.nvim",
+--     depends = {"nvim-treesitter/nvim-treesitter"}
+--   })
+--   require"render-markdown".setup {
+--     heading = {
+--
+--     }
+--   }
+-- end)
+
 -- AI
 --------------------------------------------------------------------------------
 
 later(function()
   add({ source = "zbirenbaum/copilot.lua" })
-
-  add({
-    source = "yetone/avante.nvim",
-    monitor = "main",
-    depends = {
-      "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "echasnovski/mini.icons",
-      -- Optional
-      "zbirenbaum/copilot.lua",
-      "MeanderingProgrammer/render-markdown.nvim"
-    },
-    hooks = { post_checkout = function() vim.cmd("make") end }
-  })
-
   require "copilot".setup {
     suggestion = { enable = true, auto_trigger = true,
       -- Resembles the default completion keymaps but with Modifier instead of Control
@@ -240,10 +235,27 @@ later(function()
     panel = { enable = false, auto_refresh = true }
   }
 
+  add({
+    source = "yetone/avante.nvim",
+    monitor = "main",
+    depends = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "zbirenbaum/copilot.lua",
+    },
+    hooks = { post_checkout = function() vim.cmd("make") end }
+  })
+
   local model = os.getenv("AVANTE_MODEL") or "claude"
 
   require"avante".setup {
     provider = model,
+    windows = {
+      width = 50,
+      sidebar_header = { enabled = false },
+      edit = { border = "double" },
+    }
   }
 end)
 
@@ -254,10 +266,19 @@ now(function()
   require'mini.surround'.setup{}
 end)
 
+-- Temporary fix for "global" border for floating windows
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+---@diagnostic disable-next-line: duplicate-set-field
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or "double"
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
 -- Diagnositcs config
 vim.diagnostic.config{
   virtual_text = { severity = vim.diagnostic.severity.WARN },
-  float = { border = "shadow", source = true },
+  float = {  source = true },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "●",
@@ -267,6 +288,7 @@ vim.diagnostic.config{
     }
   },
 }
+
 
 -- Adapt theme to terminal foreground/background
 vim.api.nvim_set_hl(0, "DiffAdd", { fg = "#cbf9cb", bg = "#074008" })
