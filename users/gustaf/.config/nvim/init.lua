@@ -16,7 +16,7 @@ vim.opt.undofile = true
 vim.opt.expandtab = true
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
-vim.opt.laststatus = 1
+vim.opt.laststatus = 3
 vim.opt.smartindent = true
 vim.opt.completeopt = "menuone,popup,fuzzy,noinsert"
 
@@ -209,33 +209,24 @@ end)
 --------------------------------------------------------------------------------
 
 later(function()
-  add({
-    source = "olimorris/codecompanion.nvim",
-    depends = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    }
-  })
-  require'codecompanion'.setup {
-    strategies = {
-      inline = {
-        adapter = "copilot",
-        keymaps = {
-          accept_change = { modes = { n = "<leader>ca"}, description = "Accept change" },
-          reject_change = { modes = { n = "<leader>cr"}, description = "Reject change" },
-        }
-      }
-    }
-  }
-end)
-
-later(function()
-  add({ source = "David-Kunz/gen.nvim" })
-  require'gen'.setup{}
-end)
-
-later(function()
   add({ source = "zbirenbaum/copilot.lua" })
+
+  add({
+    source = "yetone/avante.nvim",
+    monitor = "main",
+    depends = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "echasnovski/mini.icons",
+      -- Optional
+      "zbirenbaum/copilot.lua",
+      "MeanderingProgrammer/render-markdown.nvim"
+    },
+    hooks = { post_checkout = function() vim.cmd("make") end }
+  })
+
   require "copilot".setup {
     suggestion = { enable = true, auto_trigger = true,
       -- Resembles the default completion keymaps but with Modifier instead of Control
@@ -247,6 +238,12 @@ later(function()
       }
     },
     panel = { enable = false, auto_refresh = true }
+  }
+
+  local model = os.getenv("AVANTE_MODEL") or "claude"
+
+  require"avante".setup {
+    provider = model,
   }
 end)
 
