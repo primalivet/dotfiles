@@ -205,17 +205,21 @@ now(function()
   vim.keymap.set("n", "[h", require 'gitsigns'.prev_hunk, { desc = "Go to previous git hunk" })
 end)
 
--- now(function()
---   add({
---     source = "MeanderingProgrammer/render-markdown.nvim",
---     depends = {"nvim-treesitter/nvim-treesitter"}
---   })
---   require"render-markdown".setup {
---     heading = {
---
---     }
---   }
--- end)
+now(function()
+  add({
+    source = "MeanderingProgrammer/render-markdown.nvim",
+    depends = {"nvim-treesitter/nvim-treesitter"}
+  })
+  require"render-markdown".setup {
+    file_types = { 'markdown', 'Avante' },
+    overrides = {
+      filetype = {
+        markdown = { sign = { enabled = false } },
+        Avante = { sign = { enabled = false } }
+      }
+    }
+  }
+end)
 
 -- AI
 --------------------------------------------------------------------------------
