@@ -3,7 +3,7 @@ local now, add, later = require 'user'.setup()
 -- Options
 --------------------------------------------------------------------------------
 
-vim.opt.number = false
+vim.opt.number = true
 vim.opt.relativenumber = false
 vim.opt.wrap = false
 vim.opt.signcolumn = "yes"
@@ -58,34 +58,26 @@ vim.keymap.set("n", "<leader>d", vim.diagnostic.setqflist, { desc = "Add buffer 
 vim.keymap.set("n", "<leader>ds", ":Gdiffsplit<CR>", { desc = "Git diff split current file" })
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Easily hit escape in terminal mode" })
 
+-- Misc
+--------------------------------------------------------------------------------
+
+now(function()
+  require'mini.icons'.setup{}
+  require'mini.extra'.setup{}
+  require'mini.surround'.setup{}
+  require'mini.git'.setup{}
+  require'mini.diff'.setup{}
+  vim.keymap.set("n", "ho", MiniDiff.toggle_overlay, { desc = "Toggle diff overlay" })
+end)
+
 -- Syntax
 --------------------------------------------------------------------------------
 
 now(function()
-  add({
-    source = 'nvim-treesitter/nvim-treesitter',
-    -- TODO: Getting error with this dependency, look into it
-    -- depends = { "nvim-treesitter/nvim-treesitter-textobjects" }
-  })
+  add({ source = 'nvim-treesitter/nvim-treesitter' })
   require "nvim-treesitter.configs".setup {
     auto_install = true,
     incremental_selection = { enable = true },
-    textobjects = {
-      select = {
-        enable = true,
-        keymaps = {
-          ["af"] = "@function.outer",
-          ["if"] = "@function.inner",
-          ["ac"] = "@class.outer",
-          ["ic"] = "@class.inner",
-        }
-      },
-      swap = {
-        enable = true,
-        swap_next = { ["<leader>a"] = "@parameter.inner" },
-        swap_previous = { ["<leader>A"] = "@parameter.inner" },
-      }
-    },
     highlight = { enable = true },
     indent = { enable = true }
   }
@@ -157,72 +149,49 @@ end)
 --------------------------------------------------------------------------------
 
 now(function()
-  add({
-    source = "nvim-telescope/telescope.nvim",
-    checkout = "0.1.8",
-    depends = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-ui-select.nvim",
-      {
-        source = "nvim-telescope/telescope-fzf-native.nvim",
-        hooks = {
-          post_install = function(ctx)
-            vim.system({ 'make' }, { cwd = ctx.path })
-          end
+  require'mini.pick'.setup{
+    window = {
+      config = function()
+        return {
+          border = "double", anchor = "SW",
+          height = math.floor(vim.o.lines / 2),
+          width = math.floor(vim.o.columns)
         }
-      }
-    }
-  })
-  local telescope = require 'telescope'
-  local builtin = require 'telescope.builtin'
-  local themes = require 'telescope.themes'
-
-  telescope.setup {
-    defaults = { preview = false },
-    pickers = {
-      builtin = { theme = "ivy" },
-      find_files = { theme = "ivy" },
-      live_grep = { theme = "ivy" }
-    },
-    extensions = { fzf = {}, ['ui-select'] = { themes.get_ivy {} } }
-  }
-  pcall(telescope.load_extension, 'fzf')
-  pcall(telescope.load_extension, 'ui-select')
-
-  vim.keymap.set("n", "<leader>sc", builtin.builtin, { desc = "Find builtin Telescope commands" })
-  vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Find files" })
-  vim.keymap.set("n", "<leader>sl", builtin.live_grep, { desc = "Grep in files" })
-end)
-
--- Git
---------------------------------------------------------------------------------
-
-now(function()
-  add({ source = "tpope/vim-fugitive" })
-  add({ source = "lewis6991/gitsigns.nvim" })
-  require 'gitsigns'.setup {}
-  vim.keymap.set("n", "]h", require 'gitsigns'.next_hunk, { desc = "Go to next git hunk" })
-  vim.keymap.set("n", "[h", require 'gitsigns'.prev_hunk, { desc = "Go to previous git hunk" })
-end)
-
-now(function()
-  add({
-    source = "MeanderingProgrammer/render-markdown.nvim",
-    depends = {"nvim-treesitter/nvim-treesitter"}
-  })
-  require"render-markdown".setup {
-    file_types = { 'markdown', 'Avante' },
-    overrides = {
-      filetype = {
-        markdown = { sign = { enabled = false } },
-        Avante = { sign = { enabled = false } }
-      }
+      end
     }
   }
+  vim.ui.select = MiniPick.ui_select
+  vim.keymap.set("n", "<leader>sc", ":Pick commands<CR>", { desc = "Find commands" })
+  vim.keymap.set("n", "<leader>sf", ":Pick files<CR>", { desc = "Find files" })
+  vim.keymap.set("n", "<leader>sl", ":Pick grep_live<CR>", { desc = "Find live in files" })
+  vim.keymap.set("n", "<leader>sr", ":Pick resume<CR>", { desc = "Find resume" })
+  vim.keymap.set("n", "<leader>sd", ":Pick diagnostic<CR>", { desc = "Find diagnostic" })
 end)
 
 -- AI
 --------------------------------------------------------------------------------
+
+later(function()
+  add({
+    source = "olimorris/codecompanion.nvim",
+    depends = { "nvim-treesitter/nvim-treesitter", "nvim-lua/plenary.nvim" }
+  })
+
+  -- "anthropic" (default) or "copilot" supported for now
+  local adapter = os.getenv("CODECOMPANION_MODEL") or "anthropic"
+
+  require'codecompanion'.setup {
+    strategies = {
+      chat = {
+        adapter = adapter,
+        keymaps = {
+          completion = { modes = { i = "<C-x><C-a>" } }
+        }
+      },
+      inline = { adapter = adapter }
+    }
+  }
+end)
 
 later(function()
   add({ source = "zbirenbaum/copilot.lua" })
@@ -267,7 +236,20 @@ end)
 --------------------------------------------------------------------------------
 
 now(function()
-  require'mini.surround'.setup{}
+  add({
+    source = "MeanderingProgrammer/render-markdown.nvim",
+    depends = {"nvim-treesitter/nvim-treesitter"}
+  })
+  require"render-markdown".setup {
+    file_types = { 'markdown', 'Avante' },
+    overrides = {
+      filetype = {
+        markdown = { sign = { enabled = false } },
+        Avante = { sign = { enabled = false } },
+        codecompanion = { sign = { enabled = false } }
+      }
+    }
+  }
 end)
 
 -- Temporary fix for "global" border for floating windows
@@ -282,19 +264,13 @@ end
 -- Diagnositcs config
 vim.diagnostic.config{
   virtual_text = { severity = vim.diagnostic.severity.WARN },
-  float = {  source = true },
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "●",
-      [vim.diagnostic.severity.WARN] = "◉",
-      [vim.diagnostic.severity.INFO] = "◎",
-      [vim.diagnostic.severity.HINT] = "◯",
-    }
-  },
+  float = {  source = true }
 }
 
 
--- Adapt theme to terminal foreground/background
+-- Colorscheme
+---------------------------------------------------------------------------------
+
 vim.api.nvim_set_hl(0, "DiffAdd", { fg = "#cbf9cb", bg = "#074008" })
 vim.api.nvim_set_hl(0, "DiffChange", { fg = "#cbf9f1", bg = "#074037" })
 vim.api.nvim_set_hl(0, "DiffText", { fg = "#cbf9f1", bg = "#0b6456" })
