@@ -1,4 +1,10 @@
-{ config, lib, pkgs, darwin, ... }: {
+{ config, lib, pkgs, darwin, ... }:
+let
+  mergeAttrs = as: builtins.foldl' (acc: set: acc // set) { } as;
+  optionalAttrs = lib.attrsets.optionalAttrs;
+  isDarwin = pkgs.stdenv.isDarwin;
+in
+{
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
@@ -31,7 +37,10 @@
       LANG = "en_US.UTF-8";
       LC_TIME = "sv_SE.UTF-8";
       KEYTIMEOUT = "1";
-    };
+    } //
+    (optionalAttrs isDarwin {
+      PATH = "/opt/homebrew/bin:$PATH";
+    });
     shellAliases = {
       vi = "nvim";
       ll = "ls -l --color --group-directories-first --time-style=long-iso --human-readable -p";
