@@ -1,20 +1,21 @@
 local now, add, later = require 'user'.setup()
 
-vim.opt.wrap = false
-vim.opt.signcolumn = "auto"
 vim.opt.clipboard = "unnamedplus"
-vim.opt.inccommand = "split"
-vim.opt.smartcase = true
+vim.opt.completeopt = "menuone,popup,fuzzy,noinsert"
+vim.opt.expandtab = true
 vim.opt.ignorecase = true
+vim.opt.inccommand = "split"
+vim.opt.laststatus = 3
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.shiftwidth = 2
+vim.opt.signcolumn = "yes:1"
+vim.opt.smartcase = true
+vim.opt.smartindent = true
+vim.opt.softtabstop = 2
 vim.opt.swapfile = false
 vim.opt.undofile = true
-vim.opt.expandtab = true
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.laststatus = 3
-vim.opt.smartindent = true
-vim.opt.completeopt = "menuone,popup,fuzzy,noinsert"
-
+vim.opt.wrap = false
 local group = vim.api.nvim_create_augroup("USER", {})
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
@@ -27,6 +28,7 @@ vim.api.nvim_create_autocmd({ "LspAttach" }, {
   group = group,
   pattern = "*",
   callback = function()
+    vim.opt.omnifunc = 'v:lua.MiniCompletion.completefunc_lsp'
     -- HINT: the <leader>gq mappings below is here rather then general since
     -- the neovim sets the 'formatexpr' to vim.lsp.formatexpr() on LspAttach.
     -- However, since most ts/js projects use prettier (instead of typescript
@@ -89,6 +91,15 @@ now(function()
   vim.keymap.set("n", "<leader>sl", ":Pick grep_live<CR>", { desc = "Find live in files" })
   vim.keymap.set("n", "<leader>sr", ":Pick resume<CR>", { desc = "Find resume" })
   vim.keymap.set("n", "<leader>sd", ":Pick diagnostic<CR>", { desc = "Find diagnostic" })
+end)
+
+now(function()
+  require'mini.completion'.setup{
+    delay = { completion = 10^7 }, -- Disable automatic completion
+    window = { info = { border = 'single' }, signature = { border = 'single' } },
+    lsp_completion = { source_func = 'omnifunc', auto_setup = false },
+    set_vim_settings = false
+  }
 end)
 
 now(function()

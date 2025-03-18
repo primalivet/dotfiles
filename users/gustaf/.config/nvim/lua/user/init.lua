@@ -16,7 +16,9 @@ return {
     require('mini.deps').setup({ path = { package = path_package } })
     require"mini.extra".setup{}
     require"mini.icons".setup{}
+    MiniIcons.mock_nvim_web_devicons()
     local now, add, later = MiniDeps.now, MiniDeps.add, MiniDeps.later
+    later(MiniIcons.tweak_lsp_kind) -- Loaded with later  as it loads the whole vim.lsp module
     return now, add, later
   end
 }
