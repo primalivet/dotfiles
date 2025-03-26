@@ -92,7 +92,7 @@ in
       format = "$directory$git_branch$git_state$git_status$character";
       right_format = "$nix_shell";
       directory = { format = "$path "; };
-      character = { success_symbol = "%"; error_symbol = "%(bold red)"; };
+      character = { success_symbol = "%"; error_symbol = "%"; };
       git_branch = { format = "$branch(:$remote_branch) "; };
       git_state = { format = "[$state($progress_current/$progress_total)]($style) "; };
       git_status = { format = "([$all_status$ahead_behind]($style) )"; };
