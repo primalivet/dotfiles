@@ -94,8 +94,8 @@ in
       directory = { format = "$path "; };
       character = { success_symbol = "%"; error_symbol = "%"; };
       git_branch = { format = "$branch(:$remote_branch) "; };
-      git_state = { format = "[$state($progress_current/$progress_total)]($style) "; };
-      git_status = { format = "([$all_status$ahead_behind]($style) )"; };
+      git_state = { format = "$state($progress_current/$progress_total) "; };
+      git_status = { format = "($all_status$ahead_behind )"; };
       nix_shell = { format = "$state $name"; };
     };
   };
