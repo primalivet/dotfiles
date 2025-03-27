@@ -5,11 +5,8 @@ vim.opt.completeopt = "menuone,popup,fuzzy,noinsert"
 vim.opt.expandtab = true
 vim.opt.ignorecase = true
 vim.opt.inccommand = "split"
-vim.opt.laststatus = 3
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.laststatus = 1
 vim.opt.shiftwidth = 2
-vim.opt.signcolumn = "yes:1"
 vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.softtabstop = 2
@@ -60,10 +57,15 @@ vim.keymap.set("n", "<leader>d", vim.diagnostic.setqflist, { desc = "Add buffer 
 vim.keymap.set("n", "<leader>ds", ":Gdiffsplit<CR>", { desc = "Git diff split current file" })
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Easily hit escape in terminal mode" })
 
-vim.api.nvim_set_hl(0, "DiffAdd", { fg = "#cbf9cb", bg = "#074008" })
-vim.api.nvim_set_hl(0, "DiffChange", { fg = "#cbf9f1", bg = "#074037" })
-vim.api.nvim_set_hl(0, "DiffText", { fg = "#cbf9f1", bg = "#0b6456" })
-vim.api.nvim_set_hl(0, "DiffDelete", { fg = "#f9cbcb", bg = "#400707" })
+-- vim.api.nvim_set_hl(0, "DiffAdd", { fg = "#cbf9cb", bg = "#074008" })
+-- vim.api.nvim_set_hl(0, "DiffChange", { fg = "#cbf9f1", bg = "#074037" })
+-- vim.api.nvim_set_hl(0, "DiffText", { fg = "#cbf9f1", bg = "#0b6456" })
+-- vim.api.nvim_set_hl(0, "DiffDelete", { fg = "#f9cbcb", bg = "#400707" })
+
+-- vim.api.nvim_set_hl(0, "DiffAdd", { fg = "#cbf9cb", bg = "#074008" })
+-- vim.api.nvim_set_hl(0, "DiffChange", { fg = "#cbf9f1", bg = "#074037" })
+-- vim.api.nvim_set_hl(0, "DiffText", { fg = "#cbf9f1", bg = "#0b6456" })
+-- vim.api.nvim_set_hl(0, "DiffDelete", { fg = "#f9cbcb", bg = "#400707" })
 
 now(function()
   require"mini.surround".setup{}
@@ -75,7 +77,6 @@ now(function()
     indent = { enable = true }
   }
 end)
-
 now(function()
   require"mini.diff".setup{}
   vim.keymap.set("n", "ho", require"mini.diff".toggle_overlay, { desc = "Toggle hunk overlay" })
@@ -130,22 +131,6 @@ now(function()
     require"lspconfig"[name].setup(combines)
   end
 
-end)
-
-now(function()
-  add({
-    source = "MeanderingProgrammer/render-markdown.nvim",
-    depends = {"nvim-treesitter/nvim-treesitter"}
-  })
-  require"render-markdown".setup {
-    file_types = { "markdown", "codecompanion" },
-    overrides = {
-      filetype = {
-        markdown = { sign = { enabled = false } },
-        codecompanion = { sign = { enabled = false } }
-      }
-    }
-  }
 end)
 
 later(function()
