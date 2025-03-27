@@ -46,6 +46,7 @@ in
       ll = "ls -l --color --group-directories-first --time-style=long-iso --human-readable -p";
     };
     initExtra = ''
+      PROMPT='%1~ %# '
       export PATH="$HOME/.local/bin:$PATH"
       export DIRJUMP_DIRS="$HOME/Code:2"
       eval $(dirjump init)
@@ -82,21 +83,6 @@ in
       color.diff = "auto";
       color.status = "auto";
       color.ui = "auto";
-    };
-  };
-
-  programs.starship = {
-    enable = true;
-    settings = {
-      add_newline = false;
-      format = "$directory$git_branch$git_state$git_status$character";
-      right_format = "$nix_shell";
-      directory = { format = "$path "; };
-      character = { success_symbol = "%"; error_symbol = "%"; };
-      git_branch = { format = "$branch(:$remote_branch) "; };
-      git_state = { format = "$state($progress_current/$progress_total) "; };
-      git_status = { format = "($all_status$ahead_behind )"; };
-      nix_shell = { format = "$state $name"; };
     };
   };
 
