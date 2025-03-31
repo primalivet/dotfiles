@@ -30,6 +30,7 @@
       tenv
       podman
       podman-compose
+      sonar-scanner-cli
     ] ++ [
       (pkgs.writeShellScriptBin "vsu" ''npx @volvo/vce-service-util@latest $@'')
     ];
