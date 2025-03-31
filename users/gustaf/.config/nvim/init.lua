@@ -24,20 +24,12 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 vim.api.nvim_create_autocmd({ "LspAttach" }, {
   group = group,
   pattern = "*",
-  callback = function()
-    vim.opt.omnifunc = 'v:lua.MiniCompletion.completefunc_lsp'
-    -- HINT: the <leader>gq mappings below is here rather then general since
-    -- the neovim sets the 'formatexpr' to vim.lsp.formatexpr() on LspAttach.
-    -- However, since most ts/js projects use prettier (instead of typescript
-    -- lsp for mysterious reasons) we override the mapping for ts/js files.
-    --
-    -- HINT: the mf an 'f in the <leader>gq mappings sets a mark we can jump
-    -- back to.
-
-    -- TODO: get client, if == ts_ls, dont format with lsp, use <leader>gq
-    -- autocmd LspAttach * nnoremap <buffer> <leader>gq mf:%normal! gggqG<CR>'f
-    -- autocmd LspAttach *.ts,*.tsx,*.js,*.jsx nnoremap <buffer> <leader>gq mf:%!./node_modules/.bin/prettier --stdin-filepath %<CR>'f
-
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then return end
+    if client:supports_method("textDocument/completion") then
+      vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = false })
+    end
     vim.keymap.set("n", "grn", vim.lsp.buf.rename, { desc = "Rename symbol" })
     vim.keymap.set("n", "gra", vim.lsp.buf.code_action, { desc = "List line code actions" })
     vim.keymap.set("n", "grr", vim.lsp.buf.references, { desc = "List symbol references" })
@@ -57,16 +49,6 @@ vim.keymap.set("n", "<leader>d", vim.diagnostic.setqflist, { desc = "Add buffer 
 vim.keymap.set("n", "<leader>ds", ":Gdiffsplit<CR>", { desc = "Git diff split current file" })
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Easily hit escape in terminal mode" })
 
--- vim.api.nvim_set_hl(0, "DiffAdd", { fg = "#cbf9cb", bg = "#074008" })
--- vim.api.nvim_set_hl(0, "DiffChange", { fg = "#cbf9f1", bg = "#074037" })
--- vim.api.nvim_set_hl(0, "DiffText", { fg = "#cbf9f1", bg = "#0b6456" })
--- vim.api.nvim_set_hl(0, "DiffDelete", { fg = "#f9cbcb", bg = "#400707" })
-
--- vim.api.nvim_set_hl(0, "DiffAdd", { fg = "#cbf9cb", bg = "#074008" })
--- vim.api.nvim_set_hl(0, "DiffChange", { fg = "#cbf9f1", bg = "#074037" })
--- vim.api.nvim_set_hl(0, "DiffText", { fg = "#cbf9f1", bg = "#0b6456" })
--- vim.api.nvim_set_hl(0, "DiffDelete", { fg = "#f9cbcb", bg = "#400707" })
-
 now(function()
   require"mini.surround".setup{}
   add("nvim-treesitter/nvim-treesitter" )
@@ -80,7 +62,6 @@ end)
 now(function()
   require"mini.diff".setup{}
   vim.keymap.set("n", "ho", require"mini.diff".toggle_overlay, { desc = "Toggle hunk overlay" })
-  require"mini.git".setup{}
   add("tpope/vim-fugitive")
 end)
 
@@ -95,19 +76,10 @@ now(function()
 end)
 
 now(function()
-  require'mini.completion'.setup{
-    delay = { completion = 10^7 }, -- Disable automatic completion
-    window = { info = { border = 'single' }, signature = { border = 'single' } },
-    lsp_completion = { source_func = 'omnifunc', auto_setup = false },
-    set_vim_settings = false
-  }
-end)
-
-now(function()
   add("neovim/nvim-lspconfig" )
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   local servers = {
-    clangd = {},
+    -- clangd = {},
     cssls = {},
     eslint = {},
     gopls = {},
