@@ -79,7 +79,7 @@ now(function()
   add("neovim/nvim-lspconfig" )
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   local servers = {
-    -- clangd = {},
+    clangd = {},
     cssls = {},
     eslint = {},
     gopls = {},
