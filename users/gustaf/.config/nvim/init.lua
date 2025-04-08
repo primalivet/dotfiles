@@ -59,6 +59,7 @@ now(function()
     indent = { enable = true }
   }
 end)
+
 now(function()
   require"mini.diff".setup{}
   vim.keymap.set("n", "ho", require"mini.diff".toggle_overlay, { desc = "Toggle hunk overlay" })
@@ -124,7 +125,7 @@ later(function()
       "echasnovski/mini.nvim"
     }
   })
-  local adapter = os.getenv("CODECOMPANION_MODEL") or "copilot"
+  local adapter = os.getenv("CODECOMPANION_MODEL") or "anthropic"
   require"codecompanion".setup {
     strategies = {
       chat = {
