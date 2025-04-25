@@ -17,6 +17,7 @@
     name = "VCE";
     buildInputs = with pkgs; [
       kubectl
+      k9s
       kubelogin
       nodejs_22
       (azure-cli.withExtensions [
