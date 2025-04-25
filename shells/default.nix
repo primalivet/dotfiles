@@ -33,6 +33,7 @@
       sonar-scanner-cli
     ] ++ [
       (pkgs.writeShellScriptBin "vsu" ''npx @volvo/vce-service-util@latest $@'')
+      (pkgs.writeShellScriptBin "hive" ''npx --package=@graphql-hive/cli@0.44.2 hive $@'')
     ];
 
     shellHook = ''
