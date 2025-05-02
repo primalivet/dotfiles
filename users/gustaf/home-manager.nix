@@ -16,8 +16,10 @@ in
     stow
     tree
     vim
-    inetutils
     claude-code
+    # Networking
+    inetutils
+    nmap
   ];
 
   programs.zsh = {
