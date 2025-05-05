@@ -12,6 +12,7 @@
       gcc
       xclip
       brave
+      gnumake
       # ghostty requires OpenGL 3.3, which UTM 4.x unfortunately does not support (yet?)
       # workaround: use `LIBGL_ALWAYS_SOFTWARE=true ghostty` alias
       # refs:
