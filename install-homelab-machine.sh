@@ -104,24 +104,36 @@ mkdir -p /mnt/boot
 # Mount boot partition with specific permissions (umask=077 makes it only accessible by root)
 mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
 # Enable the swap partition
-swapon /dev/disk/by-label/swap
+if [[ $DISK == *"nvme"* ]]; then
+  swapon ${DISK}p2
+else
+  swapon ${DISK}2
+fi
 
 # Install NixOS from flake
 echo "[6/7] Installing NixOS..."
+# Generate configuration files
+nixos-generate-config --root /mnt
 # Install NixOS with:
 # - --no-root-passwd: don't ask for root password (user will be created with sudo access)
 # - --root /mnt: install to /mnt (our mounted filesystems)
 # - --flake: use our github configuration for the specified system
-nixos-install --no-root-passwd --root /mnt --flake github:primalivet/dotfiles#$SYSTEM_NAME
+#nixos-install --no-root-passwd --root /mnt --flake github:primalivet/dotfiles#$SYSTEM_NAME
+echo "Review the generated configuration files in /mnt/etc/nixos before proceeding."
+echo "When happy, run the following command to install:"
+echo "  From flake: nixos-install --no-root-passwd --root /mnt --flake github:primalivet/dotfiles#$SYSTEM_NAME"
+echo "  Default:    nixos-install --no-root-passwd --root /mnt"
+echo ""
+echo "Then reboot the system."
 
 # Cleanup
-echo "[7/7] Cleaning up..."
-# Unmount everything in reverse order
-umount /mnt/boot
-umount /mnt
-# Turn off swap
-swapoff /dev/disk/by-label/swap
+# echo "[7/7] Cleaning up..."
+# # Unmount everything in reverse order
+# umount /mnt/boot
+# umount /mnt
+# # Turn off swap
+# swapoff /dev/disk/by-label/swap
 
-echo
-echo "Installation complete!"
-echo "You can now reboot."
+# echo
+# echo "Installation complete!"
+# echo "You can now reboot."
