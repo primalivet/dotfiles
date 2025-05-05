@@ -22,13 +22,14 @@
         in
         import ./shells { inherit pkgs; };
 
-      mkHomelabSystem = name: { system }:
-        let
-          machineConfiguration = ./machines/${name}/configuration.nix;
-        in
+      mkHomelabSystem = name: { system, user }:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ];
+          specialArgs = { inherit user name; };
+          modules = [
+            ./machines/${name}/configuration.nix
+            ./users/${user}/homelab.nix
+            ];
         };
 
       mkUserSystem = name: { system, user, darwin ? false }:
@@ -72,6 +73,11 @@
       };
 
       nixosConfigurations.vm-aarch64-utm = mkUserSystem "vm-aarch64-utm" {
+        system = "aarch64-linux";
+        user = "gustaf";
+      };
+
+      nixosConfigurations.homelab1 = mkHomelabSystem "homelab1" {
         system = "aarch64-linux";
         user = "gustaf";
       };
