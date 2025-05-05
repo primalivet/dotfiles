@@ -22,7 +22,16 @@
         in
         import ./shells { inherit pkgs; };
 
-      mkSystem = name: { system, user, darwin ? false }:
+      mkHomelabSystem = name: { system }:
+        let
+          machineConfiguration = ./machines/${name}/configuration.nix;
+        in
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ];
+        };
+
+      mkUserSystem = name: { system, user, darwin ? false }:
         let
           machineConfiguration = ./machines/${name}/configuration.nix;
           systemFunc =
@@ -55,13 +64,14 @@
         aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
       };
 
-      darwinConfigurations.macbook-pro = mkSystem "macbook-pro" {
+
+      darwinConfigurations.macbook-pro = mkUserSystem "macbook-pro" {
         system = "aarch64-darwin";
         user = "gustaf";
         darwin = true;
       };
 
-      nixosConfigurations.vm-aarch64-utm = mkSystem "vm-aarch64-utm" {
+      nixosConfigurations.vm-aarch64-utm = mkUserSystem "vm-aarch64-utm" {
         system = "aarch64-linux";
         user = "gustaf";
       };
