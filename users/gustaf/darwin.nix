@@ -41,6 +41,7 @@
       "zed"
       "cursor"
       "bruno"
+      "docker"
     ];
   };
 }
