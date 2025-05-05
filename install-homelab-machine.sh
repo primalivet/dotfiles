@@ -47,19 +47,21 @@ case "$response" in
     *) echo "Installation cancelled"; exit 1 ;;
 esac
 
-# Cleanup previous installation
-echo "[1/6] Cleaning up any previous installation..."
-# Temporarily don't exit on errors (there might be nothing to clean up)
-set +e
+# Cleanup and unmount everything
+echo "[1/7] Cleaning up any previous installation..."
+# Turn off swap first (important: do this before unmounting)
+set +e  # Don't exit on errors during cleanup
+find /proc/swaps -name "*" -type f | grep -v proc | cut -d' ' -f1 | xargs -r swapoff
 # Unmount everything mounted under /mnt if it exists
-umount -R /mnt 2>/dev/null
-# Turn off swap if it exists
-swapoff /dev/disk/by-label/swap 2>/dev/null
-# Go back to exiting on errors
-set -e
+if mountpoint -q /mnt; then
+    umount -R /mnt
+fi
+# Wipe filesystem signatures to ensure clean slate
+wipefs -a $DISK
+set -e  # Resume exiting on errors
 
 # Partition disk
-echo "[2/6] Partitioning disk..."
+echo "[2/7] Partitioning disk..."
 # Create a new GPT (modern partition table format)
 parted $DISK -- mklabel gpt
 # Create root partition (where Linux lives) from 512MB to 8GB before end
@@ -71,25 +73,30 @@ parted $DISK -- mkpart ESP fat32 1MB 512MB
 # Mark the boot partition as bootable
 parted $DISK -- set 3 esp on
 
+# Wait for kernel to recognize new partitions
+echo "[3/7] Waiting for partitions to be ready..."
+sleep 2
+partprobe $DISK
+
 # Format partitions
-echo "[3/6] Formatting partitions..."
+echo "[4/7] Formatting partitions..."
 # NVMe drives use different naming (p1, p2) vs regular drives (1, 2)
 if [[ $DISK == *"nvme"* ]]; then
     # Create ext4 filesystem on root partition with label "nixos"
-    mkfs.ext4 -L nixos ${DISK}p1
+    mkfs.ext4 -F -L nixos ${DISK}p1
     # Create swap space with label "swap"
     mkswap -L swap ${DISK}p2
     # Create FAT32 filesystem on boot partition with label "boot"
     mkfs.fat -F 32 -n boot ${DISK}p3
 else
     # Same as above but for non-NVMe drives
-    mkfs.ext4 -L nixos ${DISK}1
+    mkfs.ext4 -F -L nixos ${DISK}1
     mkswap -L swap ${DISK}2
     mkfs.fat -F 32 -n boot ${DISK}3
 fi
 
 # Mount partitions
-echo "[4/6] Mounting partitions..."
+echo "[5/7] Mounting partitions..."
 # Mount the root filesystem to /mnt (where we'll install NixOS)
 mount /dev/disk/by-label/nixos /mnt
 # Create boot directory
@@ -100,7 +107,7 @@ mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
 swapon /dev/disk/by-label/swap
 
 # Install NixOS from flake
-echo "[5/6] Installing NixOS..."
+echo "[6/7] Installing NixOS..."
 # Install NixOS with:
 # - --no-root-passwd: don't ask for root password (user will be created with sudo access)
 # - --root /mnt: install to /mnt (our mounted filesystems)
@@ -108,7 +115,7 @@ echo "[5/6] Installing NixOS..."
 nixos-install --no-root-passwd --root /mnt --flake github:primalivet/dotfiles#$SYSTEM_NAME
 
 # Cleanup
-echo "[6/6] Cleaning up..."
+echo "[7/7] Cleaning up..."
 # Unmount everything in reverse order
 umount /mnt/boot
 umount /mnt
