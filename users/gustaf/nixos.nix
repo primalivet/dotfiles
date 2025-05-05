@@ -11,6 +11,7 @@
       tree
       gcc
       xclip
+      brave
       # ghostty requires OpenGL 3.3, which UTM 4.x unfortunately does not support (yet?)
       # workaround: use `LIBGL_ALWAYS_SOFTWARE=true ghostty` alias
       # refs:
@@ -18,7 +19,7 @@
       #   https://github.com/utmapp/UTM/issues/4285
       #   https://docs.mesa3d.org/envvars.html#envvar-LIBGL_ALWAYS_SOFTWARE
       # alias ghostty="LIBGL_ALWAYS_SOFTWARE=true ghostty"
-      ghostty
+      # ghostty
     ];
     shell = pkgs.zsh;
   };
