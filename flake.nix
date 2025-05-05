@@ -82,6 +82,27 @@
         user = "gustaf";
       };
 
+      nixosConfigurations.iso-aarch64 = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
+          {
+            nix.settings.experimental-features = ["nix-command" "flakes"];
+            security.sudo.wheelNeedsPassword = false;
+            services.openssh.enable = true;
+            users.users.nixos = {
+              isNormalUser = true;
+              extraGroups = ["wheel"];
+              openssh.authorizedKeys.keys = [
+                "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDp7yzlnHtcS7TliFQcaHKiojr6frzHsZ62F5kp62eeE0mmACB4vnwvWF+z6jusZpqZ1vNej5Sjh6O1phj4igtTQ5OV+D9imbhBmFvGfP9hvaIvWgdqBipeJ454u9G8n7rx9rgiPekzJfNuCpjRqJrDdc8upQJfTZTVzuDjA3yPg4rVq9L4wJWBZUzukzDEKRjrkmXE6Cuwa5xUhpViedz49+IIQypSXT/v3REnrsCO0qNm45kXhEMFH9qv12HS56jZW6ndx+OJjfhXyab8UChivFiAt/QpF3bdhtRCJ74M0bAFSsAb3UhGJ/37mslatZUH0NQpQdzIrWpzIYUFMAmKPN0pyOEzo7IVMlSdD9Tm8DkpeXPv8qDF/CBo6ms7FpDqPKm+J2kH9V7lo88Jm0FjFLYBGXcTv4a92o+nkYAB0Ga/thhbqL/Q2Zmjf+0X8S2QL5v7hey9HmVNV60hAn0merFesg2BX7oVp7QxyvUy8Vj1GnB41Ph2BSFvLhShpW8= gustaf@Gustafs-MacBook-Pro.local"
+              ];
+            };
+            # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+            system.stateVersion = "24.11"; # Did you read the comment?
+          }
+        ];
+      };
+
       devShells = {
         aarch64-darwin = mkShell "aarch64-darwin";
         aarch64-linux = mkShell "aarch64-linux";

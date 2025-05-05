@@ -9,3 +9,6 @@ update:
 
 format:
 	nix fmt
+
+iso: 
+	nix build .#nixosConfigurations.iso-aarch64.config.system.build.isoImage
