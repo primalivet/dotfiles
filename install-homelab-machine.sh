@@ -16,6 +16,8 @@ fi
 # Get disk device from second argument, or auto-detect
 # We need to know which disk to install on (like /dev/sda, /dev/vda)
 DISK=$2
+PART_DELIM=""  # Default delimiter for partitions (sda1, vda1)
+
 if [ -z "$DISK" ]; then
     # Try to find the disk automatically by checking common locations
     if [ -e "/dev/vda" ]; then
@@ -27,11 +29,17 @@ if [ -z "$DISK" ]; then
     elif [ -e "/dev/nvme0n1" ]; then
         # Modern SSDs use nvme
         DISK="/dev/nvme0n1"
+        PART_DELIM="p"  # NVMe uses pX (nvme0n1p1, nvme0n1p2)
     else
         echo "Error: Could not detect disk device"
         echo "Please specify disk as second argument"
         echo "Example: $0 homelab1 /dev/sda"
         exit 1
+    fi
+else
+    # Check if specified disk is NVMe
+    if [[ $DISK == *"nvme"* ]]; then
+        PART_DELIM="p"  # NVMe uses pX (nvme0n1p1, nvme0n1p2)
     fi
 fi
 
@@ -48,10 +56,10 @@ case "$response" in
 esac
 
 # Cleanup and unmount everything
-echo "[1/7] Cleaning up any previous installation..."
+echo "[1/8] Cleaning up any previous installation..."
 # Turn off swap first (important: do this before unmounting)
 set +e  # Don't exit on errors during cleanup
-find /proc/swaps -name "*" -type f | grep -v proc | cut -d' ' -f1 | xargs -r swapoff
+find /proc/swaps -type f 2>/dev/null | grep -v "^Filename" | awk '{print $1}' | xargs -r swapoff
 # Unmount everything mounted under /mnt if it exists
 if mountpoint -q /mnt; then
     umount -R /mnt
@@ -61,7 +69,7 @@ wipefs -a $DISK
 set -e  # Resume exiting on errors
 
 # Partition disk
-echo "[2/7] Partitioning disk..."
+echo "[2/8] Partitioning disk..."
 # Create a new GPT (modern partition table format)
 parted $DISK -- mklabel gpt
 # Create root partition (where Linux lives) from 512MB to 8GB before end
@@ -74,66 +82,65 @@ parted $DISK -- mkpart ESP fat32 1MB 512MB
 parted $DISK -- set 3 esp on
 
 # Wait for kernel to recognize new partitions
-echo "[3/7] Waiting for partitions to be ready..."
+echo "[3/8] Waiting for partitions to be ready..."
 sleep 2
 partprobe $DISK
 
 # Format partitions
-echo "[4/7] Formatting partitions..."
-# NVMe drives use different naming (p1, p2) vs regular drives (1, 2)
-if [[ $DISK == *"nvme"* ]]; then
-    # Create ext4 filesystem on root partition with label "nixos"
-    mkfs.ext4 -F -L nixos ${DISK}p1
-    # Create swap space with label "swap"
-    mkswap -L swap ${DISK}p2
-    # Create FAT32 filesystem on boot partition with label "boot"
-    mkfs.fat -F 32 -n boot ${DISK}p3
-else
-    # Same as above but for non-NVMe drives
-    mkfs.ext4 -F -L nixos ${DISK}1
-    mkswap -L swap ${DISK}2
-    mkfs.fat -F 32 -n boot ${DISK}3
-fi
+echo "[4/8] Formatting partitions..."
+# Use the partition delimiter to construct the right partition names
+mkfs.ext4 -F -L nixos ${DISK}${PART_DELIM}1
+mkswap -L swap ${DISK}${PART_DELIM}2
+mkfs.fat -F 32 -n boot ${DISK}${PART_DELIM}3
 
 # Mount partitions
-echo "[5/7] Mounting partitions..."
+echo "[5/8] Mounting partitions..."
 # Mount the root filesystem to /mnt (where we'll install NixOS)
 mount /dev/disk/by-label/nixos /mnt
 # Create boot directory
 mkdir -p /mnt/boot
 # Mount boot partition with specific permissions (umask=077 makes it only accessible by root)
 mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
-# Enable the swap partition
-if [[ $DISK == *"nvme"* ]]; then
-  swapon ${DISK}p2
-else
-  swapon ${DISK}2
-fi
+# Enable the swap partition using the direct device reference
+swapon ${DISK}${PART_DELIM}2
 
-# Install NixOS from flake
-echo "[6/7] Installing NixOS..."
-# Generate configuration files
+# Generate hardware configuration
+echo "[6/8] Generating hardware configuration..."
+# This detects hardware and creates the necessary config files
 nixos-generate-config --root /mnt
-# Install NixOS with:
-# - --no-root-passwd: don't ask for root password (user will be created with sudo access)
-# - --root /mnt: install to /mnt (our mounted filesystems)
-# - --flake: use our github configuration for the specified system
-#nixos-install --no-root-passwd --root /mnt --flake github:primalivet/dotfiles#$SYSTEM_NAME
-echo "Review the generated configuration files in /mnt/etc/nixos before proceeding."
-echo "When happy, run the following command to install:"
-echo "  From flake: nixos-install --no-root-passwd --root /mnt --flake github:primalivet/dotfiles#$SYSTEM_NAME"
-echo "  Default:    nixos-install --no-root-passwd --root /mnt"
-echo ""
-echo "Then reboot the system."
+
+# Prepare the flake with the correct hardware configuration
+echo "[7/8] Preparing and installing NixOS..."
+# Create a temporary working directory
+TEMP_DIR=$(mktemp -d)
+cd $TEMP_DIR
+
+# Clone the repository
+echo "Cloning the flake repository..."
+git clone https://github.com/primalivet/dotfiles.git
+cd dotfiles
+
+# Replace the hardware configuration in the flake with the generated one
+echo "Updating hardware configuration..."
+mkdir -p "machines/$SYSTEM_NAME"
+cp /mnt/etc/nixos/hardware-configuration.nix "machines/$SYSTEM_NAME/"
+
+# Install NixOS using the local modified flake
+echo "Installing NixOS..."
+nixos-install --no-root-passwd --root /mnt --flake ".#$SYSTEM_NAME"
+
+# Cleanup the temporary directory
+cd /
+rm -rf $TEMP_DIR
 
 # Cleanup
-# echo "[7/7] Cleaning up..."
-# # Unmount everything in reverse order
-# umount /mnt/boot
-# umount /mnt
-# # Turn off swap
-# swapoff /dev/disk/by-label/swap
+echo "[8/8] Cleaning up..."
+# Unmount everything in reverse order
+umount /mnt/boot
+umount /mnt
+# Turn off swap using the direct device reference
+swapoff ${DISK}${PART_DELIM}2
 
-# echo
-# echo "Installation complete!"
-# echo "You can now reboot."
+echo
+echo "Installation complete!"
+echo "You can now reboot."
