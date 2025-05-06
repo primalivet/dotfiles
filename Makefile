@@ -41,3 +41,15 @@ remote-install: install-homelab-machine.sh
 	ssh nixos@$(MACHINE_IP) "chmod +x install-homelab-machine.sh && sudo ./install-homelab-machine.sh $(MACHINE_NAME)"
 	ssh nixos@$(MACHINE_IP) "sleep 10 && sudo poweroff"
 
+# TODO: Set default values here for other script arguments, emial, name, etc.
+post-install: post-install-homelab-machine.sh
+	@if [ -z "$(MACHINE_NAME)" ]; then \
+		echo "MACHINE_NAME is not set"; \
+		exit 1; \
+	fi
+	@if [ -z "$(MACHINE_IP)" ]; then \
+		echo "MACHINE_IP is not set"; \
+		exit 1; \
+	fi
+	@echo "Trying to do post install $(MACHINE_NAME) on $(MACHINE_IP)"
+	./post-install-homelab-machine.sh $(MACHINE_NAME) $(MACHINE_IP)
