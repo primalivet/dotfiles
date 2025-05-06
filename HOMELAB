@@ -2,37 +2,22 @@ HOMELAB
 
 NEW MACHINE
 
-1. Boot a new machine (physical or virtual) from the minimal NixOS ISO image.
-2. Run 'curl -O https://raw.githubusercontent.com/primalivet/dotfiles/main/install-homelab-machine.sh'
-   to download the installer script.
-3. Make it executable with 'chmod +x install-homelab-machine.sh'.
-4. Run the installer with 'sudo ./install-homelab-machine.sh SYSTEM_NAME'.
-5. Reboot without the ISO image.
+This repository's flake has a configuration for building a bootable NixOS ISO
+image, packed with OpenSSH server and a public key, which makes it possible to
+carry out the install via SSH.
 
-OR via SSH/SCP on local network
+NEW MACHINE - CONNECTED INSTALL
 
-1. Build the custom image 'ix build .#nixosConfigurations.iso-aarch64.config.system.build.isoImage'.
-   It includes the public key for SSH access.
-2. Boot the new machine (physical or virtual) from the custom NixOS ISO image.
+1. Build the iso with 'make iso'
+2. Boot the new machine (physical or virtual) from built iso.
 3. Get the IP address of the new machine.
-3. Transfer the installer script to the new machine with 'scp install-homelab-machine.sh nixos@<new-machine-ip>:/home/nixos
-4. SSH into the new machine with 'ssh nixos@<new-machine-ip>'.
-5. Make the installer script executable with 'chmod +x install-homelab-machine.sh'.
-6. Run the installer with 'sudo ./install-homelab-machine.sh SYSTEM_NAME'.
-7. Reboot without the ISO image.
-8. After reboot, SSH into the new machine with 'ssh gustaf@<new-machine-static-ip>'.
+4. Connect and do the install manually with 
+   'make connected-install MACHINE_IP=<machine-ip> MACHINE_NAME=<machine-name>'
 
-After that you'll have partitioned and formatted drives and NixOS installed as specified in the 'flake.nix' file in this repository and the specific systemname/hostname. But we do not have the new hardware configuration under version control. To get there, do the following:
+NEW MACHINE - REMOTE INSTALL
 
-1. Copy identity from suitable machine into the homelab machine (homelab1 in this example)
-   'scp ~/.ssh/id_ed25519 ~/.ssh/id_ed25519.pub gustaf@homelab1:/home/gustaf/.ssh
-2. Login to the machine, add the new 'hardware-configuration.nix', commit and push.
-   'ssh gustaf@homelab1'
-   'git config --global user.email ..............'
-   'git config --global user.name  ..............'
-   'git clone git@github.com:primalivet/dotfiles'
-   'cd dotfiles'
-   'cp /etc/nixos/hardware-configuration.nix machines/homelab1'
-   'git add machines/homelab1'
-   'git commit -m "update machine hardware configuration"
-   'git push origin main'
+1. Build the iso with 'make iso'
+2. Boot the new machine (physical or virtual) from built iso.
+3. Get the IP address of the new machine.
+4. Connect and do the install manually with 
+   'make remote-install MACHINE_IP=<machine-ip> MACHINE_NAME=<machine-name>'
