@@ -9,6 +9,19 @@ NEW MACHINE
 4. Run the installer with 'sudo ./install-homelab-machine.sh SYSTEM_NAME'.
 5. Reboot without the ISO image.
 
+OR via SSH/SCP on local network
+
+1. Build the custom image 'ix build .#nixosConfigurations.iso-aarch64.config.system.build.isoImage'.
+   It includes the public key for SSH access.
+2. Boot the new machine (physical or virtual) from the custom NixOS ISO image.
+3. Get the IP address of the new machine.
+3. Transfer the installer script to the new machine with 'scp install-homelab-machine.sh nixos@<new-machine-ip>:/home/nixos
+4. SSH into the new machine with 'ssh nixos@<new-machine-ip>'.
+5. Make the installer script executable with 'chmod +x install-homelab-machine.sh'.
+6. Run the installer with 'sudo ./install-homelab-machine.sh SYSTEM_NAME'.
+7. Reboot without the ISO image.
+8. After reboot, SSH into the new machine with 'ssh gustaf@<new-machine-static-ip>'.
+
 After that you'll have partitioned and formatted drives and NixOS installed as specified in the 'flake.nix' file in this repository and the specific systemname/hostname. But we do not have the new hardware configuration under version control. To get there, do the following:
 
 1. Copy identity from suitable machine into the homelab machine (homelab1 in this example)
