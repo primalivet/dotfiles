@@ -1,12 +1,8 @@
 { pkgs }: {
   default = pkgs.mkShell {
-    buildInputs = with pkgs; [
-      kubectl
-      k9s
-    ];
+    buildInputs = with pkgs; [ ];
 
     shellHook = ''
-      export KUBECONFIG=./.kube/config
     '';
   }; 
 
