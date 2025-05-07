@@ -24,9 +24,7 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-
-  # No need for firewall since we're in a VM
-  networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
   networking.interfaces.enp0s1.ipv4.addresses = [
    {
