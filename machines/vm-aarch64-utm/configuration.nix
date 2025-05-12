@@ -94,6 +94,10 @@
   # No need for firewall since we're in a VM
   networking.firewall.enable = false;
 
+  networking.hosts = {
+    "192.168.1.10" = ["hello.local"];
+  };
+
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
