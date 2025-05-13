@@ -6,7 +6,7 @@
 
     shellHook = ''
     '';
-  }; 
+  };
 
   hb = pkgs.mkShell {
     name = "HB";

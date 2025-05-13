@@ -95,7 +95,7 @@
   networking.firewall.enable = false;
 
   networking.hosts = {
-    "192.168.1.10" = ["hello.local"];
+    "192.168.1.10" = [ "hello.local" ];
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
