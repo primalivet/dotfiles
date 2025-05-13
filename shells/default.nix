@@ -1,6 +1,8 @@
 { pkgs }: {
   default = pkgs.mkShell {
-    buildInputs = with pkgs; [ ];
+    buildInputs = with pkgs; [
+      lua-language-server
+    ];
 
     shellHook = ''
     '';
