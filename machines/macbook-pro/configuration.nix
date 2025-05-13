@@ -3,7 +3,19 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [ coreutils ];
+  environment.systemPackages = with pkgs; [ 
+    curl
+    neovim
+    nodejs_23
+    ollama
+    stow
+    tree
+    vim
+    # Networking
+    inetutils
+    nmap
+    coreutils 
+  ];
 
   environment.shells = with pkgs; [
     bashInteractive

@@ -7,20 +7,6 @@ in
 {
   home.stateVersion = "24.11";
 
-  home.packages = with pkgs; [
-    curl
-    lua-language-server
-    neovim
-    nodejs_23
-    ollama
-    stow
-    tree
-    vim
-    # Networking
-    inetutils
-    nmap
-  ];
-
   programs.zsh = {
     enable = true;
     enableCompletion = true;
