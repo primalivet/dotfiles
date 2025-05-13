@@ -41,38 +41,6 @@ in
     '';
   };
 
-  programs.git = {
-    enable = true;
-    userName = "Gustaf Holm";
-    userEmail = "gustafholm1@gmail.com";
-    aliases = {
-      a = "add";
-      c = "commit";
-      co = "checkout";
-      d = "diff";
-      l = "log --oneline --graph";
-      s = "status";
-      sw = "switch";
-      cop = "!fuzzy_co() { git checkout $(git branch | fzf); }; fuzzy_co";
-    };
-    includes = [
-      { condition = "gitdir:~/Code/HB/"; path = "~/.hb/gitconfig"; }
-      { condition = "gitdir:~/Code/VCE/"; path = "~/.vce/gitconfig"; }
-    ];
-
-    extraConfig = {
-      push.default = "simple";
-      push.autoSetupRemote = true;
-      core.editor = "nvim";
-      core.filemode = false;
-      # TODO: diff tool
-      # TODO: merge tool
-      color.diff = "auto";
-      color.status = "auto";
-      color.ui = "auto";
-    };
-  };
-
   programs.fzf = {
     enable = true;
     defaultCommand = "rg --files --hidden --glob '!.git'";
@@ -98,11 +66,6 @@ in
   };
 
   programs.gnome-shell.enable = !darwin;
-
-  xdg.configFile = {
-    nvim.source = ./.config/nvim;
-    ghostty.source = ./.config/ghostty;
-  };
 
   home.file = {
     ".local/bin".source = ./.local/bin;

@@ -1,6 +1,6 @@
 [user]
   name=Gustaf Holm
-  email=gustaf.holm@icloud.com
+  email=gustafholm1@gmail.com
 [push]
   default=simple
   autoSetupRemote=true
@@ -39,15 +39,12 @@
   ui=auto
 [includeIf "gitdir:~/Code/OSS/"]
   path = ~/.git_private
-[includeIf "gitdir:~/Code/Work/"]
-  path = ~/.git_work
+[includeIf "gitdir:~/Code/HB/"]
+  path = ~/.hb/gitconfig
 [includeIf "gitdir:~/Code/VCE/"]
-  path = ~/.git_vce
+  path = ~/.vce/gitconfig
 [alias]
   co = checkout
   c = commit
   s = status
-  d = diff
-  l = log --oneline --graph
-  # l = "!. ~/.config/git/helpers && git_pretty_log"
   a = add
