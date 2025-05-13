@@ -16,8 +16,6 @@ in
     stow
     tree
     vim
-    claude-code
-    spotify-player
     # Networking
     inetutils
     nmap
