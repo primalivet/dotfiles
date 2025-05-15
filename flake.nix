@@ -22,7 +22,7 @@
         in
         import ./shells { inherit pkgs; };
 
-      mkUserSystem = name: { system, user, darwin ? false }:
+      mkUserSystem = name: { system, darwin ? false }:
         let
           machineConfiguration = ./machines/${name}/configuration.nix;
           systemFunc =
@@ -36,16 +36,6 @@
             { nixpkgs.config.allowUnfree = true; }
             { nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ]; }
             machineConfiguration
-            (if darwin
-            then home-manager.darwinModules.home-manager
-            else home-manager.nixosModules.home-manager)
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
-              home-manager.users.${user} = import ./users/${user}/home-manager.nix;
-              home-manager.extraSpecialArgs = { darwin = darwin; };
-            }
           ];
         };
     in
@@ -57,13 +47,11 @@
 
       darwinConfigurations.macbook-pro = mkUserSystem "macbook-pro" {
         system = "aarch64-darwin";
-        user = "gustaf";
         darwin = true;
       };
 
       nixosConfigurations.vm-aarch64-utm = mkUserSystem "vm-aarch64-utm" {
         system = "aarch64-linux";
-        user = "gustaf";
       };
 
       devShells = {
