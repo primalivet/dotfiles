@@ -1,0 +1,60 @@
+font-size = 16
+font-family = GitLab Mono
+theme = NvimDark
+cursor-style = block
+shell-integration-features = no-cursor
+window-padding-x = 8
+window-padding-y = 8
+window-padding-balance = true
+window-save-state = always
+macos-titlebar-proxy-icon = hidden
+auto-update-channel = tip
+
+# Sync the font size for all surfaces
+keybind = all:super+equal=increase_font_size:1
+keybind = all:super+plus=increase_font_size:1
+keybind = all:super+minus=decrease_font_size:1
+keybind = all:super+zero=reset_font_size
+
+# Tmuxish keybindings
+keybind = ctrl+space>x=close_surface
+keybind = ctrl+space>c=new_tab
+keybind = ctrl+space>n=next_tab
+keybind = ctrl+space>p=previous_tab
+keybind = ctrl+space>1=goto_tab:1
+keybind = ctrl+space>2=goto_tab:2
+keybind = ctrl+space>3=goto_tab:3
+keybind = ctrl+space>4=goto_tab:4
+keybind = ctrl+space>5=goto_tab:5
+keybind = ctrl+space>6=goto_tab:6
+keybind = ctrl+space>7=goto_tab:7
+keybind = ctrl+space>8=goto_tab:8
+keybind = ctrl+space>9=goto_tab:9
+keybind = ctrl+space>z=toggle_split_zoom
+keybind = ctrl+space>s=new_split:down
+keybind = ctrl+space>v=new_split:right
+keybind = ctrl+space>h=goto_split:left
+keybind = ctrl+space>j=goto_split:bottom
+keybind = ctrl+space>k=goto_split:top
+keybind = ctrl+space>l=goto_split:right
+keybind = ctrl+space>shift+h=resize_split:left,100
+keybind = ctrl+space>shift+j=resize_split:down,100
+keybind = ctrl+space>shift+k=resize_split:up,100
+keybind = ctrl+space>shift+l=resize_split:right,100
+keybind = ctrl+space>equal=equalize_splits
+
+
+# MacOSish keybindings
+keybind = super+x=close_surface
+keybind = super+z=toggle_split_zoom
+keybind = super+shift+s=new_split:down
+keybind = super+shift+v=new_split:right
+keybind = super+right=goto_split:right
+keybind = super+left=goto_split:left
+keybind = super+up=goto_split:top
+keybind = super+down=goto_split:bottom
+keybind = super+shift+left=resize_split:left,100
+keybind = super+shift+down=resize_split:down,100
+keybind = super+shift+right=resize_split:right,100
+keybind = super+shift+up=resize_split:up,100
+keybind = super+shift+enter=equalize_splits
