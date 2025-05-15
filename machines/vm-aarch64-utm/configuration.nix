@@ -68,11 +68,25 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    git
+    brave
     curl
-    wget
     firefox
+    gcc
+    git
+    gnumake
+    neovim
+    nodejs_23
+    ollama
+    stow
+    tree
+    vim
+    wget
+    xclip
+
+    # Networking
+    inetutils
+    nmap
+    coreutils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -96,6 +110,18 @@
 
   networking.hosts = {
     "192.168.1.10" = [ "hello.local" ];
+  };
+
+  virtualisation.docker.enable = true;
+  virtualisation.docker.enableOnBoot = true;
+
+  users.users.gustaf = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+    hashedPassword = "$6$.TJ/b9UC4jo3TOvz$DqfuGS5oj6O.X/zyHRRP9pjHJ9MbqcOHvfjSZbOFoBgMOE6dBvwXCbdqG0qkX2tC27pFZ0Hzgbics5TH2XDmU/";
+    packages = with pkgs; [
+    ];
+    shell = pkgs.zsh;
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
