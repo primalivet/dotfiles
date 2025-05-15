@@ -36,7 +36,6 @@
             { nixpkgs.config.allowUnfree = true; }
             { nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ]; }
             machineConfiguration
-            (if darwin then ./users/${user}/darwin.nix else ./users/${user}/nixos.nix)
             (if darwin
             then home-manager.darwinModules.home-manager
             else home-manager.nixosModules.home-manager)
