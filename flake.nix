@@ -54,9 +54,14 @@
         system = "aarch64-linux";
       };
 
+      nixosConfigurations.vm-x86_64-utm = mkUserSystem "vm-x86_64-utm" {
+        system = "x86_64-linux";
+      };
+
       devShells = {
         aarch64-darwin = mkShell "aarch64-darwin";
         aarch64-linux = mkShell "aarch64-linux";
+        x86_64-linux = mkShell "x86_64-linux";
       };
     };
 }

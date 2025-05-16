@@ -74,7 +74,7 @@
     gcc
     git
     gnumake
-    neovim
+    # neovim
     nodejs_23
     ollama
     stow
@@ -121,7 +121,7 @@
     hashedPassword = "$6$.TJ/b9UC4jo3TOvz$DqfuGS5oj6O.X/zyHRRP9pjHJ9MbqcOHvfjSZbOFoBgMOE6dBvwXCbdqG0qkX2tC27pFZ0Hzgbics5TH2XDmU/";
     packages = with pkgs; [
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.bashInteractive;
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
