@@ -13,6 +13,7 @@ vim.opt.softtabstop = 2
 vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.wrap = false
+
 local group = vim.api.nvim_create_augroup("USER", {})
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {

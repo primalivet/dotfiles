@@ -1,7 +1,9 @@
 font-size = 16
 font-family = GitLab Mono
 font-thicken = true
-theme = dark:NvimDark,light:NvimLight
+theme = NvimDark
+# font-family = Ac437 IBM VGA 8x16
+# theme = Builtin Dark
 cursor-style = block
 shell-integration-features = no-cursor
 window-padding-x = 8
