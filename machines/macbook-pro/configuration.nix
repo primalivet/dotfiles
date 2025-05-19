@@ -12,6 +12,9 @@
     stow
     tree
     vim
+    jq
+    fzf
+    direnv
     # Networking
     inetutils
     nmap

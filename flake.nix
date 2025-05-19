@@ -21,37 +21,29 @@
           };
         in
         import ./shells { inherit pkgs; };
-
-      mkUserSystem = name: { system, darwin ? false }:
-        let
-          machineConfiguration = ./machines/${name}/configuration.nix;
-          systemFunc =
-            if darwin
-            then inputs.nix-darwin.lib.darwinSystem
-            else nixpkgs.lib.nixosSystem;
-        in
-        systemFunc {
-          inherit system;
-          modules = [
-            { nixpkgs.config.allowUnfree = true; }
-            { nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ]; }
-            machineConfiguration
-          ];
-        };
     in
     {
       formatter = {
         aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
+        aarch64-linux = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
       };
 
-
-      darwinConfigurations.macbook-pro = mkUserSystem "macbook-pro" {
+      darwinConfigurations.macbook-pro = inputs.nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        darwin = true;
+        modules = [
+          { nixpkgs.config.allowUnfree = true; }
+          { nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ]; }
+          ./machines/macbook-pro/configuration.nix
+        ];
       };
 
-      nixosConfigurations.vm-aarch64-utm = mkUserSystem "vm-aarch64-utm" {
+      nixosConfigurations.vm-aarch64-utm = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
+        modules = [
+          { nixpkgs.config.allowUnfree = true; }
+          { nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ]; }
+          ./machines/vm-aarch64-utm/configuration.nix
+        ];
       };
 
       nixosConfigurations.vm-x86_64-utm = mkUserSystem "vm-x86_64-utm" {
