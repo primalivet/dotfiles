@@ -37,17 +37,24 @@
         ];
       };
 
-      nixosConfigurations.vm-aarch64-utm = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          { nixpkgs.config.allowUnfree = true; }
-          { nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ]; }
-          ./machines/vm-aarch64-utm/configuration.nix
-        ];
-      };
+      nixosConfigurations = {
+        vm-aarch64-utm = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [
+            { nixpkgs.config.allowUnfree = true; }
+            { nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ]; }
+            ./machines/vm-aarch64-utm/configuration.nix
+          ];
+        };
 
-      nixosConfigurations.vm-x86_64-utm = mkUserSystem "vm-x86_64-utm" {
-        system = "x86_64-linux";
+        vm-x86_64-utm = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            { nixpkgs.config.allowUnfree = true; }
+            { nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ]; }
+            ./machines/vm-x86_64-utm/configuration.nix
+          ];
+        };
       };
 
       devShells = {
