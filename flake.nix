@@ -25,7 +25,7 @@
     {
       formatter = {
         aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
-        aarch64-linux = nixpkgs.legacyPackages.aarch64-darwin.nixpkgs-fmt;
+        aarch64-linux = nixpkgs.legacyPackages.aarch64-linux.nixpkgs-fmt;
       };
 
       darwinConfigurations.macbook-pro = inputs.nix-darwin.lib.darwinSystem {
