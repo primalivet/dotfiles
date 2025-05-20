@@ -13,6 +13,7 @@
       "cursor"
       "bruno"
       "docker"
+      "tailscale"
     ];
   };
 }
