@@ -15,6 +15,8 @@
     jq
     fzf
     direnv
+    sops
+    age
     # Networking
     inetutils
     nmap
