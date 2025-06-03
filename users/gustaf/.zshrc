@@ -74,7 +74,7 @@ if type fzf &> /dev/null; then
     export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
   fi
   export FZF_DEFAULT_OPTS="--height=100% --reverse --color=bw"
-  eval "$(fzf --zsh)"
+  #eval "$(fzf --zsh)"
 fi
 
 # DIRENV
