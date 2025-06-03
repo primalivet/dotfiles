@@ -65,6 +65,9 @@ type kubectl &>/dev/null && source <(kubectl completion $(basename $SHELL))
 # SUPPORT
 # -------------------------------------------------------------------------------
 
+# SOPS
+export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
+
 # FZF
 if type fzf &> /dev/null; then
   if type rg &> /dev/null; then
