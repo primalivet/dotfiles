@@ -5,12 +5,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, nix-darwin, ... }:
     let
       mkShell = system:
         let
