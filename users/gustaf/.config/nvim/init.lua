@@ -31,10 +31,6 @@ vim.api.nvim_create_autocmd({ "LspAttach" }, {
     if client:supports_method("textDocument/completion") then
       vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = false })
     end
-    vim.keymap.set("n", "grn", vim.lsp.buf.rename, { desc = "Rename symbol" })
-    vim.keymap.set("n", "gra", vim.lsp.buf.code_action, { desc = "List line code actions" })
-    vim.keymap.set("n", "grr", vim.lsp.buf.references, { desc = "List symbol references" })
-    vim.keymap.set("n", "<C-s>", vim.lsp.buf.signature_help, { desc = "Open signature help" })
   end
 })
 
@@ -78,33 +74,8 @@ now(function()
 end)
 
 now(function()
-  add("neovim/nvim-lspconfig" )
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  local servers = {
-    clangd = {},
-    cssls = {},
-    eslint = {},
-    gopls = {},
-    html = {},
-    jsonls = {},
-    lua_ls = {},
-    prismals = {},
-    pyright = {},
-    denols = {
-      root_dir = function(fname) return vim.fs.root(fname, {"deno.jsonc", "deno.json"}) end,
-      single_file_support = false
-    },
-    ts_ls = {
-      root_dir = function(fname) return vim.fs.root(fname, { "tsconfig.json", "jsconfig.json", "package.json"}) end,
-      single_file_support = false
-    }
-  }
-
-  for name, settings in pairs(servers) do
-    local combines = vim.tbl_extend("force", { capabilities = capabilities }, settings)
-    require"lspconfig"[name].setup(combines)
-  end
-
+  add("neovim/nvim-lspconfig" ) -- since 0.11 only needed to provide $RTP/lsp
+  vim.lsp.enable({ "clangd", "eslint", "gopls", "html", "jsonls", "lua_ls", "prismals", "pyright", "ts_ls" })
 end)
 
 later(function()

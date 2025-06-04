@@ -7,7 +7,7 @@
     git
     curl
     neovim
-    nodejs_23
+    nodejs
     ollama
     stow
     tree
@@ -28,6 +28,8 @@
     zsh
     fish
   ];
+
+  system.primaryUser = "gustaf";
 
   programs.zsh.enable = true;
   programs.direnv.enable = true;

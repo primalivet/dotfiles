@@ -6,11 +6,9 @@ theme = NvimDark
 # theme = Builtin Dark
 cursor-style = block
 shell-integration-features = no-cursor
-window-padding-x = 8
-window-padding-y = 8
-window-padding-balance = true
 window-save-state = always
 macos-titlebar-proxy-icon = hidden
+macos-titlebar-style = native
 auto-update-channel = tip
 
 # Sync the font size for all surfaces
