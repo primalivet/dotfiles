@@ -13,6 +13,7 @@ vim.opt.softtabstop = 2
 vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.wrap = false
+vim.opt.grepprg = "grep -HInr $* /dev/null"
 
 local group = vim.api.nvim_create_augroup("USER", {})
 
