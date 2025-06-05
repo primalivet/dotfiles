@@ -44,7 +44,6 @@ vim.keymap.set("n", "N", "Nzz", { desc = "Center cursor on search jump unnatural
 vim.keymap.set("n", "<leader>ts", ":set hlsearch!<CR>", { desc = "Toggle highlight search" })
 vim.keymap.set("n", "<leader>tn", ":set number! relativenumber!<CR>", { desc = "Toggle line numbers" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.setqflist, { desc = "Add buffer diagnostics to quickfix list"})
-vim.keymap.set("n", "<leader>ds", ":Gdiffsplit<CR>", { desc = "Git diff split current file" })
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Easily hit escape in terminal mode" })
 
 now(function()
