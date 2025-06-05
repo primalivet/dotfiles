@@ -58,8 +58,6 @@ now(function()
 end)
 
 now(function()
-  require"mini.diff".setup{}
-  vim.keymap.set("n", "ho", require"mini.diff".toggle_overlay, { desc = "Toggle hunk overlay" })
   add("tpope/vim-fugitive")
 end)
 
@@ -94,7 +92,6 @@ later(function()
     depends = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-lua/plenary.nvim",
-      "echasnovski/mini.nvim"
     }
   })
   local adapter = os.getenv("CODECOMPANION_MODEL") or "anthropic"
@@ -109,6 +106,5 @@ later(function()
       },
       inline = { adapter = adapter }
     },
-    display = { diff = { provider = "mini_diff" } }
   }
 end)
