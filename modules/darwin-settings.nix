@@ -1,7 +1,4 @@
 { pkgs, ... }: {
-
-  security.pam.services.sudo_local.touchIdAuth = true;
-
   system.defaults = {
     dock = {
       autohide = true;
@@ -22,5 +19,11 @@
 
     hitoolbox.AppleFnUsageType = "Change Input Source";
   };
+
+  security.pam.services.sudo_local.touchIdAuth = true;
+
+  security.pki.certificateFiles = [
+    ../certs/root-ca-homelab.crt
+  ];
 }
 
