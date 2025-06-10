@@ -73,7 +73,7 @@ end)
 
 now(function()
   add("neovim/nvim-lspconfig" ) -- since 0.11 only needed to provide $RTP/lsp
-  vim.lsp.enable({ "clangd", "eslint", "gopls", "html", "jsonls", "lua_ls", "prismals", "pyright", "ts_ls" })
+  vim.lsp.enable({ "clangd", "eslint", "gopls", "html", "jsonls", "lua_ls", "prismals", "pyright", "ts_ls", "bashls" })
 end)
 
 later(function()
