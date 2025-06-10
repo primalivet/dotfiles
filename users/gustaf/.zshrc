@@ -40,16 +40,13 @@ unsetopt HIST_VERIFY # Execute commands using history (e.g.: using !$) immediate
 # ZSH COMPLETION
 # -------------------------------------------------------------------------------
 
-# COMPLETION (the hyphen makes the "." command follow symlinks)
-[[ -d $HOME/zsh.d ]] && source $HOME/zsh.d/completion_*(-.)
-
-
 # Speed up completion (https://gist.github.com/ctechols/ca1035271ad134841284)
 autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
   compinit
 done
 
+_comp_options+=(globdots)
 unsetopt flowcontrol
 setopt auto_menu
 setopt complete_in_word
@@ -61,6 +58,7 @@ zstyle ':completion:*' menu select # Allow to select in completion menu
 
 type docker &>/dev/null && source <(docker completion $(basename $SHELL))
 type kubectl &>/dev/null && source <(kubectl completion $(basename $SHELL))
+type flux &>/dev/null && source <(flux completion $(basename $SHELL))
 
 # SUPPORT
 # -------------------------------------------------------------------------------
