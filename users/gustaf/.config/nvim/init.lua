@@ -63,7 +63,6 @@ end)
 
 now(function()
   require"mini.pick".setup{ window = { config = { width = math.floor(vim.o.columns) } } }
-  vim.ui.select = MiniPick.ui_select
   vim.keymap.set("n", "<leader>sc", ":Pick commands<CR>", { desc = "Find commands" })
   vim.keymap.set("n", "<leader>sf", ":Pick files<CR>", { desc = "Find files" })
   vim.keymap.set("n", "<leader>sl", ":Pick grep_live<CR>", { desc = "Find live in files" })
