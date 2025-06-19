@@ -14,6 +14,7 @@
     vim
     jq
     fzf
+    fd
     direnv
     sops
     age
