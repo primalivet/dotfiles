@@ -15,6 +15,42 @@ vim.opt.undofile = true
 vim.opt.wrap = false
 vim.opt.grepprg = "grep -HInr $* /dev/null"
 
+
+function _G.findfunc(cmdarg, cmdcomplete)
+
+  local files = vim.fn.systemlist('git ls-files')
+  if vim.v.shell_error ~= 0 then
+    return {}
+  end
+
+  local pattern = cmdcomplete and (cmdarg .. '.*') or cmdarg
+  local filtered = {}
+
+  for _, file in ipairs(files) do
+    if string.match(file:lower(), pattern:lower()) then
+      table.insert(filtered, file)
+    end
+  end
+
+  return filtered
+end
+
+function _G.findfunc_fd(name)
+  local cmd = { 'fd', '--hidden', '--full-path', name or '.' }
+  local result = vim.system(cmd, { text = true }):wait()
+  return vim.split(result.stdout, '\n', { trimempty = true })
+end
+
+local in_git_dir = vim.fs.root(0, '.git')
+local has_fd = vim.fn.executable('fd') == 1
+
+
+if has_fd then
+  vim.opt.findfunc = 'v:lua.findfunc_fd'
+elseif in_git_dir  then
+  vim.opt.findfunc = 'v:lua.find_git_files'
+end
+
 local group = vim.api.nvim_create_augroup("USER", {})
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
@@ -41,10 +77,13 @@ vim.keymap.set("v", "<", "<gv", { desc = "Keep visual selection while indenting 
 vim.keymap.set("v", ">", ">gv", { desc = "Keep visual selection while indenting right" })
 vim.keymap.set("n", "n", "nzz", { desc = "Center cursor on search jump natural direction" })
 vim.keymap.set("n", "N", "Nzz", { desc = "Center cursor on search jump unnatural direction" })
-vim.keymap.set("n", "<leader>ts", ":set hlsearch!<CR>", { desc = "Toggle highlight search" })
-vim.keymap.set("n", "<leader>tn", ":set number! relativenumber!<CR>", { desc = "Toggle line numbers" })
-vim.keymap.set("n", "<leader>d", vim.diagnostic.setqflist, { desc = "Add buffer diagnostics to quickfix list"})
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Easily hit escape in terminal mode" })
+vim.keymap.set("n", "<leader>s", ":set hlsearch!<CR>", { desc = "Toggle highlight search" })
+vim.keymap.set("n", "<leader>n", ":set number!<CR>", { desc = "Toggle line numbers" })
+vim.keymap.set("n", "<leader>d", vim.diagnostic.setqflist, { desc = "Add buffer diagnostics to quickfix list"})
+vim.keymap.set("n", "<leader>g", ":grep ", { desc = "Find file content" })
+vim.keymap.set("n", "<leader>f", ":find ", { desc = "Find file" })
+vim.keymap.set("n", "<leader>b", ":ls<CR>:b ", { desc = "Switch to buffer" })
 
 now(function()
   require"mini.surround".setup{}
