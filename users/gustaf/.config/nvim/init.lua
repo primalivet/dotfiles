@@ -16,7 +16,7 @@ vim.opt.wrap = false
 vim.opt.grepprg = "grep -HInr $* /dev/null"
 
 
-function _G.findfunc(cmdarg, cmdcomplete)
+function _G.findfunc_git(cmdarg, cmdcomplete)
 
   local files = vim.fn.systemlist('git ls-files')
   if vim.v.shell_error ~= 0 then
@@ -48,7 +48,7 @@ local has_fd = vim.fn.executable('fd') == 1
 if has_fd then
   vim.opt.findfunc = 'v:lua.findfunc_fd'
 elseif in_git_dir  then
-  vim.opt.findfunc = 'v:lua.find_git_files'
+  vim.opt.findfunc = 'v:lua.findfunc_git'
 end
 
 local group = vim.api.nvim_create_augroup("USER", {})
