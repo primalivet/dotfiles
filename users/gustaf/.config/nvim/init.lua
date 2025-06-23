@@ -15,39 +15,15 @@ vim.opt.undofile = true
 vim.opt.wrap = false
 vim.opt.grepprg = "grep -HInr $* /dev/null"
 
-
-function _G.findfunc_git(cmdarg, cmdcomplete)
-
-  local files = vim.fn.systemlist('git ls-files')
-  if vim.v.shell_error ~= 0 then
-    return {}
-  end
-
-  local pattern = cmdcomplete and (cmdarg .. '.*') or cmdarg
-  local filtered = {}
-
-  for _, file in ipairs(files) do
-    if string.match(file:lower(), pattern:lower()) then
-      table.insert(filtered, file)
-    end
-  end
-
-  return filtered
-end
-
-function _G.findfunc_fd(name)
-  local cmd = { 'fd', '--hidden', '--full-path', name or '.' }
+function _G.findfunc_git(cmdarg)
+  local pattern = '*' .. cmdarg .. '*'
+  local cmd = { 'git', 'ls-files', pattern }
   local result = vim.system(cmd, { text = true }):wait()
+  if result.code ~= 0 then return {} end
   return vim.split(result.stdout, '\n', { trimempty = true })
 end
 
-local in_git_dir = vim.fs.root(0, '.git')
-local has_fd = vim.fn.executable('fd') == 1
-
-
-if has_fd then
-  vim.opt.findfunc = 'v:lua.findfunc_fd'
-elseif in_git_dir  then
+if vim.fs.root(0, '.git') then
   vim.opt.findfunc = 'v:lua.findfunc_git'
 end
 
