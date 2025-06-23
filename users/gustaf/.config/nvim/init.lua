@@ -13,7 +13,7 @@ vim.opt.softtabstop = 2
 vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.wrap = false
-vim.opt.grepprg = "grep -HInr $* /dev/null"
+vim.opt.grepprg = "grep -HInr --exclude-dir={node_modules,.git,build,dist} $* /dev/null"
 
 function _G.findfunc_git(cmdarg)
   local pattern = '*' .. cmdarg .. '*'
