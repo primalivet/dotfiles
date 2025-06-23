@@ -7,10 +7,6 @@
     casks = [
       "rectangle"
       "ghostty@tip"
-      "google-drive"
-      "google-chrome"
-      "zed"
-      "cursor"
       "bruno"
       "docker"
       "tailscale"
