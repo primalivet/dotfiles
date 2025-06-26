@@ -1,7 +1,8 @@
 local now, add, later = require 'user'.setup()
 
 vim.opt.clipboard = "unnamedplus"
-vim.opt.completeopt = "menuone,popup,fuzzy,noinsert"
+vim.opt.completeopt:append("fuzzy")
+vim.opt.wildmode = "longest:full,full"
 vim.opt.expandtab = true
 vim.opt.ignorecase = true
 vim.opt.inccommand = "split"
