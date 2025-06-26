@@ -38,8 +38,8 @@
   # };
 
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
   services.spice-vdagentd.enable = true;
   services.spice-autorandr.enable = true;
 
@@ -62,6 +62,8 @@
   # services.libinput.enable = true;
 
   programs.zsh.enable = true;
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
 
   # programs.firefox.enable = true;
 
@@ -70,12 +72,13 @@
   environment.systemPackages = with pkgs; [
     brave
     curl
+    direnv
     firefox
     gcc
     git
     gnumake
     neovim
-    nodejs_23
+    nodejs
     ollama
     stow
     tree
