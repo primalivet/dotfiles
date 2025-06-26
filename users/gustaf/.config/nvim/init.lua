@@ -64,7 +64,6 @@ vim.keymap.set("n", "<leader>f", ":find ", { desc = "Find file" })
 vim.keymap.set("n", "<leader>b", ":ls<CR>:b ", { desc = "Switch to buffer" })
 
 now(function()
-  require"mini.surround".setup{}
   add("nvim-treesitter/nvim-treesitter" )
   require "nvim-treesitter.configs".setup {
     auto_install = true,
