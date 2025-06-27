@@ -116,8 +116,8 @@
     "192.168.1.10" = [ "hello.local" ];
   };
 
-  virtualisation.docker.enable = true;
-  virtualisation.docker.enableOnBoot = true;
+  virtualisation.podman.enable = true;
+  virtualisation.containers.enable = true;
 
   users.users.gustaf = {
     isNormalUser = true;
