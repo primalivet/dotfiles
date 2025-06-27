@@ -30,6 +30,14 @@ end
 
 local group = vim.api.nvim_create_augroup("USER", {})
 
+vim.api.nvim_create_autocmd({ "ColorScheme" }, {
+  group = group,
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+  end
+})
+
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   group = group,
   pattern = "*",
