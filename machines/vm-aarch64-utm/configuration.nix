@@ -85,6 +85,7 @@
     vim
     wget
     xclip
+    fzf
 
     # Networking
     inetutils
