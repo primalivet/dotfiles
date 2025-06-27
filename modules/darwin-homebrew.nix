@@ -8,7 +8,6 @@
       "rectangle"
       "ghostty@tip"
       "bruno"
-      "docker"
       "tailscale"
     ];
   };
