@@ -57,6 +57,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive pat
 zstyle ':completion:*' menu select # Allow to select in completion menu
 
 type docker &>/dev/null && source <(docker completion $(basename $SHELL))
+type podman &>/dev/null && source <(podman completion $(basename $SHELL))
 type kubectl &>/dev/null && source <(kubectl completion $(basename $SHELL))
 type flux &>/dev/null && source <(flux completion $(basename $SHELL))
 
