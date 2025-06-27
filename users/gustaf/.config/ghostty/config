@@ -1,7 +1,7 @@
 font-size = 16
-#font-family = Ubuntu Mono
-font-family = Ac437 ToshibaSat 8x14
-# font-thicken = true
+font-family = Ubuntu Mono
+#font-family = Ac437 ToshibaSat 8x14
+font-thicken = true
 theme = NvimDark
 cursor-style = block
 shell-integration-features = no-cursor
