@@ -38,6 +38,8 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, {
   end
 })
 
+vim.cmd[[colorscheme default]]
+
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   group = group,
   pattern = "*",
