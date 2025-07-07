@@ -100,35 +100,35 @@ now(function()
   vim.lsp.enable({ "clangd", "eslint", "gopls", "html", "jsonls", "lua_ls", "prismals", "pyright", "ts_ls", "bashls" })
 end)
 
-later(function()
-  add("zbirenbaum/copilot.lua")
-  require "copilot".setup {
-    suggestion = { enable = true, auto_trigger = true,
-      -- Resembles the default completion keymaps but with Modifier instead of Control
-      keymap = { accept = "<M-y>", next = "<M-n>", prev = "<M-p>", dismiss = "<M-c>" }
-    },
-  }
-end)
-
-later(function()
-  add({
-    source = "olimorris/codecompanion.nvim",
-    depends = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-lua/plenary.nvim",
-    }
-  })
-  local adapter = os.getenv("CODECOMPANION_MODEL") or "anthropic"
-  require"codecompanion".setup {
-    strategies = {
-      chat = {
-        adapter = adapter,
-        keymaps = {
-          -- Override omni completion
-          completion = { modes = { i = "<C-x><C-o>" } }
-        }
-      },
-      inline = { adapter = adapter }
-    },
-  }
-end)
+-- later(function()
+--   add("zbirenbaum/copilot.lua")
+--   require "copilot".setup {
+--     suggestion = { enable = true, auto_trigger = true,
+--       -- Resembles the default completion keymaps but with Modifier instead of Control
+--       keymap = { accept = "<M-y>", next = "<M-n>", prev = "<M-p>", dismiss = "<M-c>" }
+--     },
+--   }
+-- end)
+--
+-- later(function()
+--   add({
+--     source = "olimorris/codecompanion.nvim",
+--     depends = {
+--       "nvim-treesitter/nvim-treesitter",
+--       "nvim-lua/plenary.nvim",
+--     }
+--   })
+--   local adapter = os.getenv("CODECOMPANION_MODEL") or "anthropic"
+--   require"codecompanion".setup {
+--     strategies = {
+--       chat = {
+--         adapter = adapter,
+--         keymaps = {
+--           -- Override omni completion
+--           completion = { modes = { i = "<C-x><C-o>" } }
+--         }
+--       },
+--       inline = { adapter = adapter }
+--     },
+--   }
+-- end)

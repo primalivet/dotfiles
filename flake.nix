@@ -36,6 +36,15 @@
       };
 
       nixosConfigurations = {
+        vm-aarch64-fusion = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [
+            { nixpkgs.config.allowUnfree = true; }
+            { nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ]; }
+            ./machines/vm-aarch64-fusion/configuration.nix
+          ];
+        };
+
         vm-aarch64-utm = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
