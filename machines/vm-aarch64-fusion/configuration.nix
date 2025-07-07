@@ -33,6 +33,7 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocales = [ "sv_SE.UTF-8/UTF-8" ];
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
@@ -55,13 +56,20 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
+  # Realtime Kit (handle realtime scheduling prio to user processes).
+  # Needed as PipeWire (and PulseAudio) uses this to have realtime playback.
+  security.rtkit.enable = true; 
+
   # Enable sound.
   # services.pulseaudio.enable = true;
   # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
+  services.pipewire = {
+    enable = true;
+    systemWide = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
@@ -71,6 +79,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     hashedPassword = "$6$OWAIYB4NAWgGyXXg$/IJsv3w4kNOq9Py2O9ZEQgk4q3.yUubYLDuon58ONS7mH4JmpoSWw8L668wVSEhV0QuMwSkPFir9Vyeor3V0Y.";
+    shell = pkgs.bashInteractive;
   };
 
   programs.sway = {
@@ -100,6 +109,7 @@
     pixman
     fzf
     gnumake
+    i3status
     
     # Hyprland
     kitty
