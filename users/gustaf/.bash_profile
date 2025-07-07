@@ -97,14 +97,6 @@ export HISTSIZE=$HISTFILESIZE
 # limit). The shell sets the default value to 500 after reading any startup
 # files.
 
-export LANG='en_US.UTF-8'
-# Used to determine the locale category for any category not specifically
-# selected with a variable starting with LC_.
-
-export LC_TIME='sv_SE.UTF-8'
-# This variable determines the locale category used for data and time
-# formatting.
-
 # unset PROMPT_COMMAND
 # If this variable is set, and is an array, the value of each set element is
 # interpreted as a command to execute before printing the primary prompt
