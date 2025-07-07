@@ -16,7 +16,7 @@ set $right l
 # Your preferred terminal emulator
 set $term foot
 # Your preferred application launcher
-set $menu "wmenu-run -f 'Monospace 13'"
+set $menu "wmenu-run -f 'Monospace 12'"
 
 ### Output configuration
 #
@@ -59,6 +59,8 @@ output Virtual-1 resolution 2624x1638 position 0,0 scale 1.5
 #
 # You can also configure each device individually.
 # Read `man 5 sway-input` for more information about this section.
+
+font monospace 12
 
 input type:pointer {
   accel_profile flat
