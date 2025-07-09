@@ -40,6 +40,10 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
+  fonts.packages = with pkgs; [
+    proggyfonts
+  ];
+
   hardware.graphics.enable = true;
   virtualisation.vmware.guest.enable = true;
 
@@ -110,6 +114,7 @@
     fzf
     gnumake
     i3status
+    brave
     
     # Hyprland
     kitty
