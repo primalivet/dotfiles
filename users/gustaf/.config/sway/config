@@ -1,8 +1,4 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
+font ProggyCleanTT Regular 12
 
 ### Variables
 #
@@ -16,7 +12,7 @@ set $right l
 # Your preferred terminal emulator
 set $term foot
 # Your preferred application launcher
-set $menu "wmenu-run -f 'Monospace 12'"
+set $menu "wmenu-run -f 'ProggyCleanTT Regular 12'"
 
 ### Output configuration
 #
@@ -25,7 +21,7 @@ set $menu "wmenu-run -f 'Monospace 12'"
 #
 # Example configuration:
 #
-output Virtual-1 resolution 2624x1638 position 0,0 scale 1.5
+output Virtual-1 scale 2.0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -43,24 +39,13 @@ output Virtual-1 resolution 2624x1638 position 0,0 scale 1.5
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
-#
-# Example configuration:
-#
-#   input type:touchpad {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-#   input type:keyboard {
-#       xkb_layout "eu"
-#   }
-#
-# You can also configure each device individually.
-# Read `man 5 sway-input` for more information about this section.
 
-font monospace 12
+input "3599:6:VMware_VMware_Virtual_USB_Keyboard" {
+  xkb_layout "us"
+  xkb_options altwin:swap_lalt_lwin
+  repeat_delay 200
+  repeat_rate 45
+}
 
 input type:pointer {
   accel_profile flat
@@ -209,6 +194,7 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
 #
 # Utilities:
 #
@@ -233,22 +219,17 @@ bindsym $mod+r mode "resize"
     bindsym Print exec grim
 
 #
-# Status Bar:
+# Sway bar:
 #
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-    # status_command while ~/.config/sway/status.sh; do sleep 1; done
+bar {
+    position bottom
+
     status_command i3status
 
     colors {
         statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        background #000000
     }
 }
 
