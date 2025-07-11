@@ -89,6 +89,7 @@
   programs.sway = {
     enable = true;
   };
+
   programs.hyprland = {
     enable = true;
     withUWSM = true;
@@ -100,29 +101,48 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
+    # Basic
     gcc
     curl
-    git
-    stow
-    tree
-    vim 
-    neovim
     wget
-    inxi
-    glxinfo
-    pixman
+    git
+    tree
     fzf
     gnumake
-    i3status
-    brave
-    
-    # Hyprland
+
+    #Editors
+    vim 
+    neovim
+
+    # Media
+    mpv # video player
+    grim # grab image from wl compositor
+    slurp # select region from wl compositor
+    wf-recorder # screen recoding for wl compositor
+
+    # Notifications
+    # TODO: mako
+
+    # Dotfiles
+    stow
+
+    # Terminal emulators
     kitty
     alacritty
     ghostty
-    kdePackages.konsole
-    waybar
     st
+    foot
+
+    # Rendering
+    inxi
+    glxinfo
+    pixman
+
+    # Sway/i3
+    i3status
+    
+    # Hyprland
+    waybar
     wofi
     libsForQt5.qt5.qtwayland
     kdePackages.qtwayland
