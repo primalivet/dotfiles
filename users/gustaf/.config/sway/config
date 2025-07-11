@@ -80,8 +80,8 @@ input type:pointer {
 #
 # Assigning workspace
 #
-    assign [app_id=firefox] 1
-    assign [app_id=foot] 2
+    # assign [app_id=firefox] 1
+    # assign [app_id=foot] 2
 #
 # Moving around:
 #
