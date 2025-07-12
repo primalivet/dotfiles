@@ -9,6 +9,7 @@
       "ghostty@tip"
       "bruno"
       "tailscale"
+      "firefox"
     ];
   };
 }
