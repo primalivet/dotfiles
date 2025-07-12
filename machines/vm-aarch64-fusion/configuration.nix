@@ -75,6 +75,9 @@
     pulse.enable = true;
   };
 
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
@@ -101,51 +104,30 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-    # Basic
-    gcc
     curl
-    wget
-    git
-    tree
-    fzf
-    gnumake
-
-    #Editors
-    vim 
-    neovim
-
-    # Media
-    mpv # video player
-    grim # grab image from wl compositor
-    slurp # select region from wl compositor
-    wf-recorder # screen recoding for wl compositor
-
-    # Notifications
-    # TODO: mako
-
-    # Dotfiles
-    stow
-
-    # Terminal emulators
-    kitty
-    alacritty
-    ghostty
-    st
     foot
-
-    # Rendering
-    inxi
-    glxinfo
-    pixman
-
-    # Sway/i3
+    fzf
+    gcc
+    git
+    gnumake
+    grim # grab image from wl compositor
     i3status
-    
-    # Hyprland
-    waybar
-    wofi
-    libsForQt5.qt5.qtwayland
-    kdePackages.qtwayland
+    inxi # system information tool
+    mesa-demos # demos and tests for Mesa/OpenGL
+    mpv # video player
+    nautilus
+    neovim
+    pixman # pixel manipulation lib, used for software rendering
+    slurp # select region from wl compositor
+    st
+    stow
+    swayimg # image viewer
+    # TODO: mako # notification deamon
+    tree
+    vim 
+    wf-recorder # screen recoding for wl compositor
+    wget
+    wl-clipboard
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
