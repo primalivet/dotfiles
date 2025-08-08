@@ -1,4 +1,4 @@
-font ProggyCleanTT Regular 12
+font Terminus (TTF) Regular 10
 
 ### Variables
 #
@@ -12,7 +12,7 @@ set $right l
 # Your preferred terminal emulator
 set $term foot
 # Your preferred application launcher
-set $menu "wmenu-run -f 'ProggyCleanTT Regular 12'"
+set $menu "wmenu-run -f 'Terminus (TTF) Regular 10'"
 
 ### Output configuration
 #
@@ -223,9 +223,9 @@ bindsym $mod+r mode "resize"
 #
 
 bar {
-    position bottom
+    position top
 
-    status_command i3status
+    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
 
     colors {
         statusline #ffffff
@@ -233,4 +233,4 @@ bar {
     }
 }
 
-include @sysconfdir@/sway/config.d/*
+include /etc/sway/config.d/*
