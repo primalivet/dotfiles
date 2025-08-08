@@ -1,4 +1,4 @@
-font Terminus (TTF) Regular 10
+font Terminus (TTF) Regular 8
 
 ### Variables
 #
@@ -12,7 +12,7 @@ set $right l
 # Your preferred terminal emulator
 set $term foot
 # Your preferred application launcher
-set $menu "wmenu-run -f 'Terminus (TTF) Regular 10'"
+set $menu "wmenu-run -f 'Terminus (TTF) Regular 8'"
 
 ### Output configuration
 #
@@ -226,6 +226,10 @@ bar {
     position top
 
     status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+
+    tray {
+      tray_output *
+    }
 
     colors {
         statusline #ffffff
