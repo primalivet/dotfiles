@@ -202,6 +202,27 @@
         "type": "github"
       }
     },
+    "nix-darwin-linking": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1750492472,
+        "narHash": "sha256-0FKpJlzwgbvM2eD+hq9M363CEStiJUAh880fsIBMwUQ=",
+        "owner": "dwt",
+        "repo": "nix-darwin",
+        "rev": "be2d7d653567f49223d4d675e4a7d268a6ce90ba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dwt",
+        "ref": "application-linking-done-right",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1754278406,
@@ -238,6 +259,7 @@
       "inputs": {
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nix-darwin": "nix-darwin",
+        "nix-darwin-linking": "nix-darwin-linking",
         "nixpkgs": "nixpkgs_2"
       }
     },

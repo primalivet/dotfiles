@@ -5,6 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin-linking.url = "github:dwt/nix-darwin/application-linking-done-right";
+    nix-darwin-linking.inputs.nixpkgs.follows = "nixpkgs";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
@@ -32,6 +34,10 @@
           { nixpkgs.config.allowUnfree = true; }
           { nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ]; }
           ./machines/macbook-pro/configuration.nix
+          # Needed for linking GUI apps, will probably be merged soon
+          # https://github.com/nix-darwin/nix-darwin/pull/1396
+          { disabledModules = [ "system/applications.nix" ]; }
+          "${inputs.nix-darwin-linking}/modules/system/applications.nix"
         ];
       };
 
