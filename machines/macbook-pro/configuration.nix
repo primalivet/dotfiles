@@ -1,43 +1,42 @@
 { pkgs, ... }: {
 
+  fonts.packages = with pkgs; [
+    terminus_font_ttf
+  ];
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    git
+    age
+    coreutils
     curl
+    direnv
+    fzf
+    git
+    inetutils
+    jq
     neovim
+    nmap
     nodejs
     ollama
+    sops
     stow
+    tmux
     tree
     vim
-    jq
-    fzf
-    direnv
-    sops
-    age
-    # Networking
-    inetutils
-    nmap
-    coreutils
   ];
 
   environment.shells = with pkgs; [
     bashInteractive
-    zsh
-    fish
   ];
 
   system.primaryUser = "gustaf";
 
-  programs.zsh.enable = true;
+  programs.bash.enable = true;
+  programs.bash.completion.enable = true;
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
   imports = [
     ../../modules/darwin-settings.nix
-    ../../modules/darwin-homebrew.nix
   ];
 
   # There seem to have been issues with controling the users shell, these
@@ -63,7 +62,7 @@
     users.gustaf = {
       uid = 501;
       home = "/Users/gustaf";
-      shell = pkgs.zsh;
+      shell = pkgs.bashInteractive;
     };
   };
 

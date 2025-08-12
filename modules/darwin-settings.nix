@@ -1,23 +1,51 @@
 { pkgs, ... }: {
   system.defaults = {
-    dock = {
-      autohide = true;
-      show-recents = false;
-    };
+    # NSGlobalDomain."com.apple.keyboard.fnState" # Use F1, F2, etc. keys as standard function keys. Type: null or boolean Default: null
+    NSGlobalDomain."com.apple.swipescrolldirection" = false; # Natural scrolling
+    NSGlobalDomain.AppleShowAllExtensions = true;
+    NSGlobalDomain.AppleShowAllFiles = true;
+    NSGlobalDomain.InitialKeyRepeat = 15;
+    NSGlobalDomain.KeyRepeat = 2;
+    NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
+    NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
+    NSGlobalDomain._HIHideMenuBar = false;
 
-    # Probably need to elevate permissions to set this has mac has "protection"
-    # for my self into ~/Documents, ~/Downloads etc.
-    # screencapture.location = "${builtins.getEnv ("HOME")}/Documents/Screenshots";
-    screencapture.location = "~/Screenshots";
+    WindowManager.EnableTilingByEdgeDrag = false;
+    WindowManager.EnableTilingOptionAccelerator = false;
+    WindowManager.EnableTopTilingByEdgeDrag = false;
 
-    finder = {
-      AppleShowAllExtensions = true;
-      _FXShowPosixPathInTitle = true;
-    };
+    controlcenter.BatteryShowPercentage = true; # Show battery percentage in menubar
+    controlcenter.Bluetooth = true; # Show bluetooth in menubar
+    controlcenter.Sound = true; # Show sound in menubar
 
-    NSGlobalDomain._HIHideMenuBar = true;
+    dock.autohide = true;
+    dock.mru-spaces = false; # Rearrange spaces by most recent use
+    dock.show-recents = false;
+
+    finder.AppleShowAllExtensions = true;
+    finder.CreateDesktop = false; # Hide desktop icons
+    finder.FXPreferredViewStyle = "Nlsv";
+    finder.ShowExternalHardDrivesOnDesktop = false;
+    finder.ShowHardDrivesOnDesktop = false;
+    finder.ShowMountedServersOnDesktop = false;
+    finder.ShowPathbar = true;
+    finder._FXShowPosixPathInTitle = true;
 
     hitoolbox.AppleFnUsageType = "Change Input Source";
+
+    screencapture.location = "~/Screenshots";
+
+    spaces.spans-displays = true; # one space spans all displays
+
+  };
+
+  system.keyboard = { 
+    enableKeyMapping = true;
+    swapLeftCommandAndLeftAlt = true;
+  };
+
+  system.startup = {
+    chime = false;
   };
 
   security.pam.services.sudo_local.touchIdAuth = true;
