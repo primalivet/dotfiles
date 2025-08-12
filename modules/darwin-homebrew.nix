@@ -5,7 +5,7 @@
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
     casks = [
-      "rectangle"
+      # "nikitabobko/tap/aerospace"
       "ghostty@tip"
       "bruno"
       "tailscale"
