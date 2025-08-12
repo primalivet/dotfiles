@@ -39,11 +39,6 @@
 
   };
 
-  system.keyboard = { 
-    enableKeyMapping = true;
-    swapLeftCommandAndLeftAlt = true;
-  };
-
   system.startup = {
     chime = false;
   };
