@@ -1,0 +1,434 @@
+################################################################################
+# READLINE
+################################################################################
+# https://tiswww.cwru.edu/php/chet/readline/rluserman.html#Readline-Init-File
+# https://tiswww.cwru.edu/php/chet/readline/readline.html
+# https://wiki.archlinux.org/title/Readline
+# https://catonmat.net/ftp/bash-vi-editing-mode-cheat-sheet.pdf
+
+# TODO: Get daw and other from
+# https://github.com/deut-erium/.dotfiles/blob/main/.inputrc
+
+# active-region-start-color
+# A string variable that controls the text color and background when displaying
+# the text in the active region (see the description of enable-active-region
+# below). This string must not take up any physical character positions on the
+# display, so it should consist only of terminal escape sequences. It is output
+# to the terminal before displaying the text in the active region. This variable
+# is reset to the default value whenever the terminal type changes. The default
+# value is the string that puts the terminal in standout mode, as obtained from
+# the terminal’s terminfo description. A sample value might be ‘\e[01;33m’.
+
+# active-region-end-color
+# A string variable that "undoes" the effects of active-region-start-color and
+# restores "normal" terminal display appearance after displaying text in the
+# active region. This string must not take up any physical character positions on
+# the display, so it should consist only of terminal escape sequences. It is
+# output to the terminal after displaying the text in the active region. This
+# variable is reset to the default value whenever the terminal type changes. The
+# default value is the string that restores the terminal from standout mode, as
+# obtained from the terminal’s terminfo description. A sample value might be
+# ‘\e[0m’.
+
+set bell-style none
+# Controls what happens when Readline wants to ring the terminal bell. If set to
+# ‘none’, Readline never rings the bell. If set to ‘visible’, Readline uses a
+# visible bell if one is available. If set to ‘audible’ (the default), Readline
+# attempts to ring the terminal’s bell.
+
+# bind-tty-special-chars
+# If set to ‘on’ (the default), Readline attempts to bind the control characters
+# treated specially by the kernel’s terminal driver to their Readline
+# equivalents.
+
+# blink-matching-paren
+# If set to ‘on’, Readline attempts to briefly move the cursor to an opening
+# parenthesis when a closing parenthesis is inserted. The default is ‘off’.
+
+set colored-completion-prefix on
+# If set to ‘on’, when listing completions, Readline displays the common prefix
+# of the set of possible completions using a different color. The color
+# definitions are taken from the value of the LS_COLORS environment variable. If
+# there is a color definition in LS_COLORS for the custom suffix
+# ‘readline-colored-completion-prefix’, Readline uses this color for the common
+# prefix instead of its default. The default is ‘off’.
+
+# colored-stats
+# If set to ‘on’, Readline displays possible completions using different colors
+# to indicate their file type. The color definitions are taken from the value of
+# the LS_COLORS environment variable. The default is ‘off’.
+
+# comment-begin
+# The string to insert at the beginning of the line when the insert-comment
+# command is executed. The default value is "#".
+
+set completion-display-width 80
+# The number of screen columns used to display possible matches when performing
+# completion. The value is ignored if it is less than 0 or greater than the
+# terminal screen width. A value of 0 will cause matches to be displayed one per
+# line. The default value is -1.
+
+set completion-ignore-case on
+# If set to ‘on’, Readline performs filename matching and completion in a
+# case-insensitive fashion. The default value is ‘off’.
+
+set completion-map-case on
+# If set to ‘on’, and completion-ignore-case is enabled, Readline treats hyphens
+# (‘-’) and underscores (‘_’) as equivalent when performing case-insensitive
+# filename matching and completion. The default value is ‘off’.
+
+# completion-prefix-display-length
+# The length in characters of the common prefix of a list of possible completions
+# that is displayed without modification. When set to a value greater than zero,
+# common prefixes longer than this value are replaced with an ellipsis when
+# displaying possible completions.
+
+# completion-query-items
+# The number of possible completions that determines when the user is asked
+# whether the list of possibilities should be displayed. If the number of
+# possible completions is greater than or equal to this value, Readline will ask
+# whether or not the user wishes to view them; otherwise, they are simply listed.
+# This variable must be set to an integer value greater than or equal to zero. A
+# zero value means Readline should never ask; negative values are treated as
+# zero. The default limit is 100.
+
+# convert-meta
+# If set to ‘on’, Readline will convert characters with the eighth bit set to an
+# ASCII key sequence by stripping the eighth bit and prefixing an ESC character,
+# converting them to a meta-prefixed key sequence. The default value is ‘on’, but
+# will be set to ‘off’ if the locale is one that contains eight-bit characters.
+# This variable is dependent on the LC_CTYPE locale category, and may change if
+# the locale is changed.
+
+# disable-completion
+# If set to ‘On’, Readline will inhibit word completion. Completion characters
+# will be inserted into the line as if they had been mapped to self-insert. The
+# default is ‘off’.
+
+set echo-control-characters off
+# When set to ‘on’, on operating systems that indicate they support it, Readline
+# echoes a character corresponding to a signal generated from the keyboard. The
+# default is ‘on’.
+
+set editing-mode emacs
+# The editing-mode variable controls which default set of key bindings is used.
+# By default, Readline starts up in Emacs editing mode, where the keystrokes are
+# most similar to Emacs. This variable can be set to either ‘emacs’ or ‘vi’.
+
+# emacs-mode-string
+# If the show-mode-in-prompt variable is enabled, this string is displayed
+# immediately before the last line of the primary prompt when emacs editing mode
+# is active. The value is expanded like a key binding, so the standard set of
+# meta- and control prefixes and backslash escape sequences is available. Use the
+# ‘\1’ and ‘\2’ escapes to begin and end sequences of non-printing characters,
+# which can be used to embed a terminal control sequence into the mode string.
+# The default is ‘@’.
+
+# enable-active-region
+# The point is the current cursor position, and mark refers to a saved cursor
+# position (see Commands For Moving). The text between the point and mark is
+# referred to as the region. When this variable is set to ‘On’, Readline allows
+# certain commands to designate the region as active. When the region is active,
+# Readline highlights the text in the region using the value of the
+# active-region-start-color, which defaults to the string that enables the
+# terminal’s standout mode. The active region shows the text inserted by
+# bracketed-paste and any matching text found by incremental and non-incremental
+# history searches. The default is ‘On’.
+
+# enable-bracketed-paste
+# When set to ‘On’, Readline configures the terminal to insert each paste into
+# the editing buffer as a single string of characters, instead of treating each
+# character as if it had been read from the keyboard. This is called putting the
+# terminal into bracketed paste mode; it prevents Readline from executing any
+# editing commands bound to key sequences appearing in the pasted text. The
+# default is ‘On’.
+
+# enable-keypad
+# When set to ‘on’, Readline will try to enable the application keypad when it is
+# called. Some systems need this to enable the arrow keys. The default is ‘off’.
+
+# enable-meta-key
+# When set to ‘on’, Readline will try to enable any meta modifier key the
+# terminal claims to support when it is called. On many terminals, the meta key
+# is used to send eight-bit characters. The default is ‘on’.
+
+# expand-tilde
+# If set to ‘on’, tilde expansion is performed when Readline attempts word
+# completion. The default is ‘off’.
+
+# history-preserve-point
+# If set to ‘on’, the history code attempts to place the point (the current
+# cursor position) at the same location on each history line retrieved with
+# previous-history or next-history. The default is ‘off’.
+
+# history-size
+# Set the maximum number of history entries saved in the history list. If set to
+# zero, any existing history entries are deleted and no new entries are saved. If
+# set to a value less than zero, the number of history entries is not limited. By
+# default, the number of history entries is not limited. If an attempt is made to
+# set history-size to a non-numeric value, the maximum number of history entries
+# will be set to 500.
+
+# horizontal-scroll-mode
+# This variable can be set to either ‘on’ or ‘off’. Setting it to ‘on’ means that
+# the text of the lines being edited will scroll horizontally on a single screen
+# line when they are longer than the width of the screen, instead of wrapping
+# onto a new screen line. This variable is automatically set to ‘on’ for
+# terminals of height 1. By default, this variable is set to ‘off’.
+
+# input-meta
+# If set to ‘on’, Readline will enable eight-bit input (it will not clear the
+# eighth bit in the characters it reads), regardless of what the terminal claims
+# it can support. The default value is ‘off’, but Readline will set it to ‘on’ if
+# the locale contains eight-bit characters. The name meta-flag is a synonym for
+# this variable. This variable is dependent on the LC_CTYPE locale category, and
+# may change if the locale is changed.
+
+# isearch-terminators
+# The string of characters that should terminate an incremental search without
+# subsequently executing the character as a command (see Searching for Commands
+# in the History). If this variable has not been given a value, the characters
+# ESC and C-J will terminate an incremental search.
+
+# keymap
+# Sets Readline’s idea of the current keymap for key binding commands. Built-in
+# keymap names are emacs, emacs-standard, emacs-meta, emacs-ctlx, vi, vi-move,
+# vi-command, and vi-insert. vi is equivalent to vi-command (vi-move is also a
+# synonym); emacs is equivalent to emacs-standard. Applications may add
+# additional names. The default value is emacs. The value of the editing-mode
+# variable also affects the default keymap.
+
+# keyseq-timeout
+# Specifies the duration Readline will wait for a character when reading an
+# ambiguous key sequence (one that can form a complete key sequence using the
+# input read so far, or can take additional input to complete a longer key
+# sequence). If no input is received within the timeout, Readline will use the
+# shorter but complete key sequence. Readline uses this value to determine
+# whether or not input is available on the current input source (rl_instream by
+# default). The value is specified in milliseconds, so a value of 1000 means that
+# Readline will wait one second for additional input. If this variable is set to
+# a value less than or equal to zero, or to a non-numeric value, Readline will
+# wait until another key is pressed to decide which key sequence to complete. The
+# default value is 500.
+
+# mark-directories
+# If set to ‘on’, completed directory names have a slash appended. The default is
+# ‘on’.
+
+# mark-modified-lines
+# This variable, when set to ‘on’, causes Readline to display an asterisk (‘*’)
+# at the start of history lines which have been modified. This variable is ‘off’
+# by default.
+
+# mark-symlinked-directories
+# If set to ‘on’, completed names which are symbolic links to directories have a
+# slash appended (subject to the value of mark-directories). The default is
+# ‘off’.
+
+# match-hidden-files
+# This variable, when set to ‘on’, causes Readline to match files whose names
+# begin with a ‘.’ (hidden files) when performing filename completion. If set to
+# ‘off’, the leading ‘.’ must be supplied by the user in the filename to be
+# completed. This variable is ‘on’ by default.
+
+set menu-complete-display-prefix on
+# If set to ‘on’, menu completion displays the common prefix of the list of
+# possible completions (which may be empty) before cycling through the list. The
+# default is ‘off’.
+
+# output-meta
+# If set to ‘on’, Readline will display characters with the eighth bit set
+# directly rather than as a meta-prefixed escape sequence. The default is ‘off’,
+# but Readline will set it to ‘on’ if the locale contains eight-bit characters.
+# This variable is dependent on the LC_CTYPE locale category, and may change if
+# the locale is changed.
+
+# page-completions
+# If set to ‘on’, Readline uses an internal more-like pager to display a
+# screenful of possible completions at a time. This variable is ‘on’ by default.
+
+# print-completions-horizontally
+# If set to ‘on’, Readline will display completions with matches sorted
+# horizontally in alphabetical order, rather than down the screen. The default is
+# ‘off’.
+
+# revert-all-at-newline
+# If set to ‘on’, Readline will undo all changes to history lines before
+# returning when accept-line is executed. By default, history lines may be
+# modified and retain individual undo lists across calls to readline(). The
+# default is ‘off’.
+
+set show-all-if-ambiguous on
+# This alters the default behavior of the completion functions. If set to ‘on’,
+# words which have more than one possible completion cause the matches to be
+# listed immediately instead of ringing the bell. The default value is ‘off’.
+
+set show-all-if-unmodified on
+# This alters the default behavior of the completion functions in a fashion
+# similar to show-all-if-ambiguous. If set to ‘on’, words which have more than
+# one possible completion without any possible partial completion (the possible
+# completions don’t share a common prefix) cause the matches to be listed
+# immediately instead of ringing the bell. The default value is ‘off’.
+
+# set show-mode-in-prompt on
+# If set to ‘on’, add a string to the beginning of the prompt indicating the
+# editing mode: emacs, vi command, or vi insertion. The mode strings are
+# user-settable (e.g., emacs-mode-string). The default value is ‘off’.
+
+# skip-completed-text
+# If set to ‘on’, this alters the default completion behavior when inserting a
+# single match into the line. It’s only active when performing completion in the
+# middle of a word. If enabled, Readline does not insert characters from the
+# completion that match characters after point in the word being completed, so
+# portions of the word following the cursor are not duplicated. For instance, if
+# this is enabled, attempting completion when the cursor is after the ‘e’ in
+# ‘Makefile’ will result in ‘Makefile’ rather than ‘Makefilefile’, assuming there
+# is a single possible completion. The default value is ‘off’.
+
+set vi-cmd-mode-string "CMD"
+# If the show-mode-in-prompt variable is enabled, this string is displayed
+# immediately before the last line of the primary prompt when vi editing mode is
+# active and in command mode. The value is expanded like a key binding, so the
+# standard set of meta- and control prefixes and backslash escape sequences is
+# available. Use the ‘\1’ and ‘\2’ escapes to begin and end sequences of
+# non-printing characters, which can be used to embed a terminal control sequence
+# into the mode string. The default is ‘(cmd)’.
+
+set vi-ins-mode-string "INS"
+# If the show-mode-in-prompt variable is enabled, this string is displayed
+# immediately before the last line of the primary prompt when vi editing mode is
+# active and in insertion mode. The value is expanded like a key binding, so the
+# standard set of meta- and control prefixes and backslash escape sequences is
+# available. Use the ‘\1’ and ‘\2’ escapes to begin and end sequences of
+# non-printing characters, which can be used to embed a terminal control sequence
+# into the mode string. The default is ‘(ins)’.
+
+set visible-stats on
+# If set to ‘on’, a character denoting a file’s type is appended to the filename
+# when listing possible completions. The default is ‘off’.
+
+
+################################################################################
+# KEY MAPS
+################################################################################
+
+$if mode=vi
+  set keymap vi-command
+  "\C-X\C-R": re-read-init-file        # default emacs keymap to re-read-init-file
+  "\C-P": history-search-backward      # backward history search on up arrow
+  "\C-N": history-search-forward       # forward history search on down arrow
+  set keymap vi-insert
+  "\C-L": clear-screen                 # already mapped in vi-command
+  "\C-X\C-R": re-read-init-file        # default emacs keymap to re-read-init-file
+  "\C-P": history-search-backward      # backward history search on up arrow
+  "\C-N": history-search-forward       # forward history search on down arrow
+  TAB: menu-complete
+  "\e[Z": menu-complete-backward       # Modifier+Tab to complete backwards
+$endif
+
+
+################################################################################
+# VI MODE REFERENCE
+################################################################################
+# VI Mode bindings
+#
+# VI Insert Mode functions
+#
+# "C-D"  vi-eof-maybe
+# "C-H"  backward-delete-char
+# "C-I"  complete
+# "C-J"  accept-line
+# "C-M"  accept-line
+# "C-R"  reverse-search-history
+# "C-S"  forward-search-history
+# "C-T"  transpose-chars
+# "C-U"  unix-line-discard
+# "C-V"  quoted-insert
+# "C-W"  unix-word-rubout
+# "C-Y"  yank
+# "C-["  vi-movement-mode
+# "C-_"  undo
+# " " to "~"  self-insert
+# "C-?"  backward-delete-char
+#
+# VI Command Mode functions
+#
+# "C-D"  vi-eof-maybe
+# "C-E"  emacs-editing-mode
+# "C-G"  abort
+# "C-H"  backward-char
+# "C-J"  accept-line
+# "C-K"  kill-line
+# "C-L"  clear-screen
+# "C-M"  accept-line
+# "C-N"  next-history
+# "C-P"  previous-history
+# "C-Q"  quoted-insert
+# "C-R"  reverse-search-history
+# "C-S"  forward-search-history
+# "C-T"  transpose-chars
+# "C-U"  unix-line-discard
+# "C-V"  quoted-insert
+# "C-W"  unix-word-rubout
+# "C-Y"  yank
+# "C-_"  vi-undo
+# " "  forward-char
+# "#"  insert-comment
+# "$"  end-of-line
+# "%"  vi-match
+# "&"  vi-tilde-expand
+# "*"  vi-complete
+# "+"  next-history
+# ","  vi-char-search
+# "-"  previous-history
+# "."  vi-redo
+# "/"  vi-search
+# "0"  beginning-of-line
+# "1" to "9"  vi-arg-digit
+# ";"  vi-char-search
+# "="  vi-complete
+# "?"  vi-search
+# "A"  vi-append-eol
+# "B"  vi-prev-word
+# "C"  vi-change-to
+# "D"  vi-delete-to
+# "E"  vi-end-word
+# "F"  vi-char-search
+# "G"  vi-fetch-history
+# "I"  vi-insert-beg
+# "N"  vi-search-again
+# "P"  vi-put
+# "R"  vi-replace
+# "S"  vi-subst
+# "T"  vi-char-search
+# "U"  revert-line
+# "W"  vi-next-word
+# "X"  backward-delete-char
+# "Y"  vi-yank-to
+# "\"  vi-complete
+# "^"  vi-first-print
+# "_"  vi-yank-arg
+# "'"  vi-goto-mark
+# "a"  vi-append-mode
+# "b"  vi-prev-word
+# "c"  vi-change-to
+# "d"  vi-delete-to
+# "e"  vi-end-word
+# "f"  vi-char-search
+# "h"  backward-char
+# "i"  vi-insertion-mode
+# "j"  next-history
+# "k"  prev-history
+# "l"  forward-char
+# "m"  vi-set-mark
+# "n"  vi-search-again
+# "p"  vi-put
+# "r"  vi-change-char
+# "s"  vi-subst
+# "t"  vi-char-search
+# "u"  vi-undo
+# "w"  vi-next-word
+# "x"  vi-delete
+# "y"  vi-yank-to
+# "|"  vi-column
+# "~"  vi-change-case
