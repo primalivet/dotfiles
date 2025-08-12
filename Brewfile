@@ -1,6 +1,3 @@
-tap "nikitabobko/tap"
-cask "aerospace"
-cask "alacritty"
 cask "bruno"
 cask "firefox"
 cask "ghostty@tip"

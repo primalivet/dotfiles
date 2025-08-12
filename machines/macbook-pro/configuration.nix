@@ -5,7 +5,9 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    aerospace
     age
+    alacritty
     coreutils
     curl
     direnv
