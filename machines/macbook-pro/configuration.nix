@@ -8,6 +8,7 @@
     aerospace
     age
     alacritty
+    bruno
     coreutils
     curl
     direnv
