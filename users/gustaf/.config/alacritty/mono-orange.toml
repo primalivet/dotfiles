@@ -1,0 +1,49 @@
+# Orange Amber CRT Terminal Color Palette for Alacritty
+# Replicates the warm orange-amber phosphor look of classic terminals
+
+[colors.primary]
+background = "#000000"  # Pure black background
+foreground = "#ff9900"  # Primary orange-amber text color
+
+[colors.cursor]
+text = "#000000"
+cursor = "#ff9900"
+
+[colors.selection]
+text = "#000000"
+background = "#cc6600"
+
+# Normal colors - all variations within the orange-amber spectrum
+[colors.normal]
+black   = "#000000"  # True black
+red     = "#cc3300"  # Deep orange-red (dim)
+green   = "#cc7700"  # Orange-amber (medium)
+yellow  = "#dd8800"  # Bright orange-amber
+blue    = "#aa6600"  # Muted orange-brown
+magenta = "#dd6600"  # Pure orange-amber
+cyan    = "#cc8844"  # Light orange-amber
+white   = "#ff9900"  # Primary orange-amber
+
+# Bright colors - shifted toward yellow for "glow" effect
+[colors.bright]
+black   = "#442200"  # Dark orange-brown
+red     = "#ff5500"  # Bright orange-red
+green   = "#ffaa00"  # Golden orange
+yellow  = "#ffbb00"  # Bright golden orange
+blue    = "#cc7700"  # Medium orange
+magenta = "#ff8800"  # Bright orange
+cyan    = "#ffaa66"  # Very light orange
+white   = "#ffcc88"  # Near-white with orange tint
+
+# Optional: Dim colors for even more authentic CRT feel
+# Uncomment if your terminal supports them
+[colors.dim]
+black   = "#000000"
+red     = "#772200"
+green   = "#885500"
+yellow  = "#996600"
+blue    = "#775500"
+magenta = "#884400"
+cyan    = "#997733"
+white   = "#bb6600"
+

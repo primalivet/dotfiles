@@ -1,0 +1,48 @@
+# Green CRT Terminal Color Palette for Alacritty
+# Replicates the classic green phosphor look of vintage terminals
+
+[colors.primary]
+background = "#000000"  # Pure black background
+foreground = "#00ff00"  # Primary green text color
+
+[colors.cursor]
+text = "#000000"
+cursor = "#00ff00"
+
+[colors.selection]
+text = "#000000"
+background = "#008800"
+
+# Normal colors - all variations within the green spectrum
+[colors.normal]
+black   = "#000000"  # True black
+red     = "#006600"  # Deep green-red (dim)
+green   = "#00bb00"  # Medium green
+yellow  = "#00dd00"  # Bright green-yellow
+blue    = "#008800"  # Medium green-blue
+magenta = "#00cc00"  # Pure green
+cyan    = "#44cc44"  # Light green
+white   = "#00ff00"  # Primary green
+
+# Bright colors - shifted toward yellow-green for "glow" effect
+[colors.bright]
+black   = "#002200"  # Dark green
+red     = "#44aa44"  # Bright green-red
+green   = "#44ff44"  # Bright green
+yellow  = "#88ff88"  # Bright yellow-green
+blue    = "#44cc44"  # Medium bright green
+magenta = "#66ff66"  # Bright pure green
+cyan    = "#88ffaa"  # Very light green
+white   = "#ccffcc"  # Near-white with green tint
+
+# Optional: Dim colors for even more authentic CRT feel
+# Uncomment if your terminal supports them
+[colors.dim]
+black   = "#000000"
+red     = "#004400"
+green   = "#006600"
+yellow  = "#007700"
+blue    = "#005500"
+magenta = "#008800"
+cyan    = "#447744"
+white   = "#00aa00"

@@ -1,0 +1,47 @@
+# Amber CRT Terminal Color Palette for Alacritty
+# Replicates the warm amber phosphor look of classic terminals
+
+[colors.primary]
+background = "#000000"  # Pure black background
+foreground = "#ffaa00"  # Primary amber text color
+
+[colors.cursor]
+text = "#000000"
+cursor = "#ffaa00"
+
+[colors.selection]
+text = "#000000"
+background = "#cc8800"
+
+# Normal colors - all variations within the amber spectrum
+[colors.normal]
+black   = "#000000"  # True black
+red     = "#cc4400"  # Deep amber-red (dim)
+green   = "#bb8800"  # Amber-yellow (medium)
+yellow  = "#ddaa00"  # Bright amber-yellow
+blue    = "#996600"  # Muted amber-brown (darkest)
+magenta = "#dd8800"  # Amber-orange
+cyan    = "#ccaa44"  # Light amber
+white   = "#ffaa00"  # Primary amber
+
+# Bright colors - shifted toward yellow-white for "glow" effect
+[colors.bright]
+black   = "#333300"  # Dark amber-brown
+red     = "#ff6600"  # Bright amber-red
+green   = "#ffcc00"  # Golden amber
+yellow  = "#ffdd44"  # Bright golden yellow
+blue    = "#cc8800"  # Medium amber
+magenta = "#ffaa44"  # Bright amber-orange
+cyan    = "#ffdd88"  # Very light amber
+white   = "#ffffaa"  # Near-white with amber tint
+
+[colors.dim]
+black   = "#000000"
+red     = "#884400"
+green   = "#996600"
+yellow  = "#aa7700"
+blue    = "#664400"
+magenta = "#aa5500"
+cyan    = "#aa8833"
+white   = "#cc8800"
+
