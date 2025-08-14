@@ -41,7 +41,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" "video" "realtime" ];
     hashedPassword = "$6$OWAIYB4NAWgGyXXg$/IJsv3w4kNOq9Py2O9ZEQgk4q3.yUubYLDuon58ONS7mH4JmpoSWw8L668wVSEhV0QuMwSkPFir9Vyeor3V0Y.";
-    shell = pkgs.bash;
+    shell = pkgs.bashInteractive;
   };
 
   programs.direnv.enable = true;
@@ -51,6 +51,12 @@
 
   programs.firefox.enable = true;
 
+  programs.chromium = {
+    enable = true;
+  };
+
+  # Enable Wayland support in Chromium and other Electron apps.
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.systemPackages = with pkgs; [
     curl
     foot
@@ -78,6 +84,7 @@
     wf-recorder # screen recoding for wl compositor
     wget
     wl-clipboard
+    chromium
   ];
 
   networking.firewall.enable = false;
