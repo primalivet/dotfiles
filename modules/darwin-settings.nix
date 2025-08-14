@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   system.defaults = {
-    # NSGlobalDomain."com.apple.keyboard.fnState" # Use F1, F2, etc. keys as standard function keys. Type: null or boolean Default: null
+    NSGlobalDomain."com.apple.keyboard.fnState" = false; # Use F1, F2, etc. keys as standard function keys. Type: null or boolean Default: null
     NSGlobalDomain."com.apple.swipescrolldirection" = false; # Natural scrolling
     NSGlobalDomain.AppleShowAllExtensions = true;
     NSGlobalDomain.AppleShowAllFiles = true;
@@ -9,6 +9,7 @@
     NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
     NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
     NSGlobalDomain._HIHideMenuBar = true;
+    NSGlobalDomain.NSAutomaticWindowAnimationsEnabled = false;
 
     WindowManager.EnableTilingByEdgeDrag = false;
     WindowManager.EnableTilingOptionAccelerator = false;
