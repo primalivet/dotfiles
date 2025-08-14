@@ -1,5 +1,3 @@
-local now, add, later = require 'user'.setup()
-
 vim.opt.clipboard = "unnamedplus"
 vim.opt.completeopt:append("fuzzy")
 vim.opt.wildmode = "longest:full,full"
@@ -36,6 +34,7 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, {
   pattern = "*",
   callback = function()
     vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+    vim.api.nvim_set_hl(0, "QuickfixLine", { reverse = true })
   end
 })
 
@@ -75,63 +74,43 @@ vim.keymap.set("n", "<leader>g", ":grep ", { desc = "Find file content" })
 vim.keymap.set("n", "<leader>f", ":find ", { desc = "Find file" })
 vim.keymap.set("n", "<leader>b", ":ls<CR>:b ", { desc = "Switch to buffer" })
 
-now(function()
-  add("nvim-treesitter/nvim-treesitter" )
-  require "nvim-treesitter.configs".setup {
-    auto_install = true,
-    incremental_selection = { enable = true },
-    highlight = { enable = true },
-    indent = { enable = true }
-  }
-end)
+vim.pack.add({
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/tpope/vim-fugitive",
+  "https://github.com/neovim/nvim-lspconfig"
+})
 
-now(function()
-  add("tpope/vim-fugitive")
-end)
+require "nvim-treesitter.configs".setup {
+  auto_install = true,
+  incremental_selection = { enable = true },
+  highlight = { enable = true },
+  indent = { enable = true }
+}
 
-now(function()
-  require"mini.pick".setup{ window = { config = { width = math.floor(vim.o.columns) } } }
-  vim.keymap.set("n", "<leader>sc", ":Pick commands<CR>", { desc = "Find commands" })
-  vim.keymap.set("n", "<leader>sf", ":Pick files<CR>", { desc = "Find files" })
-  vim.keymap.set("n", "<leader>sl", ":Pick grep_live<CR>", { desc = "Find live in files" })
-  vim.keymap.set("n", "<leader>sr", ":Pick resume<CR>", { desc = "Find resume" })
-  vim.keymap.set("n", "<leader>sd", ":Pick diagnostic<CR>", { desc = "Find diagnostic" })
-end)
+vim.lsp.enable({ "clangd", "eslint", "gopls", "html", "jsonls", "lua_ls", "prismals", "pyright", "ts_ls", "bashls" })
 
-now(function()
-  add("neovim/nvim-lspconfig" ) -- since 0.11 only needed to provide $RTP/lsp
-  vim.lsp.enable({ "clangd", "eslint", "gopls", "html", "jsonls", "lua_ls", "prismals", "pyright", "ts_ls", "bashls" })
-end)
+-- vim.pack.add({ "https://github.com/zbirenbaum/copilot.lua" })
+-- require "copilot".setup {
+--   suggestion = { enable = true, auto_trigger = true,
+--     -- Resembles the default completion keymaps but with Modifier instead of Control
+--     keymap = { accept = "<M-y>", next = "<M-n>", prev = "<M-p>", dismiss = "<M-c>" }
+--   },
+-- }
 
--- later(function()
---   add("zbirenbaum/copilot.lua")
---   require "copilot".setup {
---     suggestion = { enable = true, auto_trigger = true,
---       -- Resembles the default completion keymaps but with Modifier instead of Control
---       keymap = { accept = "<M-y>", next = "<M-n>", prev = "<M-p>", dismiss = "<M-c>" }
+-- vim.pack.add({
+--   "https://github.com/olimorris/codecompanion.nvim",
+--   "https://github.com/nvim-lua/plenary.nvim"
+-- })
+-- local adapter = os.getenv("CODECOMPANION_MODEL") or "anthropic"
+-- require"codecompanion".setup {
+--   strategies = {
+--     chat = {
+--       adapter = adapter,
+--       keymaps = {
+--         -- Override omni completion
+--         completion = { modes = { i = "<C-x><C-o>" } }
+--       }
 --     },
---   }
--- end)
---
--- later(function()
---   add({
---     source = "olimorris/codecompanion.nvim",
---     depends = {
---       "nvim-treesitter/nvim-treesitter",
---       "nvim-lua/plenary.nvim",
---     }
---   })
---   local adapter = os.getenv("CODECOMPANION_MODEL") or "anthropic"
---   require"codecompanion".setup {
---     strategies = {
---       chat = {
---         adapter = adapter,
---         keymaps = {
---           -- Override omni completion
---           completion = { modes = { i = "<C-x><C-o>" } }
---         }
---       },
---       inline = { adapter = adapter }
---     },
---   }
--- end)
+--     inline = { adapter = adapter }
+--   },
+-- }
