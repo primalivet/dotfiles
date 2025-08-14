@@ -8,7 +8,7 @@
     NSGlobalDomain.KeyRepeat = 2;
     NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
     NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
-    NSGlobalDomain._HIHideMenuBar = false;
+    NSGlobalDomain._HIHideMenuBar = true;
 
     WindowManager.EnableTilingByEdgeDrag = false;
     WindowManager.EnableTilingOptionAccelerator = false;
