@@ -5,4 +5,4 @@ decorations_theme_variant = "Dark"
 
 [font]
 normal = { family = "Terminus (TTF)" }
-size = 16
+size = 20
