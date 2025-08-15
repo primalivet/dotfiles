@@ -30,26 +30,18 @@ end
 local group = vim.api.nvim_create_augroup("USER", {})
 
 vim.api.nvim_create_autocmd({ "ColorScheme" }, {
-  group = group,
-  pattern = "*",
-  callback = function()
-    vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
-  end
+  group = group, pattern = "*",
+  callback = function() vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" }) end
 })
+vim.cmd[[colorscheme default]]
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = group,
-  pattern = "*",
-  callback = function()
-    vim.treesitter.stop()
-  end
+  group = group, pattern = "*",
+  callback = function() vim.treesitter.stop() end
 })
 
-vim.cmd[[colorscheme vim]]
-
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-  group = group,
-  pattern = "*",
+  group = group, pattern = "*",
   callback = function() vim.hl.on_yank() end
 })
 
@@ -82,8 +74,5 @@ vim.keymap.set("n", "<leader>f", ":find ", { desc = "Find file" })
 vim.keymap.set("n", "<leader>b", ":ls<CR>:b ", { desc = "Switch to buffer" })
 
 vim.cmd[[packadd! cfilter]]
-vim.pack.add({
-  "https://github.com/tpope/vim-fugitive",
-  "https://github.com/neovim/nvim-lspconfig"
-})
+vim.pack.add({ "https://github.com/tpope/vim-fugitive", "https://github.com/neovim/nvim-lspconfig" })
 vim.lsp.enable({ "clangd", "eslint", "gopls", "html", "jsonls", "lua_ls", "prismals", "pyright", "ts_ls", "bashls" })
