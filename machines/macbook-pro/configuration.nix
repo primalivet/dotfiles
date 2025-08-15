@@ -35,6 +35,9 @@
 
   programs.bash.enable = true;
   programs.bash.completion.enable = true;
+  programs.bash.interactiveShellInit = ''
+    export LANG="en_US.UTF-8"
+  '';
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
