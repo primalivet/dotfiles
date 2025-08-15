@@ -2,6 +2,10 @@
 # EXPORT
 ################################################################################
 
+export LANG="en_US.UTF-8"
+# Used to determine the locale category for any category not specifically
+# selected with a variable starting with LC_.
+
 export TERM=screen-256color
 # This variable shall represent the terminal type for which output is to be
 # prepared. This information is used by utilities and application programs
