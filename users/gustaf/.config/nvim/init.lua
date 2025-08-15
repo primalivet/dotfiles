@@ -87,37 +87,3 @@ vim.pack.add({
   "https://github.com/neovim/nvim-lspconfig"
 })
 vim.lsp.enable({ "clangd", "eslint", "gopls", "html", "jsonls", "lua_ls", "prismals", "pyright", "ts_ls", "bashls" })
-
--- vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
--- require "nvim-treesitter.configs".setup {
---   auto_install = true,
---   incremental_selection = { enable = true },
---   highlight = { enable = false },
---   indent = { enable = true }
--- }
-
--- vim.pack.add({ "https://github.com/zbirenbaum/copilot.lua" })
--- require "copilot".setup {
---   suggestion = { enable = true, auto_trigger = true,
---     -- Resembles the default completion keymaps but with Modifier instead of Control
---     keymap = { accept = "<M-y>", next = "<M-n>", prev = "<M-p>", dismiss = "<M-c>" }
---   },
--- }
-
--- vim.pack.add({
---   "https://github.com/olimorris/codecompanion.nvim",
---   "https://github.com/nvim-lua/plenary.nvim"
--- })
--- local adapter = os.getenv("CODECOMPANION_MODEL") or "anthropic"
--- require"codecompanion".setup {
---   strategies = {
---     chat = {
---       adapter = adapter,
---       keymaps = {
---         -- Override omni completion
---         completion = { modes = { i = "<C-x><C-o>" } }
---       }
---     },
---     inline = { adapter = adapter }
---   },
--- }
