@@ -1,8 +1,9 @@
 [general]
-import = [ "~/.config/alacritty/mono-amber.toml" ]
+import = ["~/Code/OSS/alacritty-theme/themes/acme.toml"]
+
 [window]
 decorations_theme_variant = "Dark"
 
 [font]
 normal = { family = "Terminus (TTF)" }
-size = 20
+size = 16
