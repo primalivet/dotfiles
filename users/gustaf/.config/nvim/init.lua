@@ -1,3 +1,4 @@
+vim.cmd[[syntax off]]
 vim.opt.clipboard = "unnamedplus"
 vim.opt.completeopt:append("fuzzy")
 vim.opt.wildmode = "longest:full,full"
@@ -13,7 +14,6 @@ vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.wrap = false
 vim.opt.grepprg = "grep -HInr --exclude-dir={node_modules,.git,build,dist} $* /dev/null"
-vim.opt.termguicolors = false
 
 function _G.findfunc_git(cmdarg)
   local pattern = '*' .. cmdarg .. '*'
@@ -34,11 +34,18 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, {
   pattern = "*",
   callback = function()
     vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
-    vim.api.nvim_set_hl(0, "QuickfixLine", { reverse = true })
   end
 })
 
-vim.cmd[[colorscheme default]]
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = group,
+  pattern = "*",
+  callback = function()
+    vim.treesitter.stop()
+  end
+})
+
+vim.cmd[[colorscheme vim]]
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   group = group,
@@ -74,20 +81,20 @@ vim.keymap.set("n", "<leader>g", ":grep ", { desc = "Find file content" })
 vim.keymap.set("n", "<leader>f", ":find ", { desc = "Find file" })
 vim.keymap.set("n", "<leader>b", ":ls<CR>:b ", { desc = "Switch to buffer" })
 
+vim.cmd[[packadd! cfilter]]
 vim.pack.add({
-  "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/tpope/vim-fugitive",
   "https://github.com/neovim/nvim-lspconfig"
 })
-
-require "nvim-treesitter.configs".setup {
-  auto_install = true,
-  incremental_selection = { enable = true },
-  highlight = { enable = true },
-  indent = { enable = true }
-}
-
 vim.lsp.enable({ "clangd", "eslint", "gopls", "html", "jsonls", "lua_ls", "prismals", "pyright", "ts_ls", "bashls" })
+
+-- vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
+-- require "nvim-treesitter.configs".setup {
+--   auto_install = true,
+--   incremental_selection = { enable = true },
+--   highlight = { enable = false },
+--   indent = { enable = true }
+-- }
 
 -- vim.pack.add({ "https://github.com/zbirenbaum/copilot.lua" })
 -- require "copilot".setup {
