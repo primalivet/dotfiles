@@ -1,5 +1,5 @@
 [general]
-import = ["~/Code/OSS/alacritty-theme/themes/acme.toml"]
+import = ["~/Code/OSS/alacritty-theme/themes/xterm.toml"]
 
 [window]
 decorations_theme_variant = "Dark"
